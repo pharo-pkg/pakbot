@@ -15,7 +15,7 @@ Cargo is a leightweitgh package manager for Smalltalk.
 ![Cargo big picture](/doc/cargo-overview.png)
 
 ## How to use Cargo?
-Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work Metacello).
+Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work).
 ### Install Cargo
 ### Load packages
 ### 
