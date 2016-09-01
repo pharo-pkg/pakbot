@@ -1,3 +1,5 @@
+![Image of Cargo](/cargo-picture-small.png)
+
 # Cargo package manager
 
 Cargo is a leightweitgh package manager for Smalltalk.
