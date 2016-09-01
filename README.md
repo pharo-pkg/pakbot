@@ -12,6 +12,7 @@ Cargo is a leightweitgh package manager for Smalltalk.
 * Provide a central place to publis package versions and provide a web site on top of it to query on available packages (something similar to https://packagist.org/).
 
 ## Cargo big picture
+![Cargo big picture](/doc/cargo-overview.png)
 
 ## How to use Cargo?
 Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work Metacello).
