@@ -1,0 +1,1 @@
+Error raised when the symbolic version format is not respected.

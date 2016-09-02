@@ -1,0 +1,1 @@
+Root error class for all package manager errors.

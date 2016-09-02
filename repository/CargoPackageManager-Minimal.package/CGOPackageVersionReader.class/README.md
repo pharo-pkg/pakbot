@@ -1,0 +1,1 @@
+Specialization of the STON reader to handle the custom output format.

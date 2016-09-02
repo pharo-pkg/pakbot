@@ -1,0 +1,3 @@
+testing
+isAssembly
+	^ true

@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/3/2014 10:25",
+	"instvars" : [
+		"dependent",
+		"constraints" ],
+	"name" : "CGOPackageDependency",
+	"pools" : [
+		 ],
+	"super" : "CGOAbstractPackageDependency",
+	"type" : "normal" }

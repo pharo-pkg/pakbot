@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"newWithFileName:" : "cd 6/23/2016 16:33" },
+	"instance" : {
+		"bleedingEdgeOfConcretePackage:for:" : "ChristopheDemarey 3/24/2016 16:32",
+		"fetch:version:" : "ChristopheDemarey 6/24/2016 10:27",
+		"initialize" : "ChristopheDemarey 3/24/2016 13:45",
+		"initializeWithUrl:" : "ChristopheDemarey 3/24/2016 13:45",
+		"package:" : "ChristopheDemarey 6/24/2016 10:27",
+		"packages" : "ChristopheDemarey 3/24/2016 15:31",
+		"packagesProviding:for:" : "ChristopheDemarey 3/24/2016 16:24",
+		"packagesProviding:version:for:" : "ChristopheDemarey 3/24/2016 15:19",
+		"rootDirectory" : "ChristopheDemarey 3/24/2016 13:42",
+		"savePackageVersion:" : "ChristopheDemarey 3/24/2016 13:41",
+		"updateVirtualPackagesIndexWith:" : "ChristopheDemarey 7/6/2016 09:37",
+		"versionsOf:" : "ChristopheDemarey 6/24/2016 10:27",
+		"virtualDirectory" : "ChristopheDemarey 3/24/2016 13:41" } }

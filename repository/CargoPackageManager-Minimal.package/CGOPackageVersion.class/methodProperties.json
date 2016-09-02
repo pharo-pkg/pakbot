@@ -1,0 +1,27 @@
+{
+	"class" : {
+		"fromString:" : "ChristopheDemarey 2/6/2015 17:14",
+		"newFrom:" : "ChristopheDemarey 7/10/2015 13:48" },
+	"instance" : {
+		"=" : "ChristopheDemarey 3/25/2014 16:14",
+		"asPackageVersionReference" : "ChristopheDemarey 7/10/2015 13:48",
+		"asSerializedPackageVersion" : "ChristopheDemarey 2/9/2015 12:40",
+		"authors" : "ChristopheDemarey 11/25/2013 13:03",
+		"contributors" : "ChristopheDemarey 11/25/2013 13:03",
+		"dependencies" : "ChristopheDemarey 2/5/2015 16:11",
+		"description" : "ChristopheDemarey 11/25/2013 13:03",
+		"hash" : "ChristopheDemarey 3/25/2014 16:13",
+		"initializeFrom:" : "ChristopheDemarey 2/9/2015 15:07",
+		"initializeOn:version:" : "ChristopheDemarey 2/6/2015 16:34",
+		"isAssembly" : "ChristopheDemarey 4/1/2015 09:39",
+		"isDevelopmentVersion" : "ChristopheDemarey 4/20/2015 16:13",
+		"mandatoryKey:from:" : "ChristopheDemarey 7/10/2015 13:46",
+		"name" : "cd 6/23/2016 16:51",
+		"package" : "ChristopheDemarey 3/25/2014 14:57",
+		"package:" : "ChristopheDemarey 3/25/2014 14:59",
+		"packageFrom:" : "ChristopheDemarey 7/10/2015 13:47",
+		"packageName" : "ChristopheDemarey 3/25/2014 14:57",
+		"printOn:" : "ChristopheDemarey 8/14/2014 17:27",
+		"timestamp" : "ChristopheDemarey 2/26/2015 12:12",
+		"version" : "ChristopheDemarey 11/25/2013 13:03",
+		"versionFrom:" : "ChristopheDemarey 2/6/2015 17:06" } }

@@ -1,0 +1,3 @@
+configuring
+package: aPackageVersionString
+	packages addIfNotPresent: aPackageVersionString asPackageVersionReference

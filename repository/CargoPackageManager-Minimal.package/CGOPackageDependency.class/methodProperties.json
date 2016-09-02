@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"newFrom:" : "ChristopheDemarey 12/5/2014 16:40",
+		"on:" : "ChristopheDemarey 6/9/2016 15:46",
+		"on:for:" : "ChristopheDemarey 4/27/2015 15:55",
+		"on:for:withConstraints:" : "ChristopheDemarey 4/27/2015 15:56" },
+	"instance" : {
+		"=" : "ChristopheDemarey 4/7/2014 17:09",
+		"addDefaultVersionConstraint:from:for:" : "ChristopheDemarey 7/10/2015 13:46",
+		"asLiteral" : "ChristopheDemarey 7/9/2015 15:47",
+		"constraints" : "ChristopheDemarey 4/4/2014 13:38",
+		"dependent" : "ChristopheDemarey 4/3/2014 10:26",
+		"hash" : "ChristopheDemarey 7/3/2014 16:26",
+		"initializeOn:withConstraints:" : "ChristopheDemarey 4/27/2015 15:56",
+		"initializeWith:" : "ChristopheDemarey 7/10/2015 13:44",
+		"packageName" : "ChristopheDemarey 4/27/2015 15:59",
+		"printOn:" : "ChristopheDemarey 6/3/2015 14:30" } }

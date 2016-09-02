@@ -1,0 +1,3 @@
+private
+bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
+	self subclassResponsibility

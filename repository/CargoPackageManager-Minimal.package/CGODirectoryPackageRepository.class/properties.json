@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 3/8/2016 16:26",
+	"instvars" : [
+		"rootDirectory" ],
+	"name" : "CGODirectoryPackageRepository",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageRepository",
+	"type" : "normal" }

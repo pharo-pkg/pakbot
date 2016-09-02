@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 3/20/2014 13:28",
+	"instvars" : [
+		"policy1",
+		"policy2" ],
+	"name" : "CGODependencyConflictError",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageManagerError",
+	"type" : "normal" }

@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"fromString:" : "ChristopheDemarey 7/10/2015 13:46" },
+	"instance" : {
+		"merge:" : "ChristopheDemarey 4/4/2014 10:18",
+		"mergeAll:" : "ChristopheDemarey 4/4/2014 11:34",
+		"mergeFixedVersionConstraint:" : "ChristopheDemarey 4/4/2014 12:57",
+		"signalDependencyConflictWith:" : "ChristopheDemarey 7/10/2015 13:46" } }

@@ -1,0 +1,10 @@
+{
+	"class" : {
+		"fromStream:" : "ChristopheDemarey 11/18/2014 15:07",
+		"fromString:" : "ChristopheDemarey 11/18/2014 15:08" },
+	"instance" : {
+		"consumeColon" : "ChristopheDemarey 11/5/2014 14:29",
+		"isValidPropertyNameType:" : "ChristopheDemarey 11/17/2014 17:20",
+		"nextValueIsAssociationSeparator" : "ChristopheDemarey 11/5/2014 14:30",
+		"parseMapDo:" : "ChristopheDemarey 11/5/2014 14:59",
+		"parseValue" : "ChristopheDemarey 11/20/2014 10:33" } }

@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Default" ],
+	"commentStamp" : "ChristopheDemarey 4/2/2015 15:28",
+	"instvars" : [
+		"providerStrategy" ],
+	"name" : "CGOPackageProvider",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

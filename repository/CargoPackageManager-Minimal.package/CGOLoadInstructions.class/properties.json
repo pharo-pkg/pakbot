@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Minimal-Loader",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 10/24/2014 18:01",
+	"instvars" : [
+		"groups",
+		"packageRepositories" ],
+	"name" : "CGOLoadInstructions",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

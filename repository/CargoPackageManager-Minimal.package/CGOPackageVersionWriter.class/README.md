@@ -1,0 +1,1 @@
+Specialization of the STON wrtier to avoid serialization of empty collections.

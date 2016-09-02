@@ -1,0 +1,3 @@
+parsing
+nextValueIsAssociationSeparator
+	^ readStream peek = $:

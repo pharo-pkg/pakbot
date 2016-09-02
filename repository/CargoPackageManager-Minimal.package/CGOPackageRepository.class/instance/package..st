@@ -1,0 +1,3 @@
+fetching
+package: aPackageName
+	self subclassResponsibility

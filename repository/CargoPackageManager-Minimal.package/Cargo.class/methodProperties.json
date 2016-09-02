@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"defaultPackageRepository" : "ChristopheDemarey 3/25/2016 10:22",
+		"defaultPackageRepository:" : "ChristopheDemarey 5/19/2016 10:33",
+		"defaultPackageRepositoryUrl" : "ChristopheDemarey 3/25/2016 10:20",
+		"initialize" : "ChristopheDemarey 6/13/2016 14:29",
+		"platformAttributes" : "ChristopheDemarey 6/13/2016 14:30",
+		"platformAttributes:" : "ChristopheDemarey 6/13/2016 14:28",
+		"useLocalRepository:" : "ChristopheDemarey 5/19/2016 10:35" },
+	"instance" : {
+		"enablePackageCache" : "ChristopheDemarey 7/1/2015 16:04",
+		"initialize" : "ChristopheDemarey 3/25/2016 10:29",
+		"installFrom:" : "ChristopheDemarey 7/1/2015 16:05",
+		"installFromFile:" : "ChristopheDemarey 7/1/2015 15:29",
+		"package:" : "ChristopheDemarey 4/1/2015 09:58",
+		"rootDependency" : "ChristopheDemarey 7/10/2015 13:44",
+		"sourceRepositories:" : "ChristopheDemarey 7/3/2015 11:53" } }

@@ -1,0 +1,1 @@
+Local repository used to cache package descriptions fetched from remote repositories.

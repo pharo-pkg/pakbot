@@ -1,0 +1,18 @@
+{
+	"class" : {
+		"stonName" : "ChristopheDemarey 2/26/2016 14:03" },
+	"instance" : {
+		"asSerializedPackageVersion" : "ChristopheDemarey 7/10/2015 13:49",
+		"dependencies" : "ChristopheDemarey 2/5/2015 16:12",
+		"dependenciesFrom:" : "ChristopheDemarey 7/10/2015 10:27",
+		"file" : "ChristopheDemarey 2/5/2015 16:14",
+		"fitsPlatformRequirements" : "ChristopheDemarey 7/10/2015 13:43",
+		"fromSton:" : "ChristopheDemarey 7/10/2015 13:49",
+		"initializeFrom:" : "ChristopheDemarey 2/9/2015 15:09",
+		"platformRequirements" : "ChristopheDemarey 2/9/2015 15:15",
+		"provides:" : "ChristopheDemarey 5/6/2015 12:03",
+		"provisions" : "ChristopheDemarey 2/5/2015 16:14",
+		"provisionsFrom:" : "ChristopheDemarey 5/6/2015 11:50",
+		"repositories" : "ChristopheDemarey 2/5/2015 16:14",
+		"repositoriesFrom:" : "ChristopheDemarey 7/7/2015 11:31",
+		"stonOn:" : "ChristopheDemarey 2/9/2015 12:37" } }

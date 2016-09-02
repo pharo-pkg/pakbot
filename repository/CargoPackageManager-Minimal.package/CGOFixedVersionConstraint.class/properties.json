@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/2/2014 17:25",
+	"instvars" : [
+		"version" ],
+	"name" : "CGOFixedVersionConstraint",
+	"pools" : [
+		 ],
+	"super" : "CGODependencyConstraint",
+	"type" : "normal" }

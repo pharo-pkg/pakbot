@@ -1,0 +1,1 @@
+A PackageRepository represents a repository where can be found the package.

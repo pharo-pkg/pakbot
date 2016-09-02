@@ -1,0 +1,8 @@
+{
+	"class" : {
+		"put:onStreamPretty:" : "ChristopheDemarey 11/18/2014 11:21",
+		"toStringPretty:" : "ChristopheDemarey 11/18/2014 11:12" },
+	"instance" : {
+		"initialize" : "ChristopheDemarey 2/24/2015 17:47",
+		"nextPut:" : "ChristopheDemarey 11/17/2014 18:02",
+		"writeAssociation:" : "ChristopheDemarey 11/20/2014 10:32" } }

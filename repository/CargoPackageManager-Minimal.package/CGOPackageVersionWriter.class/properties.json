@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model-Serialization",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 11/5/2014 17:44",
+	"instvars" : [
+		 ],
+	"name" : "CGOPackageVersionWriter",
+	"pools" : [
+		 ],
+	"super" : "STONWriter",
+	"type" : "normal" }

@@ -1,0 +1,4 @@
+initialization
+initialize
+	self rootDirectory ensureCreateDirectory.
+	self virtualDirectory ensureCreateDirectory.

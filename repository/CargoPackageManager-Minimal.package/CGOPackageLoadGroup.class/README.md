@@ -1,0 +1,1 @@
+A PackageGroup represents a set of artifacts to load together.
