@@ -1,0 +1,3 @@
+accessing
+rawDependencies
+	^ manifest dependencies

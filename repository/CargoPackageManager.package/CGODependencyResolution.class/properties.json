@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/3/2014 17:46",
+	"instvars" : [
+		"ongoingPackageResolutions",
+		"rootDependency" ],
+	"name" : "CGODependencyResolution",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

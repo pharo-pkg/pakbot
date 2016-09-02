@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 3/10/2015 17:46",
+	"instvars" : [
+		 ],
+	"name" : "CGODependencyRequirementsUnmet",
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }

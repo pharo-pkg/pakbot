@@ -1,0 +1,3 @@
+code-critics
+ruleMissingSubclassResponsibilityRuleV1FalsePositive
+^ #(#(#(#RGMethodDefinition #(#CGORepositoryPackageLoadInstructionsHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') #(#(#RGMethodDefinition #(#CGORepositoryVirtualPackageHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') #(#(#RGMethodDefinition #(#CGORepositoryPackageVersionListHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') #(#(#RGMethodDefinition #(#CGORepositoryPackageVersionHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') #(#(#RGMethodDefinition #(#CGORepositoryPackageListHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') #(#(#RGMethodDefinition #(#CGORepositoryLatestPackageHandler #get #false)) #'2015-01-20T13:14:26.566429+01:00') )

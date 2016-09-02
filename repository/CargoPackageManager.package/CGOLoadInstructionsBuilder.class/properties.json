@@ -1,0 +1,16 @@
+{
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/11/2014 16:54",
+	"instvars" : [
+		"graph",
+		"resolution",
+		"loadInstructions" ],
+	"name" : "CGOLoadInstructionsBuilder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/2/2014 17:40",
+	"instvars" : [
+		 ],
+	"name" : "CGOResolutionStrategy",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

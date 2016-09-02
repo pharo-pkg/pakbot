@@ -1,0 +1,4 @@
+publishing
+publishNewPackageVersion
+	Cargo defaultPackageRepository
+		savePackageVersion: self asPackageVersion

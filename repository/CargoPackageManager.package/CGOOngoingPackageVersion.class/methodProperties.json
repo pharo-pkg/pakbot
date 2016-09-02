@@ -1,0 +1,22 @@
+{
+	"class" : {
+		"on:" : "ChristopheDemarey 6/3/2016 10:40" },
+	"instance" : {
+		"=" : "ChristopheDemarey 6/3/2016 16:29",
+		"dependencies" : "ChristopheDemarey 7/6/2016 09:55",
+		"description" : "ChristopheDemarey 2/13/2015 10:50",
+		"hash" : "ChristopheDemarey 6/3/2016 16:30",
+		"initializeWith:" : "ChristopheDemarey 2/13/2015 10:50",
+		"isAssembly" : "ChristopheDemarey 6/3/2016 10:10",
+		"isUnit" : "ChristopheDemarey 6/3/2016 10:10",
+		"manifest" : "ChristopheDemarey 2/13/2015 10:50",
+		"packageName" : "ChristopheDemarey 2/13/2015 10:50",
+		"removeAssociationWithKey:from:" : "ChristopheDemarey 5/19/2015 10:54",
+		"updateAssociationsWith:from:" : "ChristopheDemarey 2/13/2015 17:31",
+		"updateDescription:" : "ChristopheDemarey 2/13/2015 10:50",
+		"updateMethod:withContent:" : "ChristopheDemarey 5/13/2015 15:15",
+		"updatePackageName:" : "ChristopheDemarey 2/20/2015 18:03",
+		"updateProvisions:" : "ChristopheDemarey 6/8/2015 11:39",
+		"updateVersion" : "ChristopheDemarey 2/13/2015 10:50",
+		"updateVersionWith:" : "ChristopheDemarey 2/13/2015 10:50",
+		"version" : "ChristopheDemarey 2/13/2015 10:50" } }

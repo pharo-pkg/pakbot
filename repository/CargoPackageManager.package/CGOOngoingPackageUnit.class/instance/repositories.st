@@ -1,0 +1,3 @@
+accessing
+repositories
+	^ manifest repositories

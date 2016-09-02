@@ -1,0 +1,3 @@
+updating
+dependencies: aDependencyList 
+	self updateManifestDependencies: aDependencyList

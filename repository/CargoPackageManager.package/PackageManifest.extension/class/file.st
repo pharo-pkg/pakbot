@@ -1,0 +1,3 @@
+*CargoPackageManager
+file
+	^ nil

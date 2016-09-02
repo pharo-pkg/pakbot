@@ -1,0 +1,16 @@
+{
+	"class" : {
+		"dependencies" : "ChristopheDemarey 6/18/2015 11:13",
+		"description" : "ChristopheDemarey 7/10/2015 11:25",
+		"packageName" : "ChristopheDemarey 7/10/2015 11:26",
+		"platformRequirements" : "ChristopheDemarey 6/18/2015 11:13",
+		"provisions" : "ChristopheDemarey 6/18/2015 11:13",
+		"repositories" : "ChristopheDemarey 6/18/2015 11:13",
+		"ruleContainsRuleV1FalsePositive" : "ChristopheDemarey 7/10/2015 13:50",
+		"ruleEmptyExceptionHandlerRuleV1FalsePositive" : "ChristopheDemarey 7/10/2015 13:48",
+		"ruleMissingSubclassResponsibilityRuleV1FalsePositive" : "ChristopheDemarey 7/10/2015 15:05",
+		"ruleMissingYourselfRuleV1FalsePositive" : "ChristopheDemarey 7/10/2015 13:51",
+		"ruleTempsReadBeforeWrittenRuleV1FalsePositive" : "ChristopheDemarey 7/10/2015 15:05",
+		"version" : "ChristopheDemarey 6/18/2015 11:13" },
+	"instance" : {
+		 } }
