@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Tests-Functional",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 3/17/2015 16:49",
+	"instvars" : [
+		"pkgRepository",
+		"loadInstructions" ],
+	"name" : "LoadInstructionsSeaside31Test",
+	"pools" : [
+		 ],
+	"super" : "RepositoryBasedTest",
+	"type" : "normal" }

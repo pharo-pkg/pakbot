@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "CGOStrictResolutionPolicyTest",
+	"pools" : [
+		 ],
+	"super" : "CGOTest",
+	"type" : "normal" }

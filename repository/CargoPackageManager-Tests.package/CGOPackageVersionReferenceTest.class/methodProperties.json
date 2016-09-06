@@ -1,0 +1,13 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"assertIsExpectedPackageVersion:" : "ChristopheDemarey 7/10/2015 13:48",
+		"packageVersion" : "ChristopheDemarey 10/30/2014 10:33",
+		"packageVersionDescription" : "ChristopheDemarey 7/10/2015 13:49",
+		"setUp" : "ChristopheDemarey 7/10/2015 13:48",
+		"testAsPackageVersion" : "ChristopheDemarey 10/31/2014 10:30",
+		"testFetchFromCache" : "ChristopheDemarey 7/10/2015 13:45",
+		"testFetchFromRepositories" : "ChristopheDemarey 10/27/2014 08:17",
+		"testPackageName" : "ChristopheDemarey 10/24/2014 23:29",
+		"testVersionNumber" : "ChristopheDemarey 10/24/2014 23:30" } }

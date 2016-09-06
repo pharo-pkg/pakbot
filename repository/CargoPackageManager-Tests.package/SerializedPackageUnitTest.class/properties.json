@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Tests-Model-Serialization",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "SerializedPackageUnitTest",
+	"pools" : [
+		 ],
+	"super" : "CGOTest",
+	"type" : "normal" }

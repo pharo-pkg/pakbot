@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"strategy" ],
+	"name" : "InImagePackageProviderStrategyTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

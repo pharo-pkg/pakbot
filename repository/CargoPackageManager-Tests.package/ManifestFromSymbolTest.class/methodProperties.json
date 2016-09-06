@@ -1,0 +1,7 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"testShouldGetManifestWhenSymbolIsAPackageName" : "ChristopheDemarey 6/9/2016 16:26",
+		"testShouldGetManifestWhenSymbolIsAnAssemblyName" : "ChristopheDemarey 6/9/2016 16:27",
+		"testShouldGetNilWhenSymbolNotAPackageName" : "ChristopheDemarey 6/9/2016 16:13" } }

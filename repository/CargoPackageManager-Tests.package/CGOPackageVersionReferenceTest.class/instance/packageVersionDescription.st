@@ -1,0 +1,3 @@
+input
+packageVersionDescription
+	^ CGOPackageVersionWriter toStringPretty: self packageVersion

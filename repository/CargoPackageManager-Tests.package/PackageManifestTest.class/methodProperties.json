@@ -1,0 +1,6 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"testCanGetManifestFromPackageName" : "ChristopheDemarey 6/3/2016 11:35",
+		"testGetUnknownManifestRaisesNotFound" : "ChristopheDemarey 6/3/2016 11:40" } }

@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"resources" : "ChristopheDemarey 3/24/2016 10:20" },
+	"instance" : {
+		"setUp" : "ChristopheDemarey 3/24/2016 15:13",
+		"testCanFetchPackageVersion" : "ChristopheDemarey 3/24/2016 11:05",
+		"testCanSavePackageVersion" : "ChristopheDemarey 3/24/2016 15:15",
+		"testRepositoryCreationWithPath" : "ChristopheDemarey 3/24/2016 14:16",
+		"testRepositoryCreationWithUrl" : "ChristopheDemarey 3/24/2016 14:13",
+		"testShouldGetAllPackagesProvidingAVirtualPackageWhenNoPlatformAttributeSpecified" : "ChristopheDemarey 3/24/2016 15:32",
+		"testShouldGetEmptyListOfPackageVersionsWhenPackageNotFound" : "ChristopheDemarey 3/24/2016 10:25",
+		"testShouldGetLatestPackagesAvalaibleWhenAskingBleedingEdge" : "ChristopheDemarey 3/24/2016 16:34",
+		"testShouldGetListOfPackageVersions" : "ChristopheDemarey 3/24/2016 10:27",
+		"testShouldGetListOfPackages" : "ChristopheDemarey 3/24/2016 10:58",
+		"testShouldGetSpecificPackagesProvidingAVirtualPackageWhenPlatformAttributeSpecified" : "ChristopheDemarey 3/24/2016 15:05" } }

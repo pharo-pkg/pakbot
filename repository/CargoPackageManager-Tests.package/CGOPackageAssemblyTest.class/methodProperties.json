@@ -1,0 +1,9 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"expectedTestStonOnResult" : "ChristopheDemarey 7/10/2015 14:52",
+		"testInitializeFromEmptyDictionary" : "ChristopheDemarey 7/10/2015 13:47",
+		"testInitializeFromWithOnlyPackageAndVersionAndPartsProvided" : "ChristopheDemarey 7/10/2015 13:48",
+		"testInitializeParts" : "ChristopheDemarey 7/10/2015 13:47",
+		"testStonOn" : "ChristopheDemarey 7/10/2015 13:49" } }

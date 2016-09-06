@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Tests-Solver",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BleedingEdgeResolutionStrategyTest",
+	"pools" : [
+		 ],
+	"super" : "RepositoryBasedTest",
+	"type" : "normal" }

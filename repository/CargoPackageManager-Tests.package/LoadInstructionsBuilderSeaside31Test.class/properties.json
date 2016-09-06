@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Tests-Functional",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"resolution",
+		"sorter" ],
+	"name" : "LoadInstructionsBuilderSeaside31Test",
+	"pools" : [
+		 ],
+	"super" : "Seaside31BasedTest",
+	"type" : "normal" }

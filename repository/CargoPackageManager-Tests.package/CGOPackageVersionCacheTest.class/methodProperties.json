@@ -1,0 +1,10 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"testDecode" : "ChristopheDemarey 7/10/2015 13:45",
+		"testDecodeNonStonData" : "ChristopheDemarey 7/10/2015 13:45",
+		"testFetchDescription" : "ChristopheDemarey 7/10/2015 13:49",
+		"testFetchMissingDescription" : "ChristopheDemarey 7/10/2015 13:45",
+		"testPackageDescriptionCache" : "ChristopheDemarey 7/10/2015 13:45",
+		"testSaveDescription" : "ChristopheDemarey 7/10/2015 13:45" } }

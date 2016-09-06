@@ -1,0 +1,4 @@
+tests-defaults
+testPackageDescriptionCache
+	self
+		assert: CGOPackageVersionCache packageDescriptionCache exists

@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"a100With2EmptyDependency" : "ChristopheDemarey 7/10/2015 14:29",
+		"a100WithDependencies" : "ChristopheDemarey 7/10/2015 14:29",
+		"a100WithoutDependencies" : "ChristopheDemarey 7/10/2015 14:29",
+		"aWithDependencyWithNoConstraint" : "ChristopheDemarey 7/10/2015 14:29",
+		"seasideCore310StonString" : "ChristopheDemarey 7/10/2015 14:29",
+		"testDeserializeDependenciesIn" : "ChristopheDemarey 7/10/2015 13:49",
+		"testFromSton" : "ChristopheDemarey 7/10/2015 13:49",
+		"testFromStonTargetClass" : "ChristopheDemarey 7/10/2015 13:49",
+		"testFromStonWithApkg" : "ChristopheDemarey 7/10/2015 13:48",
+		"testStonOn" : "ChristopheDemarey 7/10/2015 13:49",
+		"testStonOnWith2EmptyDependency" : "ChristopheDemarey 7/10/2015 13:49",
+		"testStonOnWithApkg" : "ChristopheDemarey 7/10/2015 13:49",
+		"testStonOnWithApkgWithDependencyWithNoConstraint" : "ChristopheDemarey 7/10/2015 13:49",
+		"testStonOnWithApkgWithoutDependencies" : "ChristopheDemarey 7/10/2015 13:49" } }

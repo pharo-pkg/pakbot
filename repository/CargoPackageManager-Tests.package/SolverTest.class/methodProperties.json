@@ -1,0 +1,16 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"setUp" : "ChristopheDemarey 6/13/2016 14:38",
+		"tearDown" : "ChristopheDemarey 6/13/2016 14:37",
+		"testCanSolvePackageWithManyCompatibleConstraints" : "ChristopheDemarey 7/10/2015 13:44",
+		"testCanSolvePackageWithSpecifiedVersion" : "ChristopheDemarey 7/10/2015 13:44",
+		"testCanSolvePackageWithoutSpecifiedVersion" : "ChristopheDemarey 7/10/2015 13:44",
+		"testCanSolveVirtualPackageWithSpecifiedVersion" : "ChristopheDemarey 7/10/2015 13:44",
+		"testCanSolveVirtualPackageWithoutSpecifiedVersion" : "ChristopheDemarey 7/10/2015 13:44",
+		"testDefaultVersionIsAddedToConstraintsWhenNoConstraintAreSpecified" : "ChristopheDemarey 7/10/2015 13:44",
+		"testSolvePackageWithNonFixedConstraintDependencyRaisesUnresolvedDependency" : "ChristopheDemarey 7/10/2015 13:52",
+		"testSolvingADependencyWithATransitiveDependencySolvesBothDependencies" : "ChristopheDemarey 7/10/2015 13:44",
+		"testSolvingAVirtualPackageProvidedByMoreThanOnePackageRaisesUnresolvedDependency" : "ChristopheDemarey 7/10/2015 13:52",
+		"testSolvingAVirtualPackageProvidedByNoPackageRaisesUnresolvedDependency" : "ChristopheDemarey 7/10/2015 13:52" } }

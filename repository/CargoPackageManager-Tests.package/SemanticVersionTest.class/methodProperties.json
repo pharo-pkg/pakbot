@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"assertVersion:printStringEquals:" : "ChristopheDemarey 2/26/2014 15:57",
+		"assertVersionFromString:major:minor:patch:suffix:" : "ChristopheDemarey 2/26/2014 15:57",
+		"stonSerializationFor:" : "ChristopheDemarey 7/10/2015 13:49",
+		"testEquals" : "ChristopheDemarey 10/3/2014 17:32",
+		"testFromString" : "ChristopheDemarey 3/31/2014 11:52",
+		"testGreaterThan" : "ChristopheDemarey 10/3/2014 17:31",
+		"testGreaterThan2" : "ChristopheDemarey 10/16/2014 23:44",
+		"testPrintString" : "ChristopheDemarey 3/31/2014 11:54",
+		"testSetSuffixFrom" : "ChristopheDemarey 10/3/2014 17:37",
+		"testShould10NotBeADevelopmentVersion" : "ChristopheDemarey 4/20/2015 12:32",
+		"testShould10devBeADevelopmentVersion" : "ChristopheDemarey 4/20/2015 12:34" } }

@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Tests-Functional",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"seaside31Dependency",
+		"seaside31PackageVersion" ],
+	"name" : "Seaside31BasedTest",
+	"pools" : [
+		 ],
+	"super" : "RepositoryBasedTest",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+tests
+testAsPackageVersion
+	self assertIsExpectedPackageVersion: pkgVersionReference asPackageVersion

@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"testAsPackageVersionReference" : "ChristopheDemarey 7/10/2015 13:48",
+		"testEquals" : "ChristopheDemarey 7/10/2015 13:48",
+		"testInitializeFromEmptyDictionary" : "ChristopheDemarey 7/10/2015 13:48",
+		"testInitializeFromWithNoPackageValue" : "ChristopheDemarey 7/10/2015 13:47",
+		"testInitializeFromWithNoVersion" : "ChristopheDemarey 7/10/2015 13:48",
+		"testInitializeFromWithOnlyPackageAndVersionProvided" : "ChristopheDemarey 7/10/2015 13:48",
+		"testInitializeFromWithWrongVersionProvided" : "ChristopheDemarey 7/10/2015 13:47" } }

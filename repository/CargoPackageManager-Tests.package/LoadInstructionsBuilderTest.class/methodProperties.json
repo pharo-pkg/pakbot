@@ -1,0 +1,10 @@
+{
+	"class" : {
+		"resources" : "ChristopheDemarey 4/13/2015 14:54" },
+	"instance" : {
+		"assertPackage:equals:" : "ChristopheDemarey 4/13/2015 15:24",
+		"expectedSortResult" : "ChristopheDemarey 4/13/2015 15:27",
+		"setUp" : "ChristopheDemarey 7/10/2015 13:51",
+		"testLoadInstructions" : "ChristopheDemarey 7/6/2015 16:24",
+		"testLoadOrder" : "ChristopheDemarey 4/13/2015 15:28",
+		"testLoadOrderHandlesCycles" : "ChristopheDemarey 4/13/2015 15:00" } }

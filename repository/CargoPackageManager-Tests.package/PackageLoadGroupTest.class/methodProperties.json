@@ -1,0 +1,6 @@
+{
+	"class" : {
+		"resources" : "ChristopheDemarey 7/6/2015 16:40" },
+	"instance" : {
+		"testCanGetMCVersionsFromALocalRepositoryWhenRemoteRepositoryNotAvailable" : "ChristopheDemarey 3/22/2016 11:09",
+		"testCannotGetMCVersionsWhenNoRepositoryAvailable" : "ChristopheDemarey 7/7/2015 17:21" } }
