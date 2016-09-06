@@ -1,0 +1,12 @@
+{
+	"class" : {
+		"on:nextBlock:" : "ChristopheDemarey 6/14/2016 15:10" },
+	"instance" : {
+		"hasChildNodes:" : "ChristopheDemarey 6/14/2016 14:56",
+		"hasNext" : "ChristopheDemarey 6/14/2016 14:49",
+		"initialize" : "ChristopheDemarey 6/14/2016 14:49",
+		"isNotVisited:" : "ChristopheDemarey 6/14/2016 14:49",
+		"next" : "ChristopheDemarey 6/14/2016 14:55",
+		"nextBlock:" : "ChristopheDemarey 6/14/2016 14:53",
+		"reset" : "ChristopheDemarey 6/14/2016 14:52",
+		"root:" : "ChristopheDemarey 6/14/2016 14:52" } }

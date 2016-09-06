@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Utils",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 6/9/2016 16:33",
+	"instvars" : [
+		"manifests" ],
+	"name" : "CGOPackageDependencyUpdater",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

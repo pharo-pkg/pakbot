@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Utils",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 6/23/2015 10:28",
+	"instvars" : [
+		"imageDependencies" ],
+	"name" : "PMPackageDependenciesChecker",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

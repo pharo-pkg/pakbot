@@ -1,0 +1,4 @@
+updating
+updateTransitiveDependenciesOf: anAssemblyManifest
+	self updateDependenciesOf: 
+		(self manifestsForAllCurrentDependenciesOfManifest: anAssemblyManifest)

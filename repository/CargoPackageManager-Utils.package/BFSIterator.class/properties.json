@@ -1,0 +1,17 @@
+{
+	"category" : "CargoPackageManager-Utils",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 6/14/2016 15:09",
+	"instvars" : [
+		"queue",
+		"alreadyVisited",
+		"root",
+		"nextBlock" ],
+	"name" : "BFSIterator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+accessing
+assemblies
+	^ AssemblyManifest allSubclasses
