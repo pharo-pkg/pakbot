@@ -1,0 +1,3 @@
+fetching
+package: aString 
+	^ aString

@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Repository-ReST",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 9/12/2014 18:56",
+	"instvars" : [
+		 ],
+	"name" : "CGORepositoryRestCallHandler",
+	"pools" : [
+		 ],
+	"super" : "ZnAutoMatchedRestCall",
+	"type" : "normal" }

@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Repository-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"server",
+		"client" ],
+	"name" : "CGORepositoryTest",
+	"pools" : [
+		 ],
+	"super" : "CGOTest",
+	"type" : "normal" }

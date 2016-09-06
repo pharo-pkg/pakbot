@@ -1,0 +1,3 @@
+matching
+pattern
+	^ #('ping')

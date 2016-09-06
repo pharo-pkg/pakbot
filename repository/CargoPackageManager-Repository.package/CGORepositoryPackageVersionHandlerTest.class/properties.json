@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Repository-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "CGORepositoryPackageVersionHandlerTest",
+	"pools" : [
+		 ],
+	"super" : "CGORepositoryTest",
+	"type" : "normal" }

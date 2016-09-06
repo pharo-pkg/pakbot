@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Repository-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 9/4/2014 14:43",
+	"instvars" : [
+		"packages" ],
+	"name" : "CGOTestPackageRepository",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageRepository",
+	"type" : "normal" }

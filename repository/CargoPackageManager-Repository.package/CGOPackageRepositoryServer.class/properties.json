@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Repository",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 3/17/2015 17:02",
+	"instvars" : [
+		"server",
+		"repository" ],
+	"name" : "CGOPackageRepositoryServer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
