@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 12/10/2014 17:32",
+	"instvars" : [
+		 ],
+	"name" : "CGOPackageBrowser",
+	"pools" : [
+		 ],
+	"super" : "GLMCompositePresentation",
+	"type" : "normal" }

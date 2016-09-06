@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "ManifestCargoPackageManagerUI",
+	"pools" : [
+		 ],
+	"super" : "PackageManifest",
+	"type" : "normal" }

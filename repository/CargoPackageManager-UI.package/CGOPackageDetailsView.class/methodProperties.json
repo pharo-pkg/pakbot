@@ -1,0 +1,27 @@
+{
+	"class" : {
+		"defaultSpec" : "ChristopheDemarey 6/4/2015 17:20",
+		"example" : "ChristopheDemarey 9/2/2016 12:45",
+		"newOn:owner:" : "ChristopheDemarey 6/4/2015 11:43",
+		"openOn:" : "ChristopheDemarey 6/4/2015 11:43" },
+	"instance" : {
+		"addPlatformRequirementTagsTo:" : "ChristopheDemarey 6/4/2015 18:00",
+		"buildPlatformTagsMorph" : "ChristopheDemarey 6/4/2015 18:00",
+		"dependenciesView" : "ChristopheDemarey 6/4/2015 11:40",
+		"editPlatformRequirements" : "ChristopheDemarey 6/4/2015 17:56",
+		"editPlatformRequirementsButton" : "ChristopheDemarey 6/4/2015 17:16",
+		"fileInputField" : "ChristopheDemarey 6/4/2015 15:23",
+		"fileLabel" : "ChristopheDemarey 6/4/2015 15:23",
+		"initialExtent" : "ChristopheDemarey 6/4/2015 11:40",
+		"initializePresenter" : "ChristopheDemarey 6/8/2015 11:36",
+		"initializeWidgets" : "ChristopheDemarey 9/2/2016 15:40",
+		"initializeWith:" : "ChristopheDemarey 6/4/2015 15:48",
+		"ongoingPackageUnit" : "ChristopheDemarey 6/4/2015 15:23",
+		"platformRequirementWidget" : "ChristopheDemarey 6/4/2015 17:01",
+		"platformRequirementsLabel" : "ChristopheDemarey 6/4/2015 15:23",
+		"provisionsInputField" : "ChristopheDemarey 6/4/2015 15:35",
+		"provisionsLabel" : "ChristopheDemarey 6/4/2015 15:23",
+		"refreshWidgetValues" : "ChristopheDemarey 6/8/2015 11:45",
+		"tagFactory" : "ChristopheDemarey 6/4/2015 17:58",
+		"updatePlatformRequirementsMorph" : "ChristopheDemarey 6/4/2015 18:01",
+		"updateProvisions" : "ChristopheDemarey 6/8/2015 11:41" } }

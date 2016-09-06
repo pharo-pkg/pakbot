@@ -1,0 +1,3 @@
+defaults
+labelSize
+	^ 75

@@ -1,0 +1,22 @@
+{
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [
+		"platformRequirementWidget" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 6/4/2015 11:41",
+	"instvars" : [
+		"ongoingPackageUnit",
+		"dependenciesView",
+		"provisionsLabel",
+		"provisionsInputField",
+		"fileLabel",
+		"fileInputField",
+		"platformRequirementsLabel",
+		"platformRequirementWidget",
+		"editPlatformRequirementsButton" ],
+	"name" : "CGOPackageDetailsView",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageView",
+	"type" : "normal" }
