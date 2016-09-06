@@ -22,6 +22,7 @@ Packages are the unit of distribution of a software. It is the minimal artefact 
 * **package assembly**: it represents a set of package units or package assemblies. It is useful to group a coherent set of packages all together. Assemblies do not have dependencies.
 * **virtual package**: they are there to manage smoothly platform-specific packages. A virtual package has only a name. Some concrete packages (units) will provide them, some others will require them. They offer low-coupling in dependencies description but have to be used carefully (no specified contract, just rely on the package name). This concept comes from the [Debian distribution] (http://www.linuxtopia.org/online_books/linux_system_administration/debian_linux_guides/debian_linux_faq/ch-pkg_basics.en_007.html).
 ![Cargo packages](/doc/cargo-packages.png)
+
 ### Dependency description
 With Cargo, dependencies are expressed at the package level (as well as other package metadata). It means each package knows its dependencies. 
 There is a working copy of the dependencies within the package. It is part of the package metadata. This working copy of dependencies intend to be easy to manage: you mostly describe a dependency by refering to a package name (no specific version, assumes it refers to the package of the same name already in the image).
