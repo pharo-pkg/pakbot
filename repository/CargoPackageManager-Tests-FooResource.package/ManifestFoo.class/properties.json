@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Tests-FooResource",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ManifestFoo",
+	"pools" : [
+		 ],
+	"super" : "PackageManifest",
+	"type" : "normal" }
