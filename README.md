@@ -28,6 +28,17 @@ With Cargo, dependencies are expressed at the package level (as well as other pa
 There is a working copy of the dependencies within the package. It is part of the package metadata. This working copy of dependencies intend to be easy to manage: you mostly describe a dependency by refering to a package name (no specific version, assumes it refers to the package of the same name already in the image).
 When you want to share a version of your package, you will publish it to the Cargo package repository so that it becomes available to anyone. During the publishing process, numberered (cargo) versions will be added to the dependencies to get reproducible loadings.
 
+### Loading packages
+You can ask Cargo to load one or many packages. Cargo will select adequate package versions according to your platform attributes and already installed packages. The package selection is called the solving of the user query. It results in getting back Cargo **load instructions** that is an object representing the list of packages to load in order.
+Cargo load instructions are serializable so that they can be used for off-line loading for example.
+
+### Updating packages
+Cargo relies on **[semantic versioning]**(http://semver.org/) to determine compatibility between versions of a package. It implies that **only a major version change could break the backward-compatibility** of a package. In other words, a patch version update (e.g. 1.2.0 => 1.2.1) or a minor version update (e.g. 1.2.1 => 1.3) should be compitable with packages working with the previous version. So, it is important that developers update the version number of a package with care by asking himself some questions: 
+ * did I make incompatible API changes? If yes, a major version increment is needed.
+ * did I introduce new functionalities without breaking backward-compatibility?. If yes, a minor version increment is needed.
+ * did I fix a bug in a backward-compatible way? If yes, a patch version increment is needed.
+In development mode, to avoid to publish a new package version to share your code with users or developers, you can use a special suffix (e.g. 2.1-dev) to tag a version as a development version. Cargo will allow you to override this version in the Cargo package repository. It means that you will be able to publish many times the same version with possibly different code.
+
 ## How to use Cargo?
 Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work).
 
