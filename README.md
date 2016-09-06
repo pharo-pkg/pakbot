@@ -33,7 +33,7 @@ You can ask Cargo to load one or many packages. Cargo will select adequate packa
 Cargo load instructions are serializable so that they can be used for off-line loading for example.
 
 ### Updating packages
-Cargo relies on **[semantic versioning]**(http://semver.org/) to determine compatibility between versions of a package. It implies that **only a major version change could break the backward-compatibility** of a package. In other words, a patch version update (e.g. 1.2.0 => 1.2.1) or a minor version update (e.g. 1.2.1 => 1.3) should be compitable with packages working with the previous version. So, it is important that developers update the version number of a package with care by asking himself some questions: 
+Cargo relies on [semantic versioning](http://semver.org/) to determine compatibility between versions of a package. It implies that **only a major version change could break the backward-compatibility** of a package. In other words, a patch version update (e.g. 1.2.0 => 1.2.1) or a minor version update (e.g. 1.2.1 => 1.3) should be compitable with packages working with the previous version. So, it is important that developers update the version number of a package with care by asking himself some questions: 
  * did I make incompatible API changes? If yes, a major version increment is needed.
  * did I introduce new functionalities without breaking backward-compatibility?. If yes, a minor version increment is needed.
  * did I fix a bug in a backward-compatible way? If yes, a patch version increment is needed.
