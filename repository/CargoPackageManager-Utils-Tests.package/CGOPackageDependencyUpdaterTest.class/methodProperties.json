@@ -1,0 +1,7 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"testShouldGetAllCurrentDependenciesOfPackageUnit" : "ChristopheDemarey 6/23/2016 15:15",
+		"testShouldGetStaticAndManuallyResolvedDependencies" : "ChristopheDemarey 6/9/2016 15:18",
+		"testShouldGetStaticAndManuallyResolvedDependenciesWhenNoIgnoredDependency" : "ChristopheDemarey 6/9/2016 15:16" } }

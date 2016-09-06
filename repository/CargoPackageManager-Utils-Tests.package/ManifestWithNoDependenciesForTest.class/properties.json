@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Utils-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ManifestWithNoDependenciesForTest",
+	"pools" : [
+		 ],
+	"super" : "PackageManifest",
+	"type" : "normal" }

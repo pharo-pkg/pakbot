@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"setUp" : "ChristopheDemarey 5/19/2016 15:30",
+		"tearDown" : "ChristopheDemarey 5/20/2016 11:05",
+		"testCanPublishOnePackageVersion" : "ChristopheDemarey 6/3/2016 14:04",
+		"testCanPublishOnePackageVersionProvidingRepository" : "ChristopheDemarey 6/3/2016 14:04",
+		"testCanPublishOnePackageVersionProvidingVersion" : "ChristopheDemarey 6/3/2016 14:04",
+		"testCanPublishPackageVersionAndItsDependencies" : "ChristopheDemarey 6/3/2016 14:04",
+		"testShouldPackageBeUpToDateAndCleanAfterPublishing" : "ChristopheDemarey 6/21/2016 15:50" } }

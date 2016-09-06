@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Utils-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"manifests" ],
+	"name" : "CGOPackageDependencyUpdaterTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
