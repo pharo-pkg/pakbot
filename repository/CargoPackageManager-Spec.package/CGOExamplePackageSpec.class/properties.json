@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Spec",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "CGOExamplePackageSpec",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageSpec",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Spec",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/16/2014 15:27",
+	"instvars" : [
+		 ],
+	"name" : "CGODataHolder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

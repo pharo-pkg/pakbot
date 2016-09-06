@@ -1,0 +1,1 @@
+Dummy class used to keep some usefull pieces of code (easier to get them in a fresh image).

@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"authors" : "ChristopheDemarey 11/25/2013 14:41",
+		"buildPackage" : "ChristopheDemarey 7/10/2015 13:50",
+		"contributors" : "ChristopheDemarey 11/25/2013 14:42",
+		"dependencies" : "ChristopheDemarey 12/8/2014 14:00",
+		"description" : "ChristopheDemarey 12/9/2014 22:46",
+		"file" : "ChristopheDemarey 12/8/2014 17:32",
+		"initialize" : "ChristopheDemarey 12/8/2014 13:56",
+		"name" : "ChristopheDemarey 11/28/2014 18:23",
+		"packageName" : "ChristopheDemarey 12/8/2014 17:29",
+		"packages" : "ChristopheDemarey 11/25/2013 14:43",
+		"platformRequirements" : "ChristopheDemarey 12/9/2014 10:20",
+		"provisions" : "ChristopheDemarey 12/9/2014 10:20",
+		"repositories" : "ChristopheDemarey 12/9/2014 10:46",
+		"srcArtifact" : "ChristopheDemarey 12/8/2014 14:00",
+		"testArtifact" : "ChristopheDemarey 10/9/2014 13:30",
+		"version" : "ChristopheDemarey 11/25/2013 14:44" } }

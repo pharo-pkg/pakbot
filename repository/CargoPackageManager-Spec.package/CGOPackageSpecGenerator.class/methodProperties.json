@@ -1,0 +1,10 @@
+{
+	"class" : {
+		"generateFor:withDependencies:" : "ChristopheDemarey 1/15/2014 17:37" },
+	"instance" : {
+		"addDependencies:" : "ChristopheDemarey 4/11/2014 10:52",
+		"addNameMethod" : "ChristopheDemarey 3/25/2014 17:13",
+		"addVersionMethod" : "ChristopheDemarey 1/15/2014 15:15",
+		"createClass" : "ChristopheDemarey 7/10/2015 15:14",
+		"normalizedPackageName:" : "ChristopheDemarey 1/15/2014 17:25",
+		"package:" : "ChristopheDemarey 1/10/2014 18:57" } }

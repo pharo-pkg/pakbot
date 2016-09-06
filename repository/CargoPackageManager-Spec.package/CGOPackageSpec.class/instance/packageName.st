@@ -1,0 +1,3 @@
+spec
+packageName
+	^ self name

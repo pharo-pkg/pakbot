@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Spec",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 2/27/2014 16:01",
+	"instvars" : [
+		 ],
+	"name" : "CGOSeaside31Visualization",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

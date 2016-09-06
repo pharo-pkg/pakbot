@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Spec",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 1/10/2014 18:47",
+	"instvars" : [
+		"package",
+		"class" ],
+	"name" : "CGOPackageSpecGenerator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
