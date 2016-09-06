@@ -1,0 +1,3 @@
+accessing
+packageVersions
+	^ Seaside31TestResource current seaside31PackageVersions

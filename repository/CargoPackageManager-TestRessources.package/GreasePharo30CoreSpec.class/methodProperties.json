@@ -1,0 +1,12 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"dependencies" : "ChristopheDemarey 12/9/2014 10:33",
+		"name" : "ChristopheDemarey 10/9/2014 15:22",
+		"platformRequirements" : "ChristopheDemarey 12/9/2014 10:25",
+		"provisions" : "ChristopheDemarey 12/9/2014 10:25",
+		"repositories" : "ChristopheDemarey 12/9/2014 09:56",
+		"srcArtifact" : "ChristopheDemarey 10/9/2014 15:23",
+		"testArtifact" : "ChristopheDemarey 10/9/2014 15:23",
+		"version" : "ChristopheDemarey 11/28/2014 18:13" } }

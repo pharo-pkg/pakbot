@@ -1,0 +1,1 @@
+A simple object used to parse a version reference

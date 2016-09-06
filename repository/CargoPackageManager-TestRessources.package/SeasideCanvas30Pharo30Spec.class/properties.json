@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Pharo",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SeasideCanvas30Pharo30Spec",
+	"pools" : [
+		 ],
+	"super" : "Seaside31PackageSpec",
+	"type" : "normal" }

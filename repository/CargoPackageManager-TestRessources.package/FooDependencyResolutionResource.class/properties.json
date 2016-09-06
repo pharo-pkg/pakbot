@@ -1,0 +1,16 @@
+{
+	"category" : "CargoPackageManager-TestRessources-Resources",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 4/10/2015 17:41",
+	"instvars" : [
+		"packages",
+		"packageProviderStrategyBackup",
+		"resolution" ],
+	"name" : "FooDependencyResolutionResource",
+	"pools" : [
+		 ],
+	"super" : "TestResource",
+	"type" : "normal" }

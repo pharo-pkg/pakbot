@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Welcome",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "SeasideWelcomeSpec",
+	"pools" : [
+		 ],
+	"super" : "Seaside31PackageSpec",
+	"type" : "normal" }

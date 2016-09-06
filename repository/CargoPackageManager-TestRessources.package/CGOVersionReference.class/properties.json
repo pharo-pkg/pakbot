@@ -1,0 +1,17 @@
+{
+	"category" : "CargoPackageManager-TestRessources-Resources",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 7/6/2015 14:25",
+	"instvars" : [
+		"packageName",
+		"branch",
+		"author",
+		"versionNumber" ],
+	"name" : "CGOVersionReference",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

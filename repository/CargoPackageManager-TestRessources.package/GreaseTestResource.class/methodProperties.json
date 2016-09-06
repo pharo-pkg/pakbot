@@ -1,0 +1,24 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"cargoFakePackageVersions" : "ChristopheDemarey 3/24/2016 09:49",
+		"cargoLocalRepository" : "ChristopheDemarey 3/24/2016 09:29",
+		"cargoPackageVersions" : "ChristopheDemarey 3/24/2016 09:37",
+		"greasecore1_1_13" : "ChristopheDemarey 3/22/2016 14:07",
+		"greasepharo30core1_1_13" : "ChristopheDemarey 3/22/2016 14:07",
+		"greasepharo30slime1_1_13" : "ChristopheDemarey 3/24/2016 09:38",
+		"greasepharo40slime1_1_13" : "ChristopheDemarey 3/24/2016 09:39",
+		"initialize" : "ChristopheDemarey 3/24/2016 09:30",
+		"initializeCargoRepository" : "ChristopheDemarey 3/24/2016 14:12",
+		"initializeCargoRepositoryVirtualIndex" : "ChristopheDemarey 3/24/2016 14:12",
+		"loadInstructions" : "ChristopheDemarey 7/6/2015 16:55",
+		"loadInstructionsFile" : "ChristopheDemarey 7/2/2015 17:44",
+		"loadInstructionsStonString" : "ChristopheDemarey 3/22/2016 10:54",
+		"mcRepository" : "ChristopheDemarey 3/22/2016 10:56",
+		"mcSnapshotMockFor:" : "ChristopheDemarey 7/6/2015 12:04",
+		"mcVersionFor:packages:" : "ChristopheDemarey 7/7/2015 15:36",
+		"mcVersionInfoMockFor:" : "ChristopheDemarey 7/6/2015 10:55",
+		"packageVersions" : "ChristopheDemarey 3/18/2016 15:26",
+		"setUp" : "ChristopheDemarey 3/22/2016 10:56",
+		"versionReferences" : "ChristopheDemarey 7/10/2015 15:16" } }

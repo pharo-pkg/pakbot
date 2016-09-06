@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Common",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 9/19/2014 15:31",
+	"instvars" : [
+		 ],
+	"name" : "Seaside31PackageSpec",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageSpec",
+	"type" : "normal" }
