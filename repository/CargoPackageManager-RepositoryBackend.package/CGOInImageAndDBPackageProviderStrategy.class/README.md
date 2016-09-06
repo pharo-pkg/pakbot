@@ -1,0 +1,2 @@
+Strategy used to provides instances of Packages from the image and a database.
+With this configuration, no new Package instance will be created in image before checking that there is not already the same package persisted in the database.

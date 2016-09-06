@@ -1,0 +1,14 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"bleedingEdgeOfConcretePackage:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"fetch:version:" : "ChristopheDemarey 7/10/2015 13:47",
+		"initialize" : "ChristopheDemarey 9/23/2014 17:35",
+		"package:" : "ChristopheDemarey 7/10/2015 13:46",
+		"packages" : "ChristopheDemarey 7/10/2015 13:47",
+		"packagesProviding:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"packagesProviding:version:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"savePackageVersion:" : "ChristopheDemarey 3/24/2016 11:37",
+		"updatePackageVersion:with:" : "ChristopheDemarey 7/10/2015 13:47",
+		"versionsOf:" : "ChristopheDemarey 7/10/2015 13:47" } }

@@ -1,0 +1,1 @@
+Test resource used to avoid populating mongo database too often.

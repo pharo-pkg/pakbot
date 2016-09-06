@@ -1,0 +1,3 @@
+private
+beSingleton
+	voyageRepository enableSingleton

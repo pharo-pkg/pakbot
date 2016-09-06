@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"newWithDbName:" : "ChristopheDemarey 10/14/2014 14:09" },
+	"instance" : {
+		"beSingleton" : "ChristopheDemarey 10/17/2014 17:50",
+		"bleedingEdgeOfConcretePackage:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"fetch:version:" : "ChristopheDemarey 7/10/2015 13:47",
+		"initializeWithDbName:" : "ChristopheDemarey 10/14/2014 13:58",
+		"package:" : "ChristopheDemarey 7/10/2015 13:46",
+		"packageVoyageId:" : "ChristopheDemarey 4/2/2015 14:48",
+		"packages" : "ChristopheDemarey 7/10/2015 13:47",
+		"packagesProviding:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"packagesProviding:version:for:" : "ChristopheDemarey 7/10/2015 13:47",
+		"reset" : "ChristopheDemarey 7/10/2015 13:47",
+		"savePackageVersion:" : "ChristopheDemarey 3/24/2016 11:37",
+		"updatePackageVersion:with:" : "ChristopheDemarey 4/20/2015 18:06",
+		"versionsOf:" : "ChristopheDemarey 7/10/2015 13:47" } }

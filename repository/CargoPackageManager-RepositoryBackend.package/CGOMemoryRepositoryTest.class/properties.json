@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-RepositoryBackend",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"repository" ],
+	"name" : "CGOMemoryRepositoryTest",
+	"pools" : [
+		 ],
+	"super" : "CGOTest",
+	"type" : "normal" }
