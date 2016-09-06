@@ -14,8 +14,17 @@ Cargo is a leightweitgh package manager for Smalltalk.
 ## Cargo big picture
 ![Cargo big picture](/doc/cargo-overview.png)
 
+## Cargo basics
+Cargo is a package manager. It automates the process of installing, upgrading and removing Smalltalk programs and libraries for a Smalltalk image in a consistent manner. A package manager deals with packages, distributions of software. Packages contain metadata, such as the software's name, description of its purpose, version number, vendor,  and a list of dependencies necessary for the software to run properly.
+### Packages
+Packages are the unit of distribution of a software. It is the minimal artefact you can load. Cargo defines 3 kind of packages:
+* package unit: it represents a piece of code in a specific version. It has dependencies.
+* package assembly: it represents a set of package units or package assemblies. It is useful to group a coherent set of packages all together. Assemblies do not have dependencies.
+* virtual package: they are there to manage smoothly platform-specific packages. A virtual package has only a name. Some concrete packages (units) will provide them, some others will require them. They offer low-coupling in dependencies description but have to be used carefully (no specified contract, jost rely on the package name). This concept comes from the Debian disctribution: http://www.linuxtopia.org/online_books/linux_system_administration/debian_linux_guides/debian_linux_faq/ch-pkg_basics.en_007.html.
+
 ## How to use Cargo?
 Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work).
+
 ### Install Cargo
 ### Load packages
 ### 
