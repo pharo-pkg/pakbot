@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testShouldGetManifestWhenSymbolIsAPackageName
 	self 
 		assert: #Kernel packageManifest

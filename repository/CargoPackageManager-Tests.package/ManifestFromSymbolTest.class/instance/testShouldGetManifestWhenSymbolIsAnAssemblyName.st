@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testShouldGetManifestWhenSymbolIsAnAssemblyName
 	self 
 		assert: #'Pharo-Kernel' packageManifest

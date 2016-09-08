@@ -1,7 +1,7 @@
 building
 mcVersionInfoMockFor: reference
 	^ MCVersionInfo
-		name: reference name
+		name: reference printString
 		id: UUID new
 		message: 'This is a mock version'
 		date: Date today

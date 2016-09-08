@@ -4,10 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "ChristopheDemarey 2/26/2015 17:16",
+	"commentStamp" : "ChristopheDemarey 9/7/2016 08:25",
 	"instvars" : [
-		 ],
-	"name" : "CGOMissingSourcePackageRepository",
+		"packageUnit" ],
+	"name" : "CGOWorkingCopyNotFound",
 	"pools" : [
 		 ],
 	"super" : "CGOPackageManagerError",
