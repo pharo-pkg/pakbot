@@ -1,7 +1,7 @@
 *CargoPackageManager-RepositoryBackend
 mongoVersion
 	<mongoDescription>
-	^ VOMongoToOneDescription new
+	^ VOToOneDescription new
 		attributeName: 'version';
 		accessor: (MAPluggableAccessor
 			read: [ :pkgVersion | pkgVersion version asString ]
