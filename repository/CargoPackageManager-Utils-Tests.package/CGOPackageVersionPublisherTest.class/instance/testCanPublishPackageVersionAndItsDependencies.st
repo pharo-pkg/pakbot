@@ -1,9 +1,11 @@
 tests
 testCanPublishPackageVersionAndItsDependencies
-	(CGOPackageVersionPublisher on: pkgRepository)
+	[ (CGOPackageVersionPublisher on: pkgRepository)
 		publishDependencies;
 		manifests: { ManifestOneDependency };
-		run.
+		run ]
+	on: CGOWorkingCopyNotFound 
+	do: [ :ex | ex resume "ignore it. it is a test manifest" ].
 	
 	self assert: (fs / 'onedependency') isDirectory.
 	self assert: (fs / 'onedependency' / ('onedependency@' , ManifestOneDependency version asSemanticVersion asString)) isFile.

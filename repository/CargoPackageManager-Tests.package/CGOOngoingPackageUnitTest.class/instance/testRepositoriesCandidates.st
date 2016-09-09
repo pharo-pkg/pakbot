@@ -4,4 +4,4 @@ testRepositoriesCandidates
 	candidates := (CGOOngoingPackageUnit on: ManifestCargoPackageManager) repositoriesCandidates.
 	self 
 		assert: candidates first location
-		equals: 'http://smalltalkhub.com/mc/demarey/CargoPackageManager/main/'.
+		equals: 'github://demarey/cargo:master/repository'.
