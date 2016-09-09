@@ -1,7 +1,7 @@
 tests
 testShouldGetLatestPackagesAvalaibleWhenAskingBleedingEdge
 	| packages |
-	packages := repository bleedingEdgeOfConcretePackage: 'Grease-Core' for: #().
+	packages := repository bleedingEdgeOfConcretePackage: 'grease-core' for: #().
 	self
 		assertCollection: (packages collect: #name)
-		hasSameElements: #('Grease-Core@1.1.13')
+		hasSameElements: #('grease-core@1.1.13')

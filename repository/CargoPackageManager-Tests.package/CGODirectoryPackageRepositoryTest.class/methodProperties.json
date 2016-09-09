@@ -9,7 +9,7 @@
 		"testRepositoryCreationWithUrl" : "ChristopheDemarey 3/24/2016 14:13",
 		"testShouldGetAllPackagesProvidingAVirtualPackageWhenNoPlatformAttributeSpecified" : "ChristopheDemarey 3/24/2016 15:32",
 		"testShouldGetEmptyListOfPackageVersionsWhenPackageNotFound" : "ChristopheDemarey 3/24/2016 10:25",
-		"testShouldGetLatestPackagesAvalaibleWhenAskingBleedingEdge" : "ChristopheDemarey 3/24/2016 16:34",
-		"testShouldGetListOfPackageVersions" : "ChristopheDemarey 3/24/2016 10:27",
-		"testShouldGetListOfPackages" : "ChristopheDemarey 3/24/2016 10:58",
+		"testShouldGetLatestPackagesAvalaibleWhenAskingBleedingEdge" : "ChristopheDemarey 9/9/2016 11:35",
+		"testShouldGetListOfPackageVersions" : "ChristopheDemarey 9/9/2016 11:36",
+		"testShouldGetListOfPackages" : "ChristopheDemarey 9/9/2016 11:39",
 		"testShouldGetSpecificPackagesProvidingAVirtualPackageWhenPlatformAttributeSpecified" : "ChristopheDemarey 3/24/2016 15:05" } }

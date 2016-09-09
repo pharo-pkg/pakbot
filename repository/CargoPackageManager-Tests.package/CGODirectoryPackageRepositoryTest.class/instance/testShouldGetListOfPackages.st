@@ -2,4 +2,4 @@ tests
 testShouldGetListOfPackages
 	self 
 		assertCollection: repository packages
-		hasSameElements: #(#GoferBar #'Grease-Core' #'Grease-Pharo30-Core' #'Grease-Pharo30-Slime' #'Grease-Pharo40-Slime')
+		hasSameElements: #(#goferbar #'grease-core' #'grease-pharo30-core' #'grease-pharo30-slime' #'grease-pharo40-slime')
