@@ -2,7 +2,7 @@
 
 # Cargo package manager
 
-Cargo is a leightweitgh package manager for Smalltalk.
+Cargo is a lightweitgh package manager for Smalltalk.
 
 ## What are the motivations behind Cargo?
 * Dependencies expressed at the package level. We want that each package describes its own dependencies in a synthetic way.
@@ -43,6 +43,13 @@ In development mode, to avoid to publish a new package version to share your cod
 Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work).
 
 ### Install Cargo
+```smalltalk
+Metacello new 
+	repository: 'github://demarey/cargo/repository';
+	baseline: 'Cargo';
+	load: 'client'
+```
+
 ### Load packages
 ### 
 
