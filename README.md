@@ -43,6 +43,13 @@ In development mode, to avoid to publish a new package version to share your cod
 Cargo comes with an API inspired by the one available in the latest versions of [Metacello](https://github.com/dalehenrich/metacello-work).
 
 ### Install Cargo
+```smalltalk
+Metacello new 
+	repository: 'github://demarey/cargo/repository';
+	baseline: 'Cargo';
+	load: 'client'
+```
+
 ### Load packages
 ### 
 
