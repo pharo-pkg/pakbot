@@ -2,7 +2,7 @@
 
 # Cargo package manager
 
-Cargo is a leightweitgh package manager for Smalltalk.
+Cargo is a lightweitgh package manager for Smalltalk.
 
 ## What are the motivations behind Cargo?
 * Dependencies expressed at the package level. We want that each package describes its own dependencies in a synthetic way.
