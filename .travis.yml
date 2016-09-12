@@ -4,7 +4,7 @@ sudo: false
 addons:
   apt:
     packages:
-    - mongodb-org
+    - mongodb-org-server
 
 # Select operating system(s)
 os:
