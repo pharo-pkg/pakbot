@@ -1,6 +1,6 @@
 ![Image of Cargo](/cargo-picture-small.png)
 
-# Cargo package manager
+# Cargo package manager [![Build Status](https://travis-ci.org/demarey/cargo.svg?branch=master)](https://travis-ci.org/demarey/cargo)
 
 Cargo is a lightweitgh package manager for Smalltalk.
 
