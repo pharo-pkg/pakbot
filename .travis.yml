@@ -9,7 +9,6 @@ addons:
 # Select operating system(s)
 os:
   - linux
-  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
