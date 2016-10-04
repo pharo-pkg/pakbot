@@ -1,3 +1,4 @@
 initialization
 initializeWith: aListOfPackageManifest 
-	manifests := aListOfPackageManifest
+	manifests := aListOfPackageManifest.
+	visited := SharedQueue new.

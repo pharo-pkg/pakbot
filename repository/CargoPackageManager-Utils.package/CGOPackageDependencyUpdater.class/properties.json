@@ -6,7 +6,8 @@
 		 ],
 	"commentStamp" : "ChristopheDemarey 6/9/2016 16:33",
 	"instvars" : [
-		"manifests" ],
+		"manifests",
+		"visited" ],
 	"name" : "CGOPackageDependencyUpdater",
 	"pools" : [
 		 ],
