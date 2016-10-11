@@ -1,4 +1,4 @@
-checking
+helpers
 assertVersion: aSymbolicVersionString printStringEquals: aString
 	| version |
 	

@@ -1,4 +1,4 @@
-checking
+helpers
 assertVersionFromString: aString major: major minor: minor patch: patch suffix: suffix
 	| version |
 	

@@ -7,7 +7,7 @@
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "SemanticVersionTest",
+	"name" : "CGOSemanticVersionTest",
 	"pools" : [
 		 ],
 	"super" : "TestCase",
