@@ -1,9 +1,8 @@
 tests
 testSaveVersionShouldFailIfVersionAlreadyExists
-	| sandboxRepository pkgVersion |
+	| pkgVersion |
 
-	sandboxRepository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	pkgVersion := GreaseTestResource current greasecore1_1_13.
 
-	sandboxRepository savePackageVersion: pkgVersion.
-	self should: [sandboxRepository savePackageVersion: pkgVersion] raise: CGOPackageVersionAlreadyExistsError.
+	emptyRepository savePackageVersion: pkgVersion.
+	self should: [emptyRepository savePackageVersion: pkgVersion] raise: CGOPackageVersionAlreadyExistsError.

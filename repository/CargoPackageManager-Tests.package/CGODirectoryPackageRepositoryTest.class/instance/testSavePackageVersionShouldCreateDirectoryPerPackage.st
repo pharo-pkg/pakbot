@@ -1,9 +1,8 @@
 repository-specific
 testSavePackageVersionShouldCreateDirectoryPerPackage
-	| sandboxRepository pkgVersion |
-
-	sandboxRepository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
-	pkgVersion := GreaseTestResource current greasecore1_1_13.
-	sandboxRepository savePackageVersion: pkgVersion.
+	| pkgVersion |
 	
-	self assert: (sandboxRepository rootDirectory / pkgVersion packageName asLowercase) isDirectory
+	pkgVersion := GreaseTestResource current greasecore1_1_13.
+	
+	emptyRepository savePackageVersion: pkgVersion.
+	self assert: (emptyRepository rootDirectory / pkgVersion packageName asLowercase) isDirectory
