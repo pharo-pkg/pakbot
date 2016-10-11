@@ -1,5 +1,5 @@
-tests
-testNewFromWithBadConstraint
+tests-creation
+testCreateDependencyWithWrongConstraintShouldFail
 	self
 		should: [ CGOPackageDependency newFrom: #A -> #('foo') ]
 		raise: CGODependencyConstraintFormatError
