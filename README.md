@@ -88,6 +88,7 @@ When you are done with the development phase (including testing) of your functio
 - you saved your code to your prefered Source Code Management system,
 - the package metadata are up to date: package name, version number, source code repository, package dependencies, package description, etc.
 Once done, you can publish your package to the Cargo repository.
+
 #### Using the scripting API
 To publish a package using the scripting API, you first need to get the object able to interact with package metadata: an OngoingPackageVersion (it has 2 subclasses: OngoingPackageUnit and OngoingPackageAssembly). With this object, you can easily update the package metadata. Once done, you need to send the message *#asPackageVersion* to the ongoing package version to get a package version. This object is a read-only object. You can now ask to the cargo repository to save this new package version:
 ```smalltalk
