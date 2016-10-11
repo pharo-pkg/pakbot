@@ -1,7 +1,7 @@
 tests
 testShouldGetAllPackagesProvidingAVirtualPackageWhenNoPlatformAttributeSpecified
 	| packages |
-	packages := greaseRepository packagesProviding: 'Grease-Slime' for: "No platform atributes" #().
+	packages := greaseRepository packagesProvidingName: 'Grease-Slime' forPlatformAttributes: "No platform atributes" #().
 
 	self
 		assertCollection: (packages collect: #name)

@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testGetPackagesShouldReturnEmptyListFromEmptyRepository
 	
 	self assert: emptyRepository packages isEmpty

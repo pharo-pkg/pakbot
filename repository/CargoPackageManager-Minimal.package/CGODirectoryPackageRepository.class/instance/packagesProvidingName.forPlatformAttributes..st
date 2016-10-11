@@ -1,5 +1,5 @@
 versions fetching
-packagesProviding: aName for: platformAttributes
+packagesProvidingName: aName forPlatformAttributes: platformAttributes
 	| packages virtualPackageIndex |
 	packages := OrderedCollection new.
 	virtualPackageIndex := self virtualDirectory / aName asLowercase.
@@ -8,8 +8,6 @@ packagesProviding: aName for: platformAttributes
 		ifTrue: [ virtualPackageIndex contents linesDo: [ :line | | pkgVersionRef pkgVersion |
 				pkgVersionRef := line asPackageVersionReference.
 				pkgVersion := (self fetch: pkgVersionRef packageName version: pkgVersionRef versionNumber).
-				platformAttributes
-					ifEmpty: [  packages add:  pkgVersion ]
-					ifNotEmpty: [ (pkgVersion platformRequirements difference: platformAttributes)
-						ifEmpty: [ packages add:  pkgVersion ] ] ].
+				(platformAttributes includesAll: pkgVersion platformRequirements)
+						ifTrue: [ packages add:  pkgVersion ] ].
 				packages ]
