@@ -1,5 +1,5 @@
 versions fetching
-packages
+packageNames
 	"list name of all packages available in the repository"
 
 	^ self rootDirectory directoryNames

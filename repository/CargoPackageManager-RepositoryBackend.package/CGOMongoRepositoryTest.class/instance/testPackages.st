@@ -4,7 +4,7 @@ testPackages
 	
 	self flag: 'This test is failing randomly: sometimes success, sometimes error. Skip it till it has a reproducible status'; skip.
 	
-	packages := repository packages.
+	packages := repository packageNames.
 	self 
 		assert: packages size
 		equals: 68.

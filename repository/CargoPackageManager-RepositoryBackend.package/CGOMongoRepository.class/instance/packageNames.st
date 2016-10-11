@@ -1,3 +1,3 @@
 versions fetching
-packages
+packageNames
 	^ CGOPackageVersion selectAll
