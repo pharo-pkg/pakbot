@@ -1,4 +1,4 @@
 as yet unclassified
 testFetchVersionsShouldReturnsEmptyListIfPackageIsVirtual
 	
-	self assert: (greaseRepository versionsOf: 'Grease-Slime') isEmpty
+	self assert: (greaseRepository versionStringsOf: 'Grease-Slime') isEmpty

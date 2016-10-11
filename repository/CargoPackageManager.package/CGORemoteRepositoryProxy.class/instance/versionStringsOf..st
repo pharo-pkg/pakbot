@@ -1,5 +1,5 @@
 versions fetching
-versionsOf: aPackageName
+versionStringsOf: aPackageName
 	[ ^ znClient
 		url: baseUrl;
 		addPathSegment: 'packages';
