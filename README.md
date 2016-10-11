@@ -51,7 +51,59 @@ Metacello new
 ```
 
 ### Load packages
-### 
+To load a project with its dependencies, you just need to ask Cargo to install the top-level package (i.e. the project assembly) describing all parts of the project.
+```smalltalk
+Cargo new 
+	package: 'MyProject@1.3';
+	install
+```
+It will load into the image the package *MyProject* in version *1.3* and all its dependencies. To achieve that, Cargo computes the list of packages to load and determines the load order. This package list is called **Cargo load instructions**. You can get this list by Calling #loadInstructions as follows:
+```smalltalk
+loadInstructions := Cargo new 
+	package: 'MyProject@1.3';
+	loadInstructions
+```
+These instructions can be saved into a file for further reuse:
+```smalltalk
+loadInstructions saveTo: 'MyProject-1.3-loadinstructions.ston' asFileReference.
+
+Cargo new
+	installFromFile: 'MyProject-1.3-loadinstructions.ston' asFileReference.
+```
+Instead of installing packages, you can only fetch them for further installation (possibly when you are off-line with no internet connection):
+```smalltalk
+Cargo new 
+	package: 'MyProject';
+	fetch
+```
+It will fetch packages into the unique instance of the MCCacheRepository. If you want to ftech packages into a specific folder, the use the *#fetchInto:* message.
+```smalltalk
+Cargo new 
+	package: 'MyProject';
+	fetchInto: '/home/me/my-cache'
+```
+
+### Publish a package
+When you are done with the development phase (including testing) of your functionality, you are ready to share this new version to your users. Ensure that 
+- you saved your code to your prefered Source Code Management system,
+- the package metadata are up to date: package name, version number, source code repository, package dependencies, package description, etc.
+Once done, you can publish your package to the Cargo repository.
+#### Using the scripting API
+To publish a package using the scripting API, you first need to get the object able to interact with package metadata: an OngoingPackageVersion (it has 2 subclasses: OngoingPackageUnit and OngoingPackageAssembly). With this object, you can easily update the package metadata. Once done, you need to send the message *#asPackageVersion* to the ongoing package version to get a package version. This object is a read-only object. You can now ask to the cargo repository to save this new package version:
+```smalltalk
+ongoing := #'Pharo-Kernel' packageManifest asOngoingPackageVersion.
+Cargo defaultPackageRepository savePackageVersion: ongoing asPackageVersion
+```
+You can also set up your own Cargo package repository if you do not want to use the default one.
+```smalltalk
+pkgRepository := CGODirectoryPackageRepository newWithFileName: 'cargo-repo'.
+```
+If you want to use it as the default Cargo repository, just tell it to Cargo:
+```smalltalk
+Cargo defaultPackageRepository: pkgRepository.
+```
+#### Using the User Interface
+Will come soon
 
 [](### List packages installed in the image)
 [](### Update packages already installed)
