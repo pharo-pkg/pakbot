@@ -1,9 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"setUp" : "ChristopheDemarey 5/21/2015 15:39",
-		"testGet" : "ChristopheDemarey 6/2/2015 11:24",
-		"testGetUnknownPackage" : "ChristopheDemarey 5/21/2015 15:44",
-		"testGetWithFilter" : "ChristopheDemarey 6/2/2015 11:25",
-		"testGetWithFilterAndMultipleValues" : "ChristopheDemarey 6/2/2015 11:25" } }

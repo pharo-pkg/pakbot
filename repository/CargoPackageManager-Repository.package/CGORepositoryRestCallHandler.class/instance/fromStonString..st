@@ -1,3 +1,3 @@
 serializing
 fromStonString: data
-	^ CGOPackageVersionReader fromString: data
+	^ STON fromString: data
