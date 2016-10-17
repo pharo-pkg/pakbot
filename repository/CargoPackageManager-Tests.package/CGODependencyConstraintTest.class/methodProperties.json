@@ -1,8 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"testFromString" : "ChristopheDemarey 7/10/2015 13:44",
-		"testFromStringWithBadValue" : "ChristopheDemarey 7/10/2015 13:46",
-		"testFromStringWithBadVersion" : "ChristopheDemarey 7/10/2015 13:44",
-		"testMergeAll" : "ChristopheDemarey 7/10/2015 13:44" } }

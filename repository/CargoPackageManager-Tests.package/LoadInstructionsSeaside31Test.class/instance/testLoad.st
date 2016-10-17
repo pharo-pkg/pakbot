@@ -1,4 +1,4 @@
 tests
 testLoad
-	self skip.
-	loadInstructions mcVersions
+	^ self skip.
+	"loadInstructions mcVersions"

@@ -1,7 +1,7 @@
 data - cargo package versions
 greasepharo40slime1_1_13
 	<cargoPackageVersion>
-	^ CGOPackageVersionReader fromString: 
+	^ STON fromString: 
 'CGOPackageUnit {
 	#package : #Grease-Pharo40-Slime,
 	#description : ''Slime uses the Refactoring Browser to find and, in some cases, rewrite common compatibility problems.'',

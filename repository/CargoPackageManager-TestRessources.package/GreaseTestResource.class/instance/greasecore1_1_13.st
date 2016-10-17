@@ -1,7 +1,7 @@
 data - cargo package versions
 greasecore1_1_13
 	<cargoPackageVersion>
-	^ CGOPackageVersionReader fromString: 
+	^ STON fromString: 
 'CGOPackageUnit {
 	#package : #Grease-Core,
 	#description : ''Core package of the Grease library.'',
