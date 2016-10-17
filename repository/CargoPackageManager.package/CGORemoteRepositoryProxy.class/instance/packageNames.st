@@ -1,5 +1,5 @@
 versions fetching
-packages 
+packageNames
 	^ znClient
 		url: baseUrl;
 		addPathSegment: 'packages';
