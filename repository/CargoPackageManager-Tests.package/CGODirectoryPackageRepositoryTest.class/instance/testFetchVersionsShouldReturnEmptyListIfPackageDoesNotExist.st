@@ -1,4 +1,4 @@
 tests
 testFetchVersionsShouldReturnEmptyListIfPackageDoesNotExist
 
-	self assert: (greaseRepository versionsOf: 'Unexistent') equals: #()
+	self assert: (greaseRepository versionStringsOf: 'Unexistent') equals: #()

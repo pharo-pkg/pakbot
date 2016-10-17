@@ -2,7 +2,7 @@ tests - versions fetching
 testVersionsOf
 	| result |
 	
-	result := repository versionsOf: 'Zinc-HTTP'.
+	result := repository versionStringsOf: 'Zinc-HTTP'.
 	self 
 		assert: result size
 		equals: 2.

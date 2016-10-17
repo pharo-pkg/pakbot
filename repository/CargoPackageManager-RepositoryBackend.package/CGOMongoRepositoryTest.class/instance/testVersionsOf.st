@@ -4,7 +4,7 @@ testVersionsOf
 	
 	self flag: 'This test is failing randomly: sometimes success, sometimes error. Skip it till it has a reproducible status'; skip.
 		
-	result := repository versionsOf: 'Zinc-HTTP'.
+	result := repository versionStringsOf: 'Zinc-HTTP'.
 	self 
 		assert: result size
 		equals: 2.
