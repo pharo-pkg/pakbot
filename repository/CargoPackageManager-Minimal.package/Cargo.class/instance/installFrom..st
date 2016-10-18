@@ -1,3 +1,3 @@
 actions
 installFrom: aLoadInstructions
-	aLoadInstructions loadFromRepositories: sourceRepositories
+	aLoadInstructions load
