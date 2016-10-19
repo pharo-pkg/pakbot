@@ -1,5 +1,5 @@
 decoding
 decode: aFileReference
-	^ [ CGOPackageVersionReader fromStream: aFileReference readStream ]
+	^ [ STON fromStream: aFileReference readStream ]
 		on: Error
 		do: [ nil ]

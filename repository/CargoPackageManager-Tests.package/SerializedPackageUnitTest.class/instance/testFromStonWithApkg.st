@@ -2,7 +2,7 @@ tests
 testFromStonWithApkg
 	| pkgVersion constraints |
 	
-	pkgVersion := CGOPackageVersionReader fromString: self a100WithDependencies.
+	pkgVersion := STON fromString: self a100WithDependencies.
 
 	self assert: pkgVersion packageName equals: #A.
 	self assert: pkgVersion version equals: (SemanticVersion fromString: '1.0').
