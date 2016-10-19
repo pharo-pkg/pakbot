@@ -3,4 +3,4 @@ testResolutionOfUnexistentPackageVersionShouldFail
 
 	| solver |
 	solver := CGOSolver new.
-	self should: [ solver solvePackageNamed: #'Unexistent' version: '1.0' ] raise: CGOPackageVersionNotFoundError
+	self should: [ solver solvePackageNamed: #'Unexistent' version: '1.0' ] raise: CGOUnresolvedDependency

@@ -1,5 +1,5 @@
 tests
-testResolutionOfPackageWithNoDependenciesShouldShieldEmptyResolution
+testResolutionOfPackageWithNoDependenciesShouldShieldNotEmptyResolution
 
 	| solver resolution repository |
 	repository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
@@ -9,4 +9,4 @@ testResolutionOfPackageWithNoDependenciesShouldShieldEmptyResolution
 	solver addRepository: repository.
 	resolution := solver solvePackageNamed: #'NoDependencies' version: '17'.
 	
-	self assert: resolution isEmpty.
+	self deny: resolution isEmpty.
