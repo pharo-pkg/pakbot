@@ -1,7 +1,7 @@
 data - cargo package versions
 greasepharo30core1_1_13
 	<cargoPackageVersion>
-	^ CGOPackageVersionReader fromString: 
+	^ STON fromString: 
 'CGOPackageUnit {
 	#package : #Grease-Pharo30-Core,
 	#description : ''Platform-specific package of the Grease-Core package for Pharo.'',

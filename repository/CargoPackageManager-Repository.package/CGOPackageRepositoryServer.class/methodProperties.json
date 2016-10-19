@@ -1,9 +1,0 @@
-{
-	"class" : {
-		"startupScript" : "ChristopheDemarey 7/10/2015 15:09" },
-	"instance" : {
-		"resetDatabase" : "ChristopheDemarey 1/23/2015 16:08",
-		"setUpDataBase" : "ChristopheDemarey 7/10/2015 15:09",
-		"start" : "ChristopheDemarey 1/23/2015 16:09",
-		"startWebServer" : "ChristopheDemarey 7/10/2015 15:05",
-		"stop" : "ChristopheDemarey 1/23/2015 16:10" } }

@@ -7,5 +7,5 @@ testFromStonTargetClass
 					instVarNamed: 'version' put: '1.0.0' asSemanticVersion;
 					yourself).
 	self 
-		assert: (CGOPackageVersionReader fromString: ston) class
+		assert: (STON fromString: ston) class
 		equals: CGOPackageUnit
