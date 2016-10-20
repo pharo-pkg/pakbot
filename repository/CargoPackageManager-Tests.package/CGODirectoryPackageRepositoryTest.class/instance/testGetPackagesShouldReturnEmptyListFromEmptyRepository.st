@@ -1,0 +1,4 @@
+tests
+testGetPackagesShouldReturnEmptyListFromEmptyRepository
+	
+	self assert: emptyRepository packageNames isEmpty

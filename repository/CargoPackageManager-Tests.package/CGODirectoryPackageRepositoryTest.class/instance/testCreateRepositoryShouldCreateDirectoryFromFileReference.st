@@ -1,0 +1,6 @@
+repository-specific
+testCreateRepositoryShouldCreateDirectoryFromFileReference	
+
+	self deny: temporaryPath asFileReference isDirectory.
+	CGODirectoryPackageRepository newInDirectory: temporaryPath asFileReference.	
+	self assert: temporaryPath asFileReference isDirectory

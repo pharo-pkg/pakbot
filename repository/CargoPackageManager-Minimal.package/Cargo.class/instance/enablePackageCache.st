@@ -1,0 +1,3 @@
+configuring
+enablePackageCache
+	sourceRepositories addFirst: MCCacheRepository uniqueInstance

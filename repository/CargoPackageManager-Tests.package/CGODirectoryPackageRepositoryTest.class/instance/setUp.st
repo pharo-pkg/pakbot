@@ -1,4 +1,6 @@
 running
 setUp
 	super setUp.
-	repository := GreaseTestResource current cargoLocalRepository.
+	greaseRepository := GreaseTestResource current cargoLocalRepository.
+	emptyRepository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
+	temporaryPath := '/tmp/cargo-repo-test' asFileReference.
