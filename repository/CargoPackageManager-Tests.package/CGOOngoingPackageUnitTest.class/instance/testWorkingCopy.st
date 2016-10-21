@@ -1,4 +1,4 @@
-tests-checking
+tests
 testWorkingCopy
 	| wc |
 	wc := (CGOOngoingPackageUnit on: ManifestCargoPackageManager) workingCopy.

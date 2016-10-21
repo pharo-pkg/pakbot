@@ -1,7 +1,6 @@
 initialization
 initializeDependenciesWith: aPackageUnit
-	dependencies := self
-		toArray:
+	dependencies := self toArray:
 			(aPackageUnit dependencies collect: 
 			[ :dependency | 
 			Association 

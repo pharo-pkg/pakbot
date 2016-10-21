@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 9/23/2016 14:00",
+	"instvars" : [
+		"versionString" ],
+	"name" : "CGOMonticelloHostedPackageVersion",
+	"pools" : [
+		 ],
+	"super" : "CGOSourcePackageVersion",
+	"type" : "normal" }

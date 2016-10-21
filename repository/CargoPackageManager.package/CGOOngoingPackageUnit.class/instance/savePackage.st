@@ -1,12 +1,8 @@
 updating
 savePackage
-	self workingCopy ifNotNil: [ :workingCopy |
+	self workingCopy ifNotNil: 
+		[ :workingCopy |
 		workingCopy needsSaving ifTrue: 
-			[ | repository | 
-			self repositories 
-				ifEmpty: [ self error: 'no repository set for ', self packageName ].
-			repository := MCRepository fromUrl: self repositories first.
-			self workingCopy
-				newVersionWithName: (self workingCopy uniqueVersionNameIn: repository)
-				message: 'Publication of version ' , self version
-				in: repository ] ].
+			[ self sourcePackage 
+				ifNil: [ self error: 'no repository set for ', self packageName ].
+			self sourcePackage saveNewVersion: self version ] ].

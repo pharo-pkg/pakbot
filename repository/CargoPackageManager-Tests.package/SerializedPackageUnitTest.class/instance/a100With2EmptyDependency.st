@@ -9,7 +9,8 @@ a100With2EmptyDependency
 		#B : [ ],
 		#C : [ ]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Foo/Bar/main/''
-	]
+	#src : CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Foo/Bar/main/'',
+		#versionString : ''JohnDoe.0''
+	}
 }'

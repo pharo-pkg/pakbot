@@ -2,8 +2,6 @@ tests-loading
 testCanGetMCVersionsFromALocalRepositoryWhenRemoteRepositoryNotAvailable
 	| pkgLoadGroup mcVersions |
 	pkgLoadGroup := GreaseTestResource current loadInstructions groups first.
-	pkgLoadGroup addRepository: GreaseTestResource current mcRepository.
-	
 	mcVersions := pkgLoadGroup mcVersions.
 		
 	self	

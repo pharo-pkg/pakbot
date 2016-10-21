@@ -8,7 +8,7 @@
 	"instvars" : [
 		"name",
 		"repositories",
-		"packageVersions" ],
+		"packageVersionRefs" ],
 	"name" : "CGOPackageLoadGroup",
 	"pools" : [
 		 ],

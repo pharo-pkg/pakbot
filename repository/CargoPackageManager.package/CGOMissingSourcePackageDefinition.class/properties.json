@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 2/26/2015 17:16",
+	"instvars" : [
+		 ],
+	"name" : "CGOMissingSourcePackageDefinition",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageManagerError",
+	"type" : "normal" }

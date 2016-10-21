@@ -8,8 +8,9 @@ greasecore1_1_13
 	#version : ''1.1.13'',
 	#timestamp : DateAndTime [ ''2015-04-14T14:51:50.116+00:00'' ],
 	#dependencies : [ ],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
-	],
-	#file : ''Grease-Core-JohanBrichau.94''
+	#src: CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#packageName : #Grease-Core,
+		#versionString : ''JohanBrichau.94''
+	}
 }'

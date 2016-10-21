@@ -6,7 +6,10 @@ testStonOnWithApkgWithoutDependencies
 		with: #package -> #A
 		with: #version -> '1.0'
 		with: #description -> 'A test package version.'
-		with: #repositories -> { 'http://smalltalkhub.com/mc/Foo/Bar/main' asUrl }.
+		with: #src -> (CGOMonticelloHostedPackageVersion 
+			repositoryUrl: 'http://smalltalkhub.com/mc/Foo/Bar/main'
+			packageName: 'no-file-specified'
+			versionString: 'JohnDoe.0').
 	pkgVersion := CGOPackageVersion newFrom: dictionary.
 	pkgVersion
 		instVarNamed: 'timestamp'
