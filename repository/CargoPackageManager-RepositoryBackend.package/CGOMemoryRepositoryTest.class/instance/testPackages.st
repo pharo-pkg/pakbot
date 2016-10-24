@@ -2,7 +2,7 @@ tests
 testPackages
 	| packages |
 	
-	packages := repository packages.
+	packages := repository packageNames.
 	self 
 		assert: packages size
 		equals: 68.
