@@ -3,6 +3,6 @@ savePackage
 	self workingCopy ifNotNil: 
 		[ :workingCopy |
 		workingCopy needsSaving ifTrue: 
-			[ self sourcePackage 
+			[ self sourceRepository 
 				ifNil: [ self error: 'no repository set for ', self packageName ].
-			self sourcePackage saveNewVersion: self version ] ].
+			self sourceRepository saveNewVersion: self version ] ].

@@ -1,9 +1,9 @@
 accessing
-sourcePackage
+sourceRepository
 	| dict |
 	[ dict := manifest sourceRepository ]
-	on: MessageNotUnderstood "src metadata not present"
-	do: [ ^ nil ].
+		on: MessageNotUnderstood "src metadata not present"
+		do: [ ^ nil ].
 	^ ((dict at: #backend) = #monticello)
 		ifTrue: [ CGOMonticelloHostedPackageVersion 
 			repositoryUrl: (dict at: #repositoryUrl)
