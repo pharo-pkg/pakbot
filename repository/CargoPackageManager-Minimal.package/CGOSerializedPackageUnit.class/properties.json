@@ -9,10 +9,9 @@
 		"authors",
 		"contributors",
 		"dependencies",
-		"repositories",
 		"platformRequirements",
 		"provisions",
-		"file" ],
+		"src" ],
 	"name" : "CGOSerializedPackageUnit",
 	"pools" : [
 		 ],

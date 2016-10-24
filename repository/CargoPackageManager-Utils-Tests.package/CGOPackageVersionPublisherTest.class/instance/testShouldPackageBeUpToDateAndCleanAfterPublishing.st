@@ -1,22 +1,28 @@
 tests
 testShouldPackageBeUpToDateAndCleanAfterPublishing
-	| pkgName wc manifest repositories |
+	| pkgName wc manifest |
 	
 	pkgName := 'CGO-Foo'.
 	RPackageOrganizer default registerPackageNamed: pkgName.
 	wc := MCWorkingCopy forPackage: (MCPackage new name: pkgName).
 	manifest := (TheManifestBuilder ofPackageNamed: pkgName) manifest.
 	manifest class compile: 'packageName ^ ', pkgName printString.
-	repositories := { 'file://' , MCCacheRepository cacheDirectory fullName }.
+	manifest class compile: 'src 
+	^ { #backend -> #monticello .
+		#repositoryUrl -> ', '''file://' , MCCacheRepository cacheDirectory fullName , ''' .
+		#packageName -> #''CGO-Foo'' .
+		#versionString -> ''testRunner.1'' } asDictionary'.
 
 	self assert: wc needsSaving.
 	(CGOPackageVersionPublisher on: pkgRepository)
 		manifests: { manifest };
-		srcRepositories: repositories;
 		run.
 	
 	self 
-		assert: manifest repositories 
-		equals: repositories.
+		assert: manifest sourceRepository 
+		equals: { #backend -> #monticello .
+		#repositoryUrl -> ('file://' , MCCacheRepository cacheDirectory fullName) .
+		#packageName -> #'CGO-Foo' .
+		#versionString -> 'testRunner.1' } asDictionary.
 	self deny: wc needsSaving.
 	wc unload

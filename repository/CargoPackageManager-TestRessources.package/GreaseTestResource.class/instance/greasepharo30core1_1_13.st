@@ -10,14 +10,15 @@ greasepharo30core1_1_13
 	#dependencies : [
 		#Grease-Core : [ ]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
-	],
+	#src: CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#packageName : #Grease-Pharo30-Core,
+		#versionString : ''JohanBrichau.16''
+	},
 	#platformRequirements : [
 		''pharo''
 	],
 	#provisions : [
 		''Grease-Core-Platform''
-	],
-	#file : ''Grease-Pharo30-Core-JohanBrichau.16''
+	]
 }'

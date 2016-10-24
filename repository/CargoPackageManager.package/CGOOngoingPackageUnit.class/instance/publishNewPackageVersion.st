@@ -1,7 +1,7 @@
 publishing
 publishNewPackageVersion
 	[ [ self newPackageVersion ]
-	on: CGOMissingSourcePackageRepository
+	on: CGOMissingSourcePackageDefinition
 		do: [ :error |
 				self setSourceRepositories.
 				error resume ] ]

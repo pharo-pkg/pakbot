@@ -1,6 +1,0 @@
-repository-specific
-testCreateRepositoryShouldCreateDirectoryFromFileName
-
-	self deny: temporaryPath asFileReference isDirectory.
-	CGODirectoryPackageRepository newInDirectory: temporaryPath fullName.
-	self assert: temporaryPath asFileReference isDirectory

@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 9/23/2016 14:00",
+	"instvars" : [
+		"repositoryUrl",
+		"packageName" ],
+	"name" : "CGOSourcePackageVersion",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

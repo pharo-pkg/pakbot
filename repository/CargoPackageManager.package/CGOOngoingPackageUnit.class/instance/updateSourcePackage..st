@@ -1,0 +1,3 @@
+updating
+updateSourcePackage: aCGOSourcePackageVersion
+	self updateMethod: #sourceRepository withContent: aCGOSourcePackageVersion

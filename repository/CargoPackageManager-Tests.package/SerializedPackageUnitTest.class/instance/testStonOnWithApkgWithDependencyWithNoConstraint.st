@@ -7,7 +7,10 @@ testStonOnWithApkgWithDependencyWithNoConstraint
 		add: #package -> #A;
 		add: #version -> '1.0';
 		add: #description -> 'A test package version.';
-		add: #repositories -> #('http://smalltalkhub.com/mc/Foo/Bar/main');
+		add: #sourceRepository -> (CGOMonticelloHostedPackageVersion 
+			repositoryUrl: 'http://smalltalkhub.com/mc/Foo/Bar/main'
+			packageName: 'no-file-specified'
+			versionString: 'JohnDoe.0');
 		add: #dependencies -> { #B -> #() }.
 	pkgVersion := CGOPackageVersion newFrom: dictionary. 
 	pkgVersion

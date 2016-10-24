@@ -10,14 +10,15 @@ greasepharo30slime1_1_13
 	#dependencies : [
 		#Grease-Core-Platform : [ ]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
-	],
+	#src: CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#packageName : #Grease-Slime,
+		#versionString : ''pmm.29''
+	},
 	#platformRequirements : [
 		''pharo3.x''
 	],
 	#provisions : [
 		''Grease-Slime''
-	],
-	#file : ''Grease-Slime-pmm.29''
+	]
 }'

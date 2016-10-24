@@ -1,3 +1,0 @@
-versions fetching
-packagesProvidingName: aName forPlatformAttributes: platformAttributes
-	self subclassResponsibility

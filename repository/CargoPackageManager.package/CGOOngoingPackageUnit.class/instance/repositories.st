@@ -1,3 +1,3 @@
 accessing
 repositories
-	^ manifest repositories
+	self halt. "deprecated"

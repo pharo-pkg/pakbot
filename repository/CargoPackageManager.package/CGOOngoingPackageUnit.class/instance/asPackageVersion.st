@@ -7,7 +7,7 @@ asPackageVersion
 			add: #dependencies -> self rawDependencies;
 			add: #provisions -> self provisions;
 			add: #description -> self description;
-			add: #repositories -> self repositories;
+			add: #sourceRepository -> self sourcePackage;
 			add: #file -> self file;
 			add: #platformRequirements -> self platformRequirements;
 			add: #timestamp -> DateAndTime now;

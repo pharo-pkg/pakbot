@@ -1,15 +1,13 @@
 {
-	"category" : "CargoPackageManager-Tests-PackageRepository",
+	"category" : "CargoPackageManager-Tests-Model",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"packageNames",
-		"temporaryPath",
-		"emptyRepository",
-		"greaseRepository" ],
+		"repository",
+		"packageNames" ],
 	"name" : "CGODirectoryPackageRepositoryTest",
 	"pools" : [
 		 ],

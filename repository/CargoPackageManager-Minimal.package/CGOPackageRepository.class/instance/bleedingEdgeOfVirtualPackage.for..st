@@ -2,7 +2,7 @@ private
 bleedingEdgeOfVirtualPackage: aVirtualPackageName for: platformAttributes
 	| packagesDict |
 	
-	packagesDict := ((self packagesProvidingName: aVirtualPackageName forPlatformAttributes: platformAttributes) collect: #asPackageVersionReference)
+	packagesDict := ((self packagesProviding: aVirtualPackageName for: platformAttributes) collect: #asPackageVersionReference)
 		groupedBy: #packageName.
 	
 	packagesDict ifEmpty: [ CGOPackageNotFoundError signal: 'Cannot find ' , aVirtualPackageName , ' package'  ].

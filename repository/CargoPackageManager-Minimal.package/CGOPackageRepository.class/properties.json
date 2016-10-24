@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "GuillermoPolito 10/11/2016 14:52",
+	"commentStamp" : "<historical>",
 	"instvars" : [
 		"baseUrl" ],
 	"name" : "CGOPackageRepository",
