@@ -7,7 +7,7 @@ testStonOnWithApkgWithDependencyWithNoConstraint
 		add: #package -> #A;
 		add: #version -> '1.0';
 		add: #description -> 'A test package version.';
-		add: #sourceRepository -> (CGOMonticelloHostedPackageVersion 
+		add: #sourcePackageVersion -> (CGOMonticelloHostedPackageVersion 
 			repositoryUrl: 'http://smalltalkhub.com/mc/Foo/Bar/main'
 			packageName: 'no-file-specified'
 			versionString: 'JohnDoe.0');

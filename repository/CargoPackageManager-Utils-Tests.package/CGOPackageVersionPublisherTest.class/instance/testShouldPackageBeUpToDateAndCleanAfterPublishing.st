@@ -19,7 +19,7 @@ testShouldPackageBeUpToDateAndCleanAfterPublishing
 		run.
 	
 	self 
-		assert: manifest sourceRepository 
+		assert: manifest sourcePackageVersion 
 		equals: { #backend -> #monticello .
 		#repositoryUrl -> ('file://' , MCCacheRepository cacheDirectory fullName) .
 		#packageName -> #'CGO-Foo' .

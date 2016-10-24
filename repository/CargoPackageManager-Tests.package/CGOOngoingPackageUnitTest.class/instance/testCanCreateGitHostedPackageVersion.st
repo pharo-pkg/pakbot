@@ -8,5 +8,5 @@ testCanCreateGitHostedPackageVersion
 		#commitish -> #e2abdh } asDictionary'.
 	
 	self 
-		assert: ongoingPkg sourceRepository class 
+		assert: ongoingPkg sourcePackageVersion class 
 		equals: CGOGitHostedPackageVersion 
