@@ -12,6 +12,6 @@ setUp
 		url: server localUrl;
 		accept: ZnMimeType applicationSton;
 		enforceHttpSuccess: true;
-		contentReader: [ :entity | entity ifNotNil: [ CGOPackageVersionReader fromString: entity contents ] ];
+		contentReader: [ :entity | entity ifNotNil: [ STON fromString: entity contents ] ];
 		contentWriter: [ :object | ZnEntity with: (CGOPackageVersionWriter toStringPretty: object) type: ZnMimeType applicationSton ];
 		yourself
