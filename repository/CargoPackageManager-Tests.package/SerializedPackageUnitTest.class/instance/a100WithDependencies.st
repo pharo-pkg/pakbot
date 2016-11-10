@@ -14,7 +14,9 @@ a100WithDependencies
 			''=1.1.0''
 		]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Foo/Bar/main/''
-	]
+	#src : CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Foo/Bar/main'',
+		#packageName : #no-file-specified,
+		#versionString : ''JohnDoe.0''
+	}
 }'

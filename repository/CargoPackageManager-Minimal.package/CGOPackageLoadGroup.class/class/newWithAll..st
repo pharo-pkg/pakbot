@@ -1,6 +1,6 @@
 instance creation
-newWithAll: aPackageVersionList
+newWithAll: aListOfPackageVersionReferenceStrings
 	^ self new 
-		intializeWithPackageVersions: aPackageVersionList;
+		intializeWithPackageVersions: aListOfPackageVersionReferenceStrings;
 		yourself
 		

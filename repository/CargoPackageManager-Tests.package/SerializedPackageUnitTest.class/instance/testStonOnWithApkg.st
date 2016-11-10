@@ -1,4 +1,4 @@
-tests
+as yet unclassified
 testStonOnWithApkg
 	| dictionary pkgVersion result |
 	
@@ -7,7 +7,10 @@ testStonOnWithApkg
 		add: #package -> #A;
 		add: #version -> '1.0';
 		add: #description -> 'A test package version.';
-		add: #repositories -> #('http://smalltalkhub.com/mc/Foo/Bar/main');
+		add: #src -> (CGOMonticelloHostedPackageVersion 
+			repositoryUrl: 'http://smalltalkhub.com/mc/Foo/Bar/main'
+			packageName: 'no-file-specified'
+			versionString: 'JohnDoe.0');
 		add: #dependencies -> { #B -> #('=3.1') . #C -> #('=1.0' '=1.1')}.
 	pkgVersion := CGOPackageVersion newFrom: dictionary.
 	pkgVersion

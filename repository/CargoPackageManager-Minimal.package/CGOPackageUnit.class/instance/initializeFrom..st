@@ -1,9 +1,8 @@
 initialization
 initializeFrom: aDictionary
 	super initializeFrom: aDictionary.
-	file := aDictionary at: #file ifAbsent: nil.
 	dependencies := self dependenciesFrom: aDictionary.
 	provisions := self provisionsFrom: aDictionary.
-	repositories := self repositoriesFrom: aDictionary.
+	src := aDictionary at: #src ifAbsent: nil.
 	platformRequirements := aDictionary at: #platformRequirements ifAbsent: #().
 	

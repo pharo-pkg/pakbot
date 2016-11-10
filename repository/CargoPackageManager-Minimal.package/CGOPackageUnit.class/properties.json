@@ -10,7 +10,8 @@
 		"file",
 		"repositories",
 		"provisions",
-		"platformRequirements" ],
+		"platformRequirements",
+		"src" ],
 	"name" : "CGOPackageUnit",
 	"pools" : [
 		 ],

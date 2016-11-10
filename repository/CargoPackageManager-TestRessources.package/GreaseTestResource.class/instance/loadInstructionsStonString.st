@@ -8,23 +8,24 @@ loadInstructionsStonString
 	#groups : OrderedCollection [
 		CGOPackageLoadGroup {
 			#name : ''Grease-Core'',
-			#packageVersions : [
+			#packageVersionRefs : [
 				CGOPackageUnit {
 					#package : #Grease-Core,
 					#description : ''Core package of the Grease library.'',
 					#version : ''1.1.13'',
 					#timestamp : DateAndTime [ ''2015-04-14T14:51:50.116+00:00'' ],
 					#dependencies : [ ],
-					#repositories : [
-						''http://smalltalkhub.foo/mc/Seaside/Grease11/main/''
-					],
-					#file : ''Grease-Core-JohanBrichau.94''
+					#src: CGOMonticelloHostedPackageVersion {
+						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#packageName : #Grease-Core,
+						#versionString : ''JohanBrichau.94''
+					}
 				}
 			]
 		},
 		CGOPackageLoadGroup {
 			#name : ''Grease-Pharo30-Core'',
-			#packageVersions : [
+			#packageVersionRefs : [
 				CGOPackageUnit {
 					#package : #Grease-Pharo30-Core,
 					#description : ''Platform-specific package of the Grease-Core package for Pharo.'',
@@ -35,22 +36,23 @@ loadInstructionsStonString
 							''=1.1.13''
 						]
 					],
-					#repositories : [
-						''http://smalltalkhub.foo/mc/Seaside/Grease11/main/''
-					],
+					#src: CGOMonticelloHostedPackageVersion {
+						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#packageName : #Grease-Pharo30-Core,
+						#versionString : ''JohanBrichau.16''
+					},
 					#platformRequirements : [
 						#pharo
 					],
 					#provisions : [
 						#Grease-Core-Platform
-					],
-					#file : ''Grease-Pharo30-Core-JohanBrichau.16''
+					]
 				}
 			]
 		},
 		CGOPackageLoadGroup {
 			#name : ''Grease-Pharo40-Slime'',
-			#packageVersions : [
+			#packageVersionRefs : [
 				CGOPackageUnit {
 					#package : #Grease-Pharo40-Slime,
 					#description : ''Slime uses the Refactoring Browser to find and, in some cases, rewrite common compatibility problems.'',
@@ -61,16 +63,17 @@ loadInstructionsStonString
 							''=1.1.13''
 						]
 					],
-					#repositories : [
-						''http://smalltalkhub.foo/mc/Seaside/Grease11/main/''
-					],
+					#src: CGOMonticelloHostedPackageVersion {
+						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#packageName : #Grease-Pharo40-Slime,
+						#versionString : ''JohanBrichau.3''
+					},
 					#platformRequirements : [
 						#pharo4.x
 					],
 					#provisions : [
 						#Grease-Slime
-					],
-					#file : ''Grease-Pharo40-Slime-JohanBrichau.3''
+					]
 				}
 			]
 		}

@@ -13,8 +13,9 @@ seasideCore310StonString
 			''=3.1.0''
 		]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Seaside/Seaside31/main/''
-	],
-	#file : ''Seaside-Core-pmm.808''
+	#src : CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Seaside31/main'',
+		#packageName : #Seaside-Core,
+		#versionString : ''pmm.808''
+	}
 }'

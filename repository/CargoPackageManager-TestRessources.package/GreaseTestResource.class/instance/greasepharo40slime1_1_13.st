@@ -10,14 +10,15 @@ greasepharo40slime1_1_13
 	#dependencies : [
 		#Grease-Core-Platform : [ ]
 	],
-	#repositories : [
-		''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
-	],
+	#src: CGOMonticelloHostedPackageVersion {
+		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#packageName : #Grease-Pharo40-Slime,
+		#versionString : ''JohanBrichau.3''
+	},
 	#platformRequirements : [
 		''pharo5.x''
 	],
 	#provisions : [
 		''Grease-Slime''
-	],
-	#file : ''Grease-Pharo40-Slime-JohanBrichau.3''
+	]
 }'

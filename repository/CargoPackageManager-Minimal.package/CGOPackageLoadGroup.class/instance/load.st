@@ -2,6 +2,6 @@ loading
 load
 	| versionLoader |
 	versionLoader := MCVersionLoader new.
-	self fetch 
+	self mcVersions 
 		do: [ :mcVersion | versionLoader addVersion: mcVersion ].
 	versionLoader load

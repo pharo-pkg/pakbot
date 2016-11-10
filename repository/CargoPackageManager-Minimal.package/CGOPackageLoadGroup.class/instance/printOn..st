@@ -1,3 +1,3 @@
 printing
 printOn: aStream
-	aStream << name << ' ' << (packageVersions asString)
+	aStream << name << ' ' << (packageVersionRefs asString)
