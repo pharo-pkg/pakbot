@@ -1,3 +1,0 @@
-configuring
-sourceRepositories: aListOfRepositoryUrl
-	sourceRepositories := aListOfRepositoryUrl

@@ -8,8 +8,7 @@ noDependenciesPackage
 			add: #dependencies -> #();
 			add: #provisions -> #();
 			add: #description -> 'no dependencies';
-			add: #repositories -> #();
-			add: #file -> '';
+			add: #src -> self defaultSourcePackageVersion;
 			add: #platformRequirements -> #();
 			add: #timestamp -> DateAndTime now;
 			yourself )

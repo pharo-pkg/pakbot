@@ -4,8 +4,8 @@ testResolutionOfConflictShouldFail
 	| solver repository |
 	repository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	repository savePackageVersion: self noDependenciesPackage.
-	repository savePackageVersion: self noDependenciesPackageBigger.
-	repository savePackageVersion: self oneDependencyPackageBigger.
+	repository savePackageVersion: self noDependenciesPackageBiggerVersion.
+	repository savePackageVersion: self oneDependencyPackageBiggerVersion.
 	repository savePackageVersion: self packageWithManyDependencies.
 	
 	solver := CGOSolver new.
