@@ -1,3 +1,3 @@
 private
 computeName
-	name := ', ' join: (packageVersionRefs collect: #packageName)
+	name := ', ' join: (packageVersions collect: #packageName)

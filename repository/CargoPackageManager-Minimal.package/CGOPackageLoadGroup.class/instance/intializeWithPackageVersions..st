@@ -1,4 +1,4 @@
 initialization
-intializeWithPackageVersions: aListOfPackageVersionReferenceStrings
-	packageVersionRefs := aListOfPackageVersionReferenceStrings collect: #asPackageVersionReference.
+intializeWithPackageVersions: aListOfPackageVersions
+	packageVersions := aListOfPackageVersions.
 	self computeName

@@ -7,8 +7,7 @@
 	"commentStamp" : "ChristopheDemarey 7/18/2014 10:57",
 	"instvars" : [
 		"name",
-		"repositories",
-		"packageVersionRefs" ],
+		"packageVersions" ],
 	"name" : "CGOPackageLoadGroup",
 	"pools" : [
 		 ],
