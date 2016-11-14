@@ -10,4 +10,4 @@ testCanGetMCVersionWhenRepositoryUrlIsWrong
 	
 	self 
 		should: [ repo mcVersion ]
-		raise: MCFileTreeGitError 
+		raise: MCFileTreeGitError, LGit_GIT_ERROR
