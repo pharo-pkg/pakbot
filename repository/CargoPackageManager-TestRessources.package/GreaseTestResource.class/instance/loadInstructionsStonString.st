@@ -8,7 +8,7 @@ loadInstructionsStonString
 	#groups : OrderedCollection [
 		CGOPackageLoadGroup {
 			#name : ''Grease-Core'',
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageUnit {
 					#package : #Grease-Core,
 					#description : ''Core package of the Grease library.'',
@@ -25,7 +25,7 @@ loadInstructionsStonString
 		},
 		CGOPackageLoadGroup {
 			#name : ''Grease-Pharo30-Core'',
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageUnit {
 					#package : #Grease-Pharo30-Core,
 					#description : ''Platform-specific package of the Grease-Core package for Pharo.'',
@@ -52,7 +52,7 @@ loadInstructionsStonString
 		},
 		CGOPackageLoadGroup {
 			#name : ''Grease-Pharo40-Slime'',
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageUnit {
 					#package : #Grease-Pharo40-Slime,
 					#description : ''Slime uses the Refactoring Browser to find and, in some cases, rewrite common compatibility problems.'',

@@ -1,11 +1,11 @@
-input
+accessing
 input
 	"Seaside31 resolution"
 	^  'CGOLoadInstructions {
 	#groups : OrderedCollection [
 		CGOPackageLoadGroup {
 			#name : #Grease-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Grease-Core,
 					#versionNumber : ''1.1.5''
@@ -18,7 +18,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Core,
 					#versionNumber : ''3.1.0''
@@ -31,7 +31,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Canvas,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Canvas,
 					#versionNumber : ''3.1.0''
@@ -44,7 +44,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Session,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Session,
 					#versionNumber : ''3.1.0''
@@ -53,7 +53,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Component,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Component,
 					#versionNumber : ''3.1.0''
@@ -62,7 +62,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-RenderLoop,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-RenderLoop,
 					#versionNumber : ''3.1.0''
@@ -71,7 +71,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Javascript-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Javascript-Core,
 					#versionNumber : ''3.1.0''
@@ -84,7 +84,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Pharo-Continuation,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Pharo-Continuation,
 					#versionNumber : ''3.1.0''
@@ -93,7 +93,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Tools-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Tools-Core,
 					#versionNumber : ''3.1.0''
@@ -106,7 +106,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Widgets,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Widgets,
 					#versionNumber : ''3.1.0''
@@ -115,7 +115,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Zinc-Resource-Meta-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Zinc-Resource-Meta-Core,
 					#versionNumber : ''2.4.8''
@@ -124,7 +124,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Zinc-Character-Encoding,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Zinc-Character-Encoding,
 					#versionNumber : ''2.4.8''
@@ -133,7 +133,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #JQuery-Core,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #JQuery-Core,
 					#versionNumber : ''3.1.0''
@@ -142,7 +142,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Flow,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Flow,
 					#versionNumber : ''3.1.0''
@@ -155,7 +155,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Tools-Web,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Tools-Web,
 					#versionNumber : ''3.1.0''
@@ -168,7 +168,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Zinc-HTTP,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Zinc-HTTP,
 					#versionNumber : ''2.4.8''
@@ -177,7 +177,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #JQuery-UI,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #JQuery-UI,
 					#versionNumber : ''3.1.0''
@@ -186,7 +186,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Development,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Development,
 					#versionNumber : ''3.1.0''
@@ -199,7 +199,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Examples,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Examples,
 					#versionNumber : ''3.1.0''
@@ -208,7 +208,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Environment,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Environment,
 					#versionNumber : ''3.1.0''
@@ -221,7 +221,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Zinc-Seaside,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Zinc-Seaside,
 					#versionNumber : ''3.1.0''
@@ -230,7 +230,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Welcome,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Welcome,
 					#versionNumber : ''3.1.0''
@@ -243,7 +243,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside-Group-Default,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside-Group-Default,
 					#versionNumber : ''3.1.0''
@@ -252,7 +252,7 @@ input
 		},
 		CGOPackageLoadGroup {
 			#name : #Seaside31,
-			#packageVersionRefs : [
+			#packageVersions : [
 				CGOPackageVersionReference {
 					#packageName : #Seaside31,
 					#versionNumber : ''3.1.0''
