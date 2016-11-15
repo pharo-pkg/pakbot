@@ -2,7 +2,7 @@ tests-loading
 testCannotGetMCVersionsWhenNoSourceRepositoryAvailable
 	| pkgLoadGroup |
 	pkgLoadGroup := GreaseTestResource current loadInstructions groups first.
-	pkgLoadGroup packageVersions first sourcePackage 
+	pkgLoadGroup packageVersions first sourcePackageVersion 
 		instVarNamed: 'repositoryUrl' 
 		put: nil.
 

@@ -7,7 +7,7 @@ testShouldPackageBeUpToDateAndCleanAfterPublishing
 	wc := MCWorkingCopy forPackage: (MCPackage new name: pkgName).
 	manifest := (TheManifestBuilder ofPackageNamed: pkgName) manifest.
 	manifest class compile: 'packageName ^ ', pkgName printString.
-	manifest class compile: 'src 
+	manifest class compile: 'sourcePackageVersion
 	^ { #backend -> #monticello .
 		#repositoryUrl -> ', '''file://' , MCCacheRepository cacheDirectory fullName , ''' .
 		#packageName -> #''CGO-Foo'' .
@@ -19,7 +19,7 @@ testShouldPackageBeUpToDateAndCleanAfterPublishing
 		run.
 	
 	self 
-		assert: manifest src 
+		assert: manifest sourcePackageVersion 
 		equals: { #backend -> #monticello .
 		#repositoryUrl -> ('file://' , MCCacheRepository cacheDirectory fullName) .
 		#packageName -> #'CGO-Foo' .

@@ -8,7 +8,7 @@ oneDependencyPackageBiggerVersion
 			add: #dependencies ->  { #'NoDependencies' -> #('=18') };
 			add: #provisions -> #();
 			add: #description -> 'no dependencies';
-			add: #src -> self defaultSourcePackageVersion;
+			add: #sourcePackageVersion -> self defaultSourcePackageVersion;
 			add: #platformRequirements -> #();
 			add: #timestamp -> DateAndTime now;
 			yourself )

@@ -8,7 +8,7 @@ packageWithManyDependencies
 			add: #dependencies ->  { #'OneDependency' -> #('=1.0.0') . #'NoDependencies' -> #('=17') };
 			add: #provisions -> #();
 			add: #description -> 'no dependencies';
-			add: #src -> self defaultSourcePackageVersion;
+			add: #sourcePackageVersion -> self defaultSourcePackageVersion;
 			add: #platformRequirements -> #();
 			add: #timestamp -> DateAndTime now;
 			yourself )

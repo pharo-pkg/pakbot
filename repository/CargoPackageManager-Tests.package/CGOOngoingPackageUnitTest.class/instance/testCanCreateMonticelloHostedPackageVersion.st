@@ -7,5 +7,5 @@ testCanCreateMonticelloHostedPackageVersion
 		#versionString -> ''JohnDoe.0'' } asDictionary'.
 	
 	self 
-		assert: ongoingPkg sourcePackage class 
+		assert: ongoingPkg sourcePackageVersion class 
 		equals: CGOMonticelloHostedPackageVersion 
