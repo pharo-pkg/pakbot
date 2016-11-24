@@ -1,0 +1,26 @@
+CGOPackageUnit {
+	#package : #CargoPackageManager,
+	#description : 'I\'m the core package of the Cargo package manager.\rI hold core classes to represent a package metadata with objects.',
+	#version : '0.2.0-dev',
+	#timestamp : DateAndTime [ '2016-11-24T14:46:41.594452+01:00' ],
+	#dependencies : [
+		#A : [
+			'=1.1.0'
+		],
+		#Athens-Balloon : [
+			'=1.0.0',
+			'=2.0.0',
+			'=3.0.0',
+			'=4.0.0'
+		]
+	],
+	#platformRequirements : [
+		'pharo',
+		'pharo5.x'
+	],
+	#provisions : [
+		#a,
+		#b,
+		#foo-bar
+	]
+}
