@@ -1,7 +1,8 @@
 tests
 testSTONDeserializationIsOk
-	| repo |
-	repo := STON fromString: self stonCargoMinimalB9ee.
-	self 
-		assert: (repo instVarNamed: 'repositoryUrl') class 
-		equals: ZnUrl
+	| gitHostedPackageVersion |
+	gitHostedPackageVersion := STON fromString: self stonCargoMinimalB9ee.
+
+	self
+		assert: ((gitHostedPackageVersion instVarNamed: 'repository') instVarNamed: 'repositoryUrl') asString
+		equals: ((self cargoMinimalB9ee instVarNamed: 'repository') instVarNamed: 'repositoryUrl')

@@ -4,7 +4,9 @@ versionOf: aPackageName in: aRepositoryList for: platformAttributes
 
 	candidates := aRepositoryList 
 		flatCollect: [ :repository | 
-			repository bleedingEdgeOf: aPackageName for: platformAttributes ]
+			[ repository bleedingEdgeOf: aPackageName for: platformAttributes ]
+				on: CGOPackageNotFoundError
+				do: [ #() "ignore" ] ]
 		as: Set.
 	(candidates size > 1)
 		ifTrue: [ CGOUnresolvedDependency package: aPackageName candidates: candidates ].

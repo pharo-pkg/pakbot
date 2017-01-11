@@ -1,0 +1,3 @@
+testing
+isAssembly
+	self subclassResponsibility

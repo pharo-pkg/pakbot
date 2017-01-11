@@ -1,5 +1,5 @@
 initialization
 repositoryUrl: aStringOrUrl packageName: aString versionString: aVersionString
-	repositoryUrl := aStringOrUrl.
+	repository := CGOMonticelloRepository repositoryUrl: aStringOrUrl.
 	packageName := aString asSymbol.
 	versionString := aVersionString

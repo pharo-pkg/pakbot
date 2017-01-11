@@ -1,3 +1,4 @@
 initialization
 initializeWithUrl: aUrlString
-	baseUrl := aUrlString
+	baseUrl := aUrlString.
+	self initialize

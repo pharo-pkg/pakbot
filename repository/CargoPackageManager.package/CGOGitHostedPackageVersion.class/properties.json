@@ -4,9 +4,8 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "ChristopheDemarey 9/23/2016 14:00",
+	"commentStamp" : "ChristopheDemarey 12/22/2016 10:15",
 	"instvars" : [
-		"subdirectory",
 		"commitish" ],
 	"name" : "CGOGitHostedPackageVersion",
 	"pools" : [

@@ -1,9 +1,9 @@
 saving
 saveNewVersion: aSemanticVersion
-	| repository |
-	repository := MCRepository fromUrl: repositoryUrl.
+	| mcRepository |
+	mcRepository := repository mcRepository.
 	self workingCopy
-		newVersionWithName: (self workingCopy uniqueVersionNameIn: repository)
+		newVersionWithName: (self workingCopy uniqueVersionNameIn: mcRepository)
 		message: 'Publication of version ' , aSemanticVersion
-		in: repository.
+		in: mcRepository.
 	self flag: 'TODO: update ongoing package version with the new generated package versionString'

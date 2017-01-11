@@ -1,0 +1,3 @@
+querying
+sourcePackageVersionClass
+	^ CGOMonticelloHostedPackageVersion 

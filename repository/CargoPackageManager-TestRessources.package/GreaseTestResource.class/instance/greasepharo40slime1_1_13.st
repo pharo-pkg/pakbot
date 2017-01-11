@@ -11,7 +11,9 @@ greasepharo40slime1_1_13
 		#Grease-Core-Platform : [ ]
 	],
 	#src: CGOMonticelloHostedPackageVersion {
-		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#repository : CGOMonticelloRepository {
+			#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
+		},
 		#packageName : #Grease-Pharo40-Slime,
 		#versionString : ''JohanBrichau.3''
 	},

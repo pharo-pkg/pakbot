@@ -7,7 +7,7 @@ testResolutionOfPackageWithOneDependencyShouldShieldNotEmptyResolution
 	repository savePackageVersion: self oneDependencyPackage.
 	
 	solver := CGOSolver new.
-	solver addRepository: repository.
+	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'OneDependency' version: '1'.
 	
 	self deny: resolution isEmpty.

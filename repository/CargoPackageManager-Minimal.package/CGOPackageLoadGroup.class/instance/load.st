@@ -4,4 +4,4 @@ load
 	versionLoader := MCVersionLoader new.
 	self mcVersions 
 		do: [ :mcVersion | versionLoader addVersion: mcVersion ].
-	versionLoader load
+	versionLoader hasVersions ifTrue: [ versionLoader load ]

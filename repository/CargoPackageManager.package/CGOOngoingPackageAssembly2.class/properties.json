@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 11/29/2016 10:43",
+	"instvars" : [
+		"parts" ],
+	"name" : "CGOOngoingPackageAssembly2",
+	"pools" : [
+		 ],
+	"super" : "CGOOngoingPackageVersion2",
+	"type" : "normal" }

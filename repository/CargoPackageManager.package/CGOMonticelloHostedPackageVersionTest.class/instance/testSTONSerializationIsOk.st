@@ -1,11 +1,11 @@
 tests
 testSTONSerializationIsOk
-	| repo |
-	repo := self cargoMinimalCD21.
+	| mcHostedPackageVersion |
+	mcHostedPackageVersion := self cargoMinimalCD21.
 	self
-		assert: (STON toString: repo asSerializableSourcePackageVersion)
+		assert: (STON toString: mcHostedPackageVersion)
 		equals: self stonCargoMinimalCD21.
 	"test that the original object is not modified"
 	self 
-		assert: (repo instVarNamed: 'repositoryUrl') class 
+		assert: ((mcHostedPackageVersion instVarNamed: 'repository') instVarNamed: 'repositoryUrl') class 
 		equals: ZnUrl

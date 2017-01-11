@@ -1,0 +1,3 @@
+private
+classFor: aCGOSourceRepository 
+	^ aCGOSourceRepository sourcePackageVersionClass

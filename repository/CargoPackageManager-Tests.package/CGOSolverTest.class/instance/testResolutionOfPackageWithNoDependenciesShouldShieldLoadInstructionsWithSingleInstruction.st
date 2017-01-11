@@ -6,7 +6,7 @@ testResolutionOfPackageWithNoDependenciesShouldShieldLoadInstructionsWithSingleI
 	repository savePackageVersion: self noDependenciesPackage.
 	
 	solver := CGOSolver new.
-	solver addRepository: repository.
+	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'NoDependencies' version: '17'.
 	
 	instructions := resolution loadInstructions groups.

@@ -1,0 +1,3 @@
+I represent a software project. I store basic metadata for the project.
+I also have a reference to the core repository of the project, i.e., the place where one can find sources of the project.
+Las but not least, a Cargo project holds the list of assemblies for this project (convenient and logical group of project packages) and the names of the package units (representing source code package) part of this project.

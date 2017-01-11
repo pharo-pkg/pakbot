@@ -1,3 +1,3 @@
 ston
 stonOn: stonWriter
-	self asSerializedPackageVersion stonOn: stonWriter
+	self asSerializablePackageVersion stonOn: stonWriter

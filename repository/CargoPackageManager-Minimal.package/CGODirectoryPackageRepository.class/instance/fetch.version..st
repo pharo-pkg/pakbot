@@ -6,5 +6,5 @@ fetch: aPackageName version: aVersion
 		ifFalse: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ].
 	packageVersionString := aPackageName asLowercase, '@', aVersion asString.
 	(packageFolder / packageVersionString) exists 
-		ifTrue: [ ^ STON fromString: (packageFolder / packageVersionString) contents ]
+		ifTrue: [ ^ CGOPackageVersion fromStonString: (packageFolder / packageVersionString) contents ]
 		ifFalse: [ CGOPackageVersionNotFoundError signal ] 

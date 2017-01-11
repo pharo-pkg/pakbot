@@ -6,12 +6,10 @@
 		 ],
 	"commentStamp" : "ChristopheDemarey 2/9/2015 12:43",
 	"instvars" : [
-		"authors",
-		"contributors",
+		"src",
 		"dependencies",
 		"platformRequirements",
-		"provisions",
-		"src" ],
+		"provisions" ],
 	"name" : "CGOSerializedPackageUnit",
 	"pools" : [
 		 ],

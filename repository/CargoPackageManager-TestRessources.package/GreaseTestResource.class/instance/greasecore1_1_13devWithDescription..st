@@ -8,7 +8,9 @@ greasecore1_1_13devWithDescription: aDescription
 	#timestamp : DateAndTime [ ''2015-04-14T14:51:50.116+00:00'' ],
 	#dependencies : [ ],
 	#src: CGOMonticelloHostedPackageVersion {
-		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#repository : CGOMonticelloRepository {
+			#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
+		},
 		#packageName : #Grease-Core,
 		#versionString : ''JohanBrichau.94''
 	}

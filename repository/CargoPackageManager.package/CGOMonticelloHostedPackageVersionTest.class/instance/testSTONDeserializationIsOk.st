@@ -1,7 +1,7 @@
 tests
 testSTONDeserializationIsOk
-	| repo |
-	repo := STON fromString: self stonCargoMinimalCD21.
+	| mcHostedPackageVersion |
+	mcHostedPackageVersion := STON fromString: self stonCargoMinimalCD21.
 	self 
-		assert: (repo instVarNamed: 'repositoryUrl') class 
+		assert: ((mcHostedPackageVersion instVarNamed: 'repository') instVarNamed: 'repositoryUrl') class 
 		equals: ZnUrl

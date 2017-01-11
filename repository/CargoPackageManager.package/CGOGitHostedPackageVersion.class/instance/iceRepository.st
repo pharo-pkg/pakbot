@@ -1,0 +1,3 @@
+private
+iceRepository
+	^ repository iceRepository

@@ -1,0 +1,19 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model-Serialization",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 11/29/2016 16:41",
+	"instvars" : [
+		"name",
+		"repository",
+		"unitNames",
+		"assemblies",
+		"authors",
+		"contributors" ],
+	"name" : "CGOSerializableProject",
+	"pools" : [
+		 ],
+	"super" : "CGOSerializedArtefact",
+	"type" : "normal" }

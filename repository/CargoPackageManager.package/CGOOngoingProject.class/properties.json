@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 11/29/2016 14:31",
+	"instvars" : [
+		 ],
+	"name" : "CGOOngoingProject",
+	"pools" : [
+		 ],
+	"super" : "CGOProject",
+	"type" : "normal" }

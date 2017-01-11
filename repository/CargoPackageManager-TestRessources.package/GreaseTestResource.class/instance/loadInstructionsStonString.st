@@ -4,7 +4,7 @@ loadInstructionsStonString
 		package: 'Grease-Slime';
 		loadInstructions"
 		
-	^  'CGOLoadInstructions {
+	^ 'CGOLoadInstructions {
 	#groups : OrderedCollection [
 		CGOPackageLoadGroup {
 			#name : ''Grease-Core'',
@@ -16,7 +16,9 @@ loadInstructionsStonString
 					#timestamp : DateAndTime [ ''2015-04-14T14:51:50.116+00:00'' ],
 					#dependencies : [ ],
 					#src: CGOMonticelloHostedPackageVersion {
-						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#repository : CGOMonticelloRepository {
+							#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main''
+						},
 						#packageName : #Grease-Core,
 						#versionString : ''JohanBrichau.94''
 					}
@@ -37,7 +39,9 @@ loadInstructionsStonString
 						]
 					],
 					#src: CGOMonticelloHostedPackageVersion {
-						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#repository : CGOMonticelloRepository {
+							#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main''
+						},
 						#packageName : #Grease-Pharo30-Core,
 						#versionString : ''JohanBrichau.16''
 					},
@@ -64,7 +68,9 @@ loadInstructionsStonString
 						]
 					],
 					#src: CGOMonticelloHostedPackageVersion {
-						#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main'',
+						#repository : CGOMonticelloRepository {
+							#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main''
+						},
 						#packageName : #Grease-Pharo40-Slime,
 						#versionString : ''JohanBrichau.3''
 					},

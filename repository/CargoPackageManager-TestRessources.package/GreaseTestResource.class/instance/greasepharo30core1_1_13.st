@@ -11,7 +11,9 @@ greasepharo30core1_1_13
 		#Grease-Core : [ ]
 	],
 	#src: CGOMonticelloHostedPackageVersion {
-		#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/'',
+		#repository : CGOMonticelloRepository {
+			#repositoryUrl : ''http://smalltalkhub.com/mc/Seaside/Grease11/main/''
+		},
 		#packageName : #Grease-Pharo30-Core,
 		#versionString : ''JohanBrichau.16''
 	},

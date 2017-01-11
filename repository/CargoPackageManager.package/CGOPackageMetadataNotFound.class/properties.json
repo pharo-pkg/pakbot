@@ -1,0 +1,14 @@
+{
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 1/10/2017 11:22",
+	"instvars" : [
+		 ],
+	"name" : "CGOPackageMetadataNotFound",
+	"pools" : [
+		 ],
+	"super" : "CGOPackageManagerError",
+	"type" : "normal" }

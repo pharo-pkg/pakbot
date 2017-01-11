@@ -1,9 +1,7 @@
 initialization
 initializeWith: aPackageUnit
 	super initializeWith: aPackageUnit.
-	src := aPackageUnit sourcePackageVersion ifNotNil: [:srcPkg | srcPkg asSerializableSourcePackageVersion].
+	src := aPackageUnit sourcePackageVersion.
 	self initializeDependenciesWith: aPackageUnit.
-	authors := self toArrayOrNilIfEmpty: aPackageUnit authors.
-	contributors := self toArrayOrNilIfEmpty: aPackageUnit contributors.
 	platformRequirements := self toArrayOrNilIfEmpty: aPackageUnit platformRequirements.
 	provisions := self toArrayOrNilIfEmpty: aPackageUnit provisions

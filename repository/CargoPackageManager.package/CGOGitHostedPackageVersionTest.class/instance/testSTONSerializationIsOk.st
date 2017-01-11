@@ -1,7 +1,7 @@
 tests
 testSTONSerializationIsOk
-	| repo |
-	repo := self cargoMinimalB9ee.
+	| gitHostedPackageVersion |
+	gitHostedPackageVersion := self cargoMinimalB9ee.
 	self
-		assert: (STON toString: repo asSerializableSourcePackageVersion)
+		assert: (STON toString: gitHostedPackageVersion)
 		equals: self stonCargoMinimalB9ee

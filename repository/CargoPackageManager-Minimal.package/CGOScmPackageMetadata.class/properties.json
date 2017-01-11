@@ -1,0 +1,15 @@
+{
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "ChristopheDemarey 1/5/2017 16:50",
+	"instvars" : [
+		"repository",
+		"packageVersions" ],
+	"name" : "CGOScmPackageMetadata",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

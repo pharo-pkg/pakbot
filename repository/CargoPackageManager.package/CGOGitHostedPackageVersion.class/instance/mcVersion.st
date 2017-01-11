@@ -1,9 +1,8 @@
 accessing
 mcVersion
-	| iceRepo icePackageVersion |
-	
-	iceRepo := (IceRepository origin: repositoryUrl) 
-		subdirectory: (subdirectory ifNil: ['']); "Optional, default = '' = code in repository root"
-		yourself.
-	icePackageVersion := (iceRepo packageNamed: packageName) versionFor: commitish.
+	| iceSavedPackage icePackageVersion |
+	iceSavedPackage := self iceRepository packageNamed: packageName.
+	icePackageVersion := commitish
+		ifNil: [ iceSavedPackage latestVersion ]
+		ifNotNil: [ iceSavedPackage versionFor: commitish ].
 	^ icePackageVersion mcVersion

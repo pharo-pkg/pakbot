@@ -9,5 +9,5 @@ testResolutionOfConflictShouldFail
 	repository savePackageVersion: self packageWithManyDependencies.
 	
 	solver := CGOSolver new.
-	solver addRepository: repository.
+	solver repositories: { repository }.
 	self should: [solver solvePackageNamed: #'ManyDependencies' version: '1.0'] raise: CGODependencyConflictError

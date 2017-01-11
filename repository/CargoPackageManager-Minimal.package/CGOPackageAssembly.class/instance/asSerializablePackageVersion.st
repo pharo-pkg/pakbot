@@ -1,0 +1,3 @@
+converting
+asSerializablePackageVersion
+	^ CGOSerializedPackageAssembly from: self
