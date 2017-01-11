@@ -30,7 +30,7 @@ baseline: spec
 					loads: #('memory' 'mongo tests') ];
 			baseline: 'Iceberg' with: [
 				spec
-					repository: 'github://npasserini/iceberg:master' ];
+					repository: 'github://demarey/iceberg:dev-0.4' ];
 			project: 'ZincHTTPComponents' with: [
 				spec
 					className: #ConfigurationOfZincHTTPComponents;
