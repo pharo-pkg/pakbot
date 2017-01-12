@@ -15,7 +15,7 @@ smalltalk:
   - Pharo-6.0
   - Pharo-5.0
 
-env:
-  global:
-    - GIT_AUTHOR_NAME=Travis-CI
-    - GIT_AUTHOR_EMAIL=cargo-ci@travis-ci.org
+# configuration
+before_script:
+  - git config --global user.name 'Travis CI'
+  - git config --global user.email 'carog-ci@travis-ci.org'
