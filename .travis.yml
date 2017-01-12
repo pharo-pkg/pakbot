@@ -16,5 +16,6 @@ smalltalk:
   - Pharo-5.0
 
 env:
-  - GIT_AUTHOR_NAME=Travis-CI
-  - GIT_AUTHOR_EMAIL=cargo-ci@travis-ci.org
+  global:
+    - GIT_AUTHOR_NAME=Travis-CI
+    - GIT_AUTHOR_EMAIL=cargo-ci@travis-ci.org
