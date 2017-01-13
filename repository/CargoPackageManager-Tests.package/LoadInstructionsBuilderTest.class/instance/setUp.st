@@ -1,6 +1,6 @@
 running
 setUp
 	super setUp.
-	sorter := CGOLoadInstructionsBuilder new
+	loadInstructionsBuilder := CGOLoadInstructionsBuilder new
 					resolution: FooDependencyResolutionResource current dependencyResolution;
 					yourself

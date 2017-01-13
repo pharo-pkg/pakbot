@@ -1,5 +1,5 @@
 tests
 testLoadOrderHandlesCycles
 	self 
-		shouldnt: [ sorter loadOrder ]
+		shouldnt: [ loadInstructionsBuilder loadOrder ]
 		raise: MessageNotUnderstood
