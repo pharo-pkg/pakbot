@@ -13,7 +13,7 @@ os:
 # Select compatible Smalltalk image(s)
 smalltalk:
   - Pharo-6.0
-  - Pharo-5.0
+#  - Pharo-5.0 (disabled because 2 tests fail: ExternalData(Object)>>doesNotUnderstand: #readStringUTF8. Pb coming from Iceberg)
 
 # configuration
 before_script:
