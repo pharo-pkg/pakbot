@@ -51,6 +51,7 @@ Note: for git backend, the code is commited to the local directory (check in the
 
 # Load the project in a new image from SCM
 You will now learn how to load your project from your prefered Source Code Management system. Let us now download a fresh Pharo image with Cargo already installed.
+
 To load a project from a SCM, Cargo offers the #installProjectFromSourceRepository: method. Just give the SourceRepository as parameter and Cargo will go through it to first load the project metadata, then to load project packages metadata, solve dependencies and install packages into the image. If no version is specified for the source repository, Cargo will use the HEAD version.
 ``` smalltalk
 Cargo new 
@@ -60,6 +61,7 @@ Cargo new
 # Load both a project and its dependents from SCM
 Cargo allows you to ask to load project packages directly from a Source Code Management system instead of using the package repository.
 These feature is especialy useful when you are developping a project. It may happen that, in development mode, you rely on external packages not yet published to the package repository. That's why Cargo propose the #useSourceRepository: message taking a CGOSourceRepository as argument. All source repositories added will take precedence on the default repository and package metadata will be loaded from the SCM for all the project packages.
+
 In the following example, we will load Counter-UI from GitHub. Its dependent Counter-Core will also be loaded from GitHub since we add its source repository.
 ``` smalltalk
 Cargo new 
