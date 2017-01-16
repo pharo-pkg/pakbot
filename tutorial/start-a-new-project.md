@@ -1,4 +1,6 @@
-# Tutoriel: How to start a new project with Cargo?
+# Tutorial: How to start a new project with Cargo?
+
+Before starting this tutorial, please ensure you already have [Cargo installed](https://github.com/demarey/cargo#install-cargo).
 
 ## Counter 
 For this tutorial, we will use a tiny project: Counter. It is basically the same example as the seaside counter. A counter has a value that can be incremented or decremented.
