@@ -4,8 +4,9 @@ This tutorial explains how to start a new project with Cargo.
 For this tutorial, we will use a tiny project: Counter. It is basically the same example as the seaside counter. A counter has a value that can be incremented or decremented.
 
 We first implement a #'Counter-Core' package that will contain a Counter class. We will also create a #'Counter-Tests' package that will contain a CounterTest class.
-link to .st files
-
+Here are the st files with the code already ready to use:
+- [Counter-Core.st](./Counter-Core.st)
+- [Counter-Tests.st](./Counter-Tests.st)
 
 # Cargo Project creation
 A Cargo project holds the meta-information on a software project: its source repository, name, desription, packages composing the project, etc.
@@ -59,8 +60,8 @@ Cargo new
 ```
 
 # Load both a project and its dependents from SCM
-Cargo allows you to ask to load project packages directly from a Source Code Management system instead of using the package repository.
-These feature is especialy useful when you are developping a project. It may happen that, in development mode, you rely on external packages not yet published to the package repository. That's why Cargo propose the #useSourceRepository: message taking a CGOSourceRepository as argument. All source repositories added will take precedence on the default repository and package metadata will be loaded from the SCM for all the project packages.
+Cargo allows you to load project packages directly from a Source Code Management system instead of using the package repository.
+This feature is especialy useful when you are developping a project. It may happen that, in development mode, you rely on external packages not yet published to the package repository. That's why Cargo propose the #useSourceRepository: message, taking a CGOSourceRepository as argument. All source repositories added will take precedence on the default repository and package metadata will be loaded from the SCM for all the project packages.
 
 In the following example, we will load Counter-UI from GitHub. Its dependent Counter-Core will also be loaded from GitHub since we add its source repository.
 ``` smalltalk
