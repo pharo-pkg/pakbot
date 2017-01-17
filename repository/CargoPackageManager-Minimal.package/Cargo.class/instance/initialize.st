@@ -1,5 +1,5 @@
 initialization
 initialize
 	super initialize.
-	repositories := { DefaultPackageRepository }.
+	repositories := { self class defaultPackageRepository }.
 	packages := OrderedCollection new

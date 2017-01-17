@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 4/24/2014 17:26",
-	"instvars" : [
-		 ],
-	"name" : "CGOVirtualPackage",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 4\/24\/2014 17:26",
 	"super" : "CGOPackage",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOVirtualPackage",
+	"type" : "normal"
+}

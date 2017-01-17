@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 12/5/2014 15:21",
-	"instvars" : [
-		 ],
-	"name" : "CGOPackageVersionInitializationError",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 12\/5\/2014 15:21",
 	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOPackageVersionInitializationError",
+	"type" : "normal"
+}

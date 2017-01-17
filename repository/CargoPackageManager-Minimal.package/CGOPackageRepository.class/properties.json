@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "GuillermoPolito 10/11/2016 14:52",
-	"instvars" : [
-		"baseUrl" ],
-	"name" : "CGOPackageRepository",
-	"pools" : [
-		 ],
+	"commentStamp" : "GuillermoPolito 10\/11\/2016 14:52",
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"baseUrl"
+	],
+	"name" : "CGOPackageRepository",
+	"type" : "normal"
+}

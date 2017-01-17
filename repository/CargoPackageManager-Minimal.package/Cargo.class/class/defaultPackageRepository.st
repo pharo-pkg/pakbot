@@ -1,3 +1,3 @@
 accessing
 defaultPackageRepository
-	^ DefaultPackageRepository
+	^ DefaultPackageRepository ifNil: [ self initialize. DefaultPackageRepository ]

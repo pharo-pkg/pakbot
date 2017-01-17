@@ -1,15 +1,14 @@
 {
+	"commentStamp" : "ChristopheDemarey 3\/20\/2014 18:15",
+	"super" : "CGOPackageManagerError",
 	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 3/20/2014 18:15",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"packageName",
-		"versionNumber" ],
+		"versionNumber"
+	],
 	"name" : "CGOPackageVersionNotFoundError",
-	"pools" : [
-		 ],
-	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"type" : "normal"
+}

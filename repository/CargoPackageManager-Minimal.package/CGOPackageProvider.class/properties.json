@@ -1,14 +1,15 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"Default" ],
-	"commentStamp" : "ChristopheDemarey 4/2/2015 15:28",
-	"instvars" : [
-		"providerStrategy" ],
-	"name" : "CGOPackageProvider",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 4\/2\/2015 15:28",
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Default"
+	],
+	"instvars" : [
+		"providerStrategy"
+	],
+	"name" : "CGOPackageProvider",
+	"type" : "normal"
+}

@@ -1,10 +1,10 @@
 {
+	"commentStamp" : "ChristopheDemarey 11\/29\/2016 16:50",
+	"super" : "Object",
 	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 11/29/2016 16:50",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"name",
 		"description",
@@ -12,9 +12,8 @@
 		"version",
 		"unitNames",
 		"assemblies",
-		"authors" ],
+		"authors"
+	],
 	"name" : "CGOProject",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

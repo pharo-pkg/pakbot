@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 12/5/2014 15:18",
-	"instvars" : [
-		 ],
-	"name" : "CGODependencyConstraintFormatError",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 12\/5\/2014 15:18",
 	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGODependencyConstraintFormatError",
+	"type" : "normal"
+}

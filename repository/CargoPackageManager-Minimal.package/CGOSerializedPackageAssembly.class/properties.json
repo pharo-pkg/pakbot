@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model-Serialization",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 2/9/2015 12:44",
-	"instvars" : [
-		"parts" ],
-	"name" : "CGOSerializedPackageAssembly",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 2\/9\/2015 12:44",
 	"super" : "CGOSerializedPackageVersion",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model-Serialization",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"parts"
+	],
+	"name" : "CGOSerializedPackageAssembly",
+	"type" : "normal"
+}

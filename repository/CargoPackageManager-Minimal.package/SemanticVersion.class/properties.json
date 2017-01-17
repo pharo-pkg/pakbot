@@ -1,17 +1,16 @@
 {
+	"commentStamp" : "ChristopheDemarey 2\/17\/2014 13:45",
+	"super" : "Object",
 	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 2/17/2014 13:45",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"major",
 		"minor",
 		"patch",
-		"suffix" ],
+		"suffix"
+	],
 	"name" : "SemanticVersion",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

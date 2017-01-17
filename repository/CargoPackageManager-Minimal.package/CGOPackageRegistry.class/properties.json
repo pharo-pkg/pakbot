@@ -1,14 +1,15 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"Default" ],
-	"commentStamp" : "ChristopheDemarey 4/3/2014 23:00",
-	"instvars" : [
-		"installedPackages" ],
-	"name" : "CGOPackageRegistry",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 4\/3\/2014 23:00",
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Default"
+	],
+	"instvars" : [
+		"installedPackages"
+	],
+	"name" : "CGOPackageRegistry",
+	"type" : "normal"
+}

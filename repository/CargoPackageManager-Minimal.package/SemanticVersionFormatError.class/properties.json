@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Minimal-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "ChristopheDemarey 3/20/2014 18:14",
-	"instvars" : [
-		 ],
-	"name" : "SemanticVersionFormatError",
-	"pools" : [
-		 ],
+	"commentStamp" : "ChristopheDemarey 3\/20\/2014 18:14",
 	"super" : "Error",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SemanticVersionFormatError",
+	"type" : "normal"
+}
