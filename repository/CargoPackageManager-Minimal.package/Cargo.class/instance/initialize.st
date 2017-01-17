@@ -1,5 +1,6 @@
 initialization
 initialize
 	super initialize.
-	repositories := { self class defaultPackageRepository }.
+	projectMetadataFromSCM := CGOScmPackageMetadata new.
+	repositories := { projectMetadataFromSCM . self class defaultPackageRepository }.
 	packages := OrderedCollection new

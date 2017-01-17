@@ -1,10 +1,7 @@
 installing
 installProjectFromSourceRepository: aCGOSourceRepository 
-	| project scmMetadata |
+	| project |
 
-	scmMetadata := CGOScmPackageMetadata new.
-	repositories := repositories copyWithFirst: scmMetadata.
-	project := scmMetadata registerProjectFromSourceRepository: aCGOSourceRepository.
-
+	project := self useSourceRepository: aCGOSourceRepository.
 	self package: project asPackageAssembly.
 	self install

@@ -11,7 +11,8 @@
 	"instvars" : [
 		"packages",
 		"sourceRepositories",
-		"repositories"
+		"repositories",
+		"projectMetadataFromSCM"
 	],
 	"name" : "Cargo",
 	"type" : "normal"

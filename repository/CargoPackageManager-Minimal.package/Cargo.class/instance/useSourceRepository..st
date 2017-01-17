@@ -1,0 +1,3 @@
+configuring
+useSourceRepository: aCGOSourceRepository 
+	^ projectMetadataFromSCM registerProjectFromSourceRepository: aCGOSourceRepository
