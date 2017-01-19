@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Utils-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"imageDependencies" ],
-	"name" : "PMPackageDependenciesCheckerTest",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Utils-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"imageDependencies"
+	],
+	"name" : "PMPackageDependenciesCheckerTest",
+	"type" : "normal"
+}

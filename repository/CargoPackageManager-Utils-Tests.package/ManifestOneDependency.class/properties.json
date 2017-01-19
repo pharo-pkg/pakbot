@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Utils-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "ManifestOneDependency",
-	"pools" : [
-		 ],
 	"super" : "PackageManifest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Utils-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "ManifestOneDependency",
+	"type" : "normal"
+}

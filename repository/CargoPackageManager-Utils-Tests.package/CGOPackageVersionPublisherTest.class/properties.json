@@ -1,15 +1,14 @@
 {
-	"category" : "CargoPackageManager-Utils-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Utils-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"fs",
-		"pkgRepository" ],
+		"pkgRepository"
+	],
 	"name" : "CGOPackageVersionPublisherTest",
-	"pools" : [
-		 ],
-	"super" : "BabyMock2TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}
