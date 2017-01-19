@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Tests-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "CGODependencyConstraintTest",
-	"pools" : [
-		 ],
 	"super" : "CGOTest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGODependencyConstraintTest",
+	"type" : "normal"
+}

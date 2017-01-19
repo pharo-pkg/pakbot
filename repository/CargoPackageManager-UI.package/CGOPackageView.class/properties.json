@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 6/4/2015 15:19",
-	"instvars" : [
-		 ],
-	"name" : "CGOPackageView",
-	"pools" : [
-		 ],
 	"super" : "ComposableModel",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOPackageView",
+	"type" : "normal"
+}

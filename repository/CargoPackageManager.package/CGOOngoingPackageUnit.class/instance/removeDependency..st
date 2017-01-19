@@ -1,3 +1,4 @@
 updating
 removeDependency: aPackageDependency
-	self updateManifestDependencies: (self dependenciesWithout: aPackageDependency)
+	dependencies := dependencies 
+		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]

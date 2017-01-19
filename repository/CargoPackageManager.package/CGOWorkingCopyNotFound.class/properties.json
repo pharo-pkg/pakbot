@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 9/7/2016 08:25",
-	"instvars" : [
-		"packageUnit" ],
-	"name" : "CGOWorkingCopyNotFound",
-	"pools" : [
-		 ],
 	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packageUnit"
+	],
+	"name" : "CGOWorkingCopyNotFound",
+	"type" : "normal"
+}

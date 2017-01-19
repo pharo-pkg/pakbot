@@ -1,1 +1,0 @@
-Current version of the package assembly metadata. As a PackageVersion is not editable, it is the only way  to update it.

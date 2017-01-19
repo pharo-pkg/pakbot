@@ -1,4 +1,3 @@
-accessing
+updating
 dependencies
-	^ manifest dependencies
-		collect: #asPackageDependency
+	^ dependencies

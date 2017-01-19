@@ -1,5 +1,5 @@
 checking
 checkRepositories
-	self repositories 
-		ifEmpty: [ CGOMissingSourcePackageDefinition 
+	src 
+		ifNil: [ CGOMissingSourcePackageDefinition 
 							signal: 'No source repository defined for: ' , self packageName ]

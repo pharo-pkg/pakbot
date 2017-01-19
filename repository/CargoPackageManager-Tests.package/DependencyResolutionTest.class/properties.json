@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Tests-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"resolution" ],
-	"name" : "DependencyResolutionTest",
-	"pools" : [
-		 ],
 	"super" : "CGOTest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"resolution"
+	],
+	"name" : "DependencyResolutionTest",
+	"type" : "normal"
+}

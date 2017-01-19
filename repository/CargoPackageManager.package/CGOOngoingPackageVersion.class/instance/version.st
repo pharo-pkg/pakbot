@@ -1,3 +1,3 @@
 accessing
 version
-	^ manifest version
+	^ version

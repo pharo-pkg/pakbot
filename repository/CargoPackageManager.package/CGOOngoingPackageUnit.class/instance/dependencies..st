@@ -1,3 +1,3 @@
 updating
 dependencies: aDependencyList 
-	self updateManifestDependencies: aDependencyList
+	dependencies := aDependencyList

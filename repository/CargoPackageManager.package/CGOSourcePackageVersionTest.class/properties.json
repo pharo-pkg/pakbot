@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Loading",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "CGOSourcePackageVersionTest",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOSourcePackageVersionTest",
+	"type" : "normal"
+}

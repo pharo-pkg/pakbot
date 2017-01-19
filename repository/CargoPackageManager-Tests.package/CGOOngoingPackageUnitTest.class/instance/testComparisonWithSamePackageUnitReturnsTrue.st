@@ -1,7 +1,7 @@
 tests
 testComparisonWithSamePackageUnitReturnsTrue
 	| unit |
-	unit := (CGOOngoingPackageUnit2 for: #'Test').
+	unit := (CGOOngoingPackageUnit for: #'Test').
 	
 	self 
 		assert: unit 

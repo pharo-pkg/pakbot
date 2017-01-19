@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Loading",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 12/22/2016 10:14",
-	"instvars" : [
-		"subdirectory" ],
-	"name" : "CGOGitRepository",
-	"pools" : [
-		 ],
 	"super" : "CGOSourceRepository",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"subdirectory"
+	],
+	"name" : "CGOGitRepository",
+	"type" : "normal"
+}

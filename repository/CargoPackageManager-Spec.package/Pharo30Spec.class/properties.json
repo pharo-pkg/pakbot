@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Spec",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "Pharo30Spec",
-	"pools" : [
-		 ],
 	"super" : "CGOPackageSpec",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Spec",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Pharo30Spec",
+	"type" : "normal"
+}

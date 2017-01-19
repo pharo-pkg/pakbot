@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Loading",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 12/22/2016 10:15",
-	"instvars" : [
-		 ],
-	"name" : "CGOMonticelloRepository",
-	"pools" : [
-		 ],
 	"super" : "CGOSourceRepository",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOMonticelloRepository",
+	"type" : "normal"
+}

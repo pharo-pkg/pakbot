@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Tests-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "CGOSolverTest",
-	"pools" : [
-		 ],
 	"super" : "CGOTest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOSolverTest",
+	"type" : "normal"
+}

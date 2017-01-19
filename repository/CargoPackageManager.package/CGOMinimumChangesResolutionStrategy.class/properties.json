@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 4/4/2014 23:20",
-	"instvars" : [
-		 ],
-	"name" : "CGOMinimumChangesResolutionStrategy",
-	"pools" : [
-		 ],
 	"super" : "CGOResolutionStrategy",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOMinimumChangesResolutionStrategy",
+	"type" : "normal"
+}

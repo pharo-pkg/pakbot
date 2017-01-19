@@ -1,16 +1,15 @@
 {
-	"category" : "CargoPackageManager-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 10/7/2014 13:21",
+	"super" : "CGOPackageRepository",
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"endpoint",
 		"znClient",
-		"packageVersionCache" ],
+		"packageVersionCache"
+	],
 	"name" : "CGORemoteRepositoryProxy",
-	"pools" : [
-		 ],
-	"super" : "CGOPackageRepository",
-	"type" : "normal" }
+	"type" : "normal"
+}

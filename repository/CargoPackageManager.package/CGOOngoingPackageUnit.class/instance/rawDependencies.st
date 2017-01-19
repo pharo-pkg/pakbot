@@ -1,3 +1,0 @@
-accessing
-rawDependencies
-	^ manifest dependencies

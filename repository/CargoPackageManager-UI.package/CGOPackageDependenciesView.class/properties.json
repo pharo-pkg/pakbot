@@ -1,19 +1,18 @@
 {
-	"category" : "CargoPackageManager-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 5/13/2015 15:41",
+	"super" : "CGOPackageView",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"ongoingPackageVersion",
 		"dependencyTree",
 		"label",
 		"addButton",
 		"editButton",
-		"removeButton" ],
+		"removeButton"
+	],
 	"name" : "CGOPackageDependenciesView",
-	"pools" : [
-		 ],
-	"super" : "CGOPackageView",
-	"type" : "normal" }
+	"type" : "normal"
+}

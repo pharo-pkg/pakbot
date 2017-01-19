@@ -1,17 +1,16 @@
 {
-	"category" : "CargoPackageManager-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 1/20/2014 14:24",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"constraintsMap",
 		"resolution",
 		"defaultVersionStrategy",
-		"repositories" ],
+		"repositories"
+	],
 	"name" : "CGOSolver",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

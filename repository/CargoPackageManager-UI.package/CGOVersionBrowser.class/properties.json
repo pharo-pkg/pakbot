@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 11/28/2014 14:07",
-	"instvars" : [
-		 ],
-	"name" : "CGOVersionBrowser",
-	"pools" : [
-		 ],
 	"super" : "GTObjectVariablesBrowser",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOVersionBrowser",
+	"type" : "normal"
+}

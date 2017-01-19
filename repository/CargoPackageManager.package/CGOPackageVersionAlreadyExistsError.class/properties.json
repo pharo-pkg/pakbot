@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 12/10/2014 15:27",
-	"instvars" : [
-		 ],
-	"name" : "CGOPackageVersionAlreadyExistsError",
-	"pools" : [
-		 ],
 	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOPackageVersionAlreadyExistsError",
+	"type" : "normal"
+}

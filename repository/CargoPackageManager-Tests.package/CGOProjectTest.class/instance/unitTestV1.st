@@ -1,5 +1,5 @@
 test data
 unitTestV1
-	^ CGOOngoingPackageUnit2 example
+	^ CGOOngoingPackageUnit example
 		package: #Package1;
 		yourself

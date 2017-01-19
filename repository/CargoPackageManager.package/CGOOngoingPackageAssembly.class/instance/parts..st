@@ -1,3 +1,3 @@
 updating
-parts: aDependencyList
-	self updateManifestParts: aDependencyList
+parts: aListOfCGOPackageDependency
+	parts := aListOfCGOPackageDependency

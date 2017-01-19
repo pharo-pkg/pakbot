@@ -1,3 +1,3 @@
 accessing
 packageName
-	^ manifest packageName
+	^ package name

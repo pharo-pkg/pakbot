@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 4/4/2014 10:45",
-	"instvars" : [
-		"candidates" ],
-	"name" : "CGOUnresolvedDependency",
-	"pools" : [
-		 ],
 	"super" : "CGOPackageManagerError",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"candidates"
+	],
+	"name" : "CGOUnresolvedDependency",
+	"type" : "normal"
+}

@@ -1,5 +1,5 @@
 comparing
 = other
 	^ self class == other class 
-		ifTrue: [ manifest == other manifest ]
+		ifTrue: [ package == other package and: [ projectName = other projectName ] ]
 		ifFalse: [ ^ false ]	

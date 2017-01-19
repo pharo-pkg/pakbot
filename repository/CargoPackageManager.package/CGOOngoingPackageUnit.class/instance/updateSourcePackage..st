@@ -1,3 +1,0 @@
-updating
-updateSourcePackage: aCGOSourcePackageVersion
-	self updateMethod: #sourcePackageVersion withContent: aCGOSourcePackageVersion

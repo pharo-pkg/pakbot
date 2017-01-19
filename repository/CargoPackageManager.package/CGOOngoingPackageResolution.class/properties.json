@@ -1,15 +1,14 @@
 {
-	"category" : "CargoPackageManager-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 1/4/2017 11:30",
+	"super" : "CGOAbstractPackageDependency",
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"packageVersion",
-		"originDependencies" ],
+		"originDependencies"
+	],
 	"name" : "CGOOngoingPackageResolution",
-	"pools" : [
-		 ],
-	"super" : "CGOAbstractPackageDependency",
-	"type" : "normal" }
+	"type" : "normal"
+}

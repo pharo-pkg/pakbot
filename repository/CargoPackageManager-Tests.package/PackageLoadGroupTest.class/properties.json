@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Tests-Loader",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "<historical>",
-	"instvars" : [
-		 ],
-	"name" : "PackageLoadGroupTest",
-	"pools" : [
-		 ],
 	"super" : "CGOTest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Loader",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "PackageLoadGroupTest",
+	"type" : "normal"
+}

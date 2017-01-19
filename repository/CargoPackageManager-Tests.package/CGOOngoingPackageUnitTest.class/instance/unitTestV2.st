@@ -1,6 +1,6 @@
 test data
 unitTestV2
-	^ (CGOOngoingPackageUnit2 for: #'Test')
+	^ (CGOOngoingPackageUnit for: #'Test')
 		version: '0.2-dev';
 		description: 'A simple ongoing package unit.';
 		sourcePackageVersion: (CGOGitHostedPackageVersion

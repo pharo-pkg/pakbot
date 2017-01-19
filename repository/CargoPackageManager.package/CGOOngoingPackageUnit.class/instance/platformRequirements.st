@@ -1,3 +1,0 @@
-accessing
-platformRequirements
-	^ manifest platformRequirements

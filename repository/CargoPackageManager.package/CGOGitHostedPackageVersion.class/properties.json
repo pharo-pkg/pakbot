@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Loading",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 12/22/2016 10:15",
-	"instvars" : [
-		"commitish" ],
-	"name" : "CGOGitHostedPackageVersion",
-	"pools" : [
-		 ],
 	"super" : "CGOSourcePackageVersion",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Loading",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"commitish"
+	],
+	"name" : "CGOGitHostedPackageVersion",
+	"type" : "normal"
+}

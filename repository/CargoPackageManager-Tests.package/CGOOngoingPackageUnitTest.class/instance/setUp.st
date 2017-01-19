@@ -1,4 +1,8 @@
-running
+initialization
 setUp
 	super setUp.
-	ongoingPkg := CGOOngoingPackageUnit on: (TheManifestBuilder new createManifestNamed: 'Test') new
+	oldPackageRegistry := CGOPackageRegistry default.
+	CGOPackageRegistry default: CGOPackageRegistry new.
+	CGOPackageRegistry default
+		register: CGOOngoingProject example
+	

@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Tests-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"solver" ],
-	"name" : "SolverTest",
-	"pools" : [
-		 ],
 	"super" : "RepositoryBasedTest",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"solver"
+	],
+	"name" : "SolverTest",
+	"type" : "normal"
+}

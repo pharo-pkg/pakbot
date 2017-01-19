@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Tests-Model",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "<historical>",
-	"instvars" : [
-		"ongoingPkg" ],
-	"name" : "CGOOngoingPackageUnitTest",
-	"pools" : [
-		 ],
+	"commentStamp" : "",
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"oldPackageRegistry"
+	],
+	"name" : "CGOOngoingPackageUnitTest",
+	"type" : "normal"
+}

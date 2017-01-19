@@ -1,13 +1,9 @@
 converting
 asPackageVersion
-	^ CGOPackageVersion newFrom: 
-		( Dictionary new
-			add: #package -> self packageName asSymbol;
-			add: #version -> self version;
-			add: #dependencies -> self rawDependencies;
-			add: #provisions -> self provisions;
-			add: #description -> self description;
-			add: #sourcePackageVersion -> self sourcePackageVersion;
-			add: #platformRequirements -> self platformRequirements;
-			add: #timestamp -> DateAndTime now;
-			yourself )
+	| unit |
+	unit := CGOPackageUnit new.
+	CGOPackageUnit allInstVarNames
+		reject: [ :name | #(authors contributors repositories) includes: name ]
+		thenDo: [ :instVarName | 
+			unit instVarNamed: instVarName put: (self instVarNamed: instVarName) ].
+	^ unit	

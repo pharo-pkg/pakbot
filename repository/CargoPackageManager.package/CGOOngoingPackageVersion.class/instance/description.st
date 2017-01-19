@@ -1,3 +1,3 @@
 accessing
 description
-	^ manifest description
+	^ description

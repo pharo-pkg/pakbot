@@ -1,3 +1,0 @@
-accessing
-rawFile
-	^ manifest file

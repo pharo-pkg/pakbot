@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Solver",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 4/4/2014 23:23",
-	"instvars" : [
-		 ],
-	"name" : "CGOBleedingEdgeResolutionStrategy",
-	"pools" : [
-		 ],
 	"super" : "CGOResolutionStrategy",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOBleedingEdgeResolutionStrategy",
+	"type" : "normal"
+}

@@ -1,10 +1,10 @@
 {
-	"category" : "CargoPackageManager-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 5/12/2015 11:28",
+	"super" : "CGOPackageView",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"ongoingPackageVersion",
 		"nameLabel",
@@ -16,9 +16,8 @@
 		"repositoryValueLabel",
 		"repositoryEditButton",
 		"descriptionLabel",
-		"descriptionText" ],
+		"descriptionText"
+	],
 	"name" : "CGOPackageOverview",
-	"pools" : [
-		 ],
-	"super" : "CGOPackageView",
-	"type" : "normal" }
+	"type" : "normal"
+}

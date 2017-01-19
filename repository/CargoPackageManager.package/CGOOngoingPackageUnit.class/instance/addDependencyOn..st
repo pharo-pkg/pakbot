@@ -1,4 +1,4 @@
 updating
 addDependencyOn: aPackageName 
-	self updateManifestDependencies: 
-		(self dependencies	copyWith: (CGOPackageDependency newFrom: aPackageName -> #()))
+	dependencies	add:
+		(CGOPackageDependency newFrom: aPackageName -> #())

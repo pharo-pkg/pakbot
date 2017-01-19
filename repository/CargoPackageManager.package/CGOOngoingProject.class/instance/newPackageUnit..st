@@ -4,4 +4,4 @@ newPackageUnit: aCGOPackageUnitName
 	
 	unitName := aCGOPackageUnitName asSymbol.
 	unitNames add: unitName.
-	^ CGOPackageRegistry default register: (CGOOngoingPackageUnit2 for: unitName in: name)
+	^ CGOPackageRegistry default register: (CGOOngoingPackageUnit for: unitName in: name)

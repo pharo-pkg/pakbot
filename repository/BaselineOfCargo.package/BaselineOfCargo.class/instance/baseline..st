@@ -22,7 +22,7 @@ baseline: spec
 			project: 'Ston' with: [
 				spec
 					className: #ConfigurationOfSton;
-					versionString: #'bleedingEdge';
+					versionString: #'stable';
 					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/STON/main/' ];
 			baseline: 'Voyage' with: [
 				spec
