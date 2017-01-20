@@ -1,0 +1,3 @@
+accessing
+project
+	^ CGOProject fromStonString: projectRepository projectMetadataStonString

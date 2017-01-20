@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 11\/29\/2016 16:49",
+	"commentStamp" : "ChristopheDemarey 11/29/2016 16:49",
 	"super" : "Object",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
@@ -7,10 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"package",
-		"authors",
-		"contributors",
-		"description",
 		"version",
+		"description",
 		"timestamp"
 	],
 	"name" : "CGOPackageVersion",

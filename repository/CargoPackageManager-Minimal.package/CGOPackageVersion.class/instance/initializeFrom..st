@@ -5,5 +5,3 @@ initializeFrom: aDictionary
 	version := self versionFrom: aDictionary.
 	description := aDictionary at: #description ifAbsent: ''.
 	timestamp := DateAndTime now.
-	authors := aDictionary at: #authors ifAbsent: #().
-	contributors := aDictionary at: #contributors ifAbsent: #().

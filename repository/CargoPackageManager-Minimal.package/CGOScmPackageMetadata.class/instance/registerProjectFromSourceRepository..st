@@ -3,7 +3,7 @@ registerProjectFromSourceRepository: aCGOSourceRepository
 	| project |
 	
 	project := CGOProject fromStonString: aCGOSourceRepository projectMetadataStonString.
-	packageVersions add: project asPackageAssembly.
+	packageVersions add: project.
 	project packageUnitNames
 		collect: [ :unitName |
 			CGOPackageVersion fromStonString: (aCGOSourceRepository packageMetadataStonStringFor: unitName) ]

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 2\/5\/2015 11:46",
+	"commentStamp" : "ChristopheDemarey 2/5/2015 11:46",
 	"super" : "CGOPackageVersion",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
@@ -7,7 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"dependencies",
-		"repositories",
 		"provisions",
 		"platformRequirements",
 		"src"

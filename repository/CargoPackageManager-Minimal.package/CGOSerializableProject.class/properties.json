@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 11\/29\/2016 16:41",
+	"commentStamp" : "ChristopheDemarey 11/29/2016 16:41",
 	"super" : "CGOSerializedArtefact",
 	"category" : "CargoPackageManager-Minimal-Model-Serialization",
 	"classinstvars" : [ ],

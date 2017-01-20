@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 4\/3\/2014 10:25",
+	"commentStamp" : "ChristopheDemarey 4/3/2014 10:25",
 	"super" : "CGOAbstractPackageDependency",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
