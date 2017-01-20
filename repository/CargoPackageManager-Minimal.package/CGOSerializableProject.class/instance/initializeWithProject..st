@@ -1,5 +1,5 @@
 initialization
-initializeWithProject: aCGOProject 
+initializeWithProject: aCGOProject
 	name := aCGOProject name.
 	description := aCGOProject description.
 	repository := aCGOProject repository asSerializableRepository.

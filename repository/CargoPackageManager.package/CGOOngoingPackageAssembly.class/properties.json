@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"parts"
+		"parts",
+		"projectRepository"
 	],
 	"name" : "CGOOngoingPackageAssembly",
 	"type" : "normal"
