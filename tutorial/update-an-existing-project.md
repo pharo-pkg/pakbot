@@ -50,4 +50,4 @@ cargoPackage
 ```
 Do not forget to save the project to do not loose your metadata changes!
 
-Note: To save Cargo metadata, the only way (for now) is to use the #saveToSCM method on a Cargo project. Tools like Monticello and iceberg cannot save files that are not Smalltalk code.
+*__Note__: To save Cargo metadata, the only way (for now) is to use the #saveToSCM method on a Cargo project. Tools like Monticello and iceberg cannot save files that are not Smalltalk code.*
