@@ -31,3 +31,23 @@ Then, you can create an Assembly and set its properties by calling setters:
 	yourself.
 ```
 It will automatically add the package assembly named *#'Counter-UI-Tests'* to the project. Loading *#'Counter-UI-Tests'* will trigger the load of both *#'Counter-UI-Core'* and *#'Counter-Tests'* but also their dependencies.
+Then, the project can be saved:
+``` smalltalk
+project saveToSCM: 'Add #Counter-UI-Tests assembly.'
+```
+
+## Edit the metadata of an existing package
+To edit the metadata of an existing package, get this package by asking it to the Cargo registry (the package has to be loaded). Then convert this package so it becomes editable by sending the #asOngoingPackageVersion message.
+``` smalltalk
+cargoPackage := (CGOPackageRegistry default packageNamed: 'Counter-Core') asOngoingPackageVersion.
+```
+
+Then, you can create an Assembly and set its properties by calling setters:
+``` smalltalk
+cargoPackage 
+	description: 'Counter UI + counter packages';
+	version: '2.0'.
+```
+Do not forget to save the project to do not loose your metadata changes!
+
+Note: To save Cargo metadata, the only way (for now) is to use the #saveToSCM method on a Cargo project. Tools like Monticello and iceberg cannot save files that are not Smalltalk code.
