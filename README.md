@@ -92,7 +92,7 @@ Once done, you can publish your package to the Cargo repository.
 #### Using the scripting API
 To publish a package using the scripting API, you first need to get the object able to interact with package metadata: an OngoingPackageVersion (it has 2 subclasses: OngoingPackageUnit and OngoingPackageAssembly). With this object, you can easily update the package metadata. Once done, you need to send the message *#asPackageVersion* to the ongoing package version to get a package version. This object is a read-only object. You can now ask to the cargo repository to save this new package version:
 ```smalltalk
-ongoing := #'Pharo-Kernel' packageManifest asOngoingPackageVersion.
+ongoing := (CGOPackageRegistry default packageNamed: #'Pharo-Kernel') asOngoingPackageVersion.
 Cargo defaultPackageRepository savePackageVersion: ongoing asPackageVersion
 ```
 You can also set up your own Cargo package repository if you do not want to use the default one.
@@ -111,7 +111,7 @@ Will come soon
 
 ##FAQ
 ###Where should I update my package dependencies?
-Dependencies are part of package metadata. Package metadata is currently managed through a PackageManifest (a class in the package itself). You should not directly edit this class but use the Nautilus plugin to edit the metadata: select a package in Nautilus, open the contextual menu (right-click) and select "Browse package metadata ..."
+Dependencies are part of package metadata. Package metadata is managed through living ojects in the Pharo image. You can retrieve them through the Cargo registry. You can edit pacakge metadata by sending messages to the corresponding ongoing package version or by using the dedicated UI.
 The DependencyAnalyzer tool could also help to find the dependencies of a package. It is also available from Nautilus contextual menu on a package: "browse dependencies ..."
 ###Do I need to release and publish all packages of my project independently?
 The anwser is no! It would be a tedious work to release all packages independently. Cargo comes with some tools to automatize the release and the publication of a set of packages.
