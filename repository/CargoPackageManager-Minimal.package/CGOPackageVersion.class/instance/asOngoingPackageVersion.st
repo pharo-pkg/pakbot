@@ -1,0 +1,3 @@
+converting
+asOngoingPackageVersion
+	^ CGOOngoingPackageVersion fromPackageVersion: self

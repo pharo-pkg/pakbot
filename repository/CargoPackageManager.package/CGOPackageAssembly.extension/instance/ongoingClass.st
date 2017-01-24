@@ -1,0 +1,3 @@
+*CargoPackageManager
+ongoingClass
+	^ CGOOngoingPackageAssembly 
