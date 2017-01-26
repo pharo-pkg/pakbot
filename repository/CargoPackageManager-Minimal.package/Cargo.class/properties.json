@@ -12,7 +12,8 @@
 		"packages",
 		"sourceRepositories",
 		"repositories",
-		"projectMetadataFromSCM"
+		"projectMetadataFromSCM",
+		"registry"
 	],
 	"name" : "Cargo",
 	"type" : "normal"
