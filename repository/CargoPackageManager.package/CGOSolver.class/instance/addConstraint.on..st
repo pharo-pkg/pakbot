@@ -1,12 +1,12 @@
 private
-addConstraint: aConstraint on: aPackage
+addConstraint: aConstraint on: aPackageName
 	| constraints |
 
 	constraints := constraintsMap
-		at: aPackage
+		at: aPackageName
 		ifPresent: [ :currentConstraints | aConstraint mergeAll: currentConstraints ]
 		ifAbsent: [ aConstraint asOrderedCollection ].
 	
 	constraintsMap
-		at: aPackage
+		at: aPackageName
 		put: constraints

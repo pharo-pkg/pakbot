@@ -1,0 +1,3 @@
+accessing
+alreadyInstalledPackages: aListOfPackageVersions
+	alreadyInstalledPackages := aListOfPackageVersions asSet

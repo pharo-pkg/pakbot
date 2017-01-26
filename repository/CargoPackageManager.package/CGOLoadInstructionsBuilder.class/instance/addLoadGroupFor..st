@@ -1,6 +1,8 @@
 loading order
 addLoadGroupFor: resolvedDependencies
-	| packageGroup |
-	packageGroup := CGOPackageLoadGroup newWithAll: 
-		(resolvedDependencies collect: #packageVersion as: Array).
-	loadInstructions addGroup: packageGroup
+	| packageVersions |
+	packageVersions := ( resolvedDependencies 
+		collect: #packageVersion
+		thenReject: [ :pkgVersion | resolution isAlreadyInstalled: pkgVersion ] ) asArray.
+	packageVersions 
+		ifNotEmpty: [ loadInstructions addGroup: (CGOPackageLoadGroup newWithAll: packageVersions) ]

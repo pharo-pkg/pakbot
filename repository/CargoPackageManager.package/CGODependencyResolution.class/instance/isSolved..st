@@ -1,3 +1,6 @@
 testing
 isSolved: aPackageName
-	^ (self ongoingPackageResolutionFor: aPackageName) isSolved
+	^ alreadyInstalledPackages
+		detect: [ :each | each packageName = aPackageName ]
+		ifFound: [ true ]
+		ifNone: [ (self ongoingPackageResolutionFor: aPackageName) isSolved ]

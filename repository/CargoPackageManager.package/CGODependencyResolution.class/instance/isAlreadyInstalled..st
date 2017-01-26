@@ -1,0 +1,3 @@
+testing
+isAlreadyInstalled: aCGOPackageVersion
+	^ alreadyInstalledPackages includes: aCGOPackageVersion
