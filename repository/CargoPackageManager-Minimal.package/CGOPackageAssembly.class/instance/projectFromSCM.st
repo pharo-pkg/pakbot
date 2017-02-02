@@ -1,3 +1,3 @@
-accessing
-project
+private
+projectFromSCM
 	^ CGOProject fromStonString: projectRepository projectMetadataStonString

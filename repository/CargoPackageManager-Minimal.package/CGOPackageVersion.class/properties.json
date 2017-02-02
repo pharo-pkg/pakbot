@@ -9,7 +9,8 @@
 		"package",
 		"version",
 		"description",
-		"timestamp"
+		"timestamp",
+		"projectName"
 	],
 	"name" : "CGOPackageVersion",
 	"type" : "normal"

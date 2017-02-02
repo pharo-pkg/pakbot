@@ -1,15 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "CGOTest",
+	"super" : "CGOModelTest",
 	"category" : "CargoPackageManager-Tests-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"oldRegistry",
-		"registry",
-		"ongoingProject"
-	],
+	"instvars" : [ ],
 	"name" : "CGOProjectTest",
 	"type" : "normal"
 }

@@ -8,5 +8,6 @@ assemblyA1
 			#parts
 				->
 					{(#B -> #()).
-					(#C -> #('=1.1'))}.
+					(#C -> #('=1.1'))}
+		with: #projectName -> #'MyProject'.
 	^ CGOPackageVersion newFrom: dictionary

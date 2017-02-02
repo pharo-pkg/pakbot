@@ -1,5 +1,5 @@
 tests
-testCanConvertAssmeblyToOngoing
+testCanConvertAssemblyToOngoing
 	| pkgVersion ongoing |
 	pkgVersion := self assemblyA1.
 	ongoing := pkgVersion asOngoingPackageVersion.

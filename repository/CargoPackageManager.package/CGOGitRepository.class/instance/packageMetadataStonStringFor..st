@@ -1,4 +1,4 @@
-loading
+fetching
 packageMetadataStonStringFor: aPackageName
 	^ (CGOSourcePackageVersion 
 			repository: 	self

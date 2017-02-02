@@ -1,5 +1,6 @@
-initialization
+running
 setUp
+	super setUp.
 	oldRegistry := CGOPackageRegistry default.
 	ongoingProject := CGOOngoingProject example.
 	registry := CGOPackageRegistry new 

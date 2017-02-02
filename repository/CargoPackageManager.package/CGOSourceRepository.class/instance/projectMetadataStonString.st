@@ -1,3 +1,3 @@
-loading
+fetching
 projectMetadataStonString
 	self subclassResponsibility

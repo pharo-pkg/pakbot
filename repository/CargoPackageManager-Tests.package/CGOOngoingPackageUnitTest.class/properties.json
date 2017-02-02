@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
+	"super" : "CGOModelTest",
 	"category" : "CargoPackageManager-Tests-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],

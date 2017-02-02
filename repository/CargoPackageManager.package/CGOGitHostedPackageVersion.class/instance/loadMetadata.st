@@ -1,4 +1,4 @@
-loading
+fetching
 loadMetadata
 	| iceRepository |
 	iceRepository := self iceRepository.

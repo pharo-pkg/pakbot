@@ -1,3 +1,5 @@
 accessing
 project
-	^ CGOPackageRegistry default packageNamed: projectName
+	^ [ self projectFromRegistry ]
+		on: CGOPackageNotFoundError 
+		do: [ self projectFromSCM ]

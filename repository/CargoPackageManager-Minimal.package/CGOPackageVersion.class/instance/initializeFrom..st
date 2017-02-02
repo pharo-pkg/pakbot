@@ -5,3 +5,4 @@ initializeFrom: aDictionary
 	version := self versionFrom: aDictionary.
 	description := aDictionary at: #description ifAbsent: ''.
 	timestamp := DateAndTime now.
+	projectName := aDictionary at: #projectName ifAbsent: nil.

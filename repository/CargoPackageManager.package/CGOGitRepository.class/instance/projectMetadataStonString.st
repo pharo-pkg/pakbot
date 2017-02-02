@@ -1,4 +1,4 @@
-loading
+fetching
 projectMetadataStonString
 	| repository |
 	repository := self iceRepository.

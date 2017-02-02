@@ -1,3 +1,5 @@
 accessing
 project
-	self subclassResponsibility
+	^ [ self projectFromRegistry ]
+		on: CGOPackageNotFoundError 
+		do: [ self projectFromSCM ]
