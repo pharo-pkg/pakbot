@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-RepositoryBackend",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"strategy" ],
-	"name" : "CGOInImageAndDBPackageProviderStrategyTest",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-RepositoryBackend",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"strategy"
+	],
+	"name" : "CGOInImageAndDBPackageProviderStrategyTest",
+	"type" : "normal"
+}
