@@ -2,8 +2,7 @@ private
 isVirtual: aPackageName
 	repositories do: 
 		[ :repository | 
-			[ repository package: aPackageName.
-			^ false "package found!" ] 
+			[ ^ repository isVirtual: aPackageName ] 
 			on: CGOPackageNotFoundError
 			do: [ "ignore" ] ].
-	^ true "no package found!"
+	CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package'

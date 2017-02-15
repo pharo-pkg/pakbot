@@ -1,7 +1,7 @@
 tests
 testSolvePackageWithNonFixedConstraintDependencyRaisesUnresolvedDependency
 	| testPackage dependency |
-	testPackage := #'Test'.
+	testPackage := #'JQuery-Core'.
 	dependency := CGOPackageDependency 
 		on: testPackage 
 		for: nil

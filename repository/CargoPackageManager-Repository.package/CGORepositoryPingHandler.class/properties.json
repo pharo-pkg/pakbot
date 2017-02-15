@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Repository-ReST",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 6/17/2015 08:46",
-	"instvars" : [
-		 ],
-	"name" : "CGORepositoryPingHandler",
-	"pools" : [
-		 ],
 	"super" : "CGORepositoryRestCallHandler",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Repository-ReST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGORepositoryPingHandler",
+	"type" : "normal"
+}

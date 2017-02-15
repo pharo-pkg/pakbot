@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Adaptors",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "ZincResourceMetaCoreSpec",
-	"pools" : [
-		 ],
 	"super" : "Seaside31PackageSpec",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Adaptors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "ZincResourceMetaCoreSpec",
+	"type" : "normal"
+}

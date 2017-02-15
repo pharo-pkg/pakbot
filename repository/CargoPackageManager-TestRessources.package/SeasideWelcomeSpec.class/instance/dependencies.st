@@ -1,4 +1,4 @@
-as yet unclassified
+spec
 dependencies
 	^ { #'Seaside-Environment' -> #('=3.1') .
 		#'Seaside-Tools-Web' -> #('=3.1') .
@@ -8,7 +8,7 @@ dependencies
 		#'Seaside-Flow' -> #('=3.1') .
 		#'JQuery-Core' -> #('=3.1') .
 		#'JQuery-UI' -> #('=3.1') .
-		#'Seaside-Welcome-Platform' -> #('=3.1') }
+		#'Seaside-Welcome-Platform' -> #('=1') }
 
 	"(package addDependency: 'Seaside-Tests-Flow')
 		version: '';

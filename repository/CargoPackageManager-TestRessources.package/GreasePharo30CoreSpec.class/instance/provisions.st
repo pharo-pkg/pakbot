@@ -1,3 +1,3 @@
-as yet unclassified
+spec
 provisions
-	^ #(#'Grease-Core-Platform')
+	^ #(#'Grease-Core-Platform@1.0')

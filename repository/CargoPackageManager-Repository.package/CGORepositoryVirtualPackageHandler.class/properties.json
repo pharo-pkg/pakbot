@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-Repository-ReST",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 9/11/2014 17:05",
-	"instvars" : [
-		 ],
-	"name" : "CGORepositoryVirtualPackageHandler",
-	"pools" : [
-		 ],
 	"super" : "CGORepositoryRestCallHandler",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Repository-ReST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGORepositoryVirtualPackageHandler",
+	"type" : "normal"
+}

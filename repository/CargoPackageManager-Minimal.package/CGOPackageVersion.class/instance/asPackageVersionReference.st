@@ -1,5 +1,5 @@
 converting
 asPackageVersionReference
-	^ CGOPackageVersionReference new
-		initializeWithName: self packageName version: self version asString;
-		yourself
+	^ CGOPackageVersionReference 
+		packageName: self packageName 
+		version: self version asString

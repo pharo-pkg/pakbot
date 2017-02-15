@@ -1,12 +1,7 @@
 private
 bleedingEdgeOfVirtualPackage: aVirtualPackageName for: platformAttributes
-	| packagesDict |
-	
-	packagesDict := ((self packagesProvidingName: aVirtualPackageName forPlatformAttributes: platformAttributes) collect: #asPackageVersionReference)
-		groupedBy: #packageName.
-	
-	packagesDict ifEmpty: [ CGOPackageNotFoundError signal: 'Cannot find ' , aVirtualPackageName , ' package'  ].
-	
-	^ (packagesDict size = 1)
-		ifTrue: [ Array with: (packagesDict values first detectMax: #versionNumber) ]
-		ifFalse: [ packagesDict values collect: [ :each | each detectMax: #versionNumber ] ]
+	"Virtual packages DO NOT support platform attributes at this time. So, platformAttributes argument is just ignored"
+	| pkgVersionRef |
+	pkgVersionRef := ((self versionStringsOfVirtual: aVirtualPackageName) collect: #asPackageVersionReference)
+		detectMax: #versionNumber.
+	^ self fetchVirtual: pkgVersionRef packageName version: pkgVersionRef versionNumber asString

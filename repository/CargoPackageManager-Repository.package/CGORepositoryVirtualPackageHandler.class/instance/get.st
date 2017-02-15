@@ -8,7 +8,7 @@ get
 	[ packageVersions := self packageRepository 
 							packagesProviding: virtualPackageName
 							version: version
-							for: platformAttributes ]
+							forPlatformAttributes: platformAttributes ]
 		on: CGOPackageVersionNotFoundError
 		do: [ ^ self notFound ].
 	^ self stonResponse: packageVersions

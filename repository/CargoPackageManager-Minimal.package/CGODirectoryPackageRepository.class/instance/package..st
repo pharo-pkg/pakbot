@@ -1,4 +1,7 @@
 fetching
 package: aPackageName
-	(self rootDirectory / aPackageName asLowercase) exists 
-		ifFalse: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ]
+	^ (self rootDirectory / aPackageName asLowercase) exists
+		ifTrue: [ CGOPackageProvider default packageNamed: aPackageName ]
+		ifFalse: [ (self virtualDirectory / aPackageName asLowercase) exists
+			ifTrue: [ CGOPackageProvider default virtualPackageNamed: aPackageName ]
+			ifFalse: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ] ]

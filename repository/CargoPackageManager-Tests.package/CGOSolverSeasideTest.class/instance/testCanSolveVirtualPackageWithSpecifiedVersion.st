@@ -3,7 +3,7 @@ testCanSolveVirtualPackageWithSpecifiedVersion
 	| testPackage version dependency resolution packageVersion |
 	
 	testPackage := #'Seaside-Canvas-Platform'.
-	version := '3.1' asSemanticVersion.					
+	version := '1.0' asSemanticVersion.					
 	dependency := CGOPackageDependency
 						on: testPackage
 						for: nil
@@ -17,4 +17,4 @@ testCanSolveVirtualPackageWithSpecifiedVersion
 		equals: 'Seaside-Pharo-Canvas'.
 	self
 		assert: packageVersion version
-		equals: version
+		equals: '3.1' asSemanticVersion

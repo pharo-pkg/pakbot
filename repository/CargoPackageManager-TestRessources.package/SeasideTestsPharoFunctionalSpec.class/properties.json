@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Pharo",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "SeasideTestsPharoFunctionalSpec",
-	"pools" : [
-		 ],
 	"super" : "Seaside31PackageSpec",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Pharo",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeasideTestsPharoFunctionalSpec",
+	"type" : "normal"
+}

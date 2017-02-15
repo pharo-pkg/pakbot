@@ -1,7 +1,7 @@
 initialization
 initializeFromProject: aCGOProject
 	super initialize.
-	name := aCGOProject name copy.
+	name := aCGOProject packageName copy.
 	description := aCGOProject description copy.
 	repository := aCGOProject repository deepCopy.
 	version := aCGOProject version deepCopy.

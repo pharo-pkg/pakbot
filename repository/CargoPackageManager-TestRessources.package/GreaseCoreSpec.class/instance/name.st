@@ -1,3 +1,3 @@
-as yet unclassified
+spec
 name
 	^ 'Grease-Core'

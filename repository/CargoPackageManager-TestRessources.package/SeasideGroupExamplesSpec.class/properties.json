@@ -1,14 +1,11 @@
 {
-	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Common",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "SeasideGroupExamplesSpec",
-	"pools" : [
-		 ],
 	"super" : "Seaside31PackageSpec",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-TestRessources-SeasideDesc-Common",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeasideGroupExamplesSpec",
+	"type" : "normal"
+}

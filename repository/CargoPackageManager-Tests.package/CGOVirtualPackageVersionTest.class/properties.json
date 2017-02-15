@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOModelTest",
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOVirtualPackageVersionTest",
+	"type" : "normal"
+}

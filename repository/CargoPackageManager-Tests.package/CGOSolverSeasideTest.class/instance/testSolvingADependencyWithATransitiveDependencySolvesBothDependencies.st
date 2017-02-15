@@ -4,7 +4,7 @@ testSolvingADependencyWithATransitiveDependencySolvesBothDependencies
 	dependencyToSolve := CGOPackageDependency 
 								on: 'Seaside-Flow-Platform'
 								for: nil
-								withConstraints: { CGOFixedVersionConstraint with: '3.1' }.
+								withConstraints: { CGOFixedVersionConstraint with: '1' }.
 	
 	resolution := solver solveDependency: dependencyToSolve.
 

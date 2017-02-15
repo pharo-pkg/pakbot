@@ -1,4 +1,4 @@
-tests
+tests - saving
 testSaveDevelopmentVersionShouldOverrideOldVersion
 
 	emptyRepository savePackageVersion: (GreaseTestResource current greasecore1_1_13devWithDescription: 'old').

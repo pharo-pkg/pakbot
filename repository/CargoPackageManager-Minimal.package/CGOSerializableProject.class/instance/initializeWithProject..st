@@ -1,6 +1,6 @@
 initialization
 initializeWithProject: aCGOProject
-	name := aCGOProject name.
+	name := aCGOProject packageName.
 	description := aCGOProject description.
 	repository := aCGOProject repository asSerializableRepository.
 	version := aCGOProject version asString.

@@ -6,5 +6,5 @@ testBleedingEdgeFor
 				bleedingEdgeOf: #'Zinc-HTTP'
 				for: #().
 	self 
-		assert: result first asString
+		assert: result asString
 		equals: 'Zinc-HTTP@2.5.2'

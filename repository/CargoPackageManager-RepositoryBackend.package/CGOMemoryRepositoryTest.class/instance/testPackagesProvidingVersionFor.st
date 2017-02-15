@@ -4,8 +4,8 @@ testPackagesProvidingVersionFor
 	
 	result := repository 
 				packagesProviding: 'Seaside-Canvas-Platform'
-				version: '3.1' asSemanticVersion
-				for: (OrderedCollection with: #'pharo2.x').
+				version: '1.0' asSemanticVersion
+				forPlatformAttributes: (OrderedCollection with: #'pharo2.x').
 	self 
 		assert: result size
 		equals: 1.

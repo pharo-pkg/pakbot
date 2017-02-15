@@ -1,3 +1,3 @@
-as yet unclassified
+spec
 provisions
-	^ #(#'Seaside-Development-Platform')
+	^ #(#'Seaside-Development-Platform@1.0')

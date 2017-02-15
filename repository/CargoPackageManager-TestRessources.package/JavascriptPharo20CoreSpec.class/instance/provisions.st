@@ -1,3 +1,3 @@
-as yet unclassified
+spec
 provisions
-	^ #(#'Javascript-Core-Platform')
+	^ #(#'Javascript-Core-Platform@1')

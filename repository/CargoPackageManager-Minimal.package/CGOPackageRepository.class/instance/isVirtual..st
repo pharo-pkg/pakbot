@@ -1,7 +1,3 @@
-private
+testing
 isVirtual: aPackageName
-	[ self package: aPackageName.
-	^ false "package found!" ] 
-		on: CGOPackageNotFoundError
-		do: [ "ignore" ].
-	^ true "no package found!"
+	^ (self package: aPackageName) isVirtual

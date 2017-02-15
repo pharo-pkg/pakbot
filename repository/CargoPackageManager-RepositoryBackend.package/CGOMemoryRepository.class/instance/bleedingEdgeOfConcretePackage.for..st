@@ -8,4 +8,4 @@ bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
 		and: [ each platformRequirements 
 					ifEmpty: [ true ]
 					ifNotEmpty: [ :requirements | requirements includesAny: platformAttributes ] ] ].
-	^ Array with: (candidates detectMax: #version) asPackageVersionReference
+	^ (candidates detectMax: #version) asPackageVersionReference

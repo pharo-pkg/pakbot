@@ -7,6 +7,6 @@ initializeFromPackageVersion: aCGOPackageVersion
 	timestamp := DateAndTime now.
 	"projectName := aCGOPackageVersion projectName copy."
 	dependencies := aCGOPackageVersion dependencies collect: #copy as: OrderedCollection.
-	provisions := aCGOPackageVersion provisions asOrderedCollection.
+	self provisions: aCGOPackageVersion provisions.
 	platformRequirements := aCGOPackageVersion platformRequirements asOrderedCollection.	
 	src := aCGOPackageVersion sourcePackageVersion deepCopy.

@@ -2,12 +2,13 @@ solving
 versionOf: aPackageName in: aRepositoryList for: platformAttributes
 	| candidates |
 
-	candidates := aRepositoryList 
-		flatCollect: [ :repository | 
-			[ repository bleedingEdgeOf: aPackageName for: platformAttributes ]
+	candidates := Set new.
+	aRepositoryList 
+		do: [ :repository | 
+			[ candidates add: (repository bleedingEdgeOf: aPackageName for: platformAttributes) asPackageVersionReference ]
 				on: CGOPackageNotFoundError
-				do: [ #() "ignore" ] ]
-		as: Set.
+				do: [ "ignore" ] ].
+	candidates ifEmpty: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ].
 	(candidates size > 1)
 		ifTrue: [ CGOUnresolvedDependency package: aPackageName candidates: candidates ].
 	^ candidates detectMax: [ :v | v ]

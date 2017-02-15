@@ -4,11 +4,10 @@ updateVirtualPackagesIndexWith: aPackageVersion
 	aPackageVersion provisions
 		ifEmpty: [ ^ self ]
 		ifNotEmpty: [ :provisions | 
-			provisions
-				do: [ :provision | 
-					| file |
-					file := (self virtualDirectory / provision asLowercase)
-						ensureCreateFile.
+			provisions 
+				do: [ :virtualPackageVersionRef | | dir file |
+					dir := (self virtualIndexesDirectory / virtualPackageVersionRef packageName asLowercase) ensureCreateDirectory.
+					file :=  (dir / virtualPackageVersionRef asString asLowercase) ensureCreateFile.
 					file
 						writeStreamDo: [ :stream | 
 							stream

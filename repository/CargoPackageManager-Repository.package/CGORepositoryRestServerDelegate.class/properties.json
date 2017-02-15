@@ -1,14 +1,13 @@
 {
-	"category" : "CargoPackageManager-Repository-ReST",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 10/31/2014 15:06",
-	"instvars" : [
-		"packageRepository" ],
-	"name" : "CGORepositoryRestServerDelegate",
-	"pools" : [
-		 ],
 	"super" : "ZnRestServerDelegate",
-	"type" : "normal" }
+	"category" : "CargoPackageManager-Repository-ReST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packageRepository"
+	],
+	"name" : "CGORepositoryRestServerDelegate",
+	"type" : "normal"
+}

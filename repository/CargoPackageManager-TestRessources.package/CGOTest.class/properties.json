@@ -1,15 +1,14 @@
 {
-	"category" : "CargoPackageManager-TestRessources-Resources",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BabyMock2TestCase",
+	"category" : "CargoPackageManager-TestRessources-Resources",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"systemPackages",
-		"packageProviderStrategyBackup" ],
+		"packageProviderStrategyBackup"
+	],
 	"name" : "CGOTest",
-	"pools" : [
-		 ],
-	"super" : "BabyMock2TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}

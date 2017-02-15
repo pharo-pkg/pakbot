@@ -1,17 +1,16 @@
 {
-	"category" : "CargoPackageManager-TestRessources-Resources",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 7/2/2015 17:38",
+	"super" : "TestResource",
+	"category" : "CargoPackageManager-TestRessources-Resources",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"fs",
 		"mcRepository",
 		"versionReferences",
-		"cargoRepository" ],
+		"cargoRepository"
+	],
 	"name" : "GreaseTestResource",
-	"pools" : [
-		 ],
-	"super" : "TestResource",
-	"type" : "normal" }
+	"type" : "normal"
+}

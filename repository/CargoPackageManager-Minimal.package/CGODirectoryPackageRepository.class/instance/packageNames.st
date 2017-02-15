@@ -3,4 +3,4 @@ packageNames
 	"list name of all packages available in the repository"
 
 	^ self rootDirectory directoryNames
-		reject: [ :each | each = 'virtual' ]
+		reject: [ :each | each = 'virtual' or: [ each = 'virtual-indexes' ] ]

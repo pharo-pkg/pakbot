@@ -4,6 +4,6 @@ bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
 	
 	packageId := self packageVoyageId: aPackageName.
 	candidates := CGOPackageVersion selectMany: [ :each | (each at: 'package.__id') = packageId ].
-	^ Array with: ((candidates 
+	^ ((candidates 
 		select: [ :each | (each platformRequirements difference: platformAttributes) isEmpty ])
 			detectMax: #version) asPackageVersionReference

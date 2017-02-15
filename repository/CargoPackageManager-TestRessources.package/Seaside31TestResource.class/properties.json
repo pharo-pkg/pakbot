@@ -1,15 +1,14 @@
 {
-	"category" : "CargoPackageManager-TestRessources-Resources",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "ChristopheDemarey 9/19/2014 15:24",
+	"super" : "TestResource",
+	"category" : "CargoPackageManager-TestRessources-Resources",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"packageProviderStrategyBackup",
-		"packageVersions" ],
+		"packageVersions"
+	],
 	"name" : "Seaside31TestResource",
-	"pools" : [
-		 ],
-	"super" : "TestResource",
-	"type" : "normal" }
+	"type" : "normal"
+}

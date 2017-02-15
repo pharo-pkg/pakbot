@@ -17,7 +17,7 @@ seasideCore310StonString
 			''=1.1.5''
 		],
 		#Seaside-Core-Platform : [
-			''=3.1.0''
+			''=1.0.0''
 		]
 	]
 }'

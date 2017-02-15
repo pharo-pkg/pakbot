@@ -1,3 +1,3 @@
-as yet unclassified
+spec
 name
 	^ 'Seaside-Canvas-Pharo'

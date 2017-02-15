@@ -1,4 +1,4 @@
-as yet unclassified
+spec
 dependencies
 	^ { #'Seaside-Core' -> #('=3.1') .
 		#'Seaside-Canvas' -> #('=3.1') .
@@ -7,7 +7,7 @@ dependencies
 		#'Seaside-RenderLoop' -> #('=3.1') .
 		#'Seaside-Tools-Core' -> #('=3.1') .
 		#'Seaside-Widgets' -> #('=3.1') .
-		#'Seaside-Environment-Platform' -> #('=3.1') }
+		#'Seaside-Environment-Platform' -> #('=1') }
 
 	"	(package addDependency: 'Seaside-Pharo-Environment')
 		platform: #squeakCommon;
