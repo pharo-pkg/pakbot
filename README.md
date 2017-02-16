@@ -20,7 +20,7 @@ Cargo is a package manager. It automates the process of installing, upgrading an
 Packages are the unit of distribution of a software. It is the minimal artefact you can load. Cargo defines 3 kind of packages:
 * **package unit**: it represents a piece of code in a specific version. It has dependencies.
 * **package assembly**: it represents a set of package units or package assemblies. It is useful to group a coherent set of packages all together. Assemblies do not have dependencies.
-* **virtual package**: they are there to manage smoothly platform-specific packages. A virtual package has only a name. Some concrete packages (units) will provide them, some others will require them. They offer low-coupling in dependencies description but have to be used carefully (no specified contract, just rely on the package name). This concept comes from the [Debian distribution] (http://www.linuxtopia.org/online_books/linux_system_administration/debian_linux_guides/debian_linux_faq/ch-pkg_basics.en_007.html).
+* **virtual package**: they are there to manage smoothly platform-specific packages. A virtual package is a special kind of package. It has only a name, a version and a description (you can define here the contract implied by the virtual package). Some concrete packages (units) will provide them, some others will require them. They offer low-coupling in dependencies description but have to be used carefully (no formal contract, just rely on the package name and version). This concept comes from the [Debian distribution] (http://www.linuxtopia.org/online_books/linux_system_administration/debian_linux_guides/debian_linux_faq/ch-pkg_basics.en_007.html).
 ![Cargo packages](/doc/cargo-packages.png)
 
 ### Dependency description
