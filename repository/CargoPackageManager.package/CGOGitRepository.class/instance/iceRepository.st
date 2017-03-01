@@ -1,5 +1,7 @@
 accessing
 iceRepository
-	^ (IceRepository origin: repositoryUrl) 
+	^ IceRepositoryCreator new 
+		remote: (IceRemote url: repositoryUrl);
 		subdirectory: (subdirectory ifNil: ['']); "Optional, default = '' = code in repository root"
-		yourself
+		createRepository.
+	" maybe we sould register the repository to Iceberg using #register selector"
