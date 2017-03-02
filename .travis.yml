@@ -18,4 +18,4 @@ smalltalk:
 # configuration
 before_script:
   - git config --global user.name 'Travis CI'
-  - git config --global user.email 'carog-ci@travis-ci.org'
+  - git config --global user.email 'cargo-ci@travis-ci.org'
