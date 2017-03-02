@@ -5,6 +5,7 @@ addons:
   apt:
     packages:
     - mongodb-org-server
+    - libgit2-0
 
 # Select operating system(s)
 os:
