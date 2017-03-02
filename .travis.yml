@@ -5,11 +5,11 @@ addons:
   apt:
     packages:
     - mongodb-org-server
-    - libgit2-0
 
 # Select operating system(s)
 os:
-  - linux
+#  - linux (disabled because of libgit - ssl pb)
+  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
