@@ -1,0 +1,1 @@
+Error thrown when one tries to register a package whose name is already registered in Cargo package registry.
