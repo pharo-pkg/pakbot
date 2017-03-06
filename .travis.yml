@@ -8,8 +8,8 @@ addons:
 
 # Select operating system(s)
 os:
-#  - linux (disabled because of libgit - ssl pb)
-  - osx
+  - linux
+#  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
