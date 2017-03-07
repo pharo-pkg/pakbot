@@ -2,7 +2,9 @@ tests
 testCanGetProjectFromRegistry
 	| project |
 	project := ongoingProject asCargoProject.
-	registry register: project.
+	[ registry register: project ]
+		on: CGOPackageAlreadyRegistered 
+		do: [ "ignore" ].
 	
 	self
 		assert: self unitTestV1 project 
