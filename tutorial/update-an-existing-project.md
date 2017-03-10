@@ -27,7 +27,7 @@ Then, you can create an Assembly and set its properties by calling setters:
 ``` smalltalk
 (project newPackageAssembly: #'Counter-UI-Tests')
 	description: 'Counter UI + counter packages';
-	parts: #('Counter-UI-Core' 'Counter-Tests
+	parts: #('Counter-UI-Core' 'Counter-Tests');
 	yourself.
 ```
 It will automatically add the package assembly named *#'Counter-UI-Tests'* to the project. Loading *#'Counter-UI-Tests'* will trigger the load of both *#'Counter-UI-Core'* and *#'Counter-Tests'* but also their dependencies.
