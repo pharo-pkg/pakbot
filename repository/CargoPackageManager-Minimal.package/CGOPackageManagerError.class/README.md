@@ -1,1 +1,1 @@
-Root error class for all package manager errors.
+Root error class for all Cargo package manager errors.

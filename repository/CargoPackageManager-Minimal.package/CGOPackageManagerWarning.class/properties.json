@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "ChristopheDemarey 3/13/2017 12:53",
-	"super" : "Error",
+	"commentStamp" : "ChristopheDemarey 3/13/2017 12:52",
+	"super" : "Warning",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOPackageManagerError",
+	"name" : "CGOPackageManagerWarning",
 	"type" : "normal"
 }

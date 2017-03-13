@@ -1,0 +1,3 @@
+converting
+asPackageVersion
+	^ self

@@ -9,6 +9,7 @@ versionOf: aPackageName in: aRepositoryList for: platformAttributes
 				on: CGOPackageNotFoundError
 				do: [ "ignore" ] ].
 	candidates ifEmpty: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ].
+	candidates := candidates groupedBy: #packageName.
 	(candidates size > 1)
 		ifTrue: [ CGOUnresolvedDependency package: aPackageName candidates: candidates ].
-	^ candidates detectMax: [ :v | v ]
+	^ (candidates at: aPackageName) detectMax: [ :v | v ]

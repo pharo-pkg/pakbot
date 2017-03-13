@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOPackageManagerWarning",
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGODifferentPackageVersionsPublication",
+	"type" : "normal"
+}

@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"defaultPackageRepository",
+		"testPackageRepository",
+		"fs"
+	],
 	"name" : "CGOOngoingProjectTest",
 	"type" : "normal"
 }
