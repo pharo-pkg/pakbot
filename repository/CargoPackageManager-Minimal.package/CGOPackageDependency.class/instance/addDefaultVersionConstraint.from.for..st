@@ -6,5 +6,5 @@ addDefaultVersionConstraint: aResolutionStrategy from: repositories for: platfor
 						versionOf: targetedPackage
 						in: repositories
 						for: platformAttributes.
-	defaultPackageVersionRef ifNil: [ CGOPackageNotFoundError signal: 'Cannot find ' , targetedPackage , ' package' ].
+	defaultPackageVersionRef ifNil: [ CGOPackageNotFoundError signal: targetedPackage ].
 	constraints := { CGOFixedVersionConstraint with: defaultPackageVersionRef versionNumber }

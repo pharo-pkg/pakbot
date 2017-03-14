@@ -5,4 +5,4 @@ isVirtual: aPackageName
 			[ ^ repository isVirtual: aPackageName ] 
 			on: CGOPackageNotFoundError
 			do: [ "ignore" ] ].
-	CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package'
+	CGOPackageNotFoundError signal: aPackageName

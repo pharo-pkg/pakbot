@@ -8,5 +8,5 @@ package: aPackageName
 	on: ZnHttpUnsuccessful 
 	do: [ :error |
 		znClient isNotFound 
-			ifTrue: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName ]
+			ifTrue: [ CGOPackageNotFoundError signal: aPackageName ]
 			ifFalse: [ error signal ] ]

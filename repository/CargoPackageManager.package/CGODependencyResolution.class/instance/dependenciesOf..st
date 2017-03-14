@@ -5,4 +5,7 @@ dependenciesOf: anOngoingPackageResolution
 		collect: [ :packageName | 
 			ongoingPackageResolutions 
 				at: packageName
-				ifAbsent: [ self ongoingPackageResolutionForPackageVersion: (alreadyInstalledPackages detect: [ :each | each packageName = packageName ]) ] ]
+				ifAbsent: [ self ongoingPackageResolutionForPackageVersion: 
+					(alreadyInstalledPackages 
+						detect: [ :each | each packageName = packageName ]
+						ifNone: [ CGOPackageNotFoundError signal: packageName ]) ] ]

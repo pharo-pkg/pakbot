@@ -4,4 +4,4 @@ package: aPackageName
 		ifTrue: [ CGOPackageProvider default packageNamed: aPackageName ]
 		ifFalse: [ (self virtualDirectory / aPackageName asLowercase) exists
 			ifTrue: [ CGOPackageProvider default virtualPackageNamed: aPackageName ]
-			ifFalse: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ] ]
+			ifFalse: [ CGOPackageNotFoundError signal: aPackageName ] ]
