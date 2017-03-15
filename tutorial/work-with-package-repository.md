@@ -11,11 +11,7 @@ A Cargo repository is used to hold software packages for the Smalltalk programmi
 
 Cargo has a default package repository that aims to store package versions of OSS Smalltalk projects: the central repository. To deal with proprietary code, you can host your own package repository in your company.
 
-## Load both a project and its dependents from a Cargo Package repository
-
-In [How to start a new project with Cargo?](https://github.com/demarey/cargo/blob/master/tutorial/start-a-new-project.md#load-both-a-project-and-its-dependents-from-scm), we saw how to load a project from a Source Code Management system. In this section, we will do the same operation, i.e. load a project or a package, but from a package repository.
-
-# Create a Cargo Package repository
+## Create a Cargo Package repository
 Cargo comes with a simple implementation of a package repository relying on the file system. It means that you do not need to install anything to enable this kind of repository that will be persistent outside the image.
 By default, Cargo will use the central remote repository to search for or to publish packages. This default repository can be changed as following to use a local, file system-based package repository:
 ```smalltalk
@@ -23,7 +19,7 @@ Cargo useLocalRepository: '/tmp/cargo-local-repo'.
 ```
 It will create the package repository structure and set it as the default Cargo repository.
 
-# Publish packages to a package repository.
+## Publish packages to a package repository.
 
 Let us load the Pharo counter project into the image and publish the current version to the Cargo repository:
 ```smalltalk
@@ -55,7 +51,9 @@ Then we publish thr project:
 ```smalltalk
 uiproject publishAll.
  ```
-# Load a project, an assembly or any package
+## Load a project, an assembly or any package
+In [How to start a new project with Cargo?](https://github.com/demarey/cargo/blob/master/tutorial/start-a-new-project.md#load-both-a-project-and-its-dependents-from-scm), we saw how to load a project from a Source Code Management system. In this section, we will do the same operation, i.e. load a project or a package, but from a package repository.
+
 In a fresh pharo image, with Cargo already loaded, we will load the Counter project from our local Cargo repository:
 ```smalltalk
 Cargo useLocalRepository: '/tmp/cargo-local-repo'.
