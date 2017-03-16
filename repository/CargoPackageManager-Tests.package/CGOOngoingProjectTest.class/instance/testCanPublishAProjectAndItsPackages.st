@@ -7,7 +7,7 @@ testCanPublishAProjectAndItsPackages
 		on: CGODifferentPackageVersionsPublication 
 		do: [ :ex | ex resume ].
 	
-	packages := testPackageRepository packages.
+	packages := testPackageRepository packageNames.
 	self 
 		assert: packages size
 		equals: 4.

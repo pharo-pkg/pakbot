@@ -5,7 +5,7 @@ Before starting this tutorial, please ensure you already have [Cargo installed](
 In this tutorial, we will still use the *Pharo counter example* already presented [here](https://github.com/demarey/cargo/blob/master/tutorial/start-a-new-project.md#counter)
 Starting from a fresh Pharo image, the first thing you will probably do is to load an existing project into your image.
 
-## Load both a project and its dependents from SCM
+## Load both a project and its dependents
 We saw in the [How to start a new project with Cargo?](https://github.com/demarey/cargo/blob/master/tutorial/start-a-new-project.md#load-both-a-project-and-its-dependents-from-scm) the way to load a project directly from the SCM.
 
 We will again load *Counter-UI* from GitHub. Its dependent *Counter-Core* will also be loaded from GitHub since we added its source repository.

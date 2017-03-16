@@ -9,5 +9,5 @@ testRaisesWarningWhenPublishingDifferentVersions
 		description: 'ensure we get a warning when trying to publish a project having packges in a different version than the project'.
 		
 	self 
-		assert: testPackageRepository packages isEmpty
+		assert: testPackageRepository packageNames isEmpty
 		description: 'ensure no package has been published before one handle the warning'
