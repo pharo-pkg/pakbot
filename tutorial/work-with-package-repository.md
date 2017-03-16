@@ -1,4 +1,4 @@
-# Tutorial: How to to work with a Cargo Package Repository?
+# Tutorial: How to work with a Cargo Package Repository?
 
 Before starting this tutorial, please ensure you already have [Cargo installed](https://github.com/demarey/cargo#install-cargo).
 
