@@ -1,5 +1,5 @@
 serialization
 fromSton: stonReader
 	super fromSton: stonReader.
-	(repositoryUrl beginsWith: 'git@')
+	self isGitRepositoryUrl
 		ifFalse: [ repositoryUrl := repositoryUrl asUrl ]
