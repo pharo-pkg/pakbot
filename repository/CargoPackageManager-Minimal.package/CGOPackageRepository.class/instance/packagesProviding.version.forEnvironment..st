@@ -1,0 +1,3 @@
+versions fetching
+packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttributes
+	self subclassResponsibility

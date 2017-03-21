@@ -1,5 +1,5 @@
 versions fetching
-packagesProviding: aVirtualPackageName version: aSemanticVersion forPlatformAttributes: platformAttributes
+packagesProviding: aVirtualPackageName version: aSemanticVersion forEnvironment: platformAttributes
 	^ (self packageVersionNamesProviding: aVirtualPackageName version: aSemanticVersion)
 		collect: [ :packageVersionName | | pkgVersionRef |
 			pkgVersionRef := packageVersionName asPackageVersionReference.

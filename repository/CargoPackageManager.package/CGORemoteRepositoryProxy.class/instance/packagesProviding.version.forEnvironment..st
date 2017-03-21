@@ -1,5 +1,5 @@
 versions fetching
-packagesProviding: aName version: aSemanticVersion forPlatformAttributes: platformAttributes
+packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttributes
 	[ ^ znClient
 		url: baseUrl;
 		addPathSegment: 'virtualpackages';

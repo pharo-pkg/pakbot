@@ -1,5 +1,5 @@
 versions fetching
-packagesProviding: aName version: aSemanticVersion forPlatformAttributes: platformAttributes
+packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttributes
 	| packages |
 	
 	packages := CGOPackageVersion selectMany: 
