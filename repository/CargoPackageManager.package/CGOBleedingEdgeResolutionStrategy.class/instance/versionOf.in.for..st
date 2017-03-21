@@ -5,7 +5,7 @@ versionOf: aPackageName in: aRepositoryList for: platformAttributes
 	candidates := Set new.
 	aRepositoryList 
 		do: [ :repository | 
-			[ candidates add: (repository bleedingEdgeOf: aPackageName for: platformAttributes) asPackageVersionReference ]
+			[ candidates add: (repository latestVersionOfPackage: aPackageName suitableForEnvironment: platformAttributes) asPackageVersionReference ]
 				on: CGOPackageNotFoundError
 				do: [ "ignore" ] ].
 	candidates ifEmpty: [ CGOPackageNotFoundError signal: 'Cannot find ' , aPackageName , ' package' ].

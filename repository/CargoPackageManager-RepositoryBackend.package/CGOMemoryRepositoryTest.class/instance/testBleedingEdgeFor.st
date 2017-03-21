@@ -3,8 +3,8 @@ testBleedingEdgeFor
 	| result |
 	
 	result := repository 
-				bleedingEdgeOf: #'Zinc-HTTP'
-				for: #().
+				latestVersionOfPackage: #'Zinc-HTTP'
+				suitableForEnvironment: #().
 	self 
 		assert: result asString
 		equals: 'Zinc-HTTP@2.5.2'

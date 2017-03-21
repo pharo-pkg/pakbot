@@ -1,0 +1,3 @@
+private
+latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes
+	self subclassResponsibility

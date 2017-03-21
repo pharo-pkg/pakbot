@@ -1,4 +1,4 @@
 private
-bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
+latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes
 	^ ((self versionStringsOf: aPackageName) collect: #asPackageVersionReference)
 			detectMax: [ :pkgVersion | pkgVersion versionNumber asSemanticVersion ]

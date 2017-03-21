@@ -1,5 +1,5 @@
 versions fetching
-bleedingEdgeOf: aPackageName for: platformAttributes
+latestVersionOfPackage: aPackageName suitableForEnvironment: platformAttributes
 	[ ^ znClient
 		url: baseUrl;
 		addPathSegment: 'packages';

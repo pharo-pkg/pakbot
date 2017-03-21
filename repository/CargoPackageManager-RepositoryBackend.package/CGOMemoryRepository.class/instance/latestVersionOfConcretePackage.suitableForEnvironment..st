@@ -1,5 +1,5 @@
 versions fetching
-bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
+latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes
 	| candidates |
 
 	candidates := CGOPackageVersion selectMany: 

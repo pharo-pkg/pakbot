@@ -1,7 +1,7 @@
 tests - saving
 testShouldGetLatestPackageAvalaibleWhenAskingBleedingEdge
 	| package |
-	package := greaseRepository bleedingEdgeOfConcretePackage: 'grease-core' for: #().
+	package := greaseRepository latestVersionOfConcretePackage: 'grease-core' suitableForEnvironment: #().
 	
 	self
 		assert: package name

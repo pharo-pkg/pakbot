@@ -1,4 +1,4 @@
 versions fetching
-bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
+latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes
 	"just pick the current version in the SCM"
 	^ (self package: aPackageName) asPackageVersionReference
