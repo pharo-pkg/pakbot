@@ -1,5 +1,5 @@
 tests - saving
-testShouldGetLatestPackageAvalaibleWhenAskingBleedingEdge
+testShouldGetLatestPackageAvalaibleWhenAskingLatestVersion
 	| package |
 	package := greaseRepository latestVersionOfConcretePackage: 'grease-core' suitableForEnvironment: #().
 	

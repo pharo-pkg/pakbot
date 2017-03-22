@@ -1,5 +1,5 @@
 versions fetching
-bleedingEdgeOfConcretePackage: aPackageName for: platformAttributes
+latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes
 	^ packages 
 		detect: [ :package | 
 				(package packageName = aPackageName)

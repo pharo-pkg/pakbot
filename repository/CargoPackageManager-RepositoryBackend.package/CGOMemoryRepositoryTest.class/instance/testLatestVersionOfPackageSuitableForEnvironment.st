@@ -1,5 +1,5 @@
 tests - versions fetching
-testBleedingEdgeFor
+testLatestVersionOfPackageSuitableForEnvironment
 	| result |
 	
 	result := repository 

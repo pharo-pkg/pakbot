@@ -1,5 +1,5 @@
 tests - saving
-testCanGetBleedingEdgeOfVirtualPackage
+testCanGetLatestVersionOfVirtualPackage
 	| package |
 	package := greaseRepository latestVersionOfPackage: 'Grease-Slime' suitableForEnvironment: #('pharo5.x').
 	self
