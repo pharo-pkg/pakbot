@@ -1,4 +1,4 @@
-# Tutorial: How to to work with a Cargo Package Repository?
+# Tutorial: How to work with a Cargo Package Repository?
 
 Before starting this tutorial, please ensure you already have [Cargo installed](https://github.com/demarey/cargo#install-cargo).
 
@@ -70,3 +70,33 @@ Cargo new
 ```
 It will load parts of the package assembly: the package units *Counter-UI-Spec* and *Counter-Tests*. In this case, only *Counter-UI-Spec* will be loaded as *Counter-Tests* was already loaded in the image before we ran this command.
 As you can see, with Cargo, you can load the same way a project, a package assembly or a package unit as they all are packages.
+
+## Dealing with many package repositories
+### Mixed mode: loading some packages from a package repository, some others from SCM
+#### Prepare a Cargo package repository where the Counter project is published
+You can first [load the counter project](https://github.com/demarey/cargo/blob/master/tutorial/start-a-new-project.md#load-the-project-in-a-new-image-from-scm) from the SCM.
+Then publih it to a package repository:
+```smalltalk
+Cargo useLocalRepository: '/tmp/counter-repo'.
+project := (CGOPackageRegistry default packageNamed: 'Counter').
+project publishAll.
+```
+#### Loading packages from different sources
+In a fresh image (no counter nor counter-ui project installed), you can easily load packages both from a SCM and a Cargo package repository:
+```smalltalk
+Cargo new 
+    useSourceRepository: (CGOGitRepository repositoryUrl:'git@github.com:demarey/pharo-counter-ui.git');
+    useLocalRepository: '/tmp/counter-repo';
+    package: #'Counter-UI';
+   install.
+```
+Cargo will iterate on its repositories, starting from source repositories (SCM), in the declared order, to find packages. If a package is found in a repository, the search stops and the package is retrieved from this repository.
+### Mixed mode: loading packages from the central package repository, some others from a private package repository
+We can use the same messages we saw in the previous section to load some packages from the central package repository, some others from a private package repository.
+```smalltalk
+Cargo initialize. "Cargo comes with the central repository as default repository. We just ensure here that we will use the central repository if the default has changed!"
+Cargo new 
+    useLocalRepository: '/tmp/counter-repo';
+    package: #'Counter-UI';
+   install.
+```
