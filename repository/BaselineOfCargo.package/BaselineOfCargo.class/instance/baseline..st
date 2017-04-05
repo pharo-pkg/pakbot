@@ -51,7 +51,7 @@ baseline: spec
 			package: #'CargoPackageManager-TestRessources' with: [
 				spec requires: #(#CargoPackageManager #'CargoPackageManager-Spec' 'BabyMock2' ). ];
 			package: #'CargoPackageManager-Tests' with: [
-				spec requires: #(#CargoPackageManager #'CargoPackageManager-RepositoryBackend' #'CargoPackageManager-TestRessources' 'Ston' ). ];
+				spec requires: #(#CargoPackageManager #'CargoPackageManager-RepositoryBackend' #'CargoPackageManager-TestRessources' "'Ston'" ). ];
 			package: #'CargoPackageManager-Tests-FooResource';
 			package: #'CargoPackageManager-UI' with: [
 				spec requires: #(#CargoPackageManager ). ];
