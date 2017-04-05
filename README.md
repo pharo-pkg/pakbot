@@ -106,14 +106,14 @@ Cargo defaultPackageRepository: pkgRepository.
 #### Using the User Interface
 Will come soon
 
-[//]: # (### List packages installed in the image)
-[//]: # (### Update packages already installed)
+[](### List packages installed in the image)
+[](### Update packages already installed)
 
-## FAQ
-### Where should I update my package dependencies?
+##FAQ
+###Where should I update my package dependencies?
 Dependencies are part of package metadata. Package metadata is managed through living ojects in the Pharo image. You can retrieve them through the Cargo registry. You can edit pacakge metadata by sending messages to the corresponding ongoing package version or by using the dedicated UI.
 The DependencyAnalyzer tool could also help to find the dependencies of a package. It is also available from Nautilus contextual menu on a package: "browse dependencies ..."
-### Do I need to release and publish all packages of my project independently?
+###Do I need to release and publish all packages of my project independently?
 The anwser is no! It would be a tedious work to release all packages independently. Cargo comes with some tools to automatize the release and the publication of a set of packages.
-### Do I need to specify a version number for all dependencies?
+###Do I need to specify a version number for all dependencies?
 No, version number for dependencies are optional for the current working copy of the package metadata. More, it is recommanded to do not specify the version number but only describe the package you depend on. The version of a dependency is only required when you release a new version of your package. At this time, if no version is specified, Cargo will use the package version of the dependency currently in the image.

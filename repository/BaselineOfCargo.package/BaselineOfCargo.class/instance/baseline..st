@@ -41,8 +41,8 @@ baseline: spec
 		spec 
 			package: #CargoPackageManager with: [
 				spec requires: #(#'CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos' 'Iceberg'). ];
-			package: #'CargoPackageManager-Minimal' with: [
-				spec requires: #('Ston' ). ];
+			package: #'CargoPackageManager-Minimal' "with: [
+				spec requires: #('Ston' ). ]";
 			package: #'CargoPackageManager-Repository' with: [
 				spec requires: #(#CargoPackageManager #'CargoPackageManager-RepositoryBackend' #'CargoPackageManager-TestRessources' 'ZincHTTPComponents' ). ];
 			package: #'CargoPackageManager-RepositoryBackend' with: [
