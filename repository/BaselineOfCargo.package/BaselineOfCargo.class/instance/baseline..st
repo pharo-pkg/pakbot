@@ -19,14 +19,15 @@ baseline: spec
 					versionString: #'bleedingEdge';
 					loads: #('Moose-Algos-Graph' );
 					repository: 'http://smalltalkhub.com/mc/Moose/MooseAlgos/main/' ];
-			project: 'Ston' with: [
+			" STON is already in the image, do not overwrite this version
+			 project: 'Ston' with: [
 				spec
 					className: #ConfigurationOfSton;
 					versionString: #'stable';
-					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/STON/main/' ];
+					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/STON/main/' ];"
 			baseline: 'Voyage' with: [
 				spec
-					repository: 'github://pharo-nosql/voyage:1.4/mc';
+					repository: 'github://pharo-nosql/voyage:1.4.2/mc';
 					loads: #('memory' 'mongo tests') ];
 			baseline: 'Iceberg' with: [
 				spec
