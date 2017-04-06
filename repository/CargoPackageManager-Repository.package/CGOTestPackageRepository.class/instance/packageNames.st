@@ -1,3 +1,3 @@
 accessing
-packages
+packageNames
 	^ packages collect: [ :package | package packageName ]
