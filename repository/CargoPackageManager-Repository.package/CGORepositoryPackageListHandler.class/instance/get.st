@@ -1,3 +1,3 @@
 public
 get
-	^ self stonResponse: self packageRepository packages
+	^ self stonResponse: self packageRepository packageNames
