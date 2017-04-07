@@ -27,7 +27,7 @@ baseline: spec
 					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/STON/main/' ];"
 			baseline: 'Voyage' with: [
 				spec
-					repository: 'github://pharo-nosql/voyage:1.4.2/mc';
+					repository: 'github://pharo-nosql/voyage:master/mc';
 					loads: #('memory' 'mongo tests') ];
 			baseline: 'Iceberg' with: [
 				spec
