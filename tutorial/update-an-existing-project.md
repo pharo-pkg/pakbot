@@ -13,7 +13,7 @@ We will again load *Counter-UI* from GitHub. Its dependent *Counter-Core* will a
 Cargo new 
 	useSourceRepository: (CGOGitRepository repositoryUrl:'git@github.com:demarey/pharo-counter-ui.git');
 	useSourceRepository: (CGOGitRepository repositoryUrl:'git@github.com:demarey/pharo-counter.git');
-	project: #'Counter-UI';
+	package: #'Counter-UI';
 	install
 ```
 
