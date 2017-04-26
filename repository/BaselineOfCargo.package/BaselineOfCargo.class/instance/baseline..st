@@ -36,8 +36,13 @@ baseline: spec
 				spec
 					className: #ConfigurationOfZincHTTPComponents;
 					versionString: #'bleedingEdge';
-					loads: #('REST' );
-					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/' ].
+					loads: #('REST');
+					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/' ];
+			project: 'Calypso' with: [ "Cargo has a project plugin for Calypso browser"
+				spec
+					className: #ConfigurationOfCalypso;
+					versionString: #development;
+					repository: 'http://smalltalkhub.com/mc/Pharo/Calypso/main/' ].
 		spec 
 			package: #CargoPackageManager with: [
 				spec requires: #(#'CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos' 'Iceberg'). ];
@@ -55,12 +60,14 @@ baseline: spec
 			package: #'CargoPackageManager-Tests-FooResource';
 			package: #'CargoPackageManager-UI' with: [
 				spec requires: #(#CargoPackageManager ). ];
+			package: #'CargoPackageManager-Calypso' with: [
+				spec requires: #(#CargoPackageManager #Calypso). ];
 			package: 'CargoPackageManager-Utils' with: [
 				spec requires: #('DependencyAnalyser' ). ];
 			package: #'CargoPackageManager-Utils-Tests' with: [
 				spec requires: #(#'CargoPackageManager-Tests-FooResource' ). ].
 		spec 
-			group: 'client' with: #(#CargoPackageManager );
+			group: 'client' with: #(#CargoPackageManager #'CargoPackageManager-Calypso');
 			group: 'server' with: #(#'CargoPackageManager-RepositoryBackend' #'CargoPackageManager-Repository' );
 			group: 'tests' with: #('CargoPackageManager-Tests' 'utils' #'CargoPackageManager-Utils-Tests' );
 			group: 'utils' with: #('CargoPackageManager-Utils' 'client' ). ]

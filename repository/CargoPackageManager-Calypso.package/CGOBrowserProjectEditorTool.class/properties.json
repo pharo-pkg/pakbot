@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "ChristopheDemarey 4/26/2017 09:33",
+	"super" : "ClyBrowserTool",
+	"category" : "CargoPackageManager-Calypso",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOBrowserProjectEditorTool",
+	"type" : "normal"
+}

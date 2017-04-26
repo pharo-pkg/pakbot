@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "ChristopheDemarey 4/26/2017 09:34",
+	"super" : "CmdCommand",
+	"category" : "CargoPackageManager-Calypso",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"commitMessage"
+	],
+	"name" : "CGOBrowserCommitProjectCommand",
+	"type" : "normal"
+}

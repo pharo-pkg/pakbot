@@ -1,0 +1,3 @@
+accessing
+shouldBeActivatedInContext: aBrowserContext
+	^ aBrowserContext isProjectSelected
