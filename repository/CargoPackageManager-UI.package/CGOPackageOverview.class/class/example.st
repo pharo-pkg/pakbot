@@ -1,3 +1,3 @@
 example
 example
-	^ self openOn: (CGOOngoingPackageUnit on: ManifestCargoPackageManager)
+	^ self openOn: (CGOOngoingPackageUnit example)

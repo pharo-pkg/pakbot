@@ -6,8 +6,7 @@ defaultSpec
 				newRow: [ :nameRow |
 					nameRow 
 						add: #nameLabel width: self labelSize;
-						add: #nameInputField;
-						add: #browseButton width: 24 ]
+						add: #nameInputField ]
 				height: self inputTextHeight;
 				newRow: [ :versionRow |
 					versionRow 
@@ -17,8 +16,7 @@ defaultSpec
 				newRow: [ :repositoryRow |
 					repositoryRow 
 						add: #repositoryLabel width: self labelSize;
-						add: #repositoryValueLabel;
-						add: #repositoryEditButton  width: 25]
+						add: #repositoryInputField ]
 				height: self inputTextHeight;
 				add: #descriptionLabel height: self inputTextHeight;
 			 	add: #descriptionText ]

@@ -1,3 +1,3 @@
 example
 example
-	^ self openOnOngoing: (CGOOngoingPackageUnit on: ManifestCargoPackageManager)
+	^ self openOnOngoing: (CGOOngoingPackageUnit example)

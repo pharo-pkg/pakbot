@@ -9,11 +9,10 @@
 		"ongoingPackageVersion",
 		"nameLabel",
 		"nameInputField",
-		"browseButton",
 		"versionLabel",
 		"versionInputField",
 		"repositoryLabel",
-		"repositoryValueLabel",
+		"repositoryInputField",
 		"repositoryEditButton",
 		"descriptionLabel",
 		"descriptionText"

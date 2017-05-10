@@ -7,9 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"overview",
-		"ongoingPackageUnit",
-		"detailsView"
+		"ongoingPackageUnit"
 	],
-	"name" : "CGOPackagePanel",
+	"name" : "CGOProjectPanel",
 	"type" : "normal"
 }
