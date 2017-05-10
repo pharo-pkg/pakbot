@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "ClyPackageGroup",
+	"category" : "CargoPackageManager-Calypso-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cargoAssembly"
+	],
+	"name" : "CGOClyPackageAssembly",
+	"type" : "normal"
+}

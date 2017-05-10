@@ -1,0 +1,1 @@
+I'm a specific version of a PackageGroupProvider giving only a group of set of dependencies for the current project.
