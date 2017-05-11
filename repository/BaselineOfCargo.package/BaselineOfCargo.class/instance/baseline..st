@@ -60,14 +60,14 @@ baseline: spec
 			package: #'CargoPackageManager-Tests-FooResource';
 			package: #'CargoPackageManager-UI' with: [
 				spec requires: #(#CargoPackageManager ). ];
-			package: #'CargoPackageManager-Calypso' with: [
+			package: #'CargoPackageManager-Calypso-Browser' with: [
 				spec requires: #(#CargoPackageManager #Calypso). ];
 			package: 'CargoPackageManager-Utils' with: [
 				spec requires: #('DependencyAnalyser' ). ];
 			package: #'CargoPackageManager-Utils-Tests' with: [
 				spec requires: #(#'CargoPackageManager-Tests-FooResource' ). ].
 		spec 
-			group: 'client' with: #(#CargoPackageManager #'CargoPackageManager-Calypso');
+			group: 'client' with: #(#CargoPackageManager #'CargoPackageManager-Calypso-Browser');
 			group: 'server' with: #(#'CargoPackageManager-RepositoryBackend' #'CargoPackageManager-Repository' );
 			group: 'tests' with: #('CargoPackageManager-Tests' 'utils' #'CargoPackageManager-Utils-Tests' );
 			group: 'utils' with: #('CargoPackageManager-Utils' 'client' ). ]
