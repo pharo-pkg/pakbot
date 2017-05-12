@@ -1,7 +1,7 @@
 *CargoPackageManager-Calypso-Environment
-asCalypsoItemManagedBy: aPackageManager
+asCalypsoItemManagedBy: aPackageManager 
 	| item calypsoProject |
 	calypsoProject := aPackageManager projectOf: self.
-	item := ClyEnvironmentItem named: self name with: calypsoProject.
+	item := ClyEnvironmentItem named: self name with: calypsoProject.		
 	item scope: ClyProjectScope.
-	^ item
+	^item

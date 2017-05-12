@@ -12,7 +12,8 @@
 		"version",
 		"unitNames",
 		"assemblies",
-		"authors"
+		"authors",
+		"registry"
 	],
 	"name" : "CGOProject",
 	"type" : "normal"

@@ -1,5 +1,5 @@
 acccessing
 packageNamed: aName
-	^ installedPackages 
-		detect: [ :package | package packageName = aName asSymbol ]
-		ifNone: [ CGOPackageNotFoundError signal: aName asString ]
+	^ self 
+		packageNamed: aName 
+		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
