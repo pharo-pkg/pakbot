@@ -41,7 +41,7 @@ baseline: spec
 			project: 'Calypso' with: [ "Cargo has a project plugin for Calypso browser"
 				spec
 					className: #ConfigurationOfCalypso;
-					versionString: #development;
+					versionString: #stable;
 					repository: 'http://smalltalkhub.com/mc/Pharo/Calypso/main/' ].
 		spec 
 			package: #CargoPackageManager with: [
