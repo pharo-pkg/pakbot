@@ -10,7 +10,8 @@
 		"version",
 		"description",
 		"timestamp",
-		"projectName"
+		"projectName",
+		"registry"
 	],
 	"name" : "CGOOngoingPackageVersion",
 	"type" : "normal"

@@ -6,5 +6,5 @@ initializeFromProject: aCGOProject
 	repository := aCGOProject repository deepCopy.
 	version := aCGOProject version deepCopy.
 	unitNames := aCGOProject unitNames asSet.
-	assemblies := aCGOProject assemblies deepCopy asSet.
+	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	authors := aCGOProject authors copy asSet.
