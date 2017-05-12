@@ -1,3 +1,3 @@
 initialization
 canBeExecutedInStandardContext: aToolContext
-	^ aToolContext isProjectSelected not
+	^ aToolContext isProjectSelected

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 4/26/2017 09:34",
+	"commentStamp" : "ChristopheDemarey 5/12/2017 16:15",
 	"super" : "CGOClyCommand",
 	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
 	"classinstvars" : [ ],
@@ -7,8 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"project",
-		"commitMessage"
+		"unitName"
 	],
-	"name" : "CGOBrowserCommitProjectCommand",
+	"name" : "CGOBrowserPackageUnitCreationCommand",
 	"type" : "normal"
 }

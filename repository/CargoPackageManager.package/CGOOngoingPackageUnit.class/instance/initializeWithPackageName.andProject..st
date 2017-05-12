@@ -5,6 +5,8 @@ initializeWithPackageName: aPackageName andProject: aCargoProjectName
 	provisions := OrderedCollection new: 0.
 	platformRequirements := OrderedCollection new: 0.	
 	aCargoProjectName ifNotNil: 
-		[ src := CGOSourcePackageVersion 
-		repository: 	self project repository
-		packageName: self packageName ]
+		[ self project repository ifNotNil: 
+			[ :projectRepo |
+			src := CGOSourcePackageVersion 
+				repository: 	projectRepo
+				packageName: self packageName. ] ].

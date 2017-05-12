@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 4/28/2017 15:38",
-	"super" : "CmdCommand",
+	"super" : "CGOClyCommand",
 	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
 	"classinstvars" : [ ],
 	"pools" : [ ],
