@@ -1,4 +1,7 @@
-accessing
+building items
 buildContentItems
-self halt.
-	cargoAssembly 
+	| items |
+	items := OrderedCollection new.
+	self buildPackageItemsOn: items.
+	self buildAssemblyItemsOn: items.
+	^ items

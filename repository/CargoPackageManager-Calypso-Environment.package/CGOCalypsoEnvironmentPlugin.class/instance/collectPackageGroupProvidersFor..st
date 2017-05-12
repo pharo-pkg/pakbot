@@ -1,5 +1,5 @@
 accessing
 collectPackageGroupProvidersFor: aProject
 
-	^ {CGOClyAssemblyGroupProvider . CGOClyDependencyGroupProvider}
+	^ { CGOClyAssemblyGroupProvider }
 		collect: [ :each | each project: aProject ]

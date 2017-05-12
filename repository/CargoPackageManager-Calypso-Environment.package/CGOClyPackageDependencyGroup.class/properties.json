@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "ChristopheDemarey 5/10/2017 08:56",
-	"super" : "ClyClassGroupProvider",
+	"commentStamp" : "",
+	"super" : "ClyClassGroup",
 	"category" : "CargoPackageManager-Calypso-Environment",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOClyDependencyGroupProvider",
+	"name" : "CGOClyPackageDependencyGroup",
 	"type" : "normal"
 }

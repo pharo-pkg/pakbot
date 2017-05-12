@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "DenisKudryashov 4/24/2017 11:17",
 	"super" : "ClyPackageManager",
-	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"category" : "CargoPackageManager-Calypso-Environment",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
