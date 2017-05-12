@@ -1,3 +1,3 @@
 initialization
 defaultTitle
-	^ 'Unit'
+	^ 'Assembly'

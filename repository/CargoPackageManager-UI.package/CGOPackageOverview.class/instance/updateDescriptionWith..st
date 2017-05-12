@@ -1,3 +1,3 @@
 updating
 updateDescriptionWith: aString
-	ongoingPackageVersion updateDescription: aString printString
+	ongoingPackageVersion description: aString printString

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "ClyBrowserTool",
+	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOBrowserPackageAssemblyEditorTool",
+	"type" : "normal"
+}

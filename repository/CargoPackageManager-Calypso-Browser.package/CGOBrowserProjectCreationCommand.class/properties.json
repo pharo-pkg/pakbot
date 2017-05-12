@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "ChristopheDemarey 5/12/2017 14:09",
+	"super" : "CmdCommand",
+	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"projectName",
+		"toolContext",
+		"packageManager"
+	],
+	"name" : "CGOBrowserProjectCreationCommand",
+	"type" : "normal"
+}

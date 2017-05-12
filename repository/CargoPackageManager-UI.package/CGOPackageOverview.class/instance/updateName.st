@@ -1,3 +1,3 @@
 updating
 updateName
-	ongoingPackageVersion updatePackageName: nameInputField text asSymbol printString
+	ongoingPackageVersion name: nameInputField text asSymbol printString

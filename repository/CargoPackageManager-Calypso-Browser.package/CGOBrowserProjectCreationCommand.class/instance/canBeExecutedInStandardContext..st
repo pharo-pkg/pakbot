@@ -1,0 +1,3 @@
+initialization
+canBeExecutedInStandardContext: aToolContext
+	^ true

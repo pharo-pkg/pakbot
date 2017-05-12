@@ -1,3 +1,3 @@
 accessing
 shouldBeActivatedInContext: aBrowserContext
-	^ aBrowserContext isProjectSelected
+	^ aBrowserContext isPackageSelected and: [ aBrowserContext lastSelectedPackage isKindOf: ClyManagedPackage   ]
