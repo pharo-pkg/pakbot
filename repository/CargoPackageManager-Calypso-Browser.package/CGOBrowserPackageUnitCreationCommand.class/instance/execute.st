@@ -5,4 +5,3 @@ execute
 		systemEnvironment: toolContext systemEnvironment;
 		packageName: unitName;
 		execute.
-	self refreshCalypso

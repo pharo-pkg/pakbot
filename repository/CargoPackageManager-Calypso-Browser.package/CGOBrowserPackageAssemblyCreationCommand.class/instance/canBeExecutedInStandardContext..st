@@ -1,3 +1,5 @@
 initialization
 canBeExecutedInStandardContext: aToolContext
-	^ aToolContext isProjectSelected
+	^ true "aToolContext isProjectSelected
+		or: [ self halt. aToolContext hasSelectedItems 
+			and: [ aToolContext isPackageGroupSelected ] ]"

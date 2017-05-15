@@ -1,7 +1,9 @@
 initialization
 build
-	| managedProject |
-	managedProject := context lastSelectedProject.
+	| packageManager unit |
+	packageManager := context systemEnvironment projectManager packageManagers first.
+	unit := packageManager versionOf: context lastSelectedPackage.
+	
 	self 
-		addMorph: (CGOProjectPanel buildOnOngoing: managedProject project asOngoingProject)
+		addMorph: (CGOPackageUnitView buildOnOngoing: unit asOngoingPackageVersion)
 		fullFrame: LayoutFrame identity

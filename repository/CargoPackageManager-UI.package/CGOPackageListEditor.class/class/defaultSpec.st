@@ -1,4 +1,4 @@
-example
+specs
 defaultSpec
 	^ SpecLayout composed
 		newColumn: [ :column |
@@ -10,4 +10,4 @@ defaultSpec
 						add: #editButton width: 40;
 						add: #removeButton width: 40 ]
 				height: self toolbarHeight;
-				add: #dependencyTree ]
+				add: #packageTree ]

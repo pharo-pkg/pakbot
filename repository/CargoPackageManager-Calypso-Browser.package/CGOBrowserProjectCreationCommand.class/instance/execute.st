@@ -1,4 +1,3 @@
 execution
 execute
-	packageManager createProjectNamed: projectName.
-	self refreshCalypso
+	packageManager createProjectNamed: projectName

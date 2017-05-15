@@ -1,0 +1,1 @@
+Abstract class showing a list of packages and allowing to add/remove/edit elements from the list

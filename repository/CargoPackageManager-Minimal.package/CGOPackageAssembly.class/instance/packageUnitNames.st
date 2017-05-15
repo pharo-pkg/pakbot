@@ -1,5 +1,5 @@
 accessing
-packageUnits
+packageUnitNames
 	| foundPackage |
 	^ parts
 		select: [ :each | 

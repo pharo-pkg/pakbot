@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "ChristopheDemarey 5/15/2017 13:26",
+	"super" : "CGOPackageView",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"ongoingPackageVersion",
+		"packageTree",
+		"label",
+		"addButton",
+		"editButton",
+		"removeButton"
+	],
+	"name" : "CGOPackageListEditor",
+	"type" : "normal"
+}

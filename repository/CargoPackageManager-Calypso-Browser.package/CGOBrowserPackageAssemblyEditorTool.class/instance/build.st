@@ -1,7 +1,7 @@
 initialization
 build
-	| managedProject |
-	managedProject := context lastSelectedProject.
+	| managedAssembly |
+	managedAssembly := context lastSelectedPackageGroup.
 	self 
-		addMorph: (CGOProjectPanel buildOnOngoing: managedProject project asOngoingProject)
+		addMorph: (CGOPackageAssemblyView buildOnOngoing: managedAssembly cargoAssembly asOngoingPackageVersion)
 		fullFrame: LayoutFrame identity

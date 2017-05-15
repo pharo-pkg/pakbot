@@ -4,5 +4,5 @@ allPackageUnits
 	
 	| units |
 	units := (self assemblies flatCollect: #allPackageUnits as: Set).
-	units addAll: self packageUnits.
+	units addAll: self packageUnitNames.
 	^ units

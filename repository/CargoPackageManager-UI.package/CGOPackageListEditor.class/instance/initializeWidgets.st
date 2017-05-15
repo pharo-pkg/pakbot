@@ -1,24 +1,21 @@
 initialization
 initializeWidgets
-	(label := self newLabel) 
-		label: 'Dependencies:'.
+	(label := self newLabel) label: self packageListEditorLabel.
 	addButton := self newButton
 		label: nil;
 		icon: (Smalltalk ui icons iconNamed: #addIcon);
 		enabled: true;
-		help: 'Add a new dependency'.
+		help: self addButtonHelpString.
 	editButton := self newButton
 		label: nil;
 		icon: (Smalltalk ui icons iconNamed: #editIcon);
 		enabled: false;
-		help: 'Edit the dependency'.
+		help: self editButtonHelpString.
 	removeButton := self newButton
 		label: nil;
 		icon: (Smalltalk ui icons iconNamed: #removeIcon);
 		enabled: false;
-		help: 'Rmove the dependency'.
-	
-	
-	dependencyTree := self newTree
-		displayBlock: [ :dependency | self displayStringFor: dependency ];
-		whenBuiltDo:[ dependencyTree roots: self buildRoots ]
+		help: self removeButtonHelpString.
+	packageTree := self newTree
+		displayBlock: [ :package | self displayStringFor: package ];
+		whenBuiltDo: [ packageTree roots: self buildRoots ]

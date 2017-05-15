@@ -1,8 +1,8 @@
 actions
-editConstraints
+editAction
 	"only one fixed constraint managed for now"
 	| dependency versionString |
-	dependency := self selectedDependency.
+	dependency := self selectedPackage.
 	versionString := UIManager default
 		request: 'Version for this dependency (or empty if no constraint)'
 		initialAnswer: (dependency constraints 

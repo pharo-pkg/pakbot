@@ -1,4 +1,4 @@
 accessing
 packages
-	^ cargoAssembly packageUnits collect: 
-		[ :unit | project packageNamed: unit packageName ]
+	^ cargoAssembly packageUnitNames collect: 
+		[ :unitName | project packageNamed: unitName ]

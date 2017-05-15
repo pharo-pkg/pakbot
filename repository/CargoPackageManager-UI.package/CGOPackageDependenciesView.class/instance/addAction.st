@@ -1,0 +1,3 @@
+actions
+addAction
+	ongoingPackageVersion addNewDependency: self

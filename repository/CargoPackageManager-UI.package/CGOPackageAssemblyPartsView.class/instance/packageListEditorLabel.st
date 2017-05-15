@@ -1,0 +1,3 @@
+configuration
+packageListEditorLabel
+	^ 'Assembly parts:'

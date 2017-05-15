@@ -1,6 +1,6 @@
 tests
 testCanGetPackageUnits
 	| units |
-	units := ongoingProject packageUnits.
+	units := ongoingProject packageUnitNames.
 	
 	self assert: (units allSatisfy: #isUnit).

@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "ChristopheDemarey 5/15/2017 15:48",
+	"super" : "CGOPackageView",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packageOverview",
+		"ongoingPackageUnit",
+		"dependenciesView"
+	],
+	"name" : "CGOPackageUnitView",
+	"type" : "normal"
+}
