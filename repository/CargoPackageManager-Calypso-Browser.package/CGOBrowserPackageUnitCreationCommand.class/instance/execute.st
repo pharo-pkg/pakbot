@@ -1,7 +1,6 @@
 execution
 execute
 	project newPackageUnit: unitName.
-	SycAddNewPackageCommand new
-		systemEnvironment: toolContext systemEnvironment;
-		packageName: unitName;
-		execute.
+	[ toolContext systemEnvironment packageNamed: unitName ]
+		on: KeyNotFound
+		do: [ self createSystemPackage ]
