@@ -1,3 +1,3 @@
 execution
 execute
-	project publishAll 
+	project project publishAll 
