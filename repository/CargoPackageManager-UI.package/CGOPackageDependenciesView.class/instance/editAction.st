@@ -10,6 +10,8 @@ editAction
 			ifNotEmpty: [ :constraints | constraints first asString allButFirst ])
 		title: 'Constraints of ' , dependency targetedPackage , ' package'.
 	versionString ifNil: [ ^ self ].
+	versionString ifEmpty: [ ^ self ].
+
 	ongoingPackageVersion
 		updateDependency: (CGOPackageDependency 
 			on: dependency packageName 
