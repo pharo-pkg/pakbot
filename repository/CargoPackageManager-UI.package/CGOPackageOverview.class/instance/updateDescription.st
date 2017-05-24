@@ -1,3 +1,3 @@
 updating
 updateDescription
-	ongoingPackageVersion description: descriptionText text
+	ongoingPackageVersion description: descriptionText text asString

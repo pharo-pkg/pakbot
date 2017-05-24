@@ -2,5 +2,5 @@ querying
 candidatePackages
 	| partsNames |
 	partsNames := (ongoingPackageVersion parts collect: #targetedPackage) copyWith: ongoingPackageVersion packageName.
-	^ (ongoingPackageVersion project packages 
+	^ (ongoingPackageVersion registry installedPackages
 		reject: [ :packageVersion |	partsNames includes: packageVersion packageName  ]) asArray
