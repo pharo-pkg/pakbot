@@ -1,3 +1,3 @@
 initialization
-canBeExecutedInStandardContext: aToolContext
+canBeExecutedInContext: aToolContext
 	^ aToolContext hasSelectedItems "and: [ aToolContext lastSelectedObject isRemovable ]"

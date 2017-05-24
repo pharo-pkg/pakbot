@@ -1,6 +1,6 @@
 execution
-prepareFullExecutionInStandardContext: aToolContext
-	super prepareFullExecutionInStandardContext: aToolContext.
+prepareFullExecutionInContext: aToolContext
+	super prepareFullExecutionInContext: aToolContext.
 	
 	assemblyName := UIManager default 
 		request: 'Package assembly name' 

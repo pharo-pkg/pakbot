@@ -1,7 +1,7 @@
 execution
-prepareFullExecutionInStandardContext: aToolContext
+prepareFullExecutionInContext: aToolContext
 	| packageManagers |
-	super prepareFullExecutionInStandardContext: aToolContext.
+	super prepareFullExecutionInContext: aToolContext.
 	toolContext := aToolContext.
 	
 	packageManagers := aToolContext systemEnvironment projectManager packageManagers.

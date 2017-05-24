@@ -1,3 +1,0 @@
-execution
-applyResultInStandardContext: aToolContext
-	self refreshCalypsoRoot
