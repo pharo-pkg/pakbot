@@ -29,9 +29,10 @@ baseline: spec
 				spec
 					repository: 'github://pharo-nosql/voyage:master/mc';
 					loads: #('memory' 'mongo tests') ];
+			" Iceberg is already in the image, do not overwrite this version 
 			baseline: 'Iceberg' with: [
 				spec
-					repository: 'github://npasserini/iceberg:dev-0.4' ];
+					repository: 'github://pharo-vcs/iceberg:dev-0.4' ];"
 			project: 'ZincHTTPComponents' with: [
 				spec
 					className: #ConfigurationOfZincHTTPComponents;
@@ -45,7 +46,7 @@ baseline: spec
 					repository: 'http://smalltalkhub.com/mc/Pharo/Calypso/main/' ].
 		spec 
 			package: #CargoPackageManager with: [
-				spec requires: #(#'CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos' 'Iceberg'). ];
+				spec requires: #(#'CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos' "'Iceberg'"). ];
 			package: #'CargoPackageManager-Minimal' "with: [
 				spec requires: #('Ston' ). ]";
 			package: #'CargoPackageManager-Repository' with: [
