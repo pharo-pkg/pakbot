@@ -2,4 +2,7 @@ activation
 systemBrowserToolbarActivator
 	<commandActivator>
 	
-	^ ClyToolbarCommandActivator  byItemOf: ClyButtonToolbarGroup for: ClyProjectSystemBrowserContext
+	^ ClyToolbarCommandActivator 
+		byItemOf: ClyButtonToolbarGroup
+		order: 1010
+		for: ClyProjectSystemBrowserContext
