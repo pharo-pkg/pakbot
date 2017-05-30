@@ -1,3 +1,3 @@
 execution
 execute
-	project removePart: packageToRemove cargoAssembly
+	project removePart: packageToRemove cargoPackage
