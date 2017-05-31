@@ -10,7 +10,7 @@ initializePresenter
 		[ self addAction.
 		self refreshUI ].
 	removeButton action: 
-		[ ongoingPackageVersion removeAction: self selectedPackage.
+		[ self removeAction: self selectedPackage.
 		self refreshUI ].
 	editButton action: 
 		[ self editAction ].

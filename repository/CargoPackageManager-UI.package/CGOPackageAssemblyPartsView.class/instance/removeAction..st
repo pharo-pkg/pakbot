@@ -1,0 +1,3 @@
+actions
+removeAction: aCGOPackageDependency 
+	ongoingPackageVersion removePart: aCGOPackageDependency
