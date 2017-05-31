@@ -3,5 +3,5 @@ defaultSpec
 	^ SpecLayout composed
 		newRow: [ :row |
 			row
-				add: #packageOverview;
+				add: #packageOverview  withSpec: #minimalSpec;
 				add: #partsView ]
