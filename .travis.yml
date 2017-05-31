@@ -8,8 +8,8 @@ addons:
 
 # Select operating system(s)
 os:
-  - linux
-#  - osx
+#  - linux
+  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
