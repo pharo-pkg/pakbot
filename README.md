@@ -54,13 +54,13 @@ Metacello new
 To load a project with its dependencies, you just need to ask Cargo to install the top-level package (i.e. the project assembly) describing all parts of the project.
 ```smalltalk
 Cargo new 
-	package: 'MyProject@1.3';
+	package: 'MyProject' version:'1.3';
 	install
 ```
 It will load into the image the package *MyProject* in version *1.3* and all its dependencies. To achieve that, Cargo computes the list of packages to load and determines the load order. This package list is called **Cargo load instructions**. You can get this list by Calling #loadInstructions as follows:
 ```smalltalk
 loadInstructions := Cargo new 
-	package: 'MyProject@1.3';
+	package: 'MyProject' version:'1.3';
 	loadInstructions
 ```
 These instructions can be saved into a file for further reuse:

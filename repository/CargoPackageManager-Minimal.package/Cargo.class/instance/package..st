@@ -1,3 +1,3 @@
 configuring
-package: aPackageVersionString
-	packages addIfNotPresent: aPackageVersionString asPackageVersionReference
+package: aPackageName
+	self package: aPackageName version: ''
