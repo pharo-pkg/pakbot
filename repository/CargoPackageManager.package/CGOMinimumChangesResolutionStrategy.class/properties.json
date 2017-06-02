@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 4/4/2014 23:20",
-	"super" : "CGOResolutionStrategy",
+	"super" : "CGOPackageVersionResolutionStrategy",
 	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],

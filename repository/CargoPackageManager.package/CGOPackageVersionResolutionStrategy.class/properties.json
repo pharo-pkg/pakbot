@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "ChristopheDemarey 4/2/2014 17:40",
+	"commentStamp" : "ChristopheDemarey 6/2/2017 13:45",
 	"super" : "Object",
 	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOResolutionStrategy",
+	"name" : "CGOPackageVersionResolutionStrategy",
 	"type" : "normal"
 }

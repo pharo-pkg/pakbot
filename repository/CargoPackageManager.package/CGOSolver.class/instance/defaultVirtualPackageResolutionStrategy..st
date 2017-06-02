@@ -1,0 +1,3 @@
+accessing
+defaultVirtualPackageResolutionStrategy: aVirtualPackageResolutionStrategy
+	defaultVirtualPackageResolutionStrategy := aVirtualPackageResolutionStrategy

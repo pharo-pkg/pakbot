@@ -1,1 +1,1 @@
-A BleedingEdgeUpdatePolicy is used to specify that we should always take the latest version of the dependency.
+A BleedingEdgeUpdatePolicy is used to specify that we should always take the latest version of the package targeted by the dependency.

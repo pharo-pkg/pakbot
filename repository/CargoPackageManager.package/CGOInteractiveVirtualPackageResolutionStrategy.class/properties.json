@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "ChristopheDemarey 6/2/2017 14:33",
+	"super" : "CGOVirtualPackageResolutionStrategy",
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOInteractiveVirtualPackageResolutionStrategy",
+	"type" : "normal"
+}

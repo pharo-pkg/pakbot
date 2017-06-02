@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "ChristopheDemarey 6/2/2017 13:49",
-	"super" : "CGOPackageVersionResolutionStrategy",
+	"super" : "Object",
 	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOBleedingEdgeResolutionStrategy",
+	"name" : "CGOVirtualPackageResolutionStrategy",
 	"type" : "normal"
 }

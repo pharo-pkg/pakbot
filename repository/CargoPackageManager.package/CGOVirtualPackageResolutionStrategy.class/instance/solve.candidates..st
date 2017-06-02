@@ -1,0 +1,3 @@
+solving
+solve: aDependency candidates: aListOfPackageVersionReferences
+	self subclassResponsibility

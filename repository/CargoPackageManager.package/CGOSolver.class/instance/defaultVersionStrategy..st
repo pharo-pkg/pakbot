@@ -1,3 +1,0 @@
-accessing
-defaultVersionStrategy: aResolutionStrategy
-	defaultVersionStrategy := aResolutionStrategy

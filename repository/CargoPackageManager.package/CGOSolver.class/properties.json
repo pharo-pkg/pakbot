@@ -8,8 +8,9 @@
 	"instvars" : [
 		"constraintsMap",
 		"resolution",
-		"defaultVersionStrategy",
-		"repositories"
+		"repositories",
+		"defaultPackageVersionStrategy",
+		"defaultVirtualPackageResolutionStrategy"
 	],
 	"name" : "CGOSolver",
 	"type" : "normal"

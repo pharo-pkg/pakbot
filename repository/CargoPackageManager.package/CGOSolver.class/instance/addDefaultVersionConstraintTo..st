@@ -1,6 +1,6 @@
 private
 addDefaultVersionConstraintTo: aDependency
 	aDependency
-		addDefaultVersionConstraint: self defaultVersionStrategy
+		addDefaultVersionConstraint: self defaultPackageVersionStrategy
 		from: repositories
 		for: Cargo platformAttributes
