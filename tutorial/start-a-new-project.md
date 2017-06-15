@@ -10,13 +10,10 @@ Here are the st files with the code already ready to use:
 - [Counter-Core.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Core.st)
 - [Counter-Tests.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Tests.st)
 
-At the end of this tutorial,
-- *Counter* project will have 2 package units:
+At the end of this tutorial, *Counter* project will have 2 package units:
 	- *Counter-Core*
 	- *Counter-Tests* that depends on *Counter-Core*
-- the already existing *Counter-UI* project will have 1 package unit and 1 package assembly:
-	- *Counter-UI-Spec* (already exisiting)
-	- *Counter-UI-Tests* composed of *Counter-UI-Spec* and *Counter-Tests*.
+We will also use the already existing *Counter-UI* project composed of 1 package unit: *Counter-UI-Spec*.
 
 ## Cargo Project creation
 A Cargo project holds the meta-information on a software project: its source repository, name, desription, packages composing the project, etc.
