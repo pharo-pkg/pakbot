@@ -5,6 +5,6 @@ rootDependency
 	^ CGOPackageDependency 
 		on: pkgVersionRef packageName
 		for: nil 
-		withConstraints: (pkgVersionRef versionNumber
+		withConstraints: (pkgVersionRef versionString
 			ifEmpty: [ #() ]
-			ifNotEmpty: [ {(CGOFixedVersionConstraint with: pkgVersionRef versionNumber)} ] ) 
+			ifNotEmpty: [ {(CGOFixedVersionConstraint with: pkgVersionRef versionString)} ] ) 

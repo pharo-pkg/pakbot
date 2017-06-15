@@ -8,5 +8,5 @@ provisionsFromListOfProvisionStrings: aListOfProvisionStrings
 			CGOPackageVersionReference 
 				packageName: pkgVersionRef packageName 
 				version:	(pkgVersionRef versionNumber 
-					ifEmpty: [ '1.0.0' ]
-					ifNotEmpty: [ pkgVersionRef versionNumber asSemanticVersion asString "Ensure versionNumber is a valid semanantic version"]) ]
+					ifNil: [ '1.0.0' asSemanticVersion ]
+					ifNotNil: [ pkgVersionRef versionNumber ]) ]

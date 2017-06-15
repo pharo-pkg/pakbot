@@ -1,3 +1,5 @@
 accessing
 versionNumber
-	^ versionNumber
+	^ version 
+		ifEmpty: [ nil ]
+		ifNotEmpty: [ version asSemanticVersion ]

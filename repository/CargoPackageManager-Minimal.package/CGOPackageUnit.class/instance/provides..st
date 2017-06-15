@@ -4,8 +4,8 @@ provides: aVirtualPackageVersionReference
 		detect: [ :provision | | pkgVersionRef |
 			pkgVersionRef := provision asPackageVersionReference.
 			(pkgVersionRef packageName = aVirtualPackageVersionReference packageName)
-				and: [ aVirtualPackageVersionReference versionNumber 
+				and: [ aVirtualPackageVersionReference versionString
 							ifEmpty: [ true ]
-							ifNotEmpty: [ pkgVersionRef versionNumber = aVirtualPackageVersionReference versionNumber ] ] ]
+							ifNotEmpty: [ pkgVersionRef versionString = aVirtualPackageVersionReference versionString ] ] ]
 		ifFound: [ true ]
 		ifNone: [ false ]

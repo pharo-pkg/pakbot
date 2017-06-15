@@ -6,5 +6,8 @@ testCanCreateFromPackageName
 		assert: ref packageName 
 		equals: 'SomePackage'.
 	self 
+		assert: ref versionString
+		equals: ''.
+	self 
 		assert: ref versionNumber
-		equals: ''
+		equals: nil

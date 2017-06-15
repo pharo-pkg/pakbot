@@ -1,5 +1,7 @@
 initialization
-initializeWithName: aPackageName version: aVersionString
+initializeWithName: aPackageName version: aVersionOrVersionString
 	packageName := aPackageName.
-	versionNumber := aVersionString asSemanticVersion asString. "ensure semantic version is correct"
+	version := aVersionOrVersionString asString.
+	version ifNotEmpty: 
+		[ version asSemanticVersion asString  "ensure semantic version is correct" ].
 	packageRepositories := #()

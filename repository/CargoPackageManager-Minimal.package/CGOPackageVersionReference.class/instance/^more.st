@@ -1,3 +1,3 @@
 comparing
 > other
-	^ versionNumber > other versionNumber
+	^ self versionNumber > other versionNumber

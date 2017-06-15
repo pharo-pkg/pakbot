@@ -4,4 +4,4 @@ latestVersionOfVirtualPackage: aVirtualPackageName suitableForEnvironment: platf
 	| pkgVersionRef |
 	pkgVersionRef := ((self versionStringsOfVirtual: aVirtualPackageName) collect: #asPackageVersionReference)
 		detectMax: #versionNumber.
-	^ self fetchVirtual: pkgVersionRef packageName version: pkgVersionRef versionNumber asString
+	^ self fetchVirtual: pkgVersionRef packageName version: pkgVersionRef versionString

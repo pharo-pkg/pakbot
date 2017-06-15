@@ -5,6 +5,6 @@ packagesProviding: aVirtualPackageName version: aSemanticVersion forEnvironment:
 			pkgVersionRef := packageVersionName asPackageVersionReference.
 			self 
 				fetch: pkgVersionRef packageName
-				version: pkgVersionRef versionNumber asSemanticVersion  ]
+				version: pkgVersionRef versionNumber ]
 		thenSelect: [ :unit |
 			unit platformRequirements includesAny: platformAttributes ]

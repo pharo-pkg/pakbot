@@ -5,4 +5,4 @@ fromString: aString
 	pkgVersionReference := aString asPackageVersionReference.
 	^ self 
 		newFrom: { #package -> pkgVersionReference packageName .
-			#version -> pkgVersionReference versionNumber } asDictionary
+			#version -> pkgVersionReference versionString } asDictionary

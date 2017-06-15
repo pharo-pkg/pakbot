@@ -8,7 +8,7 @@
 	"instvars" : [
 		"packageRepositories",
 		"packageName",
-		"versionNumber"
+		"version"
 	],
 	"name" : "CGOPackageVersionReference",
 	"type" : "normal"

@@ -5,4 +5,4 @@ fetch: aPackageVersionString
 	pkgVersionRef := aPackageVersionString asPackageVersionReference.
 	^ self 
 		fetch: pkgVersionRef packageName
-		version: pkgVersionRef versionNumber.
+		version: pkgVersionRef versionString.

@@ -5,4 +5,4 @@ assertPackage: aPackage equals: aPackageVersionString
 	anotherPackage := aPackageVersionString asPackageVersionReference.
 	
 	self assert: aPackage packageName equals: anotherPackage packageName.
-	self assert: aPackage version asString equals: anotherPackage versionNumber.
+	self assert: aPackage version equals: anotherPackage versionNumber.
