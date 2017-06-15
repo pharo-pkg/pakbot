@@ -28,7 +28,7 @@ Imagine that now we want to add a new package to our Counter-UI project. To add 
 ``` smalltalk
 project := (CGOPackageRegistry default packageNamed: 'Counter-UI') project asOngoingProject.
 ```
-The Cargo registry keeps a reference on all packages (projects, package units, package assemblies) installed in the image. You can get them by sending the `#packageNamed:` message. You will get a read-only (frozen) Cargo project that we will convert to an editable version (through #asOngoingProject) and then add a package to it.
+The Cargo registry keeps a reference on all packages (projects, package units, package assemblies) installed in the image. You can get them by sending the `#packageNamed:` message. You will get a read-only (frozen) Cargo project that we will convert to an editable version (through `#asOngoingProject`) and then add a package to it.
 
 Once you have the ongoing project, you can create an Assembly and set its properties by calling setters:
 ``` smalltalk
