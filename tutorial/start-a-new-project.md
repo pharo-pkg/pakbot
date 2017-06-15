@@ -7,12 +7,12 @@ For this tutorial, we will use a tiny project: Counter. It is basically the same
 
 We first implement a *#'Counter-Core'* package that will contain a Counter class. We will also create a *#'Counter-Tests'* package that will contain a *CounterTest* class.
 Here are the st files with the code already ready to use:
-- [Counter-Core.st](./Counter-Core.st)
-- [Counter-Tests.st](./Counter-Tests.st)
+- [Counter-Core.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Core.st)
+- [Counter-Tests.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Tests.st)
 
 ## Cargo Project creation
 A Cargo project holds the meta-information on a software project: its source repository, name, desription, packages composing the project, etc.
-We will ask Cargo to create a new project by giving it a name: 'Counter'. We also specify the initial version, a description of the project and a repository definition.
+We will ask Cargo to create a new project by giving it a name: 'Counter'. We also specify the initial version, a description of the project and a repository definition (it is best to create your own repository).
 ```smalltalk
 project := (CGOOngoingProject for: #'Counter')
 		version: '0.1-dev';
@@ -65,7 +65,7 @@ Cargo new
 Cargo allows you to load project packages directly from a Source Code Management system instead of using the package repository.
 This feature is especialy useful when you are developping a project. It may happen that, in development mode, you rely on external packages not yet published to the package repository. That's why Cargo propose the `#useSourceRepository:` message, taking a **CGOSourceRepository** as argument. All source repositories added will take precedence on the default repository and package metadata will be loaded from the SCM for all the project packages.
 
-In the following example, we will load *Counter-UI* from GitHub. Its dependent *Counter-Core* will also be loaded from GitHub since we added its source repository.
+In the following example, we will load *Counter-UI* from GitHub. *Counter-UI* is a project hosting a package with a small UI that can be used together with the *Counter* project. *Counter-UI* has a *Counter-UI-Spec* package unit depending on *Counter-Core*. Loading *Counter-UI* will also be load *Counter-Core* from GitHub since we added its source repository.
 ``` smalltalk
 Cargo new 
 	useSourceRepository: (CGOGitRepository repositoryUrl:'git@github.com:demarey/pharo-counter-ui.git');
