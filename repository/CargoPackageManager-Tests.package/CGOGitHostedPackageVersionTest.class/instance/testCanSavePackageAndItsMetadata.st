@@ -2,7 +2,6 @@ tests
 testCanSavePackageAndItsMetadata
 	| sourcePackageVersion commit message |
 	sourcePackageVersion := self cargoMinimalB9ee.
-	sourcePackageVersion inspect.
 	message := 'commit from test #testCanSavePackageAndItsMetadata'.
 	commit := sourcePackageVersion 
 		saveAndCommitWithMessage: message
