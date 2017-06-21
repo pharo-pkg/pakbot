@@ -1,0 +1,3 @@
+configuring
+useSshUrl
+	useHttpsUrl := false

@@ -1,0 +1,3 @@
+configuring
+useHttpsUrl
+	useHttpsUrl := true

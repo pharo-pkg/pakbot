@@ -1,5 +1,5 @@
 tests - test data
-pharoCounterTestsMaster
+pharoCounterTestsOriginRepo
 	^ CGOGitHostedPackageVersion
 		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
 		subdirectory: ''

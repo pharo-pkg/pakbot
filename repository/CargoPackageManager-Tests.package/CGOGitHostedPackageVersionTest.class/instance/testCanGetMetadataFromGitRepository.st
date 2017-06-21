@@ -1,7 +1,7 @@
 tests
 testCanGetMetadataFromGitRepository
 	| pkgVersion |
-	pkgVersion := CGOPackageVersion fromStonString: self pharoCounterTestsMaster loadMetadata.
+	pkgVersion := CGOPackageVersion fromStonString: self pharoCounterTestsOriginRepo loadMetadata.
 	
 	self 
 		assert: pkgVersion class 

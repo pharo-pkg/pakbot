@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-Tests-SCM",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOGitHostedPackageVersionEnforcingProtocolTest",
+	"type" : "normal"
+}

@@ -1,5 +1,5 @@
 tests
-testGetPackageMetadataNotFoundErrorWhenMetadatFileAbsent
+testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent
 	self should: 
 		[ (CGOGitHostedPackageVersion
 			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
