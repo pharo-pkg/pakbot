@@ -11,8 +11,9 @@ Here are the st files with the code already ready to use:
 - [Counter-Tests.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Tests.st)
 
 At the end of this tutorial, *Counter* project will have 2 package units:
-	- *Counter-Core*
-	- *Counter-Tests* that depends on *Counter-Core*
+- *Counter-Core*
+- *Counter-Tests* that depends on *Counter-Core*
+
 We will also use the already existing *Counter-UI* project composed of 1 package unit: *Counter-UI-Spec*.
 
 ## Cargo Project creation
