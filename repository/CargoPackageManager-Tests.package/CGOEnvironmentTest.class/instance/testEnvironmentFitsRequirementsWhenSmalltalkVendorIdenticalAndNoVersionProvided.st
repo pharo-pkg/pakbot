@@ -1,3 +1,0 @@
-tests
-testEnvironmentFitsRequirementsWhenSmalltalkVendorIdenticalAndNoVersionProvided
-	self assert: (self pharoEnvironment fitsRequirementsOf: self pharo60Environment)

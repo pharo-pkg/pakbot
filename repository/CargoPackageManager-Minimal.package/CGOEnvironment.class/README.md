@@ -1,3 +1,0 @@
-I reprensent a Cargo environment  with information on the Smalltalk dialect used, its version. You can add any tags you want on it (like OS type, architecture, bytecode set, etc).
-This information will be used by Cargo to select packages that can be installed in the image.
-CGOEnvironment>>#currrent provides the current environment for the image. Cargo will compare values provided by the current image environment to the environment platform requirements to see if the package fullfill requirements and can be installed in the target image.

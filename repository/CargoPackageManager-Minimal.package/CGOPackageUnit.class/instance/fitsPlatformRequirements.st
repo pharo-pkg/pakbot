@@ -1,4 +1,3 @@
 testing
 fitsPlatformRequirements
-	^ Cargo imageEnvironment
-		includesAll: platformRequirements
+	^ Cargo platformAttributes includesAll: platformRequirements

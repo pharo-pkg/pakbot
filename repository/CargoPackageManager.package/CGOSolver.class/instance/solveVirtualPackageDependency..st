@@ -7,7 +7,7 @@ solveVirtualPackageDependency: aDependency
 		repository
 			packagesProviding: packageName
 			version: (self versionFor: packageName)
-			forEnvironment: Cargo imageEnvironment ].
+			forEnvironment: Cargo platformAttributes ].
 	
 	candidates ifEmpty: [ CGOUnresolvedDependency signal: 'Cannot find ' , packageName , ' virtual package!' ].
 
