@@ -7,7 +7,7 @@ testVersionForIn
 	packageVersionRef := strategy 
 					versionOf: #'Seaside-Flow'
 					in: repository asOrderedCollection
-					for: #( #pharo ).
+					forEnvironment: #( #pharo ).
 	self
 		assert: packageVersionRef asString
 		equals: 'Seaside-Flow@3.1.0'.

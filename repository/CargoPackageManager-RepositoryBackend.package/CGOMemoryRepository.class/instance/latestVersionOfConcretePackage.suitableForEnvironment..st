@@ -5,7 +5,5 @@ latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAtt
 	candidates := CGOPackageVersion selectMany: 
 		[ :each | 
 		each packageName = aPackageName
-		and: [ each platformRequirements 
-					ifEmpty: [ true ]
-					ifNotEmpty: [ :requirements | requirements includesAny: platformAttributes ] ] ].
+		and: [ self does: each fitPlatformRequirements: platformAttributes ] ].
 	^ (candidates detectMax: #version) asPackageVersionReference

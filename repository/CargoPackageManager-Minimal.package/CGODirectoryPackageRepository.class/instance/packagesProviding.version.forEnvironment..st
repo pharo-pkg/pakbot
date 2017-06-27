@@ -7,4 +7,4 @@ packagesProviding: aVirtualPackageName version: aSemanticVersion forEnvironment:
 				fetch: pkgVersionRef packageName
 				version: pkgVersionRef versionNumber ]
 		thenSelect: [ :unit |
-			unit platformRequirements includesAny: platformAttributes ]
+			self does: unit fitPlatformRequirements: platformAttributes ]

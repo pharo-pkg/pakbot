@@ -5,5 +5,5 @@ packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttri
 	packages := CGOPackageVersion selectMany: [ :each | 
 		each isUnit 
 		and: [ (each provides: (CGOPackageVersionReference packageName: aName version: aSemanticVersion))
-		and: [ each platformRequirements includesAny: platformAttributes ] ] ].
+		and: [ self does: each fitPlatformRequirements: platformAttributes ] ] ].
 	^ packages collect: [ :each | each asString ]

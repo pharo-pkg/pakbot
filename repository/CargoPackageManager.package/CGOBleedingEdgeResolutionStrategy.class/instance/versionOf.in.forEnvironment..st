@@ -1,5 +1,5 @@
 solving
-versionOf: aPackageName in: aRepositoryList for: platformAttributes
+versionOf: aPackageName in: aRepositoryList forEnvironment: platformAttributes
 	| candidates |
 
 	candidates := Set new.
