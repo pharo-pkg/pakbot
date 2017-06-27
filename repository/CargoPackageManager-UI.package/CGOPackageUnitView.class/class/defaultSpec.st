@@ -4,4 +4,4 @@ defaultSpec
 		newRow: [ :row |
 			row
 				add: #packageOverview withSpec: #minimalSpec;
-				add: #dependenciesView ]
+				add: #detailsView ]

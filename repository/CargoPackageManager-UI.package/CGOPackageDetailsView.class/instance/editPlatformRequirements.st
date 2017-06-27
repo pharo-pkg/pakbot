@@ -8,7 +8,6 @@ editPlatformRequirements
 			ifNotEmpty: [ :string | Character space join: string ])
 		title: 'Platform requirements of ' , ongoingPackageUnit packageName , ' package'.
 	requirementsString ifNil: [ ^ self ].
-	ongoingPackageUnit 
-		updatePlatformRequirementsWith: (Character space split: requirementsString) asArray.
+	ongoingPackageUnit platformRequirements: (Character space split: requirementsString) asArray.
 	
 	self updatePlatformRequirementsMorph

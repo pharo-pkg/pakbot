@@ -14,9 +14,9 @@ defaultSpec
 						add: #editPlatformRequirementsButton width: 40;
 						add: #platformRequirementWidget ]
 				height: self inputTextHeight;
-				add: #dependenciesView;
+				add: #dependenciesView";
 				newRow: [ :fileRow |
 					fileRow 
 						add: #fileLabel width: self labelSize;
 						add: #fileInputField ]
-				height: self inputTextHeight ]
+				height: self inputTextHeight" ]

@@ -8,7 +8,7 @@
 	"instvars" : [
 		"packageOverview",
 		"ongoingPackageUnit",
-		"dependenciesView"
+		"detailsView"
 	],
 	"name" : "CGOPackageUnitView",
 	"type" : "normal"
