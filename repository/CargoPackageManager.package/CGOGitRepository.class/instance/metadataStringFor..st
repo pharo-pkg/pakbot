@@ -1,3 +1,3 @@
 private
 metadataStringFor: aPackageUnit
-	^ (STON toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
+	^ (CGOPackageVersionWriter toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
