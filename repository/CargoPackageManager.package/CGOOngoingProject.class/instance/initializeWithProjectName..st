@@ -5,4 +5,5 @@ initializeWithProjectName: aProjectName
 	version := '0.1-dev' asSemanticVersion. "default version number"
 	unitNames := Set new.
 	assemblies := Set new.
+	virtualPackages := Set new.
 	authors := Set new:0.

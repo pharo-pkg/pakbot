@@ -13,7 +13,8 @@
 		"unitNames",
 		"assemblies",
 		"authors",
-		"registry"
+		"registry",
+		"virtualPackages"
 	],
 	"name" : "CGOProject",
 	"type" : "normal"

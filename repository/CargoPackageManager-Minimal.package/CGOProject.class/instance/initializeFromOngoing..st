@@ -6,4 +6,5 @@ initializeFromOngoing: aCGOOngoingProject
 	version := aCGOOngoingProject version.
 	unitNames := aCGOOngoingProject packageUnitNames asArray.
 	assemblies := aCGOOngoingProject assemblies collect: #asPackageVersion as: Array.
+	virtualPackages := aCGOOngoingProject virtualPackages collect: #asPackageVersion as: Array.
 	authors := aCGOOngoingProject authors asArray.

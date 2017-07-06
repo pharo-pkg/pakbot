@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "ChristopheDemarey 7/5/2017 10:29",
+	"super" : "CGOClyCommand",
+	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"virtualPackageName"
+	],
+	"name" : "CGOBrowserVirtualPackageCreationCommand",
+	"type" : "normal"
+}

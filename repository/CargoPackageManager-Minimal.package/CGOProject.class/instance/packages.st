@@ -1,3 +1,3 @@
 accessing
 packages
-	^ self packageUnits , self assemblies
+	^ self packageUnits , self assemblies, self virtualPackages

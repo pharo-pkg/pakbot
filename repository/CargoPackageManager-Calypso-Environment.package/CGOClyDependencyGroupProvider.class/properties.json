@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 5/10/2017 08:56",
+	"commentStamp" : "ChristopheDemarey 7/6/2017 11:05",
 	"super" : "ClyClassGroupProvider",
 	"category" : "CargoPackageManager-Calypso-Environment",
 	"classinstvars" : [ ],

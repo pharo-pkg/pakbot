@@ -1,5 +1,4 @@
 versions fetching
 latestVersionOfPackage: aPackageName suitableForEnvironment: platformAttributes 
-	^ "(self isVirtual: aPackageName)
-		ifTrue: [ self latestVersionOfVirtualPackage: aPackageName suitableForEnvironment: platformAttributes ]
-		ifFalse: [" self latestVersionOfConcretePackage: aPackageName suitableForEnvironment: platformAttributes "]"
+	"just pick the current version in the SCM"
+	^ (self package: aPackageName) asPackageVersionReference
