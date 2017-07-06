@@ -1,5 +1,5 @@
 test data
 greaseRepository
 	^ CGOGitRepository 
-		repositoryUrl: 'git@github.com:demarey/Grease-cargo.git'
+		repositoryUrl: 'https://github.com/demarey/Grease-cargo.git'
 		subdirectory: 'repository'.
