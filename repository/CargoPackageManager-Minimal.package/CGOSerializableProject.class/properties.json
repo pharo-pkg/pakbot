@@ -10,6 +10,7 @@
 		"repository",
 		"unitNames",
 		"assemblies",
+		"virtualPackages",
 		"authors",
 		"contributors"
 	],
