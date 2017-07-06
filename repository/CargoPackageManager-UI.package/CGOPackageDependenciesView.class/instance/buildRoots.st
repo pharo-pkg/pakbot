@@ -4,4 +4,4 @@ buildRoots
 		collect: [ :dependency | 
 			TreeNodeModel new
 				content: dependency;
-				icon: self dependencyIcon yourself ]
+				icon: (self iconForPackage: dependency) ]
