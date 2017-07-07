@@ -8,4 +8,6 @@ registerProjectFromSourceRepository: aCGOSourceRepository
 		collect: [ :unitName |
 			CGOPackageVersion fromStonString: (aCGOSourceRepository packageMetadataStonStringFor: unitName) ]
 		thenDo: [ :unit | packageVersions add: unit ].
+	project assemblies, project virtualPackages 
+		do: [ :pkgVersion | packageVersions add: pkgVersion ].
 	^ project
