@@ -1,3 +1,3 @@
 updating
-version: aVersionString 
-	version := SemanticVersion fromString: aVersionString
+version: aVersionOrVersionString 
+	version := aVersionOrVersionString asSemanticVersion
