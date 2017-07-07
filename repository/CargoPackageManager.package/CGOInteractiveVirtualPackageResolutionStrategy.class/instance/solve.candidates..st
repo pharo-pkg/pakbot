@@ -6,7 +6,7 @@ solve: aDependency candidates: aListOfPackageVersionReferences
 							groupedBy: #packageName.	
 	
 	^ (candidates size = 1)
-		ifTrue: [ (candidates values first detectMax: #versionNumber) name ]
+		ifTrue: [ (candidates values first detectMax: #versionNumber) asString ]
 		ifFalse: [ CGOUnresolvedDependency 
 			package: aDependency targetedPackage 
 			candidates: (candidates values collect: [ :each | each detectMax: #versionNumber ]) ]
