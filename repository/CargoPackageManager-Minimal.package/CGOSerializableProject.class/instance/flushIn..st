@@ -13,5 +13,6 @@ flushIn: aCGOProject
 		instVarNamed: 'repository' put: repository;
 		instVarNamed: 'unitNames' put: (self toArray: unitNames);
 		instVarNamed: 'assemblies' put: (self toArray: assemblies);
+		instVarNamed: 'virtualPackages' put: (self toArray: virtualPackages);
 		instVarNamed: 'authors' put: (self toArray: authors);
 		yourself.

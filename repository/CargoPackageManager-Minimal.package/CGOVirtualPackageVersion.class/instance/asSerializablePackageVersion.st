@@ -1,0 +1,3 @@
+converting
+asSerializablePackageVersion
+	^ CGOSerializedVirtualPackageVersion from: self
