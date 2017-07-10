@@ -80,6 +80,8 @@ Virtual packages allow to do not hard-code all possible dependencies and keep ro
 A virtual package, as any other Cargo package, has a version and has to be published (or, at least, saved to SCM) to be used.
 
 Once the package metadata is correct, we save it to SCM.
+![Cargo project view in Calypso browser](/doc/grease-calypso.png)
+
 Then, in a fresh image with Cargo already loaded, you can install *Grease-Tests*:
 ```smalltalk
 Cargo new 
