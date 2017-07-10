@@ -90,3 +90,5 @@ Cargo new
 	install
 ```
 It will result in loading following package in a Pharo 6.0 image: *Grease-Core*, *Grease-Pharo60-Core*, *Grease-Tests-Core* and *Grease-Tests-Pharo20-Core*.
+
+![Grease-Tests loading with Cargo](/doc/grease-tests-loading.png)
