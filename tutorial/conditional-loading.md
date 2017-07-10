@@ -1,4 +1,4 @@
-# Tutorial: Cargo conditional loading support?
+# Tutorial: Cargo conditional loading support
 
 Before starting this tutorial, please ensure you already have [Cargo installed](https://github.com/demarey/cargo#install-cargo).
 
