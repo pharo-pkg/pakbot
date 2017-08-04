@@ -1,10 +1,12 @@
 versions fetching
 packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttributes
-	| packages |
+	| virtualPkgVersionRef packages |
 	
+	virtualPkgVersionRef := CGOPackageVersionReference 
+			packageName: aName 
+			version: aSemanticVersion.
 	packages := CGOPackageVersion selectMany: 
-					[ :each | (each provisions = aName) 
-					& (each version = aSemanticVersion asString) ].
+					[ :each | each provisions includes: virtualPkgVersionRef asString ].
 	^ packages 
 		select: [ :each | (each platformRequirements difference: platformAttributes) isEmpty ]
 		thenCollect: #asString
