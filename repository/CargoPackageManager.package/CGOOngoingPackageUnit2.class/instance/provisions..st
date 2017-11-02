@@ -1,0 +1,3 @@
+updating
+provisions: aListOfVirtualPackageVersionsReference 
+	provisions := (CGOPackageUnit provisionsFromListOfProvisionStrings: aListOfVirtualPackageVersionsReference)	asOrderedCollection

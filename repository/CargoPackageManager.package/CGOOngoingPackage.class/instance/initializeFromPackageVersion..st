@@ -1,0 +1,3 @@
+initialization
+initializeFromPackageVersion: aCGOPackageVersion
+	self subclassResponsibility
