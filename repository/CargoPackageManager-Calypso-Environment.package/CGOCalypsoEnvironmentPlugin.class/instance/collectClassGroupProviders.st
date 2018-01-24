@@ -1,0 +1,4 @@
+accessing
+collectClassGroupProviders
+
+	^{CGOClyDependencyGroupProvider new}

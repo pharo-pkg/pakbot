@@ -2,4 +2,4 @@ activation
 systemBrowserShortcutActivator
 	<commandActivator>
 	
-	^ CmdShortcutCommandActivator by: $n meta, $a meta for: ClyProjectSystemBrowserContext 
+	^ CmdShortcutCommandActivation by: $n meta, $a meta for: ClyProjectContextOfFullBrowser  
