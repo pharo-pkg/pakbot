@@ -3,6 +3,5 @@ buildPackageItemsOn: items
 	| item |
 	self packages
 		do: [ :each | 
-			item := ClyEnvironmentItem named: each name with: each.
-			item scope: ClyPackageScope.
+			item := ClyBrowserItem named: each name with: each.
 			items add: item ]

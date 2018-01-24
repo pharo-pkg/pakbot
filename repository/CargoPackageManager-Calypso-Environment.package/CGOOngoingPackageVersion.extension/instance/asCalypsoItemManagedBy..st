@@ -1,7 +1,5 @@
 *CargoPackageManager-Calypso-Environment
 asCalypsoItemManagedBy: aPackageManager
-	| item calypsoPackage |
+	| calypsoPackage |
 	calypsoPackage := aPackageManager packageOf: self.
-	item := ClyEnvironmentItem named: self packageName with: calypsoPackage.
-	item scope: ClyPackageScope.
-	^ item
+	^ClyBrowserItem named: self packageName with: calypsoPackage
