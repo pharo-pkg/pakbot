@@ -7,4 +7,5 @@ load
 	versionLoader hasVersions ifTrue: [ versionLoader load ].
 	self packageVersions do: 
 		[ :pkgVersion |
+		pkgVersion versionLoaded.
 		CGOPackageRegistry default register: pkgVersion ]

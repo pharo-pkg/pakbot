@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOOngoingPackage",
+	"category" : "CargoPackageManager-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOOngoingPackageAssembly2",
+	"type" : "normal"
+}

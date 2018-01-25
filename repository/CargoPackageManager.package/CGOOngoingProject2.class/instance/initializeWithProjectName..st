@@ -1,7 +1,6 @@
 initialization
 initializeWithProjectName: aProjectName
-	super initialize.
-	name := aProjectName asSymbol.
-	unitNames := Set new.
+	self initializeWithPackageName: aProjectName andProject: nil.
+	units := Set new.
 	assemblies := Set new.
 	virtualPackages := Set new.

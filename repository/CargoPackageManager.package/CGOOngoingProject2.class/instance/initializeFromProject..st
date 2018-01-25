@@ -1,8 +1,8 @@
 initialization
 initializeFromProject: aCGOProject
 	super initialize.
-	name := aCGOProject packageName copy.
+	package := aCGOProject package.
 	description := aCGOProject description copy.
-	unitNames := aCGOProject unitNames asSet.
+	units := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
 	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	virtualPackages := aCGOProject virtualPackages veryDeepCopy asSet.

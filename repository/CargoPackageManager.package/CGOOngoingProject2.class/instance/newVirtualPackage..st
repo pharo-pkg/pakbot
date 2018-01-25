@@ -2,6 +2,6 @@ updating
 newVirtualPackage: aName
 	| virtual |
 	
-	virtual := CGOOngoingVirtualPackageVersion for: aName asSymbol in: name.
+	virtual := CGOOngoingVirtualPackage for: aName asSymbol project: self.
 	virtualPackages add: virtual.
 	^ registry register: virtual

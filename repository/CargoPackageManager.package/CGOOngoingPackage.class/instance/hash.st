@@ -1,3 +1,3 @@
 comparing
 hash
-	^ self packageName hash bitXor: self projectName hash
+	^ self packageName hash bitXor: self project hash

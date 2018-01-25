@@ -2,6 +2,6 @@ updating
 newPackageAssembly: aCGOPackageAssemblyName
 	| assembly |
 	
-	assembly := (CGOOngoingPackageAssembly for: aCGOPackageAssemblyName asSymbol in: name).
+	assembly := (CGOOngoingPackageAssembly2 for: aCGOPackageAssemblyName asSymbol project: self).
 	assemblies add: assembly.
-	^ CGOPackageRegistry default register: assembly
+	^ registry register: assembly

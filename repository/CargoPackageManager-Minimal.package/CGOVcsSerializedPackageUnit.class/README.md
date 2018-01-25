@@ -1,0 +1,2 @@
+I represent a Cargo package unit ready to be serialized on a Version Control System (e.g. git).
+I map some instance variables  to an easily serialized form and skip some others variables for the serialization.

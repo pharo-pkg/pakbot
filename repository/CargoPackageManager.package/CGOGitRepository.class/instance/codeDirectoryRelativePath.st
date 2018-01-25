@@ -1,3 +1,3 @@
 accessing
 codeDirectoryRelativePath
-	^ subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
+	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]

@@ -1,6 +1,6 @@
 initialization
 initializeFromOngoing: aCGOOngoingProject 
-	name := aCGOOngoingProject packageName.
+	name := aCGOOngoingProject projectName.
 	description := aCGOOngoingProject description.
 	repository := aCGOOngoingProject repository.
 	version := aCGOOngoingProject version.

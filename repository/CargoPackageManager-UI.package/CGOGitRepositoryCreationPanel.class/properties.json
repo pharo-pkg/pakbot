@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "ChristopheDemarey 11/3/2017 15:51",
+	"super" : "ComposableModel",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"newRepositoryButton",
+		"cloneRepositoryButton",
+		"addLocalRepositoryButton",
+		"onNewRepositoryBlock"
+	],
+	"name" : "CGOGitRepositoryCreationPanel",
+	"type" : "normal"
+}

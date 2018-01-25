@@ -1,3 +1,0 @@
-converting
-asSerializableCargoProject
-	^ self shouldNotImplement

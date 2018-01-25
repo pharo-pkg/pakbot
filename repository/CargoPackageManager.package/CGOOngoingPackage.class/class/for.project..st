@@ -1,5 +1,5 @@
 instance creation
-for: aPackageName project: aCargoProjectName
+for: aPackageName project: aCargoProject
 	^ self basicNew
-		initializeWithPackageName: aPackageName andProject: aCargoProjectName;
+		initializeWithPackageName: aPackageName andProject: aCargoProject;
 		yourself 

@@ -7,7 +7,7 @@ testCanCreateNewPackageAssembly
 		
 	self
 		assert: assembly class
-		equals: CGOOngoingPackageAssembly.
+		equals: CGOOngoingPackageAssembly2.
 		
 	self
 		assert: assembly packageName

@@ -1,3 +1,5 @@
-initialization
+printing
 printOn: aStream
-	aStream << name << ' project'
+	aStream 
+		<< self packageName
+		<< ' project'

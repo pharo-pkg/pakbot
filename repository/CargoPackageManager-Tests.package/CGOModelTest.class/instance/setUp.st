@@ -2,7 +2,7 @@ running
 setUp
 	super setUp.
 	oldRegistry := CGOPackageRegistry default.
-	ongoingProject := CGOOngoingProject example.
+	ongoingProject := CGOOngoingProject2 example.
 	registry := CGOPackageRegistry new 
 		register: ongoingProject;
 		register: self unitTestV1;

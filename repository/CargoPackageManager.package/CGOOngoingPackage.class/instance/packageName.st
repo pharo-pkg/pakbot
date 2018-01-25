@@ -1,3 +1,5 @@
 accessing
 packageName
-	^ package name
+	^ package 
+		ifNil: [ 'N/A' ] 
+		ifNotNil: [ package name ]

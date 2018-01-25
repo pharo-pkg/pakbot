@@ -1,13 +1,10 @@
 adding
 registerProjectFromSourceRepository: aCGOSourceRepository
 	| project |
-	
-	project := CGOProject fromStonString: aCGOSourceRepository projectMetadataStonString.
+	repository := aCGOSourceRepository.
+	project := CGOOngoingProject2 fromStonString: aCGOSourceRepository projectMetadataStonString.
+	project repository: aCGOSourceRepository.
 	packageVersions add: project.
-	project packageUnitNames
-		collect: [ :unitName |
-			CGOPackageVersion fromStonString: (aCGOSourceRepository packageMetadataStonStringFor: unitName) ]
-		thenDo: [ :unit | packageVersions add: unit ].
-	project assemblies, project virtualPackages 
+	project packageUnits, project assemblies, project virtualPackages
 		do: [ :pkgVersion | packageVersions add: pkgVersion ].
 	^ project

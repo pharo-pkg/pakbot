@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "ChristopheDemarey 11/6/2017 15:31",
+	"super" : "CGOSerializedPackage",
+	"category" : "CargoPackageManager-Minimal-Model-Serialization",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dependencies",
+		"provisions",
+		"platformRequirements"
+	],
+	"name" : "CGOVcsSerializedPackageUnit",
+	"type" : "normal"
+}

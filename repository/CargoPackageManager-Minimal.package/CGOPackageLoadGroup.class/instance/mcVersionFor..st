@@ -1,3 +1,3 @@
 loading
 mcVersionFor: aPackageVersion
-	^ aPackageVersion sourcePackageVersion mcVersion
+	^ aPackageVersion repository mcVersionFor: aPackageVersion

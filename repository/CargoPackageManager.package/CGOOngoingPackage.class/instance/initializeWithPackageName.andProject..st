@@ -1,6 +1,6 @@
 initialization
-initializeWithPackageName: aPackageName andProject: aCargoProjectName
+initializeWithPackageName: aPackageName andProject: aCargoProject
 	super initialize.
 	package := CGOPackageProvider default packageNamed: aPackageName.
 	description := ''.
-	projectName := aCargoProjectName
+	project := aCargoProject

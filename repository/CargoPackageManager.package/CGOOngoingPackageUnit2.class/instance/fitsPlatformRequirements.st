@@ -1,0 +1,3 @@
+testing
+fitsPlatformRequirements
+	^ Cargo platformAttributes includesAll: platformRequirements
