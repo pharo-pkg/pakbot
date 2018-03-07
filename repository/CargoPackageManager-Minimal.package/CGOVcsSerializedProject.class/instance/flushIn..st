@@ -9,8 +9,8 @@ flushIn: aCGOOngoingProject
 		initializeWithPackageName: name andProject: nil;
 		description: description;
 		packageUnits: ((self toArray: units) collect: #asOngoingPackage as: Set);
-		assemblies: ((self toArray:assemblies) collect: #asOngoingPackage as: Set);
-		virtualPackages: ((self toArray:virtualPackages) collect: #asOngoingPackage as: Set);
-		yourself.
+		assemblies: ((self toArray: assemblies) collect: #asOngoingPackage as: Set);
+		virtualPackages: ((self toArray: virtualPackages) collect: #asOngoingPackage as: Set);
+		externalProjects: (self toDictionary: externalProjects).
 		
 	aCGOOngoingProject packages do: [:package | package project: aCGOOngoingProject ]

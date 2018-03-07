@@ -1,5 +1,5 @@
 instance creation
 for: aProjectName
 	^ self basicNew
-		initializeWithProject: aProjectName;
+		initializeWithProjectName: aProjectName;
 		yourself 

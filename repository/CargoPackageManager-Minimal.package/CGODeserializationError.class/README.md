@@ -1,0 +1,1 @@
+Error raised when Cargo cannot succed the sTON deserialization of some metadata.

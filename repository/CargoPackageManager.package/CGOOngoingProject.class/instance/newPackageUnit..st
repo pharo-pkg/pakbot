@@ -1,7 +1,11 @@
 updating
 newPackageUnit: aCGOPackageUnitName
-	| unitName |
+	| unit |
 	
-	unitName := aCGOPackageUnitName asSymbol.
-	unitNames add: unitName.
-	^ registry register: (CGOOngoingPackageUnit for: unitName in: name)
+	unit := CGOOngoingPackageUnit 
+		for: aCGOPackageUnitName asSymbol
+		project: self.
+	(units includes: unit)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+	units add: unit.
+	^ registry register: unit

@@ -3,7 +3,7 @@ testCanCreateOngoingProject
 	
 	self
 		assert: ongoingProject class 
-		equals: CGOOngoingProject2.
+		equals: CGOOngoingProject.
 	self
 		assert: ongoingProject packageName
 		equals: #'MyProject'.
@@ -15,7 +15,7 @@ testCanCreateOngoingProject
 		equals: 1.
 	self 
 		assert: ongoingProject packageUnits anyOne class
-		equals: CGOOngoingPackageUnit2.
+		equals: CGOOngoingPackageUnit.
 	self 
 		assert: ongoingProject packageUnits anyOne project
 		equals: ongoingProject.

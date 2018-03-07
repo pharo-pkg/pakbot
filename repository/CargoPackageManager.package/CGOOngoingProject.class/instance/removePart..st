@@ -1,6 +1,6 @@
-updating
+removing
 removePart: aCGOPackageVersion
 	registry unregister: aCGOPackageVersion.
 	assemblies 
 		remove: aCGOPackageVersion
-		ifAbsent: [ 	unitNames remove: aCGOPackageVersion packageName ]
+		ifAbsent: [ 	units remove: aCGOPackageVersion ]

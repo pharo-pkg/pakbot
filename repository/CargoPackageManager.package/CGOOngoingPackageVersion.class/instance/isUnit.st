@@ -1,3 +1,0 @@
-testing
-isUnit
-	self subclassResponsibility

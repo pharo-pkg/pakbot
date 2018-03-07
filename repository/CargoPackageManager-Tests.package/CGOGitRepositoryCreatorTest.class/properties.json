@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOGitCreationTest",
+	"category" : "CargoPackageManager-Tests-SCM",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOGitRepositoryCreatorTest",
+	"type" : "normal"
+}

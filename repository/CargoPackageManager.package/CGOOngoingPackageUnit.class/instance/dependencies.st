@@ -1,3 +1,3 @@
-updating
+accessing
 dependencies
 	^ dependencies

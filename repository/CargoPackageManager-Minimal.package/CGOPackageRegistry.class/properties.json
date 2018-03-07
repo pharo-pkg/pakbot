@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "ChristopheDemarey 4/3/2014 23:00",
+	"commentStamp" : "ChristopheDemarey 3/6/2018 15:41",
 	"super" : "Object",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
@@ -8,7 +8,8 @@
 		"Default"
 	],
 	"instvars" : [
-		"installedPackages"
+		"installedPackages",
+		"registeredProjects"
 	],
 	"name" : "CGOPackageRegistry",
 	"type" : "normal"

@@ -1,10 +1,10 @@
 tests
 testCanSavePackageAndItsMetadata
-	| repository commit message |
+	| repository mcVersion message |
 	repository := self pharoCounterMaster.
 	message := 'commit from test #testCanSavePackageAndItsMetadata'.
-	commit := repository 
-		savePackageUnit: (CGOOngoingPackageUnit2 for: 'Counter-Core') withMessage: message.
+	mcVersion := repository 
+		savePackageUnit: (CGOOngoingPackageUnit for: 'Counter-Core') withMessage: message.
 	self 
-		assert: commit comment
+		assert: mcVersion info message
 		equals: message

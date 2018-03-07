@@ -1,3 +1,3 @@
 updating
-repository: aCGOSourceRepository
-	repository := aCGOSourceRepository 
+repository: aCGOSourceRepository 
+	repository := aCGOSourceRepository

@@ -1,3 +1,3 @@
 example
 example
-	^ self repository: IceRepository registry anyOne
+	^ CGOGitRepositoryCreator example

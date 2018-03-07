@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "ChristopheDemarey 2/6/2018 11:32",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-Tests-SCM",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"iceCredentialsProviderBackup"
+	],
+	"name" : "CGOGitCreationTest",
+	"type" : "normal"
+}

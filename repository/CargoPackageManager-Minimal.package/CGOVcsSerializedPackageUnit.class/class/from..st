@@ -1,5 +1,5 @@
 instance creation
 from: aCGOOngoingPackageUnit
 	^ self basicNew
-		initializeWithOngoingPackageUnit: aCGOOngoingPackageUnit;
+		initializeWithOngoing: aCGOOngoingPackageUnit;
 		yourself

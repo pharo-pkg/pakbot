@@ -1,4 +1,5 @@
 initialization
 initialize
 	super initialize.
-	installedPackages := Set new
+	installedPackages := Set new.
+	registeredProjects := Set new.

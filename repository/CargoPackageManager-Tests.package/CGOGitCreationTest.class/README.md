@@ -1,0 +1,1 @@
+super class used to set up credentials to perform git operations (i.e. clone)

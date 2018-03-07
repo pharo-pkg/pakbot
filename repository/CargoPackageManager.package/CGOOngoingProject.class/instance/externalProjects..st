@@ -1,0 +1,3 @@
+updating
+externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration  
+	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration

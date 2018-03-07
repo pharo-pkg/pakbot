@@ -1,3 +1,0 @@
-initialization
-tearDown
-	IceCredentialsProvider providerType: iceCredentialsProviderBackup.

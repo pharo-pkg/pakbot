@@ -1,8 +1,10 @@
 saving
 savePackageUnit: packageUnit withMessage: commitMessage
-	| newMcVersion |
+	| iceSavedPackage newMcVersion |
+	iceSavedPackage := self ensureIcePackageNamed: packageUnit packageName.
+	iceSavedPackage workingCopy ifNil: [ ^ nil "nothing to save" ].
 	newMcVersion := self iceRepository 
-		internalSavePackage: (self ensureIcePackageNamed: packageUnit packageName)
+		internalSavePackage: iceSavedPackage
 		withMessage: commitMessage.
 	self iceRepository 
 		addFilesToIndex: { self iceRepository directoryForPackage: newMcVersion package }.

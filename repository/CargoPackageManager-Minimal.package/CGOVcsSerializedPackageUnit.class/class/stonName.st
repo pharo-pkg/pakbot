@@ -1,3 +1,3 @@
-ston-core
+ston
 stonName
-	^ 'CGOPackageUnit2'
+	^ #CGOPackageUnit

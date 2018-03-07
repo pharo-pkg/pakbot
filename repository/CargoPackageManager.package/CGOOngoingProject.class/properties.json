@@ -1,11 +1,18 @@
 {
-	"commentStamp" : "ChristopheDemarey 11/29/2016 14:31",
-	"super" : "CGOProject",
+	"commentStamp" : "ChristopheDemarey 10/31/2017 16:07",
+	"super" : "CGOOngoingPackage",
 	"category" : "CargoPackageManager-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"units",
+		"assemblies",
+		"virtualPackages",
+		"repository",
+		"registry",
+		"externalProjects"
+	],
 	"name" : "CGOOngoingProject",
 	"type" : "normal"
 }

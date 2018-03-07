@@ -2,5 +2,5 @@ tests
 testCanGetMCVersionWhenAOngoingPackageUnitProvided
 	| repo result |
 	repo := self pharoCounterMaster.
-	result := repo mcVersionFor: (CGOOngoingPackageUnit2 for: 'Counter-Core').
+	result := repo mcVersionFor: (CGOOngoingPackageUnit for: 'Counter-Core').
 	self assert: (result isKindOf: MCVersion)

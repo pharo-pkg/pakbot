@@ -1,3 +1,3 @@
 ston-core
 stonName
-	^ #CGOProject
+	^ #CGOProjectVersion

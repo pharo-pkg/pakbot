@@ -1,0 +1,3 @@
+initialization
+initializePartsWith: aCGOOngoingPackageAssembly
+	parts := self serializedDependenciesOf: aCGOOngoingPackageAssembly parts

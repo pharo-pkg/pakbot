@@ -1,0 +1,1 @@
+I represent a Cargo package assembly ready to be serialized on a Version Control System (e.g. git).

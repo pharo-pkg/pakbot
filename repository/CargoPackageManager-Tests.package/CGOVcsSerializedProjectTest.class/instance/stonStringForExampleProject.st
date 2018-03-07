@@ -1,10 +1,10 @@
 test data
 stonStringForExampleProject
-	^ 'CGOProject2 {
+	^ 'CGOProject {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
 	#units : [
-		CGOPackageUnit2 {
+		CGOPackageUnit {
 			#name : #Test,
 			#description : ''A simple ongoing package unit.'',
 			#dependencies : [ ]

@@ -1,3 +1,0 @@
-initialization
-initializeWithRepository: anIceRepository
-	iceRepository := anIceRepository

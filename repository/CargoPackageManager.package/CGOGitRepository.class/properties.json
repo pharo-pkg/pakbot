@@ -1,12 +1,13 @@
 {
-	"commentStamp" : "ChristopheDemarey 12/22/2016 10:14",
+	"commentStamp" : "ChristopheDemarey 2/5/2018 15:29",
 	"super" : "CGOSourceRepository",
 	"category" : "CargoPackageManager-Loading",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"iceRepository"
+		"iceRepository",
+		"version"
 	],
 	"name" : "CGOGitRepository",
 	"type" : "normal"

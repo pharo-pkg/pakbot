@@ -1,4 +1,4 @@
 updating
 addDependencyOn: aPackageName 
 	dependencies	add:
-		(CGOPackageDependency newFrom: aPackageName -> #())
+		(CGOPackageDependency on: aPackageName)

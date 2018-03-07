@@ -4,5 +4,5 @@ asOngoingPackage
 	platformRequirements := self toArray: platformRequirements.
 	provisions := self toArray: provisions.
 	
-	^ CGOOngoingPackageUnit2 new 	
+	^ CGOOngoingPackageUnit new 	
 		initializeFromVcsSerializedPackage: self

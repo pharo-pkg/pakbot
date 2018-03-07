@@ -8,7 +8,8 @@
 	"instvars" : [
 		"units",
 		"assemblies",
-		"virtualPackages"
+		"virtualPackages",
+		"externalProjects"
 	],
 	"name" : "CGOVcsSerializedProject",
 	"type" : "normal"

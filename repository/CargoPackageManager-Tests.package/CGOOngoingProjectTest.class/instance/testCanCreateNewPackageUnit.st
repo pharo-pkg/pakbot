@@ -8,7 +8,7 @@ testCanCreateNewPackageUnit
 		
 	self
 		assert: unit class
-		equals: CGOOngoingPackageUnit2.
+		equals: CGOOngoingPackageUnit.
 		
 	self
 		assert: unit packageName

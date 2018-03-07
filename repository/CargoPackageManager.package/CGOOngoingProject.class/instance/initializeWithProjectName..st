@@ -1,9 +1,7 @@
 initialization
 initializeWithProjectName: aProjectName
-	super initialize.
-	name := aProjectName asSymbol.
-	version := '0.1-dev' asSemanticVersion. "default version number"
-	unitNames := Set new.
+	self initializeWithPackageName: aProjectName andProject: nil.
+	units := Set new.
 	assemblies := Set new.
 	virtualPackages := Set new.
-	authors := Set new:0.
+	externalProjects := Dictionary new.

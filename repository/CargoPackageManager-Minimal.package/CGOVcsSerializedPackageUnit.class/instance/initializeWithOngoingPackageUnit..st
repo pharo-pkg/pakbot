@@ -1,6 +1,0 @@
-initialization
-initializeWithOngoingPackageUnit: aCGOOngoingPackageUnit
-	super initializeWithOngoingPackageUnit: aCGOOngoingPackageUnit.
-	self initializeDependenciesWith: aCGOOngoingPackageUnit.
-	platformRequirements := self toArrayOrNilIfEmpty: aCGOOngoingPackageUnit platformRequirements.
-	provisions := self toArrayOrNilIfEmpty: aCGOOngoingPackageUnit provisions

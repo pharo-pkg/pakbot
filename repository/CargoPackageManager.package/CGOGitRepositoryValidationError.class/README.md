@@ -1,0 +1,1 @@
+Error raised when the validation of  a newly created Git Repository fails

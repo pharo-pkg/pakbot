@@ -1,4 +1,4 @@
-registering
+private
 checkPackageNameRegistrationOf: aPackageName
 	^ [ self packageNamed: aPackageName.
 		CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]

@@ -1,6 +1,6 @@
 test data
 unitTestV1
-	^ CGOOngoingPackageUnit2 example
+	^ CGOOngoingPackageUnit example
 		instVarNamed: #package put: #Package1;
 		project: ongoingProject;
 		yourself

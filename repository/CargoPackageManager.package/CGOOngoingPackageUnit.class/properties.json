@@ -1,6 +1,6 @@
 {
-	"commentStamp" : "ChristopheDemarey 11/28/2016 11:55",
-	"super" : "CGOOngoingPackageVersion",
+	"commentStamp" : "ChristopheDemarey 10/31/2017 11:36",
+	"super" : "CGOOngoingPackage",
 	"category" : "CargoPackageManager-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -8,8 +8,7 @@
 	"instvars" : [
 		"dependencies",
 		"provisions",
-		"platformRequirements",
-		"src"
+		"platformRequirements"
 	],
 	"name" : "CGOOngoingPackageUnit",
 	"type" : "normal"

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "ChristopheDemarey 1/26/2018 11:26",
+	"super" : "CGOProjectDependencyDeclaration",
+	"category" : "CargoPackageManager-Minimal-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"repository"
+	],
+	"name" : "CGOCargoProjectDependency",
+	"type" : "normal"
+}

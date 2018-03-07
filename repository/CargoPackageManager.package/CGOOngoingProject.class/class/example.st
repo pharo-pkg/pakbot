@@ -1,8 +1,6 @@
 example
 example
-	^ (CGOOngoingProject2 for: #'MyProject')
-		version: '0.1-dev';
+	^ (self for: #'MyProject')
 		description: 'A simple project used for illustration.';
-		repository: CGOGitRepository example;
-		packageUnitNames: #('Package1' 'Package2');
+		packageUnits: { CGOOngoingPackageUnit example };
 		yourself

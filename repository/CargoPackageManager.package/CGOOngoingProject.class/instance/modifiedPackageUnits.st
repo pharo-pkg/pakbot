@@ -1,4 +1,4 @@
-saving
+querying
 modifiedPackageUnits 
 	"check if either source code or metadata has been modified"
 	self flag: 'TODO'.
