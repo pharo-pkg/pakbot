@@ -5,7 +5,7 @@ testCanSerializeInSTON
 	
 	self
 		assert: stonString
-		equals: 'CGOVirtualPackageVersion {
+		equals: 'CGOPublishedVirtualPackage {
 	#package : ''Mail'',
 	#version : ''1.0.0'',
 	#description : ''I respect the mail protocol V1.0. See link for more details.'',

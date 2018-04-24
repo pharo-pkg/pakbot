@@ -6,12 +6,12 @@ testCanDeserializationSimpleProject
 	
 	self
 		assert: project
-		equals: CGOOngoingProject example asOngoingProject.
+		equals: CGOOngoingProject example.
 		
 	self assert: project assemblies isEmpty.
 	self 
 		assertCollection: project packageUnitNames asArray
-		hasSameElements: #('Test').
+		hasSameElements: #('UnitTest').
 
 	packageUnit := project packageUnits anyOne.
 	self

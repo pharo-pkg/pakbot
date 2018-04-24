@@ -1,20 +1,19 @@
 {
 	"commentStamp" : "ChristopheDemarey 11/29/2016 16:50",
-	"super" : "Object",
+	"super" : "CGOPackageVersion",
 	"category" : "CargoPackageManager-Minimal-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"name",
-		"description",
 		"repository",
 		"version",
-		"unitNames",
+		"units",
 		"assemblies",
-		"authors",
+		"virtualPackages",
 		"registry",
-		"virtualPackages"
+		"authors"
 	],
 	"name" : "CGOProject",
 	"type" : "normal"

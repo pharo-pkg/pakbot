@@ -13,5 +13,5 @@ testCanPublishAProject
 		assert: published class
 		equals: CGOProject.
 	self 
-		assertCollection: published unitNames
+		assertCollection: published packageUnitNames
 		hasSameElements: #(#Package1 #Package2)

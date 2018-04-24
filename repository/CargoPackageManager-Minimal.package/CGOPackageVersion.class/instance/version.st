@@ -1,3 +1,3 @@
 accessing
 version
-	^ version
+	^ project version

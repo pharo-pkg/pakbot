@@ -3,9 +3,7 @@ testCanPublishAProjectAndItsPackages
 	| packages |
 	ongoingProject assemblies: { CGOOngoingPackageAssembly for: #AllPackages in: ongoingProject name }.
 	
-	[ ongoingProject publishAll ]
-		on: CGODifferentPackageVersionsPublication 
-		do: [ :ex | ex resume ].
+	ongoingProject publishAll.
 	
 	packages := testPackageRepository packageNames.
 	self 

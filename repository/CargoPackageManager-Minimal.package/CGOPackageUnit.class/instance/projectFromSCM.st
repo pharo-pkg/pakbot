@@ -1,3 +1,0 @@
-private
-projectFromSCM
-	^ CGOProject fromStonString: self sourcePackageVersion projectMetadataStonString

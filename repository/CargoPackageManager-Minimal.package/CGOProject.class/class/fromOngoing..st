@@ -1,5 +1,5 @@
 instance creation
-fromOngoing: aCGOOngoingProject
+fromOngoing: aCGOOngoingPackage
 	^ self basicNew 
-		initializeFromOngoing: aCGOOngoingProject;
+		initializeFromOngoing: aCGOOngoingPackage;
 		yourself

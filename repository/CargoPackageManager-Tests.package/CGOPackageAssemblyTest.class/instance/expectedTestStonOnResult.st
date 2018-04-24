@@ -1,6 +1,6 @@
 expected results
 expectedTestStonOnResult
-	^  'CGOPackageAssembly {
+	^  'CGOPublishedPackageAssembly {
 	#description : '''',
 	#version : ''1.0.0'',
 	#package : #A,

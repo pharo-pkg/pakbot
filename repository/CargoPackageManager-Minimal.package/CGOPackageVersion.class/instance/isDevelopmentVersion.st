@@ -1,3 +1,3 @@
 testing
 isDevelopmentVersion
-	^ version isDevelopmentVersion
+	^ self version isDevelopmentVersion

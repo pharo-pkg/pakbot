@@ -1,10 +1,10 @@
 initialization
 initializeFromOngoing: aCGOOngoingProject 
-	name := aCGOOngoingProject projectName.
-	description := aCGOOngoingProject description.
+	super initializeFromOngoing: aCGOOngoingProject project: self.
+	name := aCGOOngoingProject packageName copy.
 	repository := aCGOOngoingProject repository.
 	version := aCGOOngoingProject version.
-	unitNames := aCGOOngoingProject packageUnitNames asArray.
-	assemblies := aCGOOngoingProject assemblies collect: #asPackageVersion as: Array.
-	virtualPackages := aCGOOngoingProject virtualPackages collect: #asPackageVersion as: Array.
+	units := aCGOOngoingProject packageUnits collect: [:each | each asPackageVersionOf: self] as: Array.
+	assemblies := aCGOOngoingProject assemblies collect: [:each | each asPackageVersionOf: self] as: Array.
+	virtualPackages := aCGOOngoingProject virtualPackages collect: [:each | each asPackageVersionOf: self] as: Array.
 	authors := aCGOOngoingProject authors asArray.

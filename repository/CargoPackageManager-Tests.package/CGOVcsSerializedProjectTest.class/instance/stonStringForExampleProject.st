@@ -1,11 +1,14 @@
 test data
 stonStringForExampleProject
-	^ 'CGOProject {
+	"
+		STON toStringPretty: CGOOngoingProject example asVcsSerializedCargoProject
+	"
+	^ 'OngoingProject {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
 	#units : [
-		CGOPackageUnit {
-			#name : #Test,
+		OngoingPackageUnit {
+			#name : #UnitTest,
 			#description : ''A simple ongoing package unit.'',
 			#dependencies : [ ]
 		}

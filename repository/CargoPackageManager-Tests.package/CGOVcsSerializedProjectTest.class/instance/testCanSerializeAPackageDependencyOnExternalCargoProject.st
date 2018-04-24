@@ -7,7 +7,7 @@ testCanSerializeAPackageDependencyOnExternalCargoProject
 	
 	self 
 		assert: projectStonString
-		equals: 'CGOProject {
+		equals: 'OngoingProject {
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
 	#externalProjects : {
@@ -19,7 +19,7 @@ testCanSerializeAPackageDependencyOnExternalCargoProject
 		}
 	},
 	#units : [
-		CGOPackageUnit {
+		OngoingPackageUnit {
 			#name : #Counter-UI-Spec,
 			#description : ''Core package with the counter UI based on Spec.'',
 			#dependencies : [

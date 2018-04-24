@@ -8,8 +8,7 @@
 	"instvars" : [
 		"dependencies",
 		"provisions",
-		"platformRequirements",
-		"src"
+		"platformRequirements"
 	],
 	"name" : "CGOPackageUnit",
 	"type" : "normal"

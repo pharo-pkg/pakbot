@@ -6,8 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"parts",
-		"projectRepository"
+		"parts"
 	],
 	"name" : "CGOPackageAssembly",
 	"type" : "normal"

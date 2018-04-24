@@ -1,3 +1,3 @@
 printing
 printOn: aStream
-	aStream << name << '@' << (version asString) << ' project'
+	aStream << name << '@' << (version asString) << ' (project)'

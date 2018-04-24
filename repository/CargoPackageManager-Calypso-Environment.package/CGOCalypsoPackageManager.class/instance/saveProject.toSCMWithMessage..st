@@ -1,3 +1,3 @@
 operations
 saveProject: aCGOProject toSCMWithMessage: message 
-	aCGOProject asOngoingProject saveToSCM: message
+	aCGOProject asOngoingPackage saveToSCM: message

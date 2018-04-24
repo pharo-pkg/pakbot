@@ -5,4 +5,4 @@ testCanCreateMinimalOngoingPackageUnit
 	
 	self 
 		assert: unit class 
-		equals: CGOOngoingPackageUnit 
+		equals: CGOOngoingPackageUnit

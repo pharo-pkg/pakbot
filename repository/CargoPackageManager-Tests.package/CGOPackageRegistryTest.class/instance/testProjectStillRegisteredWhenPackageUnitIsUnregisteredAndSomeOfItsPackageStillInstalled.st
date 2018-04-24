@@ -2,10 +2,10 @@ tests
 testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled
 	| project unit unit2 |
 	project := CGOOngoingProject example.
+	project registry: registry.
 	unit := project packageUnits anyOne.
-	unit2 := project newPackageUnit: #Unit2.
 	registry register: unit.
-	registry register: unit2.
+	unit2 := project newPackageUnit: #Unit2. "registers #Unit2"
 	
 	registry unregister: unit.
 	

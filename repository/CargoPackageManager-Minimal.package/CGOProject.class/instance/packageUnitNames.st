@@ -1,3 +1,3 @@
 accessing
 packageUnitNames
-	^ unitNames
+	^ units collect: #packageName

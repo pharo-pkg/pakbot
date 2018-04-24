@@ -1,0 +1,1 @@
+Current version of avirtual  package  metadata. As a PackageVersion is not editable, it is the only way  to update it.

@@ -1,6 +1,6 @@
 deserialization
 flushIn: aCGOOngoingProject
-	"Flush information from this SerializableProject into the provided CGOProject.
+	"Flush information from this VcsSerializedProject into the provided CGOProject.
 	All instance variables will be set with values from the SerializableProject"
 	name isNil
 		ifTrue: [ CGOPackageManagerError new 

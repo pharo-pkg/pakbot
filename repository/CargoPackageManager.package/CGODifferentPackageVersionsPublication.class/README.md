@@ -1,1 +1,0 @@
-Error thrown when one tries to publish a package with a different version than its project

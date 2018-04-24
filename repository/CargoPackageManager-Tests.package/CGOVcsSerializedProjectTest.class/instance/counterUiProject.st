@@ -5,7 +5,7 @@ counterUiProject
 	project := (CGOOngoingProject for: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		addExternalCargoProject: #Counter -> (CGOCargoProjectDependency repositoryUrl: 'github://demarey/pharo-counter-ui:master');
-		registry: 'registry';
+		registry: CGOPackageRegistry new;
 		yourself.
 		
 	(project newPackageUnit: #'Counter-UI-Spec')

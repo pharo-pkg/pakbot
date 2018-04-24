@@ -1,3 +1,3 @@
 printing
 printOn: aStream
-	aStream << self packageName << '@' << (version asString)
+	aStream << self packageName << '@' << (self version asString)

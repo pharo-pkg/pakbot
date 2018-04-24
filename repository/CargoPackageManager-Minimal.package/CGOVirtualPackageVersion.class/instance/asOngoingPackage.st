@@ -1,0 +1,3 @@
+converting
+asOngoingPackage
+	^ CGOOngoingVirtualPackage fromPackageVersion: self

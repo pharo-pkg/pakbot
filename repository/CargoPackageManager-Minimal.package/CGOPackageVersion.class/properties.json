@@ -7,11 +7,9 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"package",
-		"version",
 		"description",
-		"timestamp",
-		"projectName",
-		"registry"
+		"project",
+		"timestamp"
 	],
 	"name" : "CGOPackageVersion",
 	"type" : "normal"

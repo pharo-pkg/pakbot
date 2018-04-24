@@ -1,3 +1,3 @@
 ston
 stonName
-	^ #CGOPackageAssemblyVersion
+	^ #CGOPublishedPackageAssembly

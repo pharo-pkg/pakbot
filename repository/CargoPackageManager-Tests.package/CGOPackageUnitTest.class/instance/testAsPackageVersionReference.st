@@ -1,6 +1,6 @@
 tests-converting
 testAsPackageVersionReference
 	| pkgVersion pkgVersionReference |
-	pkgVersion := CGOPackageVersion fromString: 'A@1.0'.
+	pkgVersion := CGOPackageUnit example.
 	pkgVersionReference := pkgVersion asPackageVersionReference.
-	self assert: pkgVersionReference asString equals: 'A@1.0.0'.
+	self assert: pkgVersionReference asString equals: 'UnitTest@2.1.0'.

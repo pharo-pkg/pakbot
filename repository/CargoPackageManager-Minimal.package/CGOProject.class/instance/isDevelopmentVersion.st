@@ -1,3 +1,0 @@
-testing
-isDevelopmentVersion
-	^ version isDevelopmentVersion

@@ -8,8 +8,12 @@ testCanConvertOngoingToProject
 		equals: CGOProject.
 	
 	self 
-		assert: project name
-		equals: ongoingProject name.
+		assert: project packageName
+		equals: ongoingProject packageName.
+		
+	self 
+		assert: project version
+		equals: ongoingProject version.
 		
 	self
 		assert: project packageUnitNames

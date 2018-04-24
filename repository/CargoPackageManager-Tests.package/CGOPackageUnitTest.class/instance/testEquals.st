@@ -1,15 +1,17 @@
 tests
 testEquals
-	| pkgA pkgB |
+	| pkgA pkgB project |
 	
-	pkgA := CGOPackageVersion fromString: 'A@1.0'.
-	pkgB := CGOPackageVersion fromString: 'B@1.0'.
+	pkgA := CGOPackageUnit example. "UnitTest@2.1"
+	pkgB := CGOPackageUnit example
+				instVarNamed: 'package' put: (CGOPackageProvider default packageNamed: #UnitFoo);
+				yourself.  "UnitFoo@2.1"
 	
-	self assert: pkgA equals: (CGOPackageVersion fromString: 'A@1.0').
+	self assert: pkgA equals: CGOPackageUnit example.
 	self assert: pkgA ~= pkgB.
 	
-	pkgB := CGOPackageVersion fromString: 'A@1.0'.
-	self assert: pkgA equals: pkgB.
-	
-	pkgA instVarNamed: 'version' put: '1.1' asSemanticVersion.
-	self assert: pkgA ~= (CGOPackageVersion fromString: 'B@0').
+	project := CGOPackageUnit example project 
+		instVarNamed: 'version' put: '2.0' asSemanticVersion;
+		yourself.
+	pkgA instVarNamed: 'project' put: project.
+	self assert: pkgA ~= CGOPackageUnit example.

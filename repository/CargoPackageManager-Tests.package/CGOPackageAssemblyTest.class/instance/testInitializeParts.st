@@ -5,7 +5,8 @@ testInitializeParts
 		with: #package -> #A
 		with: #version -> '1.0'
 		with: #parts -> { #foo -> #('=1.1') .
-								#bar -> #('=2.0') }.
+								#bar -> #('=2.0') }
+		with: #project -> CGOProject example.
 	assembly := CGOPackageVersion newFrom: dictionary.
 	self
 		assert: assembly parts first

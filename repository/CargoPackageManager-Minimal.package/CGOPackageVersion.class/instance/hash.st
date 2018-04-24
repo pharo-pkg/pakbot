@@ -1,3 +1,3 @@
 comparing
 hash
-	^ (self packageName , version printString) hash
+	^ (self packageName , self version printString) hash
