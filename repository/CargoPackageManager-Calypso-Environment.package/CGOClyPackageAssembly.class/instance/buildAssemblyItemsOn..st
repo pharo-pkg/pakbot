@@ -4,4 +4,4 @@ buildAssemblyItemsOn: items
 	cargoAssembly assemblies
 		do: [ :each | 
 			group := CGOClyPackageAssembly of: project on: each.
-			items add: group asEnvironmentItem ]
+			items add: group asCalypsoBrowserItem ]

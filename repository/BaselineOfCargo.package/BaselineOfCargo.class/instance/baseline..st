@@ -39,11 +39,12 @@ baseline: spec
 					versionString: #'bleedingEdge';
 					loads: #('REST');
 					repository: 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/' ];
-			project: 'Calypso' with: [ "Cargo has a project plugin for Calypso browser"
-				spec
-					className: #ConfigurationOfCalypso;
-					versionString: #stable;
-					repository: 'http://smalltalkhub.com/mc/Pharo/Calypso/main/' ].
+			baseline: 'Calypso' with: [ 
+				spec repository: 'github://dionisiydk/Calypso:v0.8.x' ];
+			project: 'CalypsoEnvironment' copyFrom: 'Calypso' with: [
+				spec loads: 'FullEnvironment' ];
+			project: 'CalypsoBrowser' copyFrom: 'Calypso' with: [
+				spec loads: 'default'].				
 		spec 
 			package: #CargoPackageManager with: [
 				spec requires: #(#'CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos' "'Iceberg'"). ];
@@ -62,9 +63,9 @@ baseline: spec
 			package: #'CargoPackageManager-UI' with: [
 				spec requires: #(#CargoPackageManager ). ];
 			package: #'CargoPackageManager-Calypso-Environment' with: [
-				spec requires: #(#CargoPackageManager #Calypso). ];
+				spec requires: #(#CargoPackageManager #CalypsoEnvironment). ];
 			package: #'CargoPackageManager-Calypso-Browser' with: [
-				spec requires: #(#CargoPackageManager #Calypso #'CargoPackageManager-UI' #'CargoPackageManager-Calypso-Environment'). ];
+				spec requires: #(#CargoPackageManager #CalypsoBrowser #'CargoPackageManager-UI' #'CargoPackageManager-Calypso-Environment'). ];
 			package: 'CargoPackageManager-Utils' with: [
 				spec requires: #('DependencyAnalyser' ). ];
 			package: #'CargoPackageManager-Utils-Tests' with: [
