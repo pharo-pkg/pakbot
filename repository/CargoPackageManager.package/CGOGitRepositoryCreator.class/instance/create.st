@@ -2,10 +2,10 @@ building
 create
 	| iceRepository |
 	iceRepository := IceRepositoryCreator new 
-			remote: (IceRemote url: self icebergUrl);
+			addRemote: self icebergUrl;
 			subdirectory: subdirectory;
-			location: location;
-			iceRepository.
+			location: location";
+			To fix: iceRepository".
 	^ CGOGitRepository 
 		url: self icebergUrl
 		repository: iceRepository

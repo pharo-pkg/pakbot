@@ -2,7 +2,7 @@ tests
 testCanCreateRepositoryFromIcebergRepository
 	| iceRepository repository |
 	iceRepository := IceRepositoryCreator new 
-			remote: (IceRemote url: 'https://github.com/demarey/pharo-counter.git');
+			addRemote: 'https://github.com/demarey/pharo-counter.git';
 			location: FileLocator temp / ('pharo-tests-' , DateAndTime now asFileNameCompatibleString);
 			subdirectory: '';
 			createRepository. 
