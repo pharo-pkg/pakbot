@@ -1,5 +1,5 @@
 activation
 systemBrowserAssemblyShortcutActivator
-	<commandActivator>
+	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyPackageGroupContextOfFullBrowser 
+	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   

@@ -1,5 +1,5 @@
 activation
 systemBrowserUnitMenuActivator
-	<commandActivator>
+	<classAnnotation>
 	
 	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyPackageContextOfFullBrowser 

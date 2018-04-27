@@ -1,6 +1,6 @@
 activation
 systemBrowserToolbarActivator
-	<commandActivator>
+	<classAnnotation>
 	^ ClyToolbarCommandActivation
 		byItemOf: ClyButtonToolbarGroup
-		for: ClyProjectContextOfFullBrowser  
+		for: ClyEmptyClassSelectionContext new, ClyProjectContextOfFullBrowser  

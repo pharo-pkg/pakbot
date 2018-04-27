@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 7/6/2017 11:43",
-	"super" : "ClyEnvironmentPlugin",
+	"super" : "ClySystemEnvironmentPlugin",
 	"category" : "CargoPackageManager-Calypso-Environment",
 	"classinstvars" : [ ],
 	"pools" : [ ],

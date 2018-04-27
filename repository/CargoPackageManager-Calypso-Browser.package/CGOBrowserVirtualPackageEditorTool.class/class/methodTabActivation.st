@@ -2,4 +2,4 @@ accessing
 methodTabActivation
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: ClyPackageGroupContextOfFullBrowser 
+	^ClyTabActivationStrategy for: CGOClyVirtualPackage asCalypsoItemContext  

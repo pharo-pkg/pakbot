@@ -1,8 +1,8 @@
 activation
 systemBrowserToolbarActivator
-	<commandActivator>
+	<classAnnotation>
 	
 	^ ClyToolbarCommandActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1020
-		for: ClyProjectContextOfFullBrowser  
+		for: ClyManagedProject asCalypsoItemContext, ClyEmptyClassSelectionContext new

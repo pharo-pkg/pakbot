@@ -1,3 +1,3 @@
 building groups
-createClassQueryFrom: aPackageScope
-	^ClyUnknownQuery instance
+createClassQueryFrom: aPackageScope 
+	^ClyAllClasses sortedFrom: aPackageScope

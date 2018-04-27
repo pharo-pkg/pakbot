@@ -1,3 +1,3 @@
 accessing
 packageUnitNames
-	^ self packageUnits collect: #targetedPackage
+	^ self packageUnits collect: #packageName

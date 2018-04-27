@@ -1,7 +1,7 @@
 initialization
 build
 	| virtual |
-	virtual := context lastSelectedPackageGroup cargoPackage.
+	virtual := context lastSelectedProjectChild cargoPackage.
 	
 	self 
 		addMorph: (CGOVirtualPackageView buildOnOngoing: virtual asOngoingPackageVersion)

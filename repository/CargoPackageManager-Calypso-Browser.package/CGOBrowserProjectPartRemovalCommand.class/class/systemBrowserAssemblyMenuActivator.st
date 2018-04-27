@@ -1,5 +1,5 @@
 activation
 systemBrowserAssemblyMenuActivator
-	<commandActivator>
+	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyPackageGroupContextOfFullBrowser  
+	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
