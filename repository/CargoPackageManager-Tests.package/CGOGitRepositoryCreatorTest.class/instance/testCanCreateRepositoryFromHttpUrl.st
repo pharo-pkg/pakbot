@@ -11,5 +11,5 @@ testCanCreateRepositoryFromHttpUrl
 		assert: repository class 
 		equals: CGOGitRepository.
 	self 
-		assert: repository iceRepository origin url
+		assert: repository iceRepository remote url
 		equals: 'https://github.com/demarey/cargo.git'

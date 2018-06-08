@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "PackageManifest",
+	"category" : "CargoPackageManager-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "ManifestCargoPackageManagerTests",
+	"type" : "normal"
+}

@@ -1,9 +1,10 @@
 actions
 ensureCloned
-	| location |
-	location := self iceRepository location.
-	(location exists not or: [ location hasChildren not ])
-		ifTrue: 
-			[ self iceRepository backend 
-				cloneRepositoryFrom: (IceRemote url: self repositoryUrl)
-				branch: (version ifNil: [ 'master' ]) ].
+	| commitish |
+	self isCloned
+		ifFalse: [ iceRepository := iceRepository createRepository ].
+
+	commitish := version ifNil: [ 'master' ].
+	(self isBranch: commitish)
+		ifTrue: [ self syncBranchWithOrigin: commitish ]
+		ifFalse: [ self syncToCommitish: commitish ]

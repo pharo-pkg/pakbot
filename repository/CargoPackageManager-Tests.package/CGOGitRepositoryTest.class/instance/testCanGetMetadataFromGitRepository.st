@@ -2,7 +2,7 @@ tests
 testCanGetMetadataFromGitRepository
 	| project |
 	"CGOPackageVersion"
-	project := CGOOngoingProject fromStonString: self pharoCounterMaster projectMetadataStonString.
+	project := CGOOngoingProject fromStonString: self pharoCounterMasterCloned projectMetadataStonString.
 	
 	self 
 		assert: project packageName

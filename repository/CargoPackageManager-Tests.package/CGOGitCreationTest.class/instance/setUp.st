@@ -1,6 +1,5 @@
 running
 setUp
-	IceRepository defaultBackend: IceLibgitLocalRepository.
 	CGOGitHostedPackageVersionEnforcingProtocol useHttpsUrl.
 
 	iceCredentialsProviderBackup := IceCredentialsProvider providerType.

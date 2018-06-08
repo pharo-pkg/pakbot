@@ -1,3 +1,3 @@
 querying
 currentCommitId
-	^ iceRepository headCommit commitId
+	^ iceRepository headCommit id

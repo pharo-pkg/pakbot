@@ -10,5 +10,5 @@ testCanCreateRepositoryFromGitHubUrl
 		assert: repository class
 		equals: CGOGitRepository.
 	self 
-		assert: repository iceRepository origin url
+		assert: repository iceRepository remote url
 		equals: 'git@github.com:demarey/pharo-counter.git'
