@@ -1,5 +1,5 @@
 initialization
 initializeOn: aPackageName withConstraints: aConstraintList
 	super initialize.
-	targetedPackage := aPackageName asSymbol.
+	self initializeTargetAndScopeFrom: aPackageName.
 	constraints := Array newFrom: aConstraintList

@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGODependencyTest",
+	"name" : "CGOPackageDependencyTest",
 	"type" : "normal"
 }
