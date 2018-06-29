@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Tests-LauncherRessource",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"registry",
+		"project"
+	],
+	"name" : "PharoLauncherProject",
+	"type" : "normal"
+}

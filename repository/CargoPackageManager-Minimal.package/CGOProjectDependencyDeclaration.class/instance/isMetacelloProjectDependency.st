@@ -1,0 +1,3 @@
+testing
+isMetacelloProjectDependency
+	^ false
