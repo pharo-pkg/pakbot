@@ -9,21 +9,11 @@ addons:
 # Select operating system(s)
 os:
   - linux
-#  - osx
+  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
-  - Pharo-6.0
-#  - Pharo-5.0 (disabled because 2 tests fail: ExternalData(Object)>>doesNotUnderstand: #readStringUTF8. Pb coming from Iceberg)
-
-smalltalk_edge:
-  source: estebanlm/smalltalkCI
-  branch: dev
-
-env:
-  global:
-  - PHARO_VM=stable
-  - LINUX_HEARTBEAT=threaded
+  - Pharo-7.0
 
 # configuration
 before_script:
