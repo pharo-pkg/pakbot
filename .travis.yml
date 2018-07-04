@@ -1,10 +1,7 @@
 language: smalltalk
 sudo: false
 
-addons:
-  apt:
-    packages:
-    - mongodb-org-server
+services: mongodb
 
 # Select operating system(s)
 os:
