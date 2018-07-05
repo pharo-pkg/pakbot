@@ -62,9 +62,9 @@ baseline: spec
 			package: #'CargoPackageManager-UI' with: [
 				spec requires: #(#CargoPackageManager ). ];
 			package: #'CargoPackageManager-Calypso-Environment' with: [
-				spec requires: #(#CargoPackageManager #Calypso). ];
+				spec requires: #(#CargoPackageManager ). ];
 			package: #'CargoPackageManager-Calypso-Browser' with: [
-				spec requires: #(#CargoPackageManager #Calypso #'CargoPackageManager-UI' #'CargoPackageManager-Calypso-Environment'). ];
+				spec requires: #(#CargoPackageManager  #'CargoPackageManager-UI' #'CargoPackageManager-Calypso-Environment'). ];
 			package: 'CargoPackageManager-Utils' with: [
 				spec requires: #('DependencyAnalyser' ). ];
 			package: #'CargoPackageManager-Utils-Tests' with: [

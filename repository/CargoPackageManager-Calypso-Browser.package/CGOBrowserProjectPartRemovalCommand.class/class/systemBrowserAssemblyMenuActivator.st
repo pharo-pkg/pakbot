@@ -2,4 +2,4 @@ activation
 systemBrowserAssemblyMenuActivator
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
+	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
