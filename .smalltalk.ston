@@ -1,4 +1,5 @@
 SmalltalkCISpec {
+  #name : 'Cargo',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Cargo',
