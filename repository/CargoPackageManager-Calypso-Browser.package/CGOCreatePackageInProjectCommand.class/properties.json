@@ -9,6 +9,6 @@
 		"project",
 		"unitName"
 	],
-	"name" : "CGOBrowserPackageUnitCreationCommand",
+	"name" : "CGOCreatePackageInProjectCommand",
 	"type" : "normal"
 }
