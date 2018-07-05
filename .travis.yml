@@ -13,8 +13,6 @@ smalltalk:
   - Pharo-7.0
   
 matrix:
-  include:
-    - smalltalk_config: .client.ston
   allow_failures: # Allow bleeding edge builds to fail
     - smalltalk_config: .server.ston
     - smalltalk_config: .failingTests.ston
