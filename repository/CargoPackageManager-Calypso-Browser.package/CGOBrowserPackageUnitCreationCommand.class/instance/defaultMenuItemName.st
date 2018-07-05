@@ -1,3 +1,3 @@
 initialization
 defaultMenuItemName
-	^ 'New unit'
+	^ 'New Package'
