@@ -4,7 +4,8 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'Cargo',
       #directory : 'repository',
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+	  #load : ['tests-client']
     }
   ]
 }
