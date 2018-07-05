@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-Utils-FailingTests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"imageDependencies"
+	],
+	"name" : "PMPackageDependenciesCheckerTest",
+	"type" : "normal"
+}

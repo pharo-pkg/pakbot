@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOTest",
+	"category" : "CargoPackageManager-FailingTests-Model-Serialization",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOVcsSerializedProjectTest",
+	"type" : "normal"
+}
