@@ -14,7 +14,6 @@ smalltalk:
   
 matrix:
   include: 
-    - smalltalk_config: .smalltalk.ston
     - smalltalk_config: .server.ston
     - smalltalk_config: .failingTests.ston
   allow_failures: # Allow bleeding edge builds to fail
