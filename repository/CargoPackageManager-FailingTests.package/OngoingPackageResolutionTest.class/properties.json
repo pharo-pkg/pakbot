@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOTest",
+	"category" : "CargoPackageManager-FailingTests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OngoingPackageResolutionTest",
+	"type" : "normal"
+}

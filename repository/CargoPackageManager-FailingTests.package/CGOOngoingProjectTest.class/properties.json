@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOProjectTest",
+	"category" : "CargoPackageManager-FailingTests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"defaultPackageRepository",
+		"testPackageRepository",
+		"fs"
+	],
+	"name" : "CGOOngoingProjectTest",
+	"type" : "normal"
+}
