@@ -18,11 +18,12 @@ baseline: spec
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' 'ZincHTTPComponents') ];
 				package: #'CargoPackageManager-RepositoryBackend'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'Voyage') ];
+					
 				package: #'CargoPackageManager-Spec';
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
 				package: #'CargoPackageManager-Tests'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources') ];
+					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI'
 					with: [ spec requires: #(CargoPackageManager) ];
@@ -40,8 +41,8 @@ baseline: spec
 				group: 'server'
 					with:
 					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests'
-					with:
-					#('CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests');
+				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests');
+				group: 'tests-server' with: #('server' 'tests-client');
+				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
 				group: 'development' with: #(client server tests utils) ]
