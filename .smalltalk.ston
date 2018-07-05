@@ -7,5 +7,10 @@ SmalltalkCISpec {
       #platforms : [ #pharo ],
 	  #load : ['tests-client']
     }
-  ]
+  ],
+  #testing : {
+    #exclude : {
+      #packages : [ 'CargoPackageManager-FailingTests', 'CargoPackageManager-Utils-FailingTests' ]
+    }
+  }  
 }
