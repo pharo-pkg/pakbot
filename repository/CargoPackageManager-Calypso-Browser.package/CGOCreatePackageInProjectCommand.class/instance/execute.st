@@ -1,8 +1,8 @@
 execution
 execute
 	unitName := UIManager default 
-		request: 'Package unit name' 
-		initialAnswer: ''.
+		request: 'New package name' 
+		initialAnswer: project name, '-'.
 	unitName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ].
 	
 	(toolContext systemEnvironment packageOrganizer includesPackageNamed: unitName)
