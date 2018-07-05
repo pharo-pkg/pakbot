@@ -2,4 +2,7 @@ activation
 systemBrowserMenuActivator
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyManagedProject asCalypsoItemContext 
+	^ CmdContextMenuActivation
+		byItemOf: CGOSCMMenuGroup
+		order: 10000
+		for: ClyManagedProject asCalypsoItemContext 
