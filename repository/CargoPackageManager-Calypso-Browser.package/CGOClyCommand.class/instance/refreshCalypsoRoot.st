@@ -1,3 +1,5 @@
 private
 refreshCalypsoRoot
-	toolContext tool packageView dataSource environmentCursor observedContent changedBy: nil
+
+	toolContext tool packageView dataSource isDirty
+		ifTrue: [ toolContext tool packageView dataSource runUpdate ]

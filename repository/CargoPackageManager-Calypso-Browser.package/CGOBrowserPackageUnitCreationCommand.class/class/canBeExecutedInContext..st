@@ -1,3 +1,3 @@
-initialization
+accessing
 canBeExecutedInContext: aToolContext
 	^ aToolContext isProjectSelected
