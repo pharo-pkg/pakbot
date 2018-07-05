@@ -2,7 +2,7 @@ saving
 savePackageUnit: packageUnit withMessage: commitMessage
 	| iceSavedPackage newMcVersion |
 	iceSavedPackage := self ensureIcePackageNamed: packageUnit packageName.
-	iceSavedPackage workingCopy ifNil: [ ^ nil "nothing to save" ].
+	iceSavedPackage repository workingCopy ifNil: [ ^ nil "nothing to save" ].
 	newMcVersion := self iceRepository 
 		internalSavePackage: iceSavedPackage
 		withMessage: commitMessage.

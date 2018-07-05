@@ -5,12 +5,7 @@ SmalltalkCISpec {
       #baseline : 'Cargo',
       #directory : 'repository',
       #platforms : [ #pharo ],
-	  #load : ['tests-client']
+	  #load : ['tests-server']
     }
-  ],
-  #testing : {
-    #exclude : {
-      #packages : [ 'CargoPackageManager-FailingTests', 'CargoPackageManager-Utils-FailingTests' ]
-    }
-  }  
+  ]
 }

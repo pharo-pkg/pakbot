@@ -9,7 +9,7 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-    #exclude : {
+    #include : {
       #packages : [ 'CargoPackageManager-FailingTests', 'CargoPackageManager-Utils-FailingTests' ]
     }
   }  
