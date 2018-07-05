@@ -8,6 +8,6 @@
 	"instvars" : [
 		"projectName"
 	],
-	"name" : "CGOBrowserProjectCreationCommand",
+	"name" : "CGOCreateProjectCommand",
 	"type" : "normal"
 }
