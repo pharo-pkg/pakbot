@@ -1,7 +1,7 @@
 language: smalltalk
 sudo: false
 
-services: mongodb
+# services: mongodb
 
 # Select operating system(s)
 os:
