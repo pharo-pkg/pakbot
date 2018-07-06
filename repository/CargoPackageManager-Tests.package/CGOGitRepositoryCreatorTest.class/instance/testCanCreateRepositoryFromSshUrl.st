@@ -12,4 +12,4 @@ testCanCreateRepositoryFromSshUrl
 		equals: CGOGitRepository.
 	self 
 		assert: repository iceRepository remote url
-		equals: 'git@github.com:demarey/pharo-counter.git'
+		equals: 'git://git@github.com:demarey/pharo-counter.git'

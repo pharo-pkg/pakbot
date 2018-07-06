@@ -9,4 +9,4 @@ testCanCreateRepositoryFromSshUrlWithNoProtocol
 		equals: CGOGitRepository.
 	self 
 		assert: repository repositoryUrl
-		equals: 'git@github.com:demarey/pharo-counter.git'.
+		equals: 'git://git@github.com:demarey/pharo-counter.git'.
