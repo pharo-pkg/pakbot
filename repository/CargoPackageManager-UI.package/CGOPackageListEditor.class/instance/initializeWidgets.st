@@ -16,6 +16,5 @@ initializeWidgets
 		icon: (Smalltalk ui icons iconNamed: #removeIcon);
 		enabled: false;
 		help: self removeButtonHelpString.
-	packageTree := self newTree
-		displayBlock: [ :package | self displayStringFor: package ];
-		whenBuiltDo: [ packageTree roots: self buildRoots ]
+	packageTree := self newFastTable.
+	self initializeTable

@@ -2,9 +2,9 @@ initialization
 initializePresenter
 	super initializePresenter.
 
-	packageTree whenSelectedNodesChanged: [:selection |
+"	packageTree whenSelectedNodesChanged: [:selection |
 		removeButton enabled: selection notEmpty.
-		editButton enabled: selection notEmpty ].
+		editButton enabled: selection notEmpty ]."
 	
 	addButton action: 
 		[ self addAction.
