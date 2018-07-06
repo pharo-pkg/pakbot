@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"iceCredentialsProviderBackup"
+		"iceCredentialsProviderBackup",
+		"oldRemoteTypeSelector"
 	],
 	"name" : "CGOGitCreationTest",
 	"type" : "normal"
