@@ -11,4 +11,4 @@ accept
 		^ self ].
 	
 	items do: [ :each |
-		self model newPackageUnit: each name ]
+		self model importPackageNamed: each name ]

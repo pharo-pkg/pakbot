@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"registry",
+		"systemPackageOrganizer"
+	],
+	"name" : "CGOPackageImportTest",
+	"type" : "normal"
+}
