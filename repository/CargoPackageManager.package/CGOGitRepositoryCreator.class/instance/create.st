@@ -2,7 +2,7 @@ building
 create
 	| iceRepository |
 	iceRepository := IceRepositoryCreator new 
-			addRemote: self icebergUrl;
+			addRemote: url asString;
 			subdirectory: subdirectory;
 			location: location";
 			To fix: iceRepository".

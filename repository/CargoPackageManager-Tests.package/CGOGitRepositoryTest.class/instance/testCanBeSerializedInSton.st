@@ -7,6 +7,6 @@ testCanBeSerializedInSton
 	self 
 		assert: repositoryStonString
 		equals: 'CGOGitRepository {
-	#repositoryUrl : ''git+ssh://git@github.com/demarey/pharo-counter.git'',
+	#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
 	#version : ''master''
 }'
