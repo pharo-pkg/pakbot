@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "RepositoryBasedTest",
+	"category" : "CargoPackageManager-FailingTests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"solver"
+	],
+	"name" : "CGOSolverSeasideTest",
+	"type" : "normal"
+}

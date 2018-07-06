@@ -1,6 +1,11 @@
 tests
 testCanSavePackageAndItsMetadata
 	| repository mcVersion message |
+	
+	self flag:#todo.
+	"This functionality uses old Iceberg API, should be migrated"
+	self skip.
+	
 	repository := self pharoCounterMasterCloned.
 	message := 'commit from test #testCanSavePackageAndItsMetadata'.
 	mcVersion := repository 

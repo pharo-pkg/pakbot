@@ -1,3 +1,0 @@
-initialization
-defaultMenuItemName
-	^ 'New unit'

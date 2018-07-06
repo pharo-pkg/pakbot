@@ -11,7 +11,8 @@
 		"virtualPackages",
 		"repository",
 		"registry",
-		"externalProjects"
+		"externalProjects",
+		"systemPackageOrganizer"
 	],
 	"name" : "CGOOngoingProject",
 	"type" : "normal"
