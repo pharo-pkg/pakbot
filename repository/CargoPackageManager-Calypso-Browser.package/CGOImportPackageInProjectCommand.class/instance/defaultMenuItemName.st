@@ -1,0 +1,3 @@
+initialization
+defaultMenuItemName
+	^ 'Import Package'

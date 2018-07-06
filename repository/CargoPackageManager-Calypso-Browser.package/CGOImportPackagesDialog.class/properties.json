@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "GuillermoPolito 7/5/2018 17:06",
+	"super" : "ComposablePresenter",
+	"category" : "CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"model",
+		"packagesList",
+		"packageNameText",
+		"acceptButton",
+		"cancelButton"
+	],
+	"name" : "CGOImportPackagesDialog",
+	"type" : "normal"
+}

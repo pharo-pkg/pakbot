@@ -1,0 +1,1 @@
+I am a menu group gathering together all SCM menu items (like commit, pull, push).

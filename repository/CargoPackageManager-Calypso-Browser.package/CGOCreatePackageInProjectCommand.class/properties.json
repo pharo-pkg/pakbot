@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "ChristopheDemarey 5/12/2017 16:15",
+	"super" : "CGOClyCommand",
+	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"unitName"
+	],
+	"name" : "CGOCreatePackageInProjectCommand",
+	"type" : "normal"
+}
