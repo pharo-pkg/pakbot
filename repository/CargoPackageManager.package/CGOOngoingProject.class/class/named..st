@@ -1,5 +1,5 @@
 instance creation
-for: aProjectName
+named: aProjectName
 	^ self basicNew
 		initializeWithProjectName: aProjectName;
 		yourself 
