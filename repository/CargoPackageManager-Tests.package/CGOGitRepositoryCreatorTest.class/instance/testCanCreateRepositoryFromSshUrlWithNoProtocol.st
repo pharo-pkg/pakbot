@@ -1,6 +1,5 @@
 tests
 testCanCreateRepositoryFromSshUrlWithNoProtocol
-	| repository |
 
 	repository := CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
 		
@@ -9,4 +8,4 @@ testCanCreateRepositoryFromSshUrlWithNoProtocol
 		equals: CGOGitRepository.
 	self 
 		assert: repository repositoryUrl
-		equals: 'git://git@github.com:demarey/pharo-counter.git'.
+		equals: 'git://git@github.com/demarey/pharo-counter.git'.

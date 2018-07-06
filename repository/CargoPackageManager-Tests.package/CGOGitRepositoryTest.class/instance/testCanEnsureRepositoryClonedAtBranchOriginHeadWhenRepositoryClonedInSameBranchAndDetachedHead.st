@@ -1,6 +1,6 @@
 tests
 testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepositoryClonedInSameBranchAndDetachedHead
-	| iceRepository repository location |
+	| iceRepository location |
 	location := self gitRepoUniqueLocation.
 	iceRepository := IceRepositoryCreator new 
 			addRemote: 'git@github.com:demarey/pharo-counter';

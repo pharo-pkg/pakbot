@@ -1,6 +1,6 @@
 tests
 testCanBeSerializedInSton
-	| repository repositoryStonString |
+	| repositoryStonString |
 	repository := self pharoCounterMasterCloned.
 	repositoryStonString := STON toStringPretty: repository.
 	

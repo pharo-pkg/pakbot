@@ -1,5 +1,6 @@
 tests
 testCanDetectGitRepositoryNotClonedWhenMissingLocation
-	| repository |
-	repository := self pharoCounterMaster.
-	self deny: repository isCloned
+
+	| repo |
+	repo := self pharoCounterMaster.
+	self deny: repo isCloned

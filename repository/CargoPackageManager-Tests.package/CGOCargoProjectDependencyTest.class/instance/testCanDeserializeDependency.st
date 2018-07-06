@@ -9,7 +9,7 @@ testCanDeserializeDependency
 		}'.
 	self 
 		assert: dependency repositoryUrl
-		equals: 'git@github.com:demarey/pharo-counter-ui.git'.
+		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
 	self 
 		assert: dependency version
 		equals: 'master'.
