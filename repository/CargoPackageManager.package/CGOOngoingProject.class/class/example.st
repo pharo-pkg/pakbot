@@ -1,6 +1,6 @@
 example
 example
-	^ (self for: #'MyProject')
+	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
 		packageUnits: { CGOOngoingPackageUnit example };
 		yourself

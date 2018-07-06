@@ -1,7 +1,7 @@
 example
 example
-	^ (self for: #'TestAssembly')
+	^ (self for: #TestAssembly)
 		description: 'A simple ongoing package assembly.';
 		parts: #('Unit1' 'Unit2');
-		project: (CGOOngoingProject for: #'MyProject'); 
+		project: (CGOOngoingProject named: #MyProject);
 		yourself

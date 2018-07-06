@@ -1,7 +1,7 @@
 instance creation
 fromVcsSerializedProject: aVcsSerializedProject
 	| ongoing |
-	ongoing := self new
+	ongoing := self basicNew
 		registry: CGOPackageRegistry default;
 		yourself.
 	aVcsSerializedProject flushIn: ongoing.

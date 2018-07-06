@@ -1,0 +1,1 @@
+I am a dialog that allows to select a set of packages coming from the system. On accept, those packages are added to the configured model.
