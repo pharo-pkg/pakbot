@@ -3,7 +3,7 @@ testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned
 
 	repository := CGOGitRepositoryCreator new
 		githubUrl: 'github://demarey/pharo-counter:master';
-		location: self gitRepoUniqueLocation;
+		location: self iceRepositoryLocation;
 		create.
 		
 	self deny: repository iceRepository location exists.
