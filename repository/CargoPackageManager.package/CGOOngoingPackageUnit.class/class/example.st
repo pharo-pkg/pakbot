@@ -1,6 +1,6 @@
 example
 example
-	^ (self for: #'UnitTest')
+	^ (self for: #UnitTest)
 		description: 'A simple ongoing package unit.';
-		project: (CGOOngoingProject for: #'MyProject'); 
+		project: (CGOOngoingProject named: #MyProject);
 		yourself
