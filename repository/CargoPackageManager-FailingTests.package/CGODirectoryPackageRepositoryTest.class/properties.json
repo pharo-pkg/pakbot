@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-FailingTests-PackageRepository",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packageNames",
+		"temporaryPath",
+		"emptyRepository",
+		"greaseRepository"
+	],
+	"name" : "CGODirectoryPackageRepositoryTest",
+	"type" : "normal"
+}

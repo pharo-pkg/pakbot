@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "CGOTest",
+	"category" : "CargoPackageManager-FailingTests-Loader",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "PackageLoadGroupTest",
+	"type" : "normal"
+}

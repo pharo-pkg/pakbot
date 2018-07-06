@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "RepositoryBasedTest",
+	"category" : "CargoPackageManager-FailingTests-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BleedingEdgeResolutionStrategyTest",
+	"type" : "normal"
+}
