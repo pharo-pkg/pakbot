@@ -1,6 +1,6 @@
 tests
 testCanSavePackageAndItsMetadata
-	| repository mcVersion message |
+	| mcVersion message |
 	
 	self flag:#todo.
 	"This functionality uses old Iceberg API, should be migrated"

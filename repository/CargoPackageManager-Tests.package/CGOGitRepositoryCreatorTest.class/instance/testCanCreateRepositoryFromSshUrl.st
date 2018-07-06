@@ -1,9 +1,8 @@
 tests
 testCanCreateRepositoryFromSshUrl
-	| repository |
 
 	repository := CGOGitRepositoryCreator new
-		url: 'git+ssh://git@github.com/demarey/pharo-counter.git';
+		url: 'git://git@github.com/demarey/pharo-counter.git';
 		version: 'master';
 		create.
 		
@@ -12,4 +11,4 @@ testCanCreateRepositoryFromSshUrl
 		equals: CGOGitRepository.
 	self 
 		assert: repository iceRepository remote url
-		equals: 'git@github.com:demarey/pharo-counter.git'
+		equals: 'git://git@github.com/demarey/pharo-counter.git'

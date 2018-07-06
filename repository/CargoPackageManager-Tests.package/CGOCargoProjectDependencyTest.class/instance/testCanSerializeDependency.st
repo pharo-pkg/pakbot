@@ -8,7 +8,7 @@ testCanSerializeDependency
 		assert: projectDependencyString
 		equals: 'CGOCargoProjectDependency {
 	#repository : CGOGitRepository {
-		#repositoryUrl : ''git+ssh://git@github.com/demarey/pharo-counter-ui.git'',
+		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
 		#version : ''master''
 	}
 }'.

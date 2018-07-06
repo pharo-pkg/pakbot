@@ -1,9 +1,9 @@
 tests
 testCanCreateRepositoryFromIcebergRepository
-	| iceRepository repository |
+	| iceRepository |
 	iceRepository := IceRepositoryCreator new 
 			addRemote: 'https://github.com/demarey/pharo-counter.git';
-			location: FileLocator temp / ('pharo-tests-' , DateAndTime now asFileNameCompatibleString);
+			location: self iceRepositoryLocation;
 			subdirectory: '';
 			createRepository. 
 	repository := CGOGitRepositoryCreator repositoryFromIceRepository: iceRepository.
