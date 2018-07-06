@@ -1,0 +1,3 @@
+testing
+hasScope
+	^ scope isNotNil

@@ -3,7 +3,7 @@ fromProjectDependency: aCGOMetacelloProjectDependency
 	| project |
 	project := self
 		repository: aCGOMetacelloProjectDependency repositoryUrl
-		name: 'TODO'
+		name: aCGOMetacelloProjectDependency name
 		version: aCGOMetacelloProjectDependency version.
 	aCGOMetacelloProjectDependency isMetacelloConfiguration
 		ifTrue: [ project beConfiguration ]

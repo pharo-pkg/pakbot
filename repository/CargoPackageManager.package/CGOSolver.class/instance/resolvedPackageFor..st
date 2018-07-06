@@ -2,7 +2,7 @@ protocol
 resolvedPackageFor: aDependency
 	| packageName ongoingPackageResolution packageVersionRef |
 	
-	packageName := aDependency targetedPackage.
+	packageName := aDependency dependencyName.
 	ongoingPackageResolution := resolution ongoingPackageResolutionFor: packageName.
 	packageVersionRef := (self isVirtual: packageName)
 		ifTrue: [ | pkgVersionString | 

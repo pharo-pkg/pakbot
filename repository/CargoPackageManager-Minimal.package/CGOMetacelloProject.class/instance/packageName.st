@@ -1,0 +1,3 @@
+compatibility - CGOProject
+packageName
+	^ name

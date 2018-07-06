@@ -9,5 +9,6 @@ buildProject
     lets you create new images from any template,
     automatically find and download the appropriate VM to launch your images.
 ';
+		repository: self buildRepository;
 		registry: registry;
 		yourself

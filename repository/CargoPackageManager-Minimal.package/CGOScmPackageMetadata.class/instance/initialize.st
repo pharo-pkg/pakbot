@@ -1,3 +1,3 @@
 initialization
 initialize
-	packageVersions := OrderedCollection new.
+	projects := Dictionary new.

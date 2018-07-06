@@ -4,6 +4,7 @@ testCanGetMetacelloProjects
 	ongoingProject 
 		addExternalCargoProject: 
 			#Ston -> (CGOMetacelloConfigurationProjectDependency 
+				configuration: 'Ston'
 				repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
 				version: #stable).
 				
@@ -11,4 +12,15 @@ testCanGetMetacelloProjects
 	self 
 		assert: metacelloProjects size 
 		equals: 1.
-	metacelloProjects first inspect
+
+	self 
+		assert: metacelloProjects anyOne name
+		equals: 'Ston'.
+	
+	self
+		assert: metacelloProjects anyOne version
+		equals: #stable.
+		
+	self 	
+		assert: metacelloProjects anyOne repository
+		equals: 'http://ss3.gemstone.com/ss/STON' asZnUrl.

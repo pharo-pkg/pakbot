@@ -1,3 +1,3 @@
 querying
 iceSavedPackageVersionFor: packageName
-	^ (iceRepository packageNamed: packageName) latestVersion
+	^ iceRepository workingCopy versionFor: packageName

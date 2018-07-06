@@ -9,7 +9,7 @@ buildPackages
 		addDependencyOn: #'PharoLauncher-Download';
 		addDependencyOn: #'XMLParser::Core';
 		addDependencyOn: #'Ston';
-		addDependencyOn: #'Json'.
+		addDependencyOn: #'JSON'.
 	(project newPackageUnit: #'PharoLauncher-Spec')
 		description: 'PharoLauncher UI.';
 		addDependencyOn: #'PharoLauncher-Core'.

@@ -4,7 +4,7 @@ packagesProviding: aName version: aSemanticVersion forEnvironment: platformAttri
 	"We also ignore platformAttributes as a virtual package has no platform attribute"
 	| virtualPkgVersion |
 	virtualPkgVersion := (CGOPackageVersionReference packageName: aName version: aSemanticVersion).
-	^ packageVersions 
+	^ self packageVersions 
 		select: [ :each | 
 			each isUnit
 			and: [ (each provisions includes: virtualPkgVersion) 
