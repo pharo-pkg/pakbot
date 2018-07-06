@@ -1,3 +1,4 @@
 actions
 addAction
-	ongoingPackageVersion addNewDependency: self
+	
+	CGONewDependencyDialog new openDialogWithSpec

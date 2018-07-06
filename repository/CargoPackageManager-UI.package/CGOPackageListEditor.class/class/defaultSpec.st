@@ -6,8 +6,8 @@ defaultSpec
 				newRow: [ :toolbar |
 					toolbar
 						add: #label;
-						add: #addButton width: 40;
-						add: #editButton width: 40;
-						add: #removeButton width: 40 ]
+						add: #addButton;
+						add: #editButton;
+						add: #removeButton ]
 				height: self toolbarHeight;
 				add: #packageTree ]

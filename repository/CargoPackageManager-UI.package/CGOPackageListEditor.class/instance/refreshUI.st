@@ -1,3 +1,3 @@
 refreshing
 refreshUI
-	packageTree roots: self buildRoots
+	packageTree widget dataSource: self newDataSource

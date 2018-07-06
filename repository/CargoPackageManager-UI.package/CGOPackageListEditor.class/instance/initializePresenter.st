@@ -1,10 +1,11 @@
 initialization
 initializePresenter
 	super initializePresenter.
-
-"	packageTree whenSelectedNodesChanged: [:selection |
-		removeButton enabled: selection notEmpty.
-		editButton enabled: selection notEmpty ]."
+	
+	packageTree widget
+		onAnnouncement: FTSelectionChanged 
+		send: #selectionChanged:
+		to: self.
 	
 	addButton action: 
 		[ self addAction.
