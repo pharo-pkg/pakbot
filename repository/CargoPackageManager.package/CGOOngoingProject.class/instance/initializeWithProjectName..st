@@ -4,5 +4,5 @@ initializeWithProjectName: aProjectName
 	units := Set new.
 	assemblies := Set new.
 	virtualPackages := Set new.
-	externalProjects := Dictionary new.
+	externalProjects := Set new.
 	dependencies := OrderedCollection new

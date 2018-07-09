@@ -1,7 +1,8 @@
-building
+instance creation
 buildAndRegisterIn: aCGOPackageRegistry
 	registry := aCGOPackageRegistry.
-	self buildProject.
-	self buildExternalProjectDependencies.
-	self buildPackages.
+	self
+		buildProject;
+		buildExternalProjectDependencies;
+		buildPackages.
 	^ project

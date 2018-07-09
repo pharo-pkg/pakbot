@@ -2,7 +2,7 @@ loading
 load
 	| metacello |
 	metacello := Metacello new 
-		repository: repository;
+		repository: repository asString;
 		yourself.
 	self isConfiguration
 		ifTrue: [ metacello configuration: name ]

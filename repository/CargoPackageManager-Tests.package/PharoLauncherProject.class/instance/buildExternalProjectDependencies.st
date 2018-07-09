@@ -1,22 +1,27 @@
 building
 buildExternalProjectDependencies
 	project addExternalCargoProject: 
-		#Json -> (CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProjectDependency
+			configuration: 'JSON' 
 			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
 			version: #stable).
 	project addExternalCargoProject: 
-		#Ston -> (CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProjectDependency 
+			configuration: 'Ston'
 			repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
 			version: #stable).
 	project addExternalCargoProject: 
-		#OSProcess -> (CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProjectDependency 
+			configuration: 'OSProcess'
 			repositoryUrl: 'http://www.squeaksource.com/MetacelloRepository'
 			version: #stable).
 	project addExternalCargoProject: 
-		#ProcessWrapper -> (CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProjectDependency 
+			configuration: 'ProcessWrapper'
 			repositoryUrl: 'http://smalltalkhub.com/mc/hernan/ProcessWrapper/main/'
 			version: #bleedingEdge).
 	project addExternalCargoProject: 
-		#ProcessWrapper -> (CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProjectDependency 
+			configuration: 'XMLParser'
 			repositoryUrl: 'hhttp://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
 			version: #stable).

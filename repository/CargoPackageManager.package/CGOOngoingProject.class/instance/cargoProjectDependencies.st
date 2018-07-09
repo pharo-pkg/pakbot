@@ -1,0 +1,3 @@
+accessing
+cargoProjectDependencies
+	^ externalProjects reject: #isMetacelloProjectDependency

@@ -1,5 +1,5 @@
 accessing
 dependencyTargetedPackages
 	^ packageVersion dependencies 
-		collect: #targetedPackage
+		collect: #dependencyName
 		as: Array

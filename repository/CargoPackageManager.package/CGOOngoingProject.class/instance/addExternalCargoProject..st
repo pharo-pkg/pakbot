@@ -1,3 +1,3 @@
 updating
-addExternalCargoProject: anAssociation 
-	externalProjects add: anAssociation
+addExternalCargoProject: aCGOProjectDependencyDeclaration 
+	externalProjects add: aCGOProjectDependencyDeclaration

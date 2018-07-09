@@ -2,6 +2,7 @@ tests
 testCanDeserializeDependency
 	| dependency |
 	dependency := STON fromString: 'CGOMetacelloConfigurationProjectDependency {
+	#configuration : #JSON,
 	#url : ''http://smalltalkhub.com/mc/PharoExtras/JSON/main/'',
 	#version : #stable
 }'.

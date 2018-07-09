@@ -10,7 +10,8 @@
 		"name",
 		"version",
 		"packageNames",
-		"isConfiguration"
+		"isConfiguration",
+		"registry"
 	],
 	"name" : "CGOMetacelloProject",
 	"type" : "normal"

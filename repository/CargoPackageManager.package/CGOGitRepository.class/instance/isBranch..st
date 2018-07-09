@@ -1,4 +1,4 @@
 private
 isBranch: commitish
-	^ iceRepository localBranches
-		anySatisfy: [ :branch | branch name = commitish ]
+	^ iceRepository allBranches
+		anySatisfy: [ :branch | branch name = commitish or: [ branch name endsWith: '/' , commitish ] ]

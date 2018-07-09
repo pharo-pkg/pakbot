@@ -4,7 +4,7 @@ initializeTargetAndScopeFrom: aPackageName
 	index := self indexOfScope: aPackageName.
 	index = 0
 		ifTrue: [ targetedPackage := aPackageName asSymbol ]
-		ifFalse: [ scope := aPackageName asSymbol first: index - 1.
-			targetedPackage := aPackageName asSymbol
+		ifFalse: [ scope := (aPackageName first: index - 1) asSymbol.
+			targetedPackage := (aPackageName
 				copyFrom: index + 2
-				to: aPackageName size ]
+				to: aPackageName size) asSymbol ]
