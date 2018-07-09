@@ -1,4 +1,6 @@
 tests
 testProjectIsUpToDate
 
-	self deny: project isUpToDate.
+	self installProject.
+	self assert: project isUpToDate.
+	self deny: project hasProblems.
