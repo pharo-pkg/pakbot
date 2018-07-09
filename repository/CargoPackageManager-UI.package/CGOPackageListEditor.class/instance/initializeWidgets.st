@@ -3,19 +3,18 @@ initializeWidgets
 	(label := self newLabel) label: self packageListEditorLabel.
 	addButton := self newButton
 		label: nil;
-		icon: (Smalltalk ui icons iconNamed: #addIcon);
+		icon: (self iconNamed: #addIcon);
 		enabled: true;
 		help: self addButtonHelpString.
 	editButton := self newButton
 		label: nil;
-		icon: (Smalltalk ui icons iconNamed: #editIcon);
+		icon: (self iconNamed: #editIcon);
 		enabled: false;
 		help: self editButtonHelpString.
 	removeButton := self newButton
 		label: nil;
-		icon: (Smalltalk ui icons iconNamed: #removeIcon);
+		icon: (self iconNamed: #removeIcon);
 		enabled: false;
 		help: self removeButtonHelpString.
-	packageTree := self newTree
-		displayBlock: [ :package | self displayStringFor: package ];
-		whenBuiltDo: [ packageTree roots: self buildRoots ]
+	packageTree := self newFastTable.
+	self initializeTable

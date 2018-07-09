@@ -1,9 +1,9 @@
 tests
 testCanDetectGitRepositoryCloned
-	| repository location |
-	location := self gitRepoUniqueLocation.
+	| location |
+	location := self iceRepositoryLocation.
 	IceRepositoryCreator new 
-			addRemote: 'git@github.com:demarey/pharo-counter';
+			addRemote: 'https://github.com/demarey/pharo-counter';
 			subdirectory: '';
 			location: location;
 			createRepository.

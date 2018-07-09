@@ -12,7 +12,8 @@
 		"repository",
 		"registry",
 		"externalProjects",
-		"systemPackageOrganizer"
+		"systemPackageOrganizer",
+		"dependencies"
 	],
 	"name" : "CGOOngoingProject",
 	"type" : "normal"

@@ -1,3 +1,7 @@
 accessing
 selectedPackage
-	^ packageTree selectedItem ifNotNil: [ :node | node content ]
+	| selectedIndex |
+	selectedIndex := packageTree widget selectedRowIndex.
+	selectedIndex = 0 ifTrue: [ ^ nil ].
+	
+	^ packageTree widget dataSource elementAt: selectedIndex

@@ -1,3 +1,3 @@
 private - displaying
 assemblyIcon
-	^ Smalltalk ui icons iconNamed: #groupIcon
+	^ self iconNamed: #groupIcon

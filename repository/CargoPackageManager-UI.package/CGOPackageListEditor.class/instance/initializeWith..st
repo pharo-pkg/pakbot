@@ -1,4 +1,4 @@
 initialization
 initializeWith: anOngoingPackageUnit
-	super initialize.
-	ongoingPackageVersion := anOngoingPackageUnit
+	ongoingPackageVersion := anOngoingPackageUnit.
+	self initialize

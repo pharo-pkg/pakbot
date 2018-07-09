@@ -4,4 +4,4 @@ githubUrl: aStringOrUrl
 	(self class isGitHubScheme: url) ifFalse: [ ^ self ].
 	
 	version := self commitishFrom: url.
-	url := ('git+ssh://git@github.com/' , url host , (url pathPrintString copyUpToLast: $:) , '.git') asZnUrl
+	url := ('git://git@github.com/' , url host , (url pathPrintString copyUpToLast: $:) , '.git') asZnUrl

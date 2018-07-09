@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "ITOptionDialog",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"acceptCallback",
+		"cancelCallback"
+	],
+	"name" : "CGONewDependencyDialog",
+	"type" : "normal"
+}

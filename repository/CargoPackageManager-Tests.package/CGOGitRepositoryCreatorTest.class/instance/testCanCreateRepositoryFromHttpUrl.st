@@ -1,6 +1,5 @@
 tests
 testCanCreateRepositoryFromHttpUrl
-	| repository |
 
 	repository := CGOGitRepositoryCreator new
 		url: 'https://github.com/demarey/cargo.git';
