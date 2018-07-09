@@ -1,4 +1,8 @@
 running
 tearDown
+
+	(#JSON asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.	
+	MetacelloProjectRegistration registry configurationRegistry removeKey: 'ConfigurationOfJSON' ifAbsent: [].
 	
-	^ (#JSON asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.
+	super tearDown.
+	

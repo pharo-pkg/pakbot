@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "ChristopheDemarey 3/31/2014 17:14",
-	"super" : "CGOAbstractDependency",
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "CargoPackageManager-Minimal-Dependencies",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"targetedPackage"
+		"project"
 	],
-	"name" : "CGOAbstractPackageDependency",
+	"name" : "CGOAbstractDependency",
 	"type" : "normal"
 }
