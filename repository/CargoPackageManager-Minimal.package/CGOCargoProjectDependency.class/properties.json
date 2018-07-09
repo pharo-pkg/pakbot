@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"repository"
+		"repository",
+		"name",
+		"constraints"
 	],
 	"name" : "CGOCargoProjectDependency",
 	"type" : "normal"

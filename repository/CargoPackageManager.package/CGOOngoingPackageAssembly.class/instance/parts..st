@@ -1,3 +1,3 @@
 updating
 parts: aListOfCGOPackageDependency
-	parts := aListOfCGOPackageDependency collect: #asPackageDependency
+	parts := aListOfCGOPackageDependency
