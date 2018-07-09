@@ -1,0 +1,3 @@
+accessing
+groupInputText
+	^ groupInputText

@@ -1,4 +1,7 @@
 specs
 defaultSpec
 	^ SpecLayout composed
-		add: #overview
+		newRow: [ :row | 
+			row
+				add: #overview;
+				add: #dependencies ]
