@@ -5,7 +5,7 @@ testCanCreateACGOMetacelloProjectFromAConfigurationProjectDependency
 	
 	self 
 		assert: project name
-		equals: 'TODO'.
+		equals: 'JSON'.
 	
 	self
 		assert: project version

@@ -7,4 +7,3 @@ SystemOrganization addCategory: #'CargoPackageManager-Tests-SCM'!
 SystemOrganization addCategory: #'CargoPackageManager-Tests-Solver'!
 SystemOrganization addCategory: #'CargoPackageManager-Tests-Solver'!
 SystemOrganization addCategory: #'CargoPackageManager-Tests-Solver'!
-er-Tests-Solver'!

@@ -1,9 +1,9 @@
 ston
 fromSton: stonReader
-	| repository |
+	| metacelloConfigDependency |
 	
-	repository := super fromSton: stonReader.
-	^ repository 
-		initializeWithName: repository configuration 
-		repositoryUrl: repository repositoryUrl
-		version: repository version
+	metacelloConfigDependency := super fromSton: stonReader.
+	^ metacelloConfigDependency 
+		initializeWithName: metacelloConfigDependency name 
+		repositoryUrl: metacelloConfigDependency repositoryUrl
+		version: metacelloConfigDependency version
