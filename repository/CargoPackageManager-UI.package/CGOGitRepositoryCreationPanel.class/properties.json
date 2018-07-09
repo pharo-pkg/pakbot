@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 11/3/2017 15:51",
-	"super" : "ComposableModel",
+	"super" : "ComposablePresenter",
 	"category" : "CargoPackageManager-UI",
 	"classinstvars" : [ ],
 	"pools" : [ ],

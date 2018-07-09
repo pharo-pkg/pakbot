@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #name : 'Cargo',
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Cargo',
+      #directory : 'repository',
+      #platforms : [ #pharo ],
+	  #load : ['tests-client']
+    }
+  ],
+  #testing : {
+    #include : {
+      #packages : [ 'CargoPackageManager-FailingTests', 'CargoPackageManager-Utils-FailingTests' ]
+    }
+  }  
+}

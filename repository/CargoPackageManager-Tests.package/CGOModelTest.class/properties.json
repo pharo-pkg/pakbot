@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 1/31/2017 14:23",
-	"super" : "BabyMock2TestCase",
+	"super" : "TestCase",
 	"category" : "CargoPackageManager-Tests-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],

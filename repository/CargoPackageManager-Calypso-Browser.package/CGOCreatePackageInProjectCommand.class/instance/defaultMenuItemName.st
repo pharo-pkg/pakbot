@@ -1,0 +1,3 @@
+initialization
+defaultMenuItemName
+	^ 'New Package'

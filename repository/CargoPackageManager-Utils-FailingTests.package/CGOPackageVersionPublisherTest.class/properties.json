@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Utils-FailingTests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fs",
+		"pkgRepository"
+	],
+	"name" : "CGOPackageVersionPublisherTest",
+	"type" : "normal"
+}

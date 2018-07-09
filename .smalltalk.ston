@@ -1,9 +1,16 @@
 SmalltalkCISpec {
+  #name : 'Cargo',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Cargo',
       #directory : 'repository',
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+	  #load : ['tests-client']
     }
-  ]
+  ],
+  #testing : {
+    #exclude : {
+      #packages : [ 'CargoPackageManager-FailingTests', 'CargoPackageManager-Utils-FailingTests' ]
+    }
+  }  
 }
