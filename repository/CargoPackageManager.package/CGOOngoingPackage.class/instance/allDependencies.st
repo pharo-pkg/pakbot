@@ -1,4 +1,4 @@
-accessing - dependencies
+dependencies
 allDependencies
 	
 	^ self subclassResponsibility
