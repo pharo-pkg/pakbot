@@ -2,7 +2,7 @@ utils
 installProject
 
 	Metacello new
-		configuration: 'JSON';
-		repository: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/';
-		version: '1.2';
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '2.0';
 		load.
