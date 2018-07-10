@@ -1,0 +1,1 @@
+Abstract class for all the commands that works on projects.
