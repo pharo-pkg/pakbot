@@ -1,3 +1,7 @@
 printing
 printOn: aStream
-	aStream << self packageVersion asString
+	aStream
+		<< self class name
+		<< '('
+		<< self packageVersion asString
+		<< ')'
