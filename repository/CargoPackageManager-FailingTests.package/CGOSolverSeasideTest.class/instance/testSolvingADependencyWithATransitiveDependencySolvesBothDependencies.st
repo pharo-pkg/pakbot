@@ -9,5 +9,5 @@ testSolvingADependencyWithATransitiveDependencySolvesBothDependencies
 	resolution := solver solveDependency: dependencyToSolve.
 
 	self 
-		assert: resolution resolvedDependencies size 
+		assert: resolution resolvedVersions size 
 		equals: 2

@@ -24,6 +24,7 @@ baseline: spec
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
 				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources') ];
+				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI'
@@ -42,7 +43,7 @@ baseline: spec
 				group: 'server'
 					with:
 					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests' 'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests');
+				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests' 'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 'CargoPackageManager-IntegrationTests');
 				group: 'tests-server' with: #('server' 'tests-client');
 				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
