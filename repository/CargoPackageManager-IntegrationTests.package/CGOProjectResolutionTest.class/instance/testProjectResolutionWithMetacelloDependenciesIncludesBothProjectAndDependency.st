@@ -3,8 +3,7 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 
 	| project testRegistry resolution configurationProject |
 	testRegistry := CGOPackageRegistry new.	
-	project := CGOOngoingProject example.
-	testRegistry register: project.
+	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := CGOMetacelloConfigurationProject
 		configuration: 'CargoTestProject'

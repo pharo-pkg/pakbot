@@ -3,8 +3,7 @@ testProjectWithoutDependenciesResolvesToItself
 
 	| project testRegistry resolution |
 	testRegistry := CGOPackageRegistry new.	
-	project := CGOOngoingProject example.
-	testRegistry register: project.
+	project := testRegistry newProjectNamed: 'Test'.
 	
 	resolution := CGOSolver new
 		repositories: { testRegistry };
