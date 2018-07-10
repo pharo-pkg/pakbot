@@ -1,4 +1,4 @@
-tests
+*CargoPackageManager-FailingTests
 testCanPublishAProjectAndItsPackages
 	| packages |
 	ongoingProject assemblies: { CGOOngoingPackageAssembly for: #AllPackages in: ongoingProject name }.

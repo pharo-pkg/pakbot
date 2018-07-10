@@ -6,7 +6,7 @@ testCanDeserializeAPackageDependencyOnExternalCargoProject
 	
 	dependency := project packageUnits anyOne dependencies first.
 	self 
-		assert: dependency targetedPackage
+		assert: dependency dependencyName
 		equals: 'Counter::Counter-Core'.
 	
 	self 
@@ -22,4 +22,4 @@ testCanDeserializeAPackageDependencyOnExternalCargoProject
 		equals: CGOCargoProjectDependency.
 	self
 		assert: externalProject repositoryUrl 
-		equals: 'git@github.com:demarey/pharo-counter-ui.git'.
+		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
