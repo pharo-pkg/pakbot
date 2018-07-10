@@ -6,7 +6,7 @@ tearDown
 				(each getName asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem].
 			aClass package removeFromSystem. ].
 		
-	MetacelloProjectRegistration registry configurationRegistry removeKey: 'CargoTestExample' ifAbsent: [].
+	MetacelloProjectRegistration registry configurationRegistry removeKey: 'ConfigurationOfCargoTestExample' ifAbsent: [].
 	
 	super tearDown.
 	
