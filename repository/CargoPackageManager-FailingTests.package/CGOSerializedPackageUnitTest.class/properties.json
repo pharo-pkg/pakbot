@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "<historical>",
-	"super" : "CGOTest",
+	"super" : "TestCase",
 	"category" : "CargoPackageManager-FailingTests-Model-Serialization",
 	"classinstvars" : [ ],
 	"pools" : [ ],

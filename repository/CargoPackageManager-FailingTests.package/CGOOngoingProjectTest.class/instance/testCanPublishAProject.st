@@ -1,4 +1,4 @@
-tests
+*CargoPackageManager-FailingTests
 testCanPublishAProject
 	| published |
 	ongoingProject publish.

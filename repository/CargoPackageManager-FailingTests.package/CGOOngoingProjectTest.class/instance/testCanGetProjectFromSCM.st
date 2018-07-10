@@ -1,4 +1,4 @@
-tests
+*CargoPackageManager-FailingTests
 testCanGetProjectFromSCM
 	| projectSourceRepositoryMock project |
 	projectSourceRepositoryMock := protocol mock: 'projectSourceRepositoryMock'.

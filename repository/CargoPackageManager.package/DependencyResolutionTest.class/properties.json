@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
-	"super" : "CGOTest",
-	"category" : "CargoPackageManager-FailingTests-Solver",
+	"super" : "BabyMock2TestCase",
+	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
