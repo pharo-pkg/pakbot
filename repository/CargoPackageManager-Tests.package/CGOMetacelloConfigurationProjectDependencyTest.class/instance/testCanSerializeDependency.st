@@ -1,7 +1,7 @@
 tests
 testCanSerializeDependency
 	| projectDependencyString |
-	projectDependencyString := STON toStringPretty: CGOMetacelloConfigurationProjectDependency example.
+	projectDependencyString := STON toStringPretty: CGOMetacelloConfigurationProject example.
 	
 	self 
 		assert: projectDependencyString

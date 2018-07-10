@@ -1,0 +1,4 @@
+testing
+fitsPlatformRequirements
+	
+	^ self subclassResponsibility

@@ -10,7 +10,7 @@ testLoadPackageMetacelloDependency
 	testRegistry register: ongoingProject.
 	
 	ongoingProject addExternalCargoProject: 
-		(CGOMetacelloConfigurationProjectDependency 
+		(CGOMetacelloConfigurationProject 
 			configuration: 'CargoTestExample'
 			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 			version: '1.0').

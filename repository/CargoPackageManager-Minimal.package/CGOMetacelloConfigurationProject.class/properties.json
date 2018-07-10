@@ -10,6 +10,6 @@
 		"version",
 		"configuration"
 	],
-	"name" : "CGOMetacelloConfigurationProjectDependency",
+	"name" : "CGOMetacelloConfigurationProject",
 	"type" : "normal"
 }
