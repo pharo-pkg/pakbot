@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "CGODependencyStatusTest",
-	"category" : "CargoPackageManager-Tests-Model",
+	"category" : "CargoPackageManager-IntegrationTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "TestCase",
-	"category" : "CargoPackageManager-Tests-Model",
+	"category" : "CargoPackageManager-IntegrationTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
