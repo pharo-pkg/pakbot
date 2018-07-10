@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "ChristopheDemarey 6/12/2018 09:06",
 	"super" : "CGOAbstractPackageDependency",
-	"category" : "CargoPackageManager-Minimal-Model",
+	"category" : "CargoPackageManager-Minimal-Dependencies",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

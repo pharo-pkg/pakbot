@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "ChristopheDemarey 4/2/2014 17:25",
 	"super" : "CGODependencyConstraint",
-	"category" : "CargoPackageManager-Minimal-Model",
+	"category" : "CargoPackageManager-Minimal-Dependencies",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
