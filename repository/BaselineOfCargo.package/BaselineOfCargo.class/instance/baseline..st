@@ -46,4 +46,5 @@ baseline: spec
 				group: 'tests-server' with: #('server' 'tests-client');
 				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
-				group: 'development' with: #(client server tests utils) ]
+				group: 'development' with: #(client server tests utils);
+				group: 'default' with: 'tests-client' ]
