@@ -1,5 +1,5 @@
 operations
 createProjectNamed: aString
 	| project |
-	project := CGOOngoingProject for: aString asSymbol.
+	project := CGOOngoingProject named: aString asSymbol.
 	cargoRegistry register: project

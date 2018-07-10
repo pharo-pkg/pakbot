@@ -1,12 +1,14 @@
 {
 	"commentStamp" : "ChristopheDemarey 1/26/2018 11:26",
 	"super" : "CGOProjectDependencyDeclaration",
-	"category" : "CargoPackageManager-Minimal-Model",
+	"category" : "CargoPackageManager-Minimal-Dependencies",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"repository"
+		"repository",
+		"name",
+		"constraints"
 	],
 	"name" : "CGOCargoProjectDependency",
 	"type" : "normal"

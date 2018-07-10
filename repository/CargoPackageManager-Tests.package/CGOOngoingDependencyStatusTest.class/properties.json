@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGODependencyStatusTest",
+	"category" : "CargoPackageManager-Tests-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOOngoingDependencyStatusTest",
+	"type" : "normal"
+}
