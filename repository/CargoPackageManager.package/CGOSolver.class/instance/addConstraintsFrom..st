@@ -6,4 +6,4 @@ addConstraintsFrom: aDependency
 		do: [ :constraint |
 			self 
 				addConstraint: constraint
-				on: aDependency dependencyName ]
+				on: aDependency name ]

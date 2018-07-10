@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "CGOProjectTest",
-	"category" : "CargoPackageManager-Tests-Model",
+	"category" : "CargoPackageManager-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
