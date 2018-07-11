@@ -1,17 +1,21 @@
 tests
-testProjectLoadingWithMetacelloDependenciesV1LoadsCorrespondingClassesInSystem
+testProjectLoadingWithIndirectMetacelloDependenciesV1LoadsCorrespondingClassesInSystem
 
-	| project testRegistry configurationProject |
+	| projectOne projectTwo testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
-	project := testRegistry newProjectNamed: 'Test'.
-	
+	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
+	projectOne addDependency: (CGOCargoProjectDependency
+		named: 'ProjectTwo'
+		version: '=0.0.0-N/A').
+		
+	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
 	configurationProject := CGOMetacelloConfigurationProject
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
+	projectTwo addDependency: configurationProject.
 	
-	project addDependency: configurationProject.
-	project load.
+	projectOne load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').

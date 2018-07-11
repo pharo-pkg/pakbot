@@ -10,7 +10,6 @@ testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-
 	projectOne load.
 	
 	self assert: projectOne isLoaded.
