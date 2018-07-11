@@ -1,4 +1,4 @@
 loading
-resolution
+resolve
 	
 	^ registry newSolver solveProject: self

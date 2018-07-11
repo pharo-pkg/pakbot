@@ -15,7 +15,7 @@ testProjectResolutionWithIndirectMetacelloDependenciesIncludesBothProjectAndDepe
 		version: '1.0'.
 	projectTwo addDependency: configurationProject.
 	
-	resolution := projectOne resolution.
+	resolution := projectOne resolve.
 
 	self assert: (resolution includesVersion: projectOne).
 	self assert: (resolution includesVersion: projectTwo).

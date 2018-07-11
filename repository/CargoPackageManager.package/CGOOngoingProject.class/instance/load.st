@@ -1,4 +1,4 @@
 loading
 load
 	
-	self resolution load
+	self resolve load
