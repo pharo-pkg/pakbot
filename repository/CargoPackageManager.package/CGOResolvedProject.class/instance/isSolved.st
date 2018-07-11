@@ -1,3 +1,3 @@
 testing
 isSolved
-	^ packageVersion isNotNil
+	^ resolvedProjectVersion isNotNil

@@ -15,13 +15,13 @@ testEquals
 	self assert: resolvedDep1 equals: resolvedDep2.
 	
 	resolvedDep1 := CGOResolvedProject new
-				packageVersion: (CGOPackageVersion fromString: 'pkgA@1');
+				resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1');
 				yourself.
 	resolvedDep2 := CGOResolvedProject new
-				packageVersion: (CGOPackageVersion fromString: 'pkgA@1.1');
+				resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1.1');
 				yourself.
 	self assert: (resolvedDep1 = resolvedDep2) not.
-	resolvedDep2 packageVersion: (CGOPackageVersion fromString: 'pkgA@1').
+	resolvedDep2 resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1').
 	self assert: resolvedDep1 equals: resolvedDep2.
 
 	dep1 :=  CGOPackageDependency on: pkgA for: nil.

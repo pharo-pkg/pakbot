@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"packageVersion",
-		"originDependencies"
+		"originDependencies",
+		"resolvedProjectVersion"
 	],
 	"name" : "CGOResolvedProject",
 	"type" : "normal"

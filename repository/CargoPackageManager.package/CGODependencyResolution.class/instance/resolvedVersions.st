@@ -1,4 +1,4 @@
 accessing
 resolvedVersions
 	
-	^ ongoingPackageResolutions values collect: [ :each | each packageVersion ]
+	^ ongoingPackageResolutions values collect: [ :each | each resolvedProjectVersion ]

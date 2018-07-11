@@ -1,3 +1,3 @@
 testing
 fitsPlatformRequirements
-	^ packageVersion fitsPlatformRequirements
+	^ resolvedProjectVersion fitsPlatformRequirements

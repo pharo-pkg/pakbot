@@ -1,4 +1,4 @@
 accessing
 dependencyTargetedPackages
 
-	^ packageVersion dependencies collect: [ :each | each name ]
+	^ resolvedProjectVersion dependencies collect: [ :each | each name ]

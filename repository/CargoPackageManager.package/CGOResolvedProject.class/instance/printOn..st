@@ -3,5 +3,5 @@ printOn: aStream
 	aStream
 		<< self class name
 		<< '('
-		<< self packageVersion asString
+		<< self resolvedProjectVersion asString
 		<< ')'
