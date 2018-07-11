@@ -7,7 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"constraintsMap",
-		"resolution",
 		"repositories",
 		"defaultPackageVersionStrategy",
 		"defaultVirtualPackageResolutionStrategy"

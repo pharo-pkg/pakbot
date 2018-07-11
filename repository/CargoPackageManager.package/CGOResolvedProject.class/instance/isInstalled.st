@@ -1,0 +1,4 @@
+testing
+isInstalled
+	
+	^ resolvedProjectVersion isInstalled

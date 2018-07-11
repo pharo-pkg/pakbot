@@ -7,4 +7,4 @@ testResolutionOfProjectIsResolutionRoot
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	resolution := projectOne resolve.
 	
-	self assert: resolution root equals: (resolution resolutionFor: projectOne)
+	self assert: resolution equals: (resolution resolutionFor: projectOne)

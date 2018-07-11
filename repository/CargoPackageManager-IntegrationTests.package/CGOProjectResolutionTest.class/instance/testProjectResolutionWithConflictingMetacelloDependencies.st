@@ -1,6 +1,7 @@
 tests
 testProjectResolutionWithConflictingMetacelloDependencies
 
+	<expectedFailure>
 	| project testRegistry resolution configurationProjectV1 configurationProjectV2 |
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
@@ -18,9 +19,9 @@ testProjectResolutionWithConflictingMetacelloDependencies
 	project addDependency: configurationProjectV1.
 	project addDependency: configurationProjectV2.
 
-1halt.	
 	resolution := testRegistry newSolver solveProject: project.
 
+	self fail
 "	self assert: (resolution includesVersion: project).
 	self assert: (resolution includesVersion: configurationProject).
 	self assert: resolution resolvedVersions size equals: 2."

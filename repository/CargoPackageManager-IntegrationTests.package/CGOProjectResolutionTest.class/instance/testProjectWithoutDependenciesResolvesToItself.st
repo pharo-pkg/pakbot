@@ -7,5 +7,4 @@ testProjectWithoutDependenciesResolvesToItself
 	
 	resolution := testRegistry newSolver solveProject: project.
 
-	self assert: (resolution includesVersion: project).
-	self assert: resolution resolvedVersions size equals: 1.
+	self assert: (resolution includesResolvedTarget: project)

@@ -1,3 +1,3 @@
 adding
-addOriginDependency: aDependency
+rootProject: aDependency
 	originDependencies add: aDependency

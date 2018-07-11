@@ -9,7 +9,6 @@ testProjectLoadingInstructionsWithMetacelloProjectDependencyHasMetacelloLoadingI
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
-	
 	projectOne addDependency: configurationProject.
 	resolution := projectOne resolve.
 

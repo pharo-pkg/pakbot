@@ -1,13 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "BabyMock2TestCase",
-	"category" : "CargoPackageManager-FailingTests",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"dependency",
 		"resolution"
 	],
-	"name" : "DependencyResolutionTest",
+	"name" : "CGOResolvedDependency",
 	"type" : "normal"
 }

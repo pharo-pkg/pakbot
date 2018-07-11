@@ -1,6 +1,7 @@
 lookup
 resolutionFor: aResolutionTarget
 	
-	resolvedProjectVersion = aResolutionTarget
+	(self resolvesTarget: aResolutionTarget)
 		ifTrue: [ ^ self ].
-	1halt.
+	
+	^ self allSubResolutions detect: [ :any | any resolvesTarget: aResolutionTarget ]
