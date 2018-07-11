@@ -1,6 +1,6 @@
 building
 buildProject
-	project := (CGOOngoingProject for: #PharoLauncher)
+	project := (CGOOngoingProject named: #PharoLauncher)
 		description:
 			'Pharo Launcher is a cross-platform application that
 

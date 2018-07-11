@@ -1,0 +1,1 @@
+I represent a dependency to a project managed by a Metacello ConfigurationOf.
