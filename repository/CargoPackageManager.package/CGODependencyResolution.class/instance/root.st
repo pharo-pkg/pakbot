@@ -1,3 +1,3 @@
 accessing
 root
-	^ self ongoingPackageResolutionFor: rootDependency targetedPackage
+	^ self ongoingPackageResolutionFor: rootDependency name

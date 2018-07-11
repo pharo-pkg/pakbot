@@ -1,7 +1,9 @@
 printing
 printOn: aStream
 	aStream 
-		<< 'a CGODependencyResolution for ';
+		<< self class name;
+		<< '(';
 		<< rootDependency printString;
-		cr;
-		<< ongoingPackageResolutions printString 
+		<< '=>';
+		<< ongoingPackageResolutions printString;
+		<< ')'

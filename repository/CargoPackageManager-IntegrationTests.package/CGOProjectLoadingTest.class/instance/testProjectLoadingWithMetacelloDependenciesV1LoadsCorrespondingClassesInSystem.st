@@ -1,25 +1,18 @@
 tests
-testLoadProjectMetacelloDependency
+testProjectLoadingWithMetacelloDependenciesV1LoadsCorrespondingClassesInSystem
 
-	| ongoingProject testRegistry |
-	<expectedFailure>
+	| project testRegistry configurationProject |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
 	
-	testRegistry := CGOPackageRegistry new.
+	configurationProject := CGOMetacelloConfigurationProject
+		configuration: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '1.0'.
 	
-	ongoingProject := CGOOngoingProject example.
-	testRegistry register: ongoingProject.
+	project addDependency: configurationProject.
+	project load.
 	
-	ongoingProject addDependency:
-		(CGOMetacelloConfigurationProject 
-			configuration: 'CargoTestExample'
-			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-			version: '1.0').
-
-	Cargo new
-		registry: testRegistry;
-		package: ongoingProject name version: ongoingProject version asString;
-		install.
-		
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageB').

@@ -11,10 +11,8 @@ testProjectResolutionWithCargoOngoingProjectDependenciesIncludesBothProjectAndDe
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
 
-	resolution := CGOSolver new
-		repositories: { testRegistry };
-		solveProject: projectOne.
-
+	resolution := testRegistry newSolver solveProject: projectOne.
+	
 	self assert: (resolution includesVersion: projectOne).
 	self assert: (resolution includesVersion: projectTwo).
 	self assert: resolution resolvedVersions size equals: 2.

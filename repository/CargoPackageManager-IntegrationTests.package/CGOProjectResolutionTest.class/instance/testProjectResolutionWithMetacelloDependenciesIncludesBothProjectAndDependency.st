@@ -6,15 +6,13 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := CGOMetacelloConfigurationProject
-		configuration: 'CargoTestProject'
-		repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
+		configuration: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 	
 	project addDependency: configurationProject.
 	
-	resolution := CGOSolver new
-		repositories: { testRegistry };
-		solveProject: project.
+	resolution := testRegistry newSolver solveProject: project.
 
 	self assert: (resolution includesVersion: project).
 	self assert: (resolution includesVersion: configurationProject).

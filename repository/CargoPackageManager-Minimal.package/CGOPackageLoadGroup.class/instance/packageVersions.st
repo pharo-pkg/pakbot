@@ -1,3 +1,3 @@
 accessing
 packageVersions
-	^ packageVersions
+	^ self loadableUnits

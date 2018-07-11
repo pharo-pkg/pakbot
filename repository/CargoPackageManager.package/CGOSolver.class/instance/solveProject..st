@@ -1,4 +1,5 @@
 solving
-solveProject: aProject 
+solveProject: aProject
 	
+	resolution addOriginDependency: aProject .
 	^ self solveDependency: aProject

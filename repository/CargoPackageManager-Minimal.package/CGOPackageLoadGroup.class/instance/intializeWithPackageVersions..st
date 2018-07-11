@@ -1,4 +1,4 @@
 initialization
 intializeWithPackageVersions: aListOfPackageVersions
-	packageVersions := aListOfPackageVersions.
+	loadableUnits := aListOfPackageVersions.
 	self computeName
