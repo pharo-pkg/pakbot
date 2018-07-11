@@ -1,5 +1,4 @@
 accessing
 dependencyTargetedPackages
-	^ packageVersion dependencies 
-		collect: #dependencyName
-		as: Array
+
+	^ packageVersion dependencies collect: [ :each | each name ]
