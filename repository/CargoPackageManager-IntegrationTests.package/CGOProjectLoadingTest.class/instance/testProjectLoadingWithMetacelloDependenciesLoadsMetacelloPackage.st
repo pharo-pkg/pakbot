@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
+testProjectLoadingWithMetacelloDependenciesLoadsMetacelloPackage
 
 	| project testRegistry resolution configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -13,7 +13,7 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 	project addDependency: configurationProject.
 	
 	resolution := testRegistry newSolver solveProject: project.
-
-	self assert: (resolution includesVersion: project).
-	self assert: (resolution includesVersion: configurationProject).
-	self assert: resolution resolvedVersions size equals: 2.
+	resolution load.
+	
+	self assert: project isLoaded.
+	self assert: project isUpToDate.
