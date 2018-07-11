@@ -6,10 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"constraintsMap",
-		"repositories",
-		"defaultPackageVersionStrategy",
-		"defaultVirtualPackageResolutionStrategy"
+		"repositories"
 	],
 	"name" : "CGOSolver",
 	"type" : "normal"
