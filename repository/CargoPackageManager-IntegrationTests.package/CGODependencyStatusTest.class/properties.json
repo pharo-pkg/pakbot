@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "CargoPackageManager-IntegrationTests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"registry",
+		"project",
+		"dependencyToProject",
+		"dependencyToPackage"
+	],
+	"name" : "CGODependencyStatusTest",
+	"type" : "normal"
+}

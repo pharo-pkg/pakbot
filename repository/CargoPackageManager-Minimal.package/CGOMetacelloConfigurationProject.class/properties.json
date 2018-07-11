@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOProjectDependencyDeclaration",
+	"category" : "CargoPackageManager-Minimal-Dependencies",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"url",
+		"version",
+		"configuration"
+	],
+	"name" : "CGOMetacelloConfigurationProject",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOProjectCommand",
+	"category" : "CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGORepairProjectCommand",
+	"type" : "normal"
+}

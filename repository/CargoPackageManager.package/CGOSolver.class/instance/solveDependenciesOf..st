@@ -1,7 +1,6 @@
 protocol
 solveDependenciesOf: aDependency
 	| resolvedPackage | 
-	
 	resolvedPackage := self resolvedPackageFor: aDependency.
 				
 	resolvedPackage packageVersion dependencies 

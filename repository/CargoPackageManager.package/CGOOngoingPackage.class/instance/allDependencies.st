@@ -1,0 +1,4 @@
+dependencies
+allDependencies
+	
+	^ self subclassResponsibility
