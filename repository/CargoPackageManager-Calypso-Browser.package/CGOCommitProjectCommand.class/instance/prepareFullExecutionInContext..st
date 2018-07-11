@@ -2,7 +2,6 @@ initialization
 prepareFullExecutionInContext: aToolContext
 	super prepareFullExecutionInContext: aToolContext.
 	
-	project := aToolContext lastSelectedProject.
 	commitMessage := UIManager default 
 		multiLineRequest: 'Commit message' 
 		initialAnswer: '' 

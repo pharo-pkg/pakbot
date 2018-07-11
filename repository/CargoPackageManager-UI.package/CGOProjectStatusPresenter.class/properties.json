@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "PabloTesone 7/10/2018 20:30",
+	"super" : "ComposablePresenter",
+	"category" : "CargoPackageManager-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"statusLabel",
+		"statusIcon",
+		"actionButton"
+	],
+	"name" : "CGOProjectStatusPresenter",
+	"type" : "normal"
+}

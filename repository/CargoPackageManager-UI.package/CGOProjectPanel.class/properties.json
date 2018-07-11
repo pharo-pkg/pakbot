@@ -8,7 +8,8 @@
 	"instvars" : [
 		"overview",
 		"ongoingPackageUnit",
-		"dependencies"
+		"dependencies",
+		"projectStatus"
 	],
 	"name" : "CGOProjectPanel",
 	"type" : "normal"
