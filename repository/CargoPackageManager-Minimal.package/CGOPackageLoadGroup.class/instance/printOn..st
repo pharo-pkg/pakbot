@@ -5,5 +5,5 @@ printOn: aStream
 		<< '('
 		<< name
 		<< '::'
-		<< packageVersions asString
+		<< loadableUnits asString
 		<< ')'

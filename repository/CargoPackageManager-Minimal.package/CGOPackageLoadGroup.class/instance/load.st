@@ -1,4 +1,4 @@
 loading
 load
-	self loadMetacelloProjects.
-	self loadCargoProjects.
+
+	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit load ]
