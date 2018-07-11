@@ -2,6 +2,6 @@ private
 ongoingPackageResolutionFor: aPackageName
 	^ ongoingPackageResolutions
 		at: aPackageName
-		ifAbsentPut: [ CGOOngoingPackageResolution new
+		ifAbsentPut: [ CGOResolvedProject new
 			targetedPackage: aPackageName;
 			yourself ]

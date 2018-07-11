@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "ChristopheDemarey 2/16/2018 15:41",
-	"super" : "CGOAbstractPackageDependency",
+	"super" : "Object",
 	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -9,6 +9,6 @@
 		"packageVersion",
 		"originDependencies"
 	],
-	"name" : "CGOOngoingPackageResolution",
+	"name" : "CGOResolvedProject",
 	"type" : "normal"
 }

@@ -1,5 +1,5 @@
 private
 ongoingPackageResolutionForPackageVersion: packageVersion
-	^ CGOOngoingPackageResolution new
+	^ CGOResolvedProject new
 		packageVersion: packageVersion;
 		yourself

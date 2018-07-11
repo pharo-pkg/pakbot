@@ -2,6 +2,6 @@ private
 addPackageResolutionFor: aPackageName
 	^ ongoingPackageResolutions
 			at: aPackageName
-			put: (CGOOngoingPackageResolution new
+			put: (CGOResolvedProject new
 				targetedPackage: aPackageName;
 				yourself)
