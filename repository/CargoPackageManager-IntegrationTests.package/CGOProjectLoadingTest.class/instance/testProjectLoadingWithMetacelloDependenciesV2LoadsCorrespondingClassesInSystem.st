@@ -1,7 +1,7 @@
 tests
 testProjectLoadingWithMetacelloDependenciesV2LoadsCorrespondingClassesInSystem
 
-	| project testRegistry resolution configurationProject |
+	| project testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
@@ -11,9 +11,7 @@ testProjectLoadingWithMetacelloDependenciesV2LoadsCorrespondingClassesInSystem
 		version: '2.0'.
 	
 	project addDependency: configurationProject.
-	
-	resolution := testRegistry newSolver solveProject: project.
-	resolution load.
+	project load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').

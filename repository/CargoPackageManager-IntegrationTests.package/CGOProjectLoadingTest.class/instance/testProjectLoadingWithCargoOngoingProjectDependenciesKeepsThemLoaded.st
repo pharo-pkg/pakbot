@@ -1,7 +1,7 @@
 tests
 testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded
 
-	| testRegistry resolution projectOne projectTwo |
+	| testRegistry projectOne projectTwo |
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
@@ -11,9 +11,7 @@ testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
 
-	resolution := testRegistry newSolver solveProject: projectOne.
-
-	resolution load.
+	projectOne load.
 	
 	self assert: projectOne isLoaded.
 	self assert: projectTwo isLoaded.

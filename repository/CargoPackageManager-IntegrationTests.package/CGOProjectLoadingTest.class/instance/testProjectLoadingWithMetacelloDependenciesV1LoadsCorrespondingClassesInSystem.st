@@ -11,9 +11,7 @@ testProjectLoadingWithMetacelloDependenciesV1LoadsCorrespondingClassesInSystem
 		version: '1.0'.
 	
 	project addDependency: configurationProject.
-	
-	resolution := testRegistry newSolver solveProject: project.
-	resolution load.
+	project load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
