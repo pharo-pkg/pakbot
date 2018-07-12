@@ -2,5 +2,5 @@ factory
 newSolver
 	
 	^ CGOSolver new
-		repositories: { self };
+		registry: self;
 		yourself

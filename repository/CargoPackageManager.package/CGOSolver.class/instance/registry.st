@@ -1,0 +1,4 @@
+solving
+registry
+
+	^ registry

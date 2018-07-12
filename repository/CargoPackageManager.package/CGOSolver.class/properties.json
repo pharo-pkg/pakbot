@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"repositories"
+		"registry"
 	],
 	"name" : "CGOSolver",
 	"type" : "normal"

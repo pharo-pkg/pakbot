@@ -12,5 +12,8 @@ solveProject: aProject
 	
 	"Check conflicts"
 	dependencies := resolvedProject allResolvedDependencies.
-	dependencies do: [ :each | each checkConflictsWithDependencies: dependencies ].
+	dependencies do: [ :each | 
+		each
+			checkConflictsWithDependencies: dependencies;
+			checkConflictsWithRegistry: self registry ].
 	^ resolvedProject
