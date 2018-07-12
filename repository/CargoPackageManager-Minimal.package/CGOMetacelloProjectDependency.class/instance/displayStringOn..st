@@ -1,4 +1,4 @@
-ston
+displaying
 displayStringOn: aStream
 	
 	aStream

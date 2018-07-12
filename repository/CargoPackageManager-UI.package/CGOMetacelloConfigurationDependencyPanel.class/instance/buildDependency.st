@@ -7,6 +7,6 @@ buildDependency
 	self assert: self versionInputText text notEmpty description: 'Invalid version'.
 
 	^ CGOMetacelloConfigurationProject
-		configuration: self configurationNameInputText text
+		name: self configurationNameInputText text
 		repositoryUrl: self repositoryUrlInputText text
 		version: self versionInputText text

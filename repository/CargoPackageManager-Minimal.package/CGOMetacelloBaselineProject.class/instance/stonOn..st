@@ -4,6 +4,6 @@ stonOn: stonWriter
 		writeObject: self
 		streamMap: [ :dictionary |
 			dictionary
-				at: #configuration put: name;
+				at: #baseline put: name;
 				at: #url put: url asString;
 				at: #version put: version. ]

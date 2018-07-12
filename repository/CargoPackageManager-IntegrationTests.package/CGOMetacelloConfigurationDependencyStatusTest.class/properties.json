@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOMetacelloDependencyStatusTest",
+	"name" : "CGOMetacelloConfigurationDependencyStatusTest",
 	"type" : "normal"
 }

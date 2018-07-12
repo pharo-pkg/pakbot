@@ -11,7 +11,7 @@ testLoadPackageMetacelloDependency
 	
 	ongoingProject addExternalCargoProject: 
 		(CGOMetacelloConfigurationProject 
-			configuration: 'CargoTestExample'
+			name: 'CargoTestExample'
 			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 			version: '1.0').
 	ongoingProject packages anyOne addDependencyOn: #'CargoTestExample'.
