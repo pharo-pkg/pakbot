@@ -2,5 +2,5 @@ conflicts
 checkConflictsWithRegistry: aCGOPackageRegistry
 
 	| conflicts |
-	conflicts := aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ].
+	conflicts := aCGOPackageRegistry conflictingProjectsWith: self.
 	dependencyState := dependencyState withConflicts: conflicts.
