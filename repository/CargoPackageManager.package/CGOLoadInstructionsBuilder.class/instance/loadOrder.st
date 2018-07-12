@@ -1,9 +1,9 @@
 loading order
 loadOrder
 	| sortedElements |
-
-	resolution ifNil: [ ^ self ].
-
+	
+	resolution hasConflicts ifTrue: [ self signalConflicts ].
+	
 	sortedElements := MalTopologicalSorting new
 		privateNodes: self reducedGraph; 
 		run.
