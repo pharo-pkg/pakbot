@@ -1,15 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "CGOPackageManagerError",
 	"category" : "CargoPackageManager-Solver",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"dependency",
-		"resolution",
-		"dependencyState"
+		"resolution"
 	],
-	"name" : "CGOResolvedDependency",
+	"name" : "CGOProjectHasConflictsError",
 	"type" : "normal"
 }

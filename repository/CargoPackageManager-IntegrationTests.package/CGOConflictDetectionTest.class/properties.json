@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOProjectLoadingTest",
+	"name" : "CGOConflictDetectionTest",
 	"type" : "normal"
 }
