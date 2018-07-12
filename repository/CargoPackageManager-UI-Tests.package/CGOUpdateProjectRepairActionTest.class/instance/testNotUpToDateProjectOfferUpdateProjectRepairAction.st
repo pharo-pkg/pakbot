@@ -7,4 +7,4 @@ testNotUpToDateProjectOfferUpdateProjectRepairAction
 	
 	repairActions := CGORepairProjectAction allAvailableFor: project.
 	
-	self assert: (repairActions anySatisfy: [ :anAction | anAction isKindOf: CGOUpdateProjectDependenciesAction ])
+	self assert: (repairActions anySatisfy: [ :anAction | anAction isLoadProjectAction ])

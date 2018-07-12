@@ -2,8 +2,7 @@ running
 setUp
 	super setUp.
 	registry := CGOPackageRegistry new.
-	project := CGOOngoingProject named: 'ATestProject'.
-	registry register: project.
+	project := registry newProjectNamed:'ATestProject'.
 
 	dependencyToProject := (CGOMetacelloConfigurationProject  
 		configuration: 'CargoTestExample'
