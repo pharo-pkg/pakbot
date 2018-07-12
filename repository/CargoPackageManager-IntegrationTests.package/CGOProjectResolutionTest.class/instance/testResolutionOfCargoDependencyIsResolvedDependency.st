@@ -1,15 +1,14 @@
 tests
-testResolutionOfProjectDependencyIsResolvedDependency
+testResolutionOfCargoDependencyIsResolvedDependency
 
 	| testRegistry resolution projectOne configurationProject |
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	configurationProject := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
-		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '1.0'.
+	configurationProject := CGOCargoProjectDependency
+		named: 'test-project-source-properties-tonel'
+		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
 	projectOne addDependency: configurationProject.
 	resolution := projectOne resolve.
-	
+
 	self assert: resolution resolvedDependencies anyOne equals: (resolution resolutionFor: configurationProject)

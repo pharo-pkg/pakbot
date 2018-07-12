@@ -5,7 +5,7 @@ testConflictingMetacelloDependencyAndInstalledMetacelloProjectHasConflict
 	testRegistry := CGOPackageRegistry new.	
 
 	project := testRegistry newProjectNamed: 'Test'.
-	configurationProjectV1 := CGOMetacelloConfigurationProject
+	configurationProjectV1 := CGOMetacelloConfigurationProjectDependency
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
@@ -13,7 +13,7 @@ testConflictingMetacelloDependencyAndInstalledMetacelloProjectHasConflict
 	project load.
 	
 	project2 := testRegistry newProjectNamed: 'Test2'.
-	configurationProjectV2 := CGOMetacelloConfigurationProject
+	configurationProjectV2 := CGOMetacelloConfigurationProjectDependency
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0'.

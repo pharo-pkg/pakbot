@@ -1,7 +1,7 @@
 lookup
 resolutionFor: aResolutionTarget
 	
-	(self resolvesTarget: aResolutionTarget)
+	(aResolutionTarget isResolvedBy: self)
 		ifTrue: [ ^ self ].
 	
-	^ self allSubResolutions detect: [ :any | any resolvesTarget: aResolutionTarget ]
+	^ self allSubResolutions detect: [ :any | aResolutionTarget isResolvedBy: any ]

@@ -5,7 +5,7 @@ testProjectLoadingWithMetacelloDependenciesV1LoadsCorrespondingClassesInSystem
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	configurationProject := CGOMetacelloConfigurationProject
+	configurationProject := CGOMetacelloConfigurationProjectDependency
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.

@@ -4,6 +4,10 @@ tearDown
 	| configuration metacelloRegistration |
 	super tearDown.
 	
+	IceRepository registry
+		detect: [ :any | any name = 'test-project-source-properties-tonel' ]
+		ifFound: [ :found | found delete ].
+	
 	"We fetch the loaded configuration and remove it"
 	configuration := Smalltalk
 		at: 'ConfigurationOfCargoTestExample' asSymbol

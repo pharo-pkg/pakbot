@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithIndirectMetacelloDependenciesIncludesBothProjectAndDependencies
+testProjectResolutionWithIndirectCargoDependenciesIncludesBothProjectAndDependencies
 
 	| projectOne projectTwo testRegistry resolution configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -9,14 +9,13 @@ testProjectResolutionWithIndirectMetacelloDependenciesIncludesBothProjectAndDepe
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	configurationProject := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
-		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '1.0'.
+	configurationProject := CGOCargoProjectDependency
+		named: 'test-project-source-properties-tonel'
+		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
 	projectTwo addDependency: configurationProject.
 	
 	resolution := projectOne resolve.
 
 	self assert: (resolution includesResolvedTarget: projectOne).
 	self assert: (resolution includesResolvedTarget: projectTwo).
-	self assert: (resolution includesResolvedTarget: configurationProject).
+	self assert: (resolution includesResolvedTarget: self expectedCargoResolvedProject).

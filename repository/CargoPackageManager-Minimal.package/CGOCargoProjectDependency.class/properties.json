@@ -8,7 +8,8 @@
 	"instvars" : [
 		"repository",
 		"name",
-		"constraints"
+		"constraints",
+		"version"
 	],
 	"name" : "CGOCargoProjectDependency",
 	"type" : "normal"

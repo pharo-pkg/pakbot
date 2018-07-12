@@ -6,7 +6,7 @@ buildDependency
 	self assert: self repositoryUrlInputText text notEmpty description: 'Invalid URL'.
 	self assert: self versionInputText text notEmpty description: 'Invalid version'.
 
-	^ CGOMetacelloConfigurationProject
+	^ CGOMetacelloConfigurationProjectDependency
 		configuration: self configurationNameInputText text
 		repositoryUrl: self repositoryUrlInputText text
 		version: self versionInputText text

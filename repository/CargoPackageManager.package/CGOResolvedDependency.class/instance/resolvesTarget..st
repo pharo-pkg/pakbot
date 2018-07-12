@@ -1,4 +1,4 @@
 solving
 resolvesTarget: aResolutionTarget 
 	
-	^ dependency = aResolutionTarget
+	^ resolution resolvedProjectVersion = aResolutionTarget

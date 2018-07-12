@@ -1,0 +1,4 @@
+resolving
+resolvesDependency: aDependency
+	
+	^ false

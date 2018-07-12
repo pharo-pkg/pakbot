@@ -1,4 +1,4 @@
 example
 exampleConfiguration
 	^ self 
-		fromProjectDependency: CGOMetacelloConfigurationProject example
+		fromProjectDependency: CGOMetacelloConfigurationProjectDependency example
