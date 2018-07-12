@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "ChristopheDemarey 2/16/2018 15:41",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"originDependencies",
+		"resolvedProjectVersion",
+		"resolvedDependencies"
+	],
+	"name" : "CGOResolvedProject",
+	"type" : "normal"
+}

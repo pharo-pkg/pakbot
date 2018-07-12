@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "CargoPackageManager-Solver",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"conflictingDependencies"
+	],
+	"name" : "CGOConflictingDependencyState",
+	"type" : "normal"
+}

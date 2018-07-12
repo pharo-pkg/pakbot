@@ -1,5 +1,5 @@
 loading
 load
 	groups 
-		do: #load
+		do: [ :group | group load ]
 		displayingProgress: [ :group | 'Installing ' , group name ]

@@ -12,7 +12,7 @@ open
 	builder zoomInButton;zoomOutButton.
 	builder title: 'Seaside 3.1 Representation'.
 	builder interaction
-		highlightWhenOver: [ :aPackageVersion | aPackageVersion dependencies collect: [ :item | (resolution resolvedDependencyFor: item targetedPackage) packageVersion ]  ].
+		highlightWhenOver: [ :aPackageVersion | aPackageVersion dependencies collect: [ :item | (resolution resolvedDependencyFor: item targetedPackage) resolvedProjectVersion ]  ].
 	"builder interaction
 		noPopup;
 		on: ROMouseLeftClick
@@ -26,7 +26,7 @@ open
 	builder shape 
 		arrowedLine;
 		arrowedBezierLine.
-	builder edgesToAll: [ :aPackageVersion | aPackageVersion dependencies collect: [ :item | (resolution resolvedDependencyFor: item targetedPackage) packageVersion ] ].
+	builder edgesToAll: [ :aPackageVersion | aPackageVersion dependencies collect: [ :item | (resolution resolvedDependencyFor: item targetedPackage) resolvedProjectVersion ] ].
 	builder treeLayout verticalGap: 50. "Size between the lines of the tree. By default we can't see the edges"
 	builder open.
 	

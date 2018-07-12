@@ -1,0 +1,4 @@
+conflicts
+conflictingDependencies
+	
+	^ dependencyState conflictingDependencies

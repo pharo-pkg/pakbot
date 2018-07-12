@@ -5,9 +5,6 @@ testProjectWithoutDependenciesResolvesToItself
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	resolution := CGOSolver new
-		repositories: { testRegistry };
-		solveProject: project.
+	resolution := testRegistry newSolver solveProject: project.
 
-	self assert: (resolution includesVersion: project).
-	self assert: resolution resolvedVersions size equals: 1.
+	self assert: (resolution includesResolvedTarget: project)

@@ -12,5 +12,5 @@ testCanSolvePackageWithSpecifiedVersion
 	resolution := solver solveDependency: dependency.
 	
 	self 
-		assert: (resolution ongoingPackageResolutionFor: testPackage) packageVersion version
+		assert: (resolution ongoingPackageResolutionFor: testPackage) resolvedProjectVersion version
 		equals: version
