@@ -9,9 +9,8 @@ testProjectLoadingInstructionsWithMetacelloProjectDependencyHasMetacelloLoadingI
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
-	
 	projectOne addDependency: configurationProject.
-	resolution := projectOne resolution.
+	resolution := projectOne resolve.
 
 	"Since the project and its dependencies are already loaded and up to date,
 	the calculated load instructions should strip out all installed things and then be empty"

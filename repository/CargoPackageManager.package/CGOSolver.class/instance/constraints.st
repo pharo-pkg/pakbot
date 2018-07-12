@@ -1,3 +1,0 @@
-protocol
-constraints
-	^ constraintsMap

@@ -2,6 +2,6 @@ loading order
 reducedGraph
 
 	^ MalGraphReducer new
-		addNodesFrom: resolution root
-		childrenBlock: [ :resolvedDependency | resolution dependenciesOf: resolvedDependency ];
+		addNodesFrom: resolution
+		childrenBlock: [ :resolvedDependency | resolvedDependency resolvedDependencies collect: [ :each | each resolution ] ];
 		run

@@ -1,0 +1,4 @@
+accessing
+subresolutions
+	
+	^ self resolvedDependencies
