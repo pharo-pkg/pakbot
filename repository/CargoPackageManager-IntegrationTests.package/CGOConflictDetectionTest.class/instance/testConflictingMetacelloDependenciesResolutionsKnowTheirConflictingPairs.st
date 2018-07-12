@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithConflictingMetacelloDependenciesResolutionsKnowTheirConflictingPairs
+testConflictingMetacelloDependenciesResolutionsKnowTheirConflictingPairs
 
 	| project testRegistry resolution configurationProjectV1 configurationProjectV2 v1Resolution v2Resolution |
 	testRegistry := CGOPackageRegistry new.	

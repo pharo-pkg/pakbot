@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithoutConflictsDependencyResolutionsHaveNoConflictingDependencies
+testNonConflictingDependencyResolutionsHaveNoConflictingDependencies
 
 	| project testRegistry resolution configurationProjectV1 |
 	testRegistry := CGOPackageRegistry new.	

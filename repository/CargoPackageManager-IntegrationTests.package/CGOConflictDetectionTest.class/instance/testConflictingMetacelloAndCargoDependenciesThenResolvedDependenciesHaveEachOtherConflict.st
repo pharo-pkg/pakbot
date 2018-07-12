@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithConflictingMetacelloAndCargoDependenciesThenResolvedDependenciesHaveEachOtherConflict
+testConflictingMetacelloAndCargoDependenciesThenResolvedDependenciesHaveEachOtherConflict
 
 	| project testRegistry resolution configurationProjectV1 configurationProjectV2 resolutionOfV1 resolutionOfV2 |
 	testRegistry := CGOPackageRegistry new.	

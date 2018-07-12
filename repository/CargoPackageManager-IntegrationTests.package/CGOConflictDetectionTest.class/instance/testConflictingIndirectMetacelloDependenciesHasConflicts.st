@@ -1,5 +1,5 @@
 tests
-testProjectResolutionWithIndirectNonConflictingMetacelloDependenciesHasNoConflicts
+testConflictingIndirectMetacelloDependenciesHasConflicts
 
 	| testRegistry projectOne projectTwo |
 	testRegistry := CGOPackageRegistry new.	
@@ -16,6 +16,6 @@ testProjectResolutionWithIndirectNonConflictingMetacelloDependenciesHasNoConflic
 	projectTwo addDependency: (CGOMetacelloConfigurationProject
 		configuration: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '1.0').
+		version: '2.0').
 
-	self deny: projectOne resolve hasConflicts
+	self assert: projectOne resolve hasConflicts

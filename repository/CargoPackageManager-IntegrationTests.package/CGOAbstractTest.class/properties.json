@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "CGOAbstractTest",
+	"super" : "TestCase",
 	"category" : "CargoPackageManager-IntegrationTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "CGOConflictDetectionTest",
+	"name" : "CGOAbstractTest",
 	"type" : "normal"
 }
