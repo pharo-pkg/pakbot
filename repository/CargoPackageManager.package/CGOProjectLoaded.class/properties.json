@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "PabloTesone 7/12/2018 19:14",
+	"super" : "CGOProjectAnnouncement",
+	"category" : "CargoPackageManager-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOProjectLoaded",
+	"type" : "normal"
+}

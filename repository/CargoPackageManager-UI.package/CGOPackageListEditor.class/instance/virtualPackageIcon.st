@@ -1,3 +1,3 @@
 private - displaying
 virtualPackageIcon
-	^ Smalltalk ui icons iconNamed: #image
+	^ self iconNamed: #image

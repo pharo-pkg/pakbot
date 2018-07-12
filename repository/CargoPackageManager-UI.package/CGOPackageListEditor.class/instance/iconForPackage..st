@@ -1,6 +1,7 @@
 private - displaying
-iconForPackage: part
+iconForPackage: aDependency
 
+	aDependency isInstalled ifFalse: [ ^ self notInstalledIcon ].	
 	^ self unitIcon
 	"^ (ongoingPackageVersion project packageUnitNames includes: part targetedPackage)
 		ifTrue: [ self unitIcon ]

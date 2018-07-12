@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CGORepairProjectAction",
+	"category" : "CargoPackageManager-UI-Repair",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CGOLoadProjectAction",
+	"type" : "normal"
+}
