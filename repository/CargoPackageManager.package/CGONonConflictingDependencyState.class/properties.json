@@ -5,11 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"dependency",
-		"resolution",
-		"dependencyState"
-	],
-	"name" : "CGOResolvedDependency",
+	"instvars" : [ ],
+	"name" : "CGONonConflictingDependencyState",
 	"type" : "normal"
 }

@@ -6,10 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"dependency",
-		"resolution",
-		"dependencyState"
+		"conflictingDependencies"
 	],
-	"name" : "CGOResolvedDependency",
+	"name" : "CGOConflictingDependencyState",
 	"type" : "normal"
 }
