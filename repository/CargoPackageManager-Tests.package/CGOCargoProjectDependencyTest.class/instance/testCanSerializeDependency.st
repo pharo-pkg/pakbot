@@ -1,7 +1,7 @@
 tests
 testCanSerializeDependency
 	| projectDependency projectDependencyString |
-	projectDependency := CGOCargoProjectDependency repositoryUrl: 'github://demarey/pharo-counter-ui:master'.
+	projectDependency := CGOCargoProjectDependency named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master'.
 	projectDependencyString := STON toStringPretty: projectDependency.
 	
 	self 
@@ -10,5 +10,7 @@ testCanSerializeDependency
 	#repository : CGOGitRepository {
 		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
 		#version : ''master''
-	}
+	},
+	#name : ''pharo-counter'',
+	#version : ''''
 }'.

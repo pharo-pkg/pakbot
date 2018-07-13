@@ -3,7 +3,4 @@ fromSton: stonReader
 	| repository |
 	
 	repository := super fromSton: stonReader.
-	^ self repository: 
-		(CGOGitRepositoryCreator new
-			url: repository	repositoryUrl;
-			create)
+	^ self named: repository name repositoryUrl: repository	repositoryUrl

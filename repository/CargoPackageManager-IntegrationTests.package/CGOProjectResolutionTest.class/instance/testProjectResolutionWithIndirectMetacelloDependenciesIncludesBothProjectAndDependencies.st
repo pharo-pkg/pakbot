@@ -19,4 +19,4 @@ testProjectResolutionWithIndirectMetacelloDependenciesIncludesBothProjectAndDepe
 
 	self assert: (resolution includesResolvedTarget: projectOne).
 	self assert: (resolution includesResolvedTarget: projectTwo).
-	self assert: (resolution includesResolvedTarget: configurationProject).
+	self assert: (resolution includesResolvedTarget: (PBMetacelloConfigurationProject fromProjectDependency: configurationProject)).

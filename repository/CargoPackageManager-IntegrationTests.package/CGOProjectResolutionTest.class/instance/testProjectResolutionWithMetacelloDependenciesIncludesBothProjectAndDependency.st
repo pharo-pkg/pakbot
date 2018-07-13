@@ -15,4 +15,4 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 	resolution := project resolve.
 
 	self assert: (resolution includesResolvedTarget: project).
-	self assert: (resolution includesResolvedTarget: configurationProject).
+	self assert: (resolution includesResolvedTarget: (PBMetacelloBaselineProject fromProjectDependency: configurationProject)).
