@@ -47,5 +47,4 @@ do: [ :each |
 Metacello new
     baseline: 'Iceberg';
     repository: 'github://pharo-vcs/iceberg:dev-1.0';
-	loadType: #atomic;
     load.
