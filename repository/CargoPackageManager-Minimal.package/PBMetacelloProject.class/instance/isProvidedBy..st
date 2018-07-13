@@ -1,4 +1,4 @@
-as yet unclassified
+querying
 isProvidedBy: anInstalledVersion 
 	
 	^ anInstalledVersion providesProject: self
