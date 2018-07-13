@@ -1,3 +1,5 @@
+| repos reposToDelete |
+
 MetacelloPharoPlatform select.
 #(
     'BaselineOfTonel'
@@ -29,6 +31,10 @@ MetacelloPharoPlatform select.
     'Iceberg-Pharo6'
     'LibGit-Core') 
 do: [ :each | (each asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem ].
+
+repos := MCRepositoryGroup default instVarNamed: #repositories.
+reposToDelete := repos select: [ :each | each class name = #'AnObsoleteIceMetacelloRepositoryAdapter' ].
+repos removeAll: reposToDelete.
 
 Metacello new
     baseline: 'Iceberg';
