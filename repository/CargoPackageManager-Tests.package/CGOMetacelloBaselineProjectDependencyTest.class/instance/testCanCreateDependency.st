@@ -1,7 +1,7 @@
 tests
 testCanCreateDependency
 	| dependency |
-	dependency := CGOMetacelloBaselineProject example.
+	dependency := PBMetacelloBaselineProjectDependency example.
 	self 
 		assert: dependency name
 		equals: #PakbotTestExample.

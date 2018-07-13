@@ -3,8 +3,8 @@ testCanGetMetacelloProjects
 	| metacelloProjects |
 	ongoingProject 
 		addExternalCargoProject: 
-			(CGOMetacelloConfigurationProject
-				configuration: 'Ston'
+			(PBMetacelloConfigurationProjectDependency
+				name: 'Ston'
 				repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
 				version: #stable).
 				

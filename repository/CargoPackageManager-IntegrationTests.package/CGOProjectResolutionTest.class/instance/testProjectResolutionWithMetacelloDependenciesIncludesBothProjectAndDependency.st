@@ -5,7 +5,7 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	configurationProject := CGOMetacelloConfigurationProject
+	configurationProject := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestProject'
 		repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
 		version: '1.0'.

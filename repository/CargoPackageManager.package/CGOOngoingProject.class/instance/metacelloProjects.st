@@ -2,4 +2,4 @@ accessing
 metacelloProjects
 	^ externalProjects 
 		select: #isMetacelloProjectDependency
-		thenCollect: [ :projectDependency | CGOMetacelloProject fromProjectDependency: projectDependency ]
+		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]

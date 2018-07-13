@@ -10,7 +10,7 @@ testLoadProjectMetacelloDependency
 	testRegistry register: ongoingProject.
 	
 	ongoingProject addDependency:
-		(CGOMetacelloConfigurationProject 
+		(PBMetacelloConfigurationProjectDependency 
 			name: 'CargoTestExample'
 			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 			version: '1.0').
