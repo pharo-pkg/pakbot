@@ -1,6 +1,6 @@
 SmalltalkCISpec {
   #name : 'Cargo',
-  #preLoading : 'scripts/updateIceberg.st'
+  #preLoading : 'scripts/updateIceberg.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Cargo',
