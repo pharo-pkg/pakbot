@@ -1,5 +1,11 @@
-| repos reposToDelete |
+"Shutdown Libgit"
+LGitLibrary shutDown: true.
 
+"Unregister all iceberg repository adapters since we are going to unload all code related to it.
+Otherwise obsolete instances will stay".
+IceMetacelloRepositoryAdapter allInstances do: #unregister.
+
+"Remove iceberg from system (so I can reload it)"
 MetacelloPharoPlatform select.
 #(
     'BaselineOfTonel'
@@ -13,7 +19,7 @@ MetacelloPharoPlatform select.
     'Iceberg-Plugin-Pharo' 
     'Iceberg-Plugin-Metacello' 
     'Iceberg-Plugin-GitHub'
-	 'Iceberg-Plugin-Migration' 
+    'Iceberg-Plugin-Migration'
     'Iceberg-Plugin' 
     'Iceberg-Metacello-Integration' 
     'Iceberg-Libgit-Tonel' 
@@ -30,13 +36,16 @@ MetacelloPharoPlatform select.
     'Iceberg-SmartUI'
     'Iceberg-Pharo6'
     'LibGit-Core') 
-do: [ :each | (each asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem ].
-
-repos := MCRepositoryGroup default instVarNamed: #repositories.
-reposToDelete := repos select: [ :each | each class name = #'AnObsoleteIceMetacelloRepositoryAdapter' ].
-repos removeAll: reposToDelete.
+do: [ :each |
+    (each asPackageIfAbsent: [ 
+        (each , ' not found') logCr.
+        nil ])
+            ifNotNil: [ :package |
+                ('Removing ', each) logCr.
+                package removeFromSystem ] ].
 
 Metacello new
     baseline: 'Iceberg';
     repository: 'github://pharo-vcs/iceberg:dev-1.0';
+	loadType: #atomic;
     load.
