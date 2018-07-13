@@ -7,14 +7,14 @@ testConflictingIndirectMetacelloDependenciesHasConflicts
 	projectOne addDependency: (CGOCargoProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
-	projectOne addDependency: (CGOMetacelloConfigurationProject
-		configuration: 'CargoTestExample'
+	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectTwo addDependency: (CGOMetacelloConfigurationProject
-		configuration: 'CargoTestExample'
+	projectTwo addDependency: (PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0').
 

@@ -6,8 +6,8 @@ testConflictingCargoDependencyAndInstalledMetacelloProjectHasConflict
 	testRegistry := CGOPackageRegistry new.	
 
 	project := testRegistry newProjectNamed: 'Test'.
-	configurationProjectV1 := CGOMetacelloConfigurationProject
-		configuration: 'CargoTestExample'
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency 
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 	project addDependency: configurationProjectV1.

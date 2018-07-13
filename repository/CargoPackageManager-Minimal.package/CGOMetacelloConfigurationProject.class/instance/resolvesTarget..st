@@ -1,3 +1,0 @@
-solving
-resolvesTarget: aCGOMetacelloConfigurationProject 
-	self shouldBeImplemented.

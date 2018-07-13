@@ -1,6 +1,6 @@
 adding
 registerProjectFromSourceRepository: aCGOMetacelloProjectRepository
 	| project |
-	project := CGOMetacelloProject fromRepository: aCGOMetacelloProjectRepository.
+	project := PBMetacelloProject fromRepository: aCGOMetacelloProjectRepository.
 	packageVersions add: project.
 	^ project
