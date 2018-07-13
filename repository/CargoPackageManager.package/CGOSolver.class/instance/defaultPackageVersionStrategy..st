@@ -1,3 +1,0 @@
-accessing
-defaultPackageVersionStrategy: aPackageVersionResolutionStrategy
-	defaultPackageVersionStrategy := aPackageVersionResolutionStrategy

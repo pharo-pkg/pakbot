@@ -1,3 +1,9 @@
 printing
 printOn: aStream
-	aStream << name << ' ' << (packageVersions asString)
+	aStream
+		<< self class name
+		<< '('
+		<< name
+		<< '::'
+		<< loadableUnits asString
+		<< ')'

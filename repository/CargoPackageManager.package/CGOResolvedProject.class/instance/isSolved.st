@@ -1,0 +1,3 @@
+testing
+isSolved
+	^ resolvedProjectVersion isNotNil

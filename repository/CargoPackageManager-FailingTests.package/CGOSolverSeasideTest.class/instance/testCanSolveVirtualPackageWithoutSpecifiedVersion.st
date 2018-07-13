@@ -9,7 +9,7 @@ testCanSolveVirtualPackageWithoutSpecifiedVersion
 						withConstraints: #().
 
 	resolution := solver solveDependency: dependency.
-	packageVersion := (resolution ongoingPackageResolutionFor: testPackage) packageVersion.
+	packageVersion := (resolution ongoingPackageResolutionFor: testPackage) resolvedProjectVersion.
 	
 	self
 		assert: packageVersion packageName

@@ -27,8 +27,8 @@ baseline: spec
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
-				package: #'CargoPackageManager-UI'
-					with: [ spec requires: #(CargoPackageManager Icetray) ];
+				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];
+				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI') ];
 				package: #'CargoPackageManager-Calypso-Environment'
 					with: [ spec requires: #(CargoPackageManager) ];
 				package: #'CargoPackageManager-Calypso-Browser'
@@ -43,7 +43,8 @@ baseline: spec
 				group: 'server'
 					with:
 					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests' 'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 'CargoPackageManager-IntegrationTests');
+				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests' 'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 'CargoPackageManager-IntegrationTests'
+'CargoPackageManager-UI-Tests');
 				group: 'tests-server' with: #('server' 'tests-client');
 				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');

@@ -1,5 +1,4 @@
 loading
 load
-	self loadMetacelloProjects.
-	self loadCargoProjects.
-	self registerLoadedPackages
+
+	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit load ]

@@ -1,3 +1,0 @@
-testing
-isSolved
-	^ packageVersion isNotNil

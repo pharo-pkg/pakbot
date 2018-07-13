@@ -5,5 +5,5 @@ setUp
 	remoteRepositoryMock := protocol mock: 'remoteRepositoryMock'.
 	protocol describe
 		allow: remoteRepositoryMock recv: #fetch:version:;
-		=> self packageVersion.
+		=> self resolvedProjectVersion.
 	pkgVersionReference packageRepositories: { remoteRepositoryMock }

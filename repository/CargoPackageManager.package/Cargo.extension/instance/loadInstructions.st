@@ -3,8 +3,7 @@ loadInstructions
 	| resolution |
 	resolution := CGOSolver new
 		repositories: repositories;
-		installedPackages: self installedPackages;
-		solveDependency: self rootDependency.
+		solveProject: self rootDependency.
 	^ CGOLoadInstructionsBuilder new
 		resolution: resolution;
 		loadInstructions

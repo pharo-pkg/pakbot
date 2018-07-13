@@ -1,3 +1,0 @@
-testing
-fitsPlatformRequirements
-	^ packageVersion fitsPlatformRequirements

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "ChristopheDemarey 6/2/2017 14:33",
 	"super" : "CGOVirtualPackageResolutionStrategy",
-	"category" : "CargoPackageManager-Solver",
+	"category" : "CargoPackageManager-SolverStrategies",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

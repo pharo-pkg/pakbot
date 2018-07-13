@@ -1,3 +1,3 @@
 private - displaying
 unitIcon
-	^ Smalltalk ui icons iconNamed: #packageIcon
+	^ self iconNamed: #packageIcon

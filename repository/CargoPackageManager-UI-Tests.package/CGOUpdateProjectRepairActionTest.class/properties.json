@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "CGOAbstractTest",
+	"category" : "CargoPackageManager-UI-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"registry",
+		"project",
+		"dependencyToProject"
+	],
+	"name" : "CGOUpdateProjectRepairActionTest",
+	"type" : "normal"
+}

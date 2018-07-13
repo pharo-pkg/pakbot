@@ -1,6 +1,6 @@
 problems
 problemShortDescription
 	
-	self isUpToDate not ifTrue: [ ^ 'One or more dependencies are not up to date.' ].
+	self isUpToDate ifFalse: [ ^ 'One or more dependencies are not up to date.' ].
 	
 	^ ''
