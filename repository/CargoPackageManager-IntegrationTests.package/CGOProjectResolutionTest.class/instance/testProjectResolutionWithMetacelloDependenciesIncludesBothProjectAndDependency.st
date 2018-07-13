@@ -12,10 +12,7 @@ testProjectResolutionWithMetacelloDependenciesIncludesBothProjectAndDependency
 	
 	project addDependency: configurationProject.
 	
-	resolution := CGOSolver new
-		repositories: { testRegistry };
-		solveProject: project.
+	resolution := project resolve.
 
-	self assert: (resolution includesVersion: project).
-	self assert: (resolution includesVersion: configurationProject).
-	self assert: resolution resolvedVersions size equals: 2.
+	self assert: (resolution includesResolvedTarget: project).
+	self assert: (resolution includesResolvedTarget: configurationProject).

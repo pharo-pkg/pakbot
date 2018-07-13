@@ -1,3 +1,4 @@
-compatibility - CGOProject
+accessing
 registry: aCGOPackageRegistry 
-	registry := aCGOPackageRegistry
+	registry := aCGOPackageRegistry.
+	^ self

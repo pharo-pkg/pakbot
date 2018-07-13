@@ -5,8 +5,8 @@ testResolutionOfProjectDependencyIsResolvedDependency
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	configurationProject := CGOMetacelloConfigurationProject
-		configuration: 'CargoTestExample'
+	configurationProject := PBMetacelloConfigurationProjectDependency 
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 	projectOne addDependency: configurationProject.

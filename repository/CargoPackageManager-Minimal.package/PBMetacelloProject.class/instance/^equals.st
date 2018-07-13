@@ -10,7 +10,7 @@ comparing
 	self version = anotherProject version
 		ifFalse: [ ^ false ].
 		
-	self repositoryUrl = anotherProject repositoryUrl
+	self repository = anotherProject repository
 		ifFalse: [ ^ false ].
 		
 	^ true
