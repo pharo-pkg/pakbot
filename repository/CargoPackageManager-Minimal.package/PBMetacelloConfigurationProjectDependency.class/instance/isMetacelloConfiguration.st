@@ -1,0 +1,3 @@
+testing
+isMetacelloConfiguration
+	^ true

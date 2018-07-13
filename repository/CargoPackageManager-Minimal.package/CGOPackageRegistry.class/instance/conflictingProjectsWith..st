@@ -16,7 +16,7 @@ conflictingProjectsWith: aCGOResolvedDependency
 		
 	metacelloProjectRegistration
 		configurationProjectSpecIfPresent: [ :configurationSpec |
-			cargoProjectConflicts add: (CGOMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) ]
+			cargoProjectConflicts add: (PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) ]
 		ifAbsent: [ "Nothing" ].
 	
 	^ cargoProjectConflicts

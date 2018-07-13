@@ -9,8 +9,8 @@ testProjectLoadingWithIndirectMetacelloDependenciesV2LoadsCorrespondingClassesIn
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	configurationProject := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
+	configurationProject := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0'.
 	projectTwo addDependency: configurationProject.

@@ -5,13 +5,13 @@ testConflictingMetacelloDependenciesResolutionsKnowTheirConflictingPairs
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	configurationProjectV1 := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 
-	configurationProjectV2 := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
+	configurationProjectV2 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0'.
 	

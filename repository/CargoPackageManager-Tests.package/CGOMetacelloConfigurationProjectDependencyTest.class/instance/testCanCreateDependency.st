@@ -1,7 +1,7 @@
 tests
 testCanCreateDependency
 	| dependency |
-	dependency := CGOMetacelloConfigurationProjectDependency example.
+	dependency := PBMetacelloConfigurationProjectDependency example.
 	self 
 		assert: dependency name
 		equals: #JSON.

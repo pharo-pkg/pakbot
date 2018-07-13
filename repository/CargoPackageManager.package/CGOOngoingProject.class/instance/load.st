@@ -1,4 +1,6 @@
 loading
 load
 	
-	self resolve load
+	self resolve load.
+	
+	CGOProjectLoaded announceOnProject: self. 

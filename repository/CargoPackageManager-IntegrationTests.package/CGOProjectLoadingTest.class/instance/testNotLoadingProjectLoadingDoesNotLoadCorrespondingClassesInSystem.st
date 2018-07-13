@@ -5,8 +5,8 @@ testNotLoadingProjectLoadingDoesNotLoadCorrespondingClassesInSystem
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	configurationProject := CGOMetacelloConfigurationProjectDependency
-		configuration: 'CargoTestExample'
+	configurationProject := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 	project addDependency: configurationProject.

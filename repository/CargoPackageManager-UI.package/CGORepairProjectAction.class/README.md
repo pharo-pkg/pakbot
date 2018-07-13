@@ -1,0 +1,2 @@
+I represent all the repair actions that can be executed on a project with problems.
+I have a class message #allAvailableFor: that returns all the applicable repair actions for the status of a given project.

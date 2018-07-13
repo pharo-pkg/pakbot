@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "ComposablePresenter",
+	"category" : "CargoPackageManager-UI-Repair",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"project",
+		"reasonPanel",
+		"detailPanel",
+		"optionsList"
+	],
+	"name" : "CGORepairProjectDialog",
+	"type" : "normal"
+}
