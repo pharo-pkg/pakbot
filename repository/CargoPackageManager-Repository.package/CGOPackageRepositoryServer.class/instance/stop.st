@@ -1,3 +1,0 @@
-stopping
-stop
-	server stop

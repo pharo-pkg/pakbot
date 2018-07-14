@@ -1,3 +1,0 @@
-execution
-applyResultInContext: aToolContext
-	self refreshCalypsoChild

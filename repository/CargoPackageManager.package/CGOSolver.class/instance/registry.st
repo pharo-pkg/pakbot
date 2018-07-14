@@ -1,4 +1,0 @@
-solving
-registry
-
-	^ registry

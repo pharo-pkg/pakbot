@@ -1,3 +1,0 @@
-configuring
-srcRepositories: aListOfRepositoryLocations 
-	srcRepositories := aListOfRepositoryLocations

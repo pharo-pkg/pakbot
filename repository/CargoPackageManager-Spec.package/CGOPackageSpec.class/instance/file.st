@@ -1,3 +1,0 @@
-spec
-file
-	^ self srcArtifact

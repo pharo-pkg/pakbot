@@ -1,3 +1,0 @@
-accessing
-mcVersion
-	self subclassResponsibility

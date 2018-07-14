@@ -1,1 +1,0 @@
-Common class representing a dependency to a package.

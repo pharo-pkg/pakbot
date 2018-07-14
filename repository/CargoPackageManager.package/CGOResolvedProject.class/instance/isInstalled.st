@@ -1,4 +1,0 @@
-testing
-isInstalled
-	
-	^ resolvedProjectVersion isInstalled

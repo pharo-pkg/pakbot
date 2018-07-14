@@ -1,4 +1,0 @@
-loading
-size
-
-	^ groups size

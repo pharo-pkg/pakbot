@@ -1,1 +1,0 @@
-Root warning class for all Cargo package manager errors.

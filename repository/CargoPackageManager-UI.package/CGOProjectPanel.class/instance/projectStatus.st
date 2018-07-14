@@ -1,4 +1,0 @@
-accessing
-projectStatus
-
-	^ projectStatus

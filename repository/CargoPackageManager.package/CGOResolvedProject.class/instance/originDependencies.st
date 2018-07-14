@@ -1,3 +1,0 @@
-accessing
-originDependencies
-	^ originDependencies

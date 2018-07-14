@@ -1,3 +1,0 @@
-accessing
-packageRepositories: aPackageRepositoryList
-	packageRepositories := aPackageRepositoryList

@@ -1,4 +1,0 @@
-dependencies
-dependencies
-	
-	^ dependencies

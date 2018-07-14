@@ -1,1 +1,0 @@
-Root class for all packages spec related to Seaside 31.

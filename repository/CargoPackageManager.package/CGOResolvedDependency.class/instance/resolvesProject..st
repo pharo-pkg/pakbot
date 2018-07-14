@@ -1,4 +1,0 @@
-resolution
-resolvesProject: aProject
-	
-	^ false

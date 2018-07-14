@@ -1,1 +1,0 @@
-Error raised when a package (i.e. the package name) cannot be found.

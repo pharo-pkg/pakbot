@@ -1,3 +1,0 @@
-initialization
-defaultMenuItemName
-	^ 'Import Package'

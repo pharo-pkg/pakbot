@@ -1,1 +1,0 @@
-Constraint on a fixed dependency version of the targeted package.

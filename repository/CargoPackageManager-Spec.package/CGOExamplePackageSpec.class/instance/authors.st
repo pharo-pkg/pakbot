@@ -1,3 +1,0 @@
-description
-authors
-	^ 'Demarey Christophe'

@@ -1,3 +1,0 @@
-example
-example
-	^ CGOGitRepositoryCreator example

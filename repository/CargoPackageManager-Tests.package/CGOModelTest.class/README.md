@@ -1,1 +1,0 @@
-Class used to set up test data for Cargo projects, units and assemblies

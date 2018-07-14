@@ -1,1 +1,0 @@
-I dispatch project content retrieval to dedicated providers.

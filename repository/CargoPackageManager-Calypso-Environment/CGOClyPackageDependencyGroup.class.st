@@ -1,0 +1,8 @@
+"
+I can be queried to get the list of direct dependencies of the project hold in my state.
+"
+Class {
+	#name : #CGOClyPackageDependencyGroup,
+	#superclass : #ClyClassGroup,
+	#category : 'CargoPackageManager-Calypso-Environment'
+}

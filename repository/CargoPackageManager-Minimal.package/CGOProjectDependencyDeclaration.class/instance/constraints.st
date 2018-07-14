@@ -1,4 +1,0 @@
-accessing
-constraints
-	
-	^ self subclassResponsibility

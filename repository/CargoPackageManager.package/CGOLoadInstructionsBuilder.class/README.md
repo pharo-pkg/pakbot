@@ -1,1 +1,0 @@
-Sort dependencies from leafs to the root.

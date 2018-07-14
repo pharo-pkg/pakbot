@@ -1,3 +1,0 @@
-converting
-asOngoingPackage
-	^ CGOOngoingProject fromVcsSerializedProject: self

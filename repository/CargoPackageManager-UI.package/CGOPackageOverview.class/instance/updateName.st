@@ -1,3 +1,0 @@
-updating
-updateName
-	ongoingPackageVersion name: nameInputField text asSymbol printString

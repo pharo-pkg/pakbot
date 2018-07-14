@@ -1,3 +1,0 @@
-converting
-asOngoingPackageVersion
-	^ self

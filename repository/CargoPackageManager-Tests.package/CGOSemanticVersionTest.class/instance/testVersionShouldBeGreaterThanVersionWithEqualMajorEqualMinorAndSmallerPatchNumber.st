@@ -1,4 +1,0 @@
-tests-comparison
-testVersionShouldBeGreaterThanVersionWithEqualMajorEqualMinorAndSmallerPatchNumber
-
-	self assert: self v111 > self v100

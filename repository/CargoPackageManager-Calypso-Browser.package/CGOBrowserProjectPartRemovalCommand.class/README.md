@@ -1,2 +1,0 @@
-Calypso command providing a contextual menu to remove a part of  a Cargo project (i.e. a package unit or a package assembly).
-It does not actually remove the Rpackage associated to a package unit if the later is removed with this command.

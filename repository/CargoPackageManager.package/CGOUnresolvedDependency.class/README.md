@@ -1,1 +1,0 @@
-Error thrown when a dependency is not resolved to a specific package version at the call time.

@@ -1,3 +1,0 @@
-testing
-fitsPlatformRequirements
-	^ resolvedProjectVersion fitsPlatformRequirements

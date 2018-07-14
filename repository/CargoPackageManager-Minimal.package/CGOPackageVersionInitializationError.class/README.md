@@ -1,1 +1,0 @@
-Error raised when a problem occurs during PackageVersion initialization.

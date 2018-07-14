@@ -1,3 +1,0 @@
-configuring
-useHttpsUrl
-	useHttpsUrl := true

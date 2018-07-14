@@ -1,5 +1,0 @@
-initialization
-initialize
-	self rootDirectory ensureCreateDirectory.
-	self virtualDirectory ensureCreateDirectory.
-	self virtualIndexesDirectory ensureCreateDirectory.

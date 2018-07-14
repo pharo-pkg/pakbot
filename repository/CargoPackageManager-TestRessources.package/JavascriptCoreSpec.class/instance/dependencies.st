@@ -1,5 +1,0 @@
-spec
-dependencies
-	^ { #'Seaside-Core' -> #('=3.1') .
-		#'Seaside-Canvas' -> #('=3.1') .
-		#'Javascript-Core-Platform' -> #('=1') }

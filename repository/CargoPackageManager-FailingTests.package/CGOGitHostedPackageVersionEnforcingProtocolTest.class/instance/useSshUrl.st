@@ -1,3 +1,0 @@
-configuring
-useSshUrl
-	CGOGitHostedPackageVersionEnforcingProtocol useSshUrl

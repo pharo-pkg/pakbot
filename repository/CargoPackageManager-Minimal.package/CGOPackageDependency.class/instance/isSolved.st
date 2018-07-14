@@ -1,3 +1,0 @@
-testing
-isSolved
-	self shouldBeImplemented.

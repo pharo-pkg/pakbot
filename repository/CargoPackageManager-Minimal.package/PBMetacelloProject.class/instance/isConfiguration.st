@@ -1,3 +1,0 @@
-accessing
-isConfiguration
-	self subclassResponsibility

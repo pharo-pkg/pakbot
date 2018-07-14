@@ -1,3 +1,0 @@
-accessing
-activeColor
-	^ Color transparent

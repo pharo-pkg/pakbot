@@ -1,3 +1,0 @@
-fetching
-projectMetadataStonString
-	^ repository projectMetadataStonString
