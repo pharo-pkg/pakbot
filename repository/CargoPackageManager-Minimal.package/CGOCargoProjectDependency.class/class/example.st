@@ -1,3 +1,3 @@
 example
 example
-	^ self repositoryUrl: 'github://demarey/pharo-counter:master'
+	^ self named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter:master'

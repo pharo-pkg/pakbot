@@ -8,7 +8,8 @@
 	"instvars" : [
 		"package",
 		"description",
-		"project"
+		"project",
+		"version"
 	],
 	"name" : "CGOOngoingPackage",
 	"type" : "normal"

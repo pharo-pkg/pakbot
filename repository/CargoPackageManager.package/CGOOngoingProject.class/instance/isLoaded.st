@@ -1,5 +1,5 @@
 testing
 isLoaded
 	
-	"An ongoing project is always loaded"
-	^ true
+	^ registry notNil
+		and: [ registry isProjectInstalled: self ]
