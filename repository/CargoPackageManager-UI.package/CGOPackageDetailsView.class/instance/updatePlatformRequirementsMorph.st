@@ -1,4 +1,0 @@
-updating - ui
-updatePlatformRequirementsMorph
-	platformRequirementWidget morph removeAllMorphs.
-	self addPlatformRequirementTagsTo: platformRequirementWidget morph

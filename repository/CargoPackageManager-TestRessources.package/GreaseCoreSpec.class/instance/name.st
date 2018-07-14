@@ -1,3 +1,0 @@
-spec
-name
-	^ 'Grease-Core'

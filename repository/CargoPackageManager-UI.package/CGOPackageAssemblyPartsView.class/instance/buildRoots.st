@@ -1,3 +1,0 @@
-private
-buildRoots
-	^ ongoingPackageVersion parts

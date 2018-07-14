@@ -1,3 +1,0 @@
-*CargoPackageManager-RepositoryBackend
-voyageCollectionName
-	^ 'PackageVersion'

@@ -1,3 +1,0 @@
-private
-metadataStringFor: aPackageUnit
-	^ (CGOPackageVersionWriter toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings

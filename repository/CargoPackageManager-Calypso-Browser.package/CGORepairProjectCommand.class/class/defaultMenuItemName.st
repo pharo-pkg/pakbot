@@ -1,3 +1,0 @@
-activation
-defaultMenuItemName
-	^ 'Repair Project'

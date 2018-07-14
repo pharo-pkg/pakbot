@@ -1,3 +1,0 @@
-serialization
-stonName
-	^ #'PackageAssembly'

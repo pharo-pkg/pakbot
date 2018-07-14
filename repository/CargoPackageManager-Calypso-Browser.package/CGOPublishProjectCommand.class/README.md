@@ -1,1 +1,0 @@
-A command to publish a project and all its packages to a package repository. It will publish to the default Cargo package repository.

@@ -1,3 +1,0 @@
-cleaning
-reset
-	self initialize

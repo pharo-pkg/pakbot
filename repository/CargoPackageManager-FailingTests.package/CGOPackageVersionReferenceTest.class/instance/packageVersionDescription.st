@@ -1,3 +1,0 @@
-input
-packageVersionDescription
-	^ CGOPackageVersionWriter toStringPretty: self resolvedProjectVersion

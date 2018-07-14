@@ -1,3 +1,0 @@
-*CargoPackageManager-RepositoryBackend
-isVoyageRoot
-	^ true

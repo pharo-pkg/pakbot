@@ -1,4 +1,0 @@
-dependencies
-allDependencies
-	
-	^ self subclassResponsibility

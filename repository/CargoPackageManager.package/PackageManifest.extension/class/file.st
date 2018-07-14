@@ -1,3 +1,0 @@
-*CargoPackageManager
-file
-	^ nil

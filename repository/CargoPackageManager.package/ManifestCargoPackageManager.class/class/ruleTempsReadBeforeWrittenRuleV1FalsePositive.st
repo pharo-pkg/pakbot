@@ -1,3 +1,0 @@
-code-critics
-ruleTempsReadBeforeWrittenRuleV1FalsePositive
-^ #(#(#(#RGMethodDefinition #(#CGORepositoryLatestPackageHandler #get #false)) #'2015-01-20T13:14:26.460167+01:00') #(#(#RGMethodDefinition #(#CGORepositoryVirtualPackageHandler #get #false)) #'2015-01-20T13:14:26.460167+01:00') #(#(#RGMethodDefinition #(#CGORepositoryPackageVersionListHandler #get #false)) #'2015-01-20T13:14:26.460167+01:00') #(#(#RGMethodDefinition #(#CGORepositoryPackageVersionHandler #get #false)) #'2015-01-20T13:14:26.460167+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #fetch:version: #false)) #'2015-01-20T13:14:26.460167+01:00') #(#(#RGMethodDefinition #(#CGOSolver #versionFor: #false)) #'2015-01-20T13:14:26.460167+01:00') )

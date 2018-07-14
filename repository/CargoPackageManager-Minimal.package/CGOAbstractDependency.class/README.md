@@ -1,1 +1,0 @@
-API for common package / projet dependencies

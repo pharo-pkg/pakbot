@@ -1,3 +1,0 @@
-accessing
-packageRepository
-	^ delegate packageRepository

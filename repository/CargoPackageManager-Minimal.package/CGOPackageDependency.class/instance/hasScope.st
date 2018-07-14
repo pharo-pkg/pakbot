@@ -1,3 +1,0 @@
-testing
-hasScope
-	^ scope isNotNil

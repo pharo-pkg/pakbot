@@ -1,1 +1,0 @@
-Error raised when a package metadata file cannot be found!

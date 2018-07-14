@@ -1,3 +1,0 @@
-converting
-asSerializablePackageVersion
-	self shouldBeImplemented

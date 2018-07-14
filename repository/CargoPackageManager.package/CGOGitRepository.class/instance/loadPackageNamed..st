@@ -1,3 +1,0 @@
-loading
-loadPackageNamed: aPackageName
-	iceRepository workingCopy loadPackageNamed: aPackageName

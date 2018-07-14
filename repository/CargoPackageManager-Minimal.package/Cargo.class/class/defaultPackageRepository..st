@@ -1,3 +1,0 @@
-accessing
-defaultPackageRepository: aCGOPackageRepository
-	DefaultPackageRepository := aCGOPackageRepository

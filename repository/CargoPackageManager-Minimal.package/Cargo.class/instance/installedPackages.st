@@ -1,4 +1,0 @@
-private
-installedPackages
-	^ registry installedPackages
-		

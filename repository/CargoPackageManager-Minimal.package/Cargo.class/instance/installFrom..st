@@ -1,3 +1,0 @@
-actions
-installFrom: aLoadInstructions
-	aLoadInstructions load

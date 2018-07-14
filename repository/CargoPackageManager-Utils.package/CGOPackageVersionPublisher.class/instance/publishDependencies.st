@@ -1,3 +1,0 @@
-configuring
-publishDependencies
-	shouldPublishDependencies := true

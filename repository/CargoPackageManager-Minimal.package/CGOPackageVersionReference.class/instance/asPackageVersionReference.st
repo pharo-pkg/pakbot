@@ -1,3 +1,0 @@
-converting
-asPackageVersionReference
-	^ self

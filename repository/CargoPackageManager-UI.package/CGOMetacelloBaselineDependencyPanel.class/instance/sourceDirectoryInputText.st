@@ -1,3 +1,0 @@
-accessing
-sourceDirectoryInputText
-	^ sourceDirectoryInputText

@@ -1,1 +1,0 @@
-Utility class to automatize the publication of package versions.

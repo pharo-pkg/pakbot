@@ -1,2 +1,0 @@
-I represent a software project. I store basic metadata for the project.
-A Cargo project holds the list of assemblies (convenient and logical group of project packages) and virtual packages as well as the names of the package units (representing source code package) part of this project.

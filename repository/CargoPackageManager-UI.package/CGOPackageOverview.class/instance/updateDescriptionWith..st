@@ -1,3 +1,0 @@
-updating
-updateDescriptionWith: aString
-	ongoingPackageVersion description: aString printString

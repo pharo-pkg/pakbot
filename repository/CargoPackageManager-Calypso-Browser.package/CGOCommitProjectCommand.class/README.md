@@ -1,1 +1,0 @@
-Calypso command providing a contextual menu on Cargo project to allow a commit of the whole project.

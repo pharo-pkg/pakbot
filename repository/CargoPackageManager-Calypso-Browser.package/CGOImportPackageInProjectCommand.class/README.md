@@ -1,1 +1,0 @@
-Calypso command providing a contextual menu to import an existing package as a Cargo package unit

@@ -1,3 +1,0 @@
-*CargoPackageManager
-ongoingClass
-	self subclassResponsibility 
