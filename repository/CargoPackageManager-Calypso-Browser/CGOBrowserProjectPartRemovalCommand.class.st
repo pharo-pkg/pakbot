@@ -25,35 +25,35 @@ CGOBrowserProjectPartRemovalCommand class >> defaultMenuIconName [
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
+	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyPackageContextOfFullBrowser 
+	^ CmdContextMenuActivation byRootGroupItemFor: ClyPackageContextOfFullBrowser 
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyPackageContextOfFullBrowser 
+	^ CmdShortcutActivation by: $x meta, $p meta for: ClyPackageContextOfFullBrowser 
 ]
 
 { #category : #initialization }

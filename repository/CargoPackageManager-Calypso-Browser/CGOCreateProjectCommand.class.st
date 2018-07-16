@@ -25,20 +25,20 @@ CGOCreateProjectCommand class >> defaultMenuIconName [
 CGOCreateProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemFor: PBProjectContextOfFullBrowser
+	^ CmdContextMenuActivation byRootGroupItemFor: PBProjectContextOfFullBrowser
 ]
 
 { #category : #activation }
 CGOCreateProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $n meta, $p meta for: PBProjectContextOfFullBrowser
+	^ CmdShortcutActivation by: $n meta, $p meta for: PBProjectContextOfFullBrowser
 ]
 
 { #category : #activation }
 CGOCreateProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
-	^ ClyToolbarCommandActivation
+	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		for: PBProjectContextOfFullBrowser
 ]
