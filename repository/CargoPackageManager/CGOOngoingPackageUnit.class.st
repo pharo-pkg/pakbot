@@ -161,6 +161,12 @@ CGOOngoingPackageUnit >> satisfyConstraints: aVersion [
 	^ aVersion = version
 ]
 
+{ #category : #accessing }
+CGOOngoingPackageUnit >> systemPackage [
+	
+	^ RPackageOrganizer default packageNamed: self name
+]
+
 { #category : #updating }
 CGOOngoingPackageUnit >> updateDependency: aPackageDependency [
 	dependencies := dependencies collect: 

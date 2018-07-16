@@ -48,6 +48,12 @@ PBProjectChildBrowserItem >> name [
 ]
 
 { #category : #accessing }
+PBProjectChildBrowserItem >> systemPackage [
+	
+	^ unit systemPackage
+]
+
+{ #category : #accessing }
 PBProjectChildBrowserItem >> unit [
 	^ unit
 ]

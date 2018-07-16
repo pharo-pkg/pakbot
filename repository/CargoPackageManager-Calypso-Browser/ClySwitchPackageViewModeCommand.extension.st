@@ -4,7 +4,7 @@ Extension { #name : #ClySwitchPackageViewModeCommand }
 ClySwitchPackageViewModeCommand class >> fullBrowserToolbarActivation4 [
 	<classAnnotation>
 	
-	^ClyToolbarCommandActivation 
+	^ClyToolbarActivation 
 		byItemOf: ClyPackageToolbarGroup 
 		order: self toolbarOrder
 		for: PBProjectContextOfFullBrowser 
