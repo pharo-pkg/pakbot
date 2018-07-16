@@ -106,9 +106,21 @@ CGOOngoingPackageUnit >> isInstalled [
 	^ project registry isInstalled: self
 ]
 
+{ #category : #'querying - Installed' }
+CGOOngoingPackageUnit >> isProvidedBy: aPackageUnit [
+
+	^ aPackageUnit providesPackage: self
+]
+
 { #category : #testing }
 CGOOngoingPackageUnit >> isUnit [
 	^ true
+]
+
+{ #category : #accessing }
+CGOOngoingPackageUnit >> name [
+	
+	^ package name
 ]
 
 { #category : #accessing }
@@ -141,6 +153,12 @@ CGOOngoingPackageUnit >> provisions: aListOfVirtualPackageVersionsReference [
 CGOOngoingPackageUnit >> removeDependency: aPackageDependency [
 	dependencies := dependencies 
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
+]
+
+{ #category : #'querying - installed' }
+CGOOngoingPackageUnit >> satisfyConstraints: aVersion [ 
+
+	^ aVersion = version
 ]
 
 { #category : #updating }

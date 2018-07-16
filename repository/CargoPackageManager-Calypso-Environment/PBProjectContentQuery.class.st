@@ -1,7 +1,7 @@
 Class {
 	#name : #PBProjectContentQuery,
-	#superclass : #ClyProjectContentQuery,
-	#category : #'CargoPackageManager-Calypso-Environment'
+	#superclass : #ClyTypedQuery,
+	#category : #'CargoPackageManager-Calypso-Environment-Queries'
 }
 
 { #category : #accessing }
@@ -12,22 +12,19 @@ PBProjectContentQuery class >> resultItemsType [
 { #category : #execution }
 PBProjectContentQuery >> buildResult: aQueryResult [
 
-	self halt
+	aQueryResult fillWith: scope project items
 ]
 
 { #category : #execution }
 PBProjectContentQuery >> checkEmptyResult [
 	
-	self halt.
-	scope projectsDo: [ :each | 
-		each items ifNotEmpty: [ ^false ]  ].
-	^true
+	^ scope project isEmpty
 ]
 
 { #category : #'system changes' }
 PBProjectContentQuery >> collectMetadataOf: aQueryResult by: anEnvironmentPlugin [
 
-	self halt
+
 ]
 
 { #category : #'system changes' }

@@ -85,7 +85,8 @@ PBProjectBrowserItem >> isEmpty [
 
 { #category : #testing }
 PBProjectBrowserItem >> items [
-	1halt.
+	
+	^ self project packageUnits collect: [ :each | PBProjectChildBrowserItem forUnit: each ]
 ]
 
 { #category : #accessing }

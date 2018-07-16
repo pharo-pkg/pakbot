@@ -1,5 +1,10 @@
 Class {
 	#name : #PBProjectScope,
-	#superclass : #ClyProjectScope,
+	#superclass : #ClyTypedScope,
 	#category : #'CargoPackageManager-Calypso-Environment'
 }
+
+{ #category : #accessing }
+PBProjectScope >> project [
+	^ self basisObjects anyOne
+]
