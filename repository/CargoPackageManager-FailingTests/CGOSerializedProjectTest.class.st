@@ -40,7 +40,7 @@ CGOSerializedProjectTest >> testFromSton [
 { #category : #tests }
 CGOSerializedProjectTest >> testFromStonTargetClass [
 	| ston |
-	ston := CGOPackageVersionWriter toStringPretty: 
+	ston := CGOPackageVersionWriterV1 toStringPretty: 
 				(CGOProject new
 					instVarNamed: 'name' put: #A;
 					instVarNamed: 'version' put: '1.0.0' asSemanticVersion;
@@ -57,6 +57,6 @@ CGOSerializedProjectTest >> testStonOn [
 	project := CGOOngoingProject example asCargoProject asSerializableCargoProject.
 	
 	self
-		assert: (CGOPackageVersionWriter toStringPretty: project)
+		assert: (CGOPackageVersionWriterV1 toStringPretty: project)
 		equals: self stonStringForExampleProject
 ]

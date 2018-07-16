@@ -5,45 +5,45 @@ I factorize some fields declaration and some utilty methods.
 Do not use me directly but use one of my subclasses!
 "
 Class {
-	#name : #CGOSerializedPackage,
+	#name : #CGOVcsSerializedPackage,
 	#superclass : #Object,
 	#instVars : [
 		'name',
 		'description'
 	],
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #serialization }
-CGOSerializedPackage >> dependencyConstraintsMapping: aDependency [
+CGOVcsSerializedPackage >> dependencyConstraintsMapping: aDependency [
 	^ (aDependency constraints collect: #asString)
 			ifEmpty: [ #() ]
 ]
 
 { #category : #accessing }
-CGOSerializedPackage >> description [
+CGOVcsSerializedPackage >> description [
 	^ description
 ]
 
 { #category : #utility }
-CGOSerializedPackage >> dictionaryOrNilIfEmpty: aDictionary [
+CGOVcsSerializedPackage >> dictionaryOrNilIfEmpty: aDictionary [
 	aDictionary ifNil: [ ^ nil ].
 	^ aDictionary ifEmpty: [ nil ]
 ]
 
 { #category : #initialization }
-CGOSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
+CGOVcsSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
 	name := aCGOOngoingPackageUnit packageName.
 	description := aCGOOngoingPackageUnit description.
 ]
 
 { #category : #accessing }
-CGOSerializedPackage >> name [
+CGOVcsSerializedPackage >> name [
 	^ name
 ]
 
 { #category : #serialization }
-CGOSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
+CGOVcsSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
 	^ self toArray:
 		(aPackageDependencyList
 			collect: [ :dependency |	| constraints |
@@ -54,14 +54,14 @@ CGOSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
 ]
 
 { #category : #utility }
-CGOSerializedPackage >> toArray: aCollection [
+CGOVcsSerializedPackage >> toArray: aCollection [
 	^ aCollection 
 		ifNil: [ #() ]
 		ifNotNil: [ aCollection asArray ]
 ]
 
 { #category : #utility }
-CGOSerializedPackage >> toArrayOrNilIfEmpty: aCollection [
+CGOVcsSerializedPackage >> toArrayOrNilIfEmpty: aCollection [
 	aCollection ifNil: [ ^ nil ].
 	^ aCollection
 		ifEmpty: [ nil ]
@@ -69,6 +69,6 @@ CGOSerializedPackage >> toArrayOrNilIfEmpty: aCollection [
 ]
 
 { #category : #utility }
-CGOSerializedPackage >> toDictionary: aDictionaryOrNil [
+CGOVcsSerializedPackage >> toDictionary: aDictionaryOrNil [
 	^ aDictionaryOrNil ifNil: [ ^ Dictionary new ]
 ]

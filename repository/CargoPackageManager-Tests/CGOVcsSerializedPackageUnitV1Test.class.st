@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOVcsSerializedPackageUnitTest,
+	#name : #CGOVcsSerializedPackageUnitV1Test,
 	#superclass : #TestCase,
-	#category : 'CargoPackageManager-Tests-Model-Serialization'
+	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitTest >> testCanDeserializeDepedencyThatIsASymbol [	
+CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [	
 	| serializedUnit stonString unit |
 	serializedUnit := CGOVcsSerializedPackageUnit new 
 		instVarNamed: 'name' put: #Bar;
@@ -19,7 +19,7 @@ CGOVcsSerializedPackageUnitTest >> testCanDeserializeDepedencyThatIsASymbol [
 ]
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitTest >> testCanDeserializeDepedencyThatIsAnAssociation [	
+CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociation [	
 	| serializedUnit stonString unit |
 	serializedUnit := CGOVcsSerializedPackageUnit new 
 		instVarNamed: 'dependencies' put: {#Project::Foo -> #()};
@@ -32,7 +32,7 @@ CGOVcsSerializedPackageUnitTest >> testCanDeserializeDepedencyThatIsAnAssociatio
 ]
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitTest >> testGetEmptyCollectionWhenNoDependency [
+CGOVcsSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
 	| serializedUnit stonString unit |
 	serializedUnit := CGOVcsSerializedPackageUnit new 
 		instVarNamed: 'dependencies' put: #();

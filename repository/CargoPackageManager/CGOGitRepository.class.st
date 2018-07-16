@@ -161,7 +161,7 @@ CGOGitRepository >> mcVersionFor: aPackageVersion [
 
 { #category : #private }
 CGOGitRepository >> metadataStringFor: aPackageUnit [
-	^ (CGOPackageVersionWriter toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
+	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
 ]
 
@@ -207,7 +207,7 @@ CGOGitRepository >> saveProject: aVcsSerializedCargoProject withMessage: commitM
 { #category : #saving }
 CGOGitRepository >> saveProjectMetadataToIndex: serializableProject [
 	^ self iceRepository 
-		saveContent: (CGOPackageVersionWriter toStringPretty: serializableProject) withInternetLineEndings
+		saveContent: (CGOPackageVersionWriterV1 toStringPretty: serializableProject) withInternetLineEndings
 		inWorkingCopyFile: self projectMetadataPath
 ]
 

@@ -4,14 +4,14 @@ I map some instance variables  to an easily serialized form.
 "
 Class {
 	#name : #CGOVcsSerializedProject,
-	#superclass : #CGOSerializedPackage,
+	#superclass : #CGOVcsSerializedPackage,
 	#instVars : [
 		'units',
 		'assemblies',
 		'virtualPackages',
 		'externalProjects'
 	],
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #'instance creation' }

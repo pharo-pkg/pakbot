@@ -4,13 +4,13 @@ I map some instance variables  to an easily serialized form and skip some others
 "
 Class {
 	#name : #CGOVcsSerializedPackageUnit,
-	#superclass : #CGOSerializedPackage,
+	#superclass : #CGOVcsSerializedPackage,
 	#instVars : [
 		'dependencies',
 		'provisions',
 		'platformRequirements'
 	],
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #'instance creation' }

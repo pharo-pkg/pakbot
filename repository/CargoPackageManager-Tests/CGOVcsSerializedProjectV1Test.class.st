@@ -1,16 +1,16 @@
 Class {
-	#name : #CGOVcsSerializedProjectTest,
+	#name : #CGOVcsSerializedProjectV1Test,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-Tests-Model-Serialization'
+	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 
 { #category : #accessing }
-CGOVcsSerializedProjectTest class >> resources [
+CGOVcsSerializedProjectV1Test class >> resources [
 	^ #()
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> counterUiProject [
+CGOVcsSerializedProjectV1Test >> counterUiProject [
 	| project |
 	project := (CGOOngoingProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
@@ -27,7 +27,7 @@ CGOVcsSerializedProjectTest >> counterUiProject [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> counterUiStonString [
+CGOVcsSerializedProjectV1Test >> counterUiStonString [
 	" STON toStringPretty: (self new counterUIProject asVcsSerializedCargoProject) "
 	^ '{#version:''1.0''}
 OngoingProject {
@@ -54,7 +54,7 @@ OngoingProject {
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> stonStringForExampleProject [
+CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 	"
 		STON toStringPretty: CGOOngoingProject example asVcsSerializedCargoProject
 	"
@@ -73,7 +73,7 @@ OngoingProject {
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanDeserializationSimpleProject [
+CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 	| project packageUnit |
 	
 	project := CGOOngoingProject fromStonString: self stonStringForExampleProject.
@@ -98,7 +98,7 @@ CGOVcsSerializedProjectTest >> testCanDeserializationSimpleProject [
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
+CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
 	| project dependency externalProject |
 	
 	project := CGOOngoingProject fromStonString: self counterUiStonString.
@@ -125,7 +125,7 @@ CGOVcsSerializedProjectTest >> testCanDeserializeAPackageDependencyOnExternalCar
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanSerializeAPackageDependencyOnExternalCargoProject [
+CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCargoProject [
 	| project projectStonString |
 	
 	project := self counterUiProject.
@@ -159,12 +159,12 @@ CGOVcsSerializedProjectTest >> testCanSerializeAPackageDependencyOnExternalCargo
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanSerializeSimpleProject [
+CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| project |
 	
 	project := CGOOngoingProject example asVcsSerializedCargoProject.
 	
 	self
-		assert: (CGOPackageVersionWriter toStringPretty: project)
+		assert: (CGOPackageVersionWriterV1 toStringPretty: project)
 		equals: self stonStringForExampleProject
 ]
