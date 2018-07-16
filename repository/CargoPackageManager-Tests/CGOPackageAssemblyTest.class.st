@@ -20,7 +20,8 @@ CGOPackageAssemblyTest >> assemblyA1 [
 
 { #category : #'expected results' }
 CGOPackageAssemblyTest >> expectedTestStonOnResult [
-	^  'CGOPublishedPackageAssembly {
+	^  '{#version:''1.0''}
+CGOPublishedPackageAssembly {
 	#description : '''',
 	#version : ''1.0.0'',
 	#package : #A,

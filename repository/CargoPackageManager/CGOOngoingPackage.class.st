@@ -36,7 +36,10 @@ CGOOngoingPackage class >> fromPackageVersion: aCGOPackageVersion [
 
 { #category : #'instance creation' }
 CGOOngoingPackage class >> fromStonString: aStonString [
-	^ (STON fromString: aStonString) asOngoingPackage 
+	| reader version |
+	reader := STON reader on: aStonString readStream.
+	version := reader next at: #version.
+	^ reader next asOngoingPackage
 ]
 
 { #category : #'as yet unclassified' }

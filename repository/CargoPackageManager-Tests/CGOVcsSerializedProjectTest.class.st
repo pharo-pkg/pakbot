@@ -29,7 +29,8 @@ CGOVcsSerializedProjectTest >> counterUiProject [
 { #category : #'test data' }
 CGOVcsSerializedProjectTest >> counterUiStonString [
 	" STON toStringPretty: (self new counterUIProject asVcsSerializedCargoProject) "
-	^ 'OngoingProject {
+	^ '{#version:''1.0''}
+OngoingProject {
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
 	#externalProjects : {
@@ -57,7 +58,8 @@ CGOVcsSerializedProjectTest >> stonStringForExampleProject [
 	"
 		STON toStringPretty: CGOOngoingProject example asVcsSerializedCargoProject
 	"
-	^ 'OngoingProject {
+	^ '{#version:''1.0''}
+OngoingProject {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
 	#units : [

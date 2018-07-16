@@ -10,6 +10,10 @@ Class {
 { #category : #convenience }
 CGOPackageVersionWriter class >> put: anObject onStreamPretty: aWriteStream [
 	(self new on: aWriteStream)
+		prettyPrint: false;
+		nextPut: {#version -> '1.0'} asDictionary;
+		prettyPrint: true;
+		newLine;
 		nextPut: anObject
 ]
 
@@ -24,4 +28,9 @@ CGOPackageVersionWriter >> initialize [
 	super initialize.
 	self referencePolicy: #ignore.
 	self prettyPrint: true
+]
+
+{ #category : #convenience }
+CGOPackageVersionWriter >> newLine [
+	writeStream nextPutAll: newLine.
 ]
