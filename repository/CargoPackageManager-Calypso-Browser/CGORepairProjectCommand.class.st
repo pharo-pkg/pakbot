@@ -1,7 +1,7 @@
 Class {
 	#name : #CGORepairProjectCommand,
 	#superclass : #CGOProjectCommand,
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #testing }
@@ -25,7 +25,7 @@ CGORepairProjectCommand class >> defaultMenuItemName [
 CGORepairProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 1 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 1 for: PBProjectBrowserItem asCalypsoItemContext
 ]
 
 { #category : #execution }

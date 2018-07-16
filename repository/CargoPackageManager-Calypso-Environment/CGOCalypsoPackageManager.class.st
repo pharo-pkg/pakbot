@@ -4,48 +4,45 @@ I'm the bridge betwwen Calypso and Cargo allowing Calypso to query me to  get th
 Class {
 	#name : #CGOCalypsoPackageManager,
 	#superclass : #ClyPackageManager,
-	#instVars : [
-		'cargoRegistry'
-	],
-	#category : 'CargoPackageManager-Calypso-Environment'
+	#category : #'CargoPackageManager-Calypso-Environment'
 }
 
 { #category : #initialization }
 CGOCalypsoPackageManager class >> initialize [
-	ClySystemEnvironment currentImage 
-		registerPackageManager: (self registry: CGOPackageRegistry default)
-]
-
-{ #category : #'instance creation' }
-CGOCalypsoPackageManager class >> registry: aCGOPackageRegistry [
-	^ self new 
-		cargoRegistry: aCGOPackageRegistry
+	ClySystemEnvironment currentImage registerPackageManager: self new
 ]
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> cargoRegistry [
-	^ cargoRegistry
-]
-
-{ #category : #accessing }
-CGOCalypsoPackageManager >> cargoRegistry: anObject [
-	cargoRegistry := anObject
+	^ CGOPackageRegistry default
 ]
 
 { #category : #operations }
 CGOCalypsoPackageManager >> createProjectNamed: aString [
 	| project |
 	project := CGOOngoingProject named: aString asSymbol.
-	cargoRegistry register: project
+	self cargoRegistry register: project
+]
+
+{ #category : #queries }
+CGOCalypsoPackageManager >> customProjectItemClass [
+
+	^ PBProjectBrowserItem
+]
+
+{ #category : #queries }
+CGOCalypsoPackageManager >> customQueryClass [
+
+	^ PBAllPakbotProjects
 ]
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> dependenciesOf: systemPackage [
 	| package |
-	package := cargoRegistry packageNamed: systemPackage name.
+	package := self cargoRegistry packageNamed: systemPackage name.
 	^ package dependencies 
 		collect: [ :dependency |
-			cargoRegistry packageNamed: dependency packageName ifAbsent: [ nil ] ]
+			self cargoRegistry packageNamed: dependency packageName ifAbsent: [ nil ] ]
 		thenSelect: #notNil
 ]
 
@@ -69,6 +66,7 @@ CGOCalypsoPackageManager >> packagesOf: aCGOProject [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> projectItemsOf: aCGOProject [
+
 	^ (self packagesOf: aCGOProject), 
 		(aCGOProject assemblies collect: [:each | 
 			CGOClyPackageAssembly of: (self projectOf: each) on: each]), 
@@ -78,6 +76,7 @@ CGOCalypsoPackageManager >> projectItemsOf: aCGOProject [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> projectOf: aCGOPackageVersion [
+	1halt.
 	^ ClyManagedProject
 		for: aCGOPackageVersion project 
 		named: aCGOPackageVersion packageName 
@@ -86,8 +85,8 @@ CGOCalypsoPackageManager >> projectOf: aCGOPackageVersion [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> projects [
-	^ cargoRegistry registeredProjects 
-		collect: 	[ :each | ClyManagedProject for: each named: each packageName managedBy: self]
+	^ self cargoRegistry registeredProjects 
+		collect: 	[ :each | PBProjectBrowserItem forProject: each]
 ]
 
 { #category : #operations }
@@ -97,5 +96,5 @@ CGOCalypsoPackageManager >> saveProject: aCGOProject toSCMWithMessage: message [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> versionOf: systemPackage [
-	^ cargoRegistry packageNamed: systemPackage name
+	^ self cargoRegistry packageNamed: systemPackage name
 ]

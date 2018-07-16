@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'packageToRemove'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #accessing }
@@ -25,35 +25,35 @@ CGOBrowserProjectPartRemovalCommand class >> defaultMenuIconName [
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
+	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyPackageContextOfFullBrowser 
+	^ CmdContextMenuCommandActivation byRootGroupItemFor: ClyPackageContextOfFullBrowser 
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyPackageContextOfFullBrowser 
+	^ CmdShortcutCommandActivation by: $x meta, $p meta for: ClyPackageContextOfFullBrowser 
 ]
 
 { #category : #initialization }

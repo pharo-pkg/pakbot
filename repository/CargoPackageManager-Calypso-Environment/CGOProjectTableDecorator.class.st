@@ -8,28 +8,13 @@ Class {
 CGOProjectTableDecorator class >> browserDecorationStrategy [
 	<classAnnotation>
 	
-	^ClyTableDecorationStrategy for: ClyProjectContextOfFullBrowser
+	^ClyTableDecorationStrategy for: PBProjectContextOfFullBrowser
 ]
 
 { #category : #decoration }
 CGOProjectTableDecorator class >> decorateMainTableCell: anItemCellMorph inContext: itemContext [
 
-	| command activator icon button |
-	
-	command := CGORepairProjectCommand new.
-	itemContext prepareNewCommand: command.
-	activator := CmdCommandActivator new 
-			command: command; 
-			context: itemContext.
-
-	icon := anItemCellMorph iconNamed: #error.
-	button := command createTableCellButtonWith: icon using: activator.
-	button setBalloonText: 'The project is not up to date'.
-	anItemCellMorph definitionMorph: button
-]
-
-{ #category : #decoration }
-CGOProjectTableDecorator class >> decorateTableCell: anItemCellMorph of: aDataSourceItem [
+	anItemCellMorph actualObject decorateTableCell: anItemCellMorph inContext: itemContext
 
 ]
 
@@ -41,5 +26,6 @@ CGOProjectTableDecorator class >> priority [
 { #category : #decoration }
 CGOProjectTableDecorator class >> wantsDecorateTableCellOf: aDataSourceItem [
 		
-	^aDataSourceItem isMarkedWith: CGOProjectHasProblems 
+	self flag:#todo.
+	^aDataSourceItem actualObject isKindOf: PBProjectBrowserItem
 ]

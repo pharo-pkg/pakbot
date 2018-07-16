@@ -7,8 +7,14 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
+
+{ #category : #testing }
+CGOProjectCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ aToolContext isProjectSelected 
+]
 
 { #category : #execution }
 CGOProjectCommand >> prepareFullExecutionInContext: aToolContext [

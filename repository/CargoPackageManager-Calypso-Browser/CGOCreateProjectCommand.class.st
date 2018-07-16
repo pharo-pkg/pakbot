@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'projectName'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #accessing }
@@ -25,14 +25,14 @@ CGOCreateProjectCommand class >> defaultMenuIconName [
 CGOCreateProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectContextOfFullBrowser
+	^ CmdContextMenuCommandActivation byRootGroupItemFor: PBProjectContextOfFullBrowser
 ]
 
 { #category : #activation }
 CGOCreateProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $n meta, $p meta for: ClyProjectContextOfFullBrowser
+	^ CmdShortcutCommandActivation by: $n meta, $p meta for: PBProjectContextOfFullBrowser
 ]
 
 { #category : #activation }
@@ -40,7 +40,7 @@ CGOCreateProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	^ ClyToolbarCommandActivation
 		byItemOf: ClyButtonToolbarGroup
-		for: ClyProjectContextOfFullBrowser
+		for: PBProjectContextOfFullBrowser
 ]
 
 { #category : #execution }

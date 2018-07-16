@@ -9,7 +9,7 @@ Class {
 		'toolContext',
 		'packageManager'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #execution }

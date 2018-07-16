@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'unitName'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #accessing }
-CGOCreatePackageInProjectCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext isProjectSelected
-]
 
 { #category : #accessing }
 CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
@@ -24,14 +19,14 @@ CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
 CGOCreatePackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 10 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 10 for: PBProjectBrowserItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOCreatePackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutCommandActivation by: $p meta, $n meta for: ClyManagedProject asCalypsoItemContext
+	^ CmdShortcutCommandActivation by: $p meta, $n meta for: PBProjectBrowserItem asCalypsoItemContext
 ]
 
 { #category : #activation }
@@ -40,7 +35,7 @@ CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 	^ ClyToolbarCommandActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
-		for: ClyManagedProject asCalypsoItemContext
+		for: PBProjectBrowserItem asCalypsoItemContext
 ]
 
 { #category : #execution }

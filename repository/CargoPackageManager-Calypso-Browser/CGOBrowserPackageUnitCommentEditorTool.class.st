@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }

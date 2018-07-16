@@ -11,7 +11,7 @@ Class {
 		'acceptButton',
 		'cancelButton'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Dialogs'
 }
 
 { #category : #specs }
