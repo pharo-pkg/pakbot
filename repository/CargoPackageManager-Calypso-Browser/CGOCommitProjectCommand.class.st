@@ -25,7 +25,7 @@ CGOCommitProjectCommand class >> defaultMenuIconName [
 CGOCommitProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation
+	^ CmdContextMenuCommandActivation
 		byItemOf: CGOSCMMenuGroup
 		order: 10000
 		for: ClyManagedProject asCalypsoItemContext 
@@ -35,7 +35,7 @@ CGOCommitProjectCommand class >> systemBrowserMenuActivator [
 CGOCommitProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $s meta for: ClyManagedProject asCalypsoItemContext 
+	^ CmdShortcutCommandActivation by: $s meta for: ClyManagedProject asCalypsoItemContext 
 ]
 
 { #category : #activation }

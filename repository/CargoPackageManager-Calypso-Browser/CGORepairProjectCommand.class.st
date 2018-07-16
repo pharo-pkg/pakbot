@@ -25,7 +25,7 @@ CGORepairProjectCommand class >> defaultMenuItemName [
 CGORepairProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 1 for: ClyManagedProject asCalypsoItemContext
 ]
 
 { #category : #execution }

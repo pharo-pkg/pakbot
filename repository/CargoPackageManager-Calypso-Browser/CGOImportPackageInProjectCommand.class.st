@@ -25,14 +25,14 @@ CGOImportPackageInProjectCommand class >> defaultMenuIconName [
 CGOImportPackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuCommandActivation byRootGroupItemOrder: 20 for: ClyManagedProject asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOImportPackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta, $i meta for: ClyManagedProject asCalypsoItemContext
+	^ CmdShortcutCommandActivation by: $p meta, $i meta for: ClyManagedProject asCalypsoItemContext
 ]
 
 { #category : #activation }
