@@ -1,7 +1,7 @@
 Class {
 	#name : #PBProjectScope,
 	#superclass : #ClyTypedScope,
-	#category : #'CargoPackageManager-Calypso-Environment'
+	#category : #'CargoPackageManager-Calypso-Environment-Queries'
 }
 
 { #category : #accessing }

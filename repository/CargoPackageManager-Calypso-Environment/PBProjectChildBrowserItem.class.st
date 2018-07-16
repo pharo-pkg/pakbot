@@ -7,6 +7,12 @@ Class {
 	#category : #'CargoPackageManager-Calypso-Environment-Items'
 }
 
+{ #category : #queries }
+PBProjectChildBrowserItem class >> checkCalypsoItem: aChildBrowserItem isEqualTo: anotherChildBrowserItemOrRPackage [
+		
+	^ aChildBrowserItem = anotherChildBrowserItemOrRPackage or: [ aChildBrowserItem systemPackage = anotherChildBrowserItemOrRPackage ]
+]
+
 { #category : #converting }
 PBProjectChildBrowserItem class >> convertToCalypsoBrowserItem: aUnit [
  
@@ -27,13 +33,15 @@ PBProjectChildBrowserItem class >> forUnit: anUnit [
 
 { #category : #queries }
 PBProjectChildBrowserItem class >> prepareClassQueriesFrom: packages in: aNavigationEnvironment [
-	| packagesToShow |
+		
+	^ { ClyAllClasses from: PBProjectPackageScope ofAll: packages in: aNavigationEnvironment }.
+
+]
+
+{ #category : #testing }
+PBProjectChildBrowserItem >> includesClassesAffectedBy: aSystemAnnouncement [ 
 	
-	packagesToShow := packages
-		select: [ :each | each isInstalled ]
-		thenCollect: [ :each | each systemPackage ].
-	
-	^ RPackage prepareClassQueriesFrom: packagesToShow in: aNavigationEnvironment
+	^ false
 ]
 
 { #category : #testing }

@@ -19,3 +19,16 @@ PBProjectContextOfFullBrowser >> selectedProjectItems [
 
 	^selectedItems collect: [ :each | each rootParentItem ]
 ]
+
+{ #category : #'selection-projects' }
+PBProjectContextOfFullBrowser >> showPackage: aPackage [
+	
+	self halt.
+	tool selectPackage: aPackage
+]
+
+{ #category : #'selection-projects' }
+PBProjectContextOfFullBrowser >> showPackage: aPackage atClassTag: tagName [
+	self halt.
+	tool selectPackage: aPackage atClassTag: tagName
+]
