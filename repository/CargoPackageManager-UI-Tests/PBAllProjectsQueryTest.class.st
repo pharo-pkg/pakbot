@@ -8,7 +8,7 @@ Class {
 PBAllProjectsQueryTest >> testEmptyProjectsReturnEmptyCollection [
 
 			
-	self assert: (PBAllPakbotProjects sortedFrom: scope) execute items isEmpty
+	self assert: query execute items isEmpty
 ]
 
 { #category : #tests }
@@ -18,7 +18,7 @@ PBAllProjectsQueryTest >> testWithOneProjectHasTheCorrectName [
 	| result |
 	registry newProjectNamed: 'TestProject'.
 	
-	result := (PBAllPakbotProjects sortedFrom: scope) execute items.
+	result := query execute items.
 	
 	self assert: result anyOne name equals: 'TestProject'.	
 ]
@@ -29,7 +29,7 @@ PBAllProjectsQueryTest >> testWithOneProjectIsNotEmpty [
 	
 	registry newProjectNamed: 'TestProject'.
 	
-	self deny: (PBAllPakbotProjects sortedFrom: scope) execute items isEmpty
+	self deny: query execute items isEmpty
 ]
 
 { #category : #tests }
@@ -39,7 +39,7 @@ PBAllProjectsQueryTest >> testWithOneProjectReturnsTheCorrectUIInstance [
 	| result |
 	registry newProjectNamed: 'TestProject'.
 	
-	result := (PBAllPakbotProjects sortedFrom: scope) execute items.
+	result := query execute items.
 	
 	self assert: result size equals: 1.
 	self assert: result anyOne class equals: PBProjectUIItem.	

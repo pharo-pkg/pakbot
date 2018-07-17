@@ -86,6 +86,12 @@ PBProjectUIItem >> includesPackage: aRPackage [
 ]
 
 { #category : #testing }
+PBProjectUIItem >> installedSystemPackages [
+	
+	^ self project installedSystemPackages
+]
+
+{ #category : #testing }
 PBProjectUIItem >> isEmpty [
 
 	^ self project packageUnits isEmpty
