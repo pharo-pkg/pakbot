@@ -38,7 +38,7 @@ CGOPackageVersionCacheTest >> testFetchDescription [
 	| pkgVersionString pkgVersion stonDescription fileRef |
 	
 	pkgVersionString := 'Seaside-Core@3.1.0'.
-	stonDescription := CGOPackageVersionWriter toStringPretty: (self packageVersions detect: [:each | each asString = pkgVersionString ]).
+	stonDescription := CGOPackageVersionWriterV1 toStringPretty: (self packageVersions detect: [:each | each asString = pkgVersionString ]).
 	fileRef := CGOPackageVersionCache packageDescriptionCache asFileReference / pkgVersionString asLowercase.
 	fileRef ensureDelete.
 	fileRef writeStreamDo: [ :stream | stream nextPutAll: stonDescription ].

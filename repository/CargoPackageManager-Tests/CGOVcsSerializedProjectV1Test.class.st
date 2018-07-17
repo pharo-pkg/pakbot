@@ -1,16 +1,16 @@
 Class {
-	#name : #CGOVcsSerializedProjectTest,
+	#name : #CGOVcsSerializedProjectV1Test,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-Tests-Model-Serialization'
+	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 
 { #category : #accessing }
-CGOVcsSerializedProjectTest class >> resources [
+CGOVcsSerializedProjectV1Test class >> resources [
 	^ #()
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> counterUiProject [
+CGOVcsSerializedProjectV1Test >> counterUiProject [
 	| project |
 	project := (CGOOngoingProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
@@ -27,51 +27,55 @@ CGOVcsSerializedProjectTest >> counterUiProject [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> counterUiStonString [
-	" STON toStringPretty: (self new counterUIProject asVcsSerializedCargoProject) "
-	^ 'OngoingProject {
+CGOVcsSerializedProjectV1Test >> counterUiStonString [
+	" STON toStringPretty: (self new counterUiProject asVcsSerializedCargoProject) "
+	^ '{#version:''1.0''}
+{
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
-	#externalProjects : {
-		#Counter : CGOCargoProjectDependency {
-			#repository : CGOGitRepository {
-				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
-				#version : ''master''
-			}
-		}
-	},
 	#units : [
-		OngoingPackageUnit {
+		{
 			#name : #Counter-UI-Spec,
 			#description : ''Core package with the counter UI based on Spec.'',
 			#dependencies : [
 				#''Counter::Counter-Core''
 			]
 		}
+	],
+	#externalProjects : [
+		{
+			#name : ''pharo-counter'',
+			#repository : {
+				#type : #git,
+				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
+				#version : ''master''
+			},
+			#version : ''''
+		}
 	]
 }'
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectTest >> stonStringForExampleProject [
+CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 	"
 		STON toStringPretty: CGOOngoingProject example asVcsSerializedCargoProject
 	"
-	^ 'OngoingProject {
+	^ '{#version:''1.0''}
+{
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
 	#units : [
-		OngoingPackageUnit {
+		{
 			#name : #UnitTest,
-			#description : ''A simple ongoing package unit.'',
-			#dependencies : [ ]
+			#description : ''A simple ongoing package unit.''
 		}
 	]
 }'
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanDeserializationSimpleProject [
+CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 	| project packageUnit |
 	
 	project := CGOOngoingProject fromStonString: self stonStringForExampleProject.
@@ -96,7 +100,7 @@ CGOVcsSerializedProjectTest >> testCanDeserializationSimpleProject [
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
+CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
 	| project dependency externalProject |
 	
 	project := CGOOngoingProject fromStonString: self counterUiStonString.
@@ -110,8 +114,8 @@ CGOVcsSerializedProjectTest >> testCanDeserializeAPackageDependencyOnExternalCar
 		assert: project externalProjects size 
 		equals: 1.
 	self 
-		assert: project externalProjects keys anyOne
-		equals: #Counter.
+		assert: project externalProjects anyOne name
+		equals: #'pharo-counter'.
 			
 	externalProject := project externalProjects anyOne.
 	self
@@ -119,11 +123,11 @@ CGOVcsSerializedProjectTest >> testCanDeserializeAPackageDependencyOnExternalCar
 		equals: CGOCargoProjectDependency.
 	self
 		assert: externalProject repositoryUrl 
-		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
+		equals: 'git://git@github.com/demarey/pharo-counter.git'.
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanSerializeAPackageDependencyOnExternalCargoProject [
+CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCargoProject [
 	| project projectStonString |
 	
 	project := self counterUiProject.
@@ -131,38 +135,39 @@ CGOVcsSerializedProjectTest >> testCanSerializeAPackageDependencyOnExternalCargo
 	
 	self 
 		assert: projectStonString
-		equals: 'OngoingProject {
+		equals: '{
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
-	#externalProjects : [
-		CGOCargoProjectDependency {
-			#repository : CGOGitRepository {
-				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
-				#version : ''master''
-			},
-			#name : ''pharo-counter'',
-			#version : ''''
-		}
-	],
 	#units : [
-		OngoingPackageUnit {
+		{
 			#name : #Counter-UI-Spec,
 			#description : ''Core package with the counter UI based on Spec.'',
 			#dependencies : [
 				#''Counter::Counter-Core''
 			]
 		}
+	],
+	#externalProjects : [
+		{
+			#name : ''pharo-counter'',
+			#repository : {
+				#type : #git,
+				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
+				#version : ''master''
+			},
+			#version : ''''
+		}
 	]
 }'
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectTest >> testCanSerializeSimpleProject [
-	| project |
+CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
+	| serializedProject |
 	
-	project := CGOOngoingProject example asVcsSerializedCargoProject.
+	serializedProject := CGOOngoingProject example asVcsSerializedCargoProject.
 	
 	self
-		assert: (CGOPackageVersionWriter toStringPretty: project)
+		assert: serializedProject asString
 		equals: self stonStringForExampleProject
 ]

@@ -161,7 +161,7 @@ CGOGitRepository >> mcVersionFor: aPackageVersion [
 
 { #category : #private }
 CGOGitRepository >> metadataStringFor: aPackageUnit [
-	^ (CGOPackageVersionWriter toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
+	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
 ]
 
@@ -207,7 +207,7 @@ CGOGitRepository >> saveProject: aVcsSerializedCargoProject withMessage: commitM
 { #category : #saving }
 CGOGitRepository >> saveProjectMetadataToIndex: serializableProject [
 	^ self iceRepository 
-		saveContent: (CGOPackageVersionWriter toStringPretty: serializableProject) withInternetLineEndings
+		saveContent: (CGOPackageVersionWriterV1 toStringPretty: serializableProject) withInternetLineEndings
 		inWorkingCopyFile: self projectMetadataPath
 ]
 
@@ -218,13 +218,12 @@ CGOGitRepository >> sourcePackageVersionClass [
 
 { #category : #serialization }
 CGOGitRepository >> stonOn: stonWriter [
-	stonWriter 
-		writeObject: self
-		streamMap: [ :dictionary | | url |
-			url := CGOGitRepositoryCreator urlWithScheme: repositoryUrl.
-			dictionary
-				at: #repositoryUrl put: url asString;
-				at: #version put: version. ]
+	| url |
+	url := CGOGitRepositoryCreator urlWithScheme: repositoryUrl.
+	stonWriter writeMap: (OrderedDictionary 
+		with: #type -> #git
+		with: 	#repositoryUrl -> url asString
+		with: 	#version -> version)
 ]
 
 { #category : #accessing }

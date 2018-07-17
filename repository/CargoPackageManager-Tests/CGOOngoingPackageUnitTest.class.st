@@ -10,11 +10,8 @@ Class {
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testCanCreateMinimalOngoingPackageUnit [
 	| unit |
-	unit := CGOOngoingPackageUnit for: #'Test'.
-	
-	self 
-		assert: unit class 
-		equals: CGOOngoingPackageUnit
+	unit := CGOOngoingPackageUnit named: #Test.
+	self assert: unit class equals: CGOOngoingPackageUnit
 ]
 
 { #category : #tests }
@@ -58,25 +55,21 @@ CGOOngoingPackageUnitTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testComparisonWithPackageAssemblyReturnsFalse [
 	| unit assembly |
-	unit := (CGOOngoingPackageUnit for: #'Test').
-	assembly := (CGOOngoingPackageAssembly for: 'Test').
-	
+	unit := CGOOngoingPackageUnit named: #Test.
+	assembly := CGOOngoingPackageAssembly named: 'Test'.
 	self deny: unit = assembly
 ]
 
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testComparisonWithSamePackageUnitReturnsTrue [
 	| unit |
-	unit := (CGOOngoingPackageUnit for: #'Test').
-	
-	self 
-		assert: unit 
-		equals: unit copy
+	unit := CGOOngoingPackageUnit named: #Test.
+	self assert: unit equals: unit copy
 ]
 
 { #category : #'test data' }
 CGOOngoingPackageUnitTest >> unitTestV2 [
-	^ (CGOOngoingPackageUnit for: #'Test')
+	^ (CGOOngoingPackageUnit named: #Test)
 		description: 'A simple ongoing package unit 2.';
 		project: ongoingProject;
 		yourself

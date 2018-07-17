@@ -145,7 +145,7 @@ CGODirectoryPackageRepository >> savePackageVersion: aPackageVersion [
 	directory := (self directoryFor: aPackageVersion) ensureCreateDirectory.
 	directory / aPackageVersion name asLowercase
 		writeStreamDo: [ :stream | 
-			stream nextPutAll: (CGOPackageVersionWriter toStringPretty: aPackageVersion) ].
+			stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPackageVersion) ].
 	self updateVirtualPackagesIndexWith: aPackageVersion
 ]
 

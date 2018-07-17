@@ -1,7 +1,14 @@
-Extension { #name : #CGOOngoingProjectTest }
+Class {
+	#name : #PBOngoingProjectTest,
+	#superclass : #CGOOngoingProjectTest,
+	#instVars : [
+		'protocol'
+	],
+	#category : #'CargoPackageManager-FailingTests-Model'
+}
 
-{ #category : #'*CargoPackageManager-FailingTests' }
-CGOOngoingProjectTest >> testCanGetProjectFromSCM [
+{ #category : #tests }
+PBOngoingProjectTest >> testCanGetProjectFromSCM [
 	| projectSourceRepositoryMock project |
 	projectSourceRepositoryMock := protocol mock: 'projectSourceRepositoryMock'.
 	protocol describe
@@ -15,8 +22,8 @@ CGOOngoingProjectTest >> testCanGetProjectFromSCM [
 		equals: CGOOngoingProject example
 ]
 
-{ #category : #'*CargoPackageManager-FailingTests' }
-CGOOngoingProjectTest >> testCanPublishAProject [
+{ #category : #tests }
+PBOngoingProjectTest >> testCanPublishAProject [
 	| published |
 	ongoingProject publish.
 	
@@ -34,8 +41,8 @@ CGOOngoingProjectTest >> testCanPublishAProject [
 		hasSameElements: #(#Package1 #Package2)
 ]
 
-{ #category : #'*CargoPackageManager-FailingTests' }
-CGOOngoingProjectTest >> testCanPublishAProjectAndItsPackages [
+{ #category : #tests }
+PBOngoingProjectTest >> testCanPublishAProjectAndItsPackages [
 	| packages |
 	ongoingProject assemblies: { CGOOngoingPackageAssembly for: #AllPackages in: ongoingProject name }.
 	

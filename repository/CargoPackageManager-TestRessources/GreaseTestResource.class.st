@@ -512,5 +512,5 @@ GreaseTestResource >> writePackageVersions: aListOfPackageVersions to: aFolder [
 		do: [ :pkgVersion |
 			(aFolder / pkgVersion packageName asLowercase) ensureCreateDirectory.
 			aFolder / pkgVersion packageName asLowercase / pkgVersion name asLowercase
-				writeStreamDo: [ :stream | stream nextPutAll: (CGOPackageVersionWriter toStringPretty: pkgVersion) ] ].
+				writeStreamDo: [ :stream | stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: pkgVersion) ] ].
 ]

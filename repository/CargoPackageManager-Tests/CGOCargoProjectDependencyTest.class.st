@@ -36,12 +36,13 @@ CGOCargoProjectDependencyTest >> testCanSerializeDependency [
 	
 	self 
 		assert: projectDependencyString
-		equals: 'CGOCargoProjectDependency {
-	#repository : CGOGitRepository {
+		equals: '{
+	#name : ''pharo-counter'',
+	#repository : {
+		#type : #git,
 		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
 		#version : ''master''
 	},
-	#name : ''pharo-counter'',
 	#version : ''''
-}'.
+}'
 ]

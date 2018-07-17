@@ -38,11 +38,8 @@ PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 
 { #category : #ston }
 PBMetacelloBaselineProjectDependency >> stonOn: stonWriter [
-	stonWriter 
-		writeObject: self
-		streamMap: [ :dictionary |
-			dictionary
-				at: #baseline put: name;
-				at: #url put: url asString;
-				at: #version put: version. ]
+	stonWriter writeMap: (OrderedDictionary 
+		with: #baseline -> name
+		with:	#url -> url asString
+		with: 	#version -> version)
 ]

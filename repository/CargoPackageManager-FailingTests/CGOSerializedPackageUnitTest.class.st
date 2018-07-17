@@ -140,7 +140,7 @@ CGOSerializedPackageUnitTest >> testDeserializeDependenciesIn [
 CGOSerializedPackageUnitTest >> testFromSton [
 	| seasideCore ston |
 	seasideCore := self packageVersions detect: [ :each | each packageName = 'Seaside-Core' ].
-	ston := CGOPackageVersionWriter toStringPretty: seasideCore.
+	ston := CGOPackageVersionWriterV1 toStringPretty: seasideCore.
 	self
 		assert: (STON fromString: ston)
 		equals: seasideCore
@@ -149,7 +149,7 @@ CGOSerializedPackageUnitTest >> testFromSton [
 { #category : #tests }
 CGOSerializedPackageUnitTest >> testFromStonTargetClass [
 	| ston |
-	ston := CGOPackageVersionWriter toStringPretty: 
+	ston := CGOPackageVersionWriterV1 toStringPretty: 
 				(CGOSerializedPackageUnit new
 					instVarNamed: 'package' put: #A;
 					instVarNamed: 'version' put: '1.0.0' asSemanticVersion;
@@ -188,7 +188,7 @@ CGOSerializedPackageUnitTest >> testStonOn [
 		put: (DateAndTime fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
 		
 	self
-		assert: (CGOPackageVersionWriter toStringPretty: seasideCore)
+		assert: (CGOPackageVersionWriterV1 toStringPretty: seasideCore)
 		equals: self seasideCore310StonString
 ]
 
@@ -196,7 +196,7 @@ CGOSerializedPackageUnitTest >> testStonOn [
 CGOSerializedPackageUnitTest >> testStonOnWith2EmptyDependency [
 	| pkgUnit ston |
 	pkgUnit := STON fromString: self a100With2EmptyDependency.
-	ston := CGOPackageVersionWriter toStringPretty: pkgUnit.
+	ston := CGOPackageVersionWriterV1 toStringPretty: pkgUnit.
 	self
 		assert: ston
 		equals: self a100With2EmptyDependency
@@ -220,7 +220,7 @@ CGOSerializedPackageUnitTest >> testStonOnWithApkg [
 	pkgVersion
 		instVarNamed: 'timestamp'
 		put: (DateAndTime fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
-	result := String streamContents: [ :stream | (CGOPackageVersionWriter on: stream)
+	result := String streamContents: [ :stream | (CGOPackageVersionWriterV1 on: stream)
 		referencePolicy: #ignore;
 		prettyPrint: true; 
 		nextPut: pkgVersion;
@@ -246,7 +246,7 @@ CGOSerializedPackageUnitTest >> testStonOnWithApkgWithDependencyWithNoConstraint
 	pkgVersion
 		instVarNamed: 'timestamp'
 		put: (DateAndTime fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
-	result := String streamContents: [ :stream | (CGOPackageVersionWriter on: stream)
+	result := String streamContents: [ :stream | (CGOPackageVersionWriterV1 on: stream)
 		referencePolicy: #ignore;
 		prettyPrint: true; 
 		nextPut: pkgVersion;
@@ -270,7 +270,7 @@ CGOSerializedPackageUnitTest >> testStonOnWithApkgWithoutDependencies [
 	pkgVersion
 		instVarNamed: 'timestamp'
 		put: (DateAndTime fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
-	result := String streamContents: [ :stream | (CGOPackageVersionWriter on: stream)
+	result := String streamContents: [ :stream | (CGOPackageVersionWriterV1 on: stream)
 		referencePolicy: #ignore;
 		prettyPrint: true; 
 		nextPut: pkgVersion;

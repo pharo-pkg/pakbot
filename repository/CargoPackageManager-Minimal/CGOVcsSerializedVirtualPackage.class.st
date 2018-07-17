@@ -3,8 +3,8 @@ I represent a Cargo virtual package ready to be serialized on a Version Control 
 "
 Class {
 	#name : #CGOVcsSerializedVirtualPackage,
-	#superclass : #CGOSerializedPackage,
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#superclass : #CGOVcsSerializedPackage,
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #'instance creation' }

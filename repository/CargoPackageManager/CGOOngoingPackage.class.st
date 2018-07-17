@@ -18,14 +18,22 @@ Class {
 
 { #category : #'instance creation' }
 CGOOngoingPackage class >> for: aPackageName [
-	^ self for: aPackageName project: nil 
+	
+	self deprecated: 'Please use #named: instead'
+		transformWith: '`@receiver for: `@statements1' 
+						-> '`@receiver named: `@statements1'.
+	
+	^ self named: aPackageName
 ]
 
 { #category : #'instance creation' }
 CGOOngoingPackage class >> for: aPackageName project: aCargoProject [
-	^ self basicNew
-		initializeWithPackageName: aPackageName andProject: aCargoProject;
-		yourself 
+	
+	self deprecated: 'Please use #named:project: instead'
+		transformWith: '`@receiver for: `@statements1 project: `@statements2' 
+						-> '`@receiver named: `@statements1 project: `@statements2'.
+	
+	^ self named: aPackageName project: aCargoProject
 ]
 
 { #category : #'instance creation' }
@@ -36,7 +44,26 @@ CGOOngoingPackage class >> fromPackageVersion: aCGOPackageVersion [
 
 { #category : #'instance creation' }
 CGOOngoingPackage class >> fromStonString: aStonString [
-	^ (STON fromString: aStonString) asOngoingPackage 
+	| reader version project |
+	reader := STON reader on: aStonString readStream.
+	version := reader next at: #version.
+	project:= reader next.
+
+	^ CGOPackageVersionWriterV1 deserializeProject: project version: version.
+	
+
+]
+
+{ #category : #'instance creation' }
+CGOOngoingPackage class >> named: aPackageName [
+	^ self named: aPackageName project: nil 
+]
+
+{ #category : #'instance creation' }
+CGOOngoingPackage class >> named: aPackageName project: aCargoProject [
+	^ self basicNew
+		initializeWithPackageName: aPackageName andProject: aCargoProject;
+		yourself 
 ]
 
 { #category : #'as yet unclassified' }
@@ -89,18 +116,6 @@ CGOOngoingPackage >> description [
 { #category : #accessing }
 CGOOngoingPackage >> description: aString [
 	description := aString
-]
-
-{ #category : #'private - deserialization' }
-CGOOngoingPackage >> deserializedDependencies: aListOfSerializedDependencies [
-	^ aListOfSerializedDependencies 
-		ifNil: [ OrderedCollection empty ]
-		ifNotNil: [ aListOfSerializedDependencies collect:
-				[ :associationOrString | | association |
-					association := associationOrString isString 
-						ifTrue: [ associationOrString -> #() ]
-						ifFalse: [ associationOrString ].
-					CGOPackageDependency newFrom: association ] ]
 ]
 
 { #category : #testing }

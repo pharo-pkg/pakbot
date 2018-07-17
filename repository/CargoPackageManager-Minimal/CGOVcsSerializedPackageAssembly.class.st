@@ -3,11 +3,11 @@ I represent a Cargo package assembly ready to be serialized on a Version Control
 "
 Class {
 	#name : #CGOVcsSerializedPackageAssembly,
-	#superclass : #CGOSerializedPackage,
+	#superclass : #CGOVcsSerializedPackage,
 	#instVars : [
 		'parts'
 	],
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #'instance creation' }
