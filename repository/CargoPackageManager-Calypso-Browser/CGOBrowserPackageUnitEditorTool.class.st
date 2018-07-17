@@ -27,12 +27,12 @@ CGOBrowserPackageUnitEditorTool >> activeColor [
 
 { #category : #initialization }
 CGOBrowserPackageUnitEditorTool >> build [
-	| packageManager unit |
-	packageManager := context systemEnvironment projectManager packageManagers first.
-	unit := packageManager versionOf: context lastSelectedPackage.
+	| aPackage |
+		
+	aPackage := context selectedItems first actualObject.
 	
 	self 
-		addMorph: (CGOPackageUnitView buildOnOngoing: unit asOngoingPackageVersion)
+		addMorph: (CGOPackageUnitView buildOnOngoing: aPackage unit)
 		fullFrame: LayoutFrame identity
 ]
 

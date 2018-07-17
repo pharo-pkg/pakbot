@@ -10,7 +10,8 @@ Class {
 { #category : #queries }
 PBPackageUIItem class >> checkCalypsoItem: aChildBrowserItem isEqualTo: anotherChildBrowserItemOrRPackage [
 		
-	^ aChildBrowserItem = anotherChildBrowserItemOrRPackage or: [ aChildBrowserItem systemPackage = anotherChildBrowserItemOrRPackage ]
+	^ aChildBrowserItem = anotherChildBrowserItemOrRPackage or: [ 
+		aChildBrowserItem isInstalled and: [ aChildBrowserItem systemPackage = anotherChildBrowserItemOrRPackage ]]
 ]
 
 { #category : #converting }
@@ -59,8 +60,13 @@ PBPackageUIItem >> critiques [
 
 { #category : #decorating }
 PBPackageUIItem >> decorate: anItemCellMorph inContext: itemContext [
-	
-	anItemCellMorph definitionIcon: #package
+	self isInstalled
+		ifTrue: [ anItemCellMorph definitionIcon: #package ]
+		ifFalse: [ anItemCellMorph
+				definitionMorph:
+					((self iconNamed: #package) asAlphaImageMorph
+						alpha: 0.6;
+						yourself) ]
 ]
 
 { #category : #testing }
