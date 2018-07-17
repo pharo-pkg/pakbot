@@ -25,21 +25,21 @@ CGOBrowserProjectPartRemovalCommand class >> defaultMenuIconName [
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectChildItem asCalypsoItemContext  
+	^ CmdContextMenuActivation byRootGroupItemFor: PBPackageUIItem asCalypsoItemContext  
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserAssemblyShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutActivation by: $x meta, $p meta for: PBPackageUIItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyProjectChildItem asCalypsoItemContext   
+	^ CmdShortcutActivation by: $x meta, $p meta for: PBPackageUIItem asCalypsoItemContext   
 ]
 
 { #category : #activation }
@@ -53,7 +53,7 @@ CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitMenuActivator [
 CGOBrowserProjectPartRemovalCommand class >> systemBrowserUnitShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $x meta, $p meta for: ClyPackageContextOfFullBrowser 
+	^ CmdShortcutActivation by: $x meta, $p meta for: PBPackageUIItem asCalypsoItemContext 
 ]
 
 { #category : #initialization }
@@ -63,7 +63,8 @@ CGOBrowserProjectPartRemovalCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOBrowserProjectPartRemovalCommand >> execute [
-	project removePart: packageToRemove cargoPackage
+
+	packageToRemove removeFromProject
 ]
 
 { #category : #execution }
@@ -72,10 +73,4 @@ CGOBrowserProjectPartRemovalCommand >> prepareFullExecutionInContext: aToolConte
 	super prepareFullExecutionInContext: aToolContext.
 	packageToRemove := aToolContext lastSelectedObject.
 
-]
-
-{ #category : #private }
-CGOBrowserProjectPartRemovalCommand >> refreshCalypsoChild [
-	toolContext lastSelectedItem parentItem childrenDataSource 
-		ifNotNil: [:ds | ds environmentCursor observedContent changedBy: nil]
 ]

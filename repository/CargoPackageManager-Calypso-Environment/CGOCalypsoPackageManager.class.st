@@ -27,7 +27,7 @@ CGOCalypsoPackageManager >> createProjectNamed: aString [
 { #category : #queries }
 CGOCalypsoPackageManager >> customProjectItemClass [
 
-	^ PBProjectBrowserItem
+	^ PBProjectUIItem
 ]
 
 { #category : #queries }
@@ -48,7 +48,8 @@ CGOCalypsoPackageManager >> dependenciesOf: systemPackage [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> packageNamed: aSymbol [
-	^ ClyManagedPackage 
+	self halt.
+	^ PBPackageUIItem 
 			for: (systemEnvironment packageNamed: aSymbol) 
 			managedBy: self
 ]
@@ -86,7 +87,7 @@ CGOCalypsoPackageManager >> projectOf: aCGOPackageVersion [
 { #category : #accessing }
 CGOCalypsoPackageManager >> projects [
 	^ self cargoRegistry registeredProjects 
-		collect: 	[ :each | PBProjectBrowserItem forProject: each]
+		collect: 	[ :each | PBProjectUIItem forProject: each]
 ]
 
 { #category : #operations }

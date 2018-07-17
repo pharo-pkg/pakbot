@@ -19,14 +19,14 @@ CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
 CGOCreatePackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10 for: PBProjectBrowserItem asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 10 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOCreatePackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta, $n meta for: PBProjectBrowserItem asCalypsoItemContext
+	^ CmdShortcutActivation by: $p meta, $n meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
@@ -35,7 +35,7 @@ CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
-		for: PBProjectBrowserItem asCalypsoItemContext
+		for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }

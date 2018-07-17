@@ -13,11 +13,6 @@ Class {
 }
 
 { #category : #execution }
-CGOClyCommand >> applyResultInContext: aToolContext [
-	self refreshCalypsoChild
-]
-
-{ #category : #execution }
 CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
 	| packageManagers |
 	super prepareFullExecutionInContext: aToolContext.
@@ -27,20 +22,4 @@ CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
 	packageManagers size = 1
 		ifTrue: [ packageManager := packageManagers first ]
 		ifFalse: [ self shouldBeImplemented ].
-]
-
-{ #category : #private }
-CGOClyCommand >> refreshCalypsoChild [
-	toolContext lastSelectedItem childrenDataSource
-		ifNil: [ 
-			self refreshCalypsoRoot.
-			toolContext lastSelectedItem expand ]
-		ifNotNil: [:ds |
-			self refreshCalypsoRoot ]
-]
-
-{ #category : #private }
-CGOClyCommand >> refreshCalypsoRoot [
-
-	toolContext tool packageView update
 ]

@@ -20,7 +20,7 @@ CGOProjectCommand class >> canBeExecutedInContext: aToolContext [
 CGOProjectCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
-	project := aToolContext lastSelectedProject project.
+	project := aToolContext lastSelectedProject.
 
 ]
 

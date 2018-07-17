@@ -25,11 +25,12 @@ CGORepairProjectCommand class >> defaultMenuItemName [
 CGORepairProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: PBProjectBrowserItem asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
 CGORepairProjectCommand >> execute [
 	
-	(CGOOpenRepairDialog onProject: self project) execute
+	self project openRepairDialog.
+
 ]

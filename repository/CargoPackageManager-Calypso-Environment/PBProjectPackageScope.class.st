@@ -11,6 +11,9 @@ PBProjectPackageScope >> classesDo: aBlockClosure [
 ]
 
 { #category : #accessing }
-PBProjectPackageScope >> packagesDo: aBlockClosure [ 
-	^ self basisObjects select: [ :each | each isInstalled ] thenDo: [ :each | aBlockClosure value: each systemPackage  ]
+PBProjectPackageScope >> packagesDo: aBlockClosure [
+
+	^ self basisObjects
+		select: [ :each | each isInstalled ]
+		thenDo: [ :each | aBlockClosure value: each systemPackage ]
 ]

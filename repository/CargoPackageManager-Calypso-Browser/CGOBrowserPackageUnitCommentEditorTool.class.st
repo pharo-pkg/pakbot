@@ -11,7 +11,7 @@ Class {
 CGOBrowserPackageUnitCommentEditorTool class >> methodTabActivation [
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: ClyManagedPackage asCalypsoItemContext 
+	^ClyTabActivationStrategy for: PBPackageUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }

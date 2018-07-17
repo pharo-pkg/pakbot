@@ -23,14 +23,14 @@ CGOCommitProjectCommand class >> systemBrowserMenuActivator [
 	^ CmdContextMenuActivation
 		byItemOf: CGOSCMMenuGroup
 		order: 10000
-		for: PBProjectBrowserItem asCalypsoItemContext 
+		for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
 CGOCommitProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $s meta for: PBProjectBrowserItem asCalypsoItemContext 
+	^ CmdShortcutActivation by: $s meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
@@ -40,7 +40,7 @@ CGOCommitProjectCommand class >> systemBrowserToolbarActivator [
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1010
-		for: PBProjectBrowserItem asCalypsoItemContext , ClyEmptyClassSelectionContext new
+		for: PBProjectUIItem asCalypsoItemContext , ClyEmptyClassSelectionContext new
 ]
 
 { #category : #accessing }

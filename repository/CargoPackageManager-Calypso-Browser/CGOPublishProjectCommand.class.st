@@ -16,14 +16,14 @@ CGOPublishProjectCommand class >> defaultMenuIconName [
 CGOPublishProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: PBProjectBrowserItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
+	^ CmdContextMenuActivation byRootGroupItemFor: PBProjectUIItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
 ]
 
 { #category : #activation }
 CGOPublishProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta for: PBProjectBrowserItem asCalypsoItemContext 
+	^ CmdShortcutActivation by: $p meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
@@ -33,7 +33,7 @@ CGOPublishProjectCommand class >> systemBrowserToolbarActivator [
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1020
-		for: PBProjectBrowserItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
+		for: PBProjectUIItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
 ]
 
 { #category : #initialization }
@@ -43,5 +43,5 @@ CGOPublishProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOPublishProjectCommand >> execute [
-	project project publishAll 
+	project publishAll 
 ]

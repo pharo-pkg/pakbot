@@ -43,11 +43,6 @@ CGOCreateProjectCommand class >> systemBrowserToolbarActivator [
 		for: PBProjectContextOfFullBrowser
 ]
 
-{ #category : #execution }
-CGOCreateProjectCommand >> applyResultInContext: aToolContext [
-	self refreshCalypsoRoot
-]
-
 { #category : #initialization }
 CGOCreateProjectCommand >> defaultMenuItemName [
 	^ 'New project'

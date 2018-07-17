@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 PBProjectContentQuery class >> resultItemsType [
-	^ PBProjectChildBrowserItem
+	^ PBPackageUIItem
 ]
 
 { #category : #execution }
@@ -29,6 +29,8 @@ PBProjectContentQuery >> collectMetadataOf: aQueryResult by: anEnvironmentPlugin
 
 { #category : #'system changes' }
 PBProjectContentQuery >> isResult: aQueryResult affectedBy: aSystemAnnouncement [
-
-	^true
+	
+	"Ugly stuff. We have to fix it".
+	self flag: #todo.
+	^ aSystemAnnouncement isKindOf: CGOProjectAnnouncement 
 ]

@@ -160,6 +160,9 @@ CGOPackageRegistry >> register: aPackageVersion [
 	self checkPackageNameRegistrationOf: aPackageVersion packageName.
 	installedPackages add: aPackageVersion.
 	self registerProject: aPackageVersion project.
+
+	CGOProjectCreated announceOnProject: aPackageVersion.
+
 	^ aPackageVersion
 ]
 
@@ -187,5 +190,14 @@ CGOPackageRegistry >> unregister: aPackageVersion [
 	installedPackages remove: aPackageVersion ifAbsent: [ ^ self ].
 	installedPackages 
 		detect: [ :packageVersion | packageVersion project = aPackageVersion project ]
-		ifNone: [ registeredProjects remove: aPackageVersion project ].
+		ifNone: [ self unregisterProject: aPackageVersion project ].
+		
+
+]
+
+{ #category : #registering }
+CGOPackageRegistry >> unregisterProject: aProject [
+
+	registeredProjects remove: aProject.
+	CGOProjectRemoved announceOnProject: aProject.
 ]

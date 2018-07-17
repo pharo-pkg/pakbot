@@ -234,6 +234,12 @@ CGOOngoingProject >> initializeWithProjectName: aProjectName [
 	dependencies := OrderedCollection new
 ]
 
+{ #category : #accessing }
+CGOOngoingProject >> installedSystemPackages [
+	
+	^ units select: [ :each | each isInstalled ] thenCollect: [ :each | each systemPackage ]
+]
+
 { #category : #'compatibility - cargo solver' }
 CGOOngoingProject >> isAssembly [
 	"Needed so that Cargo solver can use a project as a standard package assembly"
@@ -335,7 +341,7 @@ CGOOngoingProject >> newPackageAssembly: aCGOPackageAssemblyName [
 
 { #category : #updating }
 CGOOngoingProject >> newPackageUnit: aCGOPackageUnitName [
-	| unit |
+	| unit return |
 	
 	unit := CGOOngoingPackageUnit 
 		for: aCGOPackageUnitName asSymbol
@@ -343,7 +349,12 @@ CGOOngoingProject >> newPackageUnit: aCGOPackageUnitName [
 	(units includes: unit)
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 	units add: unit.
-	^ registry register: unit
+	
+	return := registry register: unit.
+	
+	CGOProjectPartsChanged announceOnProject: self. 
+	
+	^ return
 ]
 
 { #category : #updating }
@@ -449,9 +460,12 @@ CGOOngoingProject >> removeDependency: aDependency [
 { #category : #removing }
 CGOOngoingProject >> removePart: aCGOPackageVersion [
 	registry unregister: aCGOPackageVersion.
+
 	assemblies 
 		remove: aCGOPackageVersion
-		ifAbsent: [ 	units remove: aCGOPackageVersion ]
+		ifAbsent: [ 	units remove: aCGOPackageVersion ].
+			
+	CGOProjectPartsChanged announceOnProject: self. 
 ]
 
 { #category : #accessing }

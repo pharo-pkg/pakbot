@@ -1,11 +1,17 @@
 Class {
 	#name : #PBAllPakbotProjects,
 	#superclass : #ClyAllProjects,
-	#category : #'CargoPackageManager-Calypso-Environment'
+	#category : #'CargoPackageManager-Calypso-Environment-Queries'
 }
 
 { #category : #'items type' }
 PBAllPakbotProjects class >> resultItemsType [
 	
-	^PBProjectBrowserItem
+	^PBProjectUIItem
+]
+
+{ #category : #'system changes' }
+PBAllPakbotProjects >> isResult: aQueryResult affectedBy: aSystemAnnouncement [
+
+	^ aSystemAnnouncement isKindOf: CGOProjectAnnouncement
 ]

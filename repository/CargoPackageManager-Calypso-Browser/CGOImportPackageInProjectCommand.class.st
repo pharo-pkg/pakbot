@@ -20,14 +20,14 @@ CGOImportPackageInProjectCommand class >> defaultMenuIconName [
 CGOImportPackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBProjectBrowserItem asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOImportPackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta, $i meta for: PBProjectBrowserItem asCalypsoItemContext
+	^ CmdShortcutActivation by: $p meta, $i meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
@@ -36,7 +36,7 @@ CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivator [
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
-		for: PBProjectBrowserItem asCalypsoItemContext
+		for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
@@ -54,11 +54,7 @@ CGOImportPackageInProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOImportPackageInProjectCommand >> execute [
-
 	| dialog |
-	dialog := CGOImportPackagesDialog on: project.
-	dialog openDialogWithSpec
-		okAction: [
-			dialog accept.
-			self refreshCalypsoChild ].
+	dialog := CGOImportPackagesDialog on: project project.
+	dialog openDialogWithSpec okAction: [ dialog accept ]
 ]

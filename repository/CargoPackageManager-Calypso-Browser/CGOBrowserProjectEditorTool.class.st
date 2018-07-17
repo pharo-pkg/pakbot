@@ -12,7 +12,7 @@ Class {
 CGOBrowserProjectEditorTool class >> methodTabActivation [
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: PBProjectBrowserItem asCalypsoItemContext 
+	^ClyTabActivationStrategy for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
