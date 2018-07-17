@@ -4,8 +4,19 @@ I'm the bridge betwwen Calypso and Cargo allowing Calypso to query me to  get th
 Class {
 	#name : #CGOCalypsoPackageManager,
 	#superclass : #ClyPackageManager,
+	#instVars : [
+		'registry'
+	],
 	#category : #'CargoPackageManager-Calypso-Environment'
 }
+
+{ #category : #'instance creation' }
+CGOCalypsoPackageManager class >> forRegistry: aCGOPackageRegistry [
+
+	^ self new
+		cargoRegistry: aCGOPackageRegistry;
+		yourself
+]
 
 { #category : #initialization }
 CGOCalypsoPackageManager class >> initialize [
@@ -14,7 +25,13 @@ CGOCalypsoPackageManager class >> initialize [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> cargoRegistry [
-	^ CGOPackageRegistry default
+	^ registry ifNil: [ CGOPackageRegistry default ]
+]
+
+{ #category : #accessing }
+CGOCalypsoPackageManager >> cargoRegistry: aRegistry [
+	
+	registry := aRegistry
 ]
 
 { #category : #operations }
