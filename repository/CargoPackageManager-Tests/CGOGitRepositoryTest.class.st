@@ -81,7 +81,8 @@ CGOGitRepositoryTest >> testCanBeSerializedInSton [
 	
 	self 
 		assert: repositoryStonString
-		equals: 'CGOGitRepository {
+		equals: '{
+	#type : #git,
 	#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
 	#version : ''master''
 }'
@@ -173,7 +174,6 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 { #category : #tests }
 CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
-	"CGOPackageVersion"
 	repository := self pharoCounterMasterCloned.
 	project := CGOOngoingProject fromStonString: repository projectMetadataStonString.
 	
@@ -189,8 +189,7 @@ CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 		equals: #('Counter-Core' 'Counter-Tests').
 		
 	self 
-		assert: (project packageUnits detect: [ :each | each packageName = #'Counter-Core']) dependencies
-		equals: #().
+		assert: (project packageUnits detect: [ :each | each packageName = #'Counter-Core']) dependencies isEmpty.
 	self 
 		assert: (project packageUnits detect: [ :each | each packageName = #'Counter-Tests']) dependencies size
 		equals: 1.

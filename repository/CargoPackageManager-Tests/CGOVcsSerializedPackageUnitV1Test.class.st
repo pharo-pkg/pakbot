@@ -6,42 +6,52 @@ Class {
 
 { #category : #tests }
 CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [	
-	| serializedUnit stonString unit |
-	serializedUnit := CGOVcsSerializedPackageUnit new 
-		instVarNamed: 'name' put: #Bar;
-		instVarNamed: 'dependencies' put: #(#Project::Foo);
-		yourself.
-	stonString := STON toString: serializedUnit.
-
-	unit := STON fromString: stonString.
+	| unit dict dependency |
+	dict := Dictionary 
+		with: #name -> #Bar
+		with: #dependencies -> #(#Project::Foo).
 	
-	self assert: (unit dependencies allSatisfy: [ :each | each class = Association ])
+	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
+
+	dependency := unit dependencies first.
+	self 
+		assert: dependency targetedPackage 
+		equals: #Foo.
+	self 
+		assert: dependency scope
+		equals: #Project.
+
 ]
 
 { #category : #tests }
 CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociation [	
-	| serializedUnit stonString unit |
-	serializedUnit := CGOVcsSerializedPackageUnit new 
-		instVarNamed: 'dependencies' put: {#Project::Foo -> #()};
-		yourself.
-	stonString := STON toString: serializedUnit.
+	| unit dict dependency |
+	dict := Dictionary 
+		with: #name -> 'Foo'
+		with: #dependencies -> {#Project::Foo -> #('=1.1')}.
+
+	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
 	
-	unit := STON fromString: stonString.
-	
-	self assert: (unit dependencies allSatisfy: [ :each | each class = Association ])
+	dependency := unit dependencies first.
+	self 
+		assert: dependency targetedPackage 
+		equals: #Foo.
+	self 
+		assert: dependency constraints size
+		equals: 1.
+	self 
+		assert: dependency constraints first asString
+		equals: '=1.1.0'.
 ]
 
 { #category : #tests }
 CGOVcsSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
-	| serializedUnit stonString unit |
-	serializedUnit := CGOVcsSerializedPackageUnit new 
-		instVarNamed: 'dependencies' put: #();
-		yourself.
-	stonString := STON toString: serializedUnit.
+	| unit dict |
+	dict := Dictionary 
+		with: #name -> 'Foo'
+		with: #dependencies -> #().
 	
-	unit := STON fromString: stonString.
+	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
 	
-	self 
-		assert: unit dependencies
-		equals: #()
+	self assert: unit dependencies isEmpty
 ]

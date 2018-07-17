@@ -6,9 +6,7 @@ Class {
 	#name : #CGOVcsSerializedPackageUnit,
 	#superclass : #CGOVcsSerializedPackage,
 	#instVars : [
-		'dependencies',
-		'provisions',
-		'platformRequirements'
+		'dependencies'
 	],
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
@@ -27,12 +25,21 @@ CGOVcsSerializedPackageUnit class >> stonName [
 
 { #category : #converting }
 CGOVcsSerializedPackageUnit >> asOngoingPackage [
-	"avoid nil values when a collection is expected"
-	platformRequirements := self toArray: platformRequirements.
-	provisions := self toArray: provisions.
-	
-	^ CGOOngoingPackageUnit new 	
-		initializeFromVcsSerializedPackage: self
+	| unit |
+	dict 
+		at: #name
+		ifAbsent: [ CGOPackageManagerError new 
+						signal: 'Cannot deserialize a Project with no name defined!' ].
+					
+	unit := CGOOngoingPackageUnit named: (dict at: #name).
+	dict at: #description ifPresent: [ :description | unit description: description ].
+	dict at: #dependencies ifPresent: [ :deps | 
+		unit dependencies: (self deserializedDependencies: deps) asOrderedCollection ].
+	dict at: #provisions ifPresent: [ :provisions | 
+		unit provisions: provisions asOrderedCollection ].
+	dict at: #platformRequirements ifPresent: [ :platformRequirements | 
+		unit provisions: platformRequirements asOrderedCollection ].
+	^ unit
 ]
 
 { #category : #accessing }
@@ -46,22 +53,7 @@ CGOVcsSerializedPackageUnit >> dependencies [
 { #category : #initialization }
 CGOVcsSerializedPackageUnit >> initializeWithOngoing: aCGOOngoingPackageUnit [
 	super initializeWithOngoing: aCGOOngoingPackageUnit.
-	dependencies := self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies.
-	platformRequirements := self toArrayOrNilIfEmpty: aCGOOngoingPackageUnit platformRequirements.
-	provisions := self toArrayOrNilIfEmpty: aCGOOngoingPackageUnit provisions
-]
-
-{ #category : #accessing }
-CGOVcsSerializedPackageUnit >> packageName [
-	^ name
-]
-
-{ #category : #accessing }
-CGOVcsSerializedPackageUnit >> platformRequirements [
-	^ platformRequirements
-]
-
-{ #category : #accessing }
-CGOVcsSerializedPackageUnit >> provisions [
-	^ provisions
+	self addPropertyNamed: #dependencies ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies).
+	self addPropertyNamed: #platformRequirements ifNotEmptyOrNil: aCGOOngoingPackageUnit platformRequirements.
+	self addPropertyNamed: #provisions ifNotEmptyOrNil: aCGOOngoingPackageUnit provisions.
 ]

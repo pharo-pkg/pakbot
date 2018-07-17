@@ -7,6 +7,16 @@ Class {
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
+{ #category : #deserialization }
+CGOPackageVersionWriterV1 class >> deserializeProject: aDictionary version: aString [ 
+	^ self deserializeV1Project: aDictionary
+]
+
+{ #category : #deserialization }
+CGOPackageVersionWriterV1 class >> deserializeV1Project: aDictionary [ 
+	^ (CGOVcsSerializedProject fromDictionary: aDictionary) asOngoingProject
+]
+
 { #category : #convenience }
 CGOPackageVersionWriterV1 class >> put: anObject onStreamPretty: aWriteStream [
 	(self new on: aWriteStream)
@@ -18,9 +28,22 @@ CGOPackageVersionWriterV1 class >> put: anObject onStreamPretty: aWriteStream [
 ]
 
 { #category : #convenience }
-CGOPackageVersionWriterV1 class >> toStringPretty: object [
-	^ String streamContents: [ :stream |
-		self put: object onStreamPretty: stream ]
+CGOPackageVersionWriterV1 class >> putDictionary: aDictionary onStreamPretty: aWriteStream [
+	(self new on: aWriteStream)
+		prettyPrint: false;
+		nextPut: {#version -> '1.0'} asDictionary;
+		prettyPrint: true;
+		newLine;
+		writeMap: aDictionary
+]
+
+{ #category : #convenience }
+CGOPackageVersionWriterV1 class >> toStringPretty: anObject [
+	^ String streamContents: [ :stream | 
+		anObject isDictionary
+			ifTrue: [ self putDictionary: anObject onStreamPretty: stream ]
+			ifFalse: [ self put: anObject onStreamPretty: stream ]
+		 ]
 ]
 
 { #category : #initialization }

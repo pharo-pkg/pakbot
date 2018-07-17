@@ -124,6 +124,15 @@ CGOCargoProjectDependency >> satisfyConstraints: aSemanticVersion [
 	^ constraints allSatisfy: [ :each | each isCompatibleWith: aSemanticVersion ]
 ]
 
+{ #category : #ston }
+CGOCargoProjectDependency >> stonOn: stonWriter [
+	stonWriter writeMap: (OrderedDictionary 
+		with: 	#name -> name
+		with:	#repository -> repository
+		with: 	#version -> version) 
+
+]
+
 { #category : #accessing }
 CGOCargoProjectDependency >> version: aString [ 
 	

@@ -12,7 +12,7 @@ Class {
 
 { #category : #example }
 CGOOngoingPackageAssembly class >> example [
-	^ (self for: #TestAssembly)
+	^ (self named: #TestAssembly)
 		description: 'A simple ongoing package assembly.';
 		parts: #('Unit1' 'Unit2');
 		project: (CGOOngoingProject named: #MyProject);

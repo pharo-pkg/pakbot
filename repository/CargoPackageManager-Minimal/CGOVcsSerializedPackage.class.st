@@ -8,11 +8,29 @@ Class {
 	#name : #CGOVcsSerializedPackage,
 	#superclass : #Object,
 	#instVars : [
-		'name',
-		'description'
+		'dict'
 	],
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
+
+{ #category : #'instance creation' }
+CGOVcsSerializedPackage class >> fromDictionary: aDictionary [ 
+	^ self basicNew 
+		initializeWithDictionary: aDictionary;
+		yourself.
+]
+
+{ #category : #utility }
+CGOVcsSerializedPackage >> addPropertyNamed: aString ifNotEmptyOrNil: aCollection [ 
+	aCollection ifNil: [ ^ self ]. "NOOP"
+	^ aCollection
+		ifNotEmpty: [ dict at: aString  put: aCollection asArray ]
+]
+
+{ #category : #serialization }
+CGOVcsSerializedPackage >> asString [
+	^ CGOPackageVersionWriterV1 toStringPretty: dict
+]
 
 { #category : #serialization }
 CGOVcsSerializedPackage >> dependencyConstraintsMapping: aDependency [
@@ -20,9 +38,16 @@ CGOVcsSerializedPackage >> dependencyConstraintsMapping: aDependency [
 			ifEmpty: [ #() ]
 ]
 
-{ #category : #accessing }
-CGOVcsSerializedPackage >> description [
-	^ description
+{ #category : #deserialization }
+CGOVcsSerializedPackage >> deserializedDependencies: aListOfSerializedDependencies [
+	^ aListOfSerializedDependencies 
+		ifNil: [ OrderedCollection empty ]
+		ifNotNil: [ aListOfSerializedDependencies collect:
+				[ :associationOrString | | association |
+					association := associationOrString isString 
+						ifTrue: [ associationOrString -> #() ]
+						ifFalse: [ associationOrString ].
+					CGOPackageDependency newFrom: association ] ]
 ]
 
 { #category : #utility }
@@ -32,14 +57,15 @@ CGOVcsSerializedPackage >> dictionaryOrNilIfEmpty: aDictionary [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
-	name := aCGOOngoingPackageUnit packageName.
-	description := aCGOOngoingPackageUnit description.
+CGOVcsSerializedPackage >> initializeWithDictionary: aDictionary [ 
+	dict := aDictionary
 ]
 
-{ #category : #accessing }
-CGOVcsSerializedPackage >> name [
-	^ name
+{ #category : #initialization }
+CGOVcsSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
+	dict := OrderedDictionary new.
+	dict at: #name put: aCGOOngoingPackageUnit packageName.
+	dict at: #description put: aCGOOngoingPackageUnit description.
 ]
 
 { #category : #serialization }
@@ -51,6 +77,11 @@ CGOVcsSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
 				constraints
 					ifEmpty: [ dependency dependencyName ]
 					ifNotEmpty: [ Association key: dependency dependencyName value: constraints ] ])
+]
+
+{ #category : #serialization }
+CGOVcsSerializedPackage >> stonOn: stonWriter [
+	stonWriter writeMap: dict
 ]
 
 { #category : #utility }
