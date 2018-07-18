@@ -94,6 +94,11 @@ CGOOngoingPackageUnit >> isUnit [
 	^ true
 ]
 
+{ #category : #loading }
+CGOOngoingPackageUnit >> load [
+	self repository loadPackageNamed: self packageName
+]
+
 { #category : #accessing }
 CGOOngoingPackageUnit >> platformRequirements [
 	^ platformRequirements

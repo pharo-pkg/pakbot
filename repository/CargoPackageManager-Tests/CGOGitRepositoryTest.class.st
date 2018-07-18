@@ -137,7 +137,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 	
 	self 
 		assert: repository currentCommitId
-		equals: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8'.
+		equals: 'cfa408b472bc054a3a6e5deca7fde122d81ca125'.
 ]
 
 { #category : #tests }

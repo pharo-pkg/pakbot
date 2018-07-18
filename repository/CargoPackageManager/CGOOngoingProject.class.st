@@ -291,9 +291,8 @@ CGOOngoingProject >> isVirtual [
 
 { #category : #loading }
 CGOOngoingProject >> load [
-	
-	self resolve load.
-	
+	registry registerProject: self.
+	self packageUnits do: #load.
 	CGOProjectLoaded announceOnProject: self. 
 ]
 
@@ -467,6 +466,14 @@ CGOOngoingProject >> repository: aCGOSourceRepository [
 CGOOngoingProject >> resolve [
 	
 	^ registry newSolver solveProject: self
+]
+
+{ #category : #loading }
+CGOOngoingProject >> resolveAndLoad [
+	
+	self resolve load.
+	
+	CGOProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #solving }

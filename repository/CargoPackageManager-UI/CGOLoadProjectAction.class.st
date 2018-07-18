@@ -18,7 +18,7 @@ If there is a conflict it should be fixed before being able to load the dependen
 
 { #category : #execution }
 CGOLoadProjectAction >> execute [
-	^ project load
+	^ project resolveAndLoad
 ]
 
 { #category : #accessing }

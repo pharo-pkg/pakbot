@@ -87,7 +87,7 @@ CGOVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
 CGOVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [ 
 	| repository |
 	repository := self gitRepositoryFrom: (aDictionary at: #repository).
-	^ CGOCargoProjectDependency 
+	^ PBPakbotProjectDependency 
 		named: (aDictionary at: #name) 
 		repositoryUrl: repository repositoryUrl
 		version: (aDictionary at: #version)

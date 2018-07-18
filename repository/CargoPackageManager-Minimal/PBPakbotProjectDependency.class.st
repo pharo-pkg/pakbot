@@ -5,24 +5,24 @@ I represent a dependency to an external Cargo project.
 
 "
 Class {
-	#name : #CGOCargoProjectDependency,
-	#superclass : #CGOProjectDependencyDeclaration,
+	#name : #PBPakbotProjectDependency,
+	#superclass : #PBProjectDependencyDeclaration,
 	#instVars : [
 		'repository',
 		'name',
 		'constraints',
 		'version'
 	],
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #example }
-CGOCargoProjectDependency class >> example [
+PBPakbotProjectDependency class >> example [
 	^ self named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter:master'
 ]
 
 { #category : #'instance creation' }
-CGOCargoProjectDependency class >> fromSton: stonReader [
+PBPakbotProjectDependency class >> fromSton: stonReader [
 	| repository |
 	
 	repository := super fromSton: stonReader.
@@ -30,13 +30,13 @@ CGOCargoProjectDependency class >> fromSton: stonReader [
 ]
 
 { #category : #'instance creation' }
-CGOCargoProjectDependency class >> named: aName repositoryUrl: gitUrlString [
+PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString [
 	
 	^ self named: aName repositoryUrl: gitUrlString version: ''
 ]
 
 { #category : #'instance creation' }
-CGOCargoProjectDependency class >> named: aName repositoryUrl: gitUrlString version: aCommitish [
+PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString version: aCommitish [
 
 	^ self new 
 		name: aName;
@@ -46,7 +46,7 @@ CGOCargoProjectDependency class >> named: aName repositoryUrl: gitUrlString vers
 ]
 
 { #category : #'instance-creation' }
-CGOCargoProjectDependency class >> named: aName version: aVersion [ 
+PBPakbotProjectDependency class >> named: aName version: aVersion [ 
 	
 	^ self new
 		name: aName;
@@ -55,77 +55,79 @@ CGOCargoProjectDependency class >> named: aName version: aVersion [
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> constraints [
+PBPakbotProjectDependency >> constraints [
 
 	^ constraints
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> constraints: someConstraints [ 
+PBPakbotProjectDependency >> constraints: someConstraints [ 
 
 	constraints := someConstraints
 ]
 
 { #category : #intialization }
-CGOCargoProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
+PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
 	repository := aCGOGitRepository
 ]
 
 { #category : #'querying - installed' }
-CGOCargoProjectDependency >> isInstalled [
+PBPakbotProjectDependency >> isInstalled [
 	
 	^ project registry isInstalled: self
 ]
 
 { #category : #'querying - installed' }
-CGOCargoProjectDependency >> isProvidedBy: aInstalledVersion [ 
+PBPakbotProjectDependency >> isProvidedBy: aInstalledVersion [ 
 
 	^ aInstalledVersion providesProject: self
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> name [
+PBPakbotProjectDependency >> name [
 	^ name
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> name: aName [ 
+PBPakbotProjectDependency >> name: aName [ 
 
 	name := aName
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> repository [
+PBPakbotProjectDependency >> repository [
 	^ repository
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> repository: aRepository [ 
+PBPakbotProjectDependency >> repository: aRepository [ 
 	repository := aRepository
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> repositoryUrl [
+PBPakbotProjectDependency >> repositoryUrl [
 	^ repository repositoryUrl
 ]
 
 { #category : #solving }
-CGOCargoProjectDependency >> resolveInSolver: aCGOSolver [
+PBPakbotProjectDependency >> resolveInSolver: aCGOSolver [
 	
 	self isInstalled
 		ifTrue: [ ^ project registry projectNamed: self name ].
 	
 	"If it is not installed, we need to go fetch it from the INTERNET"
-	^ repository fetchVersion: version
+	^ (repository fetchVersion: version)
+			registry: project registry;
+			yourself
 ]
 
 { #category : #constrains }
-CGOCargoProjectDependency >> satisfyConstraints: aSemanticVersion [ 
+PBPakbotProjectDependency >> satisfyConstraints: aSemanticVersion [ 
 	^ constraints allSatisfy: [ :each | each isCompatibleWith: aSemanticVersion ]
 ]
 
 { #category : #ston }
-CGOCargoProjectDependency >> stonOn: stonWriter [
+PBPakbotProjectDependency >> stonOn: stonWriter [
 	stonWriter writeMap: (OrderedDictionary 
 		with: 	#name -> name
 		with:	#repository -> repository
@@ -134,7 +136,7 @@ CGOCargoProjectDependency >> stonOn: stonWriter [
 ]
 
 { #category : #accessing }
-CGOCargoProjectDependency >> version: aString [ 
+PBPakbotProjectDependency >> version: aString [ 
 	
 	version := aString
 ]
