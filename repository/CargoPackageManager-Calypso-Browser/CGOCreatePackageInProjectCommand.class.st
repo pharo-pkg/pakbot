@@ -38,6 +38,15 @@ CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 		for: PBProjectUIItem asCalypsoItemContext
 ]
 
+{ #category : #activation }
+CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivatorForPackage [
+	<classAnnotation>
+	^ ClyToolbarActivation
+		byItemOf: ClyButtonToolbarGroup
+		order: 1000
+		for: PBPackageUIItem asCalypsoItemContext
+]
+
 { #category : #execution }
 CGOCreatePackageInProjectCommand >> createSystemPackage [
 	SycAddNewPackageCommand new

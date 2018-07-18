@@ -9,9 +9,10 @@ Class {
 
 { #category : #queries }
 PBPackageUIItem class >> checkCalypsoItem: aChildBrowserItem isEqualTo: anotherChildBrowserItemOrRPackage [
-		
-	^ aChildBrowserItem = anotherChildBrowserItemOrRPackage or: [ 
-		aChildBrowserItem isInstalled and: [ aChildBrowserItem systemPackage = anotherChildBrowserItemOrRPackage ]]
+
+	^ aChildBrowserItem = anotherChildBrowserItemOrRPackage
+		or: [ aChildBrowserItem isInstalled
+				and: [ aChildBrowserItem systemPackage = anotherChildBrowserItemOrRPackage ] ]
 ]
 
 { #category : #converting }
@@ -33,14 +34,6 @@ PBPackageUIItem class >> forUnit: anUnit [
 ]
 
 { #category : #queries }
-PBPackageUIItem class >> prepareClassGroupQueryFrom: aPackage in: aNavigationEnvironment [
-
-	^ ClyAllClassGroups sortedFrom: (PBProjectPackageScope of: aPackage in: aNavigationEnvironment)
-		
-
-]
-
-{ #category : #queries }
 PBPackageUIItem class >> prepareClassQueriesFrom: packages in: aNavigationEnvironment [
 		
 	^ { ClyAllClasses from: PBProjectPackageScope ofAll: packages in: aNavigationEnvironment }.
@@ -54,8 +47,10 @@ PBPackageUIItem >> cargoPackage [
 
 { #category : #critiques }
 PBPackageUIItem >> critiques [
-	
-	^ unit systemPackage critiques
+
+	^ unit isInstalled
+		ifTrue: [ unit systemPackage critiques ]
+		ifFalse: [ #() ]
 ]
 
 { #category : #decorating }
@@ -96,7 +91,7 @@ PBPackageUIItem >> removeFromProject [
 PBPackageUIItem >> representsItemOfType: aClass [
 
 	"Awful code because of calypso"
-	^ ( aClass = unit class ) or: [ aClass = self class ]
+	^ ( unit class includesBehavior: aClass ) or: [ self class includesBehavior: aClass ]
 ]
 
 { #category : #accessing }

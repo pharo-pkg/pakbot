@@ -48,6 +48,11 @@ PBProjectUIItem class >> prepareProjectItemsQueryFrom: aProject in: aNavigationE
 			sortedFrom: (PBProjectScope of: aProject in: aNavigationEnvironment)
 ]
 
+{ #category : #actions }
+PBProjectUIItem >> createNewPackageNamed: aString [ 
+	^ project createNewPackageNamed: aString 
+]
+
 { #category : #decorating }
 PBProjectUIItem >> decorate: aClyBrowserItem [ 
 
