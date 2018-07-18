@@ -42,9 +42,15 @@ CGOCalypsoPackageManager >> createProjectNamed: aString [
 ]
 
 { #category : #queries }
-CGOCalypsoPackageManager >> customProjectItemClass [
+CGOCalypsoPackageManager >> customProjectClass [
 
 	^ PBProjectUIItem
+]
+
+{ #category : #queries }
+CGOCalypsoPackageManager >> customProjectItemClass [
+
+	^ PBAbstractUIItem
 ]
 
 { #category : #queries }

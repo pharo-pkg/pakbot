@@ -13,19 +13,6 @@ PBProjectUIItem class >> convertToCalypsoBrowserItem: aProject [
 	^PBBrowserItem named: aProject name with: aProject
 ]
 
-{ #category : #preparing }
-PBProjectUIItem class >> decorateBrowserItem: aBrowserItem by: anEnvironmentPlugin [
-
-	aBrowserItem actualObject decorate: aBrowserItem.
-	
-]
-
-{ #category : #sorting }
-PBProjectUIItem class >> defaultSortFunctionForCalypso [
-
-	^ ClySortByNameFunction ascending
-]
-
 { #category : #accessing }
 PBProjectUIItem class >> forProject: aProject [
 
@@ -41,23 +28,9 @@ PBProjectUIItem class >> prepareClassQueriesFrom: aCollection in: aClyNavigation
 	^ #()
 ]
 
-{ #category : #queries }
-PBProjectUIItem class >> prepareProjectItemsQueryFrom: aProject in: aNavigationEnvironment [ 
-
-	^ PBProjectContentQuery 
-			sortedFrom: (PBProjectScope of: aProject in: aNavigationEnvironment)
-]
-
 { #category : #actions }
 PBProjectUIItem >> createNewPackageNamed: aString [ 
 	^ project createNewPackageNamed: aString 
-]
-
-{ #category : #decorating }
-PBProjectUIItem >> decorate: aClyBrowserItem [ 
-
-	aClyBrowserItem markWithChildrenOf: PBPackageUIItem
-
 ]
 
 { #category : #decorating }
@@ -97,14 +70,7 @@ PBProjectUIItem >> installedSystemPackages [
 ]
 
 { #category : #testing }
-PBProjectUIItem >> isEmpty [
-
-	^ self project packageUnits isEmpty
-]
-
-{ #category : #testing }
 PBProjectUIItem >> items [
-	
 	^ self project packageUnits collect: [ :each | PBPackageUIItem forUnit: each ]
 ]
 
@@ -132,8 +98,8 @@ PBProjectUIItem >> project: aCGOOngoingProject [
 { #category : #testing }
 PBProjectUIItem >> representsItemOfType: aClass [ 
 	
-	self flag: #todo.
-	^ aClass = self class or: [aClass = project class]
+	^ ( project class includesBehavior: aClass ) or: [ self class includesBehavior: aClass ]
+
 ]
 
 { #category : #actions }

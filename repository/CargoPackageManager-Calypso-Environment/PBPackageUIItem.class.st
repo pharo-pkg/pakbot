@@ -22,11 +22,6 @@ PBPackageUIItem class >> convertToCalypsoBrowserItem: aUnit [
 ]
 
 { #category : #sorting }
-PBPackageUIItem class >> defaultSortFunctionForCalypso [
-	^ClySortByNameFunction ascending
-]
-
-{ #category : #sorting }
 PBPackageUIItem class >> forUnit: anUnit [
 	^ self new
 		unit: anUnit;
@@ -74,6 +69,11 @@ PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
 PBPackageUIItem >> isInstalled [
 	
 	^ unit isInstalled
+]
+
+{ #category : #accessing }
+PBPackageUIItem >> items [
+	^ {}
 ]
 
 { #category : #accessing }

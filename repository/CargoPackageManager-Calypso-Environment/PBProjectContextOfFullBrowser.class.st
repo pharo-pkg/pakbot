@@ -11,14 +11,7 @@ Class {
 PBProjectContextOfFullBrowser class >> selectionStrategy [
 	<classAnnotation>
 	
-	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBProjectUIItem 
-]
-
-{ #category : #'selection strategy' }
-PBProjectContextOfFullBrowser class >> selectionStrategyForPackages [
-	<classAnnotation>
-	
-	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBPackageUIItem 
+	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBAbstractUIItem  
 ]
 
 { #category : #'selection-projects' }
