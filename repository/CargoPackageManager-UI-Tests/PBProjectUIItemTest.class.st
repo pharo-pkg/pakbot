@@ -13,11 +13,11 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 	project := self findProject: 'TestProject'.	
 	commands := self commandsOfItem: project.
 
-	self assertCommands: commands include: CGOCreatePackageInProjectCommand.
-	self assertCommands: commands include: CGOImportPackageInProjectCommand.
-	self assertCommands: commands include: CGORemoveProjectCommand.
-	self assertCommands: commands include: CGOPublishProjectCommand.
-	self assertCommands: commands include: CGOCommitProjectCommand.	
+	self assertCommands: commands includes: CGOCreatePackageInProjectCommand.
+	self assertCommands: commands includes: CGOImportPackageInProjectCommand.
+	self assertCommands: commands includes: CGORemoveProjectCommand.
+	self assertCommands: commands includes: CGOPublishProjectCommand.
+	self assertCommands: commands includes: CGOCommitProjectCommand.	
 ]
 
 { #category : #tests }

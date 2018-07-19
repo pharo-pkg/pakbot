@@ -13,9 +13,15 @@ Class {
 }
 
 { #category : #tests }
-PBAbstractCalypsoTest >> assertCommands: commands include: aClass [
+PBAbstractCalypsoTest >> assertCommands: commands includes: aClass [
 
 	self assert: (commands anySatisfy: [ :each | each command class = aClass ])
+]
+
+{ #category : #tests }
+PBAbstractCalypsoTest >> assertCommands: commands notIncludes: aClass [
+
+	self assert: (commands noneSatisfy: [ :each | each command class = aClass ])
 ]
 
 { #category : #utils }
@@ -27,6 +33,16 @@ PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	aContext := PBProjectContextOfFullBrowser ofSelection: selection for: ClyFullBrowser new.
 	
 	^ CmdContextMenuActivation createActivatorsExecutableInContext: aContext
+]
+
+{ #category : #tests }
+PBAbstractCalypsoTest >> findPackage: aName [
+	| projectUI |
+	
+	projectUI := self findProject: project name.
+	^ projectUI items detect: [ :each | each name = aName ] ifNone: [ nil ]
+	
+
 ]
 
 { #category : #tests }
@@ -54,6 +70,6 @@ PBAbstractCalypsoTest >> setUp [
 PBAbstractCalypsoTest >> tearDown [
 
 	super tearDown.
-	
+
 	project ifNotNil: [ project installedSystemPackages do: #removeFromSystem ].
 ]

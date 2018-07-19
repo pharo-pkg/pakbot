@@ -326,6 +326,24 @@ CGOOngoingProject >> name [
 	^ self packageName
 ]
 
+{ #category : #adding }
+CGOOngoingProject >> newNotLoadedPackage: aCGOPackageUnitName [
+	
+	| unit |
+	
+	unit := CGOOngoingPackageUnit 
+		for: aCGOPackageUnitName asSymbol
+		project: self.
+		
+	(units includes: unit) ifTrue: [ CGOPackageAlreadyRegistered signal ].
+
+	unit registry: registry.
+
+	units add: unit.
+
+	^ unit
+]
+
 { #category : #updating }
 CGOOngoingProject >> newPackageAssembly: aCGOPackageAssemblyName [
 	| assembly |
@@ -339,16 +357,11 @@ CGOOngoingProject >> newPackageAssembly: aCGOPackageAssemblyName [
 	^ registry register: assembly
 ]
 
-{ #category : #updating }
+{ #category : #adding }
 CGOOngoingProject >> newPackageUnit: aCGOPackageUnitName [
 	| unit return |
 	
-	unit := CGOOngoingPackageUnit 
-		for: aCGOPackageUnitName asSymbol
-		project: self.
-	(units includes: unit)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
-	units add: unit.
+	unit := self newNotLoadedPackage: aCGOPackageUnitName.	
 	
 	return := registry register: unit.
 	
