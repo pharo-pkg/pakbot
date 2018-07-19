@@ -50,6 +50,11 @@ CGOOngoingPackageUnit >> asVcsSerializedPackageUnit [
 	^ CGOVcsSerializedPackageUnit from: self
 ]
 
+{ #category : #loading }
+CGOOngoingPackageUnit >> basicLoad [
+	self repository loadPackageNamed: self packageName
+]
+
 { #category : #accessing }
 CGOOngoingPackageUnit >> dependencies [
 	^ dependencies
@@ -92,11 +97,6 @@ CGOOngoingPackageUnit >> isInstalled [
 { #category : #testing }
 CGOOngoingPackageUnit >> isUnit [
 	^ true
-]
-
-{ #category : #loading }
-CGOOngoingPackageUnit >> load [
-	self repository loadPackageNamed: self packageName
 ]
 
 { #category : #accessing }

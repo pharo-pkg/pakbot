@@ -32,7 +32,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithConflictsFailsWithExcetion [
 	project addDependency: configurationProjectV1.
 	project addDependency: configurationProjectV2.
 	
-	self should: [ project resolveAndLoad ] raise: CGOProjectHasConflictsError. 
+	self should: [ project load ] raise: CGOProjectHasConflictsError. 
 	self assert: project resolve hasConflicts.	
 ]
 
@@ -68,7 +68,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectOne load.
+	projectOne basicLoad.
 	
 	self assert: projectOne isLoaded.
 	self assert: projectTwo isLoaded.
@@ -92,7 +92,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV1Lo
 		version: '1.0'.
 	projectTwo addDependency: configurationProject.
 	
-	projectOne resolveAndLoad.
+	projectOne load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
@@ -123,7 +123,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV2Lo
 		version: '2.0'.
 	projectTwo addDependency: configurationProject.
 	
-	projectOne resolveAndLoad.
+	projectOne load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
@@ -150,7 +150,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV1LoadsCorre
 		version: '1.0'.
 	
 	project addDependency: configurationProjectDependency.
-	project resolveAndLoad.
+	project load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
@@ -177,7 +177,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV2LoadsCorre
 		version: '2.0'.
 	
 	project addDependency: configurationProject.
-	project resolveAndLoad.
+	project load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'ConfigurationOfCargoTestExample').
 	self assert: (Smalltalk globals hasClassNamed: 'ClassInPackageA').
@@ -204,7 +204,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 		version: 'master'.
 	
 	project addDependency: pakbotProjectDependency.
-	project resolveAndLoad.
+	project load.
 	
 	self assert: (Smalltalk globals hasClassNamed: 'Counter').
 	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').

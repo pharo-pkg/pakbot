@@ -187,7 +187,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledMetace
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 	project addDependency: configurationProjectV1.
-	project resolveAndLoad.
+	project load.
 	
 	project2 := testRegistry newProjectNamed: 'Test2'.
 	configurationProjectV2 := PBMetacelloConfigurationProjectDependency
