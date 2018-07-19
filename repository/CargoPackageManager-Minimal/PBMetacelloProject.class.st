@@ -70,6 +70,11 @@ PBMetacelloProject >> assemblies [
 	^ #()
 ]
 
+{ #category : #loading }
+PBMetacelloProject >> basicLoad [
+	self subclassResponsibility 
+]
+
 { #category : #'compatibility - CGOProject' }
 PBMetacelloProject >> cargoProjectDependencies [
 	^ #()
@@ -138,11 +143,6 @@ PBMetacelloProject >> isProvidedBy: anInstalledVersion [
 { #category : #'compatibility - package repository' }
 PBMetacelloProject >> isVirtual [
 	^ false
-]
-
-{ #category : #loading }
-PBMetacelloProject >> load [
-	self subclassResponsibility 
 ]
 
 { #category : #'compatibility - CGOProject' }

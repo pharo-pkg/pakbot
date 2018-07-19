@@ -137,7 +137,7 @@ CGOOngoingProject >> authors [
 { #category : #loading }
 CGOOngoingProject >> basicLoad [
 	registry registerProject: self.
-	self packageUnits do: #load.
+	self packageUnits do: #basicLoad.
 	CGOProjectLoaded announceOnProject: self. 
 ]
 
