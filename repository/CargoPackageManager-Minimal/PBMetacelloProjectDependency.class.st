@@ -3,13 +3,13 @@ I represent a dependency to a project managed by Metacello.
 "
 Class {
 	#name : #PBMetacelloProjectDependency,
-	#superclass : #CGOProjectDependencyDeclaration,
+	#superclass : #PBProjectDependencyDeclaration,
 	#instVars : [
 		'url',
 		'version',
 		'name'
 	],
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #ston }

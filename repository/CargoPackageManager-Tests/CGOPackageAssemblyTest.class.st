@@ -20,7 +20,8 @@ CGOPackageAssemblyTest >> assemblyA1 [
 
 { #category : #'expected results' }
 CGOPackageAssemblyTest >> expectedTestStonOnResult [
-	^  'CGOPublishedPackageAssembly {
+	^  '{#version:''1.0''}
+CGOPublishedPackageAssembly {
 	#description : '''',
 	#version : ''1.0.0'',
 	#package : #A,
@@ -112,6 +113,6 @@ CGOPackageAssemblyTest >> testStonOn [
 			(DateAndTime
 				fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
 	self
-		assert: (CGOPackageVersionWriter toStringPretty: assembly)
+		assert: (CGOPackageVersionWriterV1 toStringPretty: assembly)
 		equals: self expectedTestStonOnResult
 ]

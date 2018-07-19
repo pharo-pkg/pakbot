@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 CGOCargoProjectDependencyTest >> testCanCreateDependency [
 	| dependency |
-	dependency := CGOCargoProjectDependency example.
+	dependency := PBPakbotProjectDependency example.
 	self 
 		assert: dependency repositoryUrl
 		equals: 'git://git@github.com/demarey/pharo-counter.git'.
@@ -16,12 +16,17 @@ CGOCargoProjectDependencyTest >> testCanCreateDependency [
 
 { #category : #tests }
 CGOCargoProjectDependencyTest >> testCanDeserializeDependency [
-	| dependency |
-	dependency := STON fromString: 'CGOCargoProjectDependency {
-			#repository : CGOGitRepository {
-				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git''
-			}
-		}'.
+	| dependency dict |
+	dict := STON fromString: '{
+	#name : ''pharo-counter'',
+	#repository : {
+		#type : #git,
+		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
+		#version : ''master''
+	},
+	#version : ''''
+}'.
+	dependency := CGOVcsSerializedProject new pakbotProjectDependencyFrom: dict.
 	self 
 		assert: dependency repositoryUrl
 		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
@@ -31,17 +36,18 @@ CGOCargoProjectDependencyTest >> testCanDeserializeDependency [
 { #category : #tests }
 CGOCargoProjectDependencyTest >> testCanSerializeDependency [
 	| projectDependency projectDependencyString |
-	projectDependency := CGOCargoProjectDependency named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master'.
+	projectDependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master'.
 	projectDependencyString := STON toStringPretty: projectDependency.
 	
 	self 
 		assert: projectDependencyString
-		equals: 'CGOCargoProjectDependency {
-	#repository : CGOGitRepository {
+		equals: '{
+	#name : ''pharo-counter'',
+	#repository : {
+		#type : #git,
 		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
 		#version : ''master''
 	},
-	#name : ''pharo-counter'',
 	#version : ''''
-}'.
+}'
 ]

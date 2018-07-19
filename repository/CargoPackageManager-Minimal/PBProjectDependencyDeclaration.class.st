@@ -6,30 +6,30 @@ My subclasses contains external project dependencies on:
 - Metecello configurations.
 "
 Class {
-	#name : #CGOProjectDependencyDeclaration,
+	#name : #PBProjectDependencyDeclaration,
 	#superclass : #CGOAbstractDependency,
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #accessing }
-CGOProjectDependencyDeclaration >> constraints [
+PBProjectDependencyDeclaration >> constraints [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #testing }
-CGOProjectDependencyDeclaration >> isMetacelloProjectDependency [
+PBProjectDependencyDeclaration >> isMetacelloProjectDependency [
 	^ false
 ]
 
 { #category : #solving }
-CGOProjectDependencyDeclaration >> isResolvedBy: aResolution [
+PBProjectDependencyDeclaration >> isResolvedBy: aResolution [
 	
 	^ aResolution resolvesDependency: self
 ]
 
 { #category : #testing }
-CGOProjectDependencyDeclaration >> isSameProjectAs: anotherProject [ 
+PBProjectDependencyDeclaration >> isSameProjectAs: anotherProject [ 
 	
 	^ self name = anotherProject name
 ]

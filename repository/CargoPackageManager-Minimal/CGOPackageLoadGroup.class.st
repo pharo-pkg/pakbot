@@ -46,7 +46,7 @@ CGOPackageLoadGroup >> intializeWithPackageVersions: aListOfPackageVersions [
 { #category : #loading }
 CGOPackageLoadGroup >> load [
 
-	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit load ]
+	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit basicLoad ]
 ]
 
 { #category : #accessing }

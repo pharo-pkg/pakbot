@@ -7,15 +7,15 @@ Class {
 { #category : #tests }
 CGOProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBothProjectAndDependency [
 
-	| project testRegistry resolution configurationProject |
+	| project testRegistry resolution pakbotProject |
 	testRegistry := CGOPackageRegistry new.	
 	project := testRegistry newProjectNamed: 'Test'.
 	
-	configurationProject := CGOCargoProjectDependency
-		named: 'test-project-source-properties-tonel'
-		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
+	pakbotProject := PBPakbotProjectDependency
+		named: 'Counter'
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
 	
-	project addDependency: configurationProject.
+	project addDependency: pakbotProject.
 	resolution := project resolve.
 
 	self assert: (resolution includesResolvedTarget: project).
@@ -29,7 +29,7 @@ CGOProjectResolutionTest >> testProjectResolutionWithCargoOngoingProjectDependen
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -43,18 +43,18 @@ CGOProjectResolutionTest >> testProjectResolutionWithCargoOngoingProjectDependen
 { #category : #tests }
 CGOProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesIncludesBothProjectAndDependencies [
 
-	| projectOne projectTwo testRegistry resolution configurationProject |
+	| projectOne projectTwo testRegistry resolution pakbotProject |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	configurationProject := CGOCargoProjectDependency
-		named: 'test-project-source-properties-tonel'
-		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
-	projectTwo addDependency: configurationProject.
+	pakbotProject := PBPakbotProjectDependency
+		named: 'Counter'
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	projectTwo addDependency: pakbotProject.
 	
 	resolution := projectOne resolve.
 
@@ -69,7 +69,7 @@ CGOProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloDependenci
 	| projectOne projectTwo testRegistry resolution configurationProject |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -122,17 +122,17 @@ CGOProjectResolutionTest >> testProjectWithoutDependenciesResolvesToItself [
 { #category : #tests }
 CGOProjectResolutionTest >> testResolutionOfCargoDependencyIsResolvedDependency [
 
-	| testRegistry resolution projectOne configurationProject |
+	| testRegistry resolution projectOne pakbotProject |
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	configurationProject := CGOCargoProjectDependency
-		named: 'test-project-source-properties-tonel'
-		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
-	projectOne addDependency: configurationProject.
+	pakbotProject := PBPakbotProjectDependency
+		named: 'Counter'
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	projectOne addDependency: pakbotProject.
 	resolution := projectOne resolve.
 
-	self assert: resolution resolvedDependencies anyOne equals: (resolution resolutionFor: configurationProject)
+	self assert: resolution resolvedDependencies anyOne equals: (resolution resolutionFor: pakbotProject)
 ]
 
 { #category : #tests }

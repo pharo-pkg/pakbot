@@ -42,7 +42,7 @@ CGOMetacelloConfigurationProjectDependencyTest >> testCanSerializeDependency [
 	
 	self 
 		assert: projectDependencyString
-		equals: 'MetacelloConfigurationProject {
+		equals: '{
 	#configuration : #JSON,
 	#url : ''http://smalltalkhub.com/mc/PharoExtras/JSON/main/'',
 	#version : #stable

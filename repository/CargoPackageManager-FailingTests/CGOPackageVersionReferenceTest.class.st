@@ -18,7 +18,7 @@ CGOPackageVersionReferenceTest >> assertIsExpectedPackageVersion: packageVersion
 
 { #category : #input }
 CGOPackageVersionReferenceTest >> packageVersionDescription [
-	^ CGOPackageVersionWriter toStringPretty: self resolvedProjectVersion
+	^ CGOPackageVersionWriterV1 toStringPretty: self resolvedProjectVersion
 ]
 
 { #category : #input }

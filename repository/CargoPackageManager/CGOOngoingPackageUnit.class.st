@@ -14,7 +14,7 @@ Class {
 
 { #category : #example }
 CGOOngoingPackageUnit class >> example [
-	^ (self for: #UnitTest)
+	^ (self named: #UnitTest)
 		description: 'A simple ongoing package unit.';
 		project: (CGOOngoingProject named: #MyProject);
 		yourself
@@ -50,6 +50,11 @@ CGOOngoingPackageUnit >> asVcsSerializedPackageUnit [
 	^ CGOVcsSerializedPackageUnit from: self
 ]
 
+{ #category : #loading }
+CGOOngoingPackageUnit >> basicLoad [
+	self repository loadPackageNamed: self packageName
+]
+
 { #category : #accessing }
 CGOOngoingPackageUnit >> dependencies [
 	^ dependencies
@@ -65,14 +70,6 @@ CGOOngoingPackageUnit >> fitsPlatformRequirements [
 	^ Cargo platformAttributes includesAll: platformRequirements
 ]
 
-{ #category : #'instance creation' }
-CGOOngoingPackageUnit >> fromSton: stonReader [
-	"Decode the specific PackageVersion serialization format."
-	| serializedPkgVersion |
-	serializedPkgVersion := CGOVcsSerializedPackageUnit new fromSton: stonReader.
-	serializedPkgVersion asOngoingPackage.
-]
-
 { #category : #initialization }
 CGOOngoingPackageUnit >> initializeFromPackageVersion: aCGOPackageVersion [
 	super initialize.
@@ -81,15 +78,6 @@ CGOOngoingPackageUnit >> initializeFromPackageVersion: aCGOPackageVersion [
 	dependencies := aCGOPackageVersion dependencies collect: #copy as: OrderedCollection.
 	self provisions: aCGOPackageVersion provisions.
 	platformRequirements := aCGOPackageVersion platformRequirements asOrderedCollection.
-]
-
-{ #category : #initialization }
-CGOOngoingPackageUnit >> initializeFromVcsSerializedPackage: aCGOVcsSerializedPackageUnit [
-	super initializeWithPackageName: aCGOVcsSerializedPackageUnit name andProject: nil. "will be set later by CGOVcsSerializedProject>>#flushIn:"
-	description := aCGOVcsSerializedPackageUnit description.
-	dependencies := self deserializedDependencies: aCGOVcsSerializedPackageUnit dependencies.
-	provisions:= aCGOVcsSerializedPackageUnit provisions asOrderedCollection.
-	platformRequirements := aCGOVcsSerializedPackageUnit platformRequirements asOrderedCollection.
 ]
 
 { #category : #initialization }
