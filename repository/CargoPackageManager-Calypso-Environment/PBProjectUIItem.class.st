@@ -1,6 +1,6 @@
 Class {
 	#name : #PBProjectUIItem,
-	#superclass : #PBAbstractUIItem,
+	#superclass : #ClyManagedProject,
 	#instVars : [
 		'project'
 	],
@@ -10,7 +10,15 @@ Class {
 { #category : #converting }
 PBProjectUIItem class >> convertToCalypsoBrowserItem: aProject [ 
 
-	^PBBrowserItem named: aProject name with: aProject
+	| item |
+	item := (PBBrowserItem named: aProject name with: aProject).	
+	aProject isEmpty ifFalse: [ item markWithChildrenOf: ClyProjectChildItem].
+	^item
+]
+
+{ #category : #soting }
+PBProjectUIItem class >> defaultSortFunctionForCalypso [
+	^ClySortByNameFunction ascending
 ]
 
 { #category : #accessing }
@@ -74,6 +82,12 @@ PBProjectUIItem >> isAffectedBy: anAnnouncement [
 
 	^ (anAnnouncement isKindOf: CGOProjectAnnouncement)
 		and: [ anAnnouncement project = self project ]
+]
+
+{ #category : #testing }
+PBProjectUIItem >> isEmpty [
+
+	^ self items isEmpty 
 ]
 
 { #category : #testing }

@@ -1,15 +1,8 @@
 Class {
 	#name : #PBAbstractUIItem,
-	#superclass : #Object,
+	#superclass : #ClyProjectChildItem,
 	#category : #'CargoPackageManager-Calypso-Environment-Items'
 }
-
-{ #category : #preparing }
-PBAbstractUIItem class >> decorateBrowserItem: aBrowserItem by: anEnvironmentPlugin [
-
-	aBrowserItem actualObject decorate: aBrowserItem.
-	
-]
 
 { #category : #'as yet unclassified' }
 PBAbstractUIItem class >> defaultSortFunctionForCalypso [

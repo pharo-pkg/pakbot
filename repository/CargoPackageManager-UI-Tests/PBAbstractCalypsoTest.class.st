@@ -30,7 +30,7 @@ PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	| aContext selection datasource |
 	datasource := ClyCollapsedDataSource empty.	
 	selection := ClyDataSourceSelection fromRoot: datasource items: {ClyDataSourceItem of: datasource value: anItem asCalypsoBrowserItem}.
-	aContext := PBProjectContextOfFullBrowser ofSelection: selection for: ClyFullBrowser new.
+	aContext := ClyProjectContextOfFullBrowser ofSelection: selection for: ClyFullBrowser new.
 	
 	^ CmdContextMenuActivation createActivatorsExecutableInContext: aContext
 ]
@@ -58,7 +58,7 @@ PBAbstractCalypsoTest >> setUp [
 	registry := CGOPackageRegistry new.
 	
 	systemEnvironment := ClySystemEnvironment new.
-	systemEnvironment projectManager registerPackageManager: (CGOCalypsoPackageManager forRegistry: registry). 
+	systemEnvironment projectManager registerProjectManager: (CGOCalypsoPackageManager forRegistry: registry). 
 	
 	navigationEnvironment := ClyNavigationEnvironment overSystemEnvironment: systemEnvironment.
 	scope := navigationEnvironment systemScope.

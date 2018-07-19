@@ -18,7 +18,9 @@ PBPackageUIItem class >> checkCalypsoItem: aChildBrowserItem isEqualTo: anotherC
 { #category : #converting }
 PBPackageUIItem class >> convertToCalypsoBrowserItem: aUnit [
  
-	^PBBrowserItem named: aUnit name with: aUnit
+	^ PBBrowserItem named: aUnit name with: aUnit.
+	
+	
 ]
 
 { #category : #sorting }

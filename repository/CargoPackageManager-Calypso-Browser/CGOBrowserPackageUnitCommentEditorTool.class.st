@@ -43,7 +43,7 @@ CGOBrowserPackageUnitCommentEditorTool >> editingText [
 
 { #category : #accessing }
 CGOBrowserPackageUnitCommentEditorTool >> unit [
-	^ context lastSelectedPackage cargoPackage
+	^ context lastSelectedPBPackage cargoPackage
 ]
 
 { #category : #testing }

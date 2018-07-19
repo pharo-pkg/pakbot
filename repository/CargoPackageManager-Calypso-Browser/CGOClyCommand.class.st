@@ -18,7 +18,7 @@ CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
 	super prepareFullExecutionInContext: aToolContext.
 	toolContext := aToolContext.
 	
-	packageManagers := aToolContext systemEnvironment projectManager packageManagers.
+	packageManagers := aToolContext systemEnvironment projectManager projectManagers.
 	packageManagers size = 1
 		ifTrue: [ packageManager := packageManagers first ]
 		ifFalse: [ self shouldBeImplemented ].

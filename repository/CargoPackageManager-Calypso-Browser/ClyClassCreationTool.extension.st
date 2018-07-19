@@ -4,5 +4,5 @@ Extension { #name : #ClyClassCreationTool }
 ClyClassCreationTool class >> fullBrowserProjectPackageActivation [
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: PBPackageUIItem asCalypsoItemContext
+	^ClyTabActivationStrategy for: PBPackageContextOfFullBrowser
 ]

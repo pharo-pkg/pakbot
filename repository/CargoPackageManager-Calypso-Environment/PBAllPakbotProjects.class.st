@@ -10,6 +10,24 @@ PBAllPakbotProjects class >> resultItemsType [
 	^PBProjectUIItem
 ]
 
+{ #category : #execution }
+PBAllPakbotProjects >> buildResult: aQueryResult [
+	| projects |
+	projects := OrderedCollection new.
+	
+	scope projectsDo: [ :each | 
+		projects add: each
+	].
+
+	aQueryResult fillWith: projects
+]
+
+{ #category : #execution }
+PBAllPakbotProjects >> collectMetadataOf: aClySortedQueryResult by: aClyDefaultSystemEnvironmentPlugin [ 
+	
+	
+]
+
 { #category : #'system changes' }
 PBAllPakbotProjects >> isResult: aQueryResult affectedBy: aSystemAnnouncement [
 

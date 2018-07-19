@@ -3,7 +3,7 @@ I'm the bridge betwwen Calypso and Cargo allowing Calypso to query me to  get th
 "
 Class {
 	#name : #CGOCalypsoPackageManager,
-	#superclass : #ClyPackageManager,
+	#superclass : #ClyProjectManager,
 	#instVars : [
 		'registry'
 	],
@@ -20,7 +20,7 @@ CGOCalypsoPackageManager class >> forRegistry: aCGOPackageRegistry [
 
 { #category : #initialization }
 CGOCalypsoPackageManager class >> initialize [
-	ClySystemEnvironment currentImage registerPackageManager: self new
+	ClySystemEnvironment currentImage registerProjectManager: self new
 ]
 
 { #category : #accessing }
@@ -111,6 +111,12 @@ CGOCalypsoPackageManager >> projectOf: aCGOPackageVersion [
 CGOCalypsoPackageManager >> projects [
 	^ self cargoRegistry registeredProjects 
 		collect: 	[ :each | PBProjectUIItem forProject: each]
+]
+
+{ #category : #'api - queries' }
+CGOCalypsoPackageManager >> queryClass [
+	
+	^ PBAllPakbotProjects
 ]
 
 { #category : #operations }
