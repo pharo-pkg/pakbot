@@ -125,6 +125,10 @@ CGOCalypsoPackageManager >> saveProject: aCGOProject toSCMWithMessage: message [
 ]
 
 { #category : #accessing }
+CGOCalypsoPackageManager >> systemEnvironment: anEnvironment [
+]
+
+{ #category : #accessing }
 CGOCalypsoPackageManager >> versionOf: systemPackage [
 	^ self cargoRegistry packageNamed: systemPackage name
 ]
