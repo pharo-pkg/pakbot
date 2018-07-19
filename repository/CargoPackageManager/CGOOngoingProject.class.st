@@ -299,7 +299,7 @@ CGOOngoingProject >> isVirtual [
 { #category : #loading }
 CGOOngoingProject >> load [
 	
-	self resolve basicLoad.
+	self resolve load.
 	
 	CGOProjectLoaded announceOnProject: self. 
 ]
