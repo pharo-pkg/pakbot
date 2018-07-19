@@ -68,7 +68,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectOne basicLoad.
+	projectOne load.
 	
 	self assert: projectOne isLoaded.
 	self assert: projectTwo isLoaded.
