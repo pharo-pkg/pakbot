@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 PBLoadPackageCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext lastSelectedPBPackage isInstalled not 
+	^ aToolContext lastSelectedPackage isInstalled not 
 ]
 
 { #category : #activation }

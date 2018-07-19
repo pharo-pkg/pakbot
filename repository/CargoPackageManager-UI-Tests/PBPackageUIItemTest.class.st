@@ -8,6 +8,11 @@ Class {
 	#category : #'CargoPackageManager-UI-Tests'
 }
 
+{ #category : #utils }
+PBPackageUIItemTest >> contextClass [
+	^ PBPackageContextOfFullBrowser 
+]
+
 { #category : #running }
 PBPackageUIItemTest >> setUp [
 	super setUp.

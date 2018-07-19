@@ -25,14 +25,19 @@ PBAbstractCalypsoTest >> assertCommands: commands notIncludes: aClass [
 ]
 
 { #category : #utils }
-PBAbstractCalypsoTest >> commandsOfItem: anItem [ 
-	
+PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	| aContext selection datasource |
-	datasource := ClyCollapsedDataSource empty.	
-	selection := ClyDataSourceSelection fromRoot: datasource items: {ClyDataSourceItem of: datasource value: anItem asCalypsoBrowserItem}.
-	aContext := ClyProjectContextOfFullBrowser ofSelection: selection for: ClyFullBrowser new.
-	
+	datasource := ClyCollapsedDataSource empty.
+	selection := ClyDataSourceSelection
+		fromRoot: datasource
+		items: {(ClyDataSourceItem of: datasource value: anItem asCalypsoBrowserItem)}.
+	aContext := self contextClass ofSelection: selection for: ClyFullBrowser new.
 	^ CmdContextMenuActivation createActivatorsExecutableInContext: aContext
+]
+
+{ #category : #utils }
+PBAbstractCalypsoTest >> contextClass [
+	^ ClyProjectContextOfFullBrowser
 ]
 
 { #category : #tests }

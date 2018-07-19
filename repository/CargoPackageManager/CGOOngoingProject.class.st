@@ -335,19 +335,14 @@ CGOOngoingProject >> name [
 
 { #category : #adding }
 CGOOngoingProject >> newNotLoadedPackage: aCGOPackageUnitName [
-	
 	| unit |
-	
-	unit := CGOOngoingPackageUnit 
-		for: aCGOPackageUnitName asSymbol
+	unit := CGOOngoingPackageUnit
+		named: aCGOPackageUnitName asSymbol
 		project: self.
-		
-	(units includes: unit) ifTrue: [ CGOPackageAlreadyRegistered signal ].
-
+	(units includes: unit)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 	unit registry: registry.
-
 	units add: unit.
-
 	^ unit
 ]
 
