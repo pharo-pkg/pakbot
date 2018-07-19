@@ -31,7 +31,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngo
 	testRegistry := CGOPackageRegistry new.
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -50,9 +50,9 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProj
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
-	dependency := CGOCargoProjectDependency
-		named: 'test-project-source-properties-tonel'
-		repositoryUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git'.
+	dependency := PBPakbotProjectDependency
+		named: 'Counter'
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
 

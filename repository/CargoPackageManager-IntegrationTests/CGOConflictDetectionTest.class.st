@@ -20,7 +20,7 @@ CGOConflictDetectionTest >> testConflictingCargoDependencyAndInstalledMetacelloP
 	project load.
 	
 	project2 := testRegistry newProjectNamed: 'Test2'.
-	configurationProjectV2 := CGOCargoProjectDependency
+	configurationProjectV2 := PBPakbotProjectDependency
 		named: 'CargoTestExample'
 		version: '=2.0.0-N/A'.
 	project2 addDependency: configurationProjectV2.
@@ -35,7 +35,7 @@ CGOConflictDetectionTest >> testConflictingIndirectMetacelloDependenciesHasConfl
 	| testRegistry projectOne projectTwo |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
@@ -65,7 +65,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesHasConfl
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 
-	configurationProjectV2 := CGOCargoProjectDependency
+	configurationProjectV2 := PBPakbotProjectDependency
 		named: 'CargoTestExample'
 		version: '=0.0.0-N/A'.
 
@@ -89,7 +89,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesThenReso
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0'.
 
-	configurationProjectV2 := CGOCargoProjectDependency
+	configurationProjectV2 := PBPakbotProjectDependency
 		named: 'CargoTestExample'
 		version: '=0.0.0-N/A'.
 
@@ -248,7 +248,7 @@ CGOConflictDetectionTest >> testNonConflictingIndirectMetacelloDependenciesHasNo
 	| testRegistry projectOne projectTwo |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency

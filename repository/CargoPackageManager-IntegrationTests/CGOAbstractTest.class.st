@@ -7,8 +7,8 @@ Class {
 { #category : #tests }
 CGOAbstractTest >> expectedCargoResolvedProject [
 
-	^ (CGOOngoingProject named: 'test-project-source-properties-tonel')
-		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:pharo-vcs/test-project-source-properties-tonel.git');
+	^ (CGOOngoingProject named: 'Counter')
+		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git');
 		version: (SemanticVersion fromString: '0-N/A')
 ]
 

@@ -134,6 +134,13 @@ CGOOngoingProject >> authors [
 	^ #()
 ]
 
+{ #category : #loading }
+CGOOngoingProject >> basicLoad [
+	registry registerProject: self.
+	self packageUnits do: #basicLoad.
+	CGOProjectLoaded announceOnProject: self. 
+]
+
 { #category : #accessing }
 CGOOngoingProject >> cargoProjectDependencies [
 	^ externalProjects reject: #isMetacelloProjectDependency
@@ -414,13 +421,13 @@ CGOOngoingProject >> project [
 	^ self
 ]
 
-{ #category : #'testing - installing' }
+{ #category : #'querying - installed' }
 CGOOngoingProject >> providesPackage: aPackageDependency [ 
 
 	^ false
 ]
 
-{ #category : #'querying - Installed' }
+{ #category : #'querying - installed' }
 CGOOngoingProject >> providesProject: aProjectDependency [
 
 	^ (self projectName = aProjectDependency name and: [ aProjectDependency satisfyConstraints: self version ])
@@ -463,7 +470,7 @@ CGOOngoingProject >> repository: aCGOSourceRepository [
 	repository := aCGOSourceRepository
 ]
 
-{ #category : #loading }
+{ #category : #private }
 CGOOngoingProject >> resolve [
 	
 	^ registry newSolver solveProject: self

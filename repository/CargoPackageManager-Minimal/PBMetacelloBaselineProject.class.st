@@ -15,16 +15,16 @@ PBMetacelloBaselineProject class >> exampleConfiguration [
 		fromProjectDependency: PBMetacelloBaselineProjectDependency example
 ]
 
-{ #category : #accessing }
-PBMetacelloBaselineProject >> isConfiguration [
-	^ true
-]
-
 { #category : #loading }
-PBMetacelloBaselineProject >> load [
+PBMetacelloBaselineProject >> basicLoad [
 	Metacello new 
 		repository: repository asString;
 		configuration: name;
 		version: version;
 		load: packageNames.
+]
+
+{ #category : #accessing }
+PBMetacelloBaselineProject >> isConfiguration [
+	^ true
 ]

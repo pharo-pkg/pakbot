@@ -15,7 +15,7 @@ CGOVcsSerializedProjectV1Test >> counterUiProject [
 	project := (CGOOngoingProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		addExternalCargoProject:
-			(CGOCargoProjectDependency
+			(PBPakbotProjectDependency
 				named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master');
 		registry: CGOPackageRegistry new;
 		yourself.
@@ -120,7 +120,7 @@ CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalC
 	externalProject := project externalProjects anyOne.
 	self
 		assert: externalProject class 
-		equals: CGOCargoProjectDependency.
+		equals: PBPakbotProjectDependency.
 	self
 		assert: externalProject repositoryUrl 
 		equals: 'git://git@github.com/demarey/pharo-counter.git'.

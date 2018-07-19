@@ -50,6 +50,11 @@ CGOOngoingPackageUnit >> asVcsSerializedPackageUnit [
 	^ CGOVcsSerializedPackageUnit from: self
 ]
 
+{ #category : #loading }
+CGOOngoingPackageUnit >> basicLoad [
+	self repository loadPackageNamed: self packageName
+]
+
 { #category : #accessing }
 CGOOngoingPackageUnit >> dependencies [
 	^ dependencies
