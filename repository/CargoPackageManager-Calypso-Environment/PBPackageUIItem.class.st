@@ -17,10 +17,11 @@ PBPackageUIItem class >> checkCalypsoItem: aChildBrowserItem isEqualTo: anotherC
 
 { #category : #converting }
 PBPackageUIItem class >> convertToCalypsoBrowserItem: aUnit [
- 
-	^ PBBrowserItem named: aUnit name with: aUnit.
-	
-	
+	| item |
+
+	item := PBBrowserItem named: aUnit name with: aUnit.
+	item actualObject decorate: item.
+	^ item.
 ]
 
 { #category : #sorting }
