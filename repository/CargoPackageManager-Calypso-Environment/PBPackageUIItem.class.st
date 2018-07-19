@@ -49,6 +49,13 @@ PBPackageUIItem >> critiques [
 ]
 
 { #category : #decorating }
+PBPackageUIItem >> decorate: aBrowserItem [
+	super decorate: aBrowserItem.
+	
+	self isEmpty ifFalse: [ aBrowserItem markWithChildrenOf: ClyClassGroup ] 
+]
+
+{ #category : #decorating }
 PBPackageUIItem >> decorate: anItemCellMorph inContext: itemContext [
 	self isInstalled
 		ifTrue: [ anItemCellMorph definitionIcon: #package ]
@@ -60,9 +67,15 @@ PBPackageUIItem >> decorate: anItemCellMorph inContext: itemContext [
 ]
 
 { #category : #testing }
-PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [ 
-	
-	^ false
+PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
+	^ self isInstalled
+		and: [ self systemPackage includesClassesAffectedBy: aSystemAnnouncement ]
+]
+
+{ #category : #announcements }
+PBPackageUIItem >> isAffectedBy: anAnnouncement [
+	^ (anAnnouncement isKindOf: ClassRecategorized)
+		and: [ (anAnnouncement packagesAffected collect: #name) includes: self name ]
 ]
 
 { #category : #testing }

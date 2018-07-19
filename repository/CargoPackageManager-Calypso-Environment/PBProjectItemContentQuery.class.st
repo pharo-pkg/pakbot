@@ -30,5 +30,5 @@ PBProjectItemContentQuery >> collectMetadataOf: aQueryResult by: anEnvironmentPl
 { #category : #'system changes' }
 PBProjectItemContentQuery >> isResult: aQueryResult affectedBy: aSystemAnnouncement [
 	
-	^ aSystemAnnouncement isKindOf: CGOProjectAnnouncement 
+	^ aQueryResult items anySatisfy: [ :each | each isAffectedBy: aSystemAnnouncement ]
 ]

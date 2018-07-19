@@ -14,6 +14,11 @@ PBProjectContextOfFullBrowser class >> selectionStrategy [
 	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBAbstractUIItem  
 ]
 
+{ #category : #accesing }
+PBProjectContextOfFullBrowser >> package [
+	^self lastSelectedObjectIn: self selectedPackages
+]
+
 { #category : #'selection-projects' }
 PBProjectContextOfFullBrowser >> selectedPackageItems [
 	^ selectedItems select: [ :each | each isBasedOnItemType: CGOOngoingPackageUnit ]

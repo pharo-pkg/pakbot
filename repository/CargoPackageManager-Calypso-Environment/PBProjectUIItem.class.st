@@ -69,6 +69,13 @@ PBProjectUIItem >> installedSystemPackages [
 	^ self project installedSystemPackages
 ]
 
+{ #category : #announcements }
+PBProjectUIItem >> isAffectedBy: anAnnouncement [
+
+	^ (anAnnouncement isKindOf: CGOProjectAnnouncement)
+		and: [ anAnnouncement project = self project ]
+]
+
 { #category : #testing }
 PBProjectUIItem >> items [
 	^ self project packageUnits collect: [ :each | PBPackageUIItem forUnit: each ]

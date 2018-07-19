@@ -24,16 +24,22 @@ PBAbstractUIItem class >> prepareProjectItemsQueryFrom: aProjectItem in: aNaviga
 ]
 
 { #category : #decorating }
-PBAbstractUIItem >> decorate: aClyBrowserItem [ 
+PBAbstractUIItem >> decorate: aClyBrowserItem [
 
-	aClyBrowserItem markWithChildrenOf: PBAbstractUIItem
-
+	self isEmpty
+		ifFalse: [ aClyBrowserItem markWithChildrenOf: PBAbstractUIItem ]
 ]
 
 { #category : #decorating }
 PBAbstractUIItem >> decorate: anItemCellMorph inContext: itemContext [
 
 	self subclassResponsibility
+]
+
+{ #category : #announcements }
+PBAbstractUIItem >> isAffectedBy: anAnnouncement [ 
+	
+	^ self subclassResponsibility 
 ]
 
 { #category : #decorating }
