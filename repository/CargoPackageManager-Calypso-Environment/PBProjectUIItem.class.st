@@ -36,17 +36,16 @@ PBProjectUIItem class >> prepareClassQueriesFrom: aCollection in: aClyNavigation
 	^ #()
 ]
 
+{ #category : #preparing }
+PBProjectUIItem class >> prepareProjectItemsQueryFrom: aProjectChildItem in: aNavigationEnvironment [ 
+
+	^ PBProjectItemContentQuery 
+			sortedFrom: (PBProjectItemScope of: aProjectChildItem in: aNavigationEnvironment)
+]
+
 { #category : #actions }
 PBProjectUIItem >> createNewPackageNamed: aString [ 
 	^ project createNewPackageNamed: aString 
-]
-
-{ #category : #decorating }
-PBProjectUIItem >> decorate: anItemCellMorph inContext: itemContext [
-	self project hasProblems
-		ifTrue: [ ^ self decorateProblems: anItemCellMorph inContext: itemContext ].
-		
-	anItemCellMorph definitionIcon: #configLoaded.
 ]
 
 { #category : #decorating }
@@ -63,6 +62,15 @@ PBProjectUIItem >> decorateProblems: anItemCellMorph inContext: itemContext [
 	button := command createTableCellButtonWith: icon using: activator.
 	button setBalloonText: 'The project is not up to date'.
 	anItemCellMorph definitionMorph: button
+]
+
+{ #category : #decorating }
+PBProjectUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
+
+	self project hasProblems
+		ifTrue: [ ^ self decorateProblems: anItemCellMorph inContext: itemContext ].
+		
+	anItemCellMorph definitionIcon: #configLoaded.
 ]
 
 { #category : #testing }

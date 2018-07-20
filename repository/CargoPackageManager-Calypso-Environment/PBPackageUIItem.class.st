@@ -38,6 +38,13 @@ PBPackageUIItem class >> prepareClassQueriesFrom: packages in: aNavigationEnviro
 
 ]
 
+{ #category : #queries }
+PBPackageUIItem class >> prepareProjectItemsQueryFrom: anItem in: aNavigationEnvironment [ 
+		
+	^ ClyAllClassGroups from: PBProjectPackageScope ofAll: {anItem} in: aNavigationEnvironment.
+
+]
+
 { #category : #accessing }
 PBPackageUIItem >> cargoPackage [
 	^ unit
@@ -54,12 +61,13 @@ PBPackageUIItem >> critiques [
 { #category : #decorating }
 PBPackageUIItem >> decorate: aBrowserItem [
 	super decorate: aBrowserItem.
-	
+
 	self isEmpty ifFalse: [ aBrowserItem markWithChildrenOf: ClyClassGroup ] 
 ]
 
 { #category : #decorating }
-PBPackageUIItem >> decorate: anItemCellMorph inContext: itemContext [
+PBPackageUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
+
 	self isInstalled
 		ifTrue: [ anItemCellMorph definitionIcon: #package ]
 		ifFalse: [ anItemCellMorph
@@ -67,6 +75,14 @@ PBPackageUIItem >> decorate: anItemCellMorph inContext: itemContext [
 					((self iconNamed: #package) asAlphaImageMorph
 						alpha: 0.6;
 						yourself) ]
+]
+
+{ #category : #accessing }
+PBPackageUIItem >> extendedClasses [
+
+	self isInstalled
+		ifFalse: [ ^ #() ].
+	^ unit systemPackage extendedClasses
 ]
 
 { #category : #testing }
@@ -77,8 +93,14 @@ PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
 
 { #category : #announcements }
 PBPackageUIItem >> isAffectedBy: anAnnouncement [
-	^ (anAnnouncement isKindOf: ClassRecategorized)
+	^ (anAnnouncement isKindOf: ClassAnnouncement)
 		and: [ (anAnnouncement packagesAffected collect: #name) includes: self name ]
+]
+
+{ #category : #testing }
+PBPackageUIItem >> isEmpty [
+	"The package is empty if there are no class tags or is not installed"
+	^ self isInstalled not or: [ self systemPackage actualClassTags isEmpty ]
 ]
 
 { #category : #testing }
@@ -89,7 +111,7 @@ PBPackageUIItem >> isInstalled [
 
 { #category : #accessing }
 PBPackageUIItem >> items [
-	^ {}
+	^ self error: 'Should not be implemented, the packages have ClassGroups inside'
 ]
 
 { #category : #accessing }
