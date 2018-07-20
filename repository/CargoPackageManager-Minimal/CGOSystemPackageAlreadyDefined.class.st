@@ -3,6 +3,6 @@ Error thrown when one tries to add a package whose name is already existing in t
 "
 Class {
 	#name : #CGOSystemPackageAlreadyDefined,
-	#superclass : #CGOPackageManagerError,
-	#category : 'CargoPackageManager-Minimal-Model'
+	#superclass : #PBError,
+	#category : #'CargoPackageManager-Minimal-Model'
 }

@@ -1,10 +1,10 @@
 Class {
 	#name : #CGOProjectHasConflictsError,
-	#superclass : #CGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'resolution'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver'
 }
 
 { #category : #signalling }
@@ -14,6 +14,11 @@ CGOProjectHasConflictsError class >> signalOnResolution: aResolution [
 		resolution: aResolution;
 		signal
 	
+]
+
+{ #category : #accessing }
+CGOProjectHasConflictsError >> messageText [
+	^ 'There are conflicts in the resolution of ' , resolution resolvedProjectVersion name
 ]
 
 { #category : #accessing }

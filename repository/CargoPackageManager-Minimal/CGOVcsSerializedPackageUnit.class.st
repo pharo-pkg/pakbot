@@ -28,7 +28,7 @@ CGOVcsSerializedPackageUnit >> asOngoingPackage [
 	| unit |
 	dict 
 		at: #name
-		ifAbsent: [ CGOPackageManagerError new 
+		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
 	unit := CGOOngoingPackageUnit named: (dict at: #name).

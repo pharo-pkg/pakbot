@@ -33,7 +33,7 @@ CGOVcsSerializedProject >> asOngoingProject [
 	
 	dict 
 		at: #name
-		ifAbsent: [ CGOPackageManagerError new 
+		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
 	project := CGOOngoingProject named: (dict at: #name).

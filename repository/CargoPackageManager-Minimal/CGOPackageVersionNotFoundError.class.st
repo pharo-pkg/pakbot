@@ -3,12 +3,12 @@ Error raised ... when a version is not found!
 "
 Class {
 	#name : #CGOPackageVersionNotFoundError,
-	#superclass : #CGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'packageName',
 		'versionNumber'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance-creation' }

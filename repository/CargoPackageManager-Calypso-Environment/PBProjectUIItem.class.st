@@ -111,7 +111,7 @@ PBProjectUIItem >> name [
 { #category : #actions }
 PBProjectUIItem >> openRepairDialog [
 
-	^ (CGOOpenRepairDialog onProject: self project) execute
+	^ (PBOpenRepairDialogAction onProject: self project) execute
 ]
 
 { #category : #accessing }
