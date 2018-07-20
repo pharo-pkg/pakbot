@@ -37,6 +37,11 @@ PBProjectHasConflictsError >> messageText [
 ]
 
 { #category : #accessing }
+PBProjectHasConflictsError >> resolution [
+	^ resolution
+]
+
+{ #category : #accessing }
 PBProjectHasConflictsError >> resolution: aCGOResolvedProject [ 
 	resolution := aCGOResolvedProject
 ]

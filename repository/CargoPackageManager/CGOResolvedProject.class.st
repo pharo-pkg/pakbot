@@ -50,6 +50,18 @@ CGOResolvedProject >> allSubResolutions [
 	^ self subresolutions asArray , (self subresolutions asArray flatCollect: [ :each | each allSubResolutions asArray ])
 ]
 
+{ #category : #conflicts }
+CGOResolvedProject >> conflictingDependencies [
+	
+	^ self resolvedDependencies select: [ :e | e hasConflicts ]
+]
+
+{ #category : #conflicts }
+CGOResolvedProject >> conflicts [
+	^ (self conflictingDependencies groupedBy: [ :aConflictingDependency | aConflictingDependency projectName ]) 
+		associations collect: [ :assoc | PBConflict onConflictingDependencies: assoc value ]
+]
+
 { #category : #accessing }
 CGOResolvedProject >> dependencyTargetedPackages [
 
@@ -113,6 +125,11 @@ CGOResolvedProject >> loadInstructions [
 	^ CGOLoadInstructionsBuilder new
 		resolution: self;
 		loadInstructions
+]
+
+{ #category : #accessing }
+CGOResolvedProject >> name [
+	^ resolvedProjectVersion name
 ]
 
 { #category : #accessing }

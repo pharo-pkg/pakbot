@@ -95,6 +95,11 @@ CGOResolvedDependency >> printOn: aStream [
 ]
 
 { #category : #accessing }
+CGOResolvedDependency >> projectName [
+	^ resolution name
+]
+
+{ #category : #accessing }
 CGOResolvedDependency >> resolution [
 	^ resolution
 ]
