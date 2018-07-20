@@ -11,7 +11,6 @@ Class {
 		'repository',
 		'registry',
 		'externalProjects',
-		'systemPackageOrganizer',
 		'packages',
 		'version'
 	],
@@ -166,7 +165,7 @@ PBProject >> createNewPackageNamed: aString [
 		on: RPackageConflictError
 		do: [ :error | CGOSystemPackageAlreadyDefined signal: aString ].
 
-	self importPackageNamed: aString.
+	^ self importPackageNamed: aString.
 ]
 
 { #category : #accessing }
@@ -208,6 +207,12 @@ PBProject >> fromSton: stonReader [
 	serializedProject flushIn: self.
 ]
 
+{ #category : #accessing }
+PBProject >> fullyQualifiedName [
+
+	 ^ self name
+]
+
 { #category : #testing }
 PBProject >> hasPackageNamed: aString [ 
 	
@@ -233,7 +238,7 @@ PBProject >> importPackageNamed: aString [
 	(packages includes: unit)
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 	packages add: unit.
-	registry register: unit
+	^ registry register: unit
 ]
 
 { #category : #initialization }
@@ -487,12 +492,7 @@ PBProject >> saveToSCM: commitMessage [
 { #category : #'system-interaction' }
 PBProject >> systemPackageOrganizer [
 	
-	^ systemPackageOrganizer ifNil: [ RPackageOrganizer default ]
-]
-
-{ #category : #'system-interaction' }
-PBProject >> systemPackageOrganizer: aPackageOrganizer [ 
-	systemPackageOrganizer := aPackageOrganizer
+	^ registry systemPackageOrganizer
 ]
 
 { #category : #accessing }

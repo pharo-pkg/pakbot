@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+PBProjectElement >> fullyQualifiedName [
+
+	 ^ self projectName, '::' , self name
+]
+
+{ #category : #accessing }
 PBProjectElement >> project [
 	^ project
 ]

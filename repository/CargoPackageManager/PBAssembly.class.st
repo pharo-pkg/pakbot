@@ -28,6 +28,20 @@ PBAssembly class >> named: aString inProject: aProject [
 		
 ]
 
+{ #category : #comparing }
+PBAssembly >> = anAssembly [
+
+	self species = anAssembly species ifFalse: [ ^ false ].
+	^ self name = anAssembly name
+]
+
+{ #category : #adding }
+PBAssembly >> addPackage: aPackage [
+	"An assembly should only contain packages of the same project"
+	self assert: (aPackage project = self project).
+	packages add: aPackage
+]
+
 { #category : #updating }
 PBAssembly >> addPart: aPackageNameOraPackageVersionReference [ 
 	| pkgVersionRef constraints |
@@ -63,6 +77,12 @@ PBAssembly >> assemblies [
 PBAssembly >> dependencies [
 	"for polymorphism with Package Unit"
 	^ self parts
+]
+
+{ #category : #comparing }
+PBAssembly >> hash [
+
+	^ self name hash
 ]
 
 { #category : #initialization }
@@ -115,7 +135,8 @@ PBAssembly >> packageUnits [
 
 { #category : #accessing }
 PBAssembly >> packages [
-	^ self packageUnits , self assemblies
+
+	^ packages
 ]
 
 { #category : #accessing }

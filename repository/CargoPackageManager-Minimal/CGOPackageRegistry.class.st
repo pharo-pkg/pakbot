@@ -10,12 +10,13 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'installedPackages',
-		'registeredProjects'
+		'registeredProjects',
+		'systemPackageOrganizer'
 	],
 	#classVars : [
 		'Default'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #accessing }
@@ -155,12 +156,12 @@ CGOPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 ]
 
 { #category : #registering }
-CGOPackageRegistry >> register: aPackageVersion [
-	aPackageVersion registry: self.
-	self checkPackageNameRegistrationOf: aPackageVersion name.
-	installedPackages add: aPackageVersion.
-	self registerProject: aPackageVersion project.
-	^ aPackageVersion
+CGOPackageRegistry >> register: aLoadableUnit [
+	aLoadableUnit registry: self.
+	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
+	installedPackages add: aLoadableUnit.
+	self registerProject: aLoadableUnit project.
+	^ aLoadableUnit
 ]
 
 { #category : #registering }
@@ -180,6 +181,17 @@ CGOPackageRegistry >> registeredProjects [
 { #category : #cleaning }
 CGOPackageRegistry >> reset [
 	self initialize
+]
+
+{ #category : #acccessing }
+CGOPackageRegistry >> systemPackageOrganizer [
+
+	^ systemPackageOrganizer ifNil: [ RPackage organizer ]
+]
+
+{ #category : #accessing }
+CGOPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [ 
+	systemPackageOrganizer := aRPackageOrganizer
 ]
 
 { #category : #registering }
