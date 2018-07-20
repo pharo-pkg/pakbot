@@ -110,6 +110,14 @@ CGOResolvedDependency >> resolution: aResolution [
 ]
 
 { #category : #resolving }
+CGOResolvedDependency >> resolveWith: aCGOResolvedProject [ 
+	
+	resolution := aCGOResolvedProject.
+	dependencyState := CGONonConflictingDependencyState new.
+
+]
+
+{ #category : #resolving }
 CGOResolvedDependency >> resolvesDependency: aDependency [ 
 	
 	^ dependency = aDependency

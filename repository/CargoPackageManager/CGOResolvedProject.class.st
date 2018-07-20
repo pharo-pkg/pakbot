@@ -147,6 +147,12 @@ CGOResolvedProject >> printOn: aStream [
 ]
 
 { #category : #accessing }
+CGOResolvedProject >> projectVersion [
+	
+	^ resolvedProjectVersion version
+]
+
+{ #category : #accessing }
 CGOResolvedProject >> resolution [
 	
 	^ resolvedProjectVersion
