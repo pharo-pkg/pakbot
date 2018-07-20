@@ -40,16 +40,16 @@ CGOModelTest >> tearDown [
 
 { #category : #'test data' }
 CGOModelTest >> unitTestV1 [
-	^ CGOOngoingPackageUnit example
-		package: #Package1;
+	^ CGOOngoingPackage example
+		name: #Package1;
 		project: ongoingProject;
 		yourself
 ]
 
 { #category : #'test data' }
 CGOModelTest >> unitTestV2 [
-	^ CGOOngoingPackageUnit example
-		package: #Package2;
+	^ CGOOngoingPackage example
+		name: #Package2;
 		project: ongoingProject;
 		yourself
 ]

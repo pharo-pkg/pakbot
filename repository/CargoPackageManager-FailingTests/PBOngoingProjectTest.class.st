@@ -37,14 +37,14 @@ PBOngoingProjectTest >> testCanPublishAProject [
 		assert: published class
 		equals: CGOProject.
 	self 
-		assertCollection: published packageUnitNames
+		assertCollection: published packageNames
 		hasSameElements: #(#Package1 #Package2)
 ]
 
 { #category : #tests }
 PBOngoingProjectTest >> testCanPublishAProjectAndItsPackages [
 	| packages |
-	ongoingProject assemblies: { CGOOngoingPackageAssembly for: #AllPackages in: ongoingProject name }.
+	ongoingProject assemblies: { CGOOngoingAssembly for: #AllPackages in: ongoingProject name }.
 	
 	ongoingProject publishAll.
 	

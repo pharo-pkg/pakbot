@@ -40,9 +40,8 @@ CGOProject class >> fromOngoing: aCGOOngoingPackage project: aCGOProject [
 { #category : #comparing }
 CGOProject >> = other [
 	"An ongoingProject and a project with the same name refers to the same entity."
-	^ (other isKindOf: CGOProject)
-		ifTrue: [ name == other packageName ]
-		ifFalse: [ ^ false ]	
+	other species = self species ifFalse: [ ^ false ].
+	^ name = other name
 ]
 
 { #category : #converting }
@@ -81,7 +80,7 @@ CGOProject >> authors [
 { #category : #'compatibility - cargo solver' }
 CGOProject >> dependencies [
 	"Needed so that Cargo solver can use a project as a standard package assembly"
-	^ self packageUnitNames collect: #asPackageDependency
+	^ self packageNames collect: #asPackageDependency
 ]
 
 { #category : #accessing }
@@ -112,7 +111,7 @@ CGOProject >> hash [
 { #category : #initialization }
 CGOProject >> initializeFromOngoing: aCGOOngoingProject [ 
 	super initializeFromOngoing: aCGOOngoingProject project: self.
-	name := aCGOOngoingProject packageName copy.
+	name := aCGOOngoingProject name copy.
 	repository := aCGOOngoingProject repository.
 	version := aCGOOngoingProject version.
 	units := aCGOOngoingProject packageUnits collect: [:each | each asPackageVersionOf: self] as: Array.
@@ -129,7 +128,7 @@ CGOProject >> isAssembly [
 
 { #category : #testing }
 CGOProject >> isEmpty [
-	^ self packageUnitNames isEmpty 
+	^ self packageNames isEmpty 
 		and: [self assemblies isEmpty 
 		and: [self virtualPackages isEmpty ] ]
 ]
@@ -141,7 +140,7 @@ CGOProject >> isProject [
 
 { #category : #accessing }
 CGOProject >> name [
-	^ name , '@' , (version asString)
+	^ name
 ]
 
 { #category : #accessing }
@@ -150,7 +149,7 @@ CGOProject >> packageName [
 ]
 
 { #category : #accessing }
-CGOProject >> packageUnitNames [
+CGOProject >> packageNames [
 	^ units collect: #packageName
 ]
 

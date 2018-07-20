@@ -14,7 +14,7 @@ Class {
 
 { #category : #example }
 CGOPackageUnit class >> example [
-	^ CGOOngoingPackageUnit example asPackageVersionOf: CGOProject example
+	^ CGOOngoingPackage example asPackageVersionOf: CGOProject example
 ]
 
 { #category : #utility }
@@ -97,7 +97,7 @@ CGOPackageUnit >> platformRequirements [
 
 { #category : #printing }
 CGOPackageUnit >> printOn: aStream [
-	aStream << self packageName << '@' << (self version asString) << ' (unit)'
+	aStream << self name << '@' << self version asString << ' (unit)'
 ]
 
 { #category : #testing }

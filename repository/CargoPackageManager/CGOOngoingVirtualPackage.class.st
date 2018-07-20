@@ -3,8 +3,8 @@ Current version of avirtual  package  metadata. As a PackageVersion is not edita
 "
 Class {
 	#name : #CGOOngoingVirtualPackage,
-	#superclass : #CGOOngoingPackage,
-	#category : 'CargoPackageManager-Model'
+	#superclass : #CGOProjectElement,
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #example }

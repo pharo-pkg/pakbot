@@ -45,7 +45,7 @@ CGOPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregistere
 	project registry: registry.
 	unit := project packageUnits anyOne.
 	registry register: unit.
-	unit2 := project newPackageUnit: #Unit2. "registers #Unit2"
+	unit2 := project importPackageNamed: #Unit2. "registers #Unit2"
 	
 	registry unregister: unit.
 	

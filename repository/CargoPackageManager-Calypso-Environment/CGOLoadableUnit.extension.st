@@ -1,11 +1,11 @@
-Extension { #name : #CGOOngoingPackage }
+Extension { #name : #CGOLoadableUnit }
 
 { #category : #'*CargoPackageManager-Calypso-Environment' }
-CGOOngoingPackage class >> convertToCalypsoBrowserItem: aPackage [ 
+CGOLoadableUnit class >> convertToCalypsoBrowserItem: aPackage [ 
 	^ClyBrowserItem named: aPackage packageName with: aPackage
 ]
 
 { #category : #'*CargoPackageManager-Calypso-Environment' }
-CGOOngoingPackage >> managedByCalypsoUsing: aPackageManager [
+CGOLoadableUnit >> managedByCalypsoUsing: aPackageManager [
 	^aPackageManager packageOf: self
 ]

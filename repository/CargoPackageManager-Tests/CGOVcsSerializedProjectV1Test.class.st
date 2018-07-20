@@ -19,7 +19,7 @@ CGOVcsSerializedProjectV1Test >> counterUiProject [
 				named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master');
 		registry: CGOPackageRegistry new;
 		yourself.
-	(project newPackageUnit: #'Counter-UI-Spec')
+	(project importPackageNamed: #'Counter-UI-Spec')
 		description: 'Core package with the counter UI based on Spec.';
 		addDependencyOn: #'Counter::Counter-Core';
 		yourself.
@@ -86,7 +86,7 @@ CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 		
 	self assert: project assemblies isEmpty.
 	self 
-		assertCollection: project packageUnitNames asArray
+		assertCollection: project packageNames asArray
 		hasSameElements: #('UnitTest').
 
 	packageUnit := project packageUnits anyOne.

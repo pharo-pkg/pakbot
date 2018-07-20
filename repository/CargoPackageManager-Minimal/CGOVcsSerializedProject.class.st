@@ -39,7 +39,7 @@ CGOVcsSerializedProject >> asOngoingProject [
 	project := CGOOngoingProject named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
-		project packageUnits: (self ongoingPackageUnitsFrom: units) ].
+		project packages: (self ongoingPackageUnitsFrom: units) ].
 	dict at: #assemblies ifPresent: [ :assemblies | 
 		project assemblies: (self ongoingPackageAssembliesFrom: assemblies) ].
 	dict at: #virtualPackages ifPresent: [ :virtualPackages | 

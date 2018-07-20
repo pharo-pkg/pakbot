@@ -38,7 +38,7 @@ CGOPublishedPackageAssembly {
 { #category : #tests }
 CGOPackageAssemblyTest >> testCanGetConvertOngoingToAssembly [
 	| assembly |
-	assembly := CGOOngoingPackageAssembly example asPackageVersionOf: self project.
+	assembly := CGOOngoingAssembly example asPackageVersionOf: self project.
 	
 	self assert: assembly project notNil.
 		
@@ -47,7 +47,7 @@ CGOPackageAssemblyTest >> testCanGetConvertOngoingToAssembly [
 		equals: '1.0.0'.
 	
 	self 
-		assert: assembly packageName
+		assert: assembly name
 		equals: #TestAssembly
 ]
 

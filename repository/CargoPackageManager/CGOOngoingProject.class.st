@@ -4,25 +4,25 @@ A Cargo project holds the list of assemblies (convenient and logical group of pr
 "
 Class {
 	#name : #CGOOngoingProject,
-	#superclass : #CGOOngoingPackage,
+	#superclass : #CGOLoadableUnit,
 	#instVars : [
-		'units',
 		'assemblies',
 		'virtualPackages',
 		'repository',
 		'registry',
 		'externalProjects',
 		'systemPackageOrganizer',
-		'dependencies'
+		'packages',
+		'version'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #example }
 CGOOngoingProject class >> example [
 	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
-		packageUnits: { CGOOngoingPackageUnit example };
+		packages: { CGOOngoingPackage example };
 		yourself
 ]
 
@@ -69,9 +69,21 @@ CGOOngoingProject class >> new [
 
 { #category : #comparing }
 CGOOngoingProject >> = other [
-	^ self class == other class 
-		ifTrue: [ package == other package ]
-		ifFalse: [ ^ false ]	
+	self species == other species ifFalse: [ ^ false ].
+	^ self name = other name
+]
+
+{ #category : #updating }
+CGOOngoingProject >> addAssembly: aCGOPackageAssemblyName [
+	| assembly |
+	
+	assembly := CGOOngoingAssembly 
+		named: aCGOPackageAssemblyName asSymbol
+		project: self.
+	(assemblies includes: assembly)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
+	assemblies add: assembly.
+	^ registry register: assembly
 ]
 
 { #category : #dependencies }
@@ -90,7 +102,7 @@ CGOOngoingProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 
 { #category : #dependencies }
 CGOOngoingProject >> allDependencies [
-	^ dependencies , (units flatCollect: #allDependencies).
+	^ dependencies , (packages flatCollect: #allDependencies).
 ]
 
 { #category : #converting }
@@ -139,6 +151,11 @@ CGOOngoingProject >> cargoProjectDependencies [
 	^ externalProjects reject: #isMetacelloProjectDependency
 ]
 
+{ #category : #accessing }
+CGOOngoingProject >> children [
+	^ self packageUnits , self assemblies, self virtualPackages
+]
+
 { #category : #adding }
 CGOOngoingProject >> createNewPackageNamed: aString [ 
 	
@@ -149,14 +166,14 @@ CGOOngoingProject >> createNewPackageNamed: aString [
 		on: RPackageConflictError
 		do: [ :error | CGOSystemPackageAlreadyDefined signal: aString ].
 
-	self newPackageUnit: aString.
+	self importPackageNamed: aString.
 ]
 
 { #category : #accessing }
 CGOOngoingProject >> defaultAssembly [
 
-	^ (CGOOngoingPackageAssembly named: #default inProject: self)
-		parts: units copy;
+	^ (CGOOngoingAssembly named: #default inProject: self)
+		parts: packages copy;
 		yourself
 ]
 
@@ -194,7 +211,7 @@ CGOOngoingProject >> fromSton: stonReader [
 { #category : #testing }
 CGOOngoingProject >> hasPackageNamed: aString [ 
 	
-	^ units anySatisfy: [ :any | any packageName = aString ]
+	^ packages anySatisfy: [ :any | any name = aString ]
 ]
 
 { #category : #testing }
@@ -204,21 +221,33 @@ CGOOngoingProject >> hasProblems [
 
 { #category : #comparing }
 CGOOngoingProject >> hash [
-	^ self packageName hash
+
+	^ self name hash
 ]
 
 { #category : #adding }
-CGOOngoingProject >> importPackageNamed: aString [ 
-	
-	self newPackageUnit: aString
+CGOOngoingProject >> importPackageNamed: aString [
+	| unit |
+	unit := CGOOngoingPackage named:
+		aString asSymbol project: self.
+	(packages includes: unit)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+	packages add: unit.
+	registry register: unit
+]
+
+{ #category : #initialization }
+CGOOngoingProject >> initialize [
+	super initialize.
+	version := '0.0.0-N/A' asSemanticVersion.
+	description := ''.
 ]
 
 { #category : #initialization }
 CGOOngoingProject >> initializeFromProject: aCGOProject [
-	super initialize.
-	package := aCGOProject package.
+	self initialize.
 	description := aCGOProject description copy.
-	units := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
+	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
 	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	virtualPackages := aCGOProject virtualPackages veryDeepCopy asSet.
 	externalProjects := aCGOProject externalProjects veryDeepCopy asSet.
@@ -226,8 +255,9 @@ CGOOngoingProject >> initializeFromProject: aCGOProject [
 
 { #category : #initialization }
 CGOOngoingProject >> initializeWithProjectName: aProjectName [
-	self initializeWithPackageName: aProjectName andProject: nil.
-	units := Set new.
+	
+	name := aProjectName.
+	packages := Set new.
 	assemblies := Set new.
 	virtualPackages := Set new.
 	externalProjects := Set new.
@@ -249,7 +279,7 @@ CGOOngoingProject >> isConflictingWith: aCGOResolvedDependency [
 
 { #category : #testing }
 CGOOngoingProject >> isEmpty [
-	^ self packageUnitNames isEmpty 
+	^ self packageNames isEmpty 
 		and: [self assemblies isEmpty 
 			and: [self virtualPackages isEmpty] ]
 ]
@@ -304,47 +334,6 @@ CGOOngoingProject >> metacelloProjects [
 		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]
 ]
 
-{ #category : #querying }
-CGOOngoingProject >> modifiedPackageUnits [ 
-	"check if either source code or metadata has been modified"
-	self flag: 'TODO'.
-	" for now, just return all packages part of the project"
-	^ self packageUnits
-		"select: #isDirty"
-	"TO DO: isDirty should take into account the metadata state"
-	"then return units objects"
-]
-
-{ #category : #accessing }
-CGOOngoingProject >> name [
-	^ self packageName
-]
-
-{ #category : #updating }
-CGOOngoingProject >> newPackageAssembly: aCGOPackageAssemblyName [
-	| assembly |
-	
-	assembly := CGOOngoingPackageAssembly 
-		for: aCGOPackageAssemblyName asSymbol
-		project: self.
-	(assemblies includes: assembly)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
-	assemblies add: assembly.
-	^ registry register: assembly
-]
-
-{ #category : #updating }
-CGOOngoingProject >> newPackageUnit: aCGOPackageUnitName [
-	| unit |
-	unit := CGOOngoingPackageUnit
-		named: aCGOPackageUnitName asSymbol
-		project: self.
-	(units includes: unit)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
-	units add: unit.
-	^ registry register: unit
-]
-
 { #category : #updating }
 CGOOngoingProject >> newVirtualPackage: aName [
 	| virtual |
@@ -359,24 +348,25 @@ CGOOngoingProject >> newVirtualPackage: aName [
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> packageUnitNames [
-	^ units collect: #packageName
+CGOOngoingProject >> packageNames [
+	^ packages collect: #name
 ]
 
 { #category : #accessing }
 CGOOngoingProject >> packageUnits [
-	^ units
+	^ packages
 ]
 
 { #category : #updating }
-CGOOngoingProject >> packageUnits: aListOfPackageUnits [
-	units := aListOfPackageUnits asSet.
-	units do: [ :each | each project: self ]
+CGOOngoingProject >> packages [
+
+	^ packages
 ]
 
-{ #category : #accessing }
-CGOOngoingProject >> packages [
-	^ self packageUnits , self assemblies, self virtualPackages
+{ #category : #updating }
+CGOOngoingProject >> packages: aListOfPackageUnits [
+	packages := aListOfPackageUnits asSet.
+	packages do: [ :each | each project: self ]
 ]
 
 { #category : #printing }
@@ -384,7 +374,7 @@ CGOOngoingProject >> printOn: aStream [
 	aStream 
 		<< self class name
 		<< '('
-		<< self packageName
+		<< self name
 		<< ')'
 ]
 
@@ -450,7 +440,7 @@ CGOOngoingProject >> removePart: aCGOPackageVersion [
 	registry unregister: aCGOPackageVersion.
 	assemblies 
 		remove: aCGOPackageVersion
-		ifAbsent: [ 	units remove: aCGOPackageVersion ]
+		ifAbsent: [ 	packages remove: aCGOPackageVersion ]
 ]
 
 { #category : #accessing }
@@ -497,6 +487,16 @@ CGOOngoingProject >> systemPackageOrganizer [
 { #category : #'system-interaction' }
 CGOOngoingProject >> systemPackageOrganizer: aPackageOrganizer [ 
 	systemPackageOrganizer := aPackageOrganizer
+]
+
+{ #category : #accessing }
+CGOOngoingProject >> version [
+	^ version
+]
+
+{ #category : #accessing }
+CGOOngoingProject >> version: anObject [
+	version := anObject
 ]
 
 { #category : #accessing }

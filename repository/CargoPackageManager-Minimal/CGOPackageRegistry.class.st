@@ -136,7 +136,7 @@ CGOPackageRegistry >> packageNamed: aName [
 { #category : #acccessing }
 CGOPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 	^ installedPackages 
-		detect: [ :package | package packageName = aName asSymbol ]
+		detect: [ :package | package name = aName asSymbol ]
 		ifNone: absentBlock
 ]
 
@@ -157,7 +157,7 @@ CGOPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 { #category : #registering }
 CGOPackageRegistry >> register: aPackageVersion [
 	aPackageVersion registry: self.
-	self checkPackageNameRegistrationOf: aPackageVersion packageName.
+	self checkPackageNameRegistrationOf: aPackageVersion name.
 	installedPackages add: aPackageVersion.
 	self registerProject: aPackageVersion project.
 	^ aPackageVersion
@@ -167,7 +167,7 @@ CGOPackageRegistry >> register: aPackageVersion [
 CGOPackageRegistry >> registerProject: aCGOProject [
 	aCGOProject registry: self.
 	(registeredProjects includes: aCGOProject)
-		ifFalse: [ self checkProjectRegistrationOf: aCGOProject packageName.
+		ifFalse: [ self checkProjectRegistrationOf: aCGOProject name.
 					registeredProjects add: aCGOProject. ].
 	^ aCGOProject
 ]

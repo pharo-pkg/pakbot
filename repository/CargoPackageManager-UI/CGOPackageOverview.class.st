@@ -48,12 +48,12 @@ CGOPackageOverview class >> defaultSpec [
 
 { #category : #example }
 CGOPackageOverview class >> example [
-	^ self openOn: (CGOOngoingPackageUnit example)
+	^ self openOn: (CGOOngoingPackage example)
 ]
 
 { #category : #example }
 CGOPackageOverview class >> example2 [
-	^ self openWithMinimalSpecOn: (CGOOngoingPackageUnit example)
+	^ self openWithMinimalSpecOn: (CGOOngoingPackage example)
 ]
 
 { #category : #specs }

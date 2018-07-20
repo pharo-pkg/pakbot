@@ -33,7 +33,7 @@ CGOSerializedProjectTest >> testFromSton [
 		
 	self assert: project authors isEmpty.
 	self 
-		assertCollection: project packageUnitNames
+		assertCollection: project packageNames
 		hasSameElements: #('Package1' 'Package2')
 ]
 

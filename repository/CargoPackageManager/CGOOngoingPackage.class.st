@@ -1,256 +1,153 @@
 "
-Abstract class representing a Cargo Package hosted in a Version Control System (e.g. git). 
-It is used to update Cargo packages metadata.
-
-- projectName is the name of the Cargo project I'm part of
+Current version of the package unit metadata. As a PackageVersion is not editable, it is the only way  to update it.
 "
 Class {
 	#name : #CGOOngoingPackage,
-	#superclass : #Object,
+	#superclass : #CGOProjectElement,
 	#instVars : [
-		'package',
-		'description',
-		'project',
-		'version'
+		'provisions',
+		'platformRequirements'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> for: aPackageName [
-	
-	self deprecated: 'Please use #named: instead'
-		transformWith: '`@receiver for: `@statements1' 
-						-> '`@receiver named: `@statements1'.
-	
-	^ self named: aPackageName
-]
-
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> for: aPackageName project: aCargoProject [
-	
-	self deprecated: 'Please use #named:project: instead'
-		transformWith: '`@receiver for: `@statements1 project: `@statements2' 
-						-> '`@receiver named: `@statements1 project: `@statements2'.
-	
-	^ self named: aPackageName project: aCargoProject
-]
-
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> fromPackageVersion: aCGOPackageVersion [
-	^ aCGOPackageVersion ongoingClass basicNew 
-		initializeFromPackageVersion: aCGOPackageVersion
-]
-
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> fromStonString: aStonString [
-	| reader version project |
-	reader := STON reader on: aStonString readStream.
-	version := reader next at: #version.
-	project:= reader next.
-
-	^ CGOPackageVersionWriterV1 deserializeProject: project version: version.
-	
-
-]
-
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> named: aPackageName [
-	^ self named: aPackageName project: nil 
-]
-
-{ #category : #'instance creation' }
-CGOOngoingPackage class >> named: aPackageName project: aCargoProject [
-	^ self basicNew
-		initializeWithPackageName: aPackageName andProject: aCargoProject;
-		yourself 
-]
-
-{ #category : #'as yet unclassified' }
-CGOOngoingPackage class >> prepareClassQueriesFrom: aCollection in: aClyNavigationEnvironment [ 
-	^#()
+{ #category : #example }
+CGOOngoingPackage class >> example [
+	^ (self named: #UnitTest project: (CGOOngoingProject named: #MyProject))
+		description: 'A simple ongoing package unit.';
+		yourself
 ]
 
 { #category : #comparing }
-CGOOngoingPackage >> = other [
-	^ self class == other class 
-		ifTrue: [ package == other package and: [ project = other project ] ]
-		ifFalse: [ ^ false ]	
+CGOOngoingPackage >> = anotherPackage [
+
+	self species = anotherPackage species ifFalse: [ ^ false ].
+	self name = anotherPackage name ifFalse: [ ^ false ].
+	^ self project = anotherPackage project
 ]
 
-{ #category : #dependencies }
+{ #category : #updating }
+CGOOngoingPackage >> addDependencyOn: aPackageName [ 
+	dependencies	add:
+		(CGOPackageDependency on: aPackageName)
+]
+
+{ #category : #'accessing - dependencies' }
 CGOOngoingPackage >> allDependencies [
 	
-	^ self subclassResponsibility
+	^ dependencies
 ]
 
 { #category : #converting }
-CGOOngoingPackage >> asOngoingPackageVersion [
-	^ self
+CGOOngoingPackage >> asPackageDependency [
+	^ (self packageName -> {('=', self version asString)}) asPackageDependency
+		project: project;
+		yourself
 ]
 
 { #category : #converting }
 CGOOngoingPackage >> asPackageVersionOf: aCGOProject [
-	self subclassResponsibility 
+	^ CGOPackageUnit fromOngoing: self project: aCGOProject
 ]
 
 { #category : #converting }
-CGOOngoingPackage >> asPackageVersionReference [
-	" version 0.0.0 means that the package has no version and comes from a VCS."
-	^ CGOPackageVersionReference 
-		packageName: self packageName 
-		version: self version
+CGOOngoingPackage >> asVcsSerializedPackageUnit [
+	"VCS version of the unit metadata (i.e. minimum metadata)"
+	^ CGOVcsSerializedPackageUnit from: self
 ]
 
 { #category : #accessing }
-CGOOngoingPackage >> constraints [
-	
-	^ { CGOFixedVersionConstraint with: self version }
+CGOOngoingPackage >> dependencies [
+	^ dependencies
 ]
 
-{ #category : #accessing }
-CGOOngoingPackage >> description [
-	^ description
-]
-
-{ #category : #accessing }
-CGOOngoingPackage >> description: aString [
-	description := aString
+{ #category : #updating }
+CGOOngoingPackage >> dependencies: aDependencyList [ 
+	dependencies := aDependencyList
 ]
 
 { #category : #testing }
 CGOOngoingPackage >> fitsPlatformRequirements [
-	" True for assemblies (and so projects) and virtual packages as they do not have platform requirements."
-	^ true
+	^ Cargo platformAttributes includesAll: platformRequirements
 ]
 
 { #category : #comparing }
 CGOOngoingPackage >> hash [
-	^ self packageName hash bitXor: self project hash
-]
 
-{ #category : #initialization }
-CGOOngoingPackage >> initialize [
-	super initialize.
-	version := '0.0.0-N/A' asSemanticVersion
+	^ self name hash
 ]
 
 { #category : #initialization }
 CGOOngoingPackage >> initializeFromPackageVersion: aCGOPackageVersion [
-	self subclassResponsibility
+	self initialize.
+	dependencies := aCGOPackageVersion dependencies collect: #copy as: OrderedCollection.
+	self provisions: aCGOPackageVersion provisions.
+	platformRequirements := aCGOPackageVersion platformRequirements asOrderedCollection.
 ]
 
 { #category : #initialization }
 CGOOngoingPackage >> initializeWithPackageName: aPackageName andProject: aCargoProject [
-	self initialize.
-	package := CGOPackageProvider default packageNamed: aPackageName.
-	description := ''.
-	project := aCargoProject
-]
-
-{ #category : #testing }
-CGOOngoingPackage >> isAssembly [
-	^ false
-]
-
-{ #category : #testing }
-CGOOngoingPackage >> isMetacelloProject [
-	^ false
-]
-
-{ #category : #testing }
-CGOOngoingPackage >> isProject [
-	^ false
-]
-
-{ #category : #testing }
-CGOOngoingPackage >> isSolved [
 	
-	^ true
+	name := aPackageName.
+	project := aCargoProject.
+	dependencies := OrderedCollection new.
+	provisions := OrderedCollection new: 0.
+	platformRequirements := OrderedCollection new: 0.	
+]
+
+{ #category : #'querying - installed' }
+CGOOngoingPackage >> isInstalled [
+	
+	^ project registry isInstalled: self
 ]
 
 { #category : #testing }
 CGOOngoingPackage >> isUnit [
-	^ false
-]
-
-{ #category : #testing }
-CGOOngoingPackage >> isVirtual [
-	^ false
+	^ true
 ]
 
 { #category : #accessing }
-CGOOngoingPackage >> package [
-	^ package
+CGOOngoingPackage >> platformRequirements [
+	^ platformRequirements
 ]
 
 { #category : #updating }
-CGOOngoingPackage >> package: aPackageName [
-	aPackageName isSymbol
-		ifFalse: [ CGOPackageVersionInitializationError signal: 'The package value must be a Symbol' ].
-	package := CGOPackageProvider default packageNamed: aPackageName
+CGOOngoingPackage >> platformRequirements: aListOfSymbols [ 
+	platformRequirements := aListOfSymbols
 ]
 
-{ #category : #accessing }
-CGOOngoingPackage >> packageName [
-	^ package 
-		ifNil: [ 'N/A' ] 
-		ifNotNil: [ package name ]
-]
-
-{ #category : #printing }
-CGOOngoingPackage >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPut: $(.
-	aStream nextPutAll: self packageName.
-	aStream nextPut: $).
-]
-
-{ #category : #accessing }
-CGOOngoingPackage >> project [
-	^ project
-]
-
-{ #category : #accessing }
-CGOOngoingPackage >> project: aCGOOngoingProject [
-	project := aCGOOngoingProject
-]
-
-{ #category : #accessing }
-CGOOngoingPackage >> projectName [
-	^ self project packageName
-]
-
-{ #category : #'querying - installed' }
-CGOOngoingPackage >> providesProject: aProjectDependency [ 
+{ #category : #'testing - installing' }
+CGOOngoingPackage >> providesPackage: aPackageDependency [ 
 	
-	"A package does not provide a project"
-	^ false
+	^ self packageName = aPackageDependency packageName and: [ aPackageDependency satisfyConstraints: self version ]
 ]
 
 { #category : #accessing }
-CGOOngoingPackage >> registry: aCGOPackageRegistry [ 
-	"Do nothing by default. Only the project keeps a reference to the registry"
+CGOOngoingPackage >> provisions [
+	^ provisions
 ]
 
-{ #category : #accessing }
-CGOOngoingPackage >> repository [
-	^ self project repository
+{ #category : #updating }
+CGOOngoingPackage >> provisions: aListOfVirtualPackageVersionsReference [ 
+	provisions := (CGOPackageUnit provisionsFromListOfProvisionStrings: aListOfVirtualPackageVersionsReference)	asOrderedCollection
 ]
 
-{ #category : #'compatibility - cargo solver' }
-CGOOngoingPackage >> version [
-
-	^ version
+{ #category : #constrains }
+CGOOngoingPackage >> removeDependency: aPackageDependency [
+	dependencies := dependencies 
+		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
 ]
 
-{ #category : #'compatibility - cargo solver' }
-CGOOngoingPackage >> version: aVersion [
-
-	version := aVersion
+{ #category : #updating }
+CGOOngoingPackage >> updateDependency: aPackageDependency [
+	dependencies := dependencies collect: 
+		[ :dependency | 
+		(dependency packageName = aPackageDependency packageName)
+			ifTrue: [ aPackageDependency ]
+			ifFalse: [ dependency ] ]
 ]
 
 { #category : #'*CargoPackageManager' }
 CGOOngoingPackage >> versionLoaded [
-	"default: do nothing"
+	self repository versionLoaded: self packageName.
 ]

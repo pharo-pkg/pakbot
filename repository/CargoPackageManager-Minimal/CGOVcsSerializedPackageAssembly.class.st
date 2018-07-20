@@ -27,7 +27,7 @@ CGOVcsSerializedPackageAssembly >> asOngoingPackage [
 	"avoid nil values when a collection is expected"
 	parts := self toArray: parts.
 
-	^ CGOOngoingPackageAssembly new 
+	^ CGOOngoingAssembly new 
 		initializeFromVcsSerializedPackage: self
 ]
 

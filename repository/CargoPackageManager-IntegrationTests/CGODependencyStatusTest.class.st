@@ -36,7 +36,7 @@ CGODependencyStatusTest >> setUp [
 
 	dependencyToProject := self createProjectDependency.
 
-	project newPackageUnit: #APackage.
+	project importPackageNamed: #APackage.
 	project addDependency: dependencyToProject
 ]
 
