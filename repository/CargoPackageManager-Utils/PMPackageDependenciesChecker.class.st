@@ -85,7 +85,7 @@ PMPackageDependenciesChecker >> manifestOf: aPackageName [
 PMPackageDependenciesChecker >> ongoingPackageUnitOf: aPackageName [
 	| manifest ongoing |
 	manifest := self manifestOf: aPackageName.
-	ongoing := CGOOngoingPackage on: manifest.
+	ongoing := PBPackage on: manifest.
 	(manifest class selectors includes: #packageName)
 		ifFalse: [ ongoing updatePackageName: aPackageName ].
 	^ ongoing

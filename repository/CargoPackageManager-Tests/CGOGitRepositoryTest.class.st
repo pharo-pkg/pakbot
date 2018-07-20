@@ -167,7 +167,7 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 	self skip.	
 	
 	repository := self pharoCounterMasterCloned.
-	result := repository mcVersionFor: (CGOOngoingPackage for: 'Counter-Core').
+	result := repository mcVersionFor: (PBPackage for: 'Counter-Core').
 	self assert: (result isKindOf: MCVersion)
 ]
 
@@ -175,14 +175,14 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
-	project := CGOOngoingProject fromStonString: repository projectMetadataStonString.
+	project := PBProject fromStonString: repository projectMetadataStonString.
 	
 	self 
 		assert: project name
 		equals: #Counter.
 	self 
 		assert: project packageUnits anyOne class 
-		equals: CGOOngoingPackage.
+		equals: PBPackage.
 	
 	self 
 		assert: (project packageUnits collect: #name) sorted
@@ -209,7 +209,7 @@ CGOGitRepositoryTest >> testCanSavePackageAndItsMetadata [
 	repository := self pharoCounterMasterCloned.
 	message := 'commit from test #testCanSavePackageAndItsMetadata'.
 	mcVersion := repository 
-		savePackageUnit: (CGOOngoingPackage for: 'Counter-Core') withMessage: message.
+		savePackageUnit: (PBPackage for: 'Counter-Core') withMessage: message.
 	self 
 		assert: mcVersion info message
 		equals: message

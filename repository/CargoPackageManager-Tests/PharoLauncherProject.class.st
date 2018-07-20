@@ -82,7 +82,7 @@ PharoLauncherProject >> buildPackages [
 
 { #category : #building }
 PharoLauncherProject >> buildProject [
-	project := (CGOOngoingProject named: #PharoLauncher)
+	project := (PBProject named: #PharoLauncher)
 		description:
 			'Pharo Launcher is a cross-platform application that
 

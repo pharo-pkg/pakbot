@@ -48,7 +48,7 @@ CGOPackageDetailsView class >> defaultSpec [
 
 { #category : #example }
 CGOPackageDetailsView class >> example [
-	^ self openOn: (CGOOngoingPackage example)
+	^ self openOn: (PBPackage example)
 ]
 
 { #category : #'instance creation' }

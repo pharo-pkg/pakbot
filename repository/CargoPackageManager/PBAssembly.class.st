@@ -2,8 +2,8 @@
 Current version of the package assembly metadata. As a PackageVersion is not editable, it is the only way  to update it.
 "
 Class {
-	#name : #CGOOngoingAssembly,
-	#superclass : #CGOProjectElement,
+	#name : #PBAssembly,
+	#superclass : #PBProjectElement,
 	#instVars : [
 		'packages'
 	],
@@ -11,16 +11,16 @@ Class {
 }
 
 { #category : #example }
-CGOOngoingAssembly class >> example [
+PBAssembly class >> example [
 	^ (self named: #TestAssembly)
 		description: 'A simple ongoing package assembly.';
 		parts: #('Unit1' 'Unit2');
-		project: (CGOOngoingProject named: #MyProject);
+		project: (PBProject named: #MyProject);
 		yourself
 ]
 
 { #category : #'instance creation' }
-CGOOngoingAssembly class >> named: aString inProject: aProject [
+PBAssembly class >> named: aString inProject: aProject [
 
 	^ self basicNew
 		initializeWithPackageName: aString andProject: aProject;
@@ -29,7 +29,7 @@ CGOOngoingAssembly class >> named: aString inProject: aProject [
 ]
 
 { #category : #updating }
-CGOOngoingAssembly >> addPart: aPackageNameOraPackageVersionReference [ 
+PBAssembly >> addPart: aPackageNameOraPackageVersionReference [ 
 	| pkgVersionRef constraints |
 	pkgVersionRef := aPackageNameOraPackageVersionReference asPackageVersionReference.
 	constraints := pkgVersionRef versionNumber 
@@ -39,7 +39,7 @@ CGOOngoingAssembly >> addPart: aPackageNameOraPackageVersionReference [
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> allPackageUnits [
+PBAssembly >> allPackageUnits [
 	" returns the list of package units part of the assembly recursively, flattening package assemblies"
 	
 	| units |
@@ -49,43 +49,38 @@ CGOOngoingAssembly >> allPackageUnits [
 ]
 
 { #category : #converting }
-CGOOngoingAssembly >> asPackageVersionOf: aCGOProject [
-	^ CGOPackageAssembly fromOngoing: self project: aCGOProject 
-]
-
-{ #category : #converting }
-CGOOngoingAssembly >> asVcsSerializedPackageAssembly [
+PBAssembly >> asVcsSerializedPackageAssembly [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedPackageAssembly from: self
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> assemblies [
+PBAssembly >> assemblies [
 	^ self partsFromRegistry: [ :each | each notNil and: [ each isAssembly ] ]
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> dependencies [
+PBAssembly >> dependencies [
 	"for polymorphism with Package Unit"
 	^ self parts
 ]
 
 { #category : #initialization }
-CGOOngoingAssembly >> initializeFromPackageVersion: aCGOPackageVersion [
+PBAssembly >> initializeFromPackageVersion: aCGOPackageVersion [
 	self initialize.
 	packages := aCGOPackageVersion dependencies collect: #copy as: OrderedCollection.
 
 ]
 
 { #category : #initialization }
-CGOOngoingAssembly >> initializeFromVcsSerializedPackage: aCGOVcsSerializedPackageAssembly [ 
+PBAssembly >> initializeFromVcsSerializedPackage: aCGOVcsSerializedPackageAssembly [ 
 	"The project will be set later by CGOVcsSerializedProject>>#flushIn:"
 	super initializeWithPackageName: aCGOVcsSerializedPackageAssembly name andProject: nil.
 	packages := self deserializedDependencies: aCGOVcsSerializedPackageAssembly parts.
 ]
 
 { #category : #initialization }
-CGOOngoingAssembly >> initializeWithPackageName: aPackageName andProject: aCargoProject [
+PBAssembly >> initializeWithPackageName: aPackageName andProject: aCargoProject [
 	
 	name := aPackageName.
 	project := aCargoProject.
@@ -93,48 +88,48 @@ CGOOngoingAssembly >> initializeWithPackageName: aPackageName andProject: aCargo
 ]
 
 { #category : #testing }
-CGOOngoingAssembly >> isAssembly [
+PBAssembly >> isAssembly [
 	^ true
 ]
 
 { #category : #testing }
-CGOOngoingAssembly >> isEmpty [
+PBAssembly >> isEmpty [
 	^ self parts isEmpty
 ]
 
 { #category : #'querying - installed' }
-CGOOngoingAssembly >> isInstalled [
+PBAssembly >> isInstalled [
 	
 	^ (self parts collect: #asPackageDependency) allSatisfy: #isInstalled
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> packageNames [
+PBAssembly >> packageNames [
 	^ self packageUnits collect: #packageName
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> packageUnits [
+PBAssembly >> packageUnits [
 	^ self partsFromRegistry: [ :each | each notNil and: [ each isUnit ] ]
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> packages [
+PBAssembly >> packages [
 	^ self packageUnits , self assemblies
 ]
 
 { #category : #accessing }
-CGOOngoingAssembly >> parts [
+PBAssembly >> parts [
 	^ packages
 ]
 
 { #category : #updating }
-CGOOngoingAssembly >> parts: aListOfCGOPackageDependency [
+PBAssembly >> parts: aListOfCGOPackageDependency [
 	packages := aListOfCGOPackageDependency
 ]
 
 { #category : #private }
-CGOOngoingAssembly >> partsFromRegistry: filterBlock [
+PBAssembly >> partsFromRegistry: filterBlock [
 	^ packages
 		collect: [ :each | 
 			self project registry 
@@ -144,6 +139,6 @@ CGOOngoingAssembly >> partsFromRegistry: filterBlock [
 ]
 
 { #category : #updating }
-CGOOngoingAssembly >> removePart: aCGOPackageDependency [ 
+PBAssembly >> removePart: aCGOPackageDependency [ 
 	packages remove: aCGOPackageDependency
 ]

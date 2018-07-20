@@ -29,7 +29,7 @@ CGOSerializedProjectTest >> testFromSton [
 	
 	self
 		assert: project
-		equals: CGOOngoingProject example asCargoProject.
+		equals: PBProject example asCargoProject.
 		
 	self assert: project authors isEmpty.
 	self 
@@ -54,7 +54,7 @@ CGOSerializedProjectTest >> testFromStonTargetClass [
 CGOSerializedProjectTest >> testStonOn [
 	| project |
 	
-	project := CGOOngoingProject example asCargoProject asSerializableCargoProject.
+	project := PBProject example asCargoProject asSerializableCargoProject.
 	
 	self
 		assert: (CGOPackageVersionWriterV1 toStringPretty: project)

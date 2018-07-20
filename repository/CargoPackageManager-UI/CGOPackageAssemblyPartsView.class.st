@@ -9,7 +9,7 @@ Class {
 
 { #category : #example }
 CGOPackageAssemblyPartsView class >> example [
-	^ self openOn: (CGOOngoingAssembly example)
+	^ self openOn: (PBAssembly example)
 ]
 
 { #category : #adding }

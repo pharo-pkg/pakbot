@@ -31,7 +31,7 @@ CGODependencyStatusTest >> installProject [
 CGODependencyStatusTest >> setUp [
 	super setUp.
 	registry := CGOPackageRegistry new.
-	project := CGOOngoingProject named: 'ATestProject'.
+	project := PBProject named: 'ATestProject'.
 	registry register: project.
 
 	dependencyToProject := self createProjectDependency.

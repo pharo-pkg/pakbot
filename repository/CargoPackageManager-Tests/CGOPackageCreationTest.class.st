@@ -14,7 +14,7 @@ CGOPackageCreationTest >> setUp [
 
 	super setUp.
 	registry := CGOPackageRegistry new.
-	project := CGOOngoingProject named: 'test'.
+	project := PBProject named: 'test'.
 	registry register: project.
 	
 	systemPackageOrganizer := RPackageOrganizer new.

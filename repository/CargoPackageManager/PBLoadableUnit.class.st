@@ -5,7 +5,7 @@ It is used to update Cargo packages metadata.
 - projectName is the name of the Cargo project I'm part of
 "
 Class {
-	#name : #CGOLoadableUnit,
+	#name : #PBLoadableUnit,
 	#superclass : #Object,
 	#instVars : [
 		'dependencies',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> for: aPackageName [
+PBLoadableUnit class >> for: aPackageName [
 	
 	self deprecated: 'Please use #named: instead'
 		transformWith: '`@receiver for: `@statements1' 
@@ -26,7 +26,7 @@ CGOLoadableUnit class >> for: aPackageName [
 ]
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> for: aPackageName project: aCargoProject [
+PBLoadableUnit class >> for: aPackageName project: aCargoProject [
 	
 	self deprecated: 'Please use #named:project: instead'
 		transformWith: '`@receiver for: `@statements1 project: `@statements2' 
@@ -36,13 +36,13 @@ CGOLoadableUnit class >> for: aPackageName project: aCargoProject [
 ]
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> fromPackageVersion: aCGOPackageVersion [
+PBLoadableUnit class >> fromPackageVersion: aCGOPackageVersion [
 	^ aCGOPackageVersion ongoingClass basicNew 
 		initializeFromPackageVersion: aCGOPackageVersion
 ]
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> fromStonString: aStonString [
+PBLoadableUnit class >> fromStonString: aStonString [
 	| reader version project |
 	reader := STON reader on: aStonString readStream.
 	version := reader next at: #version.
@@ -54,40 +54,35 @@ CGOLoadableUnit class >> fromStonString: aStonString [
 ]
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> named: aPackageName [
+PBLoadableUnit class >> named: aPackageName [
 	^ self named: aPackageName project: nil 
 ]
 
 { #category : #'instance creation' }
-CGOLoadableUnit class >> named: aPackageName project: aCargoProject [
+PBLoadableUnit class >> named: aPackageName project: aCargoProject [
 	^ self basicNew
 		initializeWithPackageName: aPackageName andProject: aCargoProject;
 		yourself 
 ]
 
 { #category : #'as yet unclassified' }
-CGOLoadableUnit class >> prepareClassQueriesFrom: aCollection in: aClyNavigationEnvironment [ 
+PBLoadableUnit class >> prepareClassQueriesFrom: aCollection in: aClyNavigationEnvironment [ 
 	^#()
 ]
 
 { #category : #dependencies }
-CGOLoadableUnit >> allDependencies [
+PBLoadableUnit >> allDependencies [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #converting }
-CGOLoadableUnit >> asOngoingPackageVersion [
+PBLoadableUnit >> asOngoingPackageVersion [
 	^ self
 ]
 
 { #category : #converting }
-CGOLoadableUnit >> asPackageVersionOf: aCGOProject [
-	self subclassResponsibility 
-]
-
-{ #category : #converting }
-CGOLoadableUnit >> asPackageVersionReference [
+PBLoadableUnit >> asPackageVersionReference [
 	" version 0.0.0 means that the package has no version and comes from a VCS."
 	^ CGOPackageVersionReference 
 		packageName: self packageName 
@@ -95,78 +90,78 @@ CGOLoadableUnit >> asPackageVersionReference [
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> constraints [
+PBLoadableUnit >> constraints [
 	
 	^ { CGOFixedVersionConstraint with: self version }
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> description [
+PBLoadableUnit >> description [
 	
 	^ description
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> description: aString [ 
+PBLoadableUnit >> description: aString [ 
 	
 	description := aString
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> fitsPlatformRequirements [
+PBLoadableUnit >> fitsPlatformRequirements [
 	" True for assemblies (and so projects) and virtual packages as they do not have platform requirements."
 	^ true
 ]
 
 { #category : #initialization }
-CGOLoadableUnit >> initializeFromPackageVersion: aCGOPackageVersion [
+PBLoadableUnit >> initializeFromPackageVersion: aCGOPackageVersion [
 	self subclassResponsibility
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isAssembly [
+PBLoadableUnit >> isAssembly [
 	^ false
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isMetacelloProject [
+PBLoadableUnit >> isMetacelloProject [
 	^ false
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isProject [
+PBLoadableUnit >> isProject [
 	^ false
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isSolved [
+PBLoadableUnit >> isSolved [
 	
 	^ true
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isUnit [
+PBLoadableUnit >> isUnit [
 	^ false
 ]
 
 { #category : #testing }
-CGOLoadableUnit >> isVirtual [
+PBLoadableUnit >> isVirtual [
 	^ false
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> name [
+PBLoadableUnit >> name [
 	
 	^ name
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> name: aString [ 
+PBLoadableUnit >> name: aString [ 
 	name := aString
 ]
 
 { #category : #printing }
-CGOLoadableUnit >> printOn: aStream [
+PBLoadableUnit >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: self name.
@@ -174,40 +169,40 @@ CGOLoadableUnit >> printOn: aStream [
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> project [
+PBLoadableUnit >> project [
 	
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> projectName [
+PBLoadableUnit >> projectName [
 	^ self project name
 ]
 
 { #category : #'querying - installed' }
-CGOLoadableUnit >> providesProject: aProjectDependency [ 
+PBLoadableUnit >> providesProject: aProjectDependency [ 
 	
 	"A package does not provide a project"
 	^ false
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> registry: aCGOPackageRegistry [ 
+PBLoadableUnit >> registry: aCGOPackageRegistry [ 
 	"Do nothing by default. Only the project keeps a reference to the registry"
 ]
 
 { #category : #accessing }
-CGOLoadableUnit >> repository [
+PBLoadableUnit >> repository [
 	^ self project repository
 ]
 
 { #category : #'compatibility - cargo solver' }
-CGOLoadableUnit >> version [
+PBLoadableUnit >> version [
 
 	^ self project version
 ]
 
 { #category : #'*CargoPackageManager' }
-CGOLoadableUnit >> versionLoaded [
+PBLoadableUnit >> versionLoaded [
 	"default: do nothing"
 ]

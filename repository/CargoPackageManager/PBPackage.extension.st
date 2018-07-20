@@ -1,6 +1,6 @@
-Extension { #name : #CGOOngoingPackage }
+Extension { #name : #PBPackage }
 
 { #category : #'*CargoPackageManager' }
-CGOOngoingPackage >> versionLoaded [
+PBPackage >> versionLoaded [
 	self repository versionLoaded: self packageName.
 ]

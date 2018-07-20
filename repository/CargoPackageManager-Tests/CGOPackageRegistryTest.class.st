@@ -15,7 +15,7 @@ CGOPackageRegistryTest >> setUp [
 { #category : #tests }
 CGOPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 	| project unit |
-	project := CGOOngoingProject example.
+	project := PBProject example.
 	unit := project packageUnits anyOne.
 	
 	registry register: unit.
@@ -28,7 +28,7 @@ CGOPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 { #category : #tests }
 CGOPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 	| project unit |
-	project := CGOOngoingProject example.
+	project := PBProject example.
 	unit := project packageUnits anyOne.
 	
 	registry register: unit.
@@ -41,7 +41,7 @@ CGOPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 { #category : #tests }
 CGOPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
 	| project unit unit2 |
-	project := CGOOngoingProject example.
+	project := PBProject example.
 	project registry: registry.
 	unit := project packageUnits anyOne.
 	registry register: unit.
@@ -57,7 +57,7 @@ CGOPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregistere
 { #category : #tests }
 CGOPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 	| project unit |
-	project := CGOOngoingProject example.
+	project := PBProject example.
 	unit := project packageUnits anyOne.
 	registry register: unit.
 	

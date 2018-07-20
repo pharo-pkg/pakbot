@@ -46,14 +46,14 @@ CGOPackagePanel class >> defaultSpec [
 
 { #category : #example }
 CGOPackagePanel class >> example [
-	^ self openOnOngoing: (CGOOngoingPackage example)
+	^ self openOnOngoing: (PBPackage example)
 ]
 
 { #category : #private }
 CGOPackagePanel class >> ongoingPackageVersionFor: selectedPackage [
 	| manifest ongoing |
 	manifest := selectedPackage packageManifest.
-	ongoing := CGOOngoingPackage on: manifest.
+	ongoing := PBPackage on: manifest.
 	(manifest class selectors includes: #packageName)
 		ifFalse: [ ongoing updatePackageName: selectedPackage name ].
 	^ ongoing

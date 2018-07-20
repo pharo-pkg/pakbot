@@ -22,7 +22,7 @@ CGOVcsSerializedProject class >> stonName [
 
 { #category : #converting }
 CGOVcsSerializedProject >> asOngoingPackage [
-	^ CGOOngoingProject fromVcsSerializedProject: self
+	^ PBProject fromVcsSerializedProject: self
 ]
 
 { #category : #converting }
@@ -36,7 +36,7 @@ CGOVcsSerializedProject >> asOngoingProject [
 		ifAbsent: [ CGOPackageManagerError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
-	project := CGOOngoingProject named: (dict at: #name).
+	project := PBProject named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
 		project packages: (self ongoingPackageUnitsFrom: units) ].

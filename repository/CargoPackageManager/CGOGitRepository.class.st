@@ -78,7 +78,7 @@ CGOGitRepository >> fetchVersion: aString [
 		ifNotEmpty: [ iceRepository revparse: aString ].
 
 
-	project := CGOOngoingProject named: commitish project projectName.
+	project := PBProject named: commitish project projectName.
 	project repository: self.
 	project version: (SemanticVersion fromString: '0-' , (aString ifEmpty: ['N/A'])).
 	^ project

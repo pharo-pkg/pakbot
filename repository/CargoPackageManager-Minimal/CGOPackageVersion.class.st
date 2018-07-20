@@ -51,12 +51,7 @@ CGOPackageVersion >> = other [
 
 { #category : #converting }
 CGOPackageVersion >> asOngoingPackage [
-	^ CGOLoadableUnit fromPackageVersion: self
-]
-
-{ #category : #converting }
-CGOPackageVersion >> asPackageVersionOf: aCGOProject [ 
-	^ self
+	^ PBLoadableUnit fromPackageVersion: self
 ]
 
 { #category : #converting }

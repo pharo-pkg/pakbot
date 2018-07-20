@@ -20,7 +20,7 @@ Class {
 
 { #category : #example }
 CGOProject class >> example [
-	^ (self fromOngoing: CGOOngoingProject example)
+	^ (self fromOngoing: PBProject example)
 		instVarNamed: 'version' put: '2.1.0' asSemanticVersion;
 		yourself
 ]
@@ -106,18 +106,6 @@ CGOProject >> fromSton: stonReader [
 { #category : #comparing }
 CGOProject >> hash [
 	^ name hash
-]
-
-{ #category : #initialization }
-CGOProject >> initializeFromOngoing: aCGOOngoingProject [ 
-	super initializeFromOngoing: aCGOOngoingProject project: self.
-	name := aCGOOngoingProject name copy.
-	repository := aCGOOngoingProject repository.
-	version := aCGOOngoingProject version.
-	units := aCGOOngoingProject packageUnits collect: [:each | each asPackageVersionOf: self] as: Array.
-	assemblies := aCGOOngoingProject assemblies collect: [:each | each asPackageVersionOf: self] as: Array.
-	virtualPackages := aCGOOngoingProject virtualPackages collect: [:each | each asPackageVersionOf: self] as: Array.
-	authors := aCGOOngoingProject authors asArray.
 ]
 
 { #category : #'compatibility - cargo solver' }

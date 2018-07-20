@@ -12,11 +12,6 @@ Class {
 	#category : 'CargoPackageManager-Minimal-Model'
 }
 
-{ #category : #example }
-CGOPackageUnit class >> example [
-	^ CGOOngoingPackage example asPackageVersionOf: CGOProject example
-]
-
 { #category : #utility }
 CGOPackageUnit class >> provisionsFromListOfProvisionStrings: aListOfProvisionStrings [
 	" example: self provisionsFromListOfProvisionStrings: #('A@2.0' 'B') "

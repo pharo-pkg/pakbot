@@ -12,7 +12,7 @@ CGOVcsSerializedProjectV1Test class >> resources [
 { #category : #'test data' }
 CGOVcsSerializedProjectV1Test >> counterUiProject [
 	| project |
-	project := (CGOOngoingProject named: #'Counter-UI')
+	project := (PBProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		addExternalCargoProject:
 			(CGOCargoProjectDependency
@@ -78,11 +78,11 @@ CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 	| project packageUnit |
 	
-	project := CGOOngoingProject fromStonString: self stonStringForExampleProject.
+	project := PBProject fromStonString: self stonStringForExampleProject.
 	
 	self
 		assert: project
-		equals: CGOOngoingProject example.
+		equals: PBProject example.
 		
 	self assert: project assemblies isEmpty.
 	self 
@@ -103,7 +103,7 @@ CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
 	| project dependency externalProject |
 	
-	project := CGOOngoingProject fromStonString: self counterUiStonString.
+	project := PBProject fromStonString: self counterUiStonString.
 	
 	dependency := project packageUnits anyOne dependencies first.
 	self 
@@ -165,7 +165,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	
-	serializedProject := CGOOngoingProject example asVcsSerializedCargoProject.
+	serializedProject := PBProject example asVcsSerializedCargoProject.
 	
 	self
 		assert: serializedProject asString

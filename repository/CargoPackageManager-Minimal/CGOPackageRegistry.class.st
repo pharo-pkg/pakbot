@@ -113,7 +113,7 @@ CGOPackageRegistry >> isVirtual: aString [
 CGOPackageRegistry >> newProjectNamed: aString [ 
 	
 	| project |
-	project := CGOOngoingProject named: aString.
+	project := PBProject named: aString.
 	self register: project.
 	^ project
 ]

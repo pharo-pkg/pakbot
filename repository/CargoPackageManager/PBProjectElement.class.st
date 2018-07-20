@@ -1,6 +1,6 @@
 Class {
-	#name : #CGOProjectElement,
-	#superclass : #CGOLoadableUnit,
+	#name : #PBProjectElement,
+	#superclass : #PBLoadableUnit,
 	#instVars : [
 		'project'
 	],
@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #accessing }
-CGOProjectElement >> project [
+PBProjectElement >> project [
 	^ project
 ]
 
 { #category : #accessing }
-CGOProjectElement >> project: aCGOOngoingProject [ 
+PBProjectElement >> project: aCGOOngoingProject [ 
 	project := aCGOOngoingProject
 ]
