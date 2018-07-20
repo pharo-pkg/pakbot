@@ -21,3 +21,9 @@ PBNonInteractiveErrorVisitor >> visitGenericError: anException [
 
 	^ anException pass
 ]
+
+{ #category : #visiting }
+PBNonInteractiveErrorVisitor >> visitProjectWithConflictsError: anError [
+	
+	^ self visitGenericError: anError
+]

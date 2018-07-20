@@ -21,3 +21,9 @@ PBInteractiveErrorVisitor >> visitGenericError: anException [
 
 	^ (ITErrorDialog on: anException) openDialogWithSpec
 ]
+
+{ #category : #visiting }
+PBInteractiveErrorVisitor >> visitProjectWithConflictsError: anError [
+	
+	self halt.
+]

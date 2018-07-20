@@ -27,7 +27,13 @@ PBErrorVisitor class >> priority [
 ]
 
 { #category : #visiting }
-PBErrorVisitor >> visitGenericError: anException [
+PBErrorVisitor >> visitGenericError: anError [
 
 	self subclassResponsibility
+]
+
+{ #category : #visiting }
+PBErrorVisitor >> visitProjectWithConflictsError: anError [
+	
+	self subclassResponsibility 
 ]
