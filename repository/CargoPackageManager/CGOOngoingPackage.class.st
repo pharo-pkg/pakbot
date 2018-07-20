@@ -43,15 +43,20 @@ CGOOngoingPackage class >> fromPackageVersion: aCGOPackageVersion [
 ]
 
 { #category : #'instance creation' }
-CGOOngoingPackage class >> fromStonString: aStonString [
+CGOOngoingPackage class >> fromStonStream: aStream [
 	| reader version project |
-	reader := STON reader on: aStonString readStream.
+	reader := STON reader on: aStream.
 	version := reader next at: #version.
 	project:= reader next.
 
 	^ CGOPackageVersionWriterV1 deserializeProject: project version: version.
 	
 
+]
+
+{ #category : #'instance creation' }
+CGOOngoingPackage class >> fromStonString: aStonString [
+	^ self fromStonStream: aStonString readStream
 ]
 
 { #category : #'instance creation' }

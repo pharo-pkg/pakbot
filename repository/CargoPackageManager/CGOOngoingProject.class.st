@@ -37,14 +37,6 @@ CGOOngoingProject class >> for: aProjectName [
 ]
 
 { #category : #'instance creation' }
-CGOOngoingProject class >> fromRepository: aCGOSourceRepository [
-	| ongoing |
-	ongoing := self fromStonString: aCGOSourceRepository projectMetadataStonString.
-	ongoing repository: aCGOSourceRepository.
-	^ ongoing
-]
-
-{ #category : #'instance creation' }
 CGOOngoingProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 	| ongoing |
 	ongoing := self basicNew
@@ -186,16 +178,6 @@ CGOOngoingProject >> externalProjects [
 { #category : #updating }
 CGOOngoingProject >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
 	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration
-]
-
-{ #category : #ston }
-CGOOngoingProject >> fromSton: stonReader [
-	"Decode the Cargo serialized project."
-	| serializedProject |
-	
-	serializedProject := CGOVcsSerializedProject new fromSton: stonReader.
-	self registry: CGOPackageRegistry default.
-	serializedProject flushIn: self.
 ]
 
 { #category : #testing }
