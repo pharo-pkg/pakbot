@@ -156,7 +156,7 @@ PBProject >> children [
 ]
 
 { #category : #adding }
-PBProject >> createNewPackageNamed: aString [ 
+PBProject >> createPackageNamed: aString [ 
 	
 	"We delegate to the system the creation of a package first.
 	This will fail if a package with that name already exists.
@@ -438,12 +438,25 @@ PBProject >> registry: aCGOPackageRegistry [
 	registry := aCGOPackageRegistry
 ]
 
+{ #category : #assemblies }
+PBProject >> removeAssembly: aPBAssembly [ 
+	
+	assemblies remove: aPBAssembly
+]
+
 { #category : #dependencies }
 PBProject >> removeDependency: aDependency [
 
 	dependencies remove: aDependency.
 	
 	CGODependenciesChanged announceOnProject: self. 
+]
+
+{ #category : #packages }
+PBProject >> removePackage: aPBPackage [ 
+	
+	packages remove: aPBPackage.
+	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ]
 ]
 
 { #category : #removing }

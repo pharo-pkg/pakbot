@@ -39,7 +39,7 @@ PBAssembly >> = anAssembly [
 PBAssembly >> addPackage: aPackage [
 	"An assembly should only contain packages of the same project"
 	self assert: (aPackage project = self project).
-	packages add: aPackage
+	^ packages add: aPackage
 ]
 
 { #category : #updating }
@@ -71,6 +71,12 @@ PBAssembly >> asVcsSerializedPackageAssembly [
 { #category : #accessing }
 PBAssembly >> assemblies [
 	^ self partsFromRegistry: [ :each | each notNil and: [ each isAssembly ] ]
+]
+
+{ #category : #packages }
+PBAssembly >> createPackageNamed: aString [ 
+	
+	^ self addPackage: (self project createPackageNamed: aString)
 ]
 
 { #category : #accessing }
@@ -157,6 +163,24 @@ PBAssembly >> partsFromRegistry: filterBlock [
 				packageNamed: each packageName 
 				ifAbsent: [ CGOPackageNotFoundError signal: each packageName ] ]
 		thenSelect: filterBlock
+]
+
+{ #category : #actions }
+PBAssembly >> remove [
+	
+	project removeAssembly: self
+]
+
+{ #category : #packages }
+PBAssembly >> removePackage: aPBPackage [ 
+	
+	packages remove: aPBPackage
+]
+
+{ #category : #package }
+PBAssembly >> removePackage: aPBPackage ifAbsent: aBlockClosure [
+	
+	packages remove: aPBPackage ifAbsent: aBlockClosure
 ]
 
 { #category : #updating }

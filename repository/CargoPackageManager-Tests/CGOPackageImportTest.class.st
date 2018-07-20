@@ -67,9 +67,9 @@ CGOPackageImportTest >> testImportNonExistingPackageInSystemRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.
-	project createNewPackageNamed: packageName.
+	project createPackageNamed: packageName.
 	
 	self
-		should: [project createNewPackageNamed: packageName]
+		should: [project createPackageNamed: packageName]
 		raise: CGOSystemPackageAlreadyDefined
 ]

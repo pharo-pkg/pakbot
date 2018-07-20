@@ -43,21 +43,11 @@ PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
-	package := project createNewPackageNamed: 'TestPackage'.
+	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly addPackage: package.
 	
 	self assert: (assembly packages includes: package)
-]
-
-{ #category : #tests }
-PBAssemblyTest >> testCanGetProjectFromAssembly [
-	| project |
-	project := ongoingProject asCargoProject.
-	
-	self
-		assert: self assemblyA1 project 
-		equals: project
 ]
 
 { #category : #tests }
@@ -72,6 +62,38 @@ PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 	self
 		should: [ assembly := project addAssemblyNamed: 'Ass1' ]
 		raise: CGOPackageAlreadyRegistered
+]
+
+{ #category : #tests }
+PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
+	
+	| testRegistry project assembly |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	project createPackageNamed: 'NewPackage'.
+	
+	assembly := project addAssemblyNamed: 'Ass1'.
+
+	self
+		should: [ assembly createPackageNamed: 'NewPackage' ]
+		raise: CGOSystemPackageAlreadyDefined
+]
+
+{ #category : #tests }
+PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
+	
+	| testRegistry project package assembly |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	assembly := project addAssemblyNamed: 'Ass1'.
+
+	package := assembly createPackageNamed: 'NewPackage'.
+	
+	self assert: (project packages includes: package)
 ]
 
 { #category : #tests }
@@ -99,23 +121,22 @@ PBAssemblyTest >> testInitializeFromEmptyDictionary [
 ]
 
 { #category : #tests }
-PBAssemblyTest >> testInitializeFromWithOnlyProjectPackageAndPartsProvided [
-	| dictionary assembly |
-	dictionary := Dictionary
-		with: #package -> #A
-		with: #parts -> #()
-		with: #project -> CGOProject example.
-	assembly := CGOPackageVersion newFrom: dictionary.
-	self 
-		assert: assembly packageName
-		equals: #A.
-	self 
-		assert: assembly version asString
-		equals: '2.1.0'.
-	self
-		assert: assembly class
-		equals: CGOPackageAssembly
+PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 	
+	| testRegistry project package assembly1 assembly2 |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	package := project createPackageNamed: 'TestPackage'.
+	assembly1 := project addAssemblyNamed: 'Ass1'.
+	assembly2 := project addAssemblyNamed: 'Ass2'.
+	
+	assembly1 addPackage: package.
+	assembly2 addPackage: package.
+	
+	self assert: (assembly1 packages includes: package).
+	self assert: (assembly2 packages includes: package).
 ]
 
 { #category : #tests }
@@ -131,17 +152,63 @@ PBAssemblyTest >> testNewAssemblyIsListed [
 ]
 
 { #category : #tests }
-PBAssemblyTest >> testStonOn [
-	| assembly |
-	assembly := self assemblyA1.
-	assembly
-		instVarNamed: 'timestamp'
-		put:
-			(DateAndTime
-				fuzzyReadFrom: '2015-02-26T12:17:20.505912+01:00' readStream).
-	self
-		assert: (CGOPackageVersionWriterV1 toStringPretty: assembly)
-		equals: self expectedTestStonOnResult
+PBAssemblyTest >> testRemoveAssemblyUnlistsIt [
+	
+	| testRegistry project assembly |
+	testRegistry := CGOPackageRegistry new.
+	project := testRegistry newProjectNamed: 'TestProject'.
+	
+	assembly := project addAssemblyNamed: 'Ass1'.
+	assembly remove.
+	self deny: (project assemblies includes: assembly)
+]
+
+{ #category : #tests }
+PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
+	
+	| testRegistry project package assembly |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	package := project createPackageNamed: 'TestPackage'.
+	assembly := project addAssemblyNamed: 'Ass1'.
+	assembly addPackage: package.
+	
+	assembly removePackage: package.
+	self assert: (project packages includes: package)
+]
+
+{ #category : #tests }
+PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
+	
+	| testRegistry project package assembly |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	package := project createPackageNamed: 'TestPackage'.
+	assembly := project addAssemblyNamed: 'Ass1'.
+	assembly addPackage: package.
+	
+	assembly removePackage: package.
+	self deny: (assembly packages includes: package)
+]
+
+{ #category : #tests }
+PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
+	
+	| testRegistry project package assembly |
+	testRegistry := CGOPackageRegistry new.
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	package := project createPackageNamed: 'TestPackage'.
+	assembly := project addAssemblyNamed: 'Ass1'.
+	assembly addPackage: package.
+	
+	project removePackage: package.
+	self deny: (assembly packages includes: package)
 ]
 
 { #category : #tests }

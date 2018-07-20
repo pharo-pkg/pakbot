@@ -22,3 +22,9 @@ PBProjectElement >> project [
 PBProjectElement >> project: aCGOOngoingProject [ 
 	project := aCGOOngoingProject
 ]
+
+{ #category : #actions }
+PBProjectElement >> remove [
+	
+	self subclassResponsibility
+]
