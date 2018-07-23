@@ -41,7 +41,7 @@ CGOGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
 { #category : #'tests - test data' }
 CGOGitRepositoryTest >> pharoCounterMaster [
 	^ CGOGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/pharo-counter.git';
+		githubUrl: 'https://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		version: 'master';
 		create
@@ -84,7 +84,7 @@ CGOGitRepositoryTest >> testCanBeSerializedInSton [
 		assert: repositoryStonString
 		equals: '{
 	#type : #git,
-	#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
+	#repositoryUrl : ''https://github.com/demarey/pharo-counter.git'',
 	#version : ''master''
 }'
 ]
