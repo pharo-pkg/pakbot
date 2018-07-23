@@ -64,5 +64,7 @@ CGOLoadInstructionsBuilder >> resolution: aDependencyResolution [
 { #category : #errors }
 CGOLoadInstructionsBuilder >> signalConflicts [
 	
-	^ CGOProjectHasConflictsError signalOnResolution: resolution
+	PBProjectHasConflictsError signalOnResolution: resolution.
+	"If the error is resumed, re check the conflicts"
+	resolution hasConflicts ifTrue: [ self signalConflicts ].
 ]

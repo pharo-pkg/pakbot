@@ -59,7 +59,7 @@ CGOProjectStatusPresenter >> initializePresenter [
 		send: #handleAnnouncement:
 		to: self.
 		
-	actionButton action: [ (CGOOpenRepairDialog onProject: project) execute ]
+	actionButton action: [ (PBOpenRepairDialogAction onProject: project) execute ]
 ]
 
 { #category : #initialization }

@@ -39,6 +39,25 @@ PBPackageUIItemTest >> testAProjectShowsBothLoadedAndNotLoadedPackages [
 ]
 
 { #category : #tests }
+PBPackageUIItemTest >> testAProjectShowsCorrectStatusIcon [
+
+	| loadedUI notLoadedUI |
+
+	self openBrowser.
+	self expandProjectNamed: 'TestProject'.
+	loadedUI := self findPackageInBrowser: 'TestProject-Loaded'.
+	notLoadedUI := self findPackageInBrowser: 'TestProject-NotLoaded'.
+	
+	self assert: loadedUI definitionMorph class equals: ImageMorph.
+	self assert: notLoadedUI definitionMorph class equals: AlphaImageMorph.
+	self assert: notLoadedUI definitionMorph asAlphaImageMorph alpha equals: 0.6.
+
+	self assert: loadedUI definitionMorph form equals: (Smalltalk ui theme iconNamed: #package).
+	self assert: notLoadedUI definitionMorph form equals: (Smalltalk ui theme iconNamed: #package).
+
+]
+
+{ #category : #tests }
 PBPackageUIItemTest >> testLoadedPackageHasCorrectCommands [
 
 	| packageUI commands |
