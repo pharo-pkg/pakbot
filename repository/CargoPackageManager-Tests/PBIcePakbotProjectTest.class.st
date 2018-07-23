@@ -1,5 +1,5 @@
 Class {
-	#name : #PBIceCargoProjectTest,
+	#name : #PBIcePakbotProjectTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'iceRepositoryLocation',
@@ -10,14 +10,14 @@ Class {
 }
 
 { #category : #accessing }
-PBIceCargoProjectTest >> iceRepositoryLocation [
+PBIcePakbotProjectTest >> iceRepositoryLocation [
 	^ iceRepositoryLocation
 		ifNil: [ iceRepositoryLocation := FileLocator temp
 				/ ('pharo-tests-' , DateAndTime now asFileNameCompatibleString) ]
 ]
 
 { #category : #running }
-PBIceCargoProjectTest >> setUp [
+PBIcePakbotProjectTest >> setUp [
 	repository := IceRepositoryCreator new 
 			addRemote: 'https://github.com/demarey/pharo-counter.git';
 			location: self iceRepositoryLocation;
@@ -29,13 +29,13 @@ PBIceCargoProjectTest >> setUp [
 ]
 
 { #category : #accessing }
-PBIceCargoProjectTest >> tearDown [
+PBIcePakbotProjectTest >> tearDown [
 	repository forget.
 	iceRepositoryLocation ensureDeleteAll
 ]
 
 { #category : #tests }
-PBIceCargoProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
+PBIcePakbotProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
 	| project diff projectNode |
 
 	pakbotProject description: 'foo'.
@@ -56,7 +56,7 @@ PBIceCargoProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
 ]
 
 { #category : #tests }
-PBIceCargoProjectTest >> testNoChangeDetectedInPakbotProjectMetatadataWhenMetadataUnchanged [
+PBIcePakbotProjectTest >> testNoChangeDetectedInPakbotProjectMetatadataWhenMetadataUnchanged [
 	| project diff |
 
 	project := IcePakbotProject onRepository: repository project: pakbotProject.
