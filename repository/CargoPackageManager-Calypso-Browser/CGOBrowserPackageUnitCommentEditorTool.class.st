@@ -38,7 +38,7 @@ CGOBrowserPackageUnitCommentEditorTool >> defaultTitle [
 
 { #category : #accessing }
 CGOBrowserPackageUnitCommentEditorTool >> editingText [
-	^ self unit description
+	^ self unit description ifNil: [ '' ]
 ]
 
 { #category : #accessing }
