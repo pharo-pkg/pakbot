@@ -148,7 +148,7 @@ PBPackage >> removeDependency: aPackageDependency [
 { #category : #'querying - installed' }
 PBPackage >> satisfyConstraints: aVersion [ 
 
-	^ aVersion = version
+	^ aVersion = self version
 ]
 
 { #category : #accessing }

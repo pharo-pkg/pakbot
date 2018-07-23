@@ -239,13 +239,7 @@ PBProject >> hash [
 
 { #category : #adding }
 PBProject >> importPackageNamed: aString [
-	| unit |
-	unit := PBPackage named:
-		aString asSymbol project: self.
-	(packages includes: unit)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
-	packages add: unit.
-	^ registry register: unit
+	^ registry register: (self newNotLoadedPackage: aString)
 ]
 
 { #category : #initialization }
@@ -280,7 +274,7 @@ PBProject >> initializeWithProjectName: aProjectName [
 { #category : #accessing }
 PBProject >> installedSystemPackages [
 	
-	^ units select: [ :each | each isInstalled ] thenCollect: [ :each | each systemPackage ]
+	^ self packages select: [ :each | each isInstalled ] thenCollect: [ :each | each systemPackage ]
 ]
 
 { #category : #'compatibility - cargo solver' }
@@ -351,6 +345,19 @@ PBProject >> metacelloProjects [
 	^ externalProjects 
 		select: #isMetacelloProjectDependency
 		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]
+]
+
+{ #category : #adding }
+PBProject >> newNotLoadedPackage: aString [ 
+	| unit |
+
+	unit := PBPackage named: aString asSymbol project: self.
+
+	(packages includes: unit)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+
+	packages add: unit.
+	^ unit
 ]
 
 { #category : #updating }

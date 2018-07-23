@@ -31,9 +31,10 @@ CGOClyPackageAssembly >> = anObject [
 
 { #category : #accessing }
 CGOClyPackageAssembly >> allPackages [
+	self halt.
 	^ cargoAssembly allPackageUnits collect: 
 		[ :unit |
-			project packageNamed: unit packageName ]
+			self project packageNamed: unit packageName ]
 ]
 
 { #category : #'building items' }

@@ -156,15 +156,12 @@ CGOPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 ]
 
 { #category : #registering }
-CGOPackageRegistry >> register: aPackageVersion [
-	aPackageVersion registry: self.
-	self checkPackageNameRegistrationOf: aPackageVersion packageName.
-	installedPackages add: aPackageVersion.
-	self registerProject: aPackageVersion project.
-
-	CGOProjectCreated announceOnProject: aPackageVersion.
-
-	^ aPackageVersion
+CGOPackageRegistry >> register: aLoadableUnit [
+	aLoadableUnit registry: self.
+	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
+	installedPackages add: aLoadableUnit.
+	self registerProject: aLoadableUnit project.
+	^ aLoadableUnit
 ]
 
 { #category : #registering }
