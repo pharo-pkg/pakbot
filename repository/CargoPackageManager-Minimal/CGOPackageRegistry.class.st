@@ -209,5 +209,6 @@ CGOPackageRegistry >> unregister: aPackageVersion [
 CGOPackageRegistry >> unregisterProject: aProject [
 
 	registeredProjects remove: aProject.
+	installedPackages remove: aProject ifAbsent: ["Nothing To DO"].
 	CGOProjectRemoved announceOnProject: aProject.
 ]
