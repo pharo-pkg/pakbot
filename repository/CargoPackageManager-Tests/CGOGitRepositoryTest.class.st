@@ -123,7 +123,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 			subdirectory: '';
 			location: location;
 			createRepository.
-	(iceRepository lookupCommit: 'c1c1ef63933790a364501cdb991b18c589516729') checkout.
+	(iceRepository lookupCommit: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8') checkout.
 	repository := CGOGitRepositoryCreator new
 		githubUrl: 'github://demarey/pharo-counter:master';
 		location: location;
@@ -131,7 +131,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 	
 	self 
 		assert: iceRepository headCommit id
-		equals: 'c1c1ef63933790a364501cdb991b18c589516729'.
+		equals: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8'.
 	
 	repository ensureCloned.
 	
@@ -175,7 +175,7 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
-	project := CGOOngoingProject fromStonString: repository projectMetadataStonString.
+	project := repository project.
 	
 	self 
 		assert: project packageName
@@ -234,5 +234,5 @@ CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsen
 		location: self iceRepositoryLocation;
 		createAndClone.
 
-	self should: [ repository projectMetadataStonString ] raise: FileDoesNotExistException
+	self should: [ repository project ] raise: PBProjectMetadataNotFound
 ]

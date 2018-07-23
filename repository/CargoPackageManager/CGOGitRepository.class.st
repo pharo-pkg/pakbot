@@ -68,6 +68,12 @@ CGOGitRepository >> ensureIcePackageNamed: aPackageName [
 ]
 
 { #category : #fetching }
+CGOGitRepository >> fetchHeadVersion [
+	
+	^ self fetchVersion: ''
+]
+
+{ #category : #fetching }
 CGOGitRepository >> fetchVersion: aString [
 	
 	| commitish project |
@@ -161,6 +167,15 @@ CGOGitRepository >> mcVersionFor: aPackageVersion [
 CGOGitRepository >> metadataStringFor: aPackageUnit [
 	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
+]
+
+{ #category : #fetching }
+CGOGitRepository >> project [
+	| iceProject |
+	iceProject := iceRepository project.
+	^ iceProject isUnborn 
+		ifTrue: [ PBProjectMetadataNotFound signal ]
+		ifFalse: [ iceProject pakbotProject ]
 ]
 
 { #category : #accessing }
