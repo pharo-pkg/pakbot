@@ -160,16 +160,19 @@ CGOPackageRegistry >> register: aLoadableUnit [
 	aLoadableUnit registry: self.
 	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
 	installedPackages add: aLoadableUnit.
-	self registerProject: aLoadableUnit project.
+	
+	(self isProjectInstalled: aLoadableUnit project)
+		ifFalse: [ self registerProject: aLoadableUnit project ].
 	^ aLoadableUnit
 ]
 
 { #category : #registering }
 CGOPackageRegistry >> registerProject: aCGOProject [
+	
+	self checkProjectRegistrationOf: aCGOProject name.
+	
 	aCGOProject registry: self.
-	(registeredProjects includes: aCGOProject)
-		ifFalse: [ self checkProjectRegistrationOf: aCGOProject name.
-					registeredProjects add: aCGOProject. ].
+	registeredProjects add: aCGOProject.
 	^ aCGOProject
 ]
 

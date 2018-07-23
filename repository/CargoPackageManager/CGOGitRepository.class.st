@@ -272,6 +272,11 @@ CGOGitRepository >> version [
 	^ version
 ]
 
+{ #category : #accessing }
+CGOGitRepository >> version: aString [ 
+	version := aString
+]
+
 { #category : #notifying }
 CGOGitRepository >> versionLoaded: packageName [
 	self flag: 'TODO: check if I need to notify Iceberg that a package has been loaded. See IceWorkingCopy>>loadPackagesNamed: aCollection fromCommit: aCommit'

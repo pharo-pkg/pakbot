@@ -46,6 +46,11 @@ PBLoadableUnitOverviewPanel class >> defaultSpec [
 						add: #repositoryLabel width: self labelSize;
 						add: #repositoryInputField ]
 				height: self inputTextHeight;
+				newRow: [ :repositoryRow |
+					repositoryRow 
+						add: #subdirectoryLabel width: self labelSize;
+						add: #subdirectoryInputField ]
+				height: self inputTextHeight;
 				add: #descriptionLabel height: self inputTextHeight;
 			 	add: #descriptionText ]
 ]
@@ -148,10 +153,10 @@ PBLoadableUnitOverviewPanel >> initializeWidgets [
 
 	"repository"
 	(repositoryLabel := self newLabel)
-		label: 'Repository Url:'.
+		label: 'Url:'.
 	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'.
-	(repositoryLabel := self newLabel)
-		label: 'Code subdirectory:'.
+	(subdirectoryLabel := self newLabel)
+		label: 'Src directory:'.
 	self newTextInputField: #subdirectoryInputField default: 'src'.
 		
 	(descriptionLabel := self newLabel)
