@@ -21,16 +21,18 @@ CGOAbstractDependency >> fullyQualifiedName [
 	^ self name
 ]
 
-{ #category : #testing }
-CGOAbstractDependency >> isInstalled [	
-	"Returns true if the exact version is installed"
-	^ self subclassResponsibility
+{ #category : #'querying - installed' }
+CGOAbstractDependency >> isInstalled [
+	
+	"Returns true if the dependency is installed in the image with the same version"
+	^ project registry isInstalled: self
 ]
 
 { #category : #testing }
 CGOAbstractDependency >> isOutSync [	
 	"Returns true if there is a version of the project installed but not the correct version"
-	^ self subclassResponsibility
+	
+	^ project registry isOutSync: self.
 ]
 
 { #category : #testing }

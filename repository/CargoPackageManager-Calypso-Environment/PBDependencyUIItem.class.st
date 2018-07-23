@@ -43,7 +43,7 @@ PBDependencyUIItem >> items [
 { #category : #testing }
 PBDependencyUIItem >> name [
 	
-	^ dependency name
+	^ dependency name , ' ( ' , self versionString, ' )' 
 ]
 
 { #category : #testing }
@@ -51,4 +51,12 @@ PBDependencyUIItem >> representsItemOfType: aClass [
 
 	^ (CGOAbstractDependency includesBehavior: aClass)
 		or: [ self class includesBehavior: aClass ]
+]
+
+{ #category : #testing }
+PBDependencyUIItem >> versionString [
+
+	^ dependency constraints size = 1
+		ifTrue: [ ^ dependency constraints anyOne displayString ]
+		ifFalse: [ dependency constraints displayString ]
 ]

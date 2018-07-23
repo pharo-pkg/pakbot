@@ -101,6 +101,14 @@ CGOPackageRegistry >> isInstalled: aPackageDependency [
 ]
 
 { #category : #testing }
+CGOPackageRegistry >> isOutSync: anUnit [ 
+
+	| found |
+	found := self packageNamed: anUnit fullyQualifiedName ifAbsent: [ ^ false ].
+	^ (anUnit satisfyConstraints: found version) not
+]
+
+{ #category : #testing }
 CGOPackageRegistry >> isProjectInstalled: aCGOOngoingProject [ 
 	
 	^ registeredProjects includes: aCGOOngoingProject
