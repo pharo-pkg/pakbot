@@ -19,7 +19,7 @@ PBNewProjectPanel class >> defaultSpec [
 { #category : #accessing }
 PBNewProjectPanel >> icon [
 
-	^ self iconNamed: #git
+	^ self iconNamed: #dirtyPackage
 ]
 
 { #category : #initialization }
