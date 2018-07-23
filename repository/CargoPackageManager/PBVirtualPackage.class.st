@@ -2,13 +2,13 @@
 Current version of avirtual  package  metadata. As a PackageVersion is not editable, it is the only way  to update it.
 "
 Class {
-	#name : #CGOOngoingVirtualPackage,
-	#superclass : #CGOOngoingPackage,
-	#category : 'CargoPackageManager-Model'
+	#name : #PBVirtualPackage,
+	#superclass : #PBProjectElement,
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #example }
-CGOOngoingVirtualPackage class >> example [
+PBVirtualPackage class >> example [
 	^ (self for: #'Virtual-Mail')
 		description: 'I am a virtual package providing a mail functionality in version 1.0.
 I provide the following API:

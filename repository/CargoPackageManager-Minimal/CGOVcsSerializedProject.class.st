@@ -15,14 +15,9 @@ CGOVcsSerializedProject class >> from: aCGOOngoingProject [
 		yourself
 ]
 
-{ #category : #'ston-core' }
-CGOVcsSerializedProject class >> stonName [
-	^ #OngoingProject
-]
-
 { #category : #converting }
 CGOVcsSerializedProject >> asOngoingPackage [
-	^ CGOOngoingProject fromVcsSerializedProject: self
+	^ PBProject fromVcsSerializedProject: self
 ]
 
 { #category : #converting }

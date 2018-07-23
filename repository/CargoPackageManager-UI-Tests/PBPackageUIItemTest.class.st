@@ -16,9 +16,9 @@ PBPackageUIItemTest >> contextClass [
 { #category : #running }
 PBPackageUIItemTest >> setUp [
 	super setUp.
-	
+
 	project := registry newProjectNamed: 'TestProject'.
-	loadedPackage := project createNewPackageNamed: 'TestProject-Loaded'.
+	loadedPackage := project createPackageNamed: 'TestProject-Loaded'.
 	notLoadedPackage := project newNotLoadedPackage: 'TestProject-NotLoaded'.	
 ]
 

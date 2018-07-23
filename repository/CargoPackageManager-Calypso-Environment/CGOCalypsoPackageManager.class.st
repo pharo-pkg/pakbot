@@ -37,26 +37,8 @@ CGOCalypsoPackageManager >> cargoRegistry: aRegistry [
 { #category : #operations }
 CGOCalypsoPackageManager >> createProjectNamed: aString [
 	| project |
-	project := CGOOngoingProject named: aString asSymbol.
+	project := PBProject named: aString asSymbol.
 	self cargoRegistry register: project
-]
-
-{ #category : #queries }
-CGOCalypsoPackageManager >> customProjectClass [
-
-	^ PBProjectUIItem
-]
-
-{ #category : #queries }
-CGOCalypsoPackageManager >> customProjectItemClass [
-
-	^ PBAbstractUIItem
-]
-
-{ #category : #queries }
-CGOCalypsoPackageManager >> customQueryClass [
-
-	^ PBAllPakbotProjects
 ]
 
 { #category : #accessing }

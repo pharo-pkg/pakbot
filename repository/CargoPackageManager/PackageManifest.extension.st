@@ -2,7 +2,7 @@ Extension { #name : #PackageManifest }
 
 { #category : #'*CargoPackageManager' }
 PackageManifest class >> asOngoingPackageVersion [
-	^ CGOOngoingPackageUnit on: self
+	^ PBPackage on: self
 ]
 
 { #category : #'*CargoPackageManager' }

@@ -2,14 +2,14 @@ Extension { #name : #AssemblyManifest }
 
 { #category : #'*CargoPackageManager' }
 AssemblyManifest class >> asOngoingPackageVersion [
-	^ CGOOngoingPackageAssembly on: self
+	^ PBAssembly on: self
 ]
 
 { #category : #'*CargoPackageManager' }
 AssemblyManifest class >> gtInspectorDescriptionIn: composite [
 	<gtInspectorPresentationOrder: 30>  
 	
-	(CGOOngoingPackageAssembly on: self)
+	(PBAssembly on: self)
 		gtInspectorDescriptionIn: composite
 ]
 
@@ -17,7 +17,7 @@ AssemblyManifest class >> gtInspectorDescriptionIn: composite [
 AssemblyManifest class >> gtInspectorPartsIn: composite [
 	<gtInspectorPresentationOrder: 35>  
 	
-	(CGOOngoingPackageAssembly on: self)
+	(PBAssembly on: self)
 		gtInspectorPartsIn: composite
 ]
 
@@ -25,7 +25,7 @@ AssemblyManifest class >> gtInspectorPartsIn: composite [
 AssemblyManifest class >> gtInspectorVersionIn: composite [
 	<gtInspectorPresentationOrder: 40>
 	
-	(CGOOngoingPackageAssembly on: self)
+	(PBAssembly on: self)
 		gtInspectorVersionIn: composite
 ]
 

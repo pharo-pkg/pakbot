@@ -48,12 +48,12 @@ CGOPackageOverview class >> defaultSpec [
 
 { #category : #example }
 CGOPackageOverview class >> example [
-	^ self openOn: (CGOOngoingPackageUnit example)
+	^ self openOn: (PBPackage example)
 ]
 
 { #category : #example }
 CGOPackageOverview class >> example2 [
-	^ self openWithMinimalSpecOn: (CGOOngoingPackageUnit example)
+	^ self openWithMinimalSpecOn: (PBPackage example)
 ]
 
 { #category : #specs }
@@ -152,7 +152,7 @@ CGOPackageOverview >> nameLabel [
 
 { #category : #initialization }
 CGOPackageOverview >> refreshWidgetValues [
-	nameInputField text: ongoingPackageVersion packageName.
+	nameInputField text: ongoingPackageVersion name.
 	versionInputField text: ongoingPackageVersion version asString.
 	ongoingPackageVersion isProject
 		ifTrue: [ ongoingPackageVersion repository ifNotNil: 
