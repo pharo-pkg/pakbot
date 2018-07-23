@@ -145,7 +145,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 CGOGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/pharo-counter.git';
+		githubUrl: 'http://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		create.
 		
@@ -231,7 +231,7 @@ CGOGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/HotelApp.git';
+		githubUrl: 'http://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		createAndClone.
 
