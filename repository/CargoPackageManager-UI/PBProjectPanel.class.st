@@ -3,7 +3,7 @@ I'm in charge of displaying meta-information on Cargo projects.
 I also allow to edit these meta-data.
 "
 Class {
-	#name : #CGOProjectPanel,
+	#name : #PBProjectPanel,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'overview',
@@ -15,21 +15,21 @@ Class {
 }
 
 { #category : #private }
-CGOProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
+PBProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
 	^ self basicNew
 		initializeWith: anOngoingPackageVersion;
 		buildWithSpec
 ]
 
 { #category : #example }
-CGOProjectPanel class >> example [
+PBProjectPanel class >> example [
 	^ self basicNew
 		initializeWith: PBProject example;
 		openWithSpec
 ]
 
 { #category : #specs }
-CGOProjectPanel >> defaultSpec [
+PBProjectPanel >> defaultSpec [
 
 	^ SpecLayout composed
 		newColumn: [ :col |
@@ -42,12 +42,12 @@ CGOProjectPanel >> defaultSpec [
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> dependencies [
+PBProjectPanel >> dependencies [
 	^ dependencies
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> initializeWidgets [
+PBProjectPanel >> initializeWidgets [
 
 	overview := CGOPackageOverview newOn: ongoingPackageUnit owner: self.
 	dependencies := CGOPackageDependenciesView newOn: ongoingPackageUnit owner: self.
@@ -55,30 +55,30 @@ CGOProjectPanel >> initializeWidgets [
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> initializeWith: anOngoingPackageUnit [
+PBProjectPanel >> initializeWith: anOngoingPackageUnit [
 	ongoingPackageUnit := anOngoingPackageUnit.
 	super initialize
 ]
 
 { #category : #accessing }
-CGOProjectPanel >> overview [
+PBProjectPanel >> overview [
 	^ overview
 ]
 
 { #category : #accessing }
-CGOProjectPanel >> projectStatus [
+PBProjectPanel >> projectStatus [
 
 	^ projectStatus
 ]
 
 { #category : #specs }
-CGOProjectPanel >> refreshUI [
+PBProjectPanel >> refreshUI [
 	self needRebuild: false.
 	self buildWithSpecLayout: (self retrieveSpec: spec selector).
 ]
 
 { #category : #specs }
-CGOProjectPanel >> retrieveSpec: aSelector [
+PBProjectPanel >> retrieveSpec: aSelector [
 
 	| layout |
 	
