@@ -2,7 +2,7 @@
 Calypso command providing a contextual menu to create a new (empty) Cargo project
 "
 Class {
-	#name : #CGOCreateProjectCommand,
+	#name : #PBCreateProjectCommand,
 	#superclass : #CGOClyCommand,
 	#instVars : [
 		'projectName'
@@ -11,32 +11,32 @@ Class {
 }
 
 { #category : #accessing }
-CGOCreateProjectCommand class >> canBeExecutedInContext: aToolContext [
+PBCreateProjectCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ aToolContext isProjectSelected not
 ]
 
 { #category : #accessing }
-CGOCreateProjectCommand class >> defaultMenuIconName [
+PBCreateProjectCommand class >> defaultMenuIconName [
 	^#configNew
 ]
 
 { #category : #activation }
-CGOCreateProjectCommand class >> systemBrowserMenuActivator [
+PBCreateProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemFor: ClyProjectContextOfFullBrowser 
 ]
 
 { #category : #activation }
-CGOCreateProjectCommand class >> systemBrowserShortcutActivator [
+PBCreateProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
 	^ CmdShortcutActivation by: $n meta, $p meta for: ClyProjectContextOfFullBrowser
 ]
 
 { #category : #activation }
-CGOCreateProjectCommand class >> systemBrowserToolbarActivator [
+PBCreateProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
@@ -44,21 +44,12 @@ CGOCreateProjectCommand class >> systemBrowserToolbarActivator [
 ]
 
 { #category : #initialization }
-CGOCreateProjectCommand >> defaultMenuItemName [
+PBCreateProjectCommand >> defaultMenuItemName [
 	^ 'New project'
 ]
 
 { #category : #execution }
-CGOCreateProjectCommand >> execute [
-	packageManager createProjectNamed: projectName
-]
-
-{ #category : #execution }
-CGOCreateProjectCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+PBCreateProjectCommand >> execute [
 	
-	projectName := UIManager default 
-		request: 'Project name' 
-		initialAnswer: ''.
-	projectName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ].
+	PBCreateProjectDialog new openDialogWithSpec
 ]
