@@ -138,15 +138,6 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 		equals: '{
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
-	#units : [
-		{
-			#name : #Counter-UI-Spec,
-			#description : ''Core package with the counter UI based on Spec.'',
-			#dependencies : [
-				#''Counter::Counter-Core''
-			]
-		}
-	],
 	#externalProjects : [
 		{
 			#name : ''pharo-counter'',
@@ -156,6 +147,15 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 				#version : ''master''
 			},
 			#version : ''''
+		}
+	],
+	#units : [
+		{
+			#name : #Counter-UI-Spec,
+			#description : ''Core package with the counter UI based on Spec.'',
+			#dependencies : [
+				#''Counter::Counter-Core''
+			]
 		}
 	]
 }'
