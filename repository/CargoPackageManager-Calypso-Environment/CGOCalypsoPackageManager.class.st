@@ -36,9 +36,9 @@ CGOCalypsoPackageManager >> cargoRegistry: aRegistry [
 
 { #category : #operations }
 CGOCalypsoPackageManager >> createProjectNamed: aString [
-	| project |
-	project := PBProject named: aString asSymbol.
-	self cargoRegistry register: project
+
+	^ self cargoRegistry newProjectNamed: aString
+
 ]
 
 { #category : #accessing }

@@ -95,6 +95,11 @@ CGOResolvedDependency >> printOn: aStream [
 ]
 
 { #category : #accessing }
+CGOResolvedDependency >> projectName [
+	^ resolution name
+]
+
+{ #category : #accessing }
 CGOResolvedDependency >> resolution [
 	^ resolution
 ]
@@ -102,6 +107,14 @@ CGOResolvedDependency >> resolution [
 { #category : #accessing }
 CGOResolvedDependency >> resolution: aResolution [ 
 	resolution := aResolution
+]
+
+{ #category : #resolving }
+CGOResolvedDependency >> resolveWith: aCGOResolvedProject [ 
+	
+	resolution := aCGOResolvedProject.
+	dependencyState := CGONonConflictingDependencyState new.
+
 ]
 
 { #category : #resolving }

@@ -7,7 +7,8 @@ Class {
 		'scope',
 		'registry',
 		'query',
-		'project'
+		'project',
+		'browser'
 	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
@@ -40,6 +41,15 @@ PBAbstractCalypsoTest >> contextClass [
 	^ ClyProjectContextOfFullBrowser
 ]
 
+{ #category : #utilities }
+PBAbstractCalypsoTest >> expandProjectNamed: aString [ 
+	
+	| items datasource |
+	datasource := browser packageView table dataSource.
+	items := datasource findItemsWhere: [ :each | each name = aString ].
+	items do: [ :anItem | datasource expand: anItem ].
+]
+
 { #category : #tests }
 PBAbstractCalypsoTest >> findPackage: aName [
 	| projectUI |
@@ -50,6 +60,18 @@ PBAbstractCalypsoTest >> findPackage: aName [
 
 ]
 
+{ #category : #utility }
+PBAbstractCalypsoTest >> findPackageInBrowser: aString [ 
+	
+	| datasource column |
+	
+	datasource := browser packageView table dataSource.
+	column := browser packageView table columns at: 1.
+	
+	^ ((1 to: datasource numberOfRows) collect: [ :i | 
+		datasource cellColumn: column row: i]) detect: [ :anItem | anItem label contents = aString ]
+]
+
 { #category : #tests }
 PBAbstractCalypsoTest >> findProject: aName [
 
@@ -57,18 +79,30 @@ PBAbstractCalypsoTest >> findProject: aName [
 ]
 
 { #category : #running }
+PBAbstractCalypsoTest >> openBrowser [
+	browser := ClyFullBrowser
+		on: navigationEnvironment
+		systemScope: navigationEnvironment systemScope.
+	browser switchToProjects.
+	browser open
+]
+
+{ #category : #running }
 PBAbstractCalypsoTest >> setUp [
 	super setUp.
-	
 	registry := CGOPackageRegistry new.
-	
 	systemEnvironment := ClySystemEnvironment new.
-	systemEnvironment projectManager registerProjectManager: (CGOCalypsoPackageManager forRegistry: registry). 
-	
-	navigationEnvironment := ClyNavigationEnvironment overSystemEnvironment: systemEnvironment.
-	scope := navigationEnvironment systemScope.
 
+	systemEnvironment projectManager
+		registerProjectManager: (CGOCalypsoPackageManager forRegistry: registry).
+
+	navigationEnvironment := ClyNavigationEnvironment
+		overSystemEnvironment: systemEnvironment.
+
+	scope := navigationEnvironment systemScope.
 	query := PBAllPakbotProjects sortedFrom: scope.
+
+	
 ]
 
 { #category : #tests }
@@ -76,5 +110,6 @@ PBAbstractCalypsoTest >> tearDown [
 
 	super tearDown.
 
+	browser ifNotNil: [ browser close. browser := nil. ].
 	project ifNotNil: [ project installedSystemPackages do: #removeFromSystem ].
 ]
