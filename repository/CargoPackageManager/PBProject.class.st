@@ -357,6 +357,9 @@ PBProject >> newNotLoadedPackage: aString [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 
 	packages add: unit.
+	
+	CGOProjectPartsChanged announceOnProject: self.
+	
 	^ unit
 ]
 
@@ -477,7 +480,9 @@ PBProject >> removeDependency: aDependency [
 PBProject >> removePackage: aPBPackage [ 
 	
 	packages remove: aPBPackage.
-	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ]
+	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ].
+	
+	CGOProjectPartsChanged announceOnProject: self.
 ]
 
 { #category : #removing }

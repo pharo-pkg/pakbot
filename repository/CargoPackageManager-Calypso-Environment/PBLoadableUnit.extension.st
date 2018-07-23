@@ -1,7 +1,7 @@
 Extension { #name : #PBLoadableUnit }
 
 { #category : #'*CargoPackageManager-Calypso-Environment' }
-PBLoadableUnit classSide >> convertToCalypsoBrowserItem: aPackage [ 
+PBLoadableUnit class >> convertToCalypsoBrowserItem: aPackage [ 
 	^ClyBrowserItem named: aPackage packageName with: aPackage
 ]
 

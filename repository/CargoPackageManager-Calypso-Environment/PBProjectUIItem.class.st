@@ -48,6 +48,12 @@ PBProjectUIItem >> createNewPackageNamed: aString [
 	^ project createNewPackageNamed: aString 
 ]
 
+{ #category : #actions }
+PBProjectUIItem >> createPackageNamed: aString [ 
+	
+	^ project createPackageNamed: aString
+]
+
 { #category : #decorating }
 PBProjectUIItem >> decorateProblems: anItemCellMorph inContext: itemContext [
 	| button activator icon command |	
