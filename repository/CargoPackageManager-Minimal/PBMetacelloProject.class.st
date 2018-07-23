@@ -90,6 +90,11 @@ PBMetacelloProject >> fitsPlatformRequirements [
 	^ true "it should be managed by Metecello"
 ]
 
+{ #category : #accessing }
+PBMetacelloProject >> fullyQualifiedName [
+	^ self name
+]
+
 { #category : #testing }
 PBMetacelloProject >> hasPackage: aPackageName [
 	packageNames add: aPackageName.
@@ -132,12 +137,6 @@ PBMetacelloProject >> isInstalled [
 { #category : #testing }
 PBMetacelloProject >> isMetacelloProject [
 	^ true
-]
-
-{ #category : #querying }
-PBMetacelloProject >> isProvidedBy: anInstalledVersion [ 
-	
-	^ anInstalledVersion providesProject: self
 ]
 
 { #category : #'compatibility - package repository' }

@@ -56,17 +56,10 @@ CGOPackageListEditor >> assemblyIcon [
 ]
 
 { #category : #'private - displaying' }
-CGOPackageListEditor >> ballonTextFor: aPart [
-
-	aPart isInstalled ifFalse: [ ^ 'The dependency is not installed in the system' ].
-	^ nil
-]
-
-{ #category : #'private - displaying' }
 CGOPackageListEditor >> displayFor: aDependency [
 
 	^ aDependency displayString asMorph
-		setBalloonText: (self ballonTextFor: aDependency);
+		setBalloonText: aDependency balloonText;
 		yourself
 ]
 
@@ -78,13 +71,8 @@ CGOPackageListEditor >> editButton [
 { #category : #'private - displaying' }
 CGOPackageListEditor >> iconForPackage: aDependency [
 
-	aDependency isInstalled ifFalse: [ ^ self notInstalledIcon ].	
-	^ self unitIcon
-	"^ (ongoingPackageVersion project packageUnitNames includes: part targetedPackage)
-		ifTrue: [ self unitIcon ]
-		ifFalse: [ (ongoingPackageVersion project virtualPackages anySatisfy: [ :virtual | virtual packageName = part targetedPackage ])
-			ifTrue: [ self virtualPackageIcon ]
-			ifFalse: [ self assemblyIcon ] ]"
+	^ self iconNamed: aDependency iconName.
+
 ]
 
 { #category : #initialization }
@@ -142,7 +130,7 @@ CGOPackageListEditor >> label [
 CGOPackageListEditor >> morphIconFor: aPart [
 
 	^ (self iconForPackage: aPart) asMorph
-		 setBalloonText: (self ballonTextFor: aPart)
+		 setBalloonText: aPart balloonText
 ]
 
 { #category : #datasource }
@@ -192,11 +180,6 @@ CGOPackageListEditor >> selectionChanged: ann [
 	removeButton enabled: ann newSelectedRowIndexes notEmpty.
 	editButton enabled: ann newSelectedRowIndexes notEmpty.
 
-]
-
-{ #category : #'private - displaying' }
-CGOPackageListEditor >> unitIcon [
-	^ self iconNamed: #packageIcon
 ]
 
 { #category : #'private - displaying' }

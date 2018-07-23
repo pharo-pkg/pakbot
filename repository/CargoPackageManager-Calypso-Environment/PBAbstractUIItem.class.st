@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PBAbstractUIItem class >> defaultSortFunctionForCalypso [
-	^ClySortByNameFunction ascending
+	^ [ :a :b | true ]
 ]
 
 { #category : #queries }
@@ -16,17 +16,17 @@ PBAbstractUIItem class >> prepareProjectItemsQueryFrom: aProjectItem in: aNaviga
 			sortedFrom: (PBProjectItemScope of: aProjectItem in: aNavigationEnvironment)
 ]
 
+{ #category : #testing }
+PBAbstractUIItem >> classes [
+	
+	^ #()
+]
+
 { #category : #decorating }
 PBAbstractUIItem >> decorate: aClyBrowserItem [
 
 	self isEmpty
 		ifFalse: [ aClyBrowserItem markWithChildrenOf: PBAbstractUIItem ]
-]
-
-{ #category : #decorating }
-PBAbstractUIItem >> decorate: anItemCellMorph inContext: itemContext [
-
-	self subclassResponsibility
 ]
 
 { #category : #announcements }
@@ -43,6 +43,12 @@ PBAbstractUIItem >> isEmpty [
 
 { #category : #accessing }
 PBAbstractUIItem >> items [ 
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+PBAbstractUIItem >> name [
+	
 	^ self subclassResponsibility
 ]
 

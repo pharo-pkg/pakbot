@@ -83,7 +83,7 @@ PBMetacelloProjectDependency >> initializeWithName: projectName repositoryUrl: u
 { #category : #'querying - installed' }
 PBMetacelloProjectDependency >> isInstalled [
 	
-	^ project registry isInstalled: self
+	^ (project registry isInstalled: self) or: [ self isInstalledInMetacello ]
 ]
 
 { #category : #'querying - installed' }
@@ -99,12 +99,6 @@ PBMetacelloProjectDependency >> isMetacelloConfiguration [
 { #category : #testing }
 PBMetacelloProjectDependency >> isMetacelloProjectDependency [
 	^ true
-]
-
-{ #category : #'querying - installed' }
-PBMetacelloProjectDependency >> isProvidedBy: aInstalledVersion [
-
-	^ (aInstalledVersion providesProject: self) or: [ self isInstalledInMetacello ]
 ]
 
 { #category : #accessing }

@@ -102,12 +102,6 @@ PBPackage >> isInstalled [
 	^ project registry isInstalled: self
 ]
 
-{ #category : #'querying - Installed' }
-PBPackage >> isProvidedBy: aPackageUnit [
-
-	^ aPackageUnit providesPackage: self
-]
-
 { #category : #testing }
 PBPackage >> isUnit [
 	^ true
@@ -121,12 +115,6 @@ PBPackage >> platformRequirements [
 { #category : #updating }
 PBPackage >> platformRequirements: aListOfSymbols [ 
 	platformRequirements := aListOfSymbols
-]
-
-{ #category : #'testing - installing' }
-PBPackage >> providesPackage: aPackageDependency [ 
-	
-	^ self name = aPackageDependency name and: [ aPackageDependency satisfyConstraints: self version ]
 ]
 
 { #category : #accessing }

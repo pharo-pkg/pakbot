@@ -95,7 +95,9 @@ CGOPackageRegistry >> installedPackages [
 { #category : #quering }
 CGOPackageRegistry >> isInstalled: aPackageDependency [ 
 	
-	^ installedPackages anySatisfy: [ :each | aPackageDependency isProvidedBy: each  ]
+	| found |
+	found := self packageNamed: aPackageDependency fullyQualifiedName ifAbsent: [ ^ false ].
+	^ aPackageDependency satisfyConstraints: found version 
 ]
 
 { #category : #testing }
@@ -138,7 +140,7 @@ CGOPackageRegistry >> packageNamed: aName [
 { #category : #acccessing }
 CGOPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 	^ installedPackages 
-		detect: [ :package | package name = aName asSymbol ]
+		detect: [ :package | package fullyQualifiedName = aName ]
 		ifNone: absentBlock
 ]
 

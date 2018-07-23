@@ -179,13 +179,6 @@ PBLoadableUnit >> projectName [
 	^ self project name
 ]
 
-{ #category : #'querying - installed' }
-PBLoadableUnit >> providesProject: aProjectDependency [ 
-	
-	"A package does not provide a project"
-	^ false
-]
-
 { #category : #accessing }
 PBLoadableUnit >> registry: aCGOPackageRegistry [ 
 	"Do nothing by default. Only the project keeps a reference to the registry"

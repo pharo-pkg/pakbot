@@ -16,6 +16,23 @@ CGOAbstractDependency >> fitsPlatformRequirements [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CGOAbstractDependency >> fullyQualifiedName [
+	^ self name
+]
+
+{ #category : #testing }
+CGOAbstractDependency >> isInstalled [	
+	"Returns true if the exact version is installed"
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+CGOAbstractDependency >> isOutSync [	
+	"Returns true if there is a version of the project installed but not the correct version"
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 CGOAbstractDependency >> isSolved [
 	
