@@ -6,7 +6,7 @@ Class {
 
 { #category : #utils }
 CGOOngoingDependencyStatusTest >> createProjectDependency [
-	^ CGOCargoProjectDependency named: 'AnotherProject' version: '=0.0.0-N/A'
+	^ PBPakbotProjectDependency named: 'AnotherProject' version: '=0.0.0-N/A'
 		
 ]
 

@@ -18,11 +18,6 @@ CGOVcsSerializedPackageUnit class >> from: aCGOOngoingPackageUnit [
 		yourself
 ]
 
-{ #category : #ston }
-CGOVcsSerializedPackageUnit class >> stonName [
-	^ #OngoingPackageUnit
-]
-
 { #category : #converting }
 CGOVcsSerializedPackageUnit >> asOngoingPackage [
 	| unit |

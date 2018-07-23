@@ -15,11 +15,6 @@ CGOVcsSerializedProject class >> from: aCGOOngoingProject [
 		yourself
 ]
 
-{ #category : #'ston-core' }
-CGOVcsSerializedProject class >> stonName [
-	^ #OngoingProject
-]
-
 { #category : #converting }
 CGOVcsSerializedProject >> asOngoingPackage [
 	^ PBProject fromVcsSerializedProject: self
@@ -87,7 +82,7 @@ CGOVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
 CGOVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [ 
 	| repository |
 	repository := self gitRepositoryFrom: (aDictionary at: #repository).
-	^ CGOCargoProjectDependency 
+	^ PBPakbotProjectDependency 
 		named: (aDictionary at: #name) 
 		repositoryUrl: repository repositoryUrl
 		version: (aDictionary at: #version)

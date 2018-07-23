@@ -7,21 +7,9 @@ Class {
 { #category : #tests }
 CGOProjectLoadingTest >> tearDown [
 
-	| configuration metacelloRegistration |
 	super tearDown.
-	
-	"We fetch the loaded configuration and remove it"
-	configuration := Smalltalk
-		at: 'ConfigurationOfCargoTestExample' asSymbol
-		ifAbsent: [ ^ self ].
-		
-	metacelloRegistration := MetacelloProjectRegistration registry configurationRegistry at: configuration name.
-	metacelloRegistration configurationProjectSpec version spec packages
-		do: [ :packageSpec | | packageOrNil |
-			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
-			packageOrNil ifNotNil: #removeFromSystem ].
-	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
-	configuration package removeFromSystem.
+	self unloadMetacelloConfiguration.
+	self unloadPakbotProject.
 ]
 
 { #category : #tests }
@@ -75,7 +63,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 	testRegistry := CGOPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -93,7 +81,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV1Lo
 	| projectOne projectTwo testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -124,7 +112,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV2Lo
 	| projectOne projectTwo testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (CGOCargoProjectDependency
+	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
 		version: '=0.0.0-N/A').
 		
@@ -201,4 +189,52 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV2LoadsCorre
 	self assert: (Smalltalk globals at: 'ClassInPackageB' asSymbol) version equals: 2.
 	self assert: (Smalltalk globals at: 'ClassInPackageC' asSymbol) version equals: 2.
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 2.
+]
+
+{ #category : #tests }
+CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
+
+	| project testRegistry pakbotProjectDependency |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	pakbotProjectDependency := PBPakbotProjectDependency
+		named: #Counter 
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
+		version: 'master'.
+	
+	project addDependency: pakbotProjectDependency.
+	project load.
+	
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').
+	
+	self assert: (Smalltalk globals at: 'Counter' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'CounterTest' asSymbol) version equals: 1.
+]
+
+{ #category : #tests }
+CGOProjectLoadingTest >> unloadMetacelloConfiguration [
+	
+	"We fetch the loaded configuration and remove it"
+	| configuration metacelloRegistration |
+	configuration := Smalltalk
+		at: 'ConfigurationOfCargoTestExample' asSymbol
+		ifAbsent: [ ^ self ].
+		
+	metacelloRegistration := MetacelloProjectRegistration registry configurationRegistry at: configuration name.
+	metacelloRegistration configurationProjectSpec version spec packages
+		do: [ :packageSpec | | packageOrNil |
+			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
+			packageOrNil ifNotNil: #removeFromSystem ].
+	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
+	configuration package removeFromSystem.
+]
+
+{ #category : #tests }
+CGOProjectLoadingTest >> unloadPakbotProject [
+	
+	#(#'Counter-Core' #'Counter-Tests') do: [ :each |
+		(RPackageOrganizer default includesPackageNamed: each)
+			ifTrue: [ (RPackageOrganizer default packageNamed: each) removeFromSystem ] ]
 ]

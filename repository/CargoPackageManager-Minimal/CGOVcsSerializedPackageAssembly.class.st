@@ -17,11 +17,6 @@ CGOVcsSerializedPackageAssembly class >> from: aCGOOngoingPackageAssembly [
 		yourself
 ]
 
-{ #category : #ston }
-CGOVcsSerializedPackageAssembly class >> stonName [
-	^ #OngoingPackageAssembly
-]
-
 { #category : #converting }
 CGOVcsSerializedPackageAssembly >> asOngoingPackage [
 	"avoid nil values when a collection is expected"

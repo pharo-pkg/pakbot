@@ -234,5 +234,5 @@ CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsen
 		location: self iceRepositoryLocation;
 		createAndClone.
 
-	self should: [ repository projectMetadataStonString ] raise: FileDoesNotExistException
+	self should: [ repository project ] raise: PBProjectMetadataNotFound
 ]

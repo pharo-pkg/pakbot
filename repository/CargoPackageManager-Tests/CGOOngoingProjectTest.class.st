@@ -21,7 +21,7 @@ CGOOngoingProjectTest >> testAddingDependencyPerformAnnouncement [
 				ann project = ongoingProject
 					ifTrue: [ announced := true ] ].
 		ongoingProject
-			addDependency: (CGOCargoProjectDependency named: 'AnotherProject' version: '=1.0.0').
+			addDependency: (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').
 		self assert: announced 
 	] ensure: [ SystemAnnouncer uniqueInstance removeSubscription: subscription ]
 ]
@@ -58,7 +58,7 @@ CGOOngoingProjectTest >> testCanGetMetacelloProjects [
 CGOOngoingProjectTest >> testRemovingDependencyPerformAnnouncement [
 	| announced subscription dep |
 
-	dep := (CGOCargoProjectDependency named: 'AnotherProject' version: '=1.0.0').
+	dep := (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').
 	ongoingProject addDependency: dep.
 
 	[ 
