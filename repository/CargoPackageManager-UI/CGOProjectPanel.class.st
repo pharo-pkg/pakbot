@@ -4,14 +4,14 @@ I also allow to edit these meta-data.
 "
 Class {
 	#name : #CGOProjectPanel,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'overview',
 		'ongoingPackageUnit',
 		'dependencies',
 		'projectStatus'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }

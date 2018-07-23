@@ -7,13 +7,13 @@ I mainly interact with OnGoingPackage[Unit/Assembly]
 "
 Class {
 	#name : #CGOPackagePanel,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'overview',
 		'ongoingPackageUnit',
 		'detailsView'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #opening }

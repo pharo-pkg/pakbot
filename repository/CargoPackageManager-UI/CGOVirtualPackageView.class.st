@@ -3,12 +3,12 @@ Simple editor for a virtual package.
 "
 Class {
 	#name : #CGOVirtualPackageView,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'packageOverview',
 		'virtualPackage'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }

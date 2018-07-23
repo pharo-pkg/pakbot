@@ -4,13 +4,13 @@ It is a composition of a package overview and a package dependency view
 "
 Class {
 	#name : #CGOPackageUnitView,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'packageOverview',
 		'ongoingPackageUnit',
 		'detailsView'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }

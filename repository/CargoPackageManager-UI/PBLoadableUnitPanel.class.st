@@ -2,18 +2,18 @@
 Common super class for PPM views woth some utility methods
 "
 Class {
-	#name : #CGOPackageView,
+	#name : #PBLoadableUnitPanel,
 	#superclass : #ComposablePresenter,
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #defaults }
-CGOPackageView class >> labelSize [
+PBLoadableUnitPanel class >> labelSize [
 	^ 75
 ]
 
 { #category : #'building widgets' }
-CGOPackageView >> newTextInputField: textInputFieldModelName [
+PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName [
 	self
 		instVarNamed: textInputFieldModelName  
 		put: (self newTextInput

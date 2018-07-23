@@ -7,7 +7,7 @@ I mainly interacte with OnGoingPackage[Unit/Assembly]
 "
 Class {
 	#name : #CGOPackageOverview,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'ongoingPackageVersion',
 		'nameLabel',
@@ -19,7 +19,7 @@ Class {
 		'descriptionLabel',
 		'descriptionText'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }
