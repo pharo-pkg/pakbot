@@ -40,7 +40,7 @@ PBPackage >> allDependencies [
 
 { #category : #converting }
 PBPackage >> asPackageDependency [
-	^ (self packageName -> {('=', self version asString)}) asPackageDependency
+	^ (self name -> {('=', self version asString)}) asPackageDependency
 		project: project;
 		yourself
 ]
@@ -49,6 +49,12 @@ PBPackage >> asPackageDependency [
 PBPackage >> asVcsSerializedPackageUnit [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedPackageUnit from: self
+]
+
+{ #category : #'private-loading' }
+PBPackage >> basicLoad [
+
+	self repository loadPackageNamed: self name
 ]
 
 { #category : #accessing }
@@ -114,7 +120,7 @@ PBPackage >> platformRequirements: aListOfSymbols [
 { #category : #'testing - installing' }
 PBPackage >> providesPackage: aPackageDependency [ 
 	
-	^ self packageName = aPackageDependency packageName and: [ aPackageDependency satisfyConstraints: self version ]
+	^ self name = aPackageDependency name and: [ aPackageDependency satisfyConstraints: self version ]
 ]
 
 { #category : #accessing }

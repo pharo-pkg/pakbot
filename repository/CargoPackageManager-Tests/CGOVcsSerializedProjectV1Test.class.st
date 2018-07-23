@@ -12,14 +12,14 @@ CGOVcsSerializedProjectV1Test class >> resources [
 { #category : #'test data' }
 CGOVcsSerializedProjectV1Test >> counterUiProject [
 	| project |
-	project := (CGOOngoingProject named: #'Counter-UI')
+	project := (PBProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		addExternalCargoProject:
 			(PBPakbotProjectDependency
 				named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master');
 		registry: CGOPackageRegistry new;
 		yourself.
-	(project newPackageUnit: #'Counter-UI-Spec')
+	(project createPackageNamed: #'Counter-UI-Spec')
 		description: 'Core package with the counter UI based on Spec.';
 		addDependencyOn: #'Counter::Counter-Core';
 		yourself.
@@ -74,6 +74,16 @@ CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 }'
 ]
 
+{ #category : #'test data' }
+CGOVcsSerializedProjectV1Test >> tearDown [
+
+	| counterUIPackage |
+	counterUIPackage := #'Counter-UI-Spec' asPackageIfAbsent: [ ^ self ].
+	counterUIPackage mcWorkingCopy unload.
+	
+	super tearDown
+]
+
 { #category : #tests }
 CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 	| project packageUnit |
@@ -103,7 +113,7 @@ CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
 	| project dependency externalProject |
 	
-	project := CGOOngoingProject fromStonString: self counterUiStonString.
+	project := PBProject fromStonString: self counterUiStonString.
 	
 	dependency := project packageUnits anyOne dependencies first.
 	self 

@@ -57,12 +57,10 @@ PBIceCargoProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
 
 { #category : #tests }
 PBIceCargoProjectTest >> testNoChangeDetectedInPakbotProjectMetatadataWhenMetadataUnchanged [
-	| project diff |
+	| project |
 
 	project := IcePakbotProject onRepository: repository project: pakbotProject.
 	repository workingCopy basicSetProject: project.
 	
-	diff := IceDiff from: repository workingCopy to: repository headCommit.
-
-	self assert: diff isEmpty.
+	self assert: repository workingCopyDiff isEmpty.
 ]

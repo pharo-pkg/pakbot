@@ -13,9 +13,10 @@ Class {
 		'assemblies',
 		'virtualPackages',
 		'registry',
-		'authors'
+		'authors',
+		'unitNames'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #example }
@@ -154,7 +155,11 @@ CGOProject >> packages [
 
 { #category : #printing }
 CGOProject >> printOn: aStream [
-	aStream << name << '@' << (version asString) << ' (project)'
+	aStream
+		<< self class name
+		<< '('
+		<< name << '@' << (version asString)
+		<< ')'
 ]
 
 { #category : #accessing }

@@ -145,6 +145,13 @@ PBProject >> authors [
 	^ #()
 ]
 
+{ #category : #'private-loading' }
+PBProject >> basicLoad [
+	registry registerProject: self.
+	self packageUnits do: #basicLoad.
+	CGOProjectLoaded announceOnProject: self. 
+]
+
 { #category : #accessing }
 PBProject >> cargoProjectDependencies [
 	^ externalProjects reject: #isMetacelloProjectDependency
@@ -261,6 +268,7 @@ PBProject >> initializeFromProject: aCGOProject [
 { #category : #initialization }
 PBProject >> initializeWithProjectName: aProjectName [
 	
+	self initialize.
 	name := aProjectName.
 	packages := Set new.
 	assemblies := Set new.

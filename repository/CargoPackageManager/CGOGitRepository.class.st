@@ -12,9 +12,10 @@ Class {
 	#superclass : #CGOSourceRepository,
 	#instVars : [
 		'iceRepository',
-		'version'
+		'version',
+		'subdirectory'
 	],
-	#category : 'CargoPackageManager-Loading'
+	#category : #'CargoPackageManager-Loading'
 }
 
 { #category : #example }
@@ -84,9 +85,8 @@ CGOGitRepository >> fetchVersion: aString [
 		ifNotEmpty: [ iceRepository revparse: aString ].
 
 
-	project := PBProject named: commitish project projectName.
+	project := PBProject fromStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
-	project version: (SemanticVersion fromString: '0-' , (aString ifEmpty: ['N/A'])).
 	^ project
 ]
 

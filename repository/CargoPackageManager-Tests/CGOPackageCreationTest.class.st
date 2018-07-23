@@ -18,7 +18,7 @@ CGOPackageCreationTest >> setUp [
 	registry register: project.
 	
 	systemPackageOrganizer := RPackageOrganizer new.
-	project systemPackageOrganizer: systemPackageOrganizer.
+	registry systemPackageOrganizer: systemPackageOrganizer.
 ]
 
 { #category : #tests }
