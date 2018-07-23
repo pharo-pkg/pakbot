@@ -71,18 +71,6 @@ PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [
 	repository := aCGOGitRepository
 ]
 
-{ #category : #'querying - installed' }
-PBPakbotProjectDependency >> isInstalled [
-	
-	^ project registry isInstalled: self
-]
-
-{ #category : #'querying - installed' }
-PBPakbotProjectDependency >> isProvidedBy: aInstalledVersion [ 
-
-	^ aInstalledVersion providesProject: self
-]
-
 { #category : #accessing }
 PBPakbotProjectDependency >> name [
 	^ name

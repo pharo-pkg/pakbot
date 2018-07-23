@@ -16,6 +16,20 @@ CGOBrowserProjectEditorTool class >> methodTabActivation [
 ]
 
 { #category : #accessing }
+CGOBrowserProjectEditorTool class >> methodTabActivationForDependencies [
+	<classAnnotation>
+	
+	^ClyTabActivationStrategy for: PBDependencyUIItem asCalypsoItemContext 
+]
+
+{ #category : #accessing }
+CGOBrowserProjectEditorTool class >> methodTabActivationForDependenciesGroup [
+	<classAnnotation>
+	
+	^ClyTabActivationStrategy for: PBDependenciesUIGroup asCalypsoItemContext 
+]
+
+{ #category : #accessing }
 CGOBrowserProjectEditorTool class >> tabOrder [
 	^ 0
 ]

@@ -42,12 +42,24 @@ PBAbstractCalypsoTest >> contextClass [
 ]
 
 { #category : #utilities }
-PBAbstractCalypsoTest >> expandProjectNamed: aString [ 
+PBAbstractCalypsoTest >> expandNodeNamed: aString [ 
 	
 	| items datasource |
-	datasource := browser packageView table dataSource.
+	datasource := browser packageView table dataSource.	
 	items := datasource findItemsWhere: [ :each | each name = aString ].
-	items do: [ :anItem | datasource expand: anItem ].
+	items do: [ :each | each expand ].
+]
+
+{ #category : #utility }
+PBAbstractCalypsoTest >> findChildInBrowser: aString [ 
+	
+	| datasource column |
+	
+	datasource := browser packageView table dataSource.
+	column := browser packageView table columns at: 1.
+	
+	^ ((1 to: datasource numberOfRows) collect: [ :i | 
+		datasource cellColumn: column row: i]) detect: [ :anItem | anItem label contents beginsWith: aString ] ifNone: [ nil ]
 ]
 
 { #category : #tests }
@@ -58,18 +70,6 @@ PBAbstractCalypsoTest >> findPackage: aName [
 	^ projectUI items detect: [ :each | each name = aName ] ifNone: [ nil ]
 	
 
-]
-
-{ #category : #utility }
-PBAbstractCalypsoTest >> findPackageInBrowser: aString [ 
-	
-	| datasource column |
-	
-	datasource := browser packageView table dataSource.
-	column := browser packageView table columns at: 1.
-	
-	^ ((1 to: datasource numberOfRows) collect: [ :i | 
-		datasource cellColumn: column row: i]) detect: [ :anItem | anItem label contents = aString ]
 ]
 
 { #category : #tests }
