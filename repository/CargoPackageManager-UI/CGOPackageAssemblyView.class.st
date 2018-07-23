@@ -54,7 +54,7 @@ CGOPackageAssemblyView >> initialExtent [
 
 { #category : #initialization }
 CGOPackageAssemblyView >> initializeWidgets [
-	packageOverview := CGOPackageOverview newOn: ongoingPackageAssembly owner: self.
+	packageOverview := PBLoadableUnitOverview newOn: ongoingPackageAssembly owner: self.
 	partsView := CGOPackageAssemblyPartsView newOn: ongoingPackageAssembly owner: self.
 ]
 

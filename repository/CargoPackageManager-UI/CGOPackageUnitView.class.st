@@ -59,7 +59,7 @@ CGOPackageUnitView >> initialExtent [
 
 { #category : #initialization }
 CGOPackageUnitView >> initializeWidgets [
-	packageOverview := CGOPackageOverview newOn: ongoingPackageUnit owner: self.
+	packageOverview := PBLoadableUnitOverview newOn: ongoingPackageUnit owner: self.
 	detailsView := CGOPackageDetailsView newOn: ongoingPackageUnit owner: self.
 ]
 

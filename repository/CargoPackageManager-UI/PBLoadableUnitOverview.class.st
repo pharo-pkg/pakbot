@@ -6,7 +6,7 @@ I mainly interacte with OnGoingPackage[Unit/Assembly]
 
 "
 Class {
-	#name : #CGOPackageOverview,
+	#name : #PBLoadableUnitOverview,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'ongoingPackageVersion',
@@ -23,7 +23,7 @@ Class {
 }
 
 { #category : #specs }
-CGOPackageOverview class >> defaultSpec [
+PBLoadableUnitOverview class >> defaultSpec [
 	^ SpecLayout composed
 		newColumn: [ : column | 
 			column
@@ -47,17 +47,17 @@ CGOPackageOverview class >> defaultSpec [
 ]
 
 { #category : #example }
-CGOPackageOverview class >> example [
+PBLoadableUnitOverview class >> example [
 	^ self openOn: (PBPackage example)
 ]
 
 { #category : #example }
-CGOPackageOverview class >> example2 [
+PBLoadableUnitOverview class >> example2 [
 	^ self openWithMinimalSpecOn: (PBPackage example)
 ]
 
 { #category : #specs }
-CGOPackageOverview class >> minimalSpec [
+PBLoadableUnitOverview class >> minimalSpec [
 	^ SpecLayout composed
 		newColumn: [ : column | 
 			column
@@ -71,41 +71,41 @@ CGOPackageOverview class >> minimalSpec [
 ]
 
 { #category : #'instance creation' }
-CGOPackageOverview class >> newOn: anOngoingPackageVersion owner: owner [
+PBLoadableUnitOverview class >> newOn: anOngoingPackageVersion owner: owner [
 	^ self basicNew
 		initializeWith: anOngoingPackageVersion;
 		yourself
 ]
 
 { #category : #opening }
-CGOPackageOverview class >> openOn: anOngoingPackageVersion [
+PBLoadableUnitOverview class >> openOn: anOngoingPackageVersion [
 	(self newOn: anOngoingPackageVersion owner: nil)
 		openWithSpec
 ]
 
 { #category : #opening }
-CGOPackageOverview class >> openWithMinimalSpecOn: anOngoingPackageVersion [
+PBLoadableUnitOverview class >> openWithMinimalSpecOn: anOngoingPackageVersion [
 	(self newOn: anOngoingPackageVersion owner: nil)
 		openWithSpec: #minimalSpec
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> descriptionLabel [
+PBLoadableUnitOverview >> descriptionLabel [
 	^ descriptionLabel
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> descriptionText [
+PBLoadableUnitOverview >> descriptionText [
 	^ descriptionText
 ]
 
 { #category : #initialization }
-CGOPackageOverview >> initialExtent [
+PBLoadableUnitOverview >> initialExtent [
 	 ^ (900.0@350.0)
 ]
 
 { #category : #initialization }
-CGOPackageOverview >> initializePresenter [
+PBLoadableUnitOverview >> initializePresenter [
 	nameInputField acceptBlock: [ self error: 'Project name should not change' ].
 	versionInputField acceptBlock: [ self updateVersion ].
 	repositoryInputField acceptBlock: [ self updateRepository ].
@@ -114,7 +114,7 @@ CGOPackageOverview >> initializePresenter [
 ]
 
 { #category : #initialization }
-CGOPackageOverview >> initializeWidgets [
+PBLoadableUnitOverview >> initializeWidgets [
 	(nameLabel := self newLabel)
 		label: 'Name:'.
 	self newTextInputField: #nameInputField.
@@ -134,24 +134,24 @@ CGOPackageOverview >> initializeWidgets [
 ]
 
 { #category : #initialization }
-CGOPackageOverview >> initializeWith: anOngoingPackageUnit [
+PBLoadableUnitOverview >> initializeWith: anOngoingPackageUnit [
 	super initialize.
 	ongoingPackageVersion := anOngoingPackageUnit.
 	self refreshWidgetValues
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> nameInputField [
+PBLoadableUnitOverview >> nameInputField [
 	^ nameInputField
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> nameLabel [
+PBLoadableUnitOverview >> nameLabel [
 	^ nameLabel
 ]
 
 { #category : #initialization }
-CGOPackageOverview >> refreshWidgetValues [
+PBLoadableUnitOverview >> refreshWidgetValues [
 	nameInputField text: ongoingPackageVersion name.
 	versionInputField text: ongoingPackageVersion version asString.
 	ongoingPackageVersion isProject
@@ -161,32 +161,32 @@ CGOPackageOverview >> refreshWidgetValues [
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> repositoryInputField [
+PBLoadableUnitOverview >> repositoryInputField [
 	^ repositoryInputField
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> repositoryLabel [
+PBLoadableUnitOverview >> repositoryLabel [
 	^ repositoryLabel
 ]
 
 { #category : #updating }
-CGOPackageOverview >> updateDescription [
+PBLoadableUnitOverview >> updateDescription [
 	ongoingPackageVersion description: descriptionText text asString
 ]
 
 { #category : #updating }
-CGOPackageOverview >> updateDescriptionWith: aString [
+PBLoadableUnitOverview >> updateDescriptionWith: aString [
 	ongoingPackageVersion description: aString printString
 ]
 
 { #category : #updating }
-CGOPackageOverview >> updateName [
+PBLoadableUnitOverview >> updateName [
 	ongoingPackageVersion name: nameInputField text asSymbol printString
 ]
 
 { #category : #updating }
-CGOPackageOverview >> updateRepository [
+PBLoadableUnitOverview >> updateRepository [
 	| repositoryString repository subdirectory |
 	repositoryString := repositoryInputField text.
 	(CGOSourceRepository isGitRepositoryUrl: repositoryString)
@@ -200,7 +200,7 @@ CGOPackageOverview >> updateRepository [
 ]
 
 { #category : #updating }
-CGOPackageOverview >> updateVersion [
+PBLoadableUnitOverview >> updateVersion [
 	| versionString |
 	versionString := versionInputField text.
 	versionString asSemanticVersion. "check the version string"
@@ -208,11 +208,11 @@ CGOPackageOverview >> updateVersion [
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> versionInputField [
+PBLoadableUnitOverview >> versionInputField [
 	^ versionInputField
 ]
 
 { #category : #accessing }
-CGOPackageOverview >> versionLabel [
+PBLoadableUnitOverview >> versionLabel [
 	^ versionLabel
 ]

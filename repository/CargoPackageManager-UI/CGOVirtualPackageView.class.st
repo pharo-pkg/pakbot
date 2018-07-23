@@ -49,7 +49,7 @@ CGOVirtualPackageView >> initialExtent [
 
 { #category : #initialization }
 CGOVirtualPackageView >> initializeWidgets [
-	packageOverview := CGOPackageOverview newOn: virtualPackage owner: self.
+	packageOverview := PBLoadableUnitOverview newOn: virtualPackage owner: self.
 ]
 
 { #category : #initialization }
