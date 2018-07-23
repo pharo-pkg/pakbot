@@ -31,7 +31,7 @@ CGOBrowserProjectEditorTool >> build [
 	managedProject := context lastSelectedProject.
 	
 	self 
-		addMorph: (CGOProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
+		addMorph: (PBProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
 		fullFrame: LayoutFrame identity
 ]
 

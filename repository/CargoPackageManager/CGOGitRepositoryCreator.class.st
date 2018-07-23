@@ -82,12 +82,12 @@ CGOGitRepositoryCreator >> commitishFrom: anUrl [
 CGOGitRepositoryCreator >> create [
 	| iceRepository |
 	iceRepository := IceRepositoryCreator new 
-			addRemote: url asString;
+			addRemote: url;
 			subdirectory: subdirectory;
 			location: location";
 			To fix: iceRepository".
 	^ CGOGitRepository 
-		url: self icebergUrl
+		url: url
 		repository: iceRepository
 		version: version
 ]
@@ -100,12 +100,9 @@ CGOGitRepositoryCreator >> createAndClone [
 ]
 
 { #category : #setting }
-CGOGitRepositoryCreator >> githubUrl: aStringOrUrl [ 
-	url := aStringOrUrl asUrl.
-	(self class isGitHubScheme: url) ifFalse: [ ^ self ].
-	
-	version := self commitishFrom: url.
-	url := ('git://git@github.com/' , url host , (url pathPrintString copyUpToLast: $:) , '.git') asZnUrl
+CGOGitRepositoryCreator >> githubUrl: aStringOrUrl [
+
+	self url: aStringOrUrl
 ]
 
 { #category : #converting }
@@ -140,28 +137,8 @@ CGOGitRepositoryCreator >> subdirectory: aString [
 
 { #category : #setting }
 CGOGitRepositoryCreator >> url: aStringOrUrl [
-	url := aStringOrUrl asZnUrl.
-	self validateUrl
-]
 
-{ #category : #validation }
-CGOGitRepositoryCreator >> validateEndsWithGit [
-	(url lastPathSegment endsWith: '.git')
-		ifFalse: [ CGOGitRepositoryValidationError signal: 'Missing ''.git'' suffix!' ]
-]
-
-{ #category : #validation }
-CGOGitRepositoryCreator >> validateScheme [
-	url scheme 
-		ifNil: [ CGOGitRepositoryValidationError signal: 'Url scheme must be provided!'].
-	(#('git' 'http' 'https') includes: url scheme)
-		ifFalse: [ CGOGitRepositoryValidationError signal: 'Scheme not supported: ', url scheme ]
-]
-
-{ #category : #validation }
-CGOGitRepositoryCreator >> validateUrl [
-	self validateScheme.
-	self validateEndsWithGit
+	url := aStringOrUrl asString
 ]
 
 { #category : #setting }

@@ -101,7 +101,7 @@ PBImportProjectFromGitPanel >> groupLabel: anObject [
 { #category : #accessing }
 PBImportProjectFromGitPanel >> icon [
 
-	^ self iconNamed: #dirtyPackage
+	^ self iconNamed: #git
 ]
 
 { #category : #initialization }

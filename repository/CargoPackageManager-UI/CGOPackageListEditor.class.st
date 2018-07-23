@@ -3,7 +3,7 @@ Abstract class showing a list of packages and allowing to add/remove/edit elemen
 "
 Class {
 	#name : #CGOPackageListEditor,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'ongoingPackageVersion',
 		'packageTree',
@@ -12,7 +12,7 @@ Class {
 		'editButton',
 		'removeButton'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }

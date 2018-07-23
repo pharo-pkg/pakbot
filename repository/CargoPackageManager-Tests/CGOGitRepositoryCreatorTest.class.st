@@ -8,7 +8,7 @@ Class {
 CGOGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/pharo-counter:master';
+		githubUrl: 'git@github.com:demarey/pharo-counter.git';
 		create.
 
 	self 	
@@ -16,7 +16,7 @@ CGOGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 		equals: CGOGitRepository.
 	self 
 		assert: repository iceRepository remote url
-		equals: 'git://git@github.com/demarey/pharo-counter.git'
+		equals: 'git@github.com:demarey/pharo-counter.git'
 ]
 
 { #category : #tests }
@@ -80,14 +80,4 @@ CGOGitRepositoryCreatorTest >> testCanCreateRepositoryFromSshUrlWithNoProtocol [
 	self 
 		assert: repository repositoryUrl
 		equals: 'git://git@github.com/demarey/pharo-counter.git'.
-]
-
-{ #category : #tests }
-CGOGitRepositoryCreatorTest >> testUrlValidationFailsIfDoesNotEndWithDotGit [
-	self 
-		should: [ CGOGitRepositoryCreator new
-			url: 'git://git@github.com/demarey/pharo-counter';
-			version: 'master';
-			create ]
-		raise: CGOGitRepositoryValidationError
 ]

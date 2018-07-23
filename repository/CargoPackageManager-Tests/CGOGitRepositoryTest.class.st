@@ -41,8 +41,9 @@ CGOGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
 { #category : #'tests - test data' }
 CGOGitRepositoryTest >> pharoCounterMaster [
 	^ CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/pharo-counter:master';
+		githubUrl: 'https://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
+		version: 'master';
 		create
 		
 ]
@@ -83,7 +84,7 @@ CGOGitRepositoryTest >> testCanBeSerializedInSton [
 		assert: repositoryStonString
 		equals: '{
 	#type : #git,
-	#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
+	#repositoryUrl : ''https://github.com/demarey/pharo-counter.git'',
 	#version : ''master''
 }'
 ]
@@ -98,7 +99,7 @@ CGOGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 			location: location;
 			createRepository.
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/pharo-counter:master';
+		githubUrl: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
 	
@@ -125,7 +126,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 			createRepository.
 	(iceRepository lookupCommit: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8') checkout.
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/pharo-counter:master';
+		githubUrl: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
 	
@@ -144,7 +145,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 CGOGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/pharo-counter:master';
+		githubUrl: 'http://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		create.
 		
@@ -230,7 +231,7 @@ CGOGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'github://demarey/HotelApp:master';
+		githubUrl: 'http://github.com/demarey/HotelApp.git';
 		location: self iceRepositoryLocation;
 		createAndClone.
 

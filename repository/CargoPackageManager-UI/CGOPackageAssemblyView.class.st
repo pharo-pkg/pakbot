@@ -4,13 +4,13 @@ It is a composition of a package overview and an assmebly parts view
 "
 Class {
 	#name : #CGOPackageAssemblyView,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'ongoingPackageAssembly',
 		'partsView',
 		'packageOverview'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }
@@ -54,7 +54,7 @@ CGOPackageAssemblyView >> initialExtent [
 
 { #category : #initialization }
 CGOPackageAssemblyView >> initializeWidgets [
-	packageOverview := CGOPackageOverview newOn: ongoingPackageAssembly owner: self.
+	packageOverview := PBLoadableUnitOverviewPanel newOn: ongoingPackageAssembly owner: self.
 	partsView := CGOPackageAssemblyPartsView newOn: ongoingPackageAssembly owner: self.
 ]
 
