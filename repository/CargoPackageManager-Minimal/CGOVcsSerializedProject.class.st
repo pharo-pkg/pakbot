@@ -100,6 +100,6 @@ CGOVcsSerializedProject >> projectDependenciesFrom: aCollection [
 
 { #category : #utility }
 CGOVcsSerializedProject >> sort: packages andCollect: aSelector [
-	^ (packages sorted: [ :a :b | a packageName < b packageName ])
+	^ (packages sorted: [ :a :b | a name < b name ])
 			collect: aSelector 
 ]
