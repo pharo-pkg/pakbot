@@ -64,6 +64,6 @@ CGOImportPackageInProjectCommand >> defaultMenuItemName [
 { #category : #execution }
 CGOImportPackageInProjectCommand >> execute [
 	| dialog |
-	dialog := CGOImportPackagesDialog on: project project.
+	dialog := PBImportPackagesDialog on: project project.
 	dialog openDialogWithSpec okAction: [ dialog accept ]
 ]
