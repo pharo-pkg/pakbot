@@ -117,16 +117,16 @@ PBLoadableUnitOverview >> initializePresenter [
 PBLoadableUnitOverview >> initializeWidgets [
 	(nameLabel := self newLabel)
 		label: 'Name:'.
-	self newTextInputField: #nameInputField.
+	self newTextInputField: #nameInputField description: 'MyProject'.
 		
 	(versionLabel := self newLabel)
 		label: 'Version:'.
-	self newTextInputField: #versionInputField. 
+	self newTextInputField: #versionInputField description: '1.0.0'. 
 
 	"repository"
 	(repositoryLabel := self newLabel)
 		label: 'Repository:'.
-	self newTextInputField: #repositoryInputField. 
+	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'. 
 		
 	(descriptionLabel := self newLabel)
 		label: 'Description:'.

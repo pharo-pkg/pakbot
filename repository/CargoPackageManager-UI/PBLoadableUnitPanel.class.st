@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #defaults }
+PBLoadableUnitPanel class >> isAbstract [
+
+	^ self == PBLoadableUnitPanel
+]
+
+{ #category : #defaults }
 PBLoadableUnitPanel class >> labelSize [
 	^ 75
 ]
@@ -19,5 +25,15 @@ PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName [
 		put: (self newTextInput
 			entryCompletion: nil;
 			acceptOnCR: true;
-			ghostText: 'none')
+			ghostText: '')
+]
+
+{ #category : #'building widgets' }
+PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName description: aDescription [
+	self
+		instVarNamed: textInputFieldModelName  
+		put: (self newTextInput
+			entryCompletion: nil;
+			acceptOnCR: true;
+			ghostText: 'e.g., ', aDescription)
 ]
