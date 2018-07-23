@@ -4,11 +4,11 @@ I have a class message #allAvailableFor: that returns all the applicable repair 
 "
 Class {
 	#name : #CGORepairProjectAction,
-	#superclass : #Object,
+	#superclass : #PBAbstractAction,
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-UI-Repair'
+	#category : #'CargoPackageManager-UI-Repair'
 }
 
 { #category : #accessing }
@@ -42,11 +42,6 @@ CGORepairProjectAction class >> isAvailableFor: aProject [
 { #category : #accessing }
 CGORepairProjectAction >> description [
 	^ self subclassResponsibility
-]
-
-{ #category : #execution }
-CGORepairProjectAction >> execute [
-	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }

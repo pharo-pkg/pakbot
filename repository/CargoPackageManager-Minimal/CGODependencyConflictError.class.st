@@ -8,12 +8,12 @@ ex:
 "
 Class {
 	#name : #CGODependencyConflictError,
-	#superclass : #CGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'policy1',
 		'policy2'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #accessing }
