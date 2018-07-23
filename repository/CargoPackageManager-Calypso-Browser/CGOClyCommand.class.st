@@ -9,13 +9,8 @@ Class {
 		'toolContext',
 		'packageManager'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #execution }
-CGOClyCommand >> applyResultInContext: aToolContext [
-	self refreshCalypsoChild
-]
 
 { #category : #execution }
 CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
@@ -23,24 +18,8 @@ CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
 	super prepareFullExecutionInContext: aToolContext.
 	toolContext := aToolContext.
 	
-	packageManagers := aToolContext systemEnvironment projectManager packageManagers.
+	packageManagers := aToolContext systemEnvironment projectManager projectManagers.
 	packageManagers size = 1
 		ifTrue: [ packageManager := packageManagers first ]
 		ifFalse: [ self shouldBeImplemented ].
-]
-
-{ #category : #private }
-CGOClyCommand >> refreshCalypsoChild [
-	toolContext lastSelectedItem childrenDataSource
-		ifNil: [ 
-			self refreshCalypsoRoot.
-			toolContext lastSelectedItem expand ]
-		ifNotNil: [:ds |
-			self refreshCalypsoRoot ]
-]
-
-{ #category : #private }
-CGOClyCommand >> refreshCalypsoRoot [
-
-	toolContext tool packageView update
 ]

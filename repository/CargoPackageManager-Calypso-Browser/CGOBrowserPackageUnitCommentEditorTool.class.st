@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }
 CGOBrowserPackageUnitCommentEditorTool class >> methodTabActivation [
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: ClyManagedPackage asCalypsoItemContext 
+	^ClyTabActivationStrategy for: PBPackageUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
@@ -43,7 +43,7 @@ CGOBrowserPackageUnitCommentEditorTool >> editingText [
 
 { #category : #accessing }
 CGOBrowserPackageUnitCommentEditorTool >> unit [
-	^ context lastSelectedPackage cargoPackage
+	^ context lastSelectedPBPackage cargoPackage
 ]
 
 { #category : #testing }

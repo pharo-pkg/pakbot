@@ -48,3 +48,10 @@ Metacello new
     baseline: 'Iceberg';
     repository: 'github://pharo-vcs/iceberg:dev-1.0';
     load.
+
+Metacello new
+  baseline: 'Calypso';
+  repository: 'github://tesonep/Calypso:dev';
+  onConflictUseIncoming;
+  onUpgrade: [ :ex :loaded :incoming | ex useIncoming ];
+  load.

@@ -5,14 +5,14 @@ This plugin will allow to show / edit project metadata.
 Class {
 	#name : #CGOBrowserProjectEditorTool,
 	#superclass : #ClyBrowserTool,
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }
 CGOBrowserProjectEditorTool class >> methodTabActivation [
 	<classAnnotation>
 	
-	^ClyTabActivationStrategy for: ClyManagedProject asCalypsoItemContext 
+	^ClyTabActivationStrategy for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
@@ -29,6 +29,7 @@ CGOBrowserProjectEditorTool >> activeColor [
 CGOBrowserProjectEditorTool >> build [
 	| managedProject |
 	managedProject := context lastSelectedProject.
+	
 	self 
 		addMorph: (CGOProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
 		fullFrame: LayoutFrame identity

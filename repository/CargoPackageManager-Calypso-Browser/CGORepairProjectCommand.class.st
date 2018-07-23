@@ -1,7 +1,7 @@
 Class {
 	#name : #CGORepairProjectCommand,
 	#superclass : #CGOProjectCommand,
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #testing }
@@ -25,11 +25,12 @@ CGORepairProjectCommand class >> defaultMenuItemName [
 CGORepairProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
 CGORepairProjectCommand >> execute [
 	
-	(CGOOpenRepairDialog onProject: self project) execute
+	self project openRepairDialog.
+
 ]

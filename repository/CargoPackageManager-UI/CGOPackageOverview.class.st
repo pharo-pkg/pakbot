@@ -152,7 +152,7 @@ CGOPackageOverview >> nameLabel [
 
 { #category : #initialization }
 CGOPackageOverview >> refreshWidgetValues [
-	nameInputField text: ongoingPackageVersion packageName.
+	nameInputField text: ongoingPackageVersion name.
 	versionInputField text: ongoingPackageVersion version asString.
 	ongoingPackageVersion isProject
 		ifTrue: [ ongoingPackageVersion repository ifNotNil: 

@@ -102,6 +102,12 @@ PBPackage >> isInstalled [
 	^ project registry isInstalled: self
 ]
 
+{ #category : #'querying - Installed' }
+PBPackage >> isProvidedBy: aPackageUnit [
+
+	^ aPackageUnit providesPackage: self
+]
+
 { #category : #testing }
 PBPackage >> isUnit [
 	^ true
@@ -137,6 +143,18 @@ PBPackage >> provisions: aListOfVirtualPackageVersionsReference [
 PBPackage >> removeDependency: aPackageDependency [
 	dependencies := dependencies 
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
+]
+
+{ #category : #'querying - installed' }
+PBPackage >> satisfyConstraints: aVersion [ 
+
+	^ aVersion = self version
+]
+
+{ #category : #accessing }
+PBPackage >> systemPackage [
+	
+	^ RPackageOrganizer default packageNamed: self name
 ]
 
 { #category : #updating }
