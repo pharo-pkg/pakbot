@@ -3,11 +3,11 @@ Error thrown when a dependency is not resolved to a specific package version at 
 "
 Class {
 	#name : #CGOUnresolvedDependency,
-	#superclass : #CGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'candidates'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver'
 }
 
 { #category : #signaling }

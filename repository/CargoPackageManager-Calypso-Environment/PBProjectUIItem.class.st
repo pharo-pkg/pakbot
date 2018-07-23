@@ -48,6 +48,12 @@ PBProjectUIItem >> createNewPackageNamed: aString [
 	^ project createNewPackageNamed: aString 
 ]
 
+{ #category : #actions }
+PBProjectUIItem >> createPackageNamed: aString [ 
+	
+	^ project createPackageNamed: aString
+]
+
 { #category : #decorating }
 PBProjectUIItem >> decorateProblems: anItemCellMorph inContext: itemContext [
 	| button activator icon command |	
@@ -111,7 +117,7 @@ PBProjectUIItem >> name [
 { #category : #actions }
 PBProjectUIItem >> openRepairDialog [
 
-	^ (CGOOpenRepairDialog onProject: self project) execute
+	^ (PBOpenRepairDialogAction onProject: self project) execute
 ]
 
 { #category : #accessing }

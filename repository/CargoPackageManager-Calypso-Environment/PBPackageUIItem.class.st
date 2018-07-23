@@ -122,7 +122,7 @@ PBPackageUIItem >> name [
 { #category : #actions }
 PBPackageUIItem >> removeFromProject [
 	
-	^ self unit project removePart: self unit
+	^ self unit project removePackage: self unit
 ]
 
 { #category : #testing }

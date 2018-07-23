@@ -28,7 +28,7 @@ CGOVcsSerializedProject >> asOngoingProject [
 	
 	dict 
 		at: #name
-		ifAbsent: [ CGOPackageManagerError new 
+		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
 	project := PBProject named: (dict at: #name).
@@ -58,19 +58,18 @@ CGOVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 { #category : #initialization }
 CGOVcsSerializedProject >> initializeWithOngoing: aCGOOngoingProject [
 	super initializeWithOngoing: aCGOOngoingProject.
-	self 
-		addPropertyNamed: #units
-		ifNotEmptyOrNil: (aCGOOngoingProject packageUnits collect: #asVcsSerializedPackageUnit).
-	self
-		addPropertyNamed: #assemblies 
-		ifNotEmptyOrNil: (aCGOOngoingProject assemblies collect: #asVcsSerializedPackageAssembly).
-	self 
-		addPropertyNamed: #virtualPackages 
-		ifNotEmptyOrNil: (aCGOOngoingProject virtualPackages collect: #asVcsSerializablePackageVersion).
 	self
 		addPropertyNamed: #externalProjects 
-		ifNotEmptyOrNil: (aCGOOngoingProject externalProjects)
-
+		ifNotEmptyOrNil: (aCGOOngoingProject externalProjects).
+	self 
+		addPropertyNamed: #units
+		ifNotEmptyOrNil: (self sort: aCGOOngoingProject packageUnits andCollect: #asVcsSerializedPackageUnit).
+	self
+		addPropertyNamed: #assemblies 
+		ifNotEmptyOrNil: (self sort: aCGOOngoingProject assemblies andCollect: #asVcsSerializedPackageAssembly).
+	self 
+		addPropertyNamed: #virtualPackages 
+		ifNotEmptyOrNil: (self sort: aCGOOngoingProject virtualPackages andCollect: #asVcsSerializablePackageVersion).
 ]
 
 { #category : #deserialization }
@@ -97,4 +96,10 @@ CGOVcsSerializedProject >> projectDependenciesFrom: aCollection [
 		(projectDependencyDict includesKey: #baseline)
 			ifTrue: [ self baselineProjectDependencyFrom: projectDependencyDict ].
 		self pakbotProjectDependencyFrom: projectDependencyDict. ]	
+]
+
+{ #category : #utility }
+CGOVcsSerializedProject >> sort: packages andCollect: aSelector [
+	^ (packages sorted: [ :a :b | a name < b name ])
+			collect: aSelector 
 ]

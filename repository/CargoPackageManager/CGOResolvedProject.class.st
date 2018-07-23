@@ -50,6 +50,18 @@ CGOResolvedProject >> allSubResolutions [
 	^ self subresolutions asArray , (self subresolutions asArray flatCollect: [ :each | each allSubResolutions asArray ])
 ]
 
+{ #category : #conflicts }
+CGOResolvedProject >> conflictingDependencies [
+	
+	^ self resolvedDependencies select: [ :e | e hasConflicts ]
+]
+
+{ #category : #conflicts }
+CGOResolvedProject >> conflicts [
+	^ (self conflictingDependencies groupedBy: [ :aConflictingDependency | aConflictingDependency projectName ]) 
+		associations collect: [ :assoc | PBConflict onConflictingDependencies: assoc value ]
+]
+
 { #category : #accessing }
 CGOResolvedProject >> dependencyTargetedPackages [
 
@@ -116,6 +128,11 @@ CGOResolvedProject >> loadInstructions [
 ]
 
 { #category : #accessing }
+CGOResolvedProject >> name [
+	^ resolvedProjectVersion name
+]
+
+{ #category : #accessing }
 CGOResolvedProject >> originDependencies [
 	^ originDependencies
 ]
@@ -127,6 +144,12 @@ CGOResolvedProject >> printOn: aStream [
 		<< '('
 		<< self resolvedProjectVersion asString
 		<< ')'
+]
+
+{ #category : #accessing }
+CGOResolvedProject >> projectVersion [
+	
+	^ resolvedProjectVersion version
 ]
 
 { #category : #accessing }

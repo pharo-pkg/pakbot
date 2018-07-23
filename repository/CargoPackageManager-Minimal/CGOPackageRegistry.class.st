@@ -116,6 +116,7 @@ CGOPackageRegistry >> newProjectNamed: aString [
 	| project |
 	project := PBProject named: aString.
 	self register: project.
+	CGOProjectCreated announceOnProject: project.
 	^ project
 ]
 
