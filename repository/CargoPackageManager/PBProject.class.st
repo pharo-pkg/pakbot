@@ -101,7 +101,7 @@ PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 
 { #category : #dependencies }
 PBProject >> allDependencies [
-	^ dependencies , (packages flatCollect: #allDependencies).
+	^ dependencies , (packages flatCollect: #allDependencies) asOrderedCollection.
 ]
 
 { #category : #converting }
