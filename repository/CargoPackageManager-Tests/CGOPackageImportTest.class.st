@@ -14,11 +14,11 @@ CGOPackageImportTest >> setUp [
 
 	super setUp.
 	registry := CGOPackageRegistry new.
-	project := CGOOngoingProject named: 'test'.
+	project := PBProject named: 'test'.
 	registry register: project.
 	
 	systemPackageOrganizer := RPackageOrganizer new.
-	project systemPackageOrganizer: systemPackageOrganizer.
+	registry systemPackageOrganizer: systemPackageOrganizer.
 ]
 
 { #category : #tests }
@@ -67,9 +67,9 @@ CGOPackageImportTest >> testImportNonExistingPackageInSystemRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.
-	project createNewPackageNamed: packageName.
+	project createPackageNamed: packageName.
 	
 	self
-		should: [project createNewPackageNamed: packageName]
+		should: [project createPackageNamed: packageName]
 		raise: CGOSystemPackageAlreadyDefined
 ]

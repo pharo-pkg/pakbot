@@ -41,7 +41,7 @@ ManifestCargoPackageManager class >> repositories [
 
 { #category : #'code-critics' }
 ManifestCargoPackageManager class >> ruleContainsRuleV1FalsePositive [
-^ #(#(#(#RGMethodDefinition #(#CGOOngoingPackageUnit #updateDependenciesWith: #false)) #'2015-01-20T13:14:26.351538+01:00') )
+^ #(#(#(#RGMethodDefinition #(#PBPackage #updateDependenciesWith: #false)) #'2015-01-20T13:14:26.351538+01:00') )
 ]
 
 { #category : #'code-critics' }

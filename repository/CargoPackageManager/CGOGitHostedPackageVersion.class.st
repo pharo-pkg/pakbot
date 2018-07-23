@@ -50,7 +50,7 @@ CGOGitHostedPackageVersion >> loadMetadata [
 		contentOfFileNamed: self metadataPath 
 		commit: iceRepository headCommit id ]
 		on: Error
-		do: [ :error | CGOPackageMetadataNotFound signal: error messageText ]
+		do: [ :error | PBProjectMetadataNotFound signal: error messageText ]
 ]
 
 { #category : #accessing }

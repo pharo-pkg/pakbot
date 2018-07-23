@@ -12,9 +12,10 @@ Class {
 	#superclass : #CGOSourceRepository,
 	#instVars : [
 		'iceRepository',
-		'version'
+		'version',
+		'subdirectory'
 	],
-	#category : 'CargoPackageManager-Loading'
+	#category : #'CargoPackageManager-Loading'
 }
 
 { #category : #example }
@@ -68,6 +69,12 @@ CGOGitRepository >> ensureIcePackageNamed: aPackageName [
 ]
 
 { #category : #fetching }
+CGOGitRepository >> fetchHeadVersion [
+	
+	^ self fetchVersion: ''
+]
+
+{ #category : #fetching }
 CGOGitRepository >> fetchVersion: aString [
 	
 	| commitish project |
@@ -77,7 +84,8 @@ CGOGitRepository >> fetchVersion: aString [
 		ifEmpty: [ iceRepository headCommit ]
 		ifNotEmpty: [ iceRepository revparse: aString ].
 
-	project := CGOOngoingProject fromStonString: (commitish fileSystem / self projectMetadataPath) contents.
+
+	project := PBProject fromStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project
 ]
@@ -161,6 +169,15 @@ CGOGitRepository >> mcVersionFor: aPackageVersion [
 CGOGitRepository >> metadataStringFor: aPackageUnit [
 	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
+]
+
+{ #category : #fetching }
+CGOGitRepository >> project [
+	| iceProject |
+	iceProject := iceRepository project.
+	^ iceProject isUnborn 
+		ifTrue: [ PBProjectMetadataNotFound signal ]
+		ifFalse: [ iceProject pakbotProject ]
 ]
 
 { #category : #accessing }

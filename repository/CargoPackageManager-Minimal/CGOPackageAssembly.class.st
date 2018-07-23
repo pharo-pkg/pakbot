@@ -24,7 +24,7 @@ CGOPackageAssembly >> allPackageUnits [
 	
 	| units |
 	units := (self assemblies flatCollect: #allPackageUnits as: Set).
-	units addAll: self packageUnitNames.
+	units addAll: self packageNames.
 	^ units
 ]
 
@@ -77,7 +77,7 @@ CGOPackageAssembly >> isAssembly [
 ]
 
 { #category : #accessing }
-CGOPackageAssembly >> packageUnitNames [
+CGOPackageAssembly >> packageNames [
 	| foundPackage |
 	^ parts
 		select: [ :each | 
@@ -103,7 +103,7 @@ CGOPackageAssembly >> partsFrom: aDictionary [
 
 { #category : #printing }
 CGOPackageAssembly >> printOn: aStream [
-	aStream << self packageName << '@' << (self version asString) << ' (assembly)'
+	aStream << self name << '@' << (self version asString) << ' (assembly)'
 ]
 
 { #category : #accessing }

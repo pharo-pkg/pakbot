@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 CGOAbstractTest >> expectedCargoResolvedProject [
 
-	^ (CGOOngoingProject named: 'Counter')
+	^ (PBProject named: 'Counter')
 		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git');
 		version: (SemanticVersion fromString: '0-N/A')
 ]

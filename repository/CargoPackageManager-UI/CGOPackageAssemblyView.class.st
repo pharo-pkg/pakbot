@@ -31,7 +31,7 @@ CGOPackageAssemblyView class >> defaultSpec [
 
 { #category : #example }
 CGOPackageAssemblyView class >> example [
-	^ self openOn: (CGOOngoingPackageAssembly example)
+	^ self openOn: (PBAssembly example)
 ]
 
 { #category : #'instance creation' }

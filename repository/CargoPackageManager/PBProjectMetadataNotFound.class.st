@@ -2,7 +2,7 @@
 Error raised when a package metadata file cannot be found!
 "
 Class {
-	#name : #CGOPackageMetadataNotFound,
+	#name : #PBProjectMetadataNotFound,
 	#superclass : #CGOPackageManagerError,
-	#category : 'CargoPackageManager-Loading'
+	#category : #'CargoPackageManager-Loading'
 }

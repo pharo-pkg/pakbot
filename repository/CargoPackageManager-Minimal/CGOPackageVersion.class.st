@@ -44,25 +44,20 @@ CGOPackageVersion class >> newFrom: aDictionary [
 { #category : #comparing }
 CGOPackageVersion >> = other [
 	(self class = other class) ifFalse: [ ^false ].
-	(self packageName = other packageName) ifFalse: [ ^false ].
+	(self name = other name) ifFalse: [ ^false ].
 	(self version = other version) ifFalse: [ ^false ].
 	^true
 ]
 
 { #category : #converting }
 CGOPackageVersion >> asOngoingPackage [
-	^ CGOOngoingPackage fromPackageVersion: self
-]
-
-{ #category : #converting }
-CGOPackageVersion >> asPackageVersionOf: aCGOProject [ 
-	^ self
+	^ PBLoadableUnit fromPackageVersion: self
 ]
 
 { #category : #converting }
 CGOPackageVersion >> asPackageVersionReference [
 	^ CGOPackageVersionReference 
-		packageName: self packageName 
+		packageName: self name 
 		version: self version asString
 ]
 
@@ -97,9 +92,10 @@ CGOPackageVersion >> initializeFrom: aDictionary [
 
 { #category : #initialization }
 CGOPackageVersion >> initializeFromOngoing: aCGOOngoingPackage project: aCGOProject [
-	package := aCGOOngoingPackage package.
 	description := aCGOOngoingPackage description copy.
 	timestamp := DateAndTime now.
+
+	package := aCGOOngoingPackage name.
 	
 	self assert: aCGOProject class = CGOProject.
 	project := aCGOProject.
@@ -142,7 +138,7 @@ CGOPackageVersion >> mandatoryKey: aKey from: aDictionary [
 
 { #category : #accessing }
 CGOPackageVersion >> name [
-	^ self printString
+	^ package
 ]
 
 { #category : #accessing }

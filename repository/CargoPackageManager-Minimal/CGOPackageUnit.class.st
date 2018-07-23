@@ -12,11 +12,6 @@ Class {
 	#category : 'CargoPackageManager-Minimal-Model'
 }
 
-{ #category : #example }
-CGOPackageUnit class >> example [
-	^ CGOOngoingPackageUnit example asPackageVersionOf: CGOProject example
-]
-
 { #category : #utility }
 CGOPackageUnit class >> provisionsFromListOfProvisionStrings: aListOfProvisionStrings [
 	" example: self provisionsFromListOfProvisionStrings: #('A@2.0' 'B') "
@@ -97,7 +92,7 @@ CGOPackageUnit >> platformRequirements [
 
 { #category : #printing }
 CGOPackageUnit >> printOn: aStream [
-	aStream << self packageName << '@' << (self version asString) << ' (unit)'
+	aStream << self name << '@' << self version asString << ' (unit)'
 ]
 
 { #category : #testing }

@@ -123,7 +123,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 			subdirectory: '';
 			location: location;
 			createRepository.
-	(iceRepository lookupCommit: 'c1c1ef63933790a364501cdb991b18c589516729') checkout.
+	(iceRepository lookupCommit: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8') checkout.
 	repository := CGOGitRepositoryCreator new
 		githubUrl: 'github://demarey/pharo-counter:master';
 		location: location;
@@ -131,7 +131,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 	
 	self 
 		assert: iceRepository headCommit id
-		equals: 'c1c1ef63933790a364501cdb991b18c589516729'.
+		equals: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8'.
 	
 	repository ensureCloned.
 	
@@ -167,7 +167,7 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 	self skip.	
 	
 	repository := self pharoCounterMasterCloned.
-	result := repository mcVersionFor: (CGOOngoingPackageUnit for: 'Counter-Core').
+	result := repository mcVersionFor: (PBPackage for: 'Counter-Core').
 	self assert: (result isKindOf: MCVersion)
 ]
 
@@ -175,23 +175,23 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
-	project := CGOOngoingProject fromStonString: repository projectMetadataStonString.
+	project := PBProject fromStonString: repository projectMetadataStonString.
 	
 	self 
-		assert: project packageName
+		assert: project name
 		equals: #Counter.
 	self 
 		assert: project packageUnits anyOne class 
-		equals: CGOOngoingPackageUnit.
+		equals: PBPackage.
 	
 	self 
-		assert: (project packageUnits collect: #packageName) sorted
+		assert: (project packageUnits collect: #name) sorted
 		equals: #('Counter-Core' 'Counter-Tests').
 		
 	self 
-		assert: (project packageUnits detect: [ :each | each packageName = #'Counter-Core']) dependencies isEmpty.
+		assert: (project packageUnits detect: [ :each | each name = #'Counter-Core']) dependencies isEmpty.
 	self 
-		assert: (project packageUnits detect: [ :each | each packageName = #'Counter-Tests']) dependencies size
+		assert: (project packageUnits detect: [ :each | each name = #'Counter-Tests']) dependencies size
 		equals: 1.
 	self 
 		assert: project assemblies isEmpty.
@@ -209,7 +209,7 @@ CGOGitRepositoryTest >> testCanSavePackageAndItsMetadata [
 	repository := self pharoCounterMasterCloned.
 	message := 'commit from test #testCanSavePackageAndItsMetadata'.
 	mcVersion := repository 
-		savePackageUnit: (CGOOngoingPackageUnit for: 'Counter-Core') withMessage: message.
+		savePackageUnit: (PBPackage for: 'Counter-Core') withMessage: message.
 	self 
 		assert: mcVersion info message
 		equals: message
@@ -234,5 +234,5 @@ CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsen
 		location: self iceRepositoryLocation;
 		createAndClone.
 
-	self should: [ repository projectMetadataStonString ] raise: FileDoesNotExistException
+	self should: [ repository project ] raise: PBProjectMetadataNotFound
 ]

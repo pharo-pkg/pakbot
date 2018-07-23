@@ -10,24 +10,8 @@ Class {
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testCanCreateMinimalOngoingPackageUnit [
 	| unit |
-	unit := CGOOngoingPackageUnit named: #Test.
-	self assert: unit class equals: CGOOngoingPackageUnit
-]
-
-{ #category : #tests }
-CGOOngoingPackageUnitTest >> testCanGetConvertOngoingToUnit [
-	| unit |
-	unit := CGOOngoingPackageUnit example asPackageVersionOf: CGOProject example.
-	
-	self assert: unit project notNil.
-		
-	self
-		assert: unit version asString
-		equals: '2.1.0'.
-	
-	self 
-		assert: unit packageName
-		equals: #UnitTest
+	unit := PBPackage named: #Test.
+	self assert: unit class equals: PBPackage
 ]
 
 { #category : #tests }
@@ -55,22 +39,21 @@ CGOOngoingPackageUnitTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testComparisonWithPackageAssemblyReturnsFalse [
 	| unit assembly |
-	unit := CGOOngoingPackageUnit named: #Test.
-	assembly := CGOOngoingPackageAssembly named: 'Test'.
+	unit := PBPackage named: #Test.
+	assembly := PBAssembly named: 'Test'.
 	self deny: unit = assembly
 ]
 
 { #category : #tests }
 CGOOngoingPackageUnitTest >> testComparisonWithSamePackageUnitReturnsTrue [
 	| unit |
-	unit := CGOOngoingPackageUnit named: #Test.
+	unit := PBPackage named: #Test.
 	self assert: unit equals: unit copy
 ]
 
 { #category : #'test data' }
 CGOOngoingPackageUnitTest >> unitTestV2 [
-	^ (CGOOngoingPackageUnit named: #Test)
+	^ (PBPackage named: #Test project: ongoingProject)
 		description: 'A simple ongoing package unit 2.';
-		project: ongoingProject;
 		yourself
 ]
