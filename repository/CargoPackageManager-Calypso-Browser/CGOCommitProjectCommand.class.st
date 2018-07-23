@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'commitMessage'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #accessing }
-CGOCommitProjectCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext isProjectSelected
-]
 
 { #category : #accessing }
 CGOCommitProjectCommand class >> defaultMenuIconName [
@@ -28,24 +23,24 @@ CGOCommitProjectCommand class >> systemBrowserMenuActivator [
 	^ CmdContextMenuActivation
 		byItemOf: CGOSCMMenuGroup
 		order: 10000
-		for: ClyManagedProject asCalypsoItemContext 
+		for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
 CGOCommitProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $s meta for: ClyManagedProject asCalypsoItemContext 
+	^ CmdShortcutActivation by: $s meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
 CGOCommitProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	
-	^ ClyToolbarCommandActivation
+	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1010
-		for: ClyManagedProject asCalypsoItemContext , ClyEmptyClassSelectionContext new
+		for: PBProjectUIItem asCalypsoItemContext , ClyEmptyClassSelectionContext new
 ]
 
 { #category : #accessing }

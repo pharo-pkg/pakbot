@@ -34,7 +34,7 @@ CGOSerializableProject >> flushIn: aCGOProject [
 	"Flush information from this SerializableProject into the provided CGOProject.
 	All instance variables will be set with values from the SerializableProject"
 	name isNil
-		ifTrue: [ CGOPackageManagerError new 
+		ifTrue: [ PBError new 
 						signal: 'Cannot deserialize a Project with no package or version defined!' ].	
 	aCGOProject 
 	"name description repository version unitNames assemblies authors"
@@ -56,7 +56,7 @@ CGOSerializableProject >> initializeWithProject: aCGOProject [
 	description := aCGOProject description.
 	repository := aCGOProject repository asSerializableRepository.
 	version := aCGOProject version asString.
-	unitNames := self toArrayOrNilIfEmpty: aCGOProject packageUnitNames.
+	unitNames := self toArrayOrNilIfEmpty: aCGOProject packageNames.
 	assemblies := self toArrayOrNilIfEmpty: aCGOProject assemblies "asVcsSerializedAssembly?".
 	virtualPackages := self toArrayOrNilIfEmpty: (aCGOProject virtualPackages collect: #asVcsSerializedPackageVersion).
 	authors := self toArrayOrNilIfEmpty: aCGOProject authors.

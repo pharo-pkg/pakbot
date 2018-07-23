@@ -3,8 +3,8 @@ Error raised when a package (i.e. the package name) cannot be found.
 "
 Class {
 	#name : #CGOPackageNotFoundError,
-	#superclass : #CGOPackageManagerError,
-	#category : 'CargoPackageManager-Minimal-Model'
+	#superclass : #PBError,
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #signalling }

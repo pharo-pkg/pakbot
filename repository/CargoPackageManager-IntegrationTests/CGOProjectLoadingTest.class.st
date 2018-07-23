@@ -32,7 +32,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithConflictsFailsWithExcetion [
 	project addDependency: configurationProjectV1.
 	project addDependency: configurationProjectV2.
 	
-	self should: [ project load ] raise: CGOProjectHasConflictsError. 
+	self should: [ project load ] raise: PBProjectHasConflictsError. 
 	self assert: project resolve hasConflicts.	
 ]
 
@@ -68,7 +68,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 		version: '=0.0.0-N/A').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectOne basicLoad.
+	projectOne load.
 	
 	self assert: projectOne isLoaded.
 	self assert: projectTwo isLoaded.

@@ -23,7 +23,7 @@ CGOModelTest >> project [
 CGOModelTest >> setUp [
 	super setUp.
 	oldRegistry := CGOPackageRegistry default.
-	ongoingProject := CGOOngoingProject example.
+	ongoingProject := PBProject example.
 	registry := CGOPackageRegistry new 
 		register: ongoingProject;
 		register: self unitTestV1;
@@ -40,16 +40,16 @@ CGOModelTest >> tearDown [
 
 { #category : #'test data' }
 CGOModelTest >> unitTestV1 [
-	^ CGOOngoingPackageUnit example
-		package: #Package1;
+	^ PBPackage example
+		name: #Package1;
 		project: ongoingProject;
 		yourself
 ]
 
 { #category : #'test data' }
 CGOModelTest >> unitTestV2 [
-	^ CGOOngoingPackageUnit example
-		package: #Package2;
+	^ PBPackage example
+		name: #Package2;
 		project: ongoingProject;
 		yourself
 ]

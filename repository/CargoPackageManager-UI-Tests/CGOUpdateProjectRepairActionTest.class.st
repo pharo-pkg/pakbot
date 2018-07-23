@@ -20,7 +20,7 @@ CGOUpdateProjectRepairActionTest >> setUp [
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0').
 
-	project newPackageUnit: #APackage.
+	project importPackageNamed: #APackage.
 	project addDependency: dependencyToProject
 ]
 

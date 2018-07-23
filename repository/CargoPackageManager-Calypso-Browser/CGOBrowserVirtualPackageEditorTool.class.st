@@ -5,7 +5,7 @@ This plugin will allow to show / edit package metadata.
 Class {
 	#name : #CGOBrowserVirtualPackageEditorTool,
 	#superclass : #ClyBrowserTool,
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }

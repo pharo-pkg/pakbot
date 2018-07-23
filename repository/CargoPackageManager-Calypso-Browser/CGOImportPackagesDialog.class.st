@@ -11,7 +11,7 @@ Class {
 		'acceptButton',
 		'cancelButton'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Dialogs'
 }
 
 { #category : #specs }
@@ -75,7 +75,7 @@ CGOImportPackagesDialog >> allPackages [
 { #category : #accessing }
 CGOImportPackagesDialog >> allPackagesNotRegistered [
 	| currentPackagesNames |
-	currentPackagesNames := self model packages collect: #packageName.
+	currentPackagesNames := self model packages collect: #name.
 	^ self allPackages reject: [ :rPackage | currentPackagesNames includes: rPackage name ]
 ]
 

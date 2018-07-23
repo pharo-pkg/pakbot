@@ -23,10 +23,10 @@ CGOVcsSerializedPackageUnit >> asOngoingPackage [
 	| unit |
 	dict 
 		at: #name
-		ifAbsent: [ CGOPackageManagerError new 
+		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
-	unit := CGOOngoingPackageUnit named: (dict at: #name).
+	unit := PBPackage named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | unit description: description ].
 	dict at: #dependencies ifPresent: [ :deps | 
 		unit dependencies: (self deserializedDependencies: deps) asOrderedCollection ].

@@ -3,11 +3,11 @@ Error raised when no working copy is found in the image for the given package un
 "
 Class {
 	#name : #CGOWorkingCopyNotFound,
-	#superclass : #CGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'packageUnit'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #signalling }

@@ -50,5 +50,6 @@ CGOClyPackageDependencies >> isResult: aQueryResult affectedBy: aSystemAnnouncem
 
 { #category : #testing }
 CGOClyPackageDependencies >> retrievesItemsOfType: itemTypeClass [
+	1halt.
 	^itemTypeClass = RPackage or: [itemTypeClass = ClyManagedProject]
 ]

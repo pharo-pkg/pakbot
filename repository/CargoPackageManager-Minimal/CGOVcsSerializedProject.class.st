@@ -17,7 +17,7 @@ CGOVcsSerializedProject class >> from: aCGOOngoingProject [
 
 { #category : #converting }
 CGOVcsSerializedProject >> asOngoingPackage [
-	^ CGOOngoingProject fromVcsSerializedProject: self
+	^ PBProject fromVcsSerializedProject: self
 ]
 
 { #category : #converting }
@@ -28,13 +28,13 @@ CGOVcsSerializedProject >> asOngoingProject [
 	
 	dict 
 		at: #name
-		ifAbsent: [ CGOPackageManagerError new 
+		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
-	project := CGOOngoingProject named: (dict at: #name).
+	project := PBProject named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
-		project packageUnits: (self ongoingPackageUnitsFrom: units) ].
+		project packages: (self ongoingPackageUnitsFrom: units) ].
 	dict at: #assemblies ifPresent: [ :assemblies | 
 		project assemblies: (self ongoingPackageAssembliesFrom: assemblies) ].
 	dict at: #virtualPackages ifPresent: [ :virtualPackages | 

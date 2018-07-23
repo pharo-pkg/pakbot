@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'unitName'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #accessing }
-CGOCreatePackageInProjectCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext isProjectSelected
-]
 
 { #category : #accessing }
 CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
@@ -24,23 +19,32 @@ CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
 CGOCreatePackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 10 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOCreatePackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta, $n meta for: ClyManagedProject asCalypsoItemContext
+	^ CmdShortcutActivation by: $p meta, $n meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
-	^ ClyToolbarCommandActivation
+	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
-		for: ClyManagedProject asCalypsoItemContext
+		for: PBProjectUIItem asCalypsoItemContext
+]
+
+{ #category : #activation }
+CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivatorForPackage [
+	<classAnnotation>
+	^ ClyToolbarActivation
+		byItemOf: ClyButtonToolbarGroup
+		order: 1000
+		for: PBPackageUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
@@ -62,5 +66,5 @@ CGOCreatePackageInProjectCommand >> execute [
 		request: 'New package name' 
 		initialAnswer: project name, '-'.
 	unitName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ].
-	project createNewPackageNamed: unitName.
+	project createPackageNamed: unitName.
 ]

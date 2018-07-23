@@ -4,13 +4,8 @@ A command to publish a project and all its packages to a package repository. It 
 Class {
 	#name : #CGOPublishProjectCommand,
 	#superclass : #CGOProjectCommand,
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #testing }
-CGOPublishProjectCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext isProjectSelected 
-]
 
 { #category : #accessing }
 CGOPublishProjectCommand class >> defaultMenuIconName [
@@ -21,24 +16,24 @@ CGOPublishProjectCommand class >> defaultMenuIconName [
 CGOPublishProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyManagedProject asCalypsoItemContext, ClyEmptyClassSelectionContext new
+	^ CmdContextMenuActivation byRootGroupItemFor: PBProjectUIItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
 ]
 
 { #category : #activation }
 CGOPublishProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta for: ClyManagedProject asCalypsoItemContext 
+	^ CmdShortcutActivation by: $p meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
 CGOPublishProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	
-	^ ClyToolbarCommandActivation
+	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1020
-		for: ClyManagedProject asCalypsoItemContext, ClyEmptyClassSelectionContext new
+		for: PBProjectUIItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
 ]
 
 { #category : #initialization }
@@ -48,5 +43,5 @@ CGOPublishProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOPublishProjectCommand >> execute [
-	project project publishAll 
+	project publishAll 
 ]

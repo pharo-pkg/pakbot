@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'unitName'
 	],
-	#category : 'CargoPackageManager-Calypso-Browser-CargoPackageManager-Calypso-Browser'
+	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
-
-{ #category : #accessing }
-CGOImportPackageInProjectCommand class >> canBeExecutedInContext: aToolContext [
-	^ aToolContext isProjectSelected
-]
 
 { #category : #accessing }
 CGOImportPackageInProjectCommand class >> defaultMenuIconName [
@@ -25,23 +20,32 @@ CGOImportPackageInProjectCommand class >> defaultMenuIconName [
 CGOImportPackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: ClyManagedProject asCalypsoItemContext
+	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOImportPackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $p meta, $i meta for: ClyManagedProject asCalypsoItemContext
+	^ CmdShortcutActivation by: $p meta, $i meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
 CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
-	^ ClyToolbarCommandActivation
+	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
-		for: ClyManagedProject asCalypsoItemContext
+		for: PBProjectUIItem asCalypsoItemContext
+]
+
+{ #category : #activation }
+CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivatorForPackages [
+	<classAnnotation>
+	^ ClyToolbarActivation
+		byItemOf: ClyButtonToolbarGroup
+		order: 1000
+		for: PBPackageUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
@@ -59,11 +63,7 @@ CGOImportPackageInProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOImportPackageInProjectCommand >> execute [
-
 	| dialog |
-	dialog := CGOImportPackagesDialog on: project.
-	dialog openDialogWithSpec
-		okAction: [
-			dialog accept.
-			self refreshCalypsoChild ].
+	dialog := CGOImportPackagesDialog on: project project.
+	dialog openDialogWithSpec okAction: [ dialog accept ]
 ]
