@@ -3,7 +3,7 @@ Error thrown when a dependency is not resolved to a specific package version at 
 "
 Class {
 	#name : #CGOUnresolvedDependency,
-	#superclass : #PBError,
+	#superclass : #AnObsoleteCGOPackageManagerError,
 	#instVars : [
 		'candidates'
 	],

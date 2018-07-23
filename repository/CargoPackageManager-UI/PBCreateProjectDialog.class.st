@@ -25,9 +25,7 @@ PBCreateProjectDialog >> allTypes [
 { #category : #actions }
 PBCreateProjectDialog >> doAccept [
 	
-	acceptCallback cull: (self selectedType
-		accept;
-		project)
+	acceptCallback cull: (self selectedType accept)
 ]
 
 { #category : #opening }

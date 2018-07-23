@@ -19,8 +19,11 @@ PBNewProjectPanel class >> defaultSpec [
 { #category : #accepting }
 PBNewProjectPanel >> accept [
 
+	| project |
 	projectPanel accept.
-	self registry registerProject: projectPanel loadableUnit.
+	project := projectPanel loadableUnit.
+	self registry registerProject: project.
+	^ project
 ]
 
 { #category : #accessing }
@@ -39,12 +42,6 @@ PBNewProjectPanel >> initializeWidgets [
 PBNewProjectPanel >> openDialogOnAccept: aBlockClosure onCancel: aBlockClosure2 [ 
 	
 	self openDialogWithSpec 
-]
-
-{ #category : #accessing }
-PBNewProjectPanel >> project [
-	
-	^ projectPanel loadableUnit
 ]
 
 { #category : #accessing }

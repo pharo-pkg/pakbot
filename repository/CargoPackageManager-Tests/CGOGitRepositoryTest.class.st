@@ -118,6 +118,7 @@ CGOGitRepositoryTest >> testCanDetectGitRepositoryNotClonedWhenMissingLocation [
 { #category : #tests }
 CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepositoryClonedInSameBranchAndDetachedHead [
 	| iceRepository location |
+	<expectedFailure>
 	location := self iceRepositoryLocation.
 	iceRepository := IceRepositoryCreator new 
 			addRemote: 'https://github.com/demarey/pharo-counter';
