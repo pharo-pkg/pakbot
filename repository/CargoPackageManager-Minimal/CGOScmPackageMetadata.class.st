@@ -121,6 +121,6 @@ CGOScmPackageMetadata >> registerProjectFromSourceRepository: aCGOSourceReposito
 { #category : #adding }
 CGOScmPackageMetadata >> registerProjectFromSourceRepository: aCGOSourceRepository at: projectId [
 	^ self 
-		registerProject: (aCGOSourceRepository project)
+		registerProject: (PBProject fromRepository: aCGOSourceRepository)
 		at: projectId
 ]

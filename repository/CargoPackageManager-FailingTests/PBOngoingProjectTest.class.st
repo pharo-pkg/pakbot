@@ -1,5 +1,5 @@
 Class {
-	#name : #PBOngoingProjectFailingTest,
+	#name : #PBOngoingProjectTest,
 	#superclass : #CGOOngoingProjectTest,
 	#instVars : [
 		'protocol'
@@ -7,24 +7,8 @@ Class {
 	#category : #'CargoPackageManager-FailingTests-Model'
 }
 
-{ #category : #running }
-PBOngoingProjectFailingTest >> testAddingDependencyPerformAnnouncement [
-	| announced subscription |
-
-	[ 	announced := false.
-		subscription := SystemAnnouncer uniqueInstance
-			when: CGODependenciesChanged
-			do: [ :ann | 
-				ann project = ongoingProject
-					ifTrue: [ announced := true ] ].
-		ongoingProject
-			addDependency: (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').
-		self assert: announced 
-	] ensure: [ SystemAnnouncer uniqueInstance removeSubscription: subscription ]
-]
-
 { #category : #tests }
-PBOngoingProjectFailingTest >> testCanGetProjectFromSCM [
+PBOngoingProjectTest >> testCanGetProjectFromSCM [
 	| projectSourceRepositoryMock project |
 	projectSourceRepositoryMock := protocol mock: 'projectSourceRepositoryMock'.
 	protocol describe
@@ -39,7 +23,7 @@ PBOngoingProjectFailingTest >> testCanGetProjectFromSCM [
 ]
 
 { #category : #tests }
-PBOngoingProjectFailingTest >> testCanPublishAProject [
+PBOngoingProjectTest >> testCanPublishAProject [
 	| published |
 	ongoingProject publish.
 	
@@ -53,14 +37,14 @@ PBOngoingProjectFailingTest >> testCanPublishAProject [
 		assert: published class
 		equals: CGOProject.
 	self 
-		assertCollection: published packageUnitNames
+		assertCollection: published packageNames
 		hasSameElements: #(#Package1 #Package2)
 ]
 
 { #category : #tests }
-PBOngoingProjectFailingTest >> testCanPublishAProjectAndItsPackages [
+PBOngoingProjectTest >> testCanPublishAProjectAndItsPackages [
 	| packages |
-	ongoingProject assemblies: { CGOOngoingPackageAssembly for: #AllPackages in: ongoingProject name }.
+	ongoingProject assemblies: { PBAssembly for: #AllPackages in: ongoingProject name }.
 	
 	ongoingProject publishAll.
 	

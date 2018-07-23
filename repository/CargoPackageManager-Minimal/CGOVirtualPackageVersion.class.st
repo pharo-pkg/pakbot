@@ -37,7 +37,7 @@ CGOVirtualPackageVersion class >> newFrom: aDictionary [
 
 { #category : #converting }
 CGOVirtualPackageVersion >> asOngoingPackage [
-	^ CGOOngoingVirtualPackage fromPackageVersion: self
+	^ PBVirtualPackage fromPackageVersion: self
 ]
 
 { #category : #converting }

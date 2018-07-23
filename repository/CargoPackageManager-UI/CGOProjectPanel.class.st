@@ -24,7 +24,7 @@ CGOProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
 { #category : #example }
 CGOProjectPanel class >> example [
 	^ self basicNew
-		initializeWith: CGOOngoingProject example;
+		initializeWith: PBProject example;
 		openWithSpec
 ]
 

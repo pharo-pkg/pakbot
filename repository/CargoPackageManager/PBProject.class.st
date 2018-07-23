@@ -3,31 +3,30 @@ I represent a software project. I store basic metadata for the project.
 A Cargo project holds the list of assemblies (convenient and logical group of project packages) and virtual packages as well as the names of the package units (representing source code package) part of this project.
 "
 Class {
-	#name : #CGOOngoingProject,
-	#superclass : #CGOOngoingPackage,
+	#name : #PBProject,
+	#superclass : #PBLoadableUnit,
 	#instVars : [
-		'units',
 		'assemblies',
 		'virtualPackages',
 		'repository',
 		'registry',
 		'externalProjects',
-		'systemPackageOrganizer',
-		'dependencies'
+		'packages',
+		'version'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #example }
-CGOOngoingProject class >> example [
+PBProject class >> example [
 	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
-		packageUnits: { CGOOngoingPackageUnit example };
+		packages: { PBPackage example };
 		yourself
 ]
 
 { #category : #'instance creation' }
-CGOOngoingProject class >> for: aProjectName [
+PBProject class >> for: aProjectName [
 	
 	self deprecated: 'Please use #named: instead'
 		transformWith: '`@receiver for: `@statements1' 
@@ -37,7 +36,15 @@ CGOOngoingProject class >> for: aProjectName [
 ]
 
 { #category : #'instance creation' }
-CGOOngoingProject class >> fromVcsSerializedProject: aVcsSerializedProject [
+PBProject class >> fromRepository: aCGOSourceRepository [
+	| ongoing |
+	ongoing := self fromStonString: aCGOSourceRepository projectMetadataStonString.
+	ongoing repository: aCGOSourceRepository.
+	^ ongoing
+]
+
+{ #category : #'instance creation' }
+PBProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 	| ongoing |
 	ongoing := self basicNew
 		registry: CGOPackageRegistry default;
@@ -47,27 +54,39 @@ CGOOngoingProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 ]
 
 { #category : #'instance creation' }
-CGOOngoingProject class >> named: aProjectName [
+PBProject class >> named: aProjectName [
 	^ self basicNew
 		initializeWithProjectName: aProjectName;
 		yourself 
 ]
 
 { #category : #'instance creation' }
-CGOOngoingProject class >> new [
+PBProject class >> new [
 
 	self error: 'Please use #named:'
 ]
 
 { #category : #comparing }
-CGOOngoingProject >> = other [
-	^ self class == other class 
-		ifTrue: [ package == other package ]
-		ifFalse: [ ^ false ]	
+PBProject >> = other [
+	self species == other species ifFalse: [ ^ false ].
+	^ self name = other name
+]
+
+{ #category : #updating }
+PBProject >> addAssemblyNamed: aName [
+	| assembly |
+	
+	assembly := PBAssembly 
+		named: aName asSymbol
+		project: self.
+	(assemblies includes: assembly)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
+	assemblies add: assembly.
+	^ registry register: assembly
 ]
 
 { #category : #dependencies }
-CGOOngoingProject >> addDependency: aDependency [
+PBProject >> addDependency: aDependency [
 
 	dependencies add: aDependency.
 	aDependency project: self.
@@ -76,49 +95,49 @@ CGOOngoingProject >> addDependency: aDependency [
 ]
 
 { #category : #updating }
-CGOOngoingProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [ 
+PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [ 
 	externalProjects add: aCGOProjectDependencyDeclaration
 ]
 
 { #category : #dependencies }
-CGOOngoingProject >> allDependencies [
-	^ dependencies , (units flatCollect: #allDependencies).
+PBProject >> allDependencies [
+	^ dependencies , (packages flatCollect: #allDependencies).
 ]
 
 { #category : #converting }
-CGOOngoingProject >> asCargoProject [
+PBProject >> asCargoProject [
 	^ CGOProject fromOngoing: self
 ]
 
 { #category : #converting }
-CGOOngoingProject >> asOngoingPackage [
+PBProject >> asOngoingPackage [
 	^ self
 ]
 
 { #category : #converting }
-CGOOngoingProject >> asSerializedCargoProject [
+PBProject >> asSerializedCargoProject [
 	"VCS version of the project metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedProject from: self
 ]
 
 { #category : #converting }
-CGOOngoingProject >> asVcsSerializedCargoProject [
+PBProject >> asVcsSerializedCargoProject [
 	"VCS version of the project metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedProject from: self
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> assemblies [
+PBProject >> assemblies [
 	^ assemblies
 ]
 
 { #category : #updating }
-CGOOngoingProject >> assemblies: aListOfPackageAssemblies [
+PBProject >> assemblies: aListOfPackageAssemblies [
 	assemblies := aListOfPackageAssemblies
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> authors [
+PBProject >> authors [
 	self flag: 'TODO'.
 	" Use libigt to get the result of this command?
 		git log 5c3843fd626b6ce88b74302ba9d2af6bc93904a9 --format='%aN' --reverse
@@ -126,20 +145,25 @@ CGOOngoingProject >> authors [
 	^ #()
 ]
 
-{ #category : #loading }
-CGOOngoingProject >> basicLoad [
+{ #category : #'private-loading' }
+PBProject >> basicLoad [
 	registry registerProject: self.
 	self packageUnits do: #basicLoad.
 	CGOProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> cargoProjectDependencies [
+PBProject >> cargoProjectDependencies [
 	^ externalProjects reject: #isMetacelloProjectDependency
 ]
 
+{ #category : #accessing }
+PBProject >> children [
+	^ self packageUnits , self assemblies, self virtualPackages
+]
+
 { #category : #adding }
-CGOOngoingProject >> createNewPackageNamed: aString [ 
+PBProject >> createPackageNamed: aString [ 
 	
 	"We delegate to the system the creation of a package first.
 	This will fail if a package with that name already exists.
@@ -148,75 +172,105 @@ CGOOngoingProject >> createNewPackageNamed: aString [
 		on: RPackageConflictError
 		do: [ :error | CGOSystemPackageAlreadyDefined signal: aString ].
 
-	self newPackageUnit: aString.
+	^ self importPackageNamed: aString.
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> defaultAssembly [
+PBProject >> defaultAssembly [
 
-	^ (CGOOngoingPackageAssembly named: #default inProject: self)
-		parts: units copy;
+	^ (PBAssembly named: #default inProject: self)
+		parts: packages copy;
 		yourself
 ]
 
 { #category : #dependencies }
-CGOOngoingProject >> dependencies [
+PBProject >> dependencies [
 	
 	^ dependencies
 ]
 
 { #category : #dependencies }
-CGOOngoingProject >> dependencies: aDependencyList [ 
+PBProject >> dependencies: aDependencyList [ 
 	dependencies := aDependencyList
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> externalProjects [
+PBProject >> externalProjects [
 	^ externalProjects
 ]
 
 { #category : #updating }
-CGOOngoingProject >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
+PBProject >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
 	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration
 ]
 
-{ #category : #testing }
-CGOOngoingProject >> hasPackageNamed: aString [ 
+{ #category : #ston }
+PBProject >> fromSton: stonReader [
+	"Decode the Cargo serialized project."
+	| serializedProject |
 	
-	^ units anySatisfy: [ :any | any packageName = aString ]
+	serializedProject := CGOVcsSerializedProject new fromSton: stonReader.
+	self registry: CGOPackageRegistry default.
+	serializedProject flushIn: self.
+]
+
+{ #category : #accessing }
+PBProject >> fullyQualifiedName [
+
+	 ^ self name
 ]
 
 { #category : #testing }
-CGOOngoingProject >> hasProblems [
+PBProject >> hasPackageNamed: aString [ 
+	
+	^ packages anySatisfy: [ :any | any name = aString ]
+]
+
+{ #category : #testing }
+PBProject >> hasProblems [
 	^ self isUpToDate not
 ]
 
 { #category : #comparing }
-CGOOngoingProject >> hash [
-	^ self packageName hash
+PBProject >> hash [
+
+	^ self name hash
 ]
 
 { #category : #adding }
-CGOOngoingProject >> importPackageNamed: aString [ 
-	
-	self newPackageUnit: aString
+PBProject >> importPackageNamed: aString [
+	| unit |
+	unit := PBPackage named:
+		aString asSymbol project: self.
+	(packages includes: unit)
+		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+	packages add: unit.
+	^ registry register: unit
 ]
 
 { #category : #initialization }
-CGOOngoingProject >> initializeFromProject: aCGOProject [
+PBProject >> initialize [
 	super initialize.
-	package := aCGOProject package.
+	version := '0.0.0-N/A' asSemanticVersion.
+	description := ''.
+]
+
+{ #category : #initialization }
+PBProject >> initializeFromProject: aCGOProject [
+	self initialize.
 	description := aCGOProject description copy.
-	units := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
+	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
 	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	virtualPackages := aCGOProject virtualPackages veryDeepCopy asSet.
 	externalProjects := aCGOProject externalProjects veryDeepCopy asSet.
 ]
 
 { #category : #initialization }
-CGOOngoingProject >> initializeWithProjectName: aProjectName [
-	self initializeWithPackageName: aProjectName andProject: nil.
-	units := Set new.
+PBProject >> initializeWithProjectName: aProjectName [
+	
+	self initialize.
+	name := aProjectName.
+	packages := Set new.
 	assemblies := Set new.
 	virtualPackages := Set new.
 	externalProjects := Set new.
@@ -224,62 +278,62 @@ CGOOngoingProject >> initializeWithProjectName: aProjectName [
 ]
 
 { #category : #'compatibility - cargo solver' }
-CGOOngoingProject >> isAssembly [
+PBProject >> isAssembly [
 	"Needed so that Cargo solver can use a project as a standard package assembly"
 	^ true
 ]
 
 { #category : #conflicts }
-CGOOngoingProject >> isConflictingWith: aCGOResolvedDependency [ 
+PBProject >> isConflictingWith: aCGOResolvedDependency [ 
 	
 	^ (self name = aCGOResolvedDependency name)
 		and: [ self ~= aCGOResolvedDependency resolution resolvedProjectVersion ]
 ]
 
 { #category : #testing }
-CGOOngoingProject >> isEmpty [
-	^ self packageUnitNames isEmpty 
+PBProject >> isEmpty [
+	^ self packageNames isEmpty 
 		and: [self assemblies isEmpty 
 			and: [self virtualPackages isEmpty] ]
 ]
 
 { #category : #testing }
-CGOOngoingProject >> isInstalled [
+PBProject >> isInstalled [
 	
 	^ self isLoaded
 ]
 
 { #category : #testing }
-CGOOngoingProject >> isLoaded [
+PBProject >> isLoaded [
 	
 	^ registry notNil
 		and: [ registry isProjectInstalled: self ]
 ]
 
 { #category : #testing }
-CGOOngoingProject >> isProject [
+PBProject >> isProject [
 	^ true
 ]
 
 { #category : #resolution }
-CGOOngoingProject >> isResolvedBy: aResolution [
+PBProject >> isResolvedBy: aResolution [
 	
 	^ aResolution resolvesProject: self
 ]
 
 { #category : #'querying - installed' }
-CGOOngoingProject >> isUpToDate [
+PBProject >> isUpToDate [
 	
 	^ self allDependencies allSatisfy: [ :each | each isInstalled ]
 ]
 
 { #category : #'compatibility - package repository' }
-CGOOngoingProject >> isVirtual [
+PBProject >> isVirtual [
 	^ false
 ]
 
 { #category : #loading }
-CGOOngoingProject >> load [
+PBProject >> load [
 	
 	self resolve load.
 	
@@ -287,58 +341,17 @@ CGOOngoingProject >> load [
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> metacelloProjects [
+PBProject >> metacelloProjects [
 	^ externalProjects 
 		select: #isMetacelloProjectDependency
 		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]
 ]
 
-{ #category : #querying }
-CGOOngoingProject >> modifiedPackageUnits [ 
-	"check if either source code or metadata has been modified"
-	self flag: 'TODO'.
-	" for now, just return all packages part of the project"
-	^ self packageUnits
-		"select: #isDirty"
-	"TO DO: isDirty should take into account the metadata state"
-	"then return units objects"
-]
-
-{ #category : #accessing }
-CGOOngoingProject >> name [
-	^ self packageName
-]
-
 { #category : #updating }
-CGOOngoingProject >> newPackageAssembly: aCGOPackageAssemblyName [
-	| assembly |
-	
-	assembly := CGOOngoingPackageAssembly 
-		for: aCGOPackageAssemblyName asSymbol
-		project: self.
-	(assemblies includes: assembly)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
-	assemblies add: assembly.
-	^ registry register: assembly
-]
-
-{ #category : #updating }
-CGOOngoingProject >> newPackageUnit: aCGOPackageUnitName [
-	| unit |
-	unit := CGOOngoingPackageUnit
-		named: aCGOPackageUnitName asSymbol
-		project: self.
-	(units includes: unit)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
-	units add: unit.
-	^ registry register: unit
-]
-
-{ #category : #updating }
-CGOOngoingProject >> newVirtualPackage: aName [
+PBProject >> newVirtualPackage: aName [
 	| virtual |
 	
-	virtual := CGOOngoingVirtualPackage 
+	virtual := PBVirtualPackage 
 		for: aName asSymbol 
 		project: self.
 	(virtualPackages includes: virtual)
@@ -348,42 +361,43 @@ CGOOngoingProject >> newVirtualPackage: aName [
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> packageUnitNames [
-	^ units collect: #packageName
+PBProject >> packageNames [
+	^ packages collect: #name
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> packageUnits [
-	^ units
+PBProject >> packageUnits [
+	^ packages
 ]
 
 { #category : #updating }
-CGOOngoingProject >> packageUnits: aListOfPackageUnits [
-	units := aListOfPackageUnits asSet.
-	units do: [ :each | each project: self ]
+PBProject >> packages [
+
+	^ packages
 ]
 
-{ #category : #accessing }
-CGOOngoingProject >> packages [
-	^ self packageUnits , self assemblies, self virtualPackages
+{ #category : #updating }
+PBProject >> packages: aListOfPackageUnits [
+	packages := aListOfPackageUnits asSet.
+	packages do: [ :each | each project: self ]
 ]
 
 { #category : #printing }
-CGOOngoingProject >> printOn: aStream [
+PBProject >> printOn: aStream [
 	aStream 
 		<< self class name
 		<< '('
-		<< self packageName
+		<< self name
 		<< ')'
 ]
 
 { #category : #problems }
-CGOOngoingProject >> problemIcon [
+PBProject >> problemIcon [
 	^ #error
 ]
 
 { #category : #problems }
-CGOOngoingProject >> problemLongDescription [
+PBProject >> problemLongDescription [
 	self isUpToDate ifFalse: [ ^ 'One or more dependencies are not up to date.
 Please update the whole project or fix the dependencies.'].
 	
@@ -391,7 +405,7 @@ Please update the whole project or fix the dependencies.'].
 ]
 
 { #category : #problems }
-CGOOngoingProject >> problemShortDescription [
+PBProject >> problemShortDescription [
 	
 	self isUpToDate ifFalse: [ ^ 'One or more dependencies are not up to date.' ].
 	
@@ -399,74 +413,93 @@ CGOOngoingProject >> problemShortDescription [
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> project [
+PBProject >> project [
 	^ self
 ]
 
-{ #category : #'querying - installed' }
-CGOOngoingProject >> providesPackage: aPackageDependency [ 
+{ #category : #'testing - installing' }
+PBProject >> providesPackage: aPackageDependency [ 
 
 	^ false
 ]
 
 { #category : #'querying - installed' }
-CGOOngoingProject >> providesProject: aProjectDependency [
+PBProject >> providesProject: aProjectDependency [
 
 	^ (self projectName = aProjectDependency name and: [ aProjectDependency satisfyConstraints: self version ])
 			and: [ self defaultAssembly isInstalled ]
 ]
 
+{ #category : #publishing }
+PBProject >> publish [
+
+	Cargo defaultPackageRepository savePackageVersion: self
+]
+
 { #category : #accessing }
-CGOOngoingProject >> registry [
+PBProject >> registry [
 	^ registry
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> registry: aCGOPackageRegistry [ 
+PBProject >> registry: aCGOPackageRegistry [ 
 	registry := aCGOPackageRegistry
 ]
 
+{ #category : #assemblies }
+PBProject >> removeAssembly: aPBAssembly [ 
+	
+	assemblies remove: aPBAssembly
+]
+
 { #category : #dependencies }
-CGOOngoingProject >> removeDependency: aDependency [
+PBProject >> removeDependency: aDependency [
 
 	dependencies remove: aDependency.
 	
 	CGODependenciesChanged announceOnProject: self. 
 ]
 
+{ #category : #packages }
+PBProject >> removePackage: aPBPackage [ 
+	
+	packages remove: aPBPackage.
+	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ]
+]
+
 { #category : #removing }
-CGOOngoingProject >> removePart: aCGOPackageVersion [
+PBProject >> removePart: aCGOPackageVersion [
 	registry unregister: aCGOPackageVersion.
 	assemblies 
 		remove: aCGOPackageVersion
-		ifAbsent: [ 	units remove: aCGOPackageVersion ]
+		ifAbsent: [ 	packages remove: aCGOPackageVersion ]
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> repository [
+PBProject >> repository [
 	^ repository
 ]
 
 { #category : #updating }
-CGOOngoingProject >> repository: aCGOSourceRepository [ 
+PBProject >> repository: aCGOSourceRepository [ 
 	repository := aCGOSourceRepository
 ]
 
-{ #category : #private }
-CGOOngoingProject >> resolve [
+{ #category : #loading }
+PBProject >> resolve [
 	
 	^ registry newSolver solveProject: self
 ]
 
 { #category : #solving }
-CGOOngoingProject >> resolveInSolver: aCGOSolver [ 
+PBProject >> resolveInSolver: aCGOSolver [ 
 	
 	"An ongoing project is already solved, we need the version in the image"
 	^ self
 ]
 
 { #category : #saving }
-CGOOngoingProject >> saveToSCM: commitMessage [ 
+PBProject >> saveToSCM: commitMessage [ 
 	self withRepositoryDo: [ :repo |
 		repository := repo.
 		[repo
@@ -478,28 +511,33 @@ CGOOngoingProject >> saveToSCM: commitMessage [
 ]
 
 { #category : #'system-interaction' }
-CGOOngoingProject >> systemPackageOrganizer [
+PBProject >> systemPackageOrganizer [
 	
-	^ systemPackageOrganizer ifNil: [ RPackageOrganizer default ]
-]
-
-{ #category : #'system-interaction' }
-CGOOngoingProject >> systemPackageOrganizer: aPackageOrganizer [ 
-	systemPackageOrganizer := aPackageOrganizer
+	^ registry systemPackageOrganizer
 ]
 
 { #category : #accessing }
-CGOOngoingProject >> virtualPackages [
+PBProject >> version [
+	^ version
+]
+
+{ #category : #accessing }
+PBProject >> version: anObject [
+	version := anObject
+]
+
+{ #category : #accessing }
+PBProject >> virtualPackages [
 	^ virtualPackages
 ]
 
 { #category : #updating }
-CGOOngoingProject >> virtualPackages: aListOfVirtualPackages [ 
+PBProject >> virtualPackages: aListOfVirtualPackages [ 
 	virtualPackages := aListOfVirtualPackages
 ]
 
 { #category : #private }
-CGOOngoingProject >> withRepositoryDo: aBlock [
+PBProject >> withRepositoryDo: aBlock [
 	repository 
 		ifNil: [ CGOGitRepositoryCreationPanel withNewRepositoryDo: aBlock ]
 		ifNotNil: [ aBlock value: repository ]

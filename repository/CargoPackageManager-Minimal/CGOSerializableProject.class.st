@@ -56,7 +56,7 @@ CGOSerializableProject >> initializeWithProject: aCGOProject [
 	description := aCGOProject description.
 	repository := aCGOProject repository asSerializableRepository.
 	version := aCGOProject version asString.
-	unitNames := self toArrayOrNilIfEmpty: aCGOProject packageUnitNames.
+	unitNames := self toArrayOrNilIfEmpty: aCGOProject packageNames.
 	assemblies := self toArrayOrNilIfEmpty: aCGOProject assemblies "asVcsSerializedAssembly?".
 	virtualPackages := self toArrayOrNilIfEmpty: (aCGOProject virtualPackages collect: #asVcsSerializedPackageVersion).
 	authors := self toArrayOrNilIfEmpty: aCGOProject authors.

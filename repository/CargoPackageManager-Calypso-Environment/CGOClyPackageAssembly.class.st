@@ -103,6 +103,6 @@ CGOClyPackageAssembly >> name [
 
 { #category : #accessing }
 CGOClyPackageAssembly >> packages [
-	^ cargoAssembly packageUnitNames collect: 
+	^ cargoAssembly packageNames collect: 
 		[ :unitName | project packageNamed: unitName ]
 ]

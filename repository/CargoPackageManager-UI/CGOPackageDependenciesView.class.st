@@ -9,7 +9,7 @@ Class {
 
 { #category : #example }
 CGOPackageDependenciesView class >> example [
-	^ self openOn: (CGOOngoingPackageUnit example)
+	^ self openOn: (PBPackage example)
 ]
 
 { #category : #actions }

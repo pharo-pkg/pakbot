@@ -2,137 +2,145 @@
 Current version of the package unit metadata. As a PackageVersion is not editable, it is the only way  to update it.
 "
 Class {
-	#name : #CGOOngoingPackageUnit,
-	#superclass : #CGOOngoingPackage,
+	#name : #PBPackage,
+	#superclass : #PBProjectElement,
 	#instVars : [
-		'dependencies',
 		'provisions',
 		'platformRequirements'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #example }
-CGOOngoingPackageUnit class >> example [
-	^ (self named: #UnitTest)
+PBPackage class >> example [
+	^ (self named: #UnitTest project: (PBProject named: #MyProject))
 		description: 'A simple ongoing package unit.';
-		project: (CGOOngoingProject named: #MyProject);
 		yourself
 ]
 
+{ #category : #comparing }
+PBPackage >> = anotherPackage [
+
+	self species = anotherPackage species ifFalse: [ ^ false ].
+	self name = anotherPackage name ifFalse: [ ^ false ].
+	^ self project = anotherPackage project
+]
+
 { #category : #updating }
-CGOOngoingPackageUnit >> addDependencyOn: aPackageName [ 
+PBPackage >> addDependencyOn: aPackageName [ 
 	dependencies	add:
 		(CGOPackageDependency on: aPackageName)
 ]
 
 { #category : #'accessing - dependencies' }
-CGOOngoingPackageUnit >> allDependencies [
+PBPackage >> allDependencies [
 	
 	^ dependencies
 ]
 
 { #category : #converting }
-CGOOngoingPackageUnit >> asPackageDependency [
-	^ (self packageName -> {('=', self version asString)}) asPackageDependency
+PBPackage >> asPackageDependency [
+	^ (self name -> {('=', self version asString)}) asPackageDependency
 		project: project;
 		yourself
 ]
 
 { #category : #converting }
-CGOOngoingPackageUnit >> asPackageVersionOf: aCGOProject [
-	^ CGOPackageUnit fromOngoing: self project: aCGOProject
-]
-
-{ #category : #converting }
-CGOOngoingPackageUnit >> asVcsSerializedPackageUnit [
+PBPackage >> asVcsSerializedPackageUnit [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedPackageUnit from: self
 ]
 
-{ #category : #loading }
-CGOOngoingPackageUnit >> basicLoad [
-	self repository loadPackageNamed: self packageName
+{ #category : #'private-loading' }
+PBPackage >> basicLoad [
+
+	self repository loadPackageNamed: self name
 ]
 
 { #category : #accessing }
-CGOOngoingPackageUnit >> dependencies [
+PBPackage >> dependencies [
 	^ dependencies
 ]
 
 { #category : #updating }
-CGOOngoingPackageUnit >> dependencies: aDependencyList [ 
+PBPackage >> dependencies: aDependencyList [ 
 	dependencies := aDependencyList
 ]
 
 { #category : #testing }
-CGOOngoingPackageUnit >> fitsPlatformRequirements [
+PBPackage >> fitsPlatformRequirements [
 	^ Cargo platformAttributes includesAll: platformRequirements
 ]
 
+{ #category : #comparing }
+PBPackage >> hash [
+
+	^ self name hash
+]
+
 { #category : #initialization }
-CGOOngoingPackageUnit >> initializeFromPackageVersion: aCGOPackageVersion [
-	super initialize.
-	package := aCGOPackageVersion package.
-	description := aCGOPackageVersion copy.
+PBPackage >> initializeFromPackageVersion: aCGOPackageVersion [
+	self initialize.
 	dependencies := aCGOPackageVersion dependencies collect: #copy as: OrderedCollection.
 	self provisions: aCGOPackageVersion provisions.
 	platformRequirements := aCGOPackageVersion platformRequirements asOrderedCollection.
 ]
 
 { #category : #initialization }
-CGOOngoingPackageUnit >> initializeWithPackageName: aPackageName andProject: aCargoProject [
-	super initializeWithPackageName: aPackageName andProject: aCargoProject.
+PBPackage >> initializeWithPackageName: aPackageName andProject: aCargoProject [
+	
+	name := aPackageName.
+	project := aCargoProject.
 	dependencies := OrderedCollection new.
 	provisions := OrderedCollection new: 0.
 	platformRequirements := OrderedCollection new: 0.	
 ]
 
 { #category : #'querying - installed' }
-CGOOngoingPackageUnit >> isInstalled [
+PBPackage >> isInstalled [
 	
 	^ project registry isInstalled: self
 ]
 
 { #category : #testing }
-CGOOngoingPackageUnit >> isUnit [
+PBPackage >> isUnit [
 	^ true
 ]
 
 { #category : #accessing }
-CGOOngoingPackageUnit >> platformRequirements [
+PBPackage >> platformRequirements [
 	^ platformRequirements
 ]
 
 { #category : #updating }
-CGOOngoingPackageUnit >> platformRequirements: aListOfSymbols [ 
+PBPackage >> platformRequirements: aListOfSymbols [ 
 	platformRequirements := aListOfSymbols
 ]
 
 { #category : #'testing - installing' }
-CGOOngoingPackageUnit >> providesPackage: aPackageDependency [ 
+PBPackage >> providesPackage: aPackageDependency [ 
 	
-	^ self packageName = aPackageDependency packageName and: [ aPackageDependency satisfyConstraints: self version ]
+	^ self name = aPackageDependency name and: [ aPackageDependency satisfyConstraints: self version ]
 ]
 
 { #category : #accessing }
-CGOOngoingPackageUnit >> provisions [
+PBPackage >> provisions [
 	^ provisions
 ]
 
 { #category : #updating }
-CGOOngoingPackageUnit >> provisions: aListOfVirtualPackageVersionsReference [ 
+PBPackage >> provisions: aListOfVirtualPackageVersionsReference [ 
 	provisions := (CGOPackageUnit provisionsFromListOfProvisionStrings: aListOfVirtualPackageVersionsReference)	asOrderedCollection
 ]
 
 { #category : #constrains }
-CGOOngoingPackageUnit >> removeDependency: aPackageDependency [
+PBPackage >> removeDependency: aPackageDependency [
 	dependencies := dependencies 
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
 ]
 
 { #category : #updating }
-CGOOngoingPackageUnit >> updateDependency: aPackageDependency [
+PBPackage >> updateDependency: aPackageDependency [
 	dependencies := dependencies collect: 
 		[ :dependency | 
 		(dependency packageName = aPackageDependency packageName)
@@ -141,6 +149,6 @@ CGOOngoingPackageUnit >> updateDependency: aPackageDependency [
 ]
 
 { #category : #'*CargoPackageManager' }
-CGOOngoingPackageUnit >> versionLoaded [
+PBPackage >> versionLoaded [
 	self repository versionLoaded: self packageName.
 ]

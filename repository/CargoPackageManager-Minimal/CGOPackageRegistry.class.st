@@ -10,12 +10,13 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'installedPackages',
-		'registeredProjects'
+		'registeredProjects',
+		'systemPackageOrganizer'
 	],
 	#classVars : [
 		'Default'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #accessing }
@@ -113,7 +114,7 @@ CGOPackageRegistry >> isVirtual: aString [
 CGOPackageRegistry >> newProjectNamed: aString [ 
 	
 	| project |
-	project := CGOOngoingProject named: aString.
+	project := PBProject named: aString.
 	self register: project.
 	^ project
 ]
@@ -136,7 +137,7 @@ CGOPackageRegistry >> packageNamed: aName [
 { #category : #acccessing }
 CGOPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 	^ installedPackages 
-		detect: [ :package | package packageName = aName asSymbol ]
+		detect: [ :package | package name = aName asSymbol ]
 		ifNone: absentBlock
 ]
 
@@ -155,19 +156,19 @@ CGOPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 ]
 
 { #category : #registering }
-CGOPackageRegistry >> register: aPackageVersion [
-	aPackageVersion registry: self.
-	self checkPackageNameRegistrationOf: aPackageVersion packageName.
-	installedPackages add: aPackageVersion.
-	self registerProject: aPackageVersion project.
-	^ aPackageVersion
+CGOPackageRegistry >> register: aLoadableUnit [
+	aLoadableUnit registry: self.
+	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
+	installedPackages add: aLoadableUnit.
+	self registerProject: aLoadableUnit project.
+	^ aLoadableUnit
 ]
 
 { #category : #registering }
 CGOPackageRegistry >> registerProject: aCGOProject [
 	aCGOProject registry: self.
 	(registeredProjects includes: aCGOProject)
-		ifFalse: [ self checkProjectRegistrationOf: aCGOProject packageName.
+		ifFalse: [ self checkProjectRegistrationOf: aCGOProject name.
 					registeredProjects add: aCGOProject. ].
 	^ aCGOProject
 ]
@@ -180,6 +181,17 @@ CGOPackageRegistry >> registeredProjects [
 { #category : #cleaning }
 CGOPackageRegistry >> reset [
 	self initialize
+]
+
+{ #category : #acccessing }
+CGOPackageRegistry >> systemPackageOrganizer [
+
+	^ systemPackageOrganizer ifNil: [ RPackage organizer ]
+]
+
+{ #category : #accessing }
+CGOPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [ 
+	systemPackageOrganizer := aRPackageOrganizer
 ]
 
 { #category : #registering }
