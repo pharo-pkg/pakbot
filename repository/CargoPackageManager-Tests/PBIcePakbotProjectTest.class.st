@@ -30,7 +30,7 @@ PBIcePakbotProjectTest >> setUp [
 
 { #category : #accessing }
 PBIcePakbotProjectTest >> tearDown [
-	repository forget.
+	repository ifNotNil: [:repo | repo forget].
 	iceRepositoryLocation ensureDeleteAll
 ]
 
