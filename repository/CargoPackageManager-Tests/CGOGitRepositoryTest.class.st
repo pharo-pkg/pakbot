@@ -231,7 +231,7 @@ CGOGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
 
 	repository := CGOGitRepositoryCreator new
-		githubUrl: 'http://github.com/demarey/pharo-counter.git';
+		githubUrl: 'http://github.com/demarey/HotelApp.git';
 		location: self iceRepositoryLocation;
 		createAndClone.
 
