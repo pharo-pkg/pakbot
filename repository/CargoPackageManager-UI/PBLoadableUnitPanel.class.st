@@ -19,6 +19,14 @@ PBLoadableUnitPanel class >> labelSize [
 ]
 
 { #category : #'building widgets' }
+PBLoadableUnitPanel >> newTextInput [
+			
+	^ super newTextInput
+		autoAccept: true;
+		yourself
+]
+
+{ #category : #'building widgets' }
 PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName [
 	self
 		instVarNamed: textInputFieldModelName  
@@ -26,6 +34,16 @@ PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName [
 			entryCompletion: nil;
 			acceptOnCR: true;
 			ghostText: '')
+]
+
+{ #category : #'building widgets' }
+PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName default: aValue [
+	self
+		instVarNamed: textInputFieldModelName  
+		put: (self newTextInput
+			entryCompletion: nil;
+			acceptOnCR: true;
+			text: aValue)
 ]
 
 { #category : #'building widgets' }

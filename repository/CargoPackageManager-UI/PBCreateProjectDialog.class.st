@@ -25,7 +25,9 @@ PBCreateProjectDialog >> allTypes [
 { #category : #actions }
 PBCreateProjectDialog >> doAccept [
 	
-	acceptCallback cull: self selectedType buildDependency
+	acceptCallback cull: (self selectedType
+		accept;
+		project)
 ]
 
 { #category : #opening }

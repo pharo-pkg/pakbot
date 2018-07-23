@@ -6,10 +6,9 @@ I mainly interacte with OnGoingPackage[Unit/Assembly]
 
 "
 Class {
-	#name : #PBLoadableUnitOverview,
+	#name : #PBLoadableUnitOverviewPanel,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
-		'ongoingPackageVersion',
 		'nameLabel',
 		'nameInputField',
 		'versionLabel',
@@ -17,13 +16,18 @@ Class {
 		'repositoryLabel',
 		'repositoryInputField',
 		'descriptionLabel',
-		'descriptionText'
+		'descriptionText',
+		'registry',
+		'loadableUnit',
+		'autoAccept',
+		'subdirectoryLabel',
+		'subdirectoryInputField'
 	],
 	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }
-PBLoadableUnitOverview class >> defaultSpec [
+PBLoadableUnitOverviewPanel class >> defaultSpec [
 	^ SpecLayout composed
 		newColumn: [ : column | 
 			column
@@ -47,17 +51,17 @@ PBLoadableUnitOverview class >> defaultSpec [
 ]
 
 { #category : #example }
-PBLoadableUnitOverview class >> example [
+PBLoadableUnitOverviewPanel class >> example [
 	^ self openOn: (PBPackage example)
 ]
 
 { #category : #example }
-PBLoadableUnitOverview class >> example2 [
+PBLoadableUnitOverviewPanel class >> example2 [
 	^ self openWithMinimalSpecOn: (PBPackage example)
 ]
 
 { #category : #specs }
-PBLoadableUnitOverview class >> minimalSpec [
+PBLoadableUnitOverviewPanel class >> minimalSpec [
 	^ SpecLayout composed
 		newColumn: [ : column | 
 			column
@@ -71,50 +75,69 @@ PBLoadableUnitOverview class >> minimalSpec [
 ]
 
 { #category : #'instance creation' }
-PBLoadableUnitOverview class >> newOn: anOngoingPackageVersion owner: owner [
+PBLoadableUnitOverviewPanel class >> newOn: anOngoingPackageVersion owner: owner [
 	^ self basicNew
 		initializeWith: anOngoingPackageVersion;
 		yourself
 ]
 
 { #category : #opening }
-PBLoadableUnitOverview class >> openOn: anOngoingPackageVersion [
+PBLoadableUnitOverviewPanel class >> openOn: anOngoingPackageVersion [
 	(self newOn: anOngoingPackageVersion owner: nil)
 		openWithSpec
 ]
 
 { #category : #opening }
-PBLoadableUnitOverview class >> openWithMinimalSpecOn: anOngoingPackageVersion [
+PBLoadableUnitOverviewPanel class >> openWithMinimalSpecOn: anOngoingPackageVersion [
 	(self newOn: anOngoingPackageVersion owner: nil)
 		openWithSpec: #minimalSpec
 ]
 
+{ #category : #initialization }
+PBLoadableUnitOverviewPanel >> accept [
+
+	self
+		updateName;
+		updateVersion;
+		updateRepository;
+		updateDescription
+]
+
 { #category : #accessing }
-PBLoadableUnitOverview >> descriptionLabel [
+PBLoadableUnitOverviewPanel >> descriptionLabel [
 	^ descriptionLabel
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> descriptionText [
+PBLoadableUnitOverviewPanel >> descriptionText [
 	^ descriptionText
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverview >> initialExtent [
+PBLoadableUnitOverviewPanel >> initialExtent [
 	 ^ (900.0@350.0)
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverview >> initializePresenter [
-	nameInputField acceptBlock: [ self error: 'Project name should not change' ].
+PBLoadableUnitOverviewPanel >> initialize [
+
+	registry := CGOPackageRegistry default.
+	super initialize.
+]
+
+{ #category : #initialization }
+PBLoadableUnitOverviewPanel >> initializePresenter [
+
+	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
 	versionInputField acceptBlock: [ self updateVersion ].
 	repositoryInputField acceptBlock: [ self updateRepository ].
+
 	descriptionText whenTextIsAccepted: 
 		[ :newText | self updateDescription ]
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverview >> initializeWidgets [
+PBLoadableUnitOverviewPanel >> initializeWidgets [
 	(nameLabel := self newLabel)
 		label: 'Name:'.
 	self newTextInputField: #nameInputField description: 'MyProject'.
@@ -125,8 +148,11 @@ PBLoadableUnitOverview >> initializeWidgets [
 
 	"repository"
 	(repositoryLabel := self newLabel)
-		label: 'Repository:'.
-	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'. 
+		label: 'Repository Url:'.
+	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'.
+	(repositoryLabel := self newLabel)
+		label: 'Code subdirectory:'.
+	self newTextInputField: #subdirectoryInputField default: 'src'.
 		
 	(descriptionLabel := self newLabel)
 		label: 'Description:'.
@@ -134,85 +160,108 @@ PBLoadableUnitOverview >> initializeWidgets [
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverview >> initializeWith: anOngoingPackageUnit [
-	super initialize.
-	ongoingPackageVersion := anOngoingPackageUnit.
+PBLoadableUnitOverviewPanel >> initializeWith: anOngoingPackageUnit [
+	self initialize.
+	loadableUnit := anOngoingPackageUnit.
 	self refreshWidgetValues
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> nameInputField [
+PBLoadableUnitOverviewPanel >> loadableUnit [
+	^ loadableUnit
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> loadableUnit: anObject [
+	loadableUnit := anObject
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> nameInputField [
 	^ nameInputField
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> nameLabel [
+PBLoadableUnitOverviewPanel >> nameLabel [
 	^ nameLabel
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverview >> refreshWidgetValues [
-	nameInputField text: ongoingPackageVersion name.
-	versionInputField text: ongoingPackageVersion version asString.
-	ongoingPackageVersion isProject
-		ifTrue: [ ongoingPackageVersion repository ifNotNil: 
+PBLoadableUnitOverviewPanel >> refreshWidgetValues [
+	nameInputField text: loadableUnit name.
+	versionInputField text: loadableUnit version asString.
+	loadableUnit isProject
+		ifTrue: [ loadableUnit repository ifNotNil: 
 			[ :repository | repositoryInputField text: repository repositoryUrl ] ].
-	descriptionText text: ongoingPackageVersion description
+	descriptionText text: loadableUnit description
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> repositoryInputField [
+PBLoadableUnitOverviewPanel >> registry [
+	^ registry
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> registry: aCGOPackageRegistry [
+
+	registry := aCGOPackageRegistry 
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> repositoryInputField [
 	^ repositoryInputField
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> repositoryLabel [
+PBLoadableUnitOverviewPanel >> repositoryLabel [
 	^ repositoryLabel
 ]
 
-{ #category : #updating }
-PBLoadableUnitOverview >> updateDescription [
-	ongoingPackageVersion description: descriptionText text asString
-]
-
-{ #category : #updating }
-PBLoadableUnitOverview >> updateDescriptionWith: aString [
-	ongoingPackageVersion description: aString printString
-]
-
-{ #category : #updating }
-PBLoadableUnitOverview >> updateName [
-	ongoingPackageVersion name: nameInputField text asSymbol printString
-]
-
-{ #category : #updating }
-PBLoadableUnitOverview >> updateRepository [
-	| repositoryString repository subdirectory |
-	repositoryString := repositoryInputField text.
-	(CGOSourceRepository isGitRepositoryUrl: repositoryString)
-		ifTrue: [ subdirectory := UIManager default 
-		request: 'Subdirectory for git repository (leave it empty if none)' 
-		initialAnswer: ''. ].
-	repository := CGOSourceRepository 
-		fromStringUrl: repositoryString 
-		subdirectory:  subdirectory.
-	ongoingPackageVersion repository: repository.
-]
-
-{ #category : #updating }
-PBLoadableUnitOverview >> updateVersion [
-	| versionString |
-	versionString := versionInputField text.
-	versionString asSemanticVersion. "check the version string"
-	ongoingPackageVersion version: versionString
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> subdirectoryInputField [
+	^ subdirectoryInputField
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> versionInputField [
+PBLoadableUnitOverviewPanel >> subdirectoryLabel [
+	^ subdirectoryLabel
+]
+
+{ #category : #updating }
+PBLoadableUnitOverviewPanel >> updateDescription [
+	loadableUnit description: descriptionText text asString
+]
+
+{ #category : #updating }
+PBLoadableUnitOverviewPanel >> updateName [
+	loadableUnit name: nameInputField text asSymbol
+]
+
+{ #category : #updating }
+PBLoadableUnitOverviewPanel >> updateRepository [
+	| repositoryString repository subdirectoryString |
+	repositoryString := repositoryInputField text.
+	subdirectoryString := repositoryInputField text.
+	repository := CGOSourceRepository 
+		fromStringUrl: repositoryString 
+		subdirectory:  subdirectoryString.
+	loadableUnit repository: repository.
+]
+
+{ #category : #updating }
+PBLoadableUnitOverviewPanel >> updateVersion [
+	| versionString |
+	versionString := versionInputField text.
+	versionString asSemanticVersion. "check the version string"
+	loadableUnit version: versionString
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> versionInputField [
 	^ versionInputField
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverview >> versionLabel [
+PBLoadableUnitOverviewPanel >> versionLabel [
 	^ versionLabel
 ]

@@ -16,6 +16,13 @@ PBNewProjectPanel class >> defaultSpec [
 			col newRow: #projectPanel ]
 ]
 
+{ #category : #accepting }
+PBNewProjectPanel >> accept [
+
+	projectPanel accept.
+	self registry registerProject: projectPanel loadableUnit.
+]
+
 { #category : #accessing }
 PBNewProjectPanel >> icon [
 
@@ -25,13 +32,19 @@ PBNewProjectPanel >> icon [
 { #category : #initialization }
 PBNewProjectPanel >> initializeWidgets [
 	
-	projectPanel := PBLoadableUnitOverview newOn: (PBProject named: '') owner: self
+	projectPanel := PBLoadableUnitOverviewPanel newOn: (PBProject named: '') owner: self.
 ]
 
 { #category : #opening }
 PBNewProjectPanel >> openDialogOnAccept: aBlockClosure onCancel: aBlockClosure2 [ 
 	
 	self openDialogWithSpec 
+]
+
+{ #category : #accessing }
+PBNewProjectPanel >> project [
+	
+	^ projectPanel loadableUnit
 ]
 
 { #category : #accessing }
@@ -42,6 +55,12 @@ PBNewProjectPanel >> projectPanel [
 { #category : #accessing }
 PBNewProjectPanel >> projectPanel: anObject [
 	projectPanel := anObject
+]
+
+{ #category : #accessing }
+PBNewProjectPanel >> registry [
+	
+	^ projectPanel registry
 ]
 
 { #category : #accessing }
