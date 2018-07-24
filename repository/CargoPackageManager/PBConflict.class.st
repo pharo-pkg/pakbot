@@ -26,6 +26,11 @@ PBConflict >> conflictingDependencies: aCollection [
 	dependencies := aCollection
 ]
 
+{ #category : #accessing }
+PBConflict >> dependencies [
+	^ dependencies
+]
+
 { #category : #testing }
 PBConflict >> isResolved [
 	

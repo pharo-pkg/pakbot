@@ -91,7 +91,7 @@ PBProject >> addDependency: aDependency [
 	dependencies add: aDependency.
 	aDependency project: self.
 	
-	CGODependenciesChanged announceOnProject: self. 
+	self announceChangeInDependencies
 ]
 
 { #category : #updating }
@@ -102,6 +102,11 @@ PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 { #category : #dependencies }
 PBProject >> allDependencies [
 	^ dependencies , (packages flatCollect: #allDependencies) asOrderedCollection.
+]
+
+{ #category : #dependencies }
+PBProject >> announceChangeInDependencies [
+	CGODependenciesChanged announceOnProject: self
 ]
 
 { #category : #converting }
@@ -231,6 +236,12 @@ PBProject >> hasProblems [
 	^ self isUpToDate not
 ]
 
+{ #category : #testing }
+PBProject >> hasRepository [
+	
+	^ repository isValidRepository
+]
+
 { #category : #comparing }
 PBProject >> hash [
 
@@ -245,6 +256,7 @@ PBProject >> importPackageNamed: aString [
 { #category : #initialization }
 PBProject >> initialize [
 	super initialize.
+	repository := PBNoRepository new.
 	version := '0.0.0-N/A' asSemanticVersion.
 	description := ''.
 ]
@@ -253,7 +265,7 @@ PBProject >> initialize [
 PBProject >> initializeFromProject: aCGOProject [
 	self initialize.
 	description := aCGOProject description copy.
-	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
+	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: OrderedCollection.
 	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	virtualPackages := aCGOProject virtualPackages veryDeepCopy asSet.
 	externalProjects := aCGOProject externalProjects veryDeepCopy asSet.
@@ -261,14 +273,15 @@ PBProject >> initializeFromProject: aCGOProject [
 
 { #category : #initialization }
 PBProject >> initializeWithProjectName: aProjectName [
+	"The packages is an OrderedCollection, the unicity of the elements is guarantee in other part of the code."
 	
 	self initialize.
 	name := aProjectName.
-	packages := Set new.
+	packages := OrderedCollection new.
 	assemblies := Set new.
 	virtualPackages := Set new.
 	externalProjects := Set new.
-	dependencies := OrderedCollection new
+
 ]
 
 { #category : #accessing }
@@ -457,10 +470,8 @@ PBProject >> removeAssembly: aPBAssembly [
 
 { #category : #dependencies }
 PBProject >> removeDependency: aDependency [
-
 	dependencies remove: aDependency.
-	
-	CGODependenciesChanged announceOnProject: self. 
+	self announceChangeInDependencies
 ]
 
 { #category : #packages }
@@ -502,18 +513,6 @@ PBProject >> resolveInSolver: aCGOSolver [
 	
 	"An ongoing project is already solved, we need the version in the image"
 	^ self
-]
-
-{ #category : #saving }
-PBProject >> saveToSCM: commitMessage [ 
-	self withRepositoryDo: [ :repo |
-		repository := repo.
-		[repo
-			saveProject: self asVcsSerializedCargoProject
-			withMessage: commitMessage]
-			on: IceGitUsernameOrEmailNotFound 
-			do: [ :error | error acceptError: (IceTipInteractiveErrorVisitor on: repository iceRepository) ] ].
-	self flag: 'also implement push by asking to which remote we will push'
 ]
 
 { #category : #'system-interaction' }

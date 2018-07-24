@@ -18,21 +18,13 @@ CGODependencyConstraintTest >> testFromString [
 		equals: CGOFixedVersionConstraint.
 	self
 		assert: dependency asString
-		equals: '=1.0.0'
-]
-
-{ #category : #tests }
-CGODependencyConstraintTest >> testFromStringWithBadValue [
-	self
-		should: [ CGODependencyConstraint fromString: 'foo' ]
-		raise: CGODependencyConstraintFormatError
+		equals: '1.0.0'
 ]
 
 { #category : #tests }
 CGODependencyConstraintTest >> testFromStringWithBadVersion [
-	self
-		should: [ CGODependencyConstraint fromString: '=foo' ]
-		raise: SemanticVersionFormatError
+
+	self assert: (CGODependencyConstraint fromString: '=foo') version isInvalid
 ]
 
 { #category : #tests }

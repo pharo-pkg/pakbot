@@ -35,7 +35,7 @@ PBNewProjectPanel >> icon [
 { #category : #initialization }
 PBNewProjectPanel >> initializeWidgets [
 	
-	projectPanel := PBLoadableUnitOverviewPanel newOn: (PBProject named: '') owner: self.
+	projectPanel := self instantiate: PBLoadableUnitOverviewPanel on: (PBProject named: '').
 ]
 
 { #category : #opening }

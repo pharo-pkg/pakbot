@@ -52,6 +52,6 @@ PBCreateProjectCommand >> defaultMenuItemName [
 PBCreateProjectCommand >> execute [
 	
 	PBCreateProjectDialog new
-		openDialogOnAccept: [ :project | CGOProjectCreated announceOnProject: project ]
+		openDialogOnAccept: [ :selectedType | CGOProjectCreated announceOnProject: selectedType accept ]
 		onCancel: [ "Nothing" ]
 ]

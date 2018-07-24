@@ -7,6 +7,14 @@ Class {
 	#category : #'CargoPackageManager-Model'
 }
 
+{ #category : #adding }
+PBProjectElement >> addDependency: aDependency [
+
+	dependencies add: aDependency.
+	aDependency project: self project.
+	self project announceChangeInDependencies.
+]
+
 { #category : #accessing }
 PBProjectElement >> fullyQualifiedName [
 

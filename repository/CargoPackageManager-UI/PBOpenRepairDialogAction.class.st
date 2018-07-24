@@ -7,7 +7,7 @@ Class {
 	#category : #'CargoPackageManager-UI-Actions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance-creation' }
 PBOpenRepairDialogAction class >> onProject: aProject [
 
 	^ self new

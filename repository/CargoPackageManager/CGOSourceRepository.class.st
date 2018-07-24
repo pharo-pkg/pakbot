@@ -45,6 +45,12 @@ CGOSourceRepository >> isGitRepositoryUrl [
 	^ self class isGitRepositoryUrl: repositoryUrl
 ]
 
+{ #category : #testing }
+CGOSourceRepository >> isValidRepository [
+	
+	^ true
+]
+
 { #category : #saving }
 CGOSourceRepository >> projectMetadataFileName [
 	^ 'project-metadata.ston'

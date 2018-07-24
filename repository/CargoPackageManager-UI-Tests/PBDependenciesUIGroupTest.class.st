@@ -19,7 +19,7 @@ PBDependenciesUIGroupTest >> testProjectWithDependenciesShowsDependencieItem [
 	project addDependency: configurationProjectV1.
 
 	self openBrowser.
-
+	
 	self expandNodeNamed: 'TestProject'.
 	self expandNodeNamed: 'Dependencies'.
 	dep := self findChildInBrowser: 'CargoTestExample'.

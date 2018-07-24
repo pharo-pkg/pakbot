@@ -13,15 +13,13 @@ Class {
 		'nameInputField',
 		'versionLabel',
 		'versionInputField',
-		'repositoryLabel',
-		'repositoryInputField',
 		'descriptionLabel',
 		'descriptionText',
 		'registry',
 		'loadableUnit',
 		'autoAccept',
-		'subdirectoryLabel',
-		'subdirectoryInputField'
+		'repositoryLabel',
+		'repositoryInputField'
 	],
 	#category : #'CargoPackageManager-UI'
 }
@@ -41,15 +39,10 @@ PBLoadableUnitOverviewPanel class >> defaultSpec [
 						add: #versionLabel width: self labelSize;
 						add: #versionInputField ]
 				height: self inputTextHeight;
-				newRow: [ :repositoryRow |
-					repositoryRow 
+				newRow: [ :versionRow |
+					versionRow 
 						add: #repositoryLabel width: self labelSize;
 						add: #repositoryInputField ]
-				height: self inputTextHeight;
-				newRow: [ :repositoryRow |
-					repositoryRow 
-						add: #subdirectoryLabel width: self labelSize;
-						add: #subdirectoryInputField ]
 				height: self inputTextHeight;
 				add: #descriptionLabel height: self inputTextHeight;
 			 	add: #descriptionText ]
@@ -104,8 +97,17 @@ PBLoadableUnitOverviewPanel >> accept [
 	self
 		updateName;
 		updateVersion;
-		updateRepository;
 		updateDescription
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> autoAccept [
+	^ autoAccept
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> autoAccept: anObject [
+	autoAccept := anObject
 ]
 
 { #category : #accessing }
@@ -114,8 +116,18 @@ PBLoadableUnitOverviewPanel >> descriptionLabel [
 ]
 
 { #category : #accessing }
+PBLoadableUnitOverviewPanel >> descriptionLabel: anObject [
+	^ descriptionLabel := anObject
+]
+
+{ #category : #accessing }
 PBLoadableUnitOverviewPanel >> descriptionText [
 	^ descriptionText
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> descriptionText: anObject [
+	descriptionText := anObject
 ]
 
 { #category : #initialization }
@@ -135,10 +147,9 @@ PBLoadableUnitOverviewPanel >> initializePresenter [
 
 	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
 	versionInputField acceptBlock: [ self updateVersion ].
-	repositoryInputField acceptBlock: [ self updateRepository ].
-
 	descriptionText whenTextIsAccepted: 
-		[ :newText | self updateDescription ]
+		[ :newText | self updateDescription ].
+	self refreshWidgetValues
 ]
 
 { #category : #initialization }
@@ -149,26 +160,15 @@ PBLoadableUnitOverviewPanel >> initializeWidgets [
 		
 	(versionLabel := self newLabel)
 		label: 'Version:'.
-	self newTextInputField: #versionInputField description: '1.0.0'. 
-
-	"repository"
+	self newTextInputField: #versionInputField description: '1.0.0'.
+	
 	(repositoryLabel := self newLabel)
-		label: 'Url:'.
-	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'.
-	(subdirectoryLabel := self newLabel)
-		label: 'Src directory:'.
-	self newTextInputField: #subdirectoryInputField default: 'src'.
+		label: 'Repository:'.
+	repositoryInputField := self instantiate: PBRepositoryInputField on: self loadableUnit.
 		
 	(descriptionLabel := self newLabel)
 		label: 'Description:'.
 	descriptionText := self newText
-]
-
-{ #category : #initialization }
-PBLoadableUnitOverviewPanel >> initializeWith: anOngoingPackageUnit [
-	self initialize.
-	loadableUnit := anOngoingPackageUnit.
-	self refreshWidgetValues
 ]
 
 { #category : #accessing }
@@ -187,22 +187,24 @@ PBLoadableUnitOverviewPanel >> nameInputField [
 ]
 
 { #category : #accessing }
+PBLoadableUnitOverviewPanel >> nameInputField: anObject [
+	nameInputField := anObject
+]
+
+{ #category : #accessing }
 PBLoadableUnitOverviewPanel >> nameLabel [
 	^ nameLabel
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverviewPanel >> project [
-	self shouldBeImplemented.
+PBLoadableUnitOverviewPanel >> nameLabel: anObject [
+	^ nameLabel := anObject
 ]
 
 { #category : #initialization }
 PBLoadableUnitOverviewPanel >> refreshWidgetValues [
 	nameInputField text: loadableUnit name.
 	versionInputField text: loadableUnit version asString.
-	loadableUnit isProject
-		ifTrue: [ loadableUnit repository ifNotNil: 
-			[ :repository | repositoryInputField text: repository repositoryUrl ] ].
 	descriptionText text: loadableUnit description
 ]
 
@@ -223,18 +225,23 @@ PBLoadableUnitOverviewPanel >> repositoryInputField [
 ]
 
 { #category : #accessing }
+PBLoadableUnitOverviewPanel >> repositoryInputField: anObject [
+	repositoryInputField := anObject
+]
+
+{ #category : #accessing }
 PBLoadableUnitOverviewPanel >> repositoryLabel [
 	^ repositoryLabel
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverviewPanel >> subdirectoryInputField [
-	^ subdirectoryInputField
+PBLoadableUnitOverviewPanel >> repositoryLabel: anObject [
+	^ repositoryLabel := anObject
 ]
 
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> subdirectoryLabel [
-	^ subdirectoryLabel
+{ #category : #initialization }
+PBLoadableUnitOverviewPanel >> setModelBeforeInitialization: aDomainObject [
+	loadableUnit := aDomainObject
 ]
 
 { #category : #updating }
@@ -245,17 +252,6 @@ PBLoadableUnitOverviewPanel >> updateDescription [
 { #category : #updating }
 PBLoadableUnitOverviewPanel >> updateName [
 	loadableUnit name: nameInputField text asSymbol
-]
-
-{ #category : #updating }
-PBLoadableUnitOverviewPanel >> updateRepository [
-	| repositoryString repository subdirectoryString |
-	repositoryString := repositoryInputField text.
-	subdirectoryString := repositoryInputField text.
-	repository := CGOSourceRepository 
-		fromStringUrl: repositoryString 
-		subdirectory:  subdirectoryString.
-	loadableUnit repository: repository.
 ]
 
 { #category : #updating }
@@ -272,6 +268,16 @@ PBLoadableUnitOverviewPanel >> versionInputField [
 ]
 
 { #category : #accessing }
+PBLoadableUnitOverviewPanel >> versionInputField: anObject [
+	versionInputField := anObject
+]
+
+{ #category : #accessing }
 PBLoadableUnitOverviewPanel >> versionLabel [
 	^ versionLabel
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> versionLabel: anObject [
+	^ versionLabel := anObject
 ]

@@ -79,7 +79,7 @@ CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithSmallerMajorN
 { #category : #'tests-parsing' }
 CGOSemanticVersionTest >> testVersionStringInvalidShouldFail [
 
-	self should: [ SemanticVersion fromString: 'toto' ] raise: SemanticVersionFormatError
+	self assert: (SemanticVersion fromString: 'toto') isInvalid
 ]
 
 { #category : #'tests-parsing' }
@@ -97,7 +97,7 @@ CGOSemanticVersionTest >> testVersionStringWithMinorNumberShouldOnlyHaveMajorAnd
 { #category : #'tests-parsing' }
 CGOSemanticVersionTest >> testVersionStringWithMoreThanThreeComponentsShouldFail [
 
-	self should:  [ SemanticVersion fromString: '1.2.3.4' ] raise: SemanticVersionFormatError
+	self assert: (SemanticVersion fromString: '1.2.3.4') isInvalid
 ]
 
 { #category : #'tests-parsing' }
