@@ -16,9 +16,7 @@ Class {
 
 { #category : #private }
 PBProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
-	^ self basicNew
-		initializeWith: anOngoingPackageVersion;
-		buildWithSpec
+	^ (self on: anOngoingPackageVersion) buildWithSpec
 ]
 
 { #category : #example }
@@ -49,15 +47,9 @@ PBProjectPanel >> dependencies [
 { #category : #initialization }
 PBProjectPanel >> initializeWidgets [
 
-	overview := PBLoadableUnitOverviewPanel newOn: ongoingPackageUnit owner: self.
-	dependencies := CGOPackageDependenciesView newOn: ongoingPackageUnit owner: self.
-	projectStatus := CGOProjectStatusPresenter newOn: ongoingPackageUnit owner: self.
-]
-
-{ #category : #initialization }
-PBProjectPanel >> initializeWith: anOngoingPackageUnit [
-	ongoingPackageUnit := anOngoingPackageUnit.
-	super initialize
+	overview := self instantiate: PBLoadableUnitOverviewPanel on: ongoingPackageUnit.
+	dependencies := self instantiate: CGOPackageDependenciesView on: ongoingPackageUnit.
+	projectStatus := self instantiate: CGOProjectStatusPresenter on: ongoingPackageUnit.
 ]
 
 { #category : #accessing }
@@ -85,4 +77,9 @@ PBProjectPanel >> retrieveSpec: aSelector [
 	layout := self perform: aSelector.
 	layout isSpecLayout ifTrue: [ layout selector: aSelector ].
 	^ layout
+]
+
+{ #category : #initialization }
+PBProjectPanel >> setModelBeforeInitialization: anOngoingPackageUnit [
+	ongoingPackageUnit := anOngoingPackageUnit
 ]

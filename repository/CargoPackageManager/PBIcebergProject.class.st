@@ -62,6 +62,12 @@ PBIcebergProject >> initialize [
 ]
 
 { #category : #accessing }
+PBIcebergProject >> name [
+	
+	^ pakbotProject name
+]
+
+{ #category : #accessing }
 PBIcebergProject >> pakbotProject [
 	^ pakbotProject
 ]
