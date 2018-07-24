@@ -23,6 +23,13 @@ PBPackageUIItemTest >> setUp [
 ]
 
 { #category : #tests }
+PBPackageUIItemTest >> tearDown [
+
+	('TestProject-Core' asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.
+	super tearDown.
+]
+
+{ #category : #tests }
 PBPackageUIItemTest >> testAProjectShowsBothLoadedAndNotLoadedPackages [
 
 	| projectUI loadedUI notLoadedUI |
@@ -62,6 +69,7 @@ PBPackageUIItemTest >> testLoadedPackageHasCorrectCommands [
 
 	| packageUI commands |
 	packageUI := self findPackage: 'TestProject-Loaded'.	
+	self openBrowser.		
 	commands := self commandsOfItem: packageUI.
 
 	self assertCommands: commands includes: PBRemovePackageFromProjectCommand.
@@ -75,6 +83,7 @@ PBPackageUIItemTest >> testNotLoadedPackageHasCorrectCommands [
 
 	| packageUI commands |
 	packageUI := self findPackage: 'TestProject-NotLoaded'.	
+	self openBrowser.		
 	commands := self commandsOfItem: packageUI.
 
 	self assertCommands: commands includes: PBRemovePackageFromProjectCommand.
@@ -93,4 +102,22 @@ PBPackageUIItemTest >> testPackagesKnowsIfTheyAreInstalled [
 
 	self deny: notLoadedUI isInstalled.
 	self assert: loadedUI isInstalled.	
+]
+
+{ #category : #tests }
+PBPackageUIItemTest >> testRemovePackageFromProjectCommand [
+
+	| pkg |
+	
+	project createPackageNamed: 'TestProject-Core'.
+
+	self openBrowser.
+
+	self expandNodeNamed: 'TestProject'.
+	pkg := self findPackage: 'TestProject-Core'.
+
+	(self command: PBRemovePackageFromProjectCommand for: pkg) executeCommand. 
+	
+	self expandNodeNamed: 'TestProject'.
+	self assert: (self findPackage: 'TestProject-Core') isNil.
 ]

@@ -258,7 +258,7 @@ PBProject >> initialize [
 PBProject >> initializeFromProject: aCGOProject [
 	self initialize.
 	description := aCGOProject description copy.
-	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: Set.
+	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: OrderedCollection.
 	assemblies := aCGOProject assemblies veryDeepCopy asSet.
 	virtualPackages := aCGOProject virtualPackages veryDeepCopy asSet.
 	externalProjects := aCGOProject externalProjects veryDeepCopy asSet.
@@ -266,6 +266,7 @@ PBProject >> initializeFromProject: aCGOProject [
 
 { #category : #initialization }
 PBProject >> initializeWithProjectName: aProjectName [
+	"The packages is an OrderedCollection, the unicity of the elements is guarantee in other part of the code."
 	
 	self initialize.
 	name := aProjectName.
