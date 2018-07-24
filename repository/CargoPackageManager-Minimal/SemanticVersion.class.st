@@ -24,7 +24,7 @@ Class {
 		'patch',
 		'suffix'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model-Versions'
 }
 
 { #category : #'instance creation' }
@@ -36,12 +36,12 @@ SemanticVersion class >> fromString: aString [
 	
 	version := self new.
 	parts := $. split: aString.
-	(parts size > 3) ifTrue: [ SemanticVersionFormatError signal: aString ].
+	(parts size > 3) ifTrue: [ ^ InvalidSemanticVersion fromString: aString ].
 	
 	majorNumber := (parts at: 1) asInteger.
-	majorNumber ifNil: [ SemanticVersionFormatError signal: 'Wrong major format' ].
+	majorNumber ifNil: [ ^ InvalidSemanticVersion fromString: aString ].
 	[ minorNumber := (parts at: 2) asInteger.
-	minorNumber ifNil: [ SemanticVersionFormatError signal: 'Wrong minor format' ].
+	minorNumber ifNil: [ ^ InvalidSemanticVersion fromString: aString ].
 	patchNumber := (parts at: 3) asInteger. ]
 		on: SubscriptOutOfBounds
 		do: [ "if minor and/or patch version is not specified, keep nil" ].
@@ -124,6 +124,11 @@ SemanticVersion >> isDevelopmentVersion [
 	^ suffix 
 		ifNil: [ false ]
 		ifNotNil: [ suffix endsWith: '-dev' ]
+]
+
+{ #category : #testing }
+SemanticVersion >> isInvalid [
+	^ false
 ]
 
 { #category : #accessing }

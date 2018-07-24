@@ -60,7 +60,7 @@ CGOFixedVersionConstraint >> mergeFixedVersionConstraint: aFixedVersionConstrain
 
 { #category : #printing }
 CGOFixedVersionConstraint >> printOn: aStream [
-	aStream nextPut: $=.
+
 	aStream nextPutAll: version printString 
 ]
 

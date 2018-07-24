@@ -26,10 +26,9 @@ PBPackage >> = anotherPackage [
 	^ self project = anotherPackage project
 ]
 
-{ #category : #updating }
-PBPackage >> addDependencyOn: aPackageName [ 
-	dependencies	add:
-		(CGOPackageDependency on: aPackageName)
+{ #category : #adding }
+PBPackage >> addDependencyOn: aPackageName [
+	self addDependency: (CGOPackageDependency on: aPackageName)
 ]
 
 { #category : #'accessing - dependencies' }
@@ -88,10 +87,9 @@ PBPackage >> initializeFromPackageVersion: aCGOPackageVersion [
 
 { #category : #initialization }
 PBPackage >> initializeWithPackageName: aPackageName andProject: aCargoProject [
-	
+	self initialize.
 	name := aPackageName.
 	project := aCargoProject.
-	dependencies := OrderedCollection new.
 	provisions := OrderedCollection new: 0.
 	platformRequirements := OrderedCollection new: 0.	
 ]

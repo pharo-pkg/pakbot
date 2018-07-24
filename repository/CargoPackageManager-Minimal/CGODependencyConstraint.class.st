@@ -14,11 +14,12 @@ Class {
 { #category : #'instance creation' }
 CGODependencyConstraint class >> fromString: aString [
 	| constraintString |
-	
+	"It only supports fixed versions"
 	constraintString := aString trim.
 	(constraintString first = $=)
-		ifTrue: [ ^ CGOFixedVersionConstraint with: (SemanticVersion fromString: constraintString allButFirst ) ]
-		ifFalse: [ CGODependencyConstraintFormatError signal ]
+		ifTrue: [ constraintString := constraintString allButFirst ].
+		
+	^ CGOFixedVersionConstraint with: (SemanticVersion fromString: constraintString )
 ]
 
 { #category : #testing }

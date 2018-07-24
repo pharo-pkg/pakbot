@@ -91,7 +91,7 @@ PBProject >> addDependency: aDependency [
 	dependencies add: aDependency.
 	aDependency project: self.
 	
-	CGODependenciesChanged announceOnProject: self. 
+	self announceChangeInDependencies
 ]
 
 { #category : #updating }
@@ -102,6 +102,11 @@ PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 { #category : #dependencies }
 PBProject >> allDependencies [
 	^ dependencies , (packages flatCollect: #allDependencies).
+]
+
+{ #category : #dependencies }
+PBProject >> announceChangeInDependencies [
+	CGODependenciesChanged announceOnProject: self
 ]
 
 { #category : #converting }
@@ -264,11 +269,11 @@ PBProject >> initializeWithProjectName: aProjectName [
 	
 	self initialize.
 	name := aProjectName.
-	packages := Set new.
+	packages := OrderedCollection new.
 	assemblies := Set new.
 	virtualPackages := Set new.
 	externalProjects := Set new.
-	dependencies := OrderedCollection new
+
 ]
 
 { #category : #accessing }
@@ -457,10 +462,8 @@ PBProject >> removeAssembly: aPBAssembly [
 
 { #category : #dependencies }
 PBProject >> removeDependency: aDependency [
-
 	dependencies remove: aDependency.
-	
-	CGODependenciesChanged announceOnProject: self. 
+	self announceChangeInDependencies
 ]
 
 { #category : #packages }

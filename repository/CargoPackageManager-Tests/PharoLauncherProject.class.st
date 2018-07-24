@@ -30,27 +30,27 @@ PharoLauncherProject >> buildAndRegisterIn: aCGOPackageRegistry [
 
 { #category : #building }
 PharoLauncherProject >> buildExternalProjectDependencies [
-	project addExternalCargoProject: 
+	project addDependency:
 		(PBMetacelloConfigurationProjectDependency
 			name: 'JSON' 
 			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
 			version: #stable).
-	project addExternalCargoProject: 
+	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'Ston'
 			repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
 			version: #stable).
-	project addExternalCargoProject: 
+	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'OSProcess'
 			repositoryUrl: 'http://www.squeaksource.com/MetacelloRepository'
 			version: #stable).
-	project addExternalCargoProject: 
+	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'ProcessWrapper'
 			repositoryUrl: 'http://smalltalkhub.com/mc/hernan/ProcessWrapper/main/'
 			version: #bleedingEdge).
-	project addExternalCargoProject: 
+	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'XMLParser'
 			repositoryUrl: 'hhttp://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
@@ -59,23 +59,23 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 
 { #category : #building }
 PharoLauncherProject >> buildPackages [
-	(project importPackageNamed: #'PharoLauncher-Download')
+	(project newNotLoadedPackage: #'PharoLauncher-Download')
 		description: 'Package dealing with image / VM detection and download.';
 		addDependencyOn: #'OSProcess::Core with Output';
 		addDependencyOn: #'ProcessWrapper::Core'.
-	(project importPackageNamed: #'PharoLauncher-Core')
+	(project newNotLoadedPackage: #'PharoLauncher-Core')
 		description: 'Core package with the model, commands and settings.';
 		addDependencyOn: #'PharoLauncher-Download';
 		addDependencyOn: #'XMLParser::Core';
 		addDependencyOn: #'Ston';
 		addDependencyOn: #'JSON'.
-	(project importPackageNamed: #'PharoLauncher-Spec')
+	(project newNotLoadedPackage: #'PharoLauncher-Spec')
 		description: 'PharoLauncher UI.';
 		addDependencyOn: #'PharoLauncher-Core'.
-	(project importPackageNamed: #'PharoLauncher-Tests-Download')
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-Download')
 		description: 'Tests of the PharoLauncher-Download package.';
 		addDependencyOn: #'PharoLauncher-Download'.
-	(project importPackageNamed: #'PharoLauncher-Tests-Core')
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-Core')
 		description: 'Tests of the PharoLauncher-Core package..';
 		addDependencyOn: #'PharoLauncher-Core'.
 ]
@@ -89,11 +89,13 @@ PharoLauncherProject >> buildProject [
     lets you manage your Pharo images (launch, rename, copy and delete);
     lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);
     lets you create new images from any template,
-    automatically find and download the appropriate VM to launch your images.
-';
+    automatically find and download the appropriate VM to launch your images.';
 		repository: self buildRepository;
 		registry: registry;
-		yourself
+		yourself.
+		
+	registry register: project.
+	^ project
 ]
 
 { #category : #building }
