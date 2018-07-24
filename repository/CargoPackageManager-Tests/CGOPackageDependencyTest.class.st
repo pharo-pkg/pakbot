@@ -108,19 +108,14 @@ CGOPackageDependencyTest >> testCreateDependencyWithNoConstraintsShouldCreateNoC
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyWithWrongConstraintShouldFail [
-	self
-		should: [ CGOPackageDependency newFrom: #A -> #('foo') ]
-		raise: CGODependencyConstraintFormatError
-	
-]
+CGOPackageDependencyTest >> testCreateDependencyWithoutEqualGeneratesAConstraint [
+	| dep |
 
-{ #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyWithWrongVersionNumberShouldFail [
-	self
-		should: [ CGOPackageDependency newFrom: #A -> #('=foo') ]
-		raise: SemanticVersionFormatError
-	
+	dep := CGOPackageDependency newFrom: #A -> #('1.1.1').
+
+	self assert: dep constraints size equals: 1.
+	self assert: dep constraints anyOne class equals: CGOFixedVersionConstraint.
+	self deny: dep constraints anyOne version isInvalid.
 ]
 
 { #category : #'tests-serialization' }
@@ -136,7 +131,7 @@ CGOPackageDependencyTest >> testDependencyLiteralRepresentationShouldBeDependenc
 	| dependency |
 	dependency := CGOPackageDependency newFrom: #A -> #('=1.0.0').
 
-	self assert: dependency asLiteral equals: #A -> #('=1.0.0')
+	self assert: dependency asLiteral equals: #A -> #('1.0.0')
 ]
 
 { #category : #'tests-version comparison' }

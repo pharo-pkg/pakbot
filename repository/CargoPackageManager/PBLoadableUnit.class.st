@@ -114,6 +114,13 @@ PBLoadableUnit >> fitsPlatformRequirements [
 ]
 
 { #category : #initialization }
+PBLoadableUnit >> initialize [
+	super initialize.
+ 	dependencies := OrderedCollection new.
+	description := ''
+]
+
+{ #category : #initialization }
 PBLoadableUnit >> initializeFromPackageVersion: aCGOPackageVersion [
 	self subclassResponsibility
 ]
