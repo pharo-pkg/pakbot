@@ -2,17 +2,17 @@
 A PackageGroup represents a set of artifacts to load together.
 "
 Class {
-	#name : #CGOPackageLoadGroup,
+	#name : #PBLoadGroup,
 	#superclass : #Object,
 	#instVars : [
 		'name',
 		'loadableUnits'
 	],
-	#category : 'CargoPackageManager-Minimal-Loader'
+	#category : #'CargoPackageManager-Minimal-Loader'
 }
 
 { #category : #'instance creation' }
-CGOPackageLoadGroup class >> newWithAll: aListOfPackageVersionReferenceStrings [
+PBLoadGroup class >> newWithAll: aListOfPackageVersionReferenceStrings [
 	^ self new 
 		intializeWithPackageVersions: aListOfPackageVersionReferenceStrings;
 		yourself
@@ -20,64 +20,64 @@ CGOPackageLoadGroup class >> newWithAll: aListOfPackageVersionReferenceStrings [
 ]
 
 { #category : #private }
-CGOPackageLoadGroup >> computeName [
+PBLoadGroup >> computeName [
 	name := ', ' join: (loadableUnits collect: #name)
 ]
 
 { #category : #loading }
-CGOPackageLoadGroup >> fetchInto: aMCRepository [
+PBLoadGroup >> fetchInto: aMCRepository [
 	^ self mcVersions
 		do: [ :version | aMCRepository storeVersion: version ];
 		yourself
 ]
 
 { #category : #testing }
-CGOPackageLoadGroup >> includes: aLoadableUnit [ 
+PBLoadGroup >> includes: aLoadableUnit [ 
 
 	^ loadableUnits includes: aLoadableUnit
 ]
 
 { #category : #initialization }
-CGOPackageLoadGroup >> intializeWithPackageVersions: aListOfPackageVersions [
+PBLoadGroup >> intializeWithPackageVersions: aListOfPackageVersions [
 	loadableUnits := aListOfPackageVersions.
 	self computeName
 ]
 
 { #category : #loading }
-CGOPackageLoadGroup >> load [
+PBLoadGroup >> load [
 
 	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit basicLoad ]
 ]
 
 { #category : #accessing }
-CGOPackageLoadGroup >> loadableUnits [
+PBLoadGroup >> loadableUnits [
 	^ loadableUnits
 ]
 
 { #category : #loading }
-CGOPackageLoadGroup >> mcVersionFor: aPackageVersion [
+PBLoadGroup >> mcVersionFor: aPackageVersion [
 	^ aPackageVersion repository mcVersionFor: aPackageVersion
 ]
 
 { #category : #loading }
-CGOPackageLoadGroup >> mcVersions [
+PBLoadGroup >> mcVersions [
 	^ self packageVersions
 		reject: #isAssembly "Assemblies are not associated to a code artefact, so nothing to load ..."
 		thenCollect: [ :pkgVersion | self mcVersionFor: pkgVersion ]
 ]
 
 { #category : #accessing }
-CGOPackageLoadGroup >> name [
+PBLoadGroup >> name [
 	^ name
 ]
 
 { #category : #accessing }
-CGOPackageLoadGroup >> packageVersions [
+PBLoadGroup >> packageVersions [
 	^ self loadableUnits
 ]
 
 { #category : #printing }
-CGOPackageLoadGroup >> printOn: aStream [
+PBLoadGroup >> printOn: aStream [
 	aStream
 		<< self class name
 		<< '('
@@ -88,7 +88,7 @@ CGOPackageLoadGroup >> printOn: aStream [
 ]
 
 { #category : #loading }
-CGOPackageLoadGroup >> registerLoadedPackages [
+PBLoadGroup >> registerLoadedPackages [
 	self packageVersions
 		do: [ :pkgVersion | 
 			pkgVersion versionLoaded.

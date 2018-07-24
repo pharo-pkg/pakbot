@@ -2,18 +2,18 @@
 A PackageGroupTest is a test class for testing the behavior of PackageGroup
 "
 Class {
-	#name : #PackageLoadGroupTest,
+	#name : #PBLoadGroupTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-FailingTests-Loader'
+	#category : #'CargoPackageManager-FailingTests-Loader'
 }
 
 { #category : #accessing }
-PackageLoadGroupTest class >> resources [
+PBLoadGroupTest class >> resources [
 	^ { GreaseTestResource }
 ]
 
 { #category : #'tests-loading' }
-PackageLoadGroupTest >> testCanGetMCVersionsFromALocalRepositoryWhenRemoteRepositoryNotAvailable [
+PBLoadGroupTest >> testCanGetMCVersionsFromALocalRepositoryWhenRemoteRepositoryNotAvailable [
 	| pkgLoadGroup mcVersions |
 	pkgLoadGroup := GreaseTestResource current loadInstructions groups first.
 	mcVersions := pkgLoadGroup mcVersions.
@@ -29,7 +29,7 @@ PackageLoadGroupTest >> testCanGetMCVersionsFromALocalRepositoryWhenRemoteReposi
 ]
 
 { #category : #'tests-loading' }
-PackageLoadGroupTest >> testCannotGetMCVersionsWhenNoSourceRepositoryAvailable [
+PBLoadGroupTest >> testCannotGetMCVersionsWhenNoSourceRepositoryAvailable [
 	| pkgLoadGroup |
 	pkgLoadGroup := GreaseTestResource current loadInstructions groups first.
 	pkgLoadGroup packageVersions first sourcePackageVersion
