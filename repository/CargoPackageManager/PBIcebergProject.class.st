@@ -2,7 +2,7 @@
 I reprensent a Pakbot project. I'm able to serialize and provide changes to the project metadata.
 "
 Class {
-	#name : #IcePakbotProject,
+	#name : #PBIcebergProject,
 	#superclass : #IceAbstractProject,
 	#instVars : [
 		'pakbotProject',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-IcePakbotProject class >> onCommitish: aCommitish project: aPakbotProject [ 
+PBIcebergProject class >> onCommitish: aCommitish project: aPakbotProject [ 
 	^ self new
 		commitish: aCommitish;
 		pakbotProject: aPakbotProject;
@@ -20,19 +20,19 @@ IcePakbotProject class >> onCommitish: aCommitish project: aPakbotProject [
 ]
 
 { #category : #'instance creation' }
-IcePakbotProject class >> onRepository: aRepository project: aPakbotProject [ 
+PBIcebergProject class >> onRepository: aRepository project: aPakbotProject [ 
 	^ self onCommitish: aRepository workingCopy project: aPakbotProject
 ]
 
 { #category : #comparing }
-IcePakbotProject >> = anotherProject [
+PBIcebergProject >> = anotherProject [
 
 	^ super = anotherProject 
 		and: [ self contentsString = anotherProject contentsString ]
 ]
 
 { #category : #changes }
-IcePakbotProject >> addProjectFileToChangeBuilder: anIceChangeImporter [ 
+PBIcebergProject >> addProjectFileToChangeBuilder: anIceChangeImporter [ 
 
 	anIceChangeImporter
 		addFileNamed: self projectFilePath basename
@@ -41,7 +41,7 @@ IcePakbotProject >> addProjectFileToChangeBuilder: anIceChangeImporter [
 ]
 
 { #category : #changes }
-IcePakbotProject >> addToChangeBuilder: anIceChangeImporter [ 
+PBIcebergProject >> addToChangeBuilder: anIceChangeImporter [ 
 	
 	"compute diff between cargo model and saved version?"
 	
@@ -49,39 +49,46 @@ IcePakbotProject >> addToChangeBuilder: anIceChangeImporter [
 ]
 
 { #category : #writing }
-IcePakbotProject >> contentsString [
+PBIcebergProject >> contentsString [
 
 	^ (CGOPackageVersionWriterV1 toStringPretty: pakbotProject asVcsSerializedCargoProject) utf8Encoded
 ]
 
+{ #category : #initialization }
+PBIcebergProject >> initialize [
+
+	super initialize.
+	sourceDirectory := 'src'
+]
+
 { #category : #accessing }
-IcePakbotProject >> pakbotProject [
+PBIcebergProject >> pakbotProject [
 	^ pakbotProject
 ]
 
 { #category : #accessing }
-IcePakbotProject >> pakbotProject: aPakbotProject [ 
+PBIcebergProject >> pakbotProject: aPakbotProject [ 
 	pakbotProject := aPakbotProject
 ]
 
 { #category : #accessing }
-IcePakbotProject >> projectFilePath [
+PBIcebergProject >> projectFilePath [
 
 	^ RelativePath with: 'project-metadata.ston'
 ]
 
 { #category : #accessing }
-IcePakbotProject >> projectFileReference [
+PBIcebergProject >> projectFileReference [
 
 	^ commitish fileSystem resolve: self projectFilePath 
 ]
 
 { #category : #accessing }
-IcePakbotProject >> sourceDirectory [
+PBIcebergProject >> sourceDirectory [
 	^ sourceDirectory
 ]
 
 { #category : #accessing }
-IcePakbotProject >> sourceDirectory: aString [ 
+PBIcebergProject >> sourceDirectory: aString [ 
 	sourceDirectory := aString
 ]

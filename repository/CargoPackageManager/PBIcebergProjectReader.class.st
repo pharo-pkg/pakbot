@@ -3,7 +3,7 @@ I am a project reader that is used to read a Pakbot project.
 I create an IcePakbotProject in case a project metadata file is found.
 "
 Class {
-	#name : #IcePakbotProjectReader,
+	#name : #PBIcebergProjectReader,
 	#superclass : #IceProjectReader,
 	#instVars : [
 		'properties'
@@ -12,16 +12,16 @@ Class {
 }
 
 { #category : #testing }
-IcePakbotProjectReader >> canReadProjectFromCommitish: aCommitish [
+PBIcebergProjectReader >> canReadProjectFromCommitish: aCommitish [
 	 
-	^ (IcePakbotProject onCommitish: aCommitish) projectFileReference exists
+	^ (PBIcebergProject onCommitish: aCommitish) projectFileReference exists
 
 ]
 
 { #category : #reading }
-IcePakbotProjectReader >> readProjectFromCommitish: aCommitish [
+PBIcebergProjectReader >> readProjectFromCommitish: aCommitish [
 	| projectFileReference pakbotProject version |
-	projectFileReference := (IcePakbotProject onCommitish: aCommitish)
+	projectFileReference := (PBIcebergProject onCommitish: aCommitish)
 		projectFileReference.
 	projectFileReference
 		binaryReadStreamDo: [ :stream | 
@@ -33,13 +33,13 @@ IcePakbotProjectReader >> readProjectFromCommitish: aCommitish [
 	pakbotProject := CGOPackageVersionWriterV1
 		deserializeProject: properties
 		version: version.
-	^ (IcePakbotProject onCommitish: aCommitish project: pakbotProject)
+	^ (PBIcebergProject onCommitish: aCommitish project: pakbotProject)
 		sourceDirectory: (self srcDirectoryFromCommitish: aCommitish);
 		yourself
 ]
 
 { #category : #private }
-IcePakbotProjectReader >> srcDirectoryFromCommitish: aCommitish [
+PBIcebergProjectReader >> srcDirectoryFromCommitish: aCommitish [
 	properties at: 'srcDirectory' ifPresent: [ :srcDir | ^ srcDir ].
 	^ (IceBasicProjectReader new canReadProjectFromCommitish: aCommitish) 
 		ifTrue: [ (IceBasicProjectReader new readProjectFromCommitish: aCommitish) sourceDirectory ]

@@ -47,7 +47,10 @@ PBSetupProjectRepositoryCommand >> execute [
 	ITOptionDialog basicNew
 		panels: {PBImportIcebergRepositoryPanel new} , IceTipRepositoryTypePanel allTypes;
 		initialize;
-		openDialogOnAccept: [ :selectedPanel | 
-			project project repository: (CGOGitRepository repository: selectedPanel accept) ]
+		openDialogOnAccept: [ :selectedPanel | | repository |
+			repository := CGOGitRepository repository: selectedPanel accept.
+			project project repository: repository.
+			
+			repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: project project) ]
 		onCancel: [  ]
 ]
