@@ -38,7 +38,18 @@ PBMetacelloConfigurationProjectDependency >> isInstalledInMetacello [
 	
 	| conf |
 	conf := MetacelloProjectRegistration registry configurationRegistry at: (#ConfigurationOf , name) ifAbsent: [ ^ false ].	
-	^ conf version = version and: [ conf loadedInImage and: [ conf configurationProjectSpec loads isEmpty ]]
+	
+	^ version isSymbol ifTrue: [  
+		self isInstalledSymbolicVersion: conf.
+	] ifFalse: [  
+		conf version = version and: [ conf loadedInImage and: [ conf configurationProjectSpec loads isEmpty ]]
+	]
+	
+]
+
+{ #category : #testing }
+PBMetacelloConfigurationProjectDependency >> isInstalledSymbolicVersion: aMetacelloProjectRegistration [
+	^ (aMetacelloProjectRegistration configurationProjectSpec projectClass project version: version) versionString = aMetacelloProjectRegistration version
 ]
 
 { #category : #testing }
