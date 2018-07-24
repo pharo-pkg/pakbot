@@ -36,7 +36,7 @@ CGOPackageDependenciesView >> buildRoots [
 { #category : #actions }
 CGOPackageDependenciesView >> editAction [
 	"only one fixed constraint managed for now"
-	| dependency versionString |
+	| dependency |
 	dependency := self selectedPackage.
 	dependency newEditPanel
 		openDialogOnAccept: [ :modifiedDependency |
