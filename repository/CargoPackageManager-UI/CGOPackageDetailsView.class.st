@@ -134,7 +134,7 @@ CGOPackageDetailsView >> initializePresenter [
 
 { #category : #initialization }
 CGOPackageDetailsView >> initializeWidgets [
-	dependenciesView := CGOPackageDependenciesView newOn: ongoingPackageUnit owner: self.
+	dependenciesView := self instantiate: CGOPackageDependenciesView on: ongoingPackageUnit.
 
 	(provisionsLabel := self newLabel)
 		label: 'Provisions:'.
@@ -189,11 +189,10 @@ CGOPackageDetailsView >> refreshWidgetValues [
 	platformRequirementWidget := self buildPlatformTagsMorph asSpecAdapter
 ]
 
-{ #category : #private }
-CGOPackageDetailsView >> tagFactory [
-	^ TagMorphFactory new
-		color: Color lightBlue;
-		yourself
+{ #category : #accessing }
+CGOPackageDetailsView >> setModelBeforeInitialization: aModel [
+
+	ongoingPackageUnit := aModel
 ]
 
 { #category : #'updating - ui' }

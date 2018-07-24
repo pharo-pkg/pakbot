@@ -32,7 +32,7 @@ CGOBrowserPackageUnitEditorTool >> build [
 	aPackage := context selectedItems first actualObject.
 	
 	self 
-		addMorph: (CGOPackageUnitView buildOnOngoing: aPackage unit)
+		addMorph: (CGOPackageUnitView on: aPackage unit) buildWithSpec
 		fullFrame: LayoutFrame identity
 ]
 
