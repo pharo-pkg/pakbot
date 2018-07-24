@@ -35,7 +35,6 @@ PBNewProjectPanelTest >> setUp [
 PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
 
 	editionPanel nameInputField text: name.
-	editionPanel repositoryInputField text: url.
 	editionPanel versionInputField text: version.
 	editionPanel descriptionText text: description.
 	
@@ -43,7 +42,6 @@ PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
 	
 	self assert: project name equals: name.
 	self assert: project version equals: version.
-	self assert: project repository repositoryUrl equals: url.
 	self assert: project description equals: description.
 ]
 
@@ -51,7 +49,6 @@ PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
 PBNewProjectPanelTest >> testProjectIsNotInstalledBeforeAccept [
 
 	editionPanel nameInputField text: name.
-	editionPanel repositoryInputField text: url.
 	editionPanel versionInputField text: version.
 	editionPanel descriptionText text: description.
 	
@@ -63,7 +60,6 @@ PBNewProjectPanelTest >> testProjectIsNotInstalledBeforeAccept [
 PBNewProjectPanelTest >> testProjectIsRegisteredAfterAccept [
 
 	editionPanel nameInputField text: name.
-	editionPanel repositoryInputField text: url.
 	editionPanel versionInputField text: version.
 	editionPanel descriptionText text: description.
 	

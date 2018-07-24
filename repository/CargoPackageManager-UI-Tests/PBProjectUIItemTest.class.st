@@ -17,7 +17,7 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 	self assertCommands: commands includes: CGOImportPackageInProjectCommand.
 	self assertCommands: commands includes: CGORemoveProjectCommand.
 	self assertCommands: commands includes: CGOPublishProjectCommand.
-	self assertCommands: commands includes: PBCommitProjectCommand.	
+	self assertCommands: commands includes: PBSetupProjectRepositoryCommand.
 ]
 
 { #category : #tests }
