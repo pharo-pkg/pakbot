@@ -231,6 +231,12 @@ PBProject >> hasProblems [
 	^ self isUpToDate not
 ]
 
+{ #category : #testing }
+PBProject >> hasRepository [
+	
+	^ repository isValidRepository
+]
+
 { #category : #comparing }
 PBProject >> hash [
 
@@ -245,6 +251,7 @@ PBProject >> importPackageNamed: aString [
 { #category : #initialization }
 PBProject >> initialize [
 	super initialize.
+	repository := PBNoRepository new.
 	version := '0.0.0-N/A' asSemanticVersion.
 	description := ''.
 ]
