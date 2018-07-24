@@ -25,6 +25,11 @@ PBAbstractCalypsoTest >> assertCommands: commands notIncludes: aClass [
 	self assert: (commands noneSatisfy: [ :each | each command class = aClass ])
 ]
 
+{ #category : #utilties }
+PBAbstractCalypsoTest >> command: aCommandClass for: anItem [
+	^ (self commandsOfItem: anItem) detect: [ :each | each command isKindOf: aCommandClass ]
+]
+
 { #category : #utils }
 PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	| aContext selection datasource |
@@ -32,7 +37,7 @@ PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	selection := ClyDataSourceSelection
 		fromRoot: datasource
 		items: {(ClyDataSourceItem of: datasource value: anItem asCalypsoBrowserItem)}.
-	aContext := self contextClass ofSelection: selection for: ClyFullBrowser new.
+	aContext := self contextClass ofSelection: selection for: browser.
 	^ CmdContextMenuActivation createActivatorsExecutableInContext: aContext
 ]
 
