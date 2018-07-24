@@ -2,22 +2,26 @@
 Calypso command providing a contextual menu on Cargo project to allow a commit of the whole project.
 "
 Class {
-	#name : #CGOCommitProjectCommand,
+	#name : #PBCommitProjectCommand,
 	#superclass : #CGOProjectCommand,
-	#instVars : [
-		'commitMessage'
-	],
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #accessing }
-CGOCommitProjectCommand class >> defaultMenuIconName [
+PBCommitProjectCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ (aToolContext isProjectSelected and: [ aToolContext selectedProjectItems size = 1 ])
+		and: [ aToolContext selectedProjectItems first actualObject project hasRepository ]
+]
+
+{ #category : #accessing }
+PBCommitProjectCommand class >> defaultMenuIconName [
 	^#monticelloPackage
 	
 ]
 
 { #category : #activation }
-CGOCommitProjectCommand class >> systemBrowserMenuActivator [
+PBCommitProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation
@@ -27,14 +31,14 @@ CGOCommitProjectCommand class >> systemBrowserMenuActivator [
 ]
 
 { #category : #activation }
-CGOCommitProjectCommand class >> systemBrowserShortcutActivator [
+PBCommitProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
 	^ CmdShortcutActivation by: $s meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
-CGOCommitProjectCommand class >> systemBrowserToolbarActivator [
+PBCommitProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	
 	^ ClyToolbarActivation
@@ -43,23 +47,13 @@ CGOCommitProjectCommand class >> systemBrowserToolbarActivator [
 		for: PBProjectUIItem asCalypsoItemContext , ClyEmptyClassSelectionContext new
 ]
 
-{ #category : #accessing }
-CGOCommitProjectCommand >> commitMessage [
-	^ commitMessage
-]
-
-{ #category : #accessing }
-CGOCommitProjectCommand >> commitMessage: anObject [
-	commitMessage := anObject
-]
-
 { #category : #initialization }
-CGOCommitProjectCommand >> defaultMenuItemName [
+PBCommitProjectCommand >> defaultMenuItemName [
 	^ 'Commit...'
 ]
 
 { #category : #execution }
-CGOCommitProjectCommand >> execute [
+PBCommitProjectCommand >> execute [
 	
 	(IceTipCommitBrowser onRepository: project project repository iceRepository) openWithSpec
 ]
