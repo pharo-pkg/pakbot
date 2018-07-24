@@ -10,13 +10,12 @@ Class {
 	#category : #'CargoPackageManager-Solver'
 }
 
-{ #category : #signalling }
+{ #category : #signaling }
 PBProjectHasConflictsError class >> signalOnResolution: aResolution [
 
 	^ self new
 		resolution: aResolution;
 		signal
-	
 ]
 
 { #category : #visiting }
@@ -34,11 +33,6 @@ PBProjectHasConflictsError >> isResumable [
 { #category : #accessing }
 PBProjectHasConflictsError >> messageText [
 	^ 'There are conflicts in the resolution of ' , resolution resolvedProjectVersion name
-]
-
-{ #category : #accessing }
-PBProjectHasConflictsError >> resolution [
-	^ resolution
 ]
 
 { #category : #accessing }

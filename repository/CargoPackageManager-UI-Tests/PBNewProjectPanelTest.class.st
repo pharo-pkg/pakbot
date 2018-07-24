@@ -21,9 +21,8 @@ PBNewProjectPanelTest >> setUp [
 	registry := CGOPackageRegistry new.
 	
 	panel := PBNewProjectPanel new.
-	project := panel project.
-	
 	editionPanel := panel projectPanel.
+	project := editionPanel loadableUnit.
 	editionPanel registry: registry.
 	
 	name := 'aName'.

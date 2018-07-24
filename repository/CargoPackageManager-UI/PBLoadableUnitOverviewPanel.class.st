@@ -191,6 +191,11 @@ PBLoadableUnitOverviewPanel >> nameLabel [
 	^ nameLabel
 ]
 
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> project [
+	self shouldBeImplemented.
+]
+
 { #category : #initialization }
 PBLoadableUnitOverviewPanel >> refreshWidgetValues [
 	nameInputField text: loadableUnit name.
