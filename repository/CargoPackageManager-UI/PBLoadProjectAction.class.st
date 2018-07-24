@@ -42,7 +42,12 @@ PBLoadProjectAction >> iconName [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+PBLoadProjectAction >> name [
+	self subclassResponsibility
+]
+
 { #category : #initializing }
 PBLoadProjectAction >> project: aProject [ 
-	^ aProject assemblies isEmpty not
+	project := aProject
 ]
