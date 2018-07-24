@@ -1,7 +1,7 @@
 "
-Small dialiog window to ask the user what to load? metadata, all, assembly?
+Small dialog window to ask the user what to load? metadata, all, assembly?
 
-	(self onProject: (PBProject example assemblies: { PBAssembly example }; yourself)) openDialogWithSpec 
+	self example
 "
 Class {
 	#name : #PBLoadProjectDialog,
@@ -23,6 +23,17 @@ PBLoadProjectDialog class >> defaultSpec [
 			column 
 				newRow: #optionsList;
 				newRow: #detailPanel ]
+]
+
+{ #category : #examples }
+PBLoadProjectDialog class >> example [
+	<example>
+	| project |
+	project := PBProject example
+		assemblies: {PBAssembly example};
+		yourself.
+		
+	(self onProject: project) openDialogWithSpec
 ]
 
 { #category : #'instance creation' }
