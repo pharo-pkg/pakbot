@@ -23,6 +23,14 @@ CGOGitRepository class >> example [
 	^ CGOGitRepositoryCreator example
 ]
 
+{ #category : #'instance-creation' }
+CGOGitRepository class >> repository: anIceLibgitRepository [ 
+	
+	^ self new
+		repository: anIceLibgitRepository;
+		yourself
+]
+
 { #category : #'instance creation' }
 CGOGitRepository class >> url: anUrlOrString repository: anIceRepository [
 	^ self url: anUrlOrString repository: anIceRepository version: nil
@@ -188,6 +196,12 @@ CGOGitRepository >> projectMetadataStonString [
 	self ensureCloned.
 	
 	^ (iceRepository headCommit fileSystem / self projectMetadataPath) contents
+]
+
+{ #category : #accessing }
+CGOGitRepository >> repository: anIceLibgitRepository [ 
+	
+	iceRepository := anIceLibgitRepository
 ]
 
 { #category : #saving }
