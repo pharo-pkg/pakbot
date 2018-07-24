@@ -13,15 +13,11 @@ Class {
 		'nameInputField',
 		'versionLabel',
 		'versionInputField',
-		'repositoryLabel',
-		'repositoryInputField',
 		'descriptionLabel',
 		'descriptionText',
 		'registry',
 		'loadableUnit',
-		'autoAccept',
-		'subdirectoryLabel',
-		'subdirectoryInputField'
+		'autoAccept'
 	],
 	#category : #'CargoPackageManager-UI'
 }
@@ -94,7 +90,6 @@ PBLoadableUnitOverviewPanel >> accept [
 	self
 		updateName;
 		updateVersion;
-		updateRepository;
 		updateDescription
 ]
 
@@ -202,17 +197,6 @@ PBLoadableUnitOverviewPanel >> updateDescription [
 { #category : #updating }
 PBLoadableUnitOverviewPanel >> updateName [
 	loadableUnit name: nameInputField text asSymbol
-]
-
-{ #category : #updating }
-PBLoadableUnitOverviewPanel >> updateRepository [
-	| repositoryString repository subdirectoryString |
-	repositoryString := repositoryInputField text.
-	subdirectoryString := repositoryInputField text.
-	repository := CGOSourceRepository 
-		fromStringUrl: repositoryString 
-		subdirectory:  subdirectoryString.
-	loadableUnit repository: repository.
 ]
 
 { #category : #updating }

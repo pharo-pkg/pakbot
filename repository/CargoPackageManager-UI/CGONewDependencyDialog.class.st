@@ -1,11 +1,7 @@
 Class {
 	#name : #CGONewDependencyDialog,
 	#superclass : #ITOptionDialog,
-	#instVars : [
-		'acceptCallback',
-		'cancelCallback'
-	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #examples }
@@ -15,29 +11,10 @@ CGONewDependencyDialog class >> example [
 ]
 
 { #category : #accessing }
-CGONewDependencyDialog >> allTypes [
-	
-	^ { 
-	CGOMetacelloBaselineDependencyPanel new.
-	CGOMetacelloConfigurationDependencyPanel new }
-]
-
-{ #category : #actions }
-CGONewDependencyDialog >> doAccept [
-	
-	acceptCallback cull: self selectedType buildDependency
-]
-
-{ #category : #opening }
-CGONewDependencyDialog >> openDialogOnAccept: anAcceptCallback onCancel: aCancelCallback [
-	
-	acceptCallback := anAcceptCallback.
-	cancelCallback := aCancelCallback.
-	self openDialogWithSpec
-]
-
-{ #category : #accessing }
-CGONewDependencyDialog >> title [
-
-	^ 'Add a dependency'
+CGONewDependencyDialog >> initialize [
+	self title: 'Add a dependency'.
+	panels := {
+		CGOMetacelloBaselineDependencyPanel new.
+		CGOMetacelloConfigurationDependencyPanel new}.
+	super initialize.
 ]
