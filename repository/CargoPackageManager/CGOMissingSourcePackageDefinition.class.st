@@ -4,7 +4,7 @@ This error is signaled when no source repository can be found!
 "
 Class {
 	#name : #CGOMissingSourcePackageDefinition,
-	#superclass : #AnObsoleteCGOPackageManagerError,
+	#superclass : #PBError,
 	#category : #'CargoPackageManager-Model'
 }
 

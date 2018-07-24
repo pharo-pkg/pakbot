@@ -3,7 +3,7 @@ Error raised when no working copy is found in the image for the given package un
 "
 Class {
 	#name : #CGOWorkingCopyNotFound,
-	#superclass : #AnObsoleteCGOPackageManagerError,
+	#superclass : #PBError,
 	#instVars : [
 		'packageUnit'
 	],
