@@ -236,6 +236,12 @@ PBProject >> hasProblems [
 	^ self isUpToDate not
 ]
 
+{ #category : #testing }
+PBProject >> hasRepository [
+	
+	^ repository isValidRepository
+]
+
 { #category : #comparing }
 PBProject >> hash [
 
@@ -250,6 +256,7 @@ PBProject >> importPackageNamed: aString [
 { #category : #initialization }
 PBProject >> initialize [
 	super initialize.
+	repository := PBNoRepository new.
 	version := '0.0.0-N/A' asSemanticVersion.
 	description := ''.
 ]
@@ -506,18 +513,6 @@ PBProject >> resolveInSolver: aCGOSolver [
 	
 	"An ongoing project is already solved, we need the version in the image"
 	^ self
-]
-
-{ #category : #saving }
-PBProject >> saveToSCM: commitMessage [ 
-	self withRepositoryDo: [ :repo |
-		repository := repo.
-		[repo
-			saveProject: self asVcsSerializedCargoProject
-			withMessage: commitMessage]
-			on: IceGitUsernameOrEmailNotFound 
-			do: [ :error | error acceptError: (IceTipInteractiveErrorVisitor on: repository iceRepository) ] ].
-	self flag: 'also implement push by asking to which remote we will push'
 ]
 
 { #category : #'system-interaction' }

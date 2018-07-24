@@ -115,12 +115,6 @@ CGOPackageListEditor >> initializeWidgets [
 
 ]
 
-{ #category : #initialization }
-CGOPackageListEditor >> initializeWith: anOngoingPackageUnit [
-	ongoingPackageVersion := anOngoingPackageUnit.
-	self initialize
-]
-
 { #category : #accessing }
 CGOPackageListEditor >> label [
 	^ label
@@ -180,6 +174,11 @@ CGOPackageListEditor >> selectionChanged: ann [
 	removeButton enabled: ann newSelectedRowIndexes notEmpty.
 	editButton enabled: ann newSelectedRowIndexes notEmpty.
 
+]
+
+{ #category : #initialization }
+CGOPackageListEditor >> setModelBeforeInitialization: aModel [
+	ongoingPackageVersion := aModel
 ]
 
 { #category : #'private - displaying' }

@@ -23,6 +23,14 @@ CGOGitRepository class >> example [
 	^ CGOGitRepositoryCreator example
 ]
 
+{ #category : #'instance-creation' }
+CGOGitRepository class >> repository: anIceLibgitRepository [ 
+	
+	^ self new
+		repository: anIceLibgitRepository;
+		yourself
+]
+
 { #category : #'instance creation' }
 CGOGitRepository class >> url: anUrlOrString repository: anIceRepository [
 	^ self url: anUrlOrString repository: anIceRepository version: nil
@@ -190,6 +198,12 @@ CGOGitRepository >> projectMetadataStonString [
 	^ (iceRepository headCommit fileSystem / self projectMetadataPath) contents
 ]
 
+{ #category : #accessing }
+CGOGitRepository >> repository: anIceLibgitRepository [ 
+	
+	iceRepository := anIceLibgitRepository
+]
+
 { #category : #saving }
 CGOGitRepository >> savePackageUnit: packageUnit withMessage: commitMessage [
 	| iceSavedPackage newMcVersion |
@@ -208,20 +222,6 @@ CGOGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
 	packageUnits 
 		do: [ :unit |
 				self savePackageUnit: unit withMessage: commitMessage ]
-]
-
-{ #category : #saving }
-CGOGitRepository >> saveProject: aVcsSerializedCargoProject withMessage: commitMessage [
-	self saveProjectMetadataToIndex: aVcsSerializedCargoProject.
-	^ self iceRepository commitWithMessage: commitMessage
-	
-]
-
-{ #category : #saving }
-CGOGitRepository >> saveProjectMetadataToIndex: serializableProject [
-	^ self iceRepository 
-		saveContent: (CGOPackageVersionWriterV1 toStringPretty: serializableProject) withInternetLineEndings
-		inWorkingCopyFile: self projectMetadataPath
 ]
 
 { #category : #querying }

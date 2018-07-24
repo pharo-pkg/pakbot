@@ -98,6 +98,12 @@ CGOProjectStatusPresenter >> requiredHeight [
 ]
 
 { #category : #accessing }
+CGOProjectStatusPresenter >> setModelBeforeInitialization: aModel [
+
+	project := aModel
+]
+
+{ #category : #accessing }
 CGOProjectStatusPresenter >> statusIcon [
 	^ statusIcon
 ]

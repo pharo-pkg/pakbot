@@ -1,10 +1,6 @@
 Class {
 	#name : #PBCreateProjectDialog,
 	#superclass : #ITOptionDialog,
-	#instVars : [
-		'acceptCallback',
-		'cancelCallback'
-	],
 	#category : #'CargoPackageManager-UI-NewProject'
 }
 
@@ -15,29 +11,10 @@ PBCreateProjectDialog class >> example [
 ]
 
 { #category : #accessing }
-PBCreateProjectDialog >> allTypes [
-	
-	^ { 
-	PBNewProjectPanel new.
-	PBImportProjectFromGitPanel new }
-]
-
-{ #category : #actions }
-PBCreateProjectDialog >> doAccept [
-	
-	acceptCallback cull: (self selectedType accept)
-]
-
-{ #category : #opening }
-PBCreateProjectDialog >> openDialogOnAccept: anAcceptCallback onCancel: aCancelCallback [
-	
-	acceptCallback := anAcceptCallback.
-	cancelCallback := aCancelCallback.
-	self openDialogWithSpec
-]
-
-{ #category : #accessing }
-PBCreateProjectDialog >> title [
-
-	^ 'Create new Project'
+PBCreateProjectDialog >> initialize [
+	panels := {
+		PBNewProjectPanel new.
+		PBImportProjectFromGitPanel new }.
+	super initialize.
+	self title: 'Create new Project'.
 ]

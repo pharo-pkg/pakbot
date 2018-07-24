@@ -40,7 +40,7 @@ PBIcePakbotProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
 
 	pakbotProject description: 'foo'.
 	
-	project := IcePakbotProject onRepository: repository project: pakbotProject.
+	project := PBIcebergProject onRepository: repository project: pakbotProject.
 	repository workingCopy basicSetProject: project.
 	
 	diff := IceDiff from: repository workingCopy to: repository headCommit.
@@ -59,7 +59,7 @@ PBIcePakbotProjectTest >> testCanDetectAChangeInPakbotProjectMetatadata [
 PBIcePakbotProjectTest >> testNoChangeDetectedInPakbotProjectMetatadataWhenMetadataUnchanged [
 	| project |
 
-	project := IcePakbotProject onRepository: repository project: pakbotProject.
+	project := PBIcebergProject onRepository: repository project: pakbotProject.
 	repository workingCopy basicSetProject: project.
 
 	self assert: repository workingCopyDiff isEmpty.
