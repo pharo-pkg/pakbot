@@ -60,16 +60,6 @@ CGOCommitProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 CGOCommitProjectCommand >> execute [
-	project saveToSCM: commitMessage
-]
-
-{ #category : #initialization }
-CGOCommitProjectCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
 	
-	commitMessage := UIManager default 
-		multiLineRequest: 'Commit message' 
-		initialAnswer: '' 
-		answerHeight: 200.
-	commitMessage isEmptyOrNil ifTrue: [ CmdCommandAborted signal]
+	(IceTipCommitBrowser onRepository: project project repository iceRepository) openWithSpec
 ]

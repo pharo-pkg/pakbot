@@ -101,11 +101,6 @@ CGOCalypsoPackageManager >> queryClass [
 	^ PBAllPakbotProjects
 ]
 
-{ #category : #operations }
-CGOCalypsoPackageManager >> saveProject: aCGOProject toSCMWithMessage: message [ 
-	aCGOProject asOngoingPackage saveToSCM: message
-]
-
 { #category : #accessing }
 CGOCalypsoPackageManager >> systemEnvironment: anEnvironment [
 ]

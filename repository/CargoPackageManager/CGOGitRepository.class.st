@@ -210,20 +210,6 @@ CGOGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
 				self savePackageUnit: unit withMessage: commitMessage ]
 ]
 
-{ #category : #saving }
-CGOGitRepository >> saveProject: aVcsSerializedCargoProject withMessage: commitMessage [
-	self saveProjectMetadataToIndex: aVcsSerializedCargoProject.
-	^ self iceRepository commitWithMessage: commitMessage
-	
-]
-
-{ #category : #saving }
-CGOGitRepository >> saveProjectMetadataToIndex: serializableProject [
-	^ self iceRepository 
-		saveContent: (CGOPackageVersionWriterV1 toStringPretty: serializableProject) withInternetLineEndings
-		inWorkingCopyFile: self projectMetadataPath
-]
-
 { #category : #querying }
 CGOGitRepository >> sourcePackageVersionClass [
 	^ CGOGitHostedPackageVersion

@@ -41,16 +41,6 @@ PBLoadableUnitOverviewPanel class >> defaultSpec [
 						add: #versionLabel width: self labelSize;
 						add: #versionInputField ]
 				height: self inputTextHeight;
-				newRow: [ :repositoryRow |
-					repositoryRow 
-						add: #repositoryLabel width: self labelSize;
-						add: #repositoryInputField ]
-				height: self inputTextHeight;
-				newRow: [ :repositoryRow |
-					repositoryRow 
-						add: #subdirectoryLabel width: self labelSize;
-						add: #subdirectoryInputField ]
-				height: self inputTextHeight;
 				add: #descriptionLabel height: self inputTextHeight;
 			 	add: #descriptionText ]
 ]
@@ -135,8 +125,6 @@ PBLoadableUnitOverviewPanel >> initializePresenter [
 
 	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
 	versionInputField acceptBlock: [ self updateVersion ].
-	repositoryInputField acceptBlock: [ self updateRepository ].
-
 	descriptionText whenTextIsAccepted: 
 		[ :newText | self updateDescription ]
 ]
@@ -150,14 +138,6 @@ PBLoadableUnitOverviewPanel >> initializeWidgets [
 	(versionLabel := self newLabel)
 		label: 'Version:'.
 	self newTextInputField: #versionInputField description: '1.0.0'. 
-
-	"repository"
-	(repositoryLabel := self newLabel)
-		label: 'Url:'.
-	self newTextInputField: #repositoryInputField description: 'git@github.com:owner/project.git'.
-	(subdirectoryLabel := self newLabel)
-		label: 'Src directory:'.
-	self newTextInputField: #subdirectoryInputField default: 'src'.
 		
 	(descriptionLabel := self newLabel)
 		label: 'Description:'.
@@ -200,9 +180,6 @@ PBLoadableUnitOverviewPanel >> project [
 PBLoadableUnitOverviewPanel >> refreshWidgetValues [
 	nameInputField text: loadableUnit name.
 	versionInputField text: loadableUnit version asString.
-	loadableUnit isProject
-		ifTrue: [ loadableUnit repository ifNotNil: 
-			[ :repository | repositoryInputField text: repository repositoryUrl ] ].
 	descriptionText text: loadableUnit description
 ]
 
@@ -215,26 +192,6 @@ PBLoadableUnitOverviewPanel >> registry [
 PBLoadableUnitOverviewPanel >> registry: aCGOPackageRegistry [
 
 	registry := aCGOPackageRegistry 
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryInputField [
-	^ repositoryInputField
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryLabel [
-	^ repositoryLabel
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> subdirectoryInputField [
-	^ subdirectoryInputField
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> subdirectoryLabel [
-	^ subdirectoryLabel
 ]
 
 { #category : #updating }
