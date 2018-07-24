@@ -24,6 +24,11 @@ PBProjectHasConflictsError >> acceptVisitor: aVisitor [
 	^ aVisitor visitProjectWithConflictsError: self
 ]
 
+{ #category : #accessing }
+PBProjectHasConflictsError >> conflicts [
+	^ resolution conflicts
+]
+
 { #category : #private }
 PBProjectHasConflictsError >> isResumable [
 
@@ -33,6 +38,11 @@ PBProjectHasConflictsError >> isResumable [
 { #category : #accessing }
 PBProjectHasConflictsError >> messageText [
 	^ 'There are conflicts in the resolution of ' , resolution resolvedProjectVersion name
+]
+
+{ #category : #accessing }
+PBProjectHasConflictsError >> resolution [
+	^ resolution
 ]
 
 { #category : #accessing }
