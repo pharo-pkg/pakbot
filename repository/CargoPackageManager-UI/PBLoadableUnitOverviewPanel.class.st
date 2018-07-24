@@ -148,7 +148,8 @@ PBLoadableUnitOverviewPanel >> initializePresenter [
 	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
 	versionInputField acceptBlock: [ self updateVersion ].
 	descriptionText whenTextIsAccepted: 
-		[ :newText | self updateDescription ]
+		[ :newText | self updateDescription ].
+	self refreshWidgetValues
 ]
 
 { #category : #initialization }

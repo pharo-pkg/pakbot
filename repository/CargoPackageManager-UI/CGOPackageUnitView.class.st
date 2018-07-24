@@ -59,17 +59,16 @@ CGOPackageUnitView >> initialExtent [
 
 { #category : #initialization }
 CGOPackageUnitView >> initializeWidgets [
-	packageOverview := PBLoadableUnitOverviewPanel newOn: ongoingPackageUnit owner: self.
-	detailsView := CGOPackageDetailsView newOn: ongoingPackageUnit owner: self.
-]
-
-{ #category : #initialization }
-CGOPackageUnitView >> initializeWith: anongoingPackageUnit [
-	ongoingPackageUnit := anongoingPackageUnit.
-	super initialize.
+	packageOverview := self instantiate: PBLoadableUnitOverviewPanel on: ongoingPackageUnit.
+	detailsView := self instantiate: CGOPackageDetailsView on: ongoingPackageUnit.
 ]
 
 { #category : #accessing }
 CGOPackageUnitView >> packageOverview [
 	^  packageOverview
+]
+
+{ #category : #initialization }
+CGOPackageUnitView >> setModelBeforeInitializing: aModel [
+	ongoingPackageUnit := aModel
 ]

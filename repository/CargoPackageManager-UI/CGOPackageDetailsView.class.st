@@ -129,6 +129,7 @@ CGOPackageDetailsView >> initializePresenter [
 	super initializePresenter.
 	editPlatformRequirementsButton action: [ self editPlatformRequirements ].
 	provisionsInputField acceptBlock: [ self updateProvisions ].
+	self refreshWidgetValues
 ]
 
 { #category : #initialization }
@@ -152,13 +153,6 @@ CGOPackageDetailsView >> initializeWidgets [
 		help: 'Edit platform requirements'.
 
 
-]
-
-{ #category : #initialization }
-CGOPackageDetailsView >> initializeWith: anOngoingPackageUnit [
-	ongoingPackageUnit := anOngoingPackageUnit.
-	super initialize.
-	self refreshWidgetValues
 ]
 
 { #category : #accessing }
