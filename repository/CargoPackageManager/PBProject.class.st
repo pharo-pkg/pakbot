@@ -22,6 +22,7 @@ PBProject class >> example [
 	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
 		packages: { PBPackage example };
+		assemblies: { PBAssembly example };
 		yourself
 ]
 
