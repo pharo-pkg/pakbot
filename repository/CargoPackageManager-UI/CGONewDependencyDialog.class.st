@@ -12,9 +12,9 @@ CGONewDependencyDialog class >> example [
 
 { #category : #accessing }
 CGONewDependencyDialog >> initialize [
-	self title: 'Add a dependency'.
 	panels := {
 		CGOMetacelloBaselineDependencyPanel new.
 		CGOMetacelloConfigurationDependencyPanel new}.
 	super initialize.
+	self title: 'Add a dependency'.
 ]

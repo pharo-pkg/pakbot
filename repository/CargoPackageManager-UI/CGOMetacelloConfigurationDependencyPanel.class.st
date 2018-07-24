@@ -144,6 +144,12 @@ CGOMetacelloConfigurationDependencyPanel >> initializeWidgets [
 ]
 
 { #category : #accessing }
+CGOMetacelloConfigurationDependencyPanel >> openDialogOnAccept: aBlockClosure onCancel: aBlockClosure2 [ 
+	
+	self openDialogWithSpec
+]
+
+{ #category : #accessing }
 CGOMetacelloConfigurationDependencyPanel >> repositoryUrlInputText [
 	^ repositoryUrlInputText
 ]

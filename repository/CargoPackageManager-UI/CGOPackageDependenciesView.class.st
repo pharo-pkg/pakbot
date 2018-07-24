@@ -17,7 +17,7 @@ CGOPackageDependenciesView >> addAction [
 	
 	CGONewDependencyDialog new 
 		openDialogOnAccept: [ :dependency |
-			ongoingPackageVersion addDependency: dependency.
+			ongoingPackageVersion addDependency: dependency buildDependency.
 			self refreshUI ]
 		onCancel: [ "Nothing" ]
 ]
