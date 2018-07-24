@@ -11,12 +11,14 @@ CGOVcsSerializedProjectV1Test class >> resources [
 
 { #category : #'test data' }
 CGOVcsSerializedProjectV1Test >> counterUiProject [
-	| project |
+	| project dependency |
+	
+	dependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
+	dependency repository version: 'master'.
+
 	project := (PBProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
-		addExternalCargoProject:
-			(PBPakbotProjectDependency
-				named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master');
+		addExternalCargoProject: dependency;
 		registry: CGOPackageRegistry new;
 		yourself.
 	(project createPackageNamed: #'Counter-UI-Spec')
@@ -148,15 +150,6 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 		equals: '{
 	#name : #Counter-UI,
 	#description : ''Small UI for the counter model.'',
-	#units : [
-		{
-			#name : #Counter-UI-Spec,
-			#description : ''Core package with the counter UI based on Spec.'',
-			#dependencies : [
-				#''Counter::Counter-Core''
-			]
-		}
-	],
 	#externalProjects : [
 		{
 			#name : ''pharo-counter'',
@@ -166,6 +159,15 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 				#version : ''master''
 			},
 			#version : ''''
+		}
+	],
+	#units : [
+		{
+			#name : #Counter-UI-Spec,
+			#description : ''Core package with the counter UI based on Spec.'',
+			#dependencies : [
+				#''Counter::Counter-Core''
+			]
 		}
 	]
 }'

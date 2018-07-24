@@ -13,9 +13,10 @@ Class {
 { #category : #'instance creation' }
 CGOSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 	^ (self isGitRepositoryUrl: url)
-		ifTrue: [ CGOGitRepository 
-			repositoryUrl: url
-			subdirectory: subdirectoryName ]
+		ifTrue: [ CGOGitRepositoryCreator new
+			githubUrl: url;
+			subdirectory: subdirectoryName;
+			create ]
 		ifFalse: [ CGOMonticelloRepository repositoryUrl: url ]
 ]
 

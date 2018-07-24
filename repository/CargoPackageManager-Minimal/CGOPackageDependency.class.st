@@ -139,18 +139,6 @@ CGOPackageDependency >> initializeWith: anAssociation [
 ]
 
 { #category : #testing }
-CGOPackageDependency >> isInstalled [
-	
-	^ project registry isInstalled: self
-]
-
-{ #category : #'querying - installed' }
-CGOPackageDependency >> isProvidedBy: aInstalledVersion [
-
-	^ aInstalledVersion providesPackage: self
-]
-
-{ #category : #testing }
 CGOPackageDependency >> isSolved [
 	self shouldBeImplemented.
 ]

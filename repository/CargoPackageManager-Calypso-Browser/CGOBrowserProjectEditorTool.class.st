@@ -16,6 +16,20 @@ CGOBrowserProjectEditorTool class >> methodTabActivation [
 ]
 
 { #category : #accessing }
+CGOBrowserProjectEditorTool class >> methodTabActivationForDependencies [
+	<classAnnotation>
+	
+	^ClyTabActivationStrategy for: PBDependencyUIItem asCalypsoItemContext 
+]
+
+{ #category : #accessing }
+CGOBrowserProjectEditorTool class >> methodTabActivationForDependenciesGroup [
+	<classAnnotation>
+	
+	^ClyTabActivationStrategy for: PBDependenciesUIGroup asCalypsoItemContext 
+]
+
+{ #category : #accessing }
 CGOBrowserProjectEditorTool class >> tabOrder [
 	^ 0
 ]
@@ -31,7 +45,7 @@ CGOBrowserProjectEditorTool >> build [
 	managedProject := context lastSelectedProject.
 	
 	self 
-		addMorph: (CGOProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
+		addMorph: (PBProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
 		fullFrame: LayoutFrame identity
 ]
 

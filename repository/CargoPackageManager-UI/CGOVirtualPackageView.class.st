@@ -3,12 +3,12 @@ Simple editor for a virtual package.
 "
 Class {
 	#name : #CGOVirtualPackageView,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'packageOverview',
 		'virtualPackage'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }
@@ -49,7 +49,7 @@ CGOVirtualPackageView >> initialExtent [
 
 { #category : #initialization }
 CGOVirtualPackageView >> initializeWidgets [
-	packageOverview := CGOPackageOverview newOn: virtualPackage owner: self.
+	packageOverview := PBLoadableUnitOverviewPanel newOn: virtualPackage owner: self.
 ]
 
 { #category : #initialization }

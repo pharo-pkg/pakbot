@@ -79,6 +79,14 @@ PBProjectUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
 	anItemCellMorph definitionIcon: #configLoaded.
 ]
 
+{ #category : #items }
+PBProjectUIItem >> dependenciesItems [
+
+	^ project dependencies
+		ifEmpty: [ ^ #() ]
+		ifNotEmpty: [ {(PBDependenciesUIGroup onProject: self project)} ]
+]
+
 { #category : #testing }
 PBProjectUIItem >> includesPackage: aRPackage [ 
 	
@@ -104,9 +112,9 @@ PBProjectUIItem >> isEmpty [
 	^ self items isEmpty 
 ]
 
-{ #category : #testing }
+{ #category : #items }
 PBProjectUIItem >> items [
-	^ self project packageUnits collect: [ :each | PBPackageUIItem forUnit: each ]
+	^ self packageItems , self dependenciesItems
 ]
 
 { #category : #accessing }
@@ -118,6 +126,13 @@ PBProjectUIItem >> name [
 PBProjectUIItem >> openRepairDialog [
 
 	^ (PBOpenRepairDialogAction onProject: self project) execute
+]
+
+{ #category : #items }
+PBProjectUIItem >> packageItems [
+	^ ((self project packageUnits
+		collect: [ :each | PBPackageUIItem forUnit: each ])
+		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
 { #category : #accessing }

@@ -44,9 +44,9 @@ PBPackageUIItemTest >> testAProjectShowsCorrectStatusIcon [
 	| loadedUI notLoadedUI |
 
 	self openBrowser.
-	self expandProjectNamed: 'TestProject'.
-	loadedUI := self findPackageInBrowser: 'TestProject-Loaded'.
-	notLoadedUI := self findPackageInBrowser: 'TestProject-NotLoaded'.
+	self expandNodeNamed: 'TestProject'.
+	loadedUI := self findChildInBrowser: 'TestProject-Loaded'.
+	notLoadedUI := self findChildInBrowser: 'TestProject-NotLoaded'.
 	
 	self assert: loadedUI definitionMorph class equals: ImageMorph.
 	self assert: notLoadedUI definitionMorph class equals: AlphaImageMorph.

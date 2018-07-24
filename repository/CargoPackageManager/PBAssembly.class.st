@@ -160,7 +160,7 @@ PBAssembly >> partsFromRegistry: filterBlock [
 	^ packages
 		collect: [ :each | 
 			self project registry 
-				packageNamed: each packageName 
+				packageNamed: each fullyQualifiedName 
 				ifAbsent: [ CGOPackageNotFoundError signal: each packageName ] ]
 		thenSelect: filterBlock
 ]

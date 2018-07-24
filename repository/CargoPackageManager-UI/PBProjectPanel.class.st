@@ -3,33 +3,33 @@ I'm in charge of displaying meta-information on Cargo projects.
 I also allow to edit these meta-data.
 "
 Class {
-	#name : #CGOProjectPanel,
-	#superclass : #CGOPackageView,
+	#name : #PBProjectPanel,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'overview',
 		'ongoingPackageUnit',
 		'dependencies',
 		'projectStatus'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #private }
-CGOProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
+PBProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
 	^ self basicNew
 		initializeWith: anOngoingPackageVersion;
 		buildWithSpec
 ]
 
 { #category : #example }
-CGOProjectPanel class >> example [
+PBProjectPanel class >> example [
 	^ self basicNew
 		initializeWith: PBProject example;
 		openWithSpec
 ]
 
 { #category : #specs }
-CGOProjectPanel >> defaultSpec [
+PBProjectPanel >> defaultSpec [
 
 	^ SpecLayout composed
 		newColumn: [ :col |
@@ -42,43 +42,43 @@ CGOProjectPanel >> defaultSpec [
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> dependencies [
+PBProjectPanel >> dependencies [
 	^ dependencies
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> initializeWidgets [
+PBProjectPanel >> initializeWidgets [
 
-	overview := CGOPackageOverview newOn: ongoingPackageUnit owner: self.
+	overview := PBLoadableUnitOverviewPanel newOn: ongoingPackageUnit owner: self.
 	dependencies := CGOPackageDependenciesView newOn: ongoingPackageUnit owner: self.
 	projectStatus := CGOProjectStatusPresenter newOn: ongoingPackageUnit owner: self.
 ]
 
 { #category : #initialization }
-CGOProjectPanel >> initializeWith: anOngoingPackageUnit [
+PBProjectPanel >> initializeWith: anOngoingPackageUnit [
 	ongoingPackageUnit := anOngoingPackageUnit.
 	super initialize
 ]
 
 { #category : #accessing }
-CGOProjectPanel >> overview [
+PBProjectPanel >> overview [
 	^ overview
 ]
 
 { #category : #accessing }
-CGOProjectPanel >> projectStatus [
+PBProjectPanel >> projectStatus [
 
 	^ projectStatus
 ]
 
 { #category : #specs }
-CGOProjectPanel >> refreshUI [
+PBProjectPanel >> refreshUI [
 	self needRebuild: false.
 	self buildWithSpecLayout: (self retrieveSpec: spec selector).
 ]
 
 { #category : #specs }
-CGOProjectPanel >> retrieveSpec: aSelector [
+PBProjectPanel >> retrieveSpec: aSelector [
 
 	| layout |
 	

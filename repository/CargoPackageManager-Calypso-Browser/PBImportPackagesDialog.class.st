@@ -2,7 +2,7 @@
 I am a dialog that allows to select a set of packages coming from the system. On accept, those packages are added to the configured model.
 "
 Class {
-	#name : #CGOImportPackagesDialog,
+	#name : #PBImportPackagesDialog,
 	#superclass : #ComposablePresenter,
 	#instVars : [
 		'model',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #specs }
-CGOImportPackagesDialog class >> defaultSpec [
+PBImportPackagesDialog class >> defaultSpec [
 	<spec: #default>
 	
 	^ SpecLayout composed 
@@ -26,22 +26,22 @@ CGOImportPackagesDialog class >> defaultSpec [
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog class >> icon [
+PBImportPackagesDialog class >> icon [
 	^ self iconNamed: #branch
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog class >> order [
+PBImportPackagesDialog class >> order [
 	^ 20
 ]
 
 { #category : #specs }
-CGOImportPackagesDialog class >> title [
+PBImportPackagesDialog class >> title [
 	^ 'Add packages'
 ]
 
 { #category : #actions }
-CGOImportPackagesDialog >> accept [
+PBImportPackagesDialog >> accept [
 	| items |
 	
 	"ensure window goes away (in case accept comes from a keybinding and not the ok button)"
@@ -57,7 +57,7 @@ CGOImportPackagesDialog >> accept [
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> addShortcutsTo: aWidget [
+PBImportPackagesDialog >> addShortcutsTo: aWidget [
 	super addShortcutsTo: aWidget.
 	aWidget 
 		bindKeyCombination: Character cr asKeyCombination 
@@ -66,26 +66,26 @@ CGOImportPackagesDialog >> addShortcutsTo: aWidget [
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> allPackages [
+PBImportPackagesDialog >> allPackages [
 	^ RPackageOrganizer default packages
 		asOrderedCollection 
 		sort: [ :a :b | a name < b name ]
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> allPackagesNotRegistered [
+PBImportPackagesDialog >> allPackagesNotRegistered [
 	| currentPackagesNames |
 	currentPackagesNames := self model packages collect: #name.
 	^ self allPackages reject: [ :rPackage | currentPackagesNames includes: rPackage name ]
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> contextSelection [ 
+PBImportPackagesDialog >> contextSelection [ 
 	^ self selectedPackage
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> initializeDialogWindow: aWindow [
+PBImportPackagesDialog >> initializeDialogWindow: aWindow [
 	acceptButton := aWindow toolbar okButton.
 	cancelButton := aWindow toolbar cancelButton.
 	acceptButton
@@ -94,7 +94,7 @@ CGOImportPackagesDialog >> initializeDialogWindow: aWindow [
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> initializePackageNameText [
+PBImportPackagesDialog >> initializePackageNameText [
 	self packageNameText whenBuiltDo: [ :ann |
 		ann widget 
 			bindKeyCombination: Character enter asKeyCombination 
@@ -110,7 +110,7 @@ CGOImportPackagesDialog >> initializePackageNameText [
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> initializePackagesList [
+PBImportPackagesDialog >> initializePackagesList [
 	| dataSource |
 	
 	dataSource := self newPackagesListDataSource.
@@ -126,7 +126,7 @@ CGOImportPackagesDialog >> initializePackagesList [
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> initializeWidgets [
+PBImportPackagesDialog >> initializeWidgets [
 	packagesList := self newIceTreeTable.
 	packageNameText := self newTextInput 
 		autoAccept: true;
@@ -141,18 +141,18 @@ CGOImportPackagesDialog >> initializeWidgets [
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> model [
+PBImportPackagesDialog >> model [
 	^ model
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> model: anObject [
+PBImportPackagesDialog >> model: anObject [
 	model := anObject.
 	self refresh
 ]
 
 { #category : #'private factory' }
-CGOImportPackagesDialog >> newPackagesListDataSource [
+PBImportPackagesDialog >> newPackagesListDataSource [
 	| dataSource |
 	^ (dataSource := IceTipSelectingDataSource new)
 		tool: self;
@@ -162,34 +162,34 @@ CGOImportPackagesDialog >> newPackagesListDataSource [
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> openDialogWithSpec [
+PBImportPackagesDialog >> openDialogWithSpec [
 	^ super openDialogWithSpec
 		okAction: [ self accept ];
 		yourself
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> packageNameText [
+PBImportPackagesDialog >> packageNameText [
 	^ packageNameText
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> packageNameText: anObject [
+PBImportPackagesDialog >> packageNameText: anObject [
 	packageNameText := anObject
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> packagesList [
+PBImportPackagesDialog >> packagesList [
 	^ packagesList
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> packagesList: anObject [
+PBImportPackagesDialog >> packagesList: anObject [
 	packagesList := anObject
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> refresh [
+PBImportPackagesDialog >> refresh [
 	packagesList widget 
 		in: [ :this | 
 			this selectRowIndexes: #(). 
@@ -200,7 +200,7 @@ CGOImportPackagesDialog >> refresh [
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> selectedPackage [
+PBImportPackagesDialog >> selectedPackage [
 	| index |
 	self flag: #todo. "This should -maybe- be modeled better on a SpecTablePresenter ;)"
 	index := packagesList widget selectedRowIndex.
@@ -209,19 +209,19 @@ CGOImportPackagesDialog >> selectedPackage [
 ]
 
 { #category : #initialization }
-CGOImportPackagesDialog >> setModelBeforeInitialization: anObject [ 
+PBImportPackagesDialog >> setModelBeforeInitialization: anObject [ 
 	model := anObject
 ]
 
 { #category : #accessing }
-CGOImportPackagesDialog >> validate [
+PBImportPackagesDialog >> validate [
 	self 
 		assert: self selectedPackage isNotNil 
 		description: 'Please select a branch to checkout.'
 ]
 
 { #category : #'private factory' }
-CGOImportPackagesDialog >> withAssertHandlingDo: aBlock [
+PBImportPackagesDialog >> withAssertHandlingDo: aBlock [
 	^ aBlock 
 		on: AssertionFailure 
 		do: [ :e | 

@@ -18,7 +18,7 @@ Class {
 
 { #category : #example }
 PBPakbotProjectDependency class >> example [
-	^ self named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter:master'
+	^ self named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
 ]
 
 { #category : #'instance creation' }
@@ -69,18 +69,6 @@ PBPakbotProjectDependency >> constraints: someConstraints [
 { #category : #intialization }
 PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
 	repository := aCGOGitRepository
-]
-
-{ #category : #'querying - installed' }
-PBPakbotProjectDependency >> isInstalled [
-	
-	^ project registry isInstalled: self
-]
-
-{ #category : #'querying - installed' }
-PBPakbotProjectDependency >> isProvidedBy: aInstalledVersion [ 
-
-	^ aInstalledVersion providesProject: self
 ]
 
 { #category : #accessing }

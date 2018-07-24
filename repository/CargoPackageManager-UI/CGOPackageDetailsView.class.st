@@ -4,7 +4,7 @@ I also use the package dependencies view.
 "
 Class {
 	#name : #CGOPackageDetailsView,
-	#superclass : #CGOPackageView,
+	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'ongoingPackageUnit',
 		'dependenciesView',
@@ -19,7 +19,7 @@ Class {
 	#classInstVars : [
 		'platformRequirementWidget'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }

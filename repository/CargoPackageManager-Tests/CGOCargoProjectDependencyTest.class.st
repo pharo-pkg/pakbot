@@ -36,7 +36,8 @@ CGOCargoProjectDependencyTest >> testCanDeserializeDependency [
 { #category : #tests }
 CGOCargoProjectDependencyTest >> testCanSerializeDependency [
 	| projectDependency projectDependencyString |
-	projectDependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'github://demarey/pharo-counter-ui:master'.
+	projectDependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
+	projectDependency repository version: 'master'.
 	projectDependencyString := STON toStringPretty: projectDependency.
 	
 	self 

@@ -434,19 +434,6 @@ PBProject >> project [
 	^ self
 ]
 
-{ #category : #'testing - installing' }
-PBProject >> providesPackage: aPackageDependency [ 
-
-	^ false
-]
-
-{ #category : #'querying - installed' }
-PBProject >> providesProject: aProjectDependency [
-
-	^ (self projectName = aProjectDependency name and: [ aProjectDependency satisfyConstraints: self version ])
-			and: [ self defaultAssembly isInstalled ]
-]
-
 { #category : #publishing }
 PBProject >> publish [
 

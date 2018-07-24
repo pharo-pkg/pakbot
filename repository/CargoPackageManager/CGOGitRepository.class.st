@@ -51,10 +51,8 @@ CGOGitRepository >> ensureCloned [
 	self isCloned
 		ifFalse: [ iceRepository := iceRepository createRepository ].
 
-	commitish := version ifNil: [ 'master' ].
-	(self isBranch: commitish)
-		ifTrue: [ self syncBranchWithOrigin: commitish ]
-		ifFalse: [ self syncToCommitish: commitish ].
+
+	version isEmptyOrNil ifFalse: [ (iceRepository lookupCommit: version) checkout ].
 		
 	[ iceRepository register ]
 		on: IceDuplicatedRepository 
@@ -175,7 +173,7 @@ CGOGitRepository >> metadataStringFor: aPackageUnit [
 CGOGitRepository >> project [
 	| iceProject |
 	iceProject := iceRepository project.
-	^ iceProject isUnborn 
+	^ iceProject isUnborn
 		ifTrue: [ PBProjectMetadataNotFound signal ]
 		ifFalse: [ iceProject pakbotProject ]
 ]
@@ -246,30 +244,14 @@ CGOGitRepository >> subdirectory [
 	^ iceRepository subdirectory
 ]
 
-{ #category : #private }
-CGOGitRepository >> syncBranchWithOrigin: branchName [
-	[ iceRepository branchName = branchName
-		ifTrue: [ ^ self	"already in sync" ] ]
-	on: IceNotInBranch
-	do: [ "we are in DETACHED HEAD mode, let's chekout the branch" ].
-	
-	[ (iceRepository branchNamed: branchName) checkout ]
-	on: IceBranchNotFound 
-	do: [ (iceRepository remoteBranchNamed: 'origin/',branchName) checkout ].
-	iceRepository fetch.
-	iceRepository hasIncomingCommits
-		ifTrue: [ iceRepository pull ]
-]
-
-{ #category : #private }
-CGOGitRepository >> syncToCommitish: commitish [
-	iceRepository headCommit = commitish
-		ifFalse: [ (iceRepository lookupCommit: commitish) checkout ]
-]
-
 { #category : #accessing }
 CGOGitRepository >> version [
 	^ version
+]
+
+{ #category : #accessing }
+CGOGitRepository >> version: aString [ 
+	version := aString
 ]
 
 { #category : #notifying }
