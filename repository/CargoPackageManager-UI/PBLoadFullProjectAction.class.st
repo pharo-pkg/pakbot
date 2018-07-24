@@ -20,7 +20,7 @@ PBLoadFullProjectAction >> description [
 
 { #category : #execution }
 PBLoadFullProjectAction >> execute [
-	"project load "
+	project load
 ]
 
 { #category : #accessing }
