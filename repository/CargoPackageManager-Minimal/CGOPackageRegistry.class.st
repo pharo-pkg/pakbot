@@ -58,8 +58,7 @@ CGOPackageRegistry >> conflictingProjectsWith: aCGOResolvedDependency [
 	
 	metacelloProjectRegistration
 		baselineProjectSpecIfPresent: [ :baselineSpec |
-			1halt: 'not yet implemented'.
-			cargoProjectConflicts add: baselineSpec ]
+			cargoProjectConflicts add: (PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec) ]
 		ifAbsent: [ "Nothing" ].
 		
 	metacelloProjectRegistration

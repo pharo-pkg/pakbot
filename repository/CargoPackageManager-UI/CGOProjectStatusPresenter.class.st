@@ -112,3 +112,9 @@ CGOProjectStatusPresenter >> statusIcon [
 CGOProjectStatusPresenter >> statusLabel [
 	^ statusLabel
 ]
+
+{ #category : #announcements }
+CGOProjectStatusPresenter >> unsubscribe [
+	
+	SystemAnnouncer uniqueInstance unsubscribe: self
+]

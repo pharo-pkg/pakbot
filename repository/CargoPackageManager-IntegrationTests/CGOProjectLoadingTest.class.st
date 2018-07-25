@@ -4,16 +4,41 @@ Class {
 	#category : 'CargoPackageManager-IntegrationTests'
 }
 
-{ #category : #tests }
+{ #category : #running }
 CGOProjectLoadingTest >> tearDown [
 
 	super tearDown.
 	self unloadMetacelloConfiguration.
+	self unloadMetacelloBaseline.
 	self unloadPakbotProject.
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testLoadingProjectWithConflictsFailsWithExcetion [
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithExcetion [
+
+	| testRegistry project baselineProjectV1 baselineProjectV2 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	baselineProjectV1 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '1.0'.
+
+	baselineProjectV2 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '2.0'.
+
+	project addDependency: baselineProjectV1.
+	project addDependency: baselineProjectV2.
+	
+	self should: [ project load ] raise: PBProjectHasConflictsError. 
+	self assert: project resolve hasConflicts.	
+]
+
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithExcetion [
 
 	| testRegistry project configurationProjectV1 configurationProjectV2 |
 	testRegistry := CGOPackageRegistry new.	
@@ -36,8 +61,28 @@ CGOProjectLoadingTest >> testLoadingProjectWithConflictsFailsWithExcetion [
 	self assert: project resolve hasConflicts.	
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testNotLoadingProjectLoadingDoesNotLoadCorrespondingClassesInSystem [
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorrespondingClassesInSystem [
+
+	| project testRegistry baselineProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	baselineProjectV1 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '1.0'.
+	project addDependency: baselineProjectV1.
+	
+	self deny: (Smalltalk globals hasClassNamed: 'BaselineOfPakbotTestExample').
+	self deny: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageA').
+	self deny: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageB').
+	self deny: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageC').
+	self deny: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageD').
+]
+
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespondingClassesInSystem [
 
 	| project testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -56,7 +101,7 @@ CGOProjectLoadingTest >> testNotLoadingProjectLoadingDoesNotLoadCorrespondingCla
 	self deny: (Smalltalk globals hasClassNamed: 'ClassInPackageD').
 ]
 
-{ #category : #tests }
+{ #category : #'tests-cargo-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded [
 
 	| testRegistry projectOne projectTwo |
@@ -75,8 +120,70 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 	self assert: projectOne isUpToDate.
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV1LoadsCorrespondingClassesInSystem [
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
+
+	| projectOne projectTwo testRegistry baselineProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
+	projectOne addDependency: (PBPakbotProjectDependency
+		named: 'ProjectTwo'
+		version: '=0.0.0-N/A').
+		
+	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	baselineProjectV1 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: '1.0'.
+	projectTwo addDependency: baselineProjectV1.
+	
+	projectOne load.
+	
+	self assert: (Smalltalk globals hasClassNamed: 'BaselineOfPakbotTestExample').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageA').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageB').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageC').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageD').
+	
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageA' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageB' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageC' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageD' asSymbol) version equals: 1.
+]
+
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
+
+	| projectOne projectTwo testRegistry baselineProjectV2 |
+	testRegistry := CGOPackageRegistry new.	
+	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
+	projectOne addDependency: (PBPakbotProjectDependency
+		named: 'ProjectTwo'
+		version: '=0.0.0-N/A').
+		
+	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	baselineProjectV2 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: '2.0'.
+	projectTwo addDependency: baselineProjectV2.
+	
+	projectOne load.
+	
+	self assert: (Smalltalk globals hasClassNamed: 'BaselineOfPakbotTestExample').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageA').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageB').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageC').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageD').
+	
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageA' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageB' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageC' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageD' asSymbol) version equals: 2.
+]
+
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -106,8 +213,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV1Lo
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 1.
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV2LoadsCorrespondingClassesInSystem [
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -137,8 +244,62 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloDependenciesV2Lo
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 2.
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV1LoadsCorrespondingClassesInSystem [
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
+
+	| project testRegistry baselineProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	baselineProjectV1 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: '1.0'.
+
+	project addDependency: baselineProjectV1.
+	project load.
+	
+	self assert: (Smalltalk globals hasClassNamed: 'BaselineOfPakbotTestExample').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageA').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageB').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageC').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageD').
+	
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageA' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageB' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageC' asSymbol) version equals: 1.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageD' asSymbol) version equals: 1.
+]
+
+{ #category : #'tests-baseline-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
+
+	| project testRegistry baselineProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	baselineProjectV1 := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: '2.0'.
+
+	project addDependency: baselineProjectV1.
+	project load.
+	
+	self assert: (Smalltalk globals hasClassNamed: 'BaselineOfPakbotTestExample').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageA').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageB').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageC').
+	self assert: (Smalltalk globals hasClassNamed: 'ClassInPakbotTestExamplePackageD').
+	
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageA' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageB' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageC' asSymbol) version equals: 2.
+	self assert: (Smalltalk globals at: 'ClassInPakbotTestExamplePackageD' asSymbol) version equals: 2.
+]
+
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project testRegistry configurationProjectDependency |
 	testRegistry := CGOPackageRegistry new.	
@@ -164,8 +325,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV1LoadsCorre
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 1.
 ]
 
-{ #category : #tests }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV2LoadsCorrespondingClassesInSystem [
+{ #category : #'tests-configuration-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| project testRegistry configurationProject |
 	testRegistry := CGOPackageRegistry new.	
@@ -191,7 +352,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloDependenciesV2LoadsCorre
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : #'tests-cargo-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project testRegistry pakbotProjectDependency |
@@ -213,7 +374,29 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 	self assert: (Smalltalk globals at: 'CounterTest' asSymbol) version equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : #running }
+CGOProjectLoadingTest >> unloadMetacelloBaseline [
+	
+	"We fetch the loaded configuration and remove it"
+	| baseline metacelloRegistration |
+	baseline := Smalltalk
+		at: 'BaselineOfPakbotTestExample' asSymbol
+		ifAbsent: [ ^ self ].
+
+	metacelloRegistration := MetacelloProjectRegistration registry baselineRegistry at: baseline name.
+	metacelloRegistration baselineProjectSpec version spec packages
+		do: [ :packageSpec | | packageOrNil |
+			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
+			packageOrNil ifNotNil: #removeFromSystem ].
+	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
+	baseline package removeFromSystem.
+	
+	IceRepository registry
+		detect: [ :any | any name = 'PakbotTestExample' ]
+		ifFound: [ :found | found delete ].
+]
+
+{ #category : #running }
 CGOProjectLoadingTest >> unloadMetacelloConfiguration [
 	
 	"We fetch the loaded configuration and remove it"
@@ -231,7 +414,7 @@ CGOProjectLoadingTest >> unloadMetacelloConfiguration [
 	configuration package removeFromSystem.
 ]
 
-{ #category : #tests }
+{ #category : #running }
 CGOProjectLoadingTest >> unloadPakbotProject [
 	
 	#(#'Counter-Core' #'Counter-Tests') do: [ :each |

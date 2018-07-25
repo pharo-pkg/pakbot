@@ -74,8 +74,16 @@ CGOMetacelloBaselineDependencyPanel >> baselineNameLabel: anObject [
 
 { #category : #building }
 CGOMetacelloBaselineDependencyPanel >> buildDependency [
-	
-	self notYetImplemented
+
+	"We should have validations, probably in the domain object itself"
+	self assert: self baselineNameInputText text notEmpty description: 'Invalid Baseline Name'.
+	self assert: self repositoryUrlInputText text notEmpty description: 'Invalid URL'.
+	self assert: self versionInputText text notEmpty description: 'Invalid version'.
+
+	^ PBMetacelloBaselineProjectDependency
+		name: self baselineNameInputText text
+		repositoryUrl: self repositoryUrlInputText text
+		version: self versionInputText text
 ]
 
 { #category : #accessing }

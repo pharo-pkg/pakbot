@@ -28,7 +28,7 @@ PBMetacelloProject class >> fromProjectDependency: aCGOMetacelloProjectDependenc
 
 { #category : #'instance creation' }
 PBMetacelloProject class >> repository: repositoryString name: projectName version: versionString [ 
-	^ self basicNew 
+	^ self new 
 		initializeWithRepository: repositoryString name: projectName version: versionString 
 
 		
