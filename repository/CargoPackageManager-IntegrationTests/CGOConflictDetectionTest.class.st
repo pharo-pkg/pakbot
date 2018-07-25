@@ -221,7 +221,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsing
 	project addDependency: configurationProjectV1.
 	resolution := project resolve.
 
-	self deny: resolution hasConflicts
+	self assert: resolution hasConflicts
 ]
 
 { #category : #tests }

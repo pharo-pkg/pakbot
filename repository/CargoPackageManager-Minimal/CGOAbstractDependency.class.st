@@ -10,6 +10,12 @@ Class {
 	#category : 'CargoPackageManager-Minimal-Dependencies'
 }
 
+{ #category : #conflicts }
+CGOAbstractDependency >> additionalConflictingInstalledProjects [
+
+	^ #()
+]
+
 { #category : #testing }
 CGOAbstractDependency >> fitsPlatformRequirements [
 	

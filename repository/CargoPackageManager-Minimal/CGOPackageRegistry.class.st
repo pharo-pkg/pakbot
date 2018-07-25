@@ -46,29 +46,6 @@ CGOPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 		do: [ "ignore: project not registered. It is safe to register a new one" ]
 ]
 
-{ #category : #conflicting }
-CGOPackageRegistry >> conflictingProjectsWith: aCGOResolvedDependency [
-
-	| cargoProjectConflicts metacelloProjectRegistration |
-	cargoProjectConflicts := self registeredProjects select: [ :each | each isConflictingWith: aCGOResolvedDependency ].
-	
-	metacelloProjectRegistration := MetacelloProjectRegistration registry
-		registrationForClassNamed: aCGOResolvedDependency name
-		ifAbsent: [ ^ cargoProjectConflicts ].
-	
-	metacelloProjectRegistration
-		baselineProjectSpecIfPresent: [ :baselineSpec |
-			cargoProjectConflicts add: (PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec) ]
-		ifAbsent: [ "Nothing" ].
-		
-	metacelloProjectRegistration
-		configurationProjectSpecIfPresent: [ :configurationSpec |
-			cargoProjectConflicts add: (PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) ]
-		ifAbsent: [ "Nothing" ].
-	
-	^ cargoProjectConflicts
-]
-
 { #category : #'compatilibility-repository' }
 CGOPackageRegistry >> fetch: aPackageName version: aVersion [
 	
