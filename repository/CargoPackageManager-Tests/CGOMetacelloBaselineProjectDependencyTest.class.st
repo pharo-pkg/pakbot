@@ -29,7 +29,7 @@ CGOMetacelloBaselineProjectDependencyTest >> testCanDeserializeDependency [
 }'.
 	self 
 		assert: dependency repositoryUrl
-		equals: 'git://git@github.com/pharo-pkg/PakbotTestExample.git' asZnUrl.
+		equals: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'.
 	self 
 		assert: dependency version
 		equals: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.

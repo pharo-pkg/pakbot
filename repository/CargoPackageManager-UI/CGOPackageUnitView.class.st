@@ -69,6 +69,6 @@ CGOPackageUnitView >> packageOverview [
 ]
 
 { #category : #initialization }
-CGOPackageUnitView >> setModelBeforeInitializing: aModel [
+CGOPackageUnitView >> setModelBeforeInitialization: aModel [
 	ongoingPackageUnit := aModel
 ]
