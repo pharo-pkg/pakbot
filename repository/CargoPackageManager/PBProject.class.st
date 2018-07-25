@@ -72,7 +72,7 @@ PBProject >> = other [
 	^ self name = other name
 ]
 
-{ #category : #updating }
+{ #category : #assemblies }
 PBProject >> addAssemblyNamed: aName [
 	| assembly |
 	
@@ -82,7 +82,10 @@ PBProject >> addAssemblyNamed: aName [
 	(assemblies includes: assembly)
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
 	assemblies add: assembly.
-	^ registry register: assembly
+	registry register: assembly.
+	CGOProjectPartsChanged announceOnProject: self.
+
+	^ assembly
 ]
 
 { #category : #dependencies }

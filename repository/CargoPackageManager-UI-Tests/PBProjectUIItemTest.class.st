@@ -5,6 +5,26 @@ Class {
 }
 
 { #category : #tests }
+PBProjectUIItemTest >> testAddAssemblyCommand [
+
+	| cmd assembly |
+	registry newProjectNamed: 'TestProject'.
+	
+	self openBrowser.
+	
+	project := self findProject: 'TestProject'.	
+	cmd := self command: CGOCreateAssemblyCommand for: project.
+	
+	[cmd executeCommand] 
+		on: ProvideAnswerNotification 
+		do: [ :ex | ex resume: 'Tests' ].
+	
+	assembly := self findUIItem: 'Tests'.
+	
+	self assert: assembly isNotNil.
+]
+
+{ #category : #tests }
 PBProjectUIItemTest >> testAddPackageCommand [
 
 	| cmd pkg |
@@ -15,12 +35,11 @@ PBProjectUIItemTest >> testAddPackageCommand [
 	project := self findProject: 'TestProject'.	
 	cmd := self command: CGOCreatePackageInProjectCommand for: project.
 
-	UIManager nonInteractiveDuring: [ 
-		[cmd executeCommand] 
-			on: ProvideAnswerNotification 
-			do: [ :ex | ex resume: 'TestProject-Core' ] ].
+	[cmd executeCommand] 
+		on: ProvideAnswerNotification 
+		do: [ :ex | ex resume: 'TestProject-Core' ].
 	
-	pkg := self findPackage: 'TestProject-Core'.
+	pkg := self findUIItem: 'TestProject-Core'.
 	
 	self assert: pkg isNotNil.
 ]
@@ -81,7 +100,7 @@ PBProjectUIItemTest >> testRemoveProjectCommand [
 	cmd := self command: CGORemoveProjectCommand for: project.
 	cmd executeCommand.
 	
-	pj := self findPackage: 'TestProject-Core'.
+	pj := self findUIItem: 'TestProject-Core'.
 	
 	self assert: pj isNil.
 ]

@@ -35,8 +35,8 @@ PBPackageUIItemTest >> testAProjectShowsBothLoadedAndNotLoadedPackages [
 	| projectUI loadedUI notLoadedUI |
 
 	projectUI := self findProject: 'TestProject'.
-	loadedUI := self findPackage: 'TestProject-Loaded'.
-	notLoadedUI := self findPackage: 'TestProject-NotLoaded'.
+	loadedUI := self findUIItem: 'TestProject-Loaded'.
+	notLoadedUI := self findUIItem: 'TestProject-NotLoaded'.
 
 	self deny: projectUI items isEmpty.	
 	self assert: projectUI items size equals: 2.
@@ -68,7 +68,7 @@ PBPackageUIItemTest >> testAProjectShowsCorrectStatusIcon [
 PBPackageUIItemTest >> testLoadedPackageHasCorrectCommands [
 
 	| packageUI commands |
-	packageUI := self findPackage: 'TestProject-Loaded'.	
+	packageUI := self findUIItem: 'TestProject-Loaded'.	
 	self openBrowser.		
 	commands := self commandsOfItem: packageUI.
 
@@ -82,7 +82,7 @@ PBPackageUIItemTest >> testLoadedPackageHasCorrectCommands [
 PBPackageUIItemTest >> testNotLoadedPackageHasCorrectCommands [
 
 	| packageUI commands |
-	packageUI := self findPackage: 'TestProject-NotLoaded'.	
+	packageUI := self findUIItem: 'TestProject-NotLoaded'.	
 	self openBrowser.		
 	commands := self commandsOfItem: packageUI.
 
@@ -97,8 +97,8 @@ PBPackageUIItemTest >> testPackagesKnowsIfTheyAreInstalled [
 
 	| loadedUI notLoadedUI |
 
-	loadedUI := self findPackage: 'TestProject-Loaded'.
-	notLoadedUI := self findPackage: 'TestProject-NotLoaded'.
+	loadedUI := self findUIItem: 'TestProject-Loaded'.
+	notLoadedUI := self findUIItem: 'TestProject-NotLoaded'.
 
 	self deny: notLoadedUI isInstalled.
 	self assert: loadedUI isInstalled.	
@@ -114,10 +114,10 @@ PBPackageUIItemTest >> testRemovePackageFromProjectCommand [
 	self openBrowser.
 
 	self expandNodeNamed: 'TestProject'.
-	pkg := self findPackage: 'TestProject-Core'.
+	pkg := self findUIItem: 'TestProject-Core'.
 
 	(self command: PBRemovePackageFromProjectCommand for: pkg) executeCommand. 
 	
 	self expandNodeNamed: 'TestProject'.
-	self assert: (self findPackage: 'TestProject-Core') isNil.
+	self assert: (self findUIItem: 'TestProject-Core') isNil.
 ]

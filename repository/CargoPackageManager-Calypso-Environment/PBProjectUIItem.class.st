@@ -43,6 +43,13 @@ PBProjectUIItem class >> prepareProjectItemsQueryFrom: aProjectChildItem in: aNa
 			sortedFrom: (PBProjectItemScope of: aProjectChildItem in: aNavigationEnvironment)
 ]
 
+{ #category : #items }
+PBProjectUIItem >> assemblyItems [
+	^ ((self project assemblies
+		collect: [ :each | PBAssemblyUIItem on: each ])
+		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
+]
+
 { #category : #actions }
 PBProjectUIItem >> createNewPackageNamed: aString [ 
 	^ project createNewPackageNamed: aString 
@@ -114,7 +121,7 @@ PBProjectUIItem >> isEmpty [
 
 { #category : #items }
 PBProjectUIItem >> items [
-	^ self packageItems , self dependenciesItems
+	^ self packageItems , self assemblyItems , self dependenciesItems
 ]
 
 { #category : #accessing }
@@ -130,8 +137,8 @@ PBProjectUIItem >> openRepairDialog [
 
 { #category : #items }
 PBProjectUIItem >> packageItems [
-	^ ((self project packageUnits
-		collect: [ :each | PBPackageUIItem forUnit: each ])
+	^ ((self project packages
+		collect: [ :each | PBPackageUIItem on: each ])
 		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
