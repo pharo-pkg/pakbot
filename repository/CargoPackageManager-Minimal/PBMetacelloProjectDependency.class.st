@@ -12,6 +12,12 @@ Class {
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
+{ #category : #'instance-creation' }
+PBMetacelloProjectDependency class >> fromMetacelloSpec: aMetacelloMCBaselineOfProjectSpec [ 
+	
+	self subclassResponsibility
+]
+
 { #category : #ston }
 PBMetacelloProjectDependency class >> fromSton: stonReader [
 	| metacelloProject |
@@ -33,7 +39,10 @@ PBMetacelloProjectDependency class >> fromSton: stonReader [
 PBMetacelloProjectDependency class >> name: projectName repositoryUrl: repositoryString version: versionString [
 	| projectDependency |
 	projectDependency := self basicNew.
-	projectDependency initializeWithName: projectName repositoryUrl: repositoryString version: versionString.
+	projectDependency
+		initializeWithName: projectName
+		repositoryUrl: repositoryString
+		version: versionString.
 	^ projectDependency yourself
 ]
 
@@ -59,11 +68,12 @@ PBMetacelloProjectDependency >> dependencies [
 PBMetacelloProjectDependency >> displayStringOn: aStream [
 	
 	aStream
-		nextPutAll: 'Proj(';
-		nextPutAll: url asString;
-		nextPutAll: ', ';
-		nextPutAll: version asString;
-		nextPutAll: ')'
+		<< name asString
+		<< ' => '
+		<< version asString
+		<< '('
+		<< url asString
+		<< ')'
 ]
 
 { #category : #testing }
@@ -75,7 +85,7 @@ PBMetacelloProjectDependency >> fitsPlatformRequirements [
 { #category : #initialization }
 PBMetacelloProjectDependency >> initializeWithName: projectName repositoryUrl: urlOrString version: aVersionString [ 
 	name := projectName asSymbol.
-	url := urlOrString asZnUrl.
+	url := urlOrString.
 	version := aVersionString.
 	
 ]

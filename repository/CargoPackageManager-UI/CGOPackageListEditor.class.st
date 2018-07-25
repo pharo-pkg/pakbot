@@ -31,20 +31,6 @@ CGOPackageListEditor class >> defaultSpec [
 
 ]
 
-{ #category : #'instance creation' }
-CGOPackageListEditor class >> newOn: anOngoingPackageVersion owner: owner [
-	^ self basicNew
-		owner: owner;
-		initializeWith: anOngoingPackageVersion;
-		yourself
-]
-
-{ #category : #opening }
-CGOPackageListEditor class >> openOn: anOngoingPackageVersion [
-	(self newOn: anOngoingPackageVersion owner: nil)
-		openWithSpec
-]
-
 { #category : #accessing }
 CGOPackageListEditor >> addButton [
 	^ addButton

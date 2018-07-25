@@ -51,7 +51,7 @@ CGOOngoingProjectTest >> testCanGetMetacelloProjects [
 		
 	self 	
 		assert: metacelloProjects anyOne repository
-		equals: 'http://ss3.gemstone.com/ss/STON' asZnUrl.
+		equals: 'http://ss3.gemstone.com/ss/STON'.
 ]
 
 { #category : #running }

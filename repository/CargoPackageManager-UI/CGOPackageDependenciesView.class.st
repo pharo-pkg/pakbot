@@ -17,7 +17,7 @@ CGOPackageDependenciesView >> addAction [
 	
 	CGONewDependencyDialog new 
 		openDialogOnAccept: [ :dependency |
-			ongoingPackageVersion addDependency: dependency.
+			ongoingPackageVersion addDependency: dependency buildDependency.
 			self refreshUI ]
 		onCancel: [ "Nothing" ]
 ]
@@ -36,7 +36,7 @@ CGOPackageDependenciesView >> buildRoots [
 { #category : #actions }
 CGOPackageDependenciesView >> editAction [
 	"only one fixed constraint managed for now"
-	| dependency versionString |
+	| dependency |
 	dependency := self selectedPackage.
 	dependency newEditPanel
 		openDialogOnAccept: [ :modifiedDependency |
