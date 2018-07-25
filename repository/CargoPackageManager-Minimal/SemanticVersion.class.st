@@ -63,6 +63,9 @@ SemanticVersion class >> suffixFrom: aString [
 
 { #category : #comparing }
 SemanticVersion >> = other [
+	self == other ifTrue: [ ^ true ].
+	self species = other species ifFalse: [ ^ false ].
+
 	(self major = other major) ifFalse: [ ^ false ].
 	(self minor = other minor) ifFalse: [ ^ false ].
 	(self patch = other patch) ifFalse: [ ^ false ].
