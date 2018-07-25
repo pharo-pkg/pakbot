@@ -44,7 +44,7 @@ PBAssemblyUIItem >> isAffectedBy: anAnnouncement [
 { #category : #accessing }
 PBAssemblyUIItem >> items [
 	^ ((assembly packages
-		collect: [ :each | PBPackageUIItem on: each ])
+		collect: [ :each | PBPackageReferenceUIItem on: each inAssembly: assembly ])
 		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
