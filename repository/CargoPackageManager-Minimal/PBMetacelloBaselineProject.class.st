@@ -12,12 +12,6 @@ Class {
 	#category : #'CargoPackageManager-Minimal-Model'
 }
 
-{ #category : #example }
-PBMetacelloBaselineProject class >> exampleConfiguration [
-	^ self 
-		fromProjectDependency: PBMetacelloBaselineProjectDependency example
-]
-
 { #category : #loading }
 PBMetacelloBaselineProject >> basicLoad [
 

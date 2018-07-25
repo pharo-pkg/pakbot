@@ -29,7 +29,7 @@ CGOMetacelloConfigurationProjectDependencyTest >> testCanDeserializeDependency [
 }'.
 	self 
 		assert: dependency repositoryUrl
-		equals: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/' asZnUrl.
+		equals: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'.
 	self 
 		assert: dependency version
 		equals: #stable.
