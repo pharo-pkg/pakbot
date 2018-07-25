@@ -258,8 +258,7 @@ PBLoadableUnitOverviewPanel >> updateName [
 PBLoadableUnitOverviewPanel >> updateVersion [
 	| versionString |
 	versionString := versionInputField text.
-	versionString asSemanticVersion. "check the version string"
-	loadableUnit version: versionString
+	loadableUnit version: versionString asSemanticVersion
 ]
 
 { #category : #accessing }

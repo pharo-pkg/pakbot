@@ -46,6 +46,18 @@ CGOSemanticVersionTest >> testPrintString [
 	self assertVersion: '1.1.3-RC1' printStringEquals: '1.1.3-RC1'
 ]
 
+{ #category : #'tests-parsing' }
+CGOSemanticVersionTest >> testRegEx [
+
+	self assert: (SemanticVersion parsingRegex matches: '1').
+	self assert: (SemanticVersion parsingRegex matches: '1.0').
+	self assert: (SemanticVersion parsingRegex matches: '1.0').
+	self assert: (SemanticVersion parsingRegex matches: '1.0.1').
+	self assert: (SemanticVersion parsingRegex matches: '1-ASD').
+	self assert: (SemanticVersion parsingRegex matches: '1.1-aa').
+	self assert: (SemanticVersion parsingRegex matches: '1.0.1-aaa')
+]
+
 { #category : #'tests-comparison' }
 CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorAndSmallerMinorNumber [
 
@@ -109,19 +121,19 @@ CGOSemanticVersionTest >> testVersionStringWithPatchNumberShouldOnlyHaveMajorAnd
 { #category : #'tests-parsing' }
 CGOSemanticVersionTest >> testVersionStringWithSuffixButNoMinorNorPatchNumberShouldHaveSuffix [
 
-	self assertVersionFromString: '1-RC1' major: 1 minor: 0 patch: 0 suffix: '-RC1'
+	self assertVersionFromString: '1-RC1' major: 1 minor: 0 patch: 0 suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
 CGOSemanticVersionTest >> testVersionStringWithSuffixButNoPatchNumberShouldHaveSuffix [
 
-	self assertVersionFromString: '1.1-RC1' major: 1 minor: 1 patch: 0 suffix: '-RC1'
+	self assertVersionFromString: '1.1-RC1' major: 1 minor: 1 patch: 0 suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
 CGOSemanticVersionTest >> testVersionStringWithSuffixShouldHaveSuffix [
 
-	self assertVersionFromString: '1.1.3-RC1' major: 1 minor: 1 patch: 3 suffix: '-RC1'
+	self assertVersionFromString: '1.1.3-RC1' major: 1 minor: 1 patch: 3 suffix: 'RC1'
 ]
 
 { #category : #'tests-comparison' }
