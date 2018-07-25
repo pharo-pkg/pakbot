@@ -1,6 +1,9 @@
+"
+Calypso command providing a contextual menu to create a new (empty) assembly into a project
+"
 Class {
 	#name : #PBCreateAssemblyCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 

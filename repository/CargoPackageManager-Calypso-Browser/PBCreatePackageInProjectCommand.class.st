@@ -3,7 +3,7 @@ Calypso command providing a contextual menu to create a new (empty) Cargo packag
 "
 Class {
 	#name : #PBCreatePackageInProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#instVars : [
 		'unitName'
 	],

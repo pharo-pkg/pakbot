@@ -3,7 +3,7 @@ Calypso command providing a contextual menu on Cargo project to allow a commit o
 "
 Class {
 	#name : #PBCommitProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 

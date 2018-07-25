@@ -37,9 +37,16 @@ PBAssembly >> = anAssembly [
 
 { #category : #adding }
 PBAssembly >> addPackage: aPackage [
-	"An assembly should only contain packages of the same project"
-	self assert: (aPackage project = self project).
-	^ packages add: aPackage
+	
+	self doAddPackage: aPackage.
+	self project announceChanged.
+]
+
+{ #category : #adding }
+PBAssembly >> addPackages: aCollection [
+	
+	aCollection do: [ :each | self doAddPackage: aCollection ].
+	self project announceChanged.
 ]
 
 { #category : #updating }
@@ -85,6 +92,17 @@ PBAssembly >> dependencies [
 	^ self parts
 ]
 
+{ #category : #adding }
+PBAssembly >> doAddPackage: aPackage [
+	
+	"Low level. Modifies the assembly without announcing changes.
+	Use with care"
+	
+	"An assembly should only contain packages of the same project"
+	self assert: (aPackage project = self project).
+	^ packages add: aPackage
+]
+
 { #category : #comparing }
 PBAssembly >> hash [
 
@@ -127,6 +145,13 @@ PBAssembly >> isEmpty [
 PBAssembly >> isInstalled [
 	
 	^ (self parts collect: #asPackageDependency) allSatisfy: #isInstalled
+]
+
+{ #category : #'support-ui' }
+PBAssembly >> packageCandidates [
+	
+	"Return the possible packages that can be added to this assembly"
+	^ self project packages difference: self packages
 ]
 
 { #category : #accessing }

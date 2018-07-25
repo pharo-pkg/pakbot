@@ -83,7 +83,7 @@ PBProject >> addAssemblyNamed: aName [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
 	assemblies add: assembly.
 	registry register: assembly.
-	CGOProjectPartsChanged announceOnProject: self.
+	self announceChanged.
 
 	^ assembly
 ]
@@ -110,6 +110,12 @@ PBProject >> allDependencies [
 { #category : #dependencies }
 PBProject >> announceChangeInDependencies [
 	CGODependenciesChanged announceOnProject: self
+]
+
+{ #category : #packages }
+PBProject >> announceChanged [
+
+	CGOProjectPartsChanged announceOnProject: self.
 ]
 
 { #category : #converting }
@@ -170,7 +176,7 @@ PBProject >> children [
 	^ self packageUnits , self assemblies, self virtualPackages
 ]
 
-{ #category : #adding }
+{ #category : #packages }
 PBProject >> createPackageNamed: aString [ 
 	
 	"We delegate to the system the creation of a package first.
@@ -251,7 +257,7 @@ PBProject >> hash [
 	^ self name hash
 ]
 
-{ #category : #adding }
+{ #category : #packages }
 PBProject >> importPackageNamed: aString [
 	^ registry register: (self newNotLoadedPackage: aString)
 ]
@@ -363,20 +369,19 @@ PBProject >> metacelloProjects [
 		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]
 ]
 
-{ #category : #adding }
+{ #category : #packages }
 PBProject >> newNotLoadedPackage: aString [ 
-	| unit |
+	| package |
 
-	unit := PBPackage named: aString asSymbol project: self.
+	package := PBPackage named: aString asSymbol project: self.
 
-	(packages includes: unit)
+	(packages includes: package)
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 
-	packages add: unit.
+	packages add: package.
+	self announceChanged.
 	
-	CGOProjectPartsChanged announceOnProject: self.
-	
-	^ unit
+	^ package
 ]
 
 { #category : #updating }
@@ -410,7 +415,7 @@ PBProject >> packages [
 
 { #category : #updating }
 PBProject >> packages: aListOfPackageUnits [
-	packages := aListOfPackageUnits asSet.
+	packages := aListOfPackageUnits.
 	packages do: [ :each | each project: self ]
 ]
 
@@ -482,8 +487,7 @@ PBProject >> removePackage: aPBPackage [
 	
 	packages remove: aPBPackage.
 	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ].
-	
-	CGOProjectPartsChanged announceOnProject: self.
+	self announceChanged.
 ]
 
 { #category : #removing }

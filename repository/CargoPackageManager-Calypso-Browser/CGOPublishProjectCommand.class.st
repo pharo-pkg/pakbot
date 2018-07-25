@@ -3,7 +3,7 @@ A command to publish a project and all its packages to a package repository. It 
 "
 Class {
 	#name : #CGOPublishProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 

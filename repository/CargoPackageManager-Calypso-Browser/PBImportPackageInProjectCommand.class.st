@@ -3,7 +3,7 @@ Calypso command providing a contextual menu to import an existing package as a C
 "
 Class {
 	#name : #PBImportPackageInProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#instVars : [
 		'unitName'
 	],
@@ -46,14 +46,6 @@ PBImportPackageInProjectCommand class >> systemBrowserToolbarActivatorForPackage
 		byItemOf: ClyButtonToolbarGroup
 		order: 1000
 		for: PBPackageUIItem asCalypsoItemContext
-]
-
-{ #category : #execution }
-PBImportPackageInProjectCommand >> createSystemPackage [
-	SycAddNewPackageCommand new
-		systemEnvironment: toolContext systemEnvironment;
-		packageName: unitName;
-		execute
 ]
 
 { #category : #initialization }

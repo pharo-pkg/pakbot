@@ -14,6 +14,12 @@ PBAssemblyUIItem class >> on: aDependency [
 		yourself
 ]
 
+{ #category : #adding }
+PBAssemblyUIItem >> addPackages: aCollection [ 
+	
+	aCollection do: [ :each | assembly addPackage: each ]
+]
+
 { #category : #decorating }
 PBAssemblyUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
 
@@ -36,14 +42,22 @@ PBAssemblyUIItem >> isAffectedBy: anAnnouncement [
 ]
 
 { #category : #accessing }
-PBAssemblyUIItem >> items [ 
-	^ #()
+PBAssemblyUIItem >> items [
+	^ ((assembly packages
+		collect: [ :each | PBPackageUIItem on: each ])
+		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
 { #category : #testing }
 PBAssemblyUIItem >> name [
 	
 	^ assembly name
+]
+
+{ #category : #accessing }
+PBAssemblyUIItem >> packageCandidates [
+	
+	^ assembly packageCandidates
 ]
 
 { #category : #testing }
