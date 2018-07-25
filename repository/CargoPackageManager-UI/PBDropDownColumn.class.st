@@ -25,6 +25,10 @@ PBDropDownColumn >> read: aPBConflict [
 		useSelectionIndex: false;
 		updateList;
 		updateListSelectionIndex;
-		updateContents;
 		yourself
+]
+
+{ #category : #accessing }
+PBDropDownColumn >> width [
+	^ 100
 ]

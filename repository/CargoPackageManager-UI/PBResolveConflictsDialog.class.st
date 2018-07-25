@@ -69,6 +69,7 @@ PBResolveConflictsDialog >> initializeWidgets [
 	conflictsList widget 
 		addColumn: (PBConflictsColumn header:'Project Name' selector: #projectName);
 		addColumn: ((PBDropDownColumn id:'Version to Use') dialog: self; yourself);
+		addColumn: ((PBConflictDetailsColumn id:'Details'));
 		addColumn: (PBNullColumn id: '');
 		dataSource: self newConflictDataSource;
 		showColumnHeaders.
@@ -114,4 +115,10 @@ PBResolveConflictsDialog >> updateOkButton [
 	^ (conflicts anySatisfy: [ :each | each isResolved not ]) 
 		ifTrue: [ self window toolbar okButton disable ]
 		ifFalse: [ self window toolbar okButton enable ]
+]
+
+{ #category : #actions }
+PBResolveConflictsDialog >> updateTable [
+	conflictsList widget refresh.
+
 ]
