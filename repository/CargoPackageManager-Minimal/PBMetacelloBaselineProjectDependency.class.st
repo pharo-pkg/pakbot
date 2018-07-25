@@ -15,6 +15,25 @@ PBMetacelloBaselineProjectDependency class >> example [
 		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'
 ]
 
+{ #category : #'instance-creation' }
+PBMetacelloBaselineProjectDependency class >> fromMetacelloSpec: aMetacelloSpec [
+
+	| metacelloUrl metacelloUrlParts version dependencyUrl |
+	metacelloUrl := aMetacelloSpec repositories map values first description.
+	metacelloUrlParts := metacelloUrl substrings: ':'.
+	
+	version := metacelloUrlParts size > 2
+		ifTrue: [ metacelloUrlParts last ]
+		ifFalse: [ self halt: 'No version specified?' ].
+
+	dependencyUrl := metacelloUrlParts first , ':', metacelloUrlParts second.
+
+	^ self
+		name: aMetacelloSpec name
+		repositoryUrl: dependencyUrl
+		version: version
+]
+
 { #category : #accessing }
 PBMetacelloBaselineProjectDependency class >> projectClass [
 	^ PBMetacelloBaselineProject 

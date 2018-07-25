@@ -12,6 +12,12 @@ Class {
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
+{ #category : #'instance-creation' }
+PBMetacelloProjectDependency class >> fromMetacelloSpec: aMetacelloMCBaselineOfProjectSpec [ 
+	
+	self subclassResponsibility
+]
+
 { #category : #ston }
 PBMetacelloProjectDependency class >> fromSton: stonReader [
 	| metacelloProject |

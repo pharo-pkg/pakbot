@@ -63,7 +63,27 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProj
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloProjectDependencyHasMetacelloLoadingInstruction [
+CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
+
+	| testRegistry resolution projectOne baselineDependency |
+	testRegistry := CGOPackageRegistry new.	
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	
+	baselineDependency := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
+	projectOne addDependency: baselineDependency.
+	resolution := projectOne resolve.
+
+	"Since the project and its dependencies are already loaded and up to date,
+	the calculated load instructions should strip out all installed things and then be empty"
+	self assert: resolution loadInstructions size equals: 1.
+	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: baselineDependency))
+]
+
+{ #category : #tests }
+CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
 
 	| testRegistry resolution projectOne configurationProject |
 	testRegistry := CGOPackageRegistry new.	
