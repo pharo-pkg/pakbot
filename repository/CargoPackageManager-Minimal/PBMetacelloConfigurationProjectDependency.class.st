@@ -48,7 +48,7 @@ PBMetacelloConfigurationProjectDependency >> additionalConflictingInstalledProje
 	"If the installed version is not the same, we have a conflict"
 	^ metacelloProjectRegistration
 		configurationProjectSpecIfPresent: [ :configurationSpec |
-			{PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec} ]
+			{(PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) project: project; yourself} ]
 		ifAbsent: [ #() ].
 
 ]

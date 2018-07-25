@@ -59,7 +59,7 @@ PBMetacelloBaselineProjectDependency >> additionalConflictingInstalledProjects [
 	"If the installed version is not the same, we have a conflict"
 	^ metacelloProjectRegistration
 		baselineProjectSpecIfPresent: [ :baselineSpec |
-			{PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec} ]
+			{(PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec) project: project; yourself} ]
 		ifAbsent: [ #() ].
 
 ]

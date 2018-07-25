@@ -51,6 +51,15 @@ PBMetacelloProjectDependency class >> projectClass [
 	self subclassResponsibility 
 ]
 
+{ #category : #comparing }
+PBMetacelloProjectDependency >> = anotherObject [
+
+	self == anotherObject ifTrue: [ ^ true ].
+	self species = anotherObject species ifFalse: [ ^ false ].
+	
+	^ self version = anotherObject version and: [ self name = anotherObject name ].
+]
+
 { #category : #accessing }
 PBMetacelloProjectDependency >> constraints [
 
@@ -80,6 +89,11 @@ PBMetacelloProjectDependency >> displayStringOn: aStream [
 PBMetacelloProjectDependency >> fitsPlatformRequirements [
 	
 	^ true "it should be managed by Metecello"
+]
+
+{ #category : #comparing }
+PBMetacelloProjectDependency >> hash [
+	^ self name hash
 ]
 
 { #category : #initialization }

@@ -1,12 +1,18 @@
 Class {
 	#name : #CGONonConflictingDependencyState,
 	#superclass : #Object,
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver-Conflicts'
 }
 
 { #category : #accessing }
 CGONonConflictingDependencyState >> conflictingDependencies [
 	
+	^ #()
+]
+
+{ #category : #accessing }
+CGONonConflictingDependencyState >> conflictingDependenciesFor: aResolvedDependency [
+
 	^ #()
 ]
 

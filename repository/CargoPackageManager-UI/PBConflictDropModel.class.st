@@ -32,7 +32,7 @@ PBConflictDropModel >> dialog: aPBResolveConflictsDialog [
 PBConflictDropModel >> list [
 	
 	list ifNil: [ list := conflict possibleResolutions ].
-	^ list collect: [ :e | e projectVersion ]	
+	^ list collect: [ :e | e version ]	
 
 
 ]
@@ -46,6 +46,6 @@ PBConflictDropModel >> selected [
 { #category : #accessing }
 PBConflictDropModel >> selected: aString [ 
 	
-	conflict selectedResolution: (list detect: [ :each | each projectVersion = aString ]).
+	conflict selectedResolution: (list detect: [ :each | each version = aString ]).
 	dialog updateOkButton.
 ]
