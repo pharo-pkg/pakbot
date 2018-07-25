@@ -13,7 +13,7 @@ PBProjectUIItemTest >> testAddAssemblyCommand [
 	self openBrowser.
 	
 	project := self findProject: 'TestProject'.	
-	cmd := self command: CGOCreateAssemblyCommand for: project.
+	cmd := self command: PBCreateAssemblyCommand for: project.
 	
 	[cmd executeCommand] 
 		on: ProvideAnswerNotification 
@@ -33,7 +33,7 @@ PBProjectUIItemTest >> testAddPackageCommand [
 	self openBrowser.
 	
 	project := self findProject: 'TestProject'.	
-	cmd := self command: CGOCreatePackageInProjectCommand for: project.
+	cmd := self command: PBCreatePackageInProjectCommand for: project.
 
 	[cmd executeCommand] 
 		on: ProvideAnswerNotification 
@@ -55,9 +55,9 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 	self openBrowser.
 	commands := self commandsOfItem: project.
 
-	self assertCommands: commands includes: CGOCreatePackageInProjectCommand.
-	self assertCommands: commands includes: CGOImportPackageInProjectCommand.
-	self assertCommands: commands includes: CGORemoveProjectCommand.
+	self assertCommands: commands includes: PBCreatePackageInProjectCommand.
+	self assertCommands: commands includes: PBImportPackageInProjectCommand.
+	self assertCommands: commands includes: PBRemoveProjectCommand.
 	self assertCommands: commands includes: CGOPublishProjectCommand.
 	self assertCommands: commands includes: PBSetupProjectRepositoryCommand.
 ]
@@ -97,7 +97,7 @@ PBProjectUIItemTest >> testRemoveProjectCommand [
 	self openBrowser.
 	
 	project := self findProject: 'TestProject'.	
-	cmd := self command: CGORemoveProjectCommand for: project.
+	cmd := self command: PBRemoveProjectCommand for: project.
 	cmd executeCommand.
 	
 	pj := self findUIItem: 'TestProject-Core'.

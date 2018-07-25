@@ -64,7 +64,7 @@ PBProjectUIItem >> createPackageNamed: aString [
 { #category : #decorating }
 PBProjectUIItem >> decorateProblems: anItemCellMorph inContext: itemContext [
 	| button activator icon command |	
-	command := CGORepairProjectCommand new.
+	command := PBRepairProjectCommand new.
 	itemContext prepareNewCommand: command.
 	
 	activator := CmdCommandActivator new

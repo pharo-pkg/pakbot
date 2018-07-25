@@ -2,7 +2,7 @@
 Calypso command providing a contextual menu to create a new (empty) Cargo package unit
 "
 Class {
-	#name : #CGOCreatePackageInProjectCommand,
+	#name : #PBCreatePackageInProjectCommand,
 	#superclass : #CGOProjectCommand,
 	#instVars : [
 		'unitName'
@@ -11,26 +11,26 @@ Class {
 }
 
 { #category : #accessing }
-CGOCreatePackageInProjectCommand class >> defaultMenuIconName [
+PBCreatePackageInProjectCommand class >> defaultMenuIconName [
 	^#packageAdd
 ]
 
 { #category : #activation }
-CGOCreatePackageInProjectCommand class >> systemBrowserMenuActivator [
+PBCreatePackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemOrder: 10 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
-CGOCreatePackageInProjectCommand class >> systemBrowserShortcutActivator [
+PBCreatePackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
 	^ CmdShortcutActivation by: $p meta, $n meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
-CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
+PBCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
@@ -39,7 +39,7 @@ CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivator [
 ]
 
 { #category : #activation }
-CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivatorForPackage [
+PBCreatePackageInProjectCommand class >> systemBrowserToolbarActivatorForPackage [
 	<classAnnotation>
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
@@ -48,7 +48,7 @@ CGOCreatePackageInProjectCommand class >> systemBrowserToolbarActivatorForPackag
 ]
 
 { #category : #execution }
-CGOCreatePackageInProjectCommand >> createSystemPackage [
+PBCreatePackageInProjectCommand >> createSystemPackage [
 	SycAddNewPackageCommand new
 		systemEnvironment: toolContext systemEnvironment;
 		packageName: unitName;
@@ -56,12 +56,12 @@ CGOCreatePackageInProjectCommand >> createSystemPackage [
 ]
 
 { #category : #initialization }
-CGOCreatePackageInProjectCommand >> defaultMenuItemName [
+PBCreatePackageInProjectCommand >> defaultMenuItemName [
 	^ 'New Package'
 ]
 
 { #category : #execution }
-CGOCreatePackageInProjectCommand >> execute [
+PBCreatePackageInProjectCommand >> execute [
 	unitName := UIManager default 
 		request: 'New package name' 
 		initialAnswer: project name, '-'.

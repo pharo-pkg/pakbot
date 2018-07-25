@@ -1,35 +1,35 @@
 Class {
-	#name : #CGOCreateAssemblyCommand,
+	#name : #PBCreateAssemblyCommand,
 	#superclass : #CGOProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #accessing }
-CGOCreateAssemblyCommand class >> defaultMenuIconName [
+PBCreateAssemblyCommand class >> defaultMenuIconName [
 
 	^#newerPackagesAvailable
 ]
 
 { #category : #execution }
-CGOCreateAssemblyCommand class >> execute [
+PBCreateAssemblyCommand class >> execute [
 	
 	^ self name , ' Assembly'
 ]
 
 { #category : #activation }
-CGOCreateAssemblyCommand class >> systemBrowserMenuActivator [
+PBCreateAssemblyCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
-CGOCreateAssemblyCommand >> defaultMenuItemName [
+PBCreateAssemblyCommand >> defaultMenuItemName [
 	^ 'New Assembly'
 ]
 
 { #category : #execution }
-CGOCreateAssemblyCommand >> execute [
+PBCreateAssemblyCommand >> execute [
 	| assemblyName |
 	assemblyName := UIManager default 
 		request: 'New assembly name' 
