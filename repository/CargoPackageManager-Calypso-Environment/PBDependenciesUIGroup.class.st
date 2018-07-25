@@ -17,7 +17,7 @@ PBDependenciesUIGroup class >> onProject: aProject [
 { #category : #decorating }
 PBDependenciesUIGroup >> decorateTableCell: anItemCellMorph inContext: itemContext [
 
-	anItemCellMorph definitionIcon: #blank.
+	anItemCellMorph definitionIcon: #glamorousBookmark.
 	anItemCellMorph label color: anItemCellMorph theme calypsoFrozenItemColor.
 ]
 

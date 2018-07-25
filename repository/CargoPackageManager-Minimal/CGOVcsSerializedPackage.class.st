@@ -65,7 +65,9 @@ CGOVcsSerializedPackage >> initializeWithDictionary: aDictionary [
 CGOVcsSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
 	dict := OrderedDictionary new.
 	dict at: #name put: aCGOOngoingPackageUnit name.
-	dict at: #description put: aCGOOngoingPackageUnit description.
+	aCGOOngoingPackageUnit description 
+		ifNotNil: [ dict at: #description put: aCGOOngoingPackageUnit description ].
+	
 ]
 
 { #category : #serialization }

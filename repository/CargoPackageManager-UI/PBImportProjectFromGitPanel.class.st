@@ -33,11 +33,14 @@ PBImportProjectFromGitPanel class >> defaultSpec [
 
 { #category : #accessing }
 PBImportProjectFromGitPanel >> accept [
-
-	^ (CGOGitRepositoryCreator new
+	| project |
+	
+	project := (CGOGitRepositoryCreator new
 		githubUrl: repositoryUrlInputText text;
 		version: versionInputText text;
-		createAndClone) project
+		createAndClone) project.
+	(PBLoadProjectDialog onProject: project) openDialogWithSpec.
+	^ project
 ]
 
 { #category : #accessing }

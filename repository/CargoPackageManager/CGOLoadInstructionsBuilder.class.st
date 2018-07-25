@@ -20,7 +20,7 @@ CGOLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
 		collect: [ :each | each resolution]
 		thenReject: [ :each | each isInstalled ] ) asArray.
 	packageVersions 
-		ifNotEmpty: [ loadInstructions addGroup: (CGOPackageLoadGroup newWithAll: packageVersions) ]
+		ifNotEmpty: [ loadInstructions addGroup: (PBLoadGroup newWithAll: packageVersions) ]
 ]
 
 { #category : #'loading order' }

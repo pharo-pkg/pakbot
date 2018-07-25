@@ -2,6 +2,8 @@
 Builder of Cargo metadata for the PharoLauncher project.
 
 	self buildAndRegisterIn: CGOPackageRegistry new
+	
+	self buildWithoutPackageDependencyAndRegisterIn: CGOPackageRegistry default
 "
 Class {
 	#name : #PharoLauncherProject,
@@ -10,12 +12,17 @@ Class {
 		'registry',
 		'project'
 	],
-	#category : 'CargoPackageManager-Tests-LauncherRessource'
+	#category : #'CargoPackageManager-Tests-LauncherRessource'
 }
 
 { #category : #'instance creation' }
 PharoLauncherProject class >> buildAndRegisterIn: aCGOPackageRegistry [
 	^ self new buildAndRegisterIn: aCGOPackageRegistry
+]
+
+{ #category : #'instance creation' }
+PharoLauncherProject class >> buildWithoutPackageDependencyAndRegisterIn: aCGOPackageRegistry [
+	^ self new buildWithoutPackageDependencyAndRegisterIn: aCGOPackageRegistry
 ]
 
 { #category : #'instance creation' }
@@ -105,4 +112,21 @@ PharoLauncherProject >> buildRepository [
 		version: 'development';
 		subdirectory: 'src';
 		create
+]
+
+{ #category : #'instance creation' }
+PharoLauncherProject >> buildWithoutPackageDependencyAndRegisterIn: aCGOPackageRegistry [
+	registry := aCGOPackageRegistry.
+	self
+		buildProject;
+		buildExternalProjectDependencies;
+		buildPackages;
+		removePackagesDependencies.
+	^ project
+]
+
+{ #category : #building }
+PharoLauncherProject >> removePackagesDependencies [
+	project packageUnits do: [ :unit |
+		unit dependencies: OrderedCollection new ]
 ]

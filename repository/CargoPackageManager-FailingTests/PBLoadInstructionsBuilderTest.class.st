@@ -1,20 +1,20 @@
 Class {
-	#name : #LoadInstructionsBuilderTest,
+	#name : #PBLoadInstructionsBuilderTest,
 	#superclass : #Seaside31BasedTest,
 	#instVars : [
 		'resolution',
 		'loadInstructionsBuilder'
 	],
-	#category : 'CargoPackageManager-FailingTests-Loader'
+	#category : #'CargoPackageManager-FailingTests-Loader'
 }
 
 { #category : #accessing }
-LoadInstructionsBuilderTest class >> resources [
+PBLoadInstructionsBuilderTest class >> resources [
 	^ super resources copyWith: FooDependencyResolutionResource
 ]
 
 { #category : #utility }
-LoadInstructionsBuilderTest >> assertPackage: aPackage equals: aPackageVersionString [
+PBLoadInstructionsBuilderTest >> assertPackage: aPackage equals: aPackageVersionString [
 	| anotherPackage |
 	
 	anotherPackage := aPackageVersionString asPackageVersionReference.
@@ -24,13 +24,13 @@ LoadInstructionsBuilderTest >> assertPackage: aPackage equals: aPackageVersionSt
 ]
 
 { #category : #'expected results' }
-LoadInstructionsBuilderTest >> expectedSortResult [
+PBLoadInstructionsBuilderTest >> expectedSortResult [
 	"self collect: [ :item | item packageVersion packageName , '@' , item packageVersion version asString]"
 	^ #('B@3.1.0' 'D@1.1.0' 'C@1.0.0' 'E@1.0.0' 'A@1.0.0' 'Foo@1.0.0')
 ]
 
 { #category : #running }
-LoadInstructionsBuilderTest >> setUp [
+PBLoadInstructionsBuilderTest >> setUp [
 	super setUp.
 	loadInstructionsBuilder := CGOLoadInstructionsBuilder new
 					resolution: FooDependencyResolutionResource current dependencyResolution;
@@ -38,7 +38,7 @@ LoadInstructionsBuilderTest >> setUp [
 ]
 
 { #category : #tests }
-LoadInstructionsBuilderTest >> testLoadInstructions [
+PBLoadInstructionsBuilderTest >> testLoadInstructions [
 	| loadInstructions pkgVersionReferences |
 
 	loadInstructions := loadInstructionsBuilder loadInstructions.
@@ -51,7 +51,7 @@ LoadInstructionsBuilderTest >> testLoadInstructions [
 ]
 
 { #category : #tests }
-LoadInstructionsBuilderTest >> testLoadOrder [
+PBLoadInstructionsBuilderTest >> testLoadOrder [
 	| packages |
 
 	packages := loadInstructionsBuilder loadOrder flattened collect: #resolvedProjectVersion.
@@ -63,14 +63,14 @@ LoadInstructionsBuilderTest >> testLoadOrder [
 ]
 
 { #category : #tests }
-LoadInstructionsBuilderTest >> testLoadOrderHandlesCycles [
+PBLoadInstructionsBuilderTest >> testLoadOrderHandlesCycles [
 	self 
 		shouldnt: [ loadInstructionsBuilder loadOrder ]
 		raise: MessageNotUnderstood
 ]
 
 { #category : #tests }
-LoadInstructionsBuilderTest >> testReducedGraph [
+PBLoadInstructionsBuilderTest >> testReducedGraph [
 	| nodes |
 
 	nodes := loadInstructionsBuilder reducedGraph.
