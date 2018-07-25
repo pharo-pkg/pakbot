@@ -41,7 +41,7 @@ PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
 	panel accept.
 	
 	self assert: project name equals: name.
-	self assert: project version equals: version.
+	self assert: project version printString equals: version.
 	self assert: project description equals: description.
 ]
 
