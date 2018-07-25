@@ -201,6 +201,102 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledMetace
 ]
 
 { #category : #tests }
+CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionInstalledIsConflict [
+
+	| project testRegistry resolution configurationProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '1.0';
+		load.
+	
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '2.0'.
+
+	project addDependency: configurationProjectV1.
+	resolution := project resolve.
+
+	self assert: resolution hasConflicts
+]
+
+{ #category : #tests }
+CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingSameVersionInstalledIsNotConflict [
+
+	| project testRegistry resolution configurationProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '2.0';
+		load.
+	
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '2.0'.
+
+	project addDependency: configurationProjectV1.
+	resolution := project resolve.
+
+	self deny: resolution hasConflicts
+]
+
+{ #category : #tests }
+CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingStableAndDifferentVersionInstalledIsConflict [
+
+	| project testRegistry resolution configurationProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '1.0';
+		load.
+	
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: #stable.
+
+	project addDependency: configurationProjectV1.
+	resolution := project resolve.
+
+	self assert: resolution hasConflicts
+]
+
+{ #category : #tests }
+CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingStableAndSameVersionInstalledIsNotConflict [
+
+	| project testRegistry resolution configurationProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '2.0';
+		load.
+	
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: #stable.
+
+	project addDependency: configurationProjectV1.
+	resolution := project resolve.
+
+	self deny: resolution hasConflicts
+]
+
+{ #category : #tests }
 CGOConflictDetectionTest >> testEqualMetacelloDependenciesHasNoConflicts [
 
 	| project testRegistry resolution configurationProjectV1 configurationProjectV2 |
