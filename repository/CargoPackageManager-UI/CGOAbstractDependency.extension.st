@@ -8,7 +8,7 @@ CGOAbstractDependency >> balloonText [
 ]
 
 { #category : #'*CargoPackageManager-UI' }
-CGOAbstractDependency >> iconName [
+CGOAbstractDependency >> statusIconName [
 	^ self isInstalled
 		ifTrue: [ #package ]
 		ifFalse: [ 

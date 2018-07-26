@@ -16,8 +16,8 @@ PBResolutionDataSource >> cellColumn: column row: rowIndex [
 ]
 
 { #category : #initialization }
-PBResolutionDataSource >> iconFor: item [
-	^ item icon
+PBResolutionDataSource >> iconsFor: item [
+	^ item icons
 ]
 
 { #category : #initialization }
@@ -27,8 +27,8 @@ PBResolutionDataSource >> newCellFor: item [
 	cell indentBy: item depth * 16.
 	
 	cell addMorphBack: (self buttonFor: item).
-	(self iconFor: item data) 
-		ifNotNil: [ :icon | cell addMorphBack: icon asMorph ].
+	(self iconsFor: item data) 
+		do: [ :icon | cell addMorphBack: icon asMorph ].
 	cell addMorphBack: (self toString: item data) asMorph asReadOnlyMorph.
 	^ cell
 	

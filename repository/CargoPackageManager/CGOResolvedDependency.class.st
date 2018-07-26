@@ -63,8 +63,9 @@ CGOResolvedDependency >> hasConflicts [
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> icon [
-	^ self iconNamed: #forward
+CGOResolvedDependency >> icons [
+	^ { self iconNamed: #forward .
+		self iconNamed: dependency iconName }
 ]
 
 { #category : #accessing }

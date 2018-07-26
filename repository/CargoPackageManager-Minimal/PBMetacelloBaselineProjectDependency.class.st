@@ -16,6 +16,11 @@ PBMetacelloBaselineProjectDependency class >> example [
 ]
 
 { #category : #accessing }
+PBMetacelloBaselineProjectDependency class >> iconName [
+	^ #komitterSmalltalkhubRemote
+]
+
+{ #category : #accessing }
 PBMetacelloBaselineProjectDependency class >> projectClass [
 	^ PBMetacelloBaselineProject 
 ]

@@ -43,7 +43,7 @@ PBResolutionPanel >> resolutionDataSource [
 	| datasource |
 	datasource := PBResolutionDataSource
 		roots: {resolution}
-		children: [ :project | project subresolutions ].
+		children: [ :project | project subresolutions sorted: [ :a :b | a name < b name ] ].
 	^ datasource
 ]
 

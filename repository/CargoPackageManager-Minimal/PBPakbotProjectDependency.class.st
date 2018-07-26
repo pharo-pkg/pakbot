@@ -29,6 +29,11 @@ PBPakbotProjectDependency class >> fromSton: stonReader [
 	^ self named: repository name repositoryUrl: repository	repositoryUrl
 ]
 
+{ #category : #accessing }
+PBPakbotProjectDependency class >> iconName [
+	^ #remote
+]
+
 { #category : #'instance creation' }
 PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString [
 	

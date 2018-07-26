@@ -86,8 +86,8 @@ CGOResolvedProject >> hash [
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> icon [
-	^ self iconNamed: #glamorousBookmark
+CGOResolvedProject >> icons [
+	^ { self iconNamed: #glamorousBookmark }
 ]
 
 { #category : #lookup }
