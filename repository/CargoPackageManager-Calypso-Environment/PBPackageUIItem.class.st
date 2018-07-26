@@ -45,6 +45,18 @@ PBPackageUIItem class >> prepareProjectItemsQueryFrom: anItem in: aNavigationEnv
 
 ]
 
+{ #category : #testing }
+PBPackageUIItem >> canBeRemovedFromAssembly [
+	
+	^ false
+]
+
+{ #category : #testing }
+PBPackageUIItem >> canBeRemovedFromProject [
+	
+	^ true
+]
+
 { #category : #accessing }
 PBPackageUIItem >> cargoPackage [
 	^ package

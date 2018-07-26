@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #activation }
+PBRemovePackageFromProjectCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ aToolContext lastSelectedItem actualObject canBeRemovedFromProject
+]
+
+{ #category : #activation }
 PBRemovePackageFromProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
