@@ -41,6 +41,12 @@ PBAssemblyUIItem >> isAffectedBy: anAnnouncement [
 	^ false
 ]
 
+{ #category : #testing }
+PBAssemblyUIItem >> isAssembly [
+	
+	^ true
+]
+
 { #category : #accessing }
 PBAssemblyUIItem >> items [
 	^ ((assembly packages
@@ -58,6 +64,12 @@ PBAssemblyUIItem >> name [
 PBAssemblyUIItem >> packageCandidates [
 	
 	^ assembly packageCandidates
+]
+
+{ #category : #operations }
+PBAssemblyUIItem >> remove [
+	
+	assembly remove
 ]
 
 { #category : #testing }

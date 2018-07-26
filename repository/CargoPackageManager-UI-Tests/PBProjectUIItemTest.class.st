@@ -5,14 +5,18 @@ Class {
 }
 
 { #category : #tests }
+PBProjectUIItemTest >> setUp [
+
+	super setUp.
+	registry newProjectNamed: 'TestProject'.
+	project := self findProject: 'TestProject'.	
+]
+
+{ #category : #tests }
 PBProjectUIItemTest >> testAddAssemblyCommand [
 
-	| cmd assembly |
-	registry newProjectNamed: 'TestProject'.
-	
+	| cmd assembly |	
 	self openBrowser.
-	
-	project := self findProject: 'TestProject'.	
 	cmd := self command: PBCreateAssemblyCommand for: project.
 	
 	[cmd executeCommand] 
@@ -28,11 +32,7 @@ PBProjectUIItemTest >> testAddAssemblyCommand [
 PBProjectUIItemTest >> testAddPackageCommand [
 
 	| cmd pkg |
-	registry newProjectNamed: 'TestProject'.
-	
 	self openBrowser.
-	
-	project := self findProject: 'TestProject'.	
 	cmd := self command: PBCreatePackageInProjectCommand for: project.
 
 	[cmd executeCommand] 
@@ -48,10 +48,6 @@ PBProjectUIItemTest >> testAddPackageCommand [
 PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 
 	| commands |
-	
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
 	self openBrowser.
 	commands := self commandsOfItem: project.
 
@@ -65,38 +61,31 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 { #category : #tests }
 PBProjectUIItemTest >> testCreatingAProjectCreatesTheCorrectUIItem [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
+	"Check the setUp"
+	
 	self assert: project isNotNil.	
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testNewProjectHasNoElements [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
-	self assert: project items isEmpty .	
+	"Check the setUp"
+	self assert: project items isEmpty
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testNewProjectIsEmpty [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
+	"Check the setUp"
 	self assert: project isEmpty.	
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testRemoveProjectCommand [
 
-	| cmd pj |
-	registry newProjectNamed: 'TestProject'.
-	
+	| cmd pj |	
 	self openBrowser.
 	
-	project := self findProject: 'TestProject'.	
 	cmd := self command: PBRemoveProjectCommand for: project.
 	cmd executeCommand.
 	

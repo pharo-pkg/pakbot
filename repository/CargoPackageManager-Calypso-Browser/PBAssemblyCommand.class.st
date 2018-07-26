@@ -16,6 +16,11 @@ PBAssemblyCommand class >> canBeExecutedInContext: aToolContext [
 	^ aToolContext hasSelectedItems
 ]
 
+{ #category : #testing }
+PBAssemblyCommand class >> isAbstract [
+	^ self == PBAssemblyCommand
+]
+
 { #category : #execution }
 PBAssemblyCommand >> prepareFullExecutionInContext: aToolContext [
 

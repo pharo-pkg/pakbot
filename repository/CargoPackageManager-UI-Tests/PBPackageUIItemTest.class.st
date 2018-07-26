@@ -23,13 +23,6 @@ PBPackageUIItemTest >> setUp [
 ]
 
 { #category : #tests }
-PBPackageUIItemTest >> tearDown [
-
-	('TestProject-Core' asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.
-	super tearDown.
-]
-
-{ #category : #tests }
 PBPackageUIItemTest >> testAProjectShowsBothLoadedAndNotLoadedPackages [
 
 	| projectUI loadedUI notLoadedUI |

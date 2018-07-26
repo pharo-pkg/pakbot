@@ -473,7 +473,8 @@ PBProject >> registry: aCGOPackageRegistry [
 { #category : #assemblies }
 PBProject >> removeAssembly: aPBAssembly [ 
 	
-	assemblies remove: aPBAssembly
+	assemblies remove: aPBAssembly.	
+	self announceChanged.
 ]
 
 { #category : #dependencies }
