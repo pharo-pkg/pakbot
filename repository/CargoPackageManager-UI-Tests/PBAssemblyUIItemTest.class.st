@@ -41,11 +41,14 @@ PBAssemblyUIItemTest >> testRemoveAssemblyCommandRemovesIt [
 
 	| projectUI assembly |
 
+	self openBrowser.
 	projectUI := self findProject: 'TestProject'.
+	self expandNodeNamed: 'TestProject'.
+	
 	assembly := self findUIItem: 'Assembly'.
 
 	(self command: PBDeleteAssemblyCommand for: assembly) executeCommand.
 	
 	self expandNodeNamed: 'TestProject'.
-	self assert: (self findUIItem: 'TestProject-Core') isNil.
+	self assert: (self findUIItem: 'Assembly') isNil.
 ]

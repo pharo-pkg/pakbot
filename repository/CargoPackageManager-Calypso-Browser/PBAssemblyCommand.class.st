@@ -25,5 +25,5 @@ PBAssemblyCommand class >> isAbstract [
 PBAssemblyCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
-	assembly := aToolContext lastSelectedProjectChild.
+	assembly := aToolContext lastSelectedObject.
 ]
