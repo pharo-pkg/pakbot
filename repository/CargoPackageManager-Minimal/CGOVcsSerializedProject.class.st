@@ -73,6 +73,11 @@ CGOVcsSerializedProject >> initializeWithOngoing: aCGOOngoingProject [
 ]
 
 { #category : #deserialization }
+CGOVcsSerializedProject >> ongoingPackageAssembliesFrom: aCollection [ 
+	^ aCollection collect: [ :each | (CGOVcsSerializedPackageAssembly fromDictionary: each) asOngoingPackage ]	
+]
+
+{ #category : #deserialization }
 CGOVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
 	^ aCollection collect: [ :each | (CGOVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]	
 ]

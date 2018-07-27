@@ -1,3 +1,7 @@
+"
+Dialog box displaying both current resolution and potential conflits.
+After conflicts are solved, proceed to the load action.
+"
 Class {
 	#name : #PBLoadPreviewDialog,
 	#superclass : #ComposablePresenter,
