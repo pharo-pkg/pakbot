@@ -41,7 +41,7 @@ PBLoadPreviewDialog class >> example [
 
 { #category : #action }
 PBLoadPreviewDialog >> accept [
-	self halt
+	conflictsPanel accept
 ]
 
 { #category : #accessing }
