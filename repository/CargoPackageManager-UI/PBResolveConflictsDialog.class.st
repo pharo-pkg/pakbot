@@ -83,7 +83,12 @@ PBResolveConflictsDialog >> errorToResume: aPBProjectHasConflictsError [
 	errorToResume := aPBProjectHasConflictsError 
 ]
 
-{ #category : #api }
+{ #category : #updating }
+PBResolveConflictsDialog >> hasConflicts [
+	^ self conflicts anySatisfy: [ :each | each isResolved not ]
+]
+
+{ #category : #initialization }
 PBResolveConflictsDialog >> initialExtent [
 	^ 600@450
 ]
@@ -113,7 +118,7 @@ PBResolveConflictsDialog >> newConflictDataSource [
 		yourself
 ]
 
-{ #category : #api }
+{ #category : #opening }
 PBResolveConflictsDialog >> openDialogWithSpec [
 
 	^ super openDialogWithSpec
@@ -131,7 +136,7 @@ PBResolveConflictsDialog >> resolution: aResolution [
 	resolution := aResolution
 ]
 
-{ #category : #api }
+{ #category : #accessing }
 PBResolveConflictsDialog >> title [
 	^ 'Resolve Conflicts for Project ' , self resolution resolvedProjectVersion name
 ]
@@ -143,8 +148,7 @@ PBResolveConflictsDialog >> toolbar [
 
 { #category : #updating }
 PBResolveConflictsDialog >> updateOkButton [
-	
-	^ (self conflicts anySatisfy: [ :each | each isResolved not ]) 
+	^ self hasConflicts
 		ifTrue: [ self window toolbar okButton disable ]
 		ifFalse: [ self window toolbar okButton enable ]
 ]

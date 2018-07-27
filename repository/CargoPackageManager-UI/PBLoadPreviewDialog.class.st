@@ -14,19 +14,19 @@ Class {
 { #category : #specs }
 PBLoadPreviewDialog class >> defaultSpec [
 	^ SpecLayout composed
-	newColumn: [ :col | 
-	col
-		newRow: [ :row |
-			 row 
-				add: #resolutionLabel;
-				add: #conflictsLabel ]
-		height: self inputTextHeight;
-		newRow: [ :row |
-			row 
-				add: #resolutionPanel;
-				add: #conflictsPanel;
-				yourself	]
-]
+		newColumn: [ :col | 
+			col
+				newRow: [ :row |
+					row
+						add: #resolutionLabel;
+						add: #conflictsLabel ]
+					height: self inputTextHeight;
+				newRow: [ :row |
+					row
+						add: #resolutionPanel;
+						addSplitter;
+						add: #conflictsPanel;
+						yourself ] ]
 ]
 
 { #category : #examples }
@@ -36,7 +36,12 @@ PBLoadPreviewDialog class >> example [
 	| resolution |
 
 	resolution := (CGOPackageRegistry default projectNamed: #PharoLauncher) resolve.
-	(self on: resolution) openWithSpec
+	(self on: resolution) openDialogWithSpec
+]
+
+{ #category : #action }
+PBLoadPreviewDialog >> accept [
+	self halt
 ]
 
 { #category : #accessing }
@@ -51,7 +56,7 @@ PBLoadPreviewDialog >> conflictsPanel [
 
 { #category : #initialization }
 PBLoadPreviewDialog >> initialExtent [
-	^ 600@450
+	^ (600@450)
 ]
 
 { #category : #initialization }
@@ -61,6 +66,16 @@ PBLoadPreviewDialog >> initializeWidgets [
 	conflictsPanel := PBResolveConflictsDialog onResolution: resolution.
 	resolutionLabel := self newLabel label: 'Dependency resolution'.
 	resolutionPanel := PBResolutionPanel on: resolution.
+	
+	self whenWindowChanged: [ self updateOkButton ].
+]
+
+{ #category : #opening }
+PBLoadPreviewDialog >> openDialogWithSpec [
+
+	^ super openDialogWithSpec
+		okAction: [ self accept ];
+		yourself
 ]
 
 { #category : #accessing }
@@ -82,4 +97,11 @@ PBLoadPreviewDialog >> setModelBeforeInitialization: aModel [
 { #category : #accessing }
 PBLoadPreviewDialog >> title [
 	^ 'Load Preview'
+]
+
+{ #category : #updating }
+PBLoadPreviewDialog >> updateOkButton [
+	^ conflictsPanel hasConflicts
+		ifTrue: [ self window toolbar okButton disable ]
+		ifFalse: [ self window toolbar okButton enable ]
 ]
