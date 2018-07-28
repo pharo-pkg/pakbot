@@ -204,6 +204,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssem
 	repository workingCopy basicSetProject: iceProject.
 	
 	repository commitWithMessage: 'commit from #testCanSerializeAndDeserilazeAProjectWithAssembly'.
+	repository workingCopy basicSetProject: nil. "ensure we read project from git"
 	deserializedProject := repository workingCopy project pakbotProject.
 	
 	self
@@ -218,6 +219,9 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssem
 	self
 		assert: deserializedProject assemblies 
 		equals: project assemblies.
+	self
+		assertCollection: deserializedProject assemblies first parts
+		hasSameElements: project assemblies first parts.
 ]
 
 { #category : #tests }
