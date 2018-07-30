@@ -85,6 +85,11 @@ CGOResolvedProject >> hash [
 	^ self resolution hash
 ]
 
+{ #category : #accessing }
+CGOResolvedProject >> icons [
+	^ { self iconNamed: #glamorousBookmark }
+]
+
 { #category : #lookup }
 CGOResolvedProject >> includesResolvedTarget: aResolutionTarget [
 
@@ -130,6 +135,11 @@ CGOResolvedProject >> loadInstructions [
 { #category : #accessing }
 CGOResolvedProject >> name [
 	^ resolvedProjectVersion name
+]
+
+{ #category : #accessing }
+CGOResolvedProject >> nameWithVersion [
+	^ self name , ' ', self projectVersion asString
 ]
 
 { #category : #accessing }

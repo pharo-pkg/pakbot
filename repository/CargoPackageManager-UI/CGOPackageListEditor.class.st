@@ -57,7 +57,7 @@ CGOPackageListEditor >> editButton [
 { #category : #'private - displaying' }
 CGOPackageListEditor >> iconForPackage: aDependency [
 
-	^ self iconNamed: aDependency iconName.
+	^ self iconNamed: aDependency statusIconName.
 
 ]
 

@@ -24,6 +24,11 @@ PBMetacelloConfigurationProjectDependency class >> fromMetacelloSpec: aMetacello
 ]
 
 { #category : #accessing }
+PBMetacelloConfigurationProjectDependency class >> iconName [
+	^ #komitterSqueakSourceRemote
+]
+
+{ #category : #accessing }
 PBMetacelloConfigurationProjectDependency class >> projectClass [
 	^ PBMetacelloConfigurationProject 
 ]

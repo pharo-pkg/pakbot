@@ -19,11 +19,18 @@ CGOVcsSerializedPackageAssembly class >> from: aCGOOngoingPackageAssembly [
 
 { #category : #converting }
 CGOVcsSerializedPackageAssembly >> asOngoingPackage [
-	"avoid nil values when a collection is expected"
-	parts := self toArray: parts.
+	| assembly |
+	dict 
+		at: #name
+		ifAbsent: [ PBError new 
+						signal: 'Cannot deserialize an Assembly with no name defined!' ].
+					
+	assembly := PBAssembly named: (dict at: #name).
+	dict at: #description ifPresent: [ :description | assembly description: description ].
+	dict at: #parts ifPresent: [ :packages | 
+		assembly parts: packages asOrderedCollection ].
+	^ assembly
 
-	^ PBAssembly new 
-		initializeFromVcsSerializedPackage: self
 ]
 
 { #category : #initialization }
@@ -34,7 +41,9 @@ CGOVcsSerializedPackageAssembly >> initializePartsWith: aCGOOngoingPackageAssemb
 { #category : #initialization }
 CGOVcsSerializedPackageAssembly >> initializeWithOngoing: aCGOOngoingPackageAssembly [
 	super initializeWithOngoing: aCGOOngoingPackageAssembly.
-	self initializePartsWith: aCGOOngoingPackageAssembly.
+	self 
+		addPropertyNamed: #parts
+		ifNotEmptyOrNil: aCGOOngoingPackageAssembly parts.
 ]
 
 { #category : #accessing }

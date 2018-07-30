@@ -102,7 +102,7 @@ CGOMetacelloConfigurationDependencyPanel >> groupLabel: anObject [
 { #category : #accessing }
 CGOMetacelloConfigurationDependencyPanel >> icon [
 	
-	^ self iconNamed: #komitterSqueakSourceRemote
+	^ self iconNamed: PBMetacelloConfigurationProjectDependency iconName
 ]
 
 { #category : #initialization }

@@ -218,16 +218,6 @@ PBProject >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [
 	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration
 ]
 
-{ #category : #ston }
-PBProject >> fromSton: stonReader [
-	"Decode the Cargo serialized project."
-	| serializedProject |
-	
-	serializedProject := CGOVcsSerializedProject new fromSton: stonReader.
-	self registry: CGOPackageRegistry default.
-	serializedProject flushIn: self.
-]
-
 { #category : #accessing }
 PBProject >> fullyQualifiedName [
 

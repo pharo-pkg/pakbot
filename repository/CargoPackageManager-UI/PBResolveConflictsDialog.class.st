@@ -2,10 +2,10 @@ Class {
 	#name : #PBResolveConflictsDialog,
 	#superclass : #ComposablePresenter,
 	#instVars : [
-		'conflicts',
 		'errorToResume',
 		'toolbar',
-		'conflictsList'
+		'conflictsList',
+		'resolution'
 	],
 	#category : #'CargoPackageManager-UI-Conflicts'
 }
@@ -15,10 +15,18 @@ PBResolveConflictsDialog class >> defaultSpec [
 	<spec: #default>
 	
 	^ SpecLayout composed 
-		newColumn: [ :column |
-			column 
-				newRow: #toolbar height: ITToolBar defaultHeight;
-				newRow: #conflictsList ]
+		add: #conflictsList;
+		yourself
+]
+
+{ #category : #specs }
+PBResolveConflictsDialog class >> example [
+	<example>
+
+	| resolution |
+
+	resolution := (CGOPackageRegistry default projectNamed: #PharoLauncher) resolve.
+	(self onResolution: resolution) openDialogWithSpec
 ]
 
 { #category : #specs }
@@ -26,9 +34,29 @@ PBResolveConflictsDialog class >> on: aConflictException [
 
 	^ self basicNew
 		errorToResume: aConflictException;
-		conflicts: aConflictException resolution conflicts;
+		resolution: aConflictException resolution;
 		initialize;
 		yourself
+]
+
+{ #category : #specs }
+PBResolveConflictsDialog class >> onResolution: aResolution [
+
+	^ self basicNew
+		resolution: aResolution;
+		initialize;
+		yourself
+]
+
+{ #category : #specs }
+PBResolveConflictsDialog class >> specWithToolbar [
+	<spec: #withToolbar>
+	
+	^ SpecLayout composed 
+		newColumn: [ :column |
+			column 
+				newRow: #toolbar height: ITToolBar defaultHeight;
+				newRow: #conflictsList ]
 ]
 
 { #category : #actions }
@@ -36,13 +64,13 @@ PBResolveConflictsDialog >> accept [
 	
 	self window close.
 	
-	conflicts do: [:aConflict | aConflict resolveWithSelected].
-	errorToResume resume
+	self conflicts do: [:aConflict | aConflict resolveWithSelected].
+	errorToResume ifNotNil: [ errorToResume resume ]
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> conflicts: aCollection [ 
-	conflicts := aCollection
+PBResolveConflictsDialog >> conflicts [
+	^ resolution conflicts
 ]
 
 { #category : #accessing }
@@ -55,7 +83,12 @@ PBResolveConflictsDialog >> errorToResume: aPBProjectHasConflictsError [
 	errorToResume := aPBProjectHasConflictsError 
 ]
 
-{ #category : #api }
+{ #category : #updating }
+PBResolveConflictsDialog >> hasConflicts [
+	^ self conflicts anySatisfy: [ :each | each isResolved not ]
+]
+
+{ #category : #initialization }
 PBResolveConflictsDialog >> initialExtent [
 	^ 600@450
 ]
@@ -81,11 +114,11 @@ PBResolveConflictsDialog >> initializeWidgets [
 PBResolveConflictsDialog >> newConflictDataSource [
 
 	^ PBConflictsDataSource new 
-		elements: conflicts;
+		elements: self conflicts;
 		yourself
 ]
 
-{ #category : #api }
+{ #category : #opening }
 PBResolveConflictsDialog >> openDialogWithSpec [
 
 	^ super openDialogWithSpec
@@ -95,10 +128,15 @@ PBResolveConflictsDialog >> openDialogWithSpec [
 
 { #category : #accessing }
 PBResolveConflictsDialog >> resolution [
-	^ errorToResume resolution 
+	^ resolution 
 ]
 
-{ #category : #api }
+{ #category : #accessing }
+PBResolveConflictsDialog >> resolution: aResolution [
+	resolution := aResolution
+]
+
+{ #category : #accessing }
 PBResolveConflictsDialog >> title [
 	^ 'Resolve Conflicts for Project ' , self resolution resolvedProjectVersion name
 ]
@@ -110,8 +148,7 @@ PBResolveConflictsDialog >> toolbar [
 
 { #category : #updating }
 PBResolveConflictsDialog >> updateOkButton [
-	
-	^ (conflicts anySatisfy: [ :each | each isResolved not ]) 
+	^ self hasConflicts
 		ifTrue: [ self window toolbar okButton disable ]
 		ifFalse: [ self window toolbar okButton enable ]
 ]
