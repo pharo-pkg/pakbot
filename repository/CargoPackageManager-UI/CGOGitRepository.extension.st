@@ -3,7 +3,8 @@ Extension { #name : #CGOGitRepository }
 { #category : #'*CargoPackageManager-UI' }
 CGOGitRepository >> description [
 	
-	^ self repositoryUrl 
+	iceRepository remotes ifEmpty: [ ^ 'No remote configured for this project' ].
+	^ iceRepository remotes anyOne url
 ]
 
 { #category : #'*CargoPackageManager-UI' }

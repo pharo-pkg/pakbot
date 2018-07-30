@@ -2,7 +2,7 @@ Class {
 	#name : #PBPackageUIItem,
 	#superclass : #PBAbstractUIItem,
 	#instVars : [
-		'unit'
+		'package'
 	],
 	#category : #'CargoPackageManager-Calypso-Environment-Items'
 }
@@ -25,9 +25,9 @@ PBPackageUIItem class >> convertToCalypsoBrowserItem: aUnit [
 ]
 
 { #category : #sorting }
-PBPackageUIItem class >> forUnit: anUnit [
+PBPackageUIItem class >> on: aPackage [
 	^ self new
-		unit: anUnit;
+		package: aPackage;
 		yourself
 ]
 
@@ -45,16 +45,28 @@ PBPackageUIItem class >> prepareProjectItemsQueryFrom: anItem in: aNavigationEnv
 
 ]
 
+{ #category : #testing }
+PBPackageUIItem >> canBeRemovedFromAssembly [
+	
+	^ false
+]
+
+{ #category : #testing }
+PBPackageUIItem >> canBeRemovedFromProject [
+	
+	^ true
+]
+
 { #category : #accessing }
 PBPackageUIItem >> cargoPackage [
-	^ unit
+	^ package
 ]
 
 { #category : #critiques }
 PBPackageUIItem >> critiques [
 
-	^ unit isInstalled
-		ifTrue: [ unit systemPackage critiques ]
+	^ package isInstalled
+		ifTrue: [ package systemPackage critiques ]
 		ifFalse: [ #() ]
 ]
 
@@ -82,7 +94,7 @@ PBPackageUIItem >> extendedClasses [
 
 	self isInstalled
 		ifFalse: [ ^ #() ].
-	^ unit systemPackage extendedClasses
+	^ package systemPackage extendedClasses
 ]
 
 { #category : #testing }
@@ -106,7 +118,7 @@ PBPackageUIItem >> isEmpty [
 { #category : #testing }
 PBPackageUIItem >> isInstalled [
 	
-	^ unit isInstalled
+	^ package isInstalled
 ]
 
 { #category : #accessing }
@@ -116,34 +128,34 @@ PBPackageUIItem >> items [
 
 { #category : #accessing }
 PBPackageUIItem >> name [
-	^ unit name
+	^ package name
+]
+
+{ #category : #accessing }
+PBPackageUIItem >> package [
+	^ package
+]
+
+{ #category : #accessing }
+PBPackageUIItem >> package: anObject [
+	package := anObject
 ]
 
 { #category : #actions }
 PBPackageUIItem >> removeFromProject [
 	
-	^ self unit project removePackage: self unit
+	^ self package project removePackage: self package
 ]
 
 { #category : #testing }
 PBPackageUIItem >> representsItemOfType: aClass [
 
 	"Awful code because of calypso"
-	^ ( unit class includesBehavior: aClass ) or: [ self class includesBehavior: aClass ]
+	^ ( package class includesBehavior: aClass ) or: [ self class includesBehavior: aClass ]
 ]
 
 { #category : #accessing }
 PBPackageUIItem >> systemPackage [
 	
-	^ unit systemPackage
-]
-
-{ #category : #accessing }
-PBPackageUIItem >> unit [
-	^ unit
-]
-
-{ #category : #accessing }
-PBPackageUIItem >> unit: anObject [
-	unit := anObject
+	^ package systemPackage
 ]

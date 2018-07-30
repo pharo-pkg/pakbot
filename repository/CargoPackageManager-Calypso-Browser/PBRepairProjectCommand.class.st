@@ -1,35 +1,35 @@
 Class {
-	#name : #CGORepairProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#name : #PBRepairProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #testing }
-CGORepairProjectCommand class >> canBeExecutedInContext: aToolContext [
+PBRepairProjectCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (aToolContext isProjectSelected and: [ aToolContext selectedProjectItems size = 1 ])
 		and: [ aToolContext selectedProjectItems first actualObject project hasProblems ]
 ]
 
 { #category : #accessing }
-CGORepairProjectCommand class >> defaultMenuIconName [
+PBRepairProjectCommand class >> defaultMenuIconName [
 	^ #repair
 ]
 
 { #category : #activation }
-CGORepairProjectCommand class >> defaultMenuItemName [
+PBRepairProjectCommand class >> defaultMenuItemName [
 	^ 'Repair Project'
 ]
 
 { #category : #activation }
-CGORepairProjectCommand class >> systemBrowserMenuActivator [
+PBRepairProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemOrder: 1 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #execution }
-CGORepairProjectCommand >> execute [
+PBRepairProjectCommand >> execute [
 	
 	self project openRepairDialog.
 

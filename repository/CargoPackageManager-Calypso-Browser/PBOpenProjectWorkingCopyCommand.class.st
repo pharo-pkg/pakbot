@@ -1,6 +1,6 @@
 Class {
 	#name : #PBOpenProjectWorkingCopyCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 

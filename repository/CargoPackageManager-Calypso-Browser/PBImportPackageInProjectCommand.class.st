@@ -2,8 +2,8 @@
 Calypso command providing a contextual menu to import an existing package as a Cargo package unit
 "
 Class {
-	#name : #CGOImportPackageInProjectCommand,
-	#superclass : #CGOProjectCommand,
+	#name : #PBImportPackageInProjectCommand,
+	#superclass : #PBProjectCommand,
 	#instVars : [
 		'unitName'
 	],
@@ -11,27 +11,27 @@ Class {
 }
 
 { #category : #accessing }
-CGOImportPackageInProjectCommand class >> defaultMenuIconName [
+PBImportPackageInProjectCommand class >> defaultMenuIconName [
 
 	^ #smallLoadProject
 ]
 
 { #category : #activation }
-CGOImportPackageInProjectCommand class >> systemBrowserMenuActivator [
+PBImportPackageInProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
-CGOImportPackageInProjectCommand class >> systemBrowserShortcutActivator [
+PBImportPackageInProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
 	^ CmdShortcutActivation by: $p meta, $i meta for: PBProjectUIItem asCalypsoItemContext
 ]
 
 { #category : #activation }
-CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivator [
+PBImportPackageInProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
@@ -40,7 +40,7 @@ CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivator [
 ]
 
 { #category : #activation }
-CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivatorForPackages [
+PBImportPackageInProjectCommand class >> systemBrowserToolbarActivatorForPackages [
 	<classAnnotation>
 	^ ClyToolbarActivation
 		byItemOf: ClyButtonToolbarGroup
@@ -48,21 +48,13 @@ CGOImportPackageInProjectCommand class >> systemBrowserToolbarActivatorForPackag
 		for: PBPackageUIItem asCalypsoItemContext
 ]
 
-{ #category : #execution }
-CGOImportPackageInProjectCommand >> createSystemPackage [
-	SycAddNewPackageCommand new
-		systemEnvironment: toolContext systemEnvironment;
-		packageName: unitName;
-		execute
-]
-
 { #category : #initialization }
-CGOImportPackageInProjectCommand >> defaultMenuItemName [
+PBImportPackageInProjectCommand >> defaultMenuItemName [
 	^ 'Import Package'
 ]
 
 { #category : #execution }
-CGOImportPackageInProjectCommand >> execute [
+PBImportPackageInProjectCommand >> execute [
 	| dialog |
 	dialog := PBImportPackagesDialog on: project project.
 	dialog openDialogWithSpec okAction: [ dialog accept ]

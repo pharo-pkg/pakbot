@@ -11,6 +11,13 @@ PBPackageContextOfFullBrowser class >> selectionStrategy [
 	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBPackageUIItem
 ]
 
+{ #category : #'selection strategy' }
+PBPackageContextOfFullBrowser class >> selectionStrategy2 [
+	<classAnnotation>
+	
+	^ClyContextSelectionStrategy for: ClyFullBrowser selectionType: PBAssemblyUIItem
+]
+
 { #category : #'selection-packages' }
 PBPackageContextOfFullBrowser >> isPackageSelected [
 

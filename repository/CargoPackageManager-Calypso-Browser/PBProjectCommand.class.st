@@ -2,7 +2,7 @@
 Abstract class for all the commands that works on projects.
 "
 Class {
-	#name : #CGOProjectCommand,
+	#name : #PBProjectCommand,
 	#superclass : #CGOClyCommand,
 	#instVars : [
 		'project'
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #testing }
-CGOProjectCommand class >> canBeExecutedInContext: aToolContext [
+PBProjectCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ aToolContext isProjectSelected 
 ]
 
 { #category : #execution }
-CGOProjectCommand >> prepareFullExecutionInContext: aToolContext [
+PBProjectCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
 	project := aToolContext lastSelectedProject.
@@ -25,11 +25,11 @@ CGOProjectCommand >> prepareFullExecutionInContext: aToolContext [
 ]
 
 { #category : #accessing }
-CGOProjectCommand >> project [
+PBProjectCommand >> project [
 	^ project
 ]
 
 { #category : #accessing }
-CGOProjectCommand >> project: anObject [
+PBProjectCommand >> project: anObject [
 	project := anObject
 ]

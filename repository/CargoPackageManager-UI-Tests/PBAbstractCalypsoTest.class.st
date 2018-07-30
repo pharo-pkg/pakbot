@@ -13,24 +13,24 @@ Class {
 	#category : #'CargoPackageManager-UI-Tests'
 }
 
-{ #category : #tests }
+{ #category : #running }
 PBAbstractCalypsoTest >> assertCommands: commands includes: aClass [
 
 	self assert: (commands anySatisfy: [ :each | each command class = aClass ])
 ]
 
-{ #category : #tests }
+{ #category : #running }
 PBAbstractCalypsoTest >> assertCommands: commands notIncludes: aClass [
 
 	self assert: (commands noneSatisfy: [ :each | each command class = aClass ])
 ]
 
-{ #category : #utilties }
+{ #category : #utility }
 PBAbstractCalypsoTest >> command: aCommandClass for: anItem [
 	^ (self commandsOfItem: anItem) detect: [ :each | each command isKindOf: aCommandClass ]
 ]
 
-{ #category : #utils }
+{ #category : #utility }
 PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	| aContext selection datasource |
 	datasource := ClyCollapsedDataSource empty.
@@ -41,12 +41,12 @@ PBAbstractCalypsoTest >> commandsOfItem: anItem [
 	^ CmdContextMenuActivation createActivatorsExecutableInContext: aContext
 ]
 
-{ #category : #utils }
+{ #category : #utility }
 PBAbstractCalypsoTest >> contextClass [
 	^ ClyProjectContextOfFullBrowser
 ]
 
-{ #category : #utilities }
+{ #category : #utility }
 PBAbstractCalypsoTest >> expandNodeNamed: aString [ 
 	
 	| items datasource |
@@ -67,20 +67,18 @@ PBAbstractCalypsoTest >> findChildInBrowser: aString [
 		datasource cellColumn: column row: i]) detect: [ :anItem | anItem label contents beginsWith: aString ] ifNone: [ nil ]
 ]
 
-{ #category : #tests }
-PBAbstractCalypsoTest >> findPackage: aName [
+{ #category : #utility }
+PBAbstractCalypsoTest >> findProject: aName [
+
+	^ query execute items detect: [ :each | each name = aName ] ifNone: [ nil ]
+]
+
+{ #category : #utility }
+PBAbstractCalypsoTest >> findUIItem: aName [
 	| projectUI |
 	
 	projectUI := self findProject: project name.
 	^ projectUI items detect: [ :each | each name = aName ] ifNone: [ nil ]
-	
-
-]
-
-{ #category : #tests }
-PBAbstractCalypsoTest >> findProject: aName [
-
-	^ query execute items detect: [ :each | each name = aName ] ifNone: [ nil ]
 ]
 
 { #category : #running }
@@ -110,11 +108,13 @@ PBAbstractCalypsoTest >> setUp [
 	
 ]
 
-{ #category : #tests }
+{ #category : #running }
 PBAbstractCalypsoTest >> tearDown [
 
-	super tearDown.
-
 	browser ifNotNil: [ browser close. browser := nil. ].
-	project ifNotNil: [ project installedSystemPackages do: #removeFromSystem ].
+	project ifNotNil: [ 
+		project installedSystemPackages do: #removeFromSystem ].
+	('TestProject-Core' asPackageIfAbsent: [ nil ])
+		ifNotNil: #removeFromSystem.
+	super tearDown
 ]

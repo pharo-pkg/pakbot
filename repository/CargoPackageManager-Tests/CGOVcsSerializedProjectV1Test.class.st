@@ -166,7 +166,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 			#name : #Counter-UI-Spec,
 			#description : ''Core package with the counter UI based on Spec.'',
 			#dependencies : [
-				#''Counter::Counter-Core''
+				#Counter-Core
 			]
 		}
 	]

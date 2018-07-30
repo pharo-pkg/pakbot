@@ -77,8 +77,8 @@ CGOVcsSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
 			collect: [ :dependency |	| constraints |
 				constraints := self dependencyConstraintsMapping: dependency.
 				constraints
-					ifEmpty: [ dependency dependencyName ]
-					ifNotEmpty: [ Association key: dependency dependencyName value: constraints ] ])
+					ifEmpty: [ dependency name ]
+					ifNotEmpty: [ Association key: dependency name value: constraints ] ])
 ]
 
 { #category : #serialization }

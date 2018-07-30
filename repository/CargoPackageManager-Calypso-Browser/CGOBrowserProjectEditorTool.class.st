@@ -5,6 +5,9 @@ This plugin will allow to show / edit project metadata.
 Class {
 	#name : #CGOBrowserProjectEditorTool,
 	#superclass : #ClyBrowserTool,
+	#instVars : [
+		'managedProject'
+	],
 	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
@@ -40,16 +43,36 @@ CGOBrowserProjectEditorTool >> activeColor [
 ]
 
 { #category : #initialization }
+CGOBrowserProjectEditorTool >> belongsToCurrentBrowserContext [
+	^browser projectSelection includesActualObject: managedProject
+]
+
+{ #category : #initialization }
 CGOBrowserProjectEditorTool >> build [
-	| managedProject |
-	managedProject := context lastSelectedProject.
-	
 	self 
 		addMorph: (PBProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
-		fullFrame: LayoutFrame identity
 ]
 
 { #category : #initialization }
 CGOBrowserProjectEditorTool >> defaultTitle [
 	^ 'Project'
+]
+
+{ #category : #initialization }
+CGOBrowserProjectEditorTool >> isSimilarTo: anotherTool [
+
+	^ (super isSimilarTo: anotherTool)
+		and: [ managedProject = anotherTool managedProject ]
+]
+
+{ #category : #initialization }
+CGOBrowserProjectEditorTool >> managedProject [
+
+	^ managedProject
+]
+
+{ #category : #initialization }
+CGOBrowserProjectEditorTool >> setUpModelFromContext [
+	managedProject := context lastSelectedProject.
+	
 ]
