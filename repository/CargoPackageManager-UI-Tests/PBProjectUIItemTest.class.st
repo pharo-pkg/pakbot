@@ -5,22 +5,41 @@ Class {
 }
 
 { #category : #tests }
+PBProjectUIItemTest >> setUp [
+
+	super setUp.
+	registry newProjectNamed: 'TestProject'.
+	project := self findProject: 'TestProject'.	
+]
+
+{ #category : #tests }
+PBProjectUIItemTest >> testAddAssemblyCommand [
+
+	| cmd assembly |	
+	self openBrowser.
+	cmd := self command: PBCreateAssemblyCommand for: project.
+	
+	[cmd executeCommand] 
+		on: ProvideAnswerNotification 
+		do: [ :ex | ex resume: 'Tests' ].
+	
+	assembly := self findUIItem: 'Tests'.
+	
+	self assert: assembly isNotNil.
+]
+
+{ #category : #tests }
 PBProjectUIItemTest >> testAddPackageCommand [
 
 	| cmd pkg |
-	registry newProjectNamed: 'TestProject'.
-	
 	self openBrowser.
-	
-	project := self findProject: 'TestProject'.	
-	cmd := self command: CGOCreatePackageInProjectCommand for: project.
+	cmd := self command: PBCreatePackageInProjectCommand for: project.
 
-	UIManager nonInteractiveDuring: [ 
-		[cmd executeCommand] 
-			on: ProvideAnswerNotification 
-			do: [ :ex | ex resume: 'TestProject-Core' ] ].
+	[cmd executeCommand] 
+		on: ProvideAnswerNotification 
+		do: [ :ex | ex resume: 'TestProject-Core' ].
 	
-	pkg := self findPackage: 'TestProject-Core'.
+	pkg := self findUIItem: 'TestProject-Core'.
 	
 	self assert: pkg isNotNil.
 ]
@@ -29,16 +48,12 @@ PBProjectUIItemTest >> testAddPackageCommand [
 PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 
 	| commands |
-	
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
 	self openBrowser.
 	commands := self commandsOfItem: project.
 
-	self assertCommands: commands includes: CGOCreatePackageInProjectCommand.
-	self assertCommands: commands includes: CGOImportPackageInProjectCommand.
-	self assertCommands: commands includes: CGORemoveProjectCommand.
+	self assertCommands: commands includes: PBCreatePackageInProjectCommand.
+	self assertCommands: commands includes: PBImportPackageInProjectCommand.
+	self assertCommands: commands includes: PBRemoveProjectCommand.
 	self assertCommands: commands includes: CGOPublishProjectCommand.
 	self assertCommands: commands includes: PBSetupProjectRepositoryCommand.
 ]
@@ -46,42 +61,35 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 { #category : #tests }
 PBProjectUIItemTest >> testCreatingAProjectCreatesTheCorrectUIItem [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
+	"Check the setUp"
+	
 	self assert: project isNotNil.	
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testNewProjectHasNoElements [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
-	self assert: project items isEmpty .	
+	"Check the setUp"
+	self assert: project items isEmpty
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testNewProjectIsEmpty [
 
-	registry newProjectNamed: 'TestProject'.
-	project := self findProject: 'TestProject'.	
-
+	"Check the setUp"
 	self assert: project isEmpty.	
 ]
 
 { #category : #tests }
 PBProjectUIItemTest >> testRemoveProjectCommand [
 
-	| cmd pj |
-	registry newProjectNamed: 'TestProject'.
-	
+	| cmd pj |	
 	self openBrowser.
 	
-	project := self findProject: 'TestProject'.	
-	cmd := self command: CGORemoveProjectCommand for: project.
+	cmd := self command: PBRemoveProjectCommand for: project.
 	cmd executeCommand.
 	
-	pj := self findPackage: 'TestProject-Core'.
+	pj := self findUIItem: 'TestProject-Core'.
 	
 	self assert: pj isNil.
 ]

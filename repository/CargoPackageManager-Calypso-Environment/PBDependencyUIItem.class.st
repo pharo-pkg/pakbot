@@ -18,7 +18,7 @@ PBDependencyUIItem class >> on: aDependency [
 PBDependencyUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
 
 	| morph |
-	morph := (Smalltalk ui theme iconNamed: dependency iconName) asMorph.
+	morph := (Smalltalk ui theme iconNamed: dependency statusIconName) asMorph.
 	morph setBalloonText: dependency balloonText.
 	anItemCellMorph definitionMorph: morph
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #PBPackageCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#instVars : [
 		'package'
 	],

@@ -69,7 +69,7 @@ CGORepairProjectDialog >> newActionsDataSource [
 	^ FTEasyListDataSource new
 		elements: (CGORepairProjectAction allAvailableFor: project);
 		display: [ :each | each name ];
-		icon: [ :each | self iconNamed: each iconName ];
+		icon: [ :each | self iconNamed: each statusIconName ];
 		yourself
 ]
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #PBSetupProjectRepositoryCommand,
-	#superclass : #CGOProjectCommand,
+	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 

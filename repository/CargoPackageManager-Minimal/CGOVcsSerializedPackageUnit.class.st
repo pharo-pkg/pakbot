@@ -24,7 +24,7 @@ CGOVcsSerializedPackageUnit >> asOngoingPackage [
 	dict 
 		at: #name
 		ifAbsent: [ PBError new 
-						signal: 'Cannot deserialize a Project with no name defined!' ].
+						signal: 'Cannot deserialize a Package with no name defined!' ].
 					
 	unit := PBPackage named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | unit description: description ].

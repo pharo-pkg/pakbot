@@ -69,6 +69,12 @@ CGOResolvedDependency >> hasConflicts [
 ]
 
 { #category : #accessing }
+CGOResolvedDependency >> icons [
+	^ { self iconNamed: #forward .
+		self iconNamed: dependency iconName }
+]
+
+{ #category : #accessing }
 CGOResolvedDependency >> initialize [
 
 	super initialize.
@@ -86,6 +92,12 @@ CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [
 CGOResolvedDependency >> name [
 	
 	^ dependency name
+]
+
+{ #category : #accessing }
+CGOResolvedDependency >> nameWithVersion [
+	
+	^ dependency name , ' ', dependency version
 ]
 
 { #category : #printing }

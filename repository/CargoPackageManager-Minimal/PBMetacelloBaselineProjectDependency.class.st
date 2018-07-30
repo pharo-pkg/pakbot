@@ -35,6 +35,11 @@ PBMetacelloBaselineProjectDependency class >> fromMetacelloSpec: aMetacelloSpec 
 ]
 
 { #category : #accessing }
+PBMetacelloBaselineProjectDependency class >> iconName [
+	^ #komitterSmalltalkhubRemote
+]
+
+{ #category : #accessing }
 PBMetacelloBaselineProjectDependency class >> projectClass [
 	^ PBMetacelloBaselineProject 
 ]

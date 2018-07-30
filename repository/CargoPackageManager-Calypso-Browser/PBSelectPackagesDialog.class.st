@@ -1,8 +1,5 @@
-"
-I am a dialog that allows to select a set of packages coming from the system. On accept, those packages are added to the configured model.
-"
 Class {
-	#name : #PBImportPackagesDialog,
+	#name : #PBSelectPackagesDialog,
 	#superclass : #ComposablePresenter,
 	#instVars : [
 		'model',
@@ -15,7 +12,7 @@ Class {
 }
 
 { #category : #specs }
-PBImportPackagesDialog class >> defaultSpec [
+PBSelectPackagesDialog class >> defaultSpec [
 	<spec: #default>
 	
 	^ SpecLayout composed 
@@ -26,28 +23,38 @@ PBImportPackagesDialog class >> defaultSpec [
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog class >> icon [
+PBSelectPackagesDialog class >> icon [
 	^ self iconNamed: #branch
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog class >> order [
+PBSelectPackagesDialog class >> order [
 	^ 20
 ]
 
 { #category : #specs }
-PBImportPackagesDialog class >> title [
+PBSelectPackagesDialog class >> title [
 	^ 'Add packages'
 ]
 
 { #category : #actions }
-PBImportPackagesDialog >> accept [
+PBSelectPackagesDialog >> accept [
+	| items |
+	
 	"ensure window goes away (in case accept comes from a keybinding and not the ok button)"
-	self window delete.
+	self window delete. 
+	
+	items := self packagesList widget dataSource selectedItems.
+	items ifEmpty: [ 
+		UIManager default inform: 'No packages selected.'.
+		^ self ].
+	
+	items do: [ :each |
+		self model importPackageNamed: each name ]
 ]
 
 { #category : #initialization }
-PBImportPackagesDialog >> addShortcutsTo: aWidget [
+PBSelectPackagesDialog >> addShortcutsTo: aWidget [
 	super addShortcutsTo: aWidget.
 	aWidget 
 		bindKeyCombination: Character cr asKeyCombination 
@@ -56,26 +63,14 @@ PBImportPackagesDialog >> addShortcutsTo: aWidget [
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> allPackages [
+PBSelectPackagesDialog >> allPackages [
 	^ RPackageOrganizer default packages
 		asOrderedCollection 
 		sort: [ :a :b | a name < b name ]
 ]
 
-{ #category : #accessing }
-PBImportPackagesDialog >> allPackagesNotRegistered [
-	| currentPackagesNames |
-	currentPackagesNames := self model packages collect: #name.
-	^ self allPackages reject: [ :rPackage | currentPackagesNames includes: rPackage name ]
-]
-
-{ #category : #accessing }
-PBImportPackagesDialog >> contextSelection [ 
-	^ self selectedPackage
-]
-
 { #category : #initialization }
-PBImportPackagesDialog >> initializeDialogWindow: aWindow [
+PBSelectPackagesDialog >> initializeDialogWindow: aWindow [
 	acceptButton := aWindow toolbar okButton.
 	cancelButton := aWindow toolbar cancelButton.
 	acceptButton
@@ -84,7 +79,7 @@ PBImportPackagesDialog >> initializeDialogWindow: aWindow [
 ]
 
 { #category : #initialization }
-PBImportPackagesDialog >> initializePackageNameText [
+PBSelectPackagesDialog >> initializePackageNameText [
 	self packageNameText whenBuiltDo: [ :ann |
 		ann widget 
 			bindKeyCombination: Character enter asKeyCombination 
@@ -100,7 +95,7 @@ PBImportPackagesDialog >> initializePackageNameText [
 ]
 
 { #category : #initialization }
-PBImportPackagesDialog >> initializePackagesList [
+PBSelectPackagesDialog >> initializePackagesList [
 	| dataSource |
 	
 	dataSource := self newPackagesListDataSource.
@@ -116,7 +111,7 @@ PBImportPackagesDialog >> initializePackagesList [
 ]
 
 { #category : #initialization }
-PBImportPackagesDialog >> initializeWidgets [
+PBSelectPackagesDialog >> initializeWidgets [
 	packagesList := self newIceTreeTable.
 	packageNameText := self newTextInput 
 		autoAccept: true;
@@ -131,18 +126,18 @@ PBImportPackagesDialog >> initializeWidgets [
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> model [
+PBSelectPackagesDialog >> model [
 	^ model
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> model: anObject [
+PBSelectPackagesDialog >> model: anObject [
 	model := anObject.
 	self refresh
 ]
 
 { #category : #'private factory' }
-PBImportPackagesDialog >> newPackagesListDataSource [
+PBSelectPackagesDialog >> newPackagesListDataSource [
 	| dataSource |
 	^ (dataSource := IceTipSelectingDataSource new)
 		tool: self;
@@ -152,34 +147,34 @@ PBImportPackagesDialog >> newPackagesListDataSource [
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> openDialogWithSpec [
+PBSelectPackagesDialog >> openDialogWithSpec [
 	^ super openDialogWithSpec
 		okAction: [ self accept ];
 		yourself
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> packageNameText [
+PBSelectPackagesDialog >> packageNameText [
 	^ packageNameText
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> packageNameText: anObject [
+PBSelectPackagesDialog >> packageNameText: anObject [
 	packageNameText := anObject
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> packagesList [
+PBSelectPackagesDialog >> packagesList [
 	^ packagesList
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> packagesList: anObject [
+PBSelectPackagesDialog >> packagesList: anObject [
 	packagesList := anObject
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> refresh [
+PBSelectPackagesDialog >> refresh [
 	packagesList widget 
 		in: [ :this | 
 			this selectRowIndexes: #(). 
@@ -190,28 +185,18 @@ PBImportPackagesDialog >> refresh [
 ]
 
 { #category : #accessing }
-PBImportPackagesDialog >> selectedPackage [
-	| index |
-	self flag: #todo. "This should -maybe- be modeled better on a SpecTablePresenter ;)"
-	index := packagesList widget selectedRowIndex.
-	index = 0 ifTrue: [ ^ nil ].
-	^ packagesList widget dataSource elementAt: index
+PBSelectPackagesDialog >> selectedItems [
+
+	^ self packagesList widget dataSource selectedItems
 ]
 
 { #category : #initialization }
-PBImportPackagesDialog >> setModelBeforeInitialization: anObject [ 
+PBSelectPackagesDialog >> setModelBeforeInitialization: anObject [ 
 	model := anObject
 ]
 
-{ #category : #accessing }
-PBImportPackagesDialog >> validate [
-	self 
-		assert: self selectedPackage isNotNil 
-		description: 'Please select a branch to checkout.'
-]
-
 { #category : #'private factory' }
-PBImportPackagesDialog >> withAssertHandlingDo: aBlock [
+PBSelectPackagesDialog >> withAssertHandlingDo: aBlock [
 	^ aBlock 
 		on: AssertionFailure 
 		do: [ :e | 

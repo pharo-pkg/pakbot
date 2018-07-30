@@ -1,6 +1,10 @@
 Class {
 	#name : #CGOVcsSerializedProjectV1Test,
 	#superclass : #CGOTest,
+	#instVars : [
+		'repository',
+		'iceRepositoryLocation'
+	],
 	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 
@@ -59,9 +63,26 @@ CGOVcsSerializedProjectV1Test >> counterUiStonString [
 ]
 
 { #category : #'test data' }
+CGOVcsSerializedProjectV1Test >> iceRepositoryLocation [
+	^ iceRepositoryLocation
+		ifNil: [ iceRepositoryLocation := FileLocator temp
+				/ ('pakbot-project-serialization-tests-' , DateAndTime now asFileNameCompatibleString) ]
+]
+
+{ #category : #'test data' }
+CGOVcsSerializedProjectV1Test >> setUp [
+	self iceRepositoryLocation ensureDeleteAll.
+	repository := IceRepositoryCreator new 
+			location: self iceRepositoryLocation;
+			createNewRepositoryNamed: 'pakbot-project-serialization-tests'.
+	(repository getConfigurationGlobal: false) username: 'mock'.
+	(repository getConfigurationGlobal: false) email: 'mock'.
+]
+
+{ #category : #'test data' }
 CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 	"
-		STON toStringPretty: CGOOngoingProject example asVcsSerializedCargoProject
+		STON toStringPretty: PBProject example asVcsSerializedCargoProject
 	"
 	^ '{#version:''1.0''}
 {
@@ -79,9 +100,9 @@ CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 { #category : #'test data' }
 CGOVcsSerializedProjectV1Test >> tearDown [
 
-	| counterUIPackage |
-	counterUIPackage := #'Counter-UI-Spec' asPackageIfAbsent: [ ^ self ].
-	counterUIPackage mcWorkingCopy unload.
+	self unloadCounterUI.
+	repository forget.
+	self iceRepositoryLocation ensureDeleteAll.
 	
 	super tearDown
 ]
@@ -166,11 +187,41 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 			#name : #Counter-UI-Spec,
 			#description : ''Core package with the counter UI based on Spec.'',
 			#dependencies : [
-				#''Counter::Counter-Core''
+				#Counter-Core
 			]
 		}
 	]
 }'
+]
+
+{ #category : #tests }
+CGOVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssembly [
+	| project iceProject deserializedProject |
+	
+	project := PBProject example.
+	project assemblies: { PBAssembly example }.
+	iceProject := PBIcebergProject onRepository: repository project: project.
+	repository workingCopy basicSetProject: iceProject.
+	
+	repository commitWithMessage: 'commit from #testCanSerializeAndDeserilazeAProjectWithAssembly'.
+	repository workingCopy basicSetProject: nil. "ensure we read project from git"
+	deserializedProject := repository workingCopy project pakbotProject.
+	
+	self
+		assert: deserializedProject name 
+		equals: project name.
+	self
+		assert: deserializedProject version 
+		equals: project version.
+	self
+		assert: deserializedProject packages 
+		equals: project packages.
+	self
+		assert: deserializedProject assemblies 
+		equals: project assemblies.
+	self
+		assertCollection: deserializedProject assemblies first parts
+		hasSameElements: project assemblies first parts.
 ]
 
 { #category : #tests }
@@ -182,4 +233,12 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	self
 		assert: serializedProject asString
 		equals: self stonStringForExampleProject
+]
+
+{ #category : #'test data' }
+CGOVcsSerializedProjectV1Test >> unloadCounterUI [
+
+	| counterUIPackage |
+	counterUIPackage := #'Counter-UI-Spec' asPackageIfAbsent: [ ^ self ].
+	counterUIPackage mcWorkingCopy unload.
 ]

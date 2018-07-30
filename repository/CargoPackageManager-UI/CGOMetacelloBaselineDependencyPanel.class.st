@@ -109,7 +109,7 @@ CGOMetacelloBaselineDependencyPanel >> groupLabel: anObject [
 { #category : #accessing }
 CGOMetacelloBaselineDependencyPanel >> icon [
 
-	^ self iconNamed: #komitterSmalltalkhubRemote
+	^ self iconNamed: PBMetacelloBaselineProjectDependency iconName
 ]
 
 { #category : #initialization }
