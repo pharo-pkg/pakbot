@@ -187,7 +187,7 @@ CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 		equals: PBPackage.
 	
 	self 
-		assert: (project packageUnits collect: #name) sorted
+		assert: (project packageUnits collect: #name) sorted asArray
 		equals: #('Counter-Core' 'Counter-Tests').
 		
 	self 
