@@ -48,7 +48,7 @@ ParametrizedTestMatrix >> expandMatrix [
 ]
 
 { #category : #addingOptions }
-ParametrizedTestMatrix >> forSelectors: aSelector addOptions: someOptions [
+ParametrizedTestMatrix >> forSelector: aSelector addOptions: someOptions [
 
 	options at: aSelector put: someOptions
 ]
@@ -58,6 +58,18 @@ ParametrizedTestMatrix >> initialize [
 	super initialize.
 	options := Dictionary new.
 	cases := OrderedCollection new
+]
+
+{ #category : #testing }
+ParametrizedTestMatrix >> isEmpty [
+	
+	^ options isEmpty and: [ cases isEmpty ]
+]
+
+{ #category : #testing }
+ParametrizedTestMatrix >> isNotEmpty [
+	
+	^ self isEmpty not
 ]
 
 { #category : #accessing }

@@ -1,10 +1,6 @@
 Class {
 	#name : #PaMatrixExampleTest,
-	#superclass : #ParametrizedTestCase,
-	#instVars : [
-		'option1',
-		'option2'
-	],
+	#superclass : #PaAbstractExampleTest,
 	#category : #'CargoPackageManager-IntegrationTests-ParametrizedTests'
 }
 
@@ -12,17 +8,7 @@ Class {
 PaMatrixExampleTest class >> testParameters [
 
 	^ ParametrizedTestMatrix new
-		forSelectors: #option1 addOptions: #(a b c);
-		forSelectors: #option2 addOptions: {[1].[2].[3]};
+		forSelector: #option1 addOptions: #(a b c);
+		forSelector: #option2 addOptions: {[1].[2].[3]};
 		yourself.
-]
-
-{ #category : #accessing }
-PaMatrixExampleTest >> option1: aString [ 
-	option1 := aString
-]
-
-{ #category : #accessing }
-PaMatrixExampleTest >> option2: anInteger [ 
-	option2 := anInteger
 ]

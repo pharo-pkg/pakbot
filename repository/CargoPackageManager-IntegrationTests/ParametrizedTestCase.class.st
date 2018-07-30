@@ -2,7 +2,7 @@ Class {
 	#name : #ParametrizedTestCase,
 	#superclass : #TestCase,
 	#instVars : [
-		'testParameters'
+		'parametersToUse'
 	],
 	#category : #'CargoPackageManager-IntegrationTests-ParametrizedTests'
 }
@@ -19,33 +19,16 @@ ParametrizedTestCase class >> buildSuite [
 	suite := self suiteClass named: self name.
 	expandedMatrix do: [ :expandedParameters | |internalSuite|
 		internalSuite := self buildSuiteFromSelectors.
-		internalSuite tests do: [ :aTest | aTest testParameters: expandedParameters ].
+		internalSuite tests do: [ :aTest | aTest parametersToUse: expandedParameters ].
 		suite addTests: internalSuite tests.
 	].
 
 	^ suite
 ]
 
-{ #category : #'building suites' }
-ParametrizedTestCase class >> buildSuiteWithParameters: parameters expandedParameters: expandedParameters suiteName: suiteName [
-
-	| suite param |
-	parameters ifEmpty: [  
-		suite := self buildSuiteFromSelectors.
-		suite tests do: [ :test | test testParameters: expandedParameters ].
-		^ suite.
-	].
-
-	suite := self suiteClass named: suiteName.
-	param := parameters first.
-	param options do: [ :expanded |
-		suite addTest: (self
-			buildSuiteWithParameters: parameters copyWithoutFirst
-			expandedParameters: (expandedParameters copyWith: expanded)
-			suiteName: suiteName, ' ', expanded suiteName)
-	].
-
-	^ suite
+{ #category : #private }
+ParametrizedTestCase class >> isAbstract [
+	^ self name = #ParametrizedTestCase 
 ]
 
 { #category : #'building suites' }
@@ -65,26 +48,34 @@ ParametrizedTestCase >> cleanUpInstanceVariables [
 				ifFalse: [ self instVarNamed: name put: nil ] ]
 ]
 
+{ #category : #accessing }
+ParametrizedTestCase >> parametersToUse [
+	^ parametersToUse ifNil: [#()]
+]
+
+{ #category : #accessing }
+ParametrizedTestCase >> parametersToUse: anObject [
+	parametersToUse := anObject
+]
+
 { #category : #printing }
 ParametrizedTestCase >> printOn: aStream [
 
 	super printOn: aStream.
-	testParameters ifNotNil: [ testParameters printElementsOn: aStream.]
+	parametersToUse ifNotNil: [ parametersToUse printElementsOn: aStream.]
 	
 ]
 
 { #category : #private }
 ParametrizedTestCase >> setUp [
 	super setUp.
-	self testParameters do: [ :aParameter | aParameter applyTo: self ]
-]
-
-{ #category : #accessing }
-ParametrizedTestCase >> testParameters [
-	^ testParameters ifNil: [#()]
-]
-
-{ #category : #accessing }
-ParametrizedTestCase >> testParameters: anObject [
-	testParameters := anObject
+	self parametersToUse do: [ :aParameter | aParameter applyTo: self ].
+	
+	"If I am executed without calling buildSuite in the class. I will use the first set of options.
+	This is a workaround to work when running from Calypso"
+	(self parametersToUse isEmpty and: [self class testParameters isNotEmpty]) 
+		ifTrue: [ 
+				self class 
+						testParameters expandMatrix first 
+						do: [ :aParameter | aParameter applyTo: self ] ]
 ]
