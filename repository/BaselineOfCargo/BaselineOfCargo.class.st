@@ -25,6 +25,7 @@ BaselineOfCargo >> baseline: spec [
 			self mooseAlgos: spec.
 			self voyage: spec.
 			self zincHttpComponents: spec.
+			self parametrizedTests: spec.
 			
 			spec
 				package: #'CargoPackageManager-Minimal';
@@ -82,6 +83,11 @@ BaselineOfCargo >> mooseAlgos: spec [
 				versionString: #bleedingEdge;
 				loads: #('Moose-Algos-Graph');
 				repository: 'http://smalltalkhub.com/mc/Moose/MooseAlgos/main/' ]
+]
+
+{ #category : #baseline }
+BaselineOfCargo >> parametrizedTests: spec [
+	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
 
 { #category : #baseline }
