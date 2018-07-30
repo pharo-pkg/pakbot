@@ -415,7 +415,7 @@ PBProject >> packages [
 
 { #category : #updating }
 PBProject >> packages: aListOfPackageUnits [
-	packages := aListOfPackageUnits.
+	packages := aListOfPackageUnits asOrderedCollection.
 	packages do: [ :each | each project: self ]
 ]
 

@@ -13,12 +13,6 @@ PBCreateAssemblyCommand class >> defaultMenuIconName [
 	^#newerPackagesAvailable
 ]
 
-{ #category : #execution }
-PBCreateAssemblyCommand class >> execute [
-	
-	^ self name , ' Assembly'
-]
-
 { #category : #activation }
 PBCreateAssemblyCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>

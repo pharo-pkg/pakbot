@@ -40,6 +40,7 @@ PBAssembly >> addPackage: aPackage [
 	
 	self doAddPackage: aPackage.
 	self project announceChanged.
+	^ aPackage
 ]
 
 { #category : #adding }
