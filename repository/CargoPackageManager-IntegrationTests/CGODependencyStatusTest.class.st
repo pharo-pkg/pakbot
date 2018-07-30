@@ -1,13 +1,13 @@
 Class {
 	#name : #CGODependencyStatusTest,
-	#superclass : #CGOAbstractTest,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'registry',
 		'project',
 		'dependencyToProject',
 		'dependencyToPackage'
 	],
-	#category : 'CargoPackageManager-IntegrationTests'
+	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #testing }

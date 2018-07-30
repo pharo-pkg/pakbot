@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOAbstractTest,
-	#superclass : #TestCase,
-	#category : 'CargoPackageManager-IntegrationTests'
+	#name : #PBAbstractTest,
+	#superclass : #ParametrizedTestCase,
+	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #tests }
-CGOAbstractTest >> expectedCargoResolvedProject [
+PBAbstractTest >> expectedCargoResolvedProject [
 
 	^ (PBProject named: 'Counter')
 		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git');
@@ -13,7 +13,7 @@ CGOAbstractTest >> expectedCargoResolvedProject [
 ]
 
 { #category : #tests }
-CGOAbstractTest >> tearDown [
+PBAbstractTest >> tearDown [
 
 	| configuration metacelloRegistration |
 	super tearDown.

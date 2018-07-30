@@ -1,12 +1,12 @@
 Class {
 	#name : #CGOUpdateProjectRepairActionTest,
-	#superclass : #CGOAbstractTest,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'registry',
 		'project',
 		'dependencyToProject'
 	],
-	#category : 'CargoPackageManager-UI-Tests'
+	#category : #'CargoPackageManager-UI-Tests'
 }
 
 { #category : #running }

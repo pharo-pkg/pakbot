@@ -1,6 +1,6 @@
 Class {
 	#name : #PBNewProjectPanelTest,
-	#superclass : #CGOAbstractTest,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'registry',
 		'project',
