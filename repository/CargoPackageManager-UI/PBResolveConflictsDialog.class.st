@@ -62,8 +62,6 @@ PBResolveConflictsDialog class >> specWithToolbar [
 { #category : #actions }
 PBResolveConflictsDialog >> accept [
 	
-	self window close.
-	
 	self conflicts do: [:aConflict | aConflict resolveWithSelected].
 	errorToResume ifNotNil: [ errorToResume resume ]
 ]
