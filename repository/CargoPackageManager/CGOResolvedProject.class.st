@@ -167,6 +167,11 @@ CGOResolvedProject >> printOn: aStream [
 		<< ')'
 ]
 
+{ #category : #accesskng }
+CGOResolvedProject >> projectVersion [
+	^ resolvedProjectVersion version
+]
+
 { #category : #accessing }
 CGOResolvedProject >> resolution [
 	

@@ -39,12 +39,14 @@ CGOUpdateProjectRepairActionTest >> testNotUpToDateProjectOfferUpdateProjectRepa
 { #category : #tests }
 CGOUpdateProjectRepairActionTest >> testNotUpToDateProjectOfferUpdateProjectRepairActionAndExecutingUpdateProject [
 	
-	| repairActions action |
+	| repairActions action dialog |
 		
 	repairActions := CGORepairProjectAction allAvailableFor: project.	
 	action := repairActions detect: [ :anAction | anAction isLoadProjectAction ].
 
-	action execute.
+	dialog := action execute.
+	
+	dialog toolbar okButton performAction.
 	
 	self assert: project isUpToDate.
 ]
