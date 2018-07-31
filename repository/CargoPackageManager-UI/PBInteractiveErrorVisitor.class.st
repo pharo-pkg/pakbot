@@ -24,8 +24,6 @@ PBInteractiveErrorVisitor >> visitGenericError: anException [
 
 { #category : #visiting }
 PBInteractiveErrorVisitor >> visitProjectWithConflictsError: anError [
-	
-	(PBResolveConflictsDialog on: anError)
-		openDialogWithSpec
-		modalRelativeTo: self currentWorld.
+
+	^ self visitGenericError: anError
 ]

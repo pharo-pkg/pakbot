@@ -57,3 +57,9 @@ PBResolutionPanel >> setModelBeforeInitialization: aModel [
 
 	resolution := aModel
 ]
+
+{ #category : #updating }
+PBResolutionPanel >> updateResolutionTree [
+	
+	resolutionTree widget dataSource updateData
+]

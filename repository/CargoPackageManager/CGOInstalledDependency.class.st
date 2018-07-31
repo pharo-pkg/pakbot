@@ -30,6 +30,11 @@ CGOInstalledDependency >> isInstalledDependency [
 	^ true
 ]
 
+{ #category : #accessing }
+CGOInstalledDependency >> originalResolution [
+	^ self resolution
+]
+
 { #category : #printing }
 CGOInstalledDependency >> printOn: aStream [
 

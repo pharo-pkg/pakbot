@@ -1,17 +1,17 @@
 Class {
-	#name : #PBResolveConflictsDialog,
+	#name : #PBResolveConflictsPanel,
 	#superclass : #ComposablePresenter,
 	#instVars : [
-		'errorToResume',
 		'toolbar',
 		'conflictsList',
-		'resolution'
+		'resolution',
+		'conflicts'
 	],
 	#category : #'CargoPackageManager-UI-Conflicts'
 }
 
 { #category : #specs }
-PBResolveConflictsDialog class >> defaultSpec [
+PBResolveConflictsPanel class >> defaultSpec [
 	<spec: #default>
 	
 	^ SpecLayout composed 
@@ -20,36 +20,17 @@ PBResolveConflictsDialog class >> defaultSpec [
 ]
 
 { #category : #specs }
-PBResolveConflictsDialog class >> example [
-	<example>
-
-	| resolution |
-
-	resolution := (CGOPackageRegistry default projectNamed: #PharoLauncher) resolve.
-	(self onResolution: resolution) openDialogWithSpec
-]
-
-{ #category : #specs }
-PBResolveConflictsDialog class >> on: aConflictException [
-
-	^ self basicNew
-		errorToResume: aConflictException;
-		resolution: aConflictException resolution;
-		initialize;
-		yourself
-]
-
-{ #category : #specs }
-PBResolveConflictsDialog class >> onResolution: aResolution [
+PBResolveConflictsPanel class >> onResolution: aResolution owner: anOwner [
 
 	^ self basicNew
 		resolution: aResolution;
+		owner: anOwner;
 		initialize;
 		yourself
 ]
 
 { #category : #specs }
-PBResolveConflictsDialog class >> specWithToolbar [
+PBResolveConflictsPanel class >> specWithToolbar [
 	<spec: #withToolbar>
 	
 	^ SpecLayout composed 
@@ -60,41 +41,37 @@ PBResolveConflictsDialog class >> specWithToolbar [
 ]
 
 { #category : #actions }
-PBResolveConflictsDialog >> accept [
+PBResolveConflictsPanel >> accept [
 	
 	self conflicts do: [:aConflict | aConflict resolveWithSelected].
-	errorToResume ifNotNil: [ errorToResume resume ]
+
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> conflicts [
-	^ resolution conflicts
+PBResolveConflictsPanel >> conflicts [
+	^ conflicts
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> conflictsList [
+PBResolveConflictsPanel >> conflictsList [
 	^ conflictsList
 ]
 
-{ #category : #accessing }
-PBResolveConflictsDialog >> errorToResume: aPBProjectHasConflictsError [ 
-	errorToResume := aPBProjectHasConflictsError 
-]
-
 { #category : #updating }
-PBResolveConflictsDialog >> hasConflicts [
+PBResolveConflictsPanel >> hasConflicts [
 	^ self conflicts anySatisfy: [ :each | each isResolved not ]
 ]
 
 { #category : #initialization }
-PBResolveConflictsDialog >> initialExtent [
+PBResolveConflictsPanel >> initialExtent [
 	^ 600@450
 ]
 
 { #category : #initialization }
-PBResolveConflictsDialog >> initializeWidgets [
+PBResolveConflictsPanel >> initializeWidgets [
 	
 	toolbar := self instantiate: ITToolBar.
+	conflicts := resolution conflicts.
 	conflictsList := self newFastTable.
 	
 	conflictsList widget 
@@ -110,7 +87,7 @@ PBResolveConflictsDialog >> initializeWidgets [
 ]
 
 { #category : #initialization }
-PBResolveConflictsDialog >> newConflictDataSource [
+PBResolveConflictsPanel >> newConflictDataSource [
 
 	^ PBConflictsDataSource new 
 		elements: self conflicts;
@@ -118,7 +95,7 @@ PBResolveConflictsDialog >> newConflictDataSource [
 ]
 
 { #category : #opening }
-PBResolveConflictsDialog >> openDialogWithSpec [
+PBResolveConflictsPanel >> openDialogWithSpec [
 
 	^ super openDialogWithSpec
 		okAction: [ self accept ];
@@ -126,34 +103,35 @@ PBResolveConflictsDialog >> openDialogWithSpec [
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> resolution [
+PBResolveConflictsPanel >> resolution [
 	^ resolution 
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> resolution: aResolution [
+PBResolveConflictsPanel >> resolution: aResolution [
 	resolution := aResolution
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> title [
+PBResolveConflictsPanel >> title [
 	^ 'Resolve Conflicts for Project ' , self resolution resolvedProjectVersion name
 ]
 
 { #category : #accessing }
-PBResolveConflictsDialog >> toolbar [
+PBResolveConflictsPanel >> toolbar [
 	^ toolbar
 ]
 
 { #category : #updating }
-PBResolveConflictsDialog >> updateOkButton [
-	^ self hasConflicts
-		ifTrue: [ self window toolbar okButton disable ]
-		ifFalse: [ self window toolbar okButton enable ]
+PBResolveConflictsPanel >> updateOkButton [
+	
+	self conflicts do: #resolveWithSelected.
+	self owner ifNotNil: [ self owner updateOkButton; updateResolutionTable ]
+	
 ]
 
 { #category : #actions }
-PBResolveConflictsDialog >> updateTable [
+PBResolveConflictsPanel >> updateTable [
 	conflictsList widget refresh.
 
 ]

@@ -39,7 +39,7 @@ PBConflict >> isResolved [
 
 { #category : #accessing }
 PBConflict >> possibleResolutions [
-	^ (dependencies collect: [ :e | e resolution ]) asOrderedCollection.
+	^ (dependencies collect: [ :e | e originalResolution ]) asOrderedCollection.
 ]
 
 { #category : #accessing }
@@ -55,8 +55,8 @@ PBConflict >> resolutionFor: aDependency [
 
 { #category : #resolving }
 PBConflict >> resolveWithSelected [
-	
-	dependencies do: [ :each | each resolveWith: selectedResolution ]
+	selectedResolution
+		ifNotNil: [ dependencies do: [ :each | each resolveWith: selectedResolution ] ]
 ]
 
 { #category : #accessing }
