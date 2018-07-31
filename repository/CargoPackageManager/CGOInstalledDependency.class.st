@@ -19,6 +19,17 @@ CGOInstalledDependency class >> onResolved: aProject [
 		yourself
 ]
 
+{ #category : #accessing }
+CGOInstalledDependency >> dependency [
+	^ resolved resolvedProjectVersion 
+]
+
+{ #category : #testing }
+CGOInstalledDependency >> isInstalledDependency [
+
+	^ true
+]
+
 { #category : #printing }
 CGOInstalledDependency >> printOn: aStream [
 

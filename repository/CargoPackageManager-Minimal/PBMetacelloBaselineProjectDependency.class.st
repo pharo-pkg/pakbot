@@ -52,6 +52,7 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	| baseline |
+	
 	baseline := MetacelloProjectRegistration registry baselineRegistry 
 		at: #BaselineOf , name 
 		ifAbsent: [ ^ false ].

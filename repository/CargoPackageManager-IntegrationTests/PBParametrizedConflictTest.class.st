@@ -11,22 +11,22 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
 }
 
-{ #category : #'building suites' }
-PBParametrizedConflictTest class >> testParameters [
+{ #category : #private }
+PBParametrizedConflictTest class >> isAbstract [
+	^ self name = #PBParametrizedConflictTest 
+]
 
-	^ ParametrizedTestMatrix new
-		"Nothing Installed"
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: '1.0' ]. #dependencyTwo -> [ :test | test createConfiguration: '2.0' ]. #expectedConflicts -> true};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: '1.0' ]. #dependencyTwo -> [ :test | test createConfiguration: '1.0' ]. #expectedConflicts -> false};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: #stable ]. #dependencyTwo -> [ :test | test createConfiguration: '1.0' ]. #expectedConflicts -> true};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: #stable ]. #dependencyTwo -> [ :test | test createConfiguration: '2.0' ]. #expectedConflicts -> false};
+{ #category : #utilities }
+PBParametrizedConflictTest >> addDependency: aDependency [
+	aDependency ifNotNil: [ project addDependency: aDependency ]
+]
 
-		"Installed"
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: '1.0' ]. #dependencyTwo -> [ :test | test createInstalledConfiguration: '2.0' ]. #expectedConflicts -> true};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: '1.0' ]. #dependencyTwo -> [ :test | test createInstalledConfiguration: '1.0' ]. #expectedConflicts -> false};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: #stable ]. #dependencyTwo -> [ :test | test createInstalledConfiguration: '1.0' ]. #expectedConflicts -> true};
-		addCase: { #dependencyOne -> [ :test | test createConfiguration: #stable ]. #dependencyTwo -> [ :test | test createInstalledConfiguration: '2.0' ]. #expectedConflicts -> false};
-		yourself
+{ #category : #utilities }
+PBParametrizedConflictTest >> createBaseline: aVersion [
+	^ PBMetacelloBaselineProjectDependency  
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: aVersion
 ]
 
 { #category : #utilities }
@@ -35,6 +35,15 @@ PBParametrizedConflictTest >> createConfiguration: aVersion [
 		name: 'CargoTestExample' 
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main' 
 		version: aVersion
+]
+
+{ #category : #utilities }
+PBParametrizedConflictTest >> createInstalledBaseline: aString [
+
+	| conf |
+	conf := self createBaseline: aString.
+	(PBMetacelloBaselineProject fromProjectDependency: conf) basicLoad.
+	^ conf
 ]
 
 { #category : #utilities }
@@ -76,6 +85,20 @@ PBParametrizedConflictTest >> expectedConflicts: anObject [
 	expectedConflicts := anObject
 ]
 
+{ #category : #utilities }
+PBParametrizedConflictTest >> installBaseline: aString [
+
+	self createInstalledBaseline: aString.
+	^ nil
+]
+
+{ #category : #utilities }
+PBParametrizedConflictTest >> installConfiguration: aString [
+
+	self createInstalledConfiguration: aString.
+	^ nil
+]
+
 { #category : #private }
 PBParametrizedConflictTest >> setUp [
 	super setUp.
@@ -87,8 +110,8 @@ PBParametrizedConflictTest >> setUp [
 PBParametrizedConflictTest >> testShouldHaveConflicts [
 
 	project := registry newProjectNamed: 'Test'.
-	project addDependency: dependencyOne.
-	project addDependency: dependencyTwo.
+	self addDependency: dependencyOne.
+	self addDependency: dependencyTwo.
 	
 	self assert: project resolve hasConflicts equals: expectedConflicts
 ]
@@ -97,15 +120,47 @@ PBParametrizedConflictTest >> testShouldHaveConflicts [
 PBParametrizedConflictTest >> testWithConflictsIsResolvedWithTheFirstOne [
 
 	"I only run, when there is conflicts"
-	| resolution |
+	| resolution conflict selected |
 	self expectedConflicts ifFalse: [ self skip ].
 
 	project := registry newProjectNamed: 'Test'.
-	project addDependency: dependencyOne.
-	project addDependency: dependencyTwo.
+	self addDependency: dependencyOne.
+	self addDependency: dependencyTwo.
 	
 	resolution := project resolve.
+	conflict := resolution conflicts anyOne.
 	
-	self halt.
+	selected := conflict resolutionFor: dependencyOne.
+	
+	conflict selectedResolution: selected.
+	conflict resolveWithSelected.
+	
+	self deny: resolution hasConflicts
+	
+]
+
+{ #category : #tests }
+PBParametrizedConflictTest >> testWithConflictsIsResolvedWithTheSecondOne [
+
+	"I only run, when there is conflicts"
+	| resolution conflict selected |
+	self expectedConflicts ifFalse: [ self skip ].
+
+	project := registry newProjectNamed: 'Test'.
+	self addDependency: dependencyOne.
+	self addDependency: dependencyTwo.
+	
+	resolution := project resolve.
+	conflict := resolution conflicts anyOne.
+
+	"I have to handle the case when there is only one dependency and the other is already installed"	
+	selected := dependencyTwo 
+					ifNil: [(conflict dependencies detect: #isInstalledDependency) resolution ] 
+					ifNotNil: [ conflict resolutionFor: dependencyTwo ].
+		
+	conflict selectedResolution: selected.
+	conflict resolveWithSelected.
+	
+	self deny: resolution hasConflicts
 	
 ]

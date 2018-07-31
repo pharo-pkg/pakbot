@@ -47,6 +47,12 @@ PBConflict >> projectName [
 	^ dependencies anyOne projectName
 ]
 
+{ #category : #testing }
+PBConflict >> resolutionFor: aDependency [ 
+	
+	^ (dependencies detect: [ :each | each dependency = aDependency ]) resolution
+]
+
 { #category : #resolving }
 PBConflict >> resolveWithSelected [
 	

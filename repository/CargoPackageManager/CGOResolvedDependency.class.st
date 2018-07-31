@@ -88,6 +88,12 @@ CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [
 		and: [ (resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
 ]
 
+{ #category : #testing }
+CGOResolvedDependency >> isInstalledDependency [
+	
+	^ false
+]
+
 { #category : #accessing }
 CGOResolvedDependency >> name [
 	

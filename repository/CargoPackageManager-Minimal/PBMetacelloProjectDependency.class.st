@@ -77,7 +77,7 @@ PBMetacelloProjectDependency >> additionalConflictingInstalledProjects [
 		configurationProjectSpecIfPresent: [ :configurationSpec |
 			^ {(PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) project: project; yourself} ]
 		ifAbsent: [ "" ].		
-		
+			
 	^ metacelloProjectRegistration
 		baselineProjectSpecIfPresent: [ :baselineSpec |
 			{(PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec) project: project; yourself} ]
