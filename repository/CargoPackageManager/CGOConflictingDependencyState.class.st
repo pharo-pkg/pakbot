@@ -37,6 +37,21 @@ CGOConflictingDependencyState >> isConflictingDependency [
 	^ true
 ]
 
+{ #category : #resolution }
+CGOConflictingDependencyState >> resolutionFor: aCGOResolvedDependency [ 
+	
+	^ aCGOResolvedDependency originalResolution
+]
+
+{ #category : #resolving }
+CGOConflictingDependencyState >> resolveWith: aCGOResolvedProject [ 
+	
+	^ CGOResolvedConflictDependencyState new
+		conflictingDependencies: conflictingDependencies;
+		resolution: aCGOResolvedProject;
+		yourself.
+]
+
 { #category : #transitioning }
 CGOConflictingDependencyState >> withConflicts: aCollection [ 
 	

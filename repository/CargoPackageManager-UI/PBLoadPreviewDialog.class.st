@@ -62,16 +62,16 @@ PBLoadPreviewDialog >> conflictsPanel [
 
 { #category : #initialization }
 PBLoadPreviewDialog >> initialExtent [
-	^ (600@450)
+	^ (750@450)
 ]
 
 { #category : #initialization }
 PBLoadPreviewDialog >> initializeWidgets [
 	
 	conflictsLabel := self newLabel label: 'Conflicts to solve'.
-	conflictsPanel := PBResolveConflictsDialog onResolution: resolution.
+	conflictsPanel := PBResolveConflictsPanel onResolution: resolution owner: self.
 	resolutionLabel := self newLabel label: 'Dependency resolution'.
-	resolutionPanel := PBResolutionPanel on: resolution.
+	resolutionPanel := PBResolutionPanel owner: self on: resolution.
 	
 	self whenWindowChanged: [ self updateOkButton ].
 ]
@@ -110,4 +110,9 @@ PBLoadPreviewDialog >> updateOkButton [
 	^ conflictsPanel hasConflicts
 		ifTrue: [ self window toolbar okButton disable ]
 		ifFalse: [ self window toolbar okButton enable ]
+]
+
+{ #category : #updating }
+PBLoadPreviewDialog >> updateResolutionTable [
+	resolutionPanel updateResolutionTree
 ]

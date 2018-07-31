@@ -22,6 +22,12 @@ CGONonConflictingDependencyState >> isConflictingDependency [
 	^ false
 ]
 
+{ #category : #resolution }
+CGONonConflictingDependencyState >> resolutionFor: aCGOResolvedDependency [ 
+	
+	^ aCGOResolvedDependency originalResolution
+]
+
 { #category : #updating }
 CGONonConflictingDependencyState >> withConflicts: aCollection [ 
 	

@@ -3,10 +3,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'dependency',
-		'resolution',
-		'dependencyState'
+		'dependencyState',
+		'originalResolution'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver'
 }
 
 { #category : #'instance-creation' }
@@ -14,14 +14,14 @@ CGOResolvedDependency class >> onDependency: aDependency resolution: aResolution
 	
 	^ self new
 		dependency: aDependency;
-		resolution: aResolution;
+		originalResolution: aResolution;
 		yourself
 ]
 
 { #category : #accessing }
 CGOResolvedDependency >> allSubResolutions [
 	
-	^ { resolution }, resolution allSubResolutions asArray
+	^ { self resolution }, self resolution allSubResolutions asArray
 ]
 
 { #category : #conflicts }
@@ -65,7 +65,7 @@ CGOResolvedDependency >> dependency: aDependency [
 { #category : #testing }
 CGOResolvedDependency >> hasConflicts [
 	
-	^ dependencyState isConflictingDependency or: [ resolution hasConflicts ]
+	^ dependencyState isConflictingDependency or: [ self resolution hasConflicts ]
 ]
 
 { #category : #accessing }
@@ -85,7 +85,7 @@ CGOResolvedDependency >> initialize [
 CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
 	
 	^ (self dependency isSameProjectAs: aCGOResolvedDependency dependency)
-		and: [ (resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
+		and: [ (self resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
 ]
 
 { #category : #testing }
@@ -106,6 +106,17 @@ CGOResolvedDependency >> nameWithVersion [
 	^ dependency name , ' ', dependency version
 ]
 
+{ #category : #accessing }
+CGOResolvedDependency >> originalResolution [
+	^ originalResolution
+]
+
+{ #category : #accessing }
+CGOResolvedDependency >> originalResolution: aProject [
+	
+	originalResolution := aProject
+]
+
 { #category : #printing }
 CGOResolvedDependency >> printOn: aStream [
 
@@ -114,30 +125,25 @@ CGOResolvedDependency >> printOn: aStream [
 		<< '('
 		<< dependency asString
 		<< ' => '
-		<< resolution asString
+		<< self resolution asString
 		<< ')'
 ]
 
 { #category : #accessing }
 CGOResolvedDependency >> projectName [
-	^ resolution name
+	^ self resolution name
 ]
 
 { #category : #accessing }
 CGOResolvedDependency >> resolution [
-	^ resolution
-]
-
-{ #category : #accessing }
-CGOResolvedDependency >> resolution: aResolution [ 
-	resolution := aResolution
+	
+	^ dependencyState resolutionFor: self
 ]
 
 { #category : #resolving }
 CGOResolvedDependency >> resolveWith: aCGOResolvedProject [ 
-	
-	resolution := aCGOResolvedProject.
-	dependencyState := CGONonConflictingDependencyState new.
+
+	dependencyState := dependencyState resolveWith: aCGOResolvedProject
 
 ]
 
@@ -156,11 +162,11 @@ CGOResolvedDependency >> resolvesProject: aProject [
 { #category : #solving }
 CGOResolvedDependency >> resolvesTarget: aResolutionTarget [ 
 	
-	^ resolution resolvedProjectVersion = aResolutionTarget
+	^ self resolution resolvedProjectVersion = aResolutionTarget
 ]
 
 { #category : #accessing }
 CGOResolvedDependency >> subresolutions [
 	
-	^ { resolution }
+	^ { self resolution }
 ]
