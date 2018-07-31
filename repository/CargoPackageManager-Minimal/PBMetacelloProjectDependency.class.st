@@ -60,6 +60,32 @@ PBMetacelloProjectDependency >> = anotherObject [
 	^ self version = anotherObject version and: [ self name = anotherObject name ].
 ]
 
+{ #category : #conflicts }
+PBMetacelloProjectDependency >> additionalConflictingInstalledProjects [
+
+	| metacelloProjectRegistration |
+
+	metacelloProjectRegistration := MetacelloProjectRegistration registry
+		registrationForClassNamed: self name
+		ifAbsent: [ ^ #() ].
+	
+	"If the installed version is the same as requested, there is no conflicts"
+	self isInstalledInMetacello ifTrue: [ ^ #() ].
+
+	"If the installed version is not the same, we have a conflict"
+	metacelloProjectRegistration
+		configurationProjectSpecIfPresent: [ :configurationSpec |
+			^ {(PBMetacelloConfigurationProjectDependency fromMetacelloSpec: configurationSpec) project: project; yourself} ]
+		ifAbsent: [ "" ].		
+		
+	^ metacelloProjectRegistration
+		baselineProjectSpecIfPresent: [ :baselineSpec |
+			{(PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec) project: project; yourself} ]
+		ifAbsent: [ #() ].
+		
+
+]
+
 { #category : #accessing }
 PBMetacelloProjectDependency >> constraints [
 

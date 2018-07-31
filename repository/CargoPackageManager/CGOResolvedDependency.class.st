@@ -85,7 +85,7 @@ CGOResolvedDependency >> initialize [
 CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
 	
 	^ (self dependency isSameProjectAs: aCGOResolvedDependency dependency)
-		and: [ (resolution = aCGOResolvedDependency resolution) not ]
+		and: [ (resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
 ]
 
 { #category : #accessing }

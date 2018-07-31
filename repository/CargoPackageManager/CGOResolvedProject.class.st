@@ -112,6 +112,12 @@ CGOResolvedProject >> initialize [
 	resolvedDependencies := Set new.
 ]
 
+{ #category : #comparison }
+CGOResolvedProject >> isEquivalentTo: aCGOResolvedProject [ 
+	
+	^ self resolution isEquivalentTo: aCGOResolvedProject resolution
+]
+
 { #category : #testing }
 CGOResolvedProject >> isInstalled [
 	

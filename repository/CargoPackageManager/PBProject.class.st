@@ -309,6 +309,12 @@ PBProject >> isEmpty [
 			and: [self virtualPackages isEmpty] ]
 ]
 
+{ #category : #comparing }
+PBProject >> isEquivalentTo: anotherProject [
+	"This method is used when the comparison requires the resolution of the project"
+	^ self = anotherProject 
+]
+
 { #category : #testing }
 PBProject >> isInstalled [
 	

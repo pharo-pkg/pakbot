@@ -25,6 +25,26 @@ PBMetacelloConfigurationProject >> basicLoad [
 ]
 
 { #category : #accessing }
+PBMetacelloConfigurationProject >> configurationClass [
+
+	Smalltalk at: #ConfigurationOf , name ifPresent: [ :aClass | ^ aClass ].
+	
+	Gofer it 
+		url: self repository;
+		configurationOf: self name;
+		load.
+		
+	^ Smalltalk at: #ConfigurationOf , name
+]
+
+{ #category : #accessing }
 PBMetacelloConfigurationProject >> isConfiguration [
 	^ true
+]
+
+{ #category : #'as yet unclassified' }
+PBMetacelloConfigurationProject >> resolvedVersion [
+	
+	self version isSymbol ifFalse: [ ^ self version ].
+	^ (self configurationClass project version: self version) versionString
 ]

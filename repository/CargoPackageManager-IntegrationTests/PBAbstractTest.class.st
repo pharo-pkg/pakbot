@@ -15,7 +15,7 @@ PBAbstractTest >> expectedCargoResolvedProject [
 { #category : #tests }
 PBAbstractTest >> tearDown [
 
-	| configuration metacelloRegistration |
+	| configuration  |
 	super tearDown.
 	
 	IceRepository registry
@@ -27,11 +27,14 @@ PBAbstractTest >> tearDown [
 		at: 'ConfigurationOfCargoTestExample' asSymbol
 		ifAbsent: [ ^ self ].
 		
-	metacelloRegistration := MetacelloProjectRegistration registry configurationRegistry at: configuration name.
-	metacelloRegistration configurationProjectSpec version spec packages
-		do: [ :packageSpec | | packageOrNil |
-			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
-			packageOrNil ifNotNil: #removeFromSystem ].
-	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
-	configuration package removeFromSystem.
+	MetacelloProjectRegistration registry configurationRegistry 
+		at: configuration name 
+		ifPresent: [ :metacelloRegistration |
+			metacelloRegistration configurationProjectSpec version spec packages
+				do: [ :packageSpec | | packageOrNil |
+				packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
+				packageOrNil ifNotNil: #removeFromSystem ].
+			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration	].
+
+	configuration package mcWorkingCopy unload.
 ]
