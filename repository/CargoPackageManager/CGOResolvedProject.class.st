@@ -58,7 +58,12 @@ CGOResolvedProject >> conflictingDependencies [
 
 { #category : #conflicts }
 CGOResolvedProject >> conflicts [
-	^ (self conflictingDependencies groupedBy: [ :aConflictingDependency | aConflictingDependency projectName ]) 
+
+	| allConflicting |
+	
+	allConflicting := self conflictingDependencies flatCollect: [ :each | each conflictingDependencies ].
+
+	^ (allConflicting groupedBy: [ :aConflictingDependency | aConflictingDependency projectName ]) 
 		associations collect: [ :assoc | PBConflict onConflictingDependencies: assoc value ]
 ]
 
@@ -105,6 +110,12 @@ CGOResolvedProject >> initialize [
 	super initialize.
 	originDependencies := Set new.
 	resolvedDependencies := Set new.
+]
+
+{ #category : #comparison }
+CGOResolvedProject >> isEquivalentTo: aCGOResolvedProject [ 
+	
+	^ self resolution isEquivalentTo: aCGOResolvedProject resolution
 ]
 
 { #category : #testing }
@@ -156,9 +167,8 @@ CGOResolvedProject >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accessing }
+{ #category : #accesskng }
 CGOResolvedProject >> projectVersion [
-	
 	^ resolvedProjectVersion version
 ]
 
@@ -229,4 +239,10 @@ CGOResolvedProject >> rootProject: aDependency [
 CGOResolvedProject >> subresolutions [
 	
 	^ self resolvedDependencies
+]
+
+{ #category : #accessing }
+CGOResolvedProject >> version [
+	
+	^ resolvedProjectVersion version
 ]

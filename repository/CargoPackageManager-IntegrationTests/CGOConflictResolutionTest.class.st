@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOConflictResolutionTest,
-	#superclass : #CGOAbstractTest,
-	#category : #'CargoPackageManager-IntegrationTests'
+	#superclass : #PBAbstractTest,
+	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
 }
 
 { #category : #tests }
@@ -93,7 +93,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasCon
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0').
 
-	[ projectOne load ] on: PBProjectHasConflictsError 
+	[ projectOne load. self fail ] on: PBProjectHasConflictsError 
 	do: [ :ex | self assert: ex conflicts isNotEmpty ]
 
 ]
@@ -117,7 +117,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOne
 	projectOne addDependency: dep1.		
 	projectOne addDependency: dep2.
 
-	[ projectOne load ] on: PBProjectHasConflictsError 
+	[ projectOne load.
+	  self fail. ] on: PBProjectHasConflictsError 
 		do: [ :ex | 
 			self assert: ex conflicts size equals: 1.
 			self assertCollection: (ex conflicts anyOne dependencies collect: #dependency) hasSameElements: { dep1. dep2 }
@@ -141,4 +142,67 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException
 		version: '2.0').
 
 	self should: [ projectOne load ] raise: PBProjectHasConflictsError 
+]
+
+{ #category : #tests }
+CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionHasBothVersions [
+
+	| project testRegistry configurationProjectV1 |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '2.0';
+		load.
+
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '1.0'.
+	
+	project addDependency: configurationProjectV1.
+
+	[ project load. self fail ] on: PBProjectHasConflictsError 
+		do: [ :ex | 
+			self assert: ex conflicts size equals: 1.
+			self assertCollection: (ex conflicts anyOne dependencies collect: [ :each | each resolution version ])	hasSameElements: { '1.0'. '2.0' }
+		]
+
+]
+
+{ #category : #tests }
+CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionResolvedWithInstalledDoesNotInstallNothing [
+
+	| project testRegistry configurationProjectV1 resolution conflict solution |
+	testRegistry := CGOPackageRegistry new.	
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	Metacello new
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: '2.0';
+		load.
+
+	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '1.0'.
+	
+	project addDependency: configurationProjectV1.
+
+	[ project load. self fail ] on: PBProjectHasConflictsError 
+		do: [ :ex | 
+			resolution := ex resolution.
+			conflict := ex conflicts anyOne ].
+		
+	solution := conflict possibleResolutions detect: [ :aResolution | aResolution resolvedProjectVersion version = '2.0' ].
+	conflict selectedResolution: solution.
+	conflict resolveWithSelected.
+	
+	self deny: resolution hasConflicts.
+	self assert: resolution loadInstructions isEmpty.
+		
+
 ]

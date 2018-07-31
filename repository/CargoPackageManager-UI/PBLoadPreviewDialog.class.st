@@ -45,7 +45,9 @@ PBLoadPreviewDialog class >> example [
 
 { #category : #action }
 PBLoadPreviewDialog >> accept [
-	conflictsPanel accept
+	conflictsPanel accept.
+	resolution load
+	
 ]
 
 { #category : #accessing }

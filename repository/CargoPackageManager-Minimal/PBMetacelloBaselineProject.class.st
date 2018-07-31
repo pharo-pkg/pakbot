@@ -37,3 +37,8 @@ PBMetacelloBaselineProject >> initialize [
 PBMetacelloBaselineProject >> isConfiguration [
 	^ true
 ]
+
+{ #category : #'as yet unclassified' }
+PBMetacelloBaselineProject >> resolvedVersion [
+	^ self version
+]

@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOConflictDetectionTest,
-	#superclass : #CGOAbstractTest,
-	#category : 'CargoPackageManager-IntegrationTests'
+	#superclass : #PBAbstractTest,
+	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
 }
 
 { #category : #tests }
@@ -153,7 +153,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependenciesResolutionsKnowT
 	v2Resolution := resolution resolutionFor: configurationProjectV2.
 
 	self assert: (v1Resolution conflictingDependencies includes: v2Resolution).
-	self assert: v1Resolution conflictingDependencies size equals: 1
+	self assert: v1Resolution conflictingDependencies size equals: 2
 ]
 
 { #category : #tests }

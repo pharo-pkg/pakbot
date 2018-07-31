@@ -1,6 +1,6 @@
 Class {
 	#name : #PBProjectConflictListTest,
-	#superclass : #CGOAbstractTest,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'resolution',
 		'registry',

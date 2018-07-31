@@ -43,13 +43,13 @@ CGOResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
 { #category : #conflicts }
 CGOResolvedDependency >> conflictingDependencies [
 	
-	^ dependencyState conflictingDependencies
+	^ dependencyState conflictingDependenciesFor: self
 ]
 
 { #category : #'conflict testing' }
 CGOResolvedDependency >> conflictingInstalledProjects: aCGOPackageRegistry [
 
-	^ (aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), 		dependency additionalConflictingInstalledProjects
+	^ ((aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), dependency additionalConflictingInstalledProjects) collect: [ :each | CGOInstalledDependency onResolved: (CGOResolvedProject onProject: each)]
 ]
 
 { #category : #accessing }
@@ -85,7 +85,13 @@ CGOResolvedDependency >> initialize [
 CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
 	
 	^ (self dependency isSameProjectAs: aCGOResolvedDependency dependency)
-		and: [ (resolution = aCGOResolvedDependency resolution) not ]
+		and: [ (resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
+]
+
+{ #category : #testing }
+CGOResolvedDependency >> isInstalledDependency [
+	
+	^ false
 ]
 
 { #category : #accessing }

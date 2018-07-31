@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'conflictingDependencies'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver-Conflicts'
 }
 
 { #category : #'instance-creation' }
@@ -23,6 +23,12 @@ CGOConflictingDependencyState >> conflictingDependencies [
 { #category : #accessing }
 CGOConflictingDependencyState >> conflictingDependencies: aCollection [ 
 	conflictingDependencies := aCollection
+]
+
+{ #category : #accessing }
+CGOConflictingDependencyState >> conflictingDependenciesFor: aResolvedDependency [
+
+	^ { aResolvedDependency } , conflictingDependencies asOrderedCollection
 ]
 
 { #category : #testing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #PBAbstractCalypsoTest,
-	#superclass : #CGOAbstractTest,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'systemEnvironment',
 		'navigationEnvironment',

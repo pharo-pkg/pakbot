@@ -21,6 +21,13 @@ PharoLauncherProject class >> buildAndRegisterIn: aCGOPackageRegistry [
 ]
 
 { #category : #'instance creation' }
+PharoLauncherProject class >> buildAndRegisterInDefault [
+
+	self buildAndRegisterIn: CGOPackageRegistry default
+
+]
+
+{ #category : #'instance creation' }
 PharoLauncherProject class >> buildWithoutPackageDependencyAndRegisterIn: aCGOPackageRegistry [
 	^ self new buildWithoutPackageDependencyAndRegisterIn: aCGOPackageRegistry
 ]

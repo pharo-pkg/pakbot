@@ -49,29 +49,10 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 	^ #MetacelloBaselineProject
 ]
 
-{ #category : #conflicts }
-PBMetacelloBaselineProjectDependency >> additionalConflictingInstalledProjects [
-
-	| metacelloProjectRegistration |
-
-	metacelloProjectRegistration := MetacelloProjectRegistration registry
-		registrationForClassNamed: self name
-		ifAbsent: [ ^ #() ].
-
-	"If the installed version is the same as requested, there is no conflicts"
-	self isInstalledInMetacello ifTrue: [ ^ #() ].
-
-	"If the installed version is not the same, we have a conflict"
-	^ metacelloProjectRegistration
-		baselineProjectSpecIfPresent: [ :baselineSpec |
-			{PBMetacelloBaselineProjectDependency fromMetacelloSpec: baselineSpec} ]
-		ifAbsent: [ #() ].
-
-]
-
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	| baseline |
+	
 	baseline := MetacelloProjectRegistration registry baselineRegistry 
 		at: #BaselineOf , name 
 		ifAbsent: [ ^ false ].

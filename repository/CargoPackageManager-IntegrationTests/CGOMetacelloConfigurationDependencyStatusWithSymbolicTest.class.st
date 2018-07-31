@@ -6,9 +6,10 @@ Class {
 
 { #category : #utils }
 CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> createProjectDependency [
+
 	^ PBMetacelloConfigurationProjectDependency  
-		name: 'JSON'
-		repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: #stable
 ]
 
@@ -16,19 +17,9 @@ CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> createProjectDepend
 CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> installProject [
 
 	Metacello new
-		configuration: 'JSON';
-		repository: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/';
-		version: '1.2';
+		configuration: 'CargoTestExample';
+		repository: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main';
+		version: #stable;
 		load.
 
-]
-
-{ #category : #running }
-CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> tearDown [
-
-	(#JSON asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.	
-	MetacelloProjectRegistration registry configurationRegistry removeKey: 'ConfigurationOfJSON' ifAbsent: [].
-	
-	super tearDown.
-	
 ]

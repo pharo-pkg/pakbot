@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOProjectLoadingTest,
-	#superclass : #CGOAbstractTest,
-	#category : 'CargoPackageManager-IntegrationTests'
+	#superclass : #PBAbstractTest,
+	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #running }

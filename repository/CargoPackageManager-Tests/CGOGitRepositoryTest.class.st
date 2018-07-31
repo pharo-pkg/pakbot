@@ -187,8 +187,8 @@ CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 		equals: PBPackage.
 	
 	self 
-		assert: (project packageUnits collect: #name) sorted asArray
-		equals: #('Counter-Core' 'Counter-Tests').
+		assertCollection: (project packageUnits collect: #name)
+		hasSameElements: #('Counter-Core' 'Counter-Tests').
 		
 	self 
 		assert: (project packageUnits detect: [ :each | each name = #'Counter-Core']) dependencies isEmpty.

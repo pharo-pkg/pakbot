@@ -25,6 +25,7 @@ BaselineOfCargo >> baseline: spec [
 			self mooseAlgos: spec.
 			self voyage: spec.
 			self zincHttpComponents: spec.
+			self parametrizedTests: spec.
 			
 			spec
 				package: #'CargoPackageManager-Minimal';
@@ -40,7 +41,7 @@ BaselineOfCargo >> baseline: spec [
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
 				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources') ];
-				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
+				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'ParametrizedTests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];
@@ -82,6 +83,11 @@ BaselineOfCargo >> mooseAlgos: spec [
 				versionString: #bleedingEdge;
 				loads: #('Moose-Algos-Graph');
 				repository: 'http://smalltalkhub.com/mc/Moose/MooseAlgos/main/' ]
+]
+
+{ #category : #baseline }
+BaselineOfCargo >> parametrizedTests: spec [
+	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
 
 { #category : #baseline }

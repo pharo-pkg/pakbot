@@ -124,6 +124,26 @@ PBMetacelloProject >> isConfiguration [
 	self subclassResponsibility
 ]
 
+{ #category : #comparing }
+PBMetacelloProject >> isEquivalentTo: anotherProject [
+	"In this comparison the project is compared against the resolved version. 
+	To solve the problem when it uses non fixed versions."
+	
+	self species = anotherProject	species
+		ifFalse: [ ^ false ].
+		
+	self name = anotherProject name
+		ifFalse: [ ^ false ].
+
+	self resolvedVersion = anotherProject resolvedVersion
+		ifFalse: [ ^ false ].
+		
+	self repository = anotherProject repository
+		ifFalse: [ ^ false ].
+		
+	^ true
+]
+
 { #category : #testing }
 PBMetacelloProject >> isInstalled [
 	
