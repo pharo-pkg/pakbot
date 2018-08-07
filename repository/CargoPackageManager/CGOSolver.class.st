@@ -26,11 +26,11 @@ CGOSolver >> registry: aRegistry [
 CGOSolver >> solveProject: aProject [
 	
 	| resolvedProject dependencies |
-	resolvedProject := CGOResolvedProject onProject: aProject.
+	resolvedProject := PBResolvedProject onProject: aProject.
 	
 	"Solve the project"
 	aProject dependencies do: [ :each |
-		resolvedProject addResolvedDependency: (CGOResolvedDependency
+		resolvedProject addResolvedDependency: (PBResolvedDependency
 			onDependency: each
 			resolution: (self solveProject: (each resolveInSolver: self))) ].
 	

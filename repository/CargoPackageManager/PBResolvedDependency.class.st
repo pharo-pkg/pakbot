@@ -1,5 +1,5 @@
 Class {
-	#name : #CGOResolvedDependency,
+	#name : #PBResolvedDependency,
 	#superclass : #Object,
 	#instVars : [
 		'dependency',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'instance-creation' }
-CGOResolvedDependency class >> onDependency: aDependency resolution: aResolution [
+PBResolvedDependency class >> onDependency: aDependency resolution: aResolution [
 	
 	^ self new
 		dependency: aDependency;
@@ -19,13 +19,13 @@ CGOResolvedDependency class >> onDependency: aDependency resolution: aResolution
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> allSubResolutions [
+PBResolvedDependency >> allSubResolutions [
 	
 	^ { self resolution }, self resolution allSubResolutions asArray
 ]
 
 { #category : #conflicts }
-CGOResolvedDependency >> checkConflictsWithDependencies: aDependencyCollection [
+PBResolvedDependency >> checkConflictsWithDependencies: aDependencyCollection [
 	
 	| conflicts |
 	conflicts := aDependencyCollection select: [ :each | each isConflictingWith: self ].
@@ -33,7 +33,7 @@ CGOResolvedDependency >> checkConflictsWithDependencies: aDependencyCollection [
 ]
 
 { #category : #conflicts }
-CGOResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
+PBResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
 
 	| conflicts |
 	conflicts := self conflictingInstalledProjects: aCGOPackageRegistry.
@@ -41,84 +41,91 @@ CGOResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
 ]
 
 { #category : #conflicts }
-CGOResolvedDependency >> conflictingDependencies [
+PBResolvedDependency >> conflictingDependencies [
 	
 	^ dependencyState conflictingDependenciesFor: self
 ]
 
 { #category : #'conflict testing' }
-CGOResolvedDependency >> conflictingInstalledProjects: aCGOPackageRegistry [
+PBResolvedDependency >> conflictingInstalledProjects: aCGOPackageRegistry [
 
-	^ ((aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), dependency additionalConflictingInstalledProjects) collect: [ :each | CGOInstalledDependency onResolved: (CGOResolvedProject onProject: each)]
+	^ ((aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), dependency additionalConflictingInstalledProjects) collect: [ :each | CGOInstalledDependency onResolved: (PBResolvedProject onProject: each)]
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> dependency [
+PBResolvedDependency >> dependency [
 	^ dependency
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> dependency: aDependency [ 
+PBResolvedDependency >> dependency: aDependency [ 
 	dependency := aDependency
 ]
 
 { #category : #testing }
-CGOResolvedDependency >> hasConflicts [
+PBResolvedDependency >> hasConflicts [
 	
 	^ dependencyState isConflictingDependency or: [ self resolution hasConflicts ]
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> icons [
-	^ { self iconNamed: #forward .
+PBResolvedDependency >> icons [
+	^ {
+		self iconNamed: (self hasConflicts ifTrue: [ #error ] ifFalse: [ #forward ]).
 		self iconNamed: dependency iconName }
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> initialize [
+PBResolvedDependency >> initialize [
 
 	super initialize.
-	dependencyState := CGONonConflictingDependencyState new
+	dependencyState := PBNonConflictingDependencyState onDependency: self
 ]
 
 { #category : #conflicts }
-CGOResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
+PBResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
 	
 	^ (self dependency isSameProjectAs: aCGOResolvedDependency dependency)
 		and: [ (self resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
 ]
 
 { #category : #testing }
-CGOResolvedDependency >> isInstalledDependency [
+PBResolvedDependency >> isInstalledDependency [
 	
 	^ false
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> name [
+PBResolvedDependency >> name [
 	
 	^ dependency name
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> nameWithVersion [
+PBResolvedDependency >> nameWithVersion [
 	
 	^ dependency name , ' ', dependency version
 ]
 
+{ #category : #'*CargoPackageManager' }
+PBResolvedDependency >> nodesInResolutionTree [
+	
+	^ dependencyState nodesInResolutionTree
+]
+
 { #category : #accessing }
-CGOResolvedDependency >> originalResolution [
+PBResolvedDependency >> originalResolution [
 	^ originalResolution
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> originalResolution: aProject [
+PBResolvedDependency >> originalResolution: aProject [
 	
 	originalResolution := aProject
 ]
 
 { #category : #printing }
-CGOResolvedDependency >> printOn: aStream [
+PBResolvedDependency >> printOn: aStream [
 
 	aStream
 		<< self class name
@@ -130,43 +137,43 @@ CGOResolvedDependency >> printOn: aStream [
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> projectName [
+PBResolvedDependency >> projectName [
 	^ self resolution name
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> resolution [
+PBResolvedDependency >> resolution [
 	
 	^ dependencyState resolutionFor: self
 ]
 
 { #category : #resolving }
-CGOResolvedDependency >> resolveWith: aCGOResolvedProject [ 
+PBResolvedDependency >> resolveWith: aCGOResolvedProject [ 
 
 	dependencyState := dependencyState resolveWith: aCGOResolvedProject
 
 ]
 
 { #category : #resolving }
-CGOResolvedDependency >> resolvesDependency: aDependency [ 
+PBResolvedDependency >> resolvesDependency: aDependency [ 
 	
 	^ dependency = aDependency
 ]
 
 { #category : #resolution }
-CGOResolvedDependency >> resolvesProject: aProject [
+PBResolvedDependency >> resolvesProject: aProject [
 	
 	^ false
 ]
 
 { #category : #solving }
-CGOResolvedDependency >> resolvesTarget: aResolutionTarget [ 
+PBResolvedDependency >> resolvesTarget: aResolutionTarget [ 
 	
 	^ self resolution resolvedProjectVersion = aResolutionTarget
 ]
 
 { #category : #accessing }
-CGOResolvedDependency >> subresolutions [
+PBResolvedDependency >> subresolutions [
 	
 	^ { self resolution }
 ]

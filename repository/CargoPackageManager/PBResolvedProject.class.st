@@ -2,18 +2,18 @@
 Class used to represent a dependency that has been resolved. It means that we know the specific version of a package to load. To be able to understand the solving afterwards, a link to origin dependencies is kept.
 "
 Class {
-	#name : #CGOResolvedProject,
+	#name : #PBResolvedProject,
 	#superclass : #Object,
 	#instVars : [
 		'originDependencies',
 		'resolvedProjectVersion',
 		'resolvedDependencies'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver'
 }
 
 { #category : #'instance-creation' }
-CGOResolvedProject class >> onProject: aProject [
+PBResolvedProject class >> onProject: aProject [
 	
 	^ self new
 		resolvedProjectVersion: aProject;
@@ -21,7 +21,7 @@ CGOResolvedProject class >> onProject: aProject [
 ]
 
 { #category : #comparing }
-CGOResolvedProject >> = anotherProject [
+PBResolvedProject >> = anotherProject [
 
 	self species = anotherProject species
 		ifFalse: [ ^ false ].
@@ -30,13 +30,13 @@ CGOResolvedProject >> = anotherProject [
 ]
 
 { #category : #adding }
-CGOResolvedProject >> addResolvedDependency: aResolvedDependency [
+PBResolvedProject >> addResolvedDependency: aResolvedDependency [
 
 	resolvedDependencies add: aResolvedDependency 
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> allResolvedDependencies [
+PBResolvedProject >> allResolvedDependencies [
 	
 	| indirectDependencies |
 	indirectDependencies := self resolvedDependencies
@@ -45,19 +45,19 @@ CGOResolvedProject >> allResolvedDependencies [
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> allSubResolutions [
+PBResolvedProject >> allSubResolutions [
 	
 	^ self subresolutions asArray , (self subresolutions asArray flatCollect: [ :each | each allSubResolutions asArray ])
 ]
 
 { #category : #conflicts }
-CGOResolvedProject >> conflictingDependencies [
+PBResolvedProject >> conflictingDependencies [
 	
 	^ self resolvedDependencies select: [ :e | e hasConflicts ]
 ]
 
 { #category : #conflicts }
-CGOResolvedProject >> conflicts [
+PBResolvedProject >> conflicts [
 
 	| allConflicting |
 	
@@ -68,35 +68,35 @@ CGOResolvedProject >> conflicts [
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> dependencyTargetedPackages [
+PBResolvedProject >> dependencyTargetedPackages [
 
 	^ resolvedProjectVersion dependencies collect: [ :each | each name ]
 ]
 
 { #category : #testing }
-CGOResolvedProject >> fitsPlatformRequirements [
+PBResolvedProject >> fitsPlatformRequirements [
 	^ resolvedProjectVersion fitsPlatformRequirements
 ]
 
 { #category : #testing }
-CGOResolvedProject >> hasConflicts [
+PBResolvedProject >> hasConflicts [
 	
 	^ self resolvedDependencies anySatisfy: [ :any | any hasConflicts ]
 ]
 
 { #category : #comparing }
-CGOResolvedProject >> hash [
+PBResolvedProject >> hash [
 
 	^ self resolution hash
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> icons [
+PBResolvedProject >> icons [
 	^ { self iconNamed: #glamorousBookmark }
 ]
 
 { #category : #lookup }
-CGOResolvedProject >> includesResolvedTarget: aResolutionTarget [
+PBResolvedProject >> includesResolvedTarget: aResolutionTarget [
 
 	(self resolvesTarget: aResolutionTarget)
 		ifTrue: [ ^ true ].
@@ -106,37 +106,37 @@ CGOResolvedProject >> includesResolvedTarget: aResolutionTarget [
 ]
 
 { #category : #initialization }
-CGOResolvedProject >> initialize [
+PBResolvedProject >> initialize [
 	super initialize.
 	originDependencies := Set new.
 	resolvedDependencies := Set new.
 ]
 
 { #category : #comparison }
-CGOResolvedProject >> isEquivalentTo: aCGOResolvedProject [ 
+PBResolvedProject >> isEquivalentTo: aCGOResolvedProject [ 
 	
 	^ self resolution isEquivalentTo: aCGOResolvedProject resolution
 ]
 
 { #category : #testing }
-CGOResolvedProject >> isInstalled [
+PBResolvedProject >> isInstalled [
 	
 	^ resolvedProjectVersion isInstalled
 ]
 
 { #category : #testing }
-CGOResolvedProject >> isSolved [
+PBResolvedProject >> isSolved [
 	^ resolvedProjectVersion isNotNil
 ]
 
 { #category : #loading }
-CGOResolvedProject >> load [
+PBResolvedProject >> load [
 	
 	self loadInstructions load
 ]
 
 { #category : #loading }
-CGOResolvedProject >> loadInstructions [
+PBResolvedProject >> loadInstructions [
 	
 	^ CGOLoadInstructionsBuilder new
 		resolution: self;
@@ -144,22 +144,22 @@ CGOResolvedProject >> loadInstructions [
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> name [
+PBResolvedProject >> name [
 	^ resolvedProjectVersion name
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> nameWithVersion [
+PBResolvedProject >> nameWithVersion [
 	^ self name , ' ', self projectVersion asString
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> originDependencies [
+PBResolvedProject >> originDependencies [
 	^ originDependencies
 ]
 
 { #category : #printing }
-CGOResolvedProject >> printOn: aStream [
+PBResolvedProject >> printOn: aStream [
 	aStream
 		<< self class name
 		<< '('
@@ -168,18 +168,18 @@ CGOResolvedProject >> printOn: aStream [
 ]
 
 { #category : #accesskng }
-CGOResolvedProject >> projectVersion [
+PBResolvedProject >> projectVersion [
 	^ resolvedProjectVersion version
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> resolution [
+PBResolvedProject >> resolution [
 	
 	^ resolvedProjectVersion
 ]
 
 { #category : #resolution }
-CGOResolvedProject >> resolution: aPackageVersionReference [
+PBResolvedProject >> resolution: aPackageVersionReference [
 	| pkgVersion |
 	pkgVersion := aPackageVersionReference.
 	pkgVersion fitsPlatformRequirements
@@ -188,7 +188,7 @@ CGOResolvedProject >> resolution: aPackageVersionReference [
 ]
 
 { #category : #lookup }
-CGOResolvedProject >> resolutionFor: aResolutionTarget [
+PBResolvedProject >> resolutionFor: aResolutionTarget [
 	
 	(aResolutionTarget isResolvedBy: self)
 		ifTrue: [ ^ self ].
@@ -197,52 +197,52 @@ CGOResolvedProject >> resolutionFor: aResolutionTarget [
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> resolvedDependencies [
+PBResolvedProject >> resolvedDependencies [
 	
 	^ resolvedDependencies
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> resolvedProjectVersion [
+PBResolvedProject >> resolvedProjectVersion [
 	^ resolvedProjectVersion
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> resolvedProjectVersion: anObject [
+PBResolvedProject >> resolvedProjectVersion: anObject [
 	resolvedProjectVersion := anObject
 ]
 
 { #category : #resolving }
-CGOResolvedProject >> resolvesDependency: aDependency [
+PBResolvedProject >> resolvesDependency: aDependency [
 	
 	^ false
 ]
 
 { #category : #resolution }
-CGOResolvedProject >> resolvesProject: aProject [ 
+PBResolvedProject >> resolvesProject: aProject [ 
 	
 	^ resolvedProjectVersion = aProject
 ]
 
 { #category : #solving }
-CGOResolvedProject >> resolvesTarget: aResolutionTarget [ 
+PBResolvedProject >> resolvesTarget: aResolutionTarget [ 
 	
 	^ resolvedProjectVersion = aResolutionTarget
 ]
 
 { #category : #adding }
-CGOResolvedProject >> rootProject: aDependency [
+PBResolvedProject >> rootProject: aDependency [
 	originDependencies add: aDependency
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> subresolutions [
+PBResolvedProject >> subresolutions [
 	
 	^ self resolvedDependencies
 ]
 
 { #category : #accessing }
-CGOResolvedProject >> version [
+PBResolvedProject >> version [
 	
 	^ resolvedProjectVersion version
 ]

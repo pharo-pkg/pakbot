@@ -15,20 +15,20 @@ OngoingPackageResolutionTest >> testEquals [
 	
 	pkgA := #A.
 	pkgB := #B.
-	resolvedDep1 := CGOResolvedProject new
+	resolvedDep1 := PBResolvedProject new
 				targetedPackage: pkgA;
 				yourself.
-	resolvedDep2 := CGOResolvedProject new
+	resolvedDep2 := PBResolvedProject new
 				targetedPackage: pkgB;
 				yourself.
 	self assert: (resolvedDep1 = resolvedDep2) not.
 	resolvedDep2 targetedPackage: pkgA.
 	self assert: resolvedDep1 equals: resolvedDep2.
 	
-	resolvedDep1 := CGOResolvedProject new
+	resolvedDep1 := PBResolvedProject new
 				resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1');
 				yourself.
-	resolvedDep2 := CGOResolvedProject new
+	resolvedDep2 := PBResolvedProject new
 				resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1.1');
 				yourself.
 	self assert: (resolvedDep1 = resolvedDep2) not.
@@ -37,10 +37,10 @@ OngoingPackageResolutionTest >> testEquals [
 
 	dep1 :=  CGOPackageDependency on: pkgA for: nil.
 	dep2 :=  CGOPackageDependency on: pkgB for: nil.
-	resolvedDep1 := CGOResolvedProject new
+	resolvedDep1 := PBResolvedProject new
 				instVarNamed: 'originDependencies' put: dep1;
 				yourself.
-	resolvedDep2 := CGOResolvedProject new
+	resolvedDep2 := PBResolvedProject new
 				instVarNamed: 'originDependencies' put: dep2;
 				yourself.
 	self assert: (resolvedDep1 = resolvedDep2) not.

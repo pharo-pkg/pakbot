@@ -67,7 +67,7 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'XMLParser'
-			repositoryUrl: 'hhttp://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
+			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
 			version: #stable).
 ]
 
@@ -104,7 +104,7 @@ PharoLauncherProject >> buildProject [
     lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);
     lets you create new images from any template,
     automatically find and download the appropriate VM to launch your images.';
-		repository: self buildRepository;
+		repository: "self buildRepository" PBNoRepository new;
 		registry: registry;
 		yourself.
 		
