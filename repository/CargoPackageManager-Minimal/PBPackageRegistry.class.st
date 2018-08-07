@@ -34,15 +34,15 @@ PBPackageRegistry class >> default: aCGOPackageRegistry [
 
 { #category : #accessing }
 PBPackageRegistry class >> reset [
-	Default ifNotNil: [ self unregisterFromSystem. Default := nil ]
+	Default ifNotNil: [ Default unregisterFromSystem. Default := nil ]
 ]
 
 { #category : #private }
 PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
-	^ [ self packageNamed: aPackageName.
-		CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
-		on: CGOPackageNotFoundError
-		do: [ "ignore: package not registered. It is safe to register a new one" ]
+	
+	(self hasInstalledPackageNamed: aPackageName)
+		ifTrue: [ CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
+
 ]
 
 { #category : #private }
@@ -61,6 +61,12 @@ PBPackageRegistry >> fetch: aPackageName version: aVersion [
 	package version = aVersion asSemanticVersion
 		ifFalse: [ CGOPackageVersionNotFoundError signal ].
 	^ package
+]
+
+{ #category : #testing }
+PBPackageRegistry >> hasInstalledPackageNamed: fullyQualifiedName [
+
+	^ self installedPackages anySatisfy: [ :each | each fullyQualifiedName = fullyQualifiedName]
 ]
 
 { #category : #initialization }
@@ -135,6 +141,28 @@ PBPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 		ifNone: absentBlock
 ]
 
+{ #category : #'system-events' }
+PBPackageRegistry >> packageRenamed: aRPackageRenamed [ 
+
+	| packages |
+	
+	packages := installedPackages select: [ :each | each name = aRPackageRenamed oldName ].
+	packages do: [ :each | each name: aRPackageRenamed newName. each project announceChanged ]
+
+]
+
+{ #category : #'system-events' }
+PBPackageRegistry >> packageUnregistered: aRPackageUnregistered [ 
+
+	| packages |
+	
+	packages := installedPackages select: [ :each | each name = aRPackageUnregistered package name ].
+	installedPackages removeAll: packages.
+	
+	packages do: [ :each | each project announceChanged ]
+
+]
+
 { #category : #acccessing }
 PBPackageRegistry >> projectNamed: aName [
 	^ self 
@@ -158,6 +186,20 @@ PBPackageRegistry >> register: aLoadableUnit [
 	(self isProjectInstalled: aLoadableUnit project)
 		ifFalse: [ self registerProject: aLoadableUnit project ].
 	^ aLoadableUnit
+]
+
+{ #category : #'system-announcements' }
+PBPackageRegistry >> registerInSystem [
+
+	SystemAnnouncer uniqueInstance
+		subscribe: RPackageUnregistered
+		send: #packageUnregistered:
+		to: self.
+		
+	SystemAnnouncer uniqueInstance
+		subscribe: RPackageRenamed
+		send: #packageRenamed:
+		to: self.	
 ]
 
 { #category : #registering }
@@ -199,6 +241,12 @@ PBPackageRegistry >> unregister: aPackageVersion [
 		ifNone: [ self unregisterProject: aPackageVersion project ].
 		
 
+]
+
+{ #category : #'system-announcements' }
+PBPackageRegistry >> unregisterFromSystem [
+
+	SystemAnnouncer uniqueInstance unsubscribe: self
 ]
 
 { #category : #registering }

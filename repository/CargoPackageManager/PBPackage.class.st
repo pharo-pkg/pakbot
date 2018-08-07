@@ -97,7 +97,8 @@ PBPackage >> initializeWithPackageName: aPackageName andProject: aCargoProject [
 { #category : #'querying - installed' }
 PBPackage >> isInstalled [
 	
-	^ project registry isInstalled: self
+	project registry systemPackageOrganizer packageNamed: self name ifAbsent: [ ^false ].
+	^ (project registry isInstalled: self)
 ]
 
 { #category : #testing }

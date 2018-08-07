@@ -394,6 +394,12 @@ PBProject >> newVirtualPackage: aName [
 ]
 
 { #category : #accessing }
+PBProject >> packageNamed: aString [ 
+	
+	^ packages detect: [ :each | each name = aString ]
+]
+
+{ #category : #accessing }
 PBProject >> packageNames [
 	^ packages collect: #name
 ]

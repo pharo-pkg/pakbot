@@ -7,6 +7,11 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
+{ #category : #private }
+PBAbstractTest class >> isAbstract [
+	^ self name = #PBAbstractTest
+]
+
 { #category : #tests }
 PBAbstractTest >> expectedCargoResolvedProject [
 
@@ -46,4 +51,6 @@ PBAbstractTest >> tearDown [
 			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration	].
 
 	configuration package mcWorkingCopy unload.
+	
+	testRegistry unregisterFromSystem
 ]
