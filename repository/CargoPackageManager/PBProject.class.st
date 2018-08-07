@@ -47,7 +47,7 @@ PBProject class >> fromRepository: aCGOSourceRepository [
 PBProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 	| ongoing |
 	ongoing := self basicNew
-		registry: CGOPackageRegistry default;
+		registry: PBPackageRegistry default;
 		yourself.
 	aVcsSerializedProject flushIn: ongoing.
 	^ ongoing
@@ -391,6 +391,12 @@ PBProject >> newVirtualPackage: aName [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 	virtualPackages add: virtual.
 	^ registry register: virtual
+]
+
+{ #category : #accessing }
+PBProject >> packageNamed: aString [ 
+	
+	^ packages detect: [ :each | each name = aString ]
 ]
 
 { #category : #accessing }

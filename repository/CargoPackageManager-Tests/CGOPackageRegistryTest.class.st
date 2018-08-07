@@ -9,7 +9,7 @@ Class {
 
 { #category : #initialization }
 CGOPackageRegistryTest >> setUp [
-	registry := CGOPackageRegistry new.
+	registry := PBPackageRegistry new.
 ]
 
 { #category : #tests }

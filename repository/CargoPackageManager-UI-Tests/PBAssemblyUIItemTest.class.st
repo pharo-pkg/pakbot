@@ -18,7 +18,7 @@ PBAssemblyUIItemTest >> setUp [
 	| assembly package |
 	super setUp.
 
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	assembly := project addAssemblyNamed: 'Assembly'.
 	package := project createPackageNamed: 'TestProject-Core'.
 	assembly addPackage: package

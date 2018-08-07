@@ -138,7 +138,7 @@ PBLoadableUnitOverviewPanel >> initialExtent [
 { #category : #initialization }
 PBLoadableUnitOverviewPanel >> initialize [
 
-	registry := CGOPackageRegistry default.
+	registry := PBPackageRegistry default.
 	super initialize.
 ]
 

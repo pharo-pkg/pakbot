@@ -1,24 +1,21 @@
 Class {
 	#name : #CGOPackageImportTest,
-	#superclass : #TestCase,
+	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
-		'registry',
 		'systemPackageOrganizer'
 	],
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
 CGOPackageImportTest >> setUp [
 
 	super setUp.
-	registry := CGOPackageRegistry new.
-	project := PBProject named: 'test'.
-	registry register: project.
+	project := testRegistry newProjectNamed: 'test'.
 	
 	systemPackageOrganizer := RPackageOrganizer new.
-	registry systemPackageOrganizer: systemPackageOrganizer.
+	testRegistry systemPackageOrganizer: systemPackageOrganizer.
 ]
 
 { #category : #tests }

@@ -19,7 +19,7 @@ It will not load any package into the system but the metadata will be browsable 
 
 { #category : #running }
 PBLoadProjectMetadataAction >> execute [
-	CGOPackageRegistry default
+	PBPackageRegistry default
 		registerProject: project.
 	CGOProjectCreated announceOnProject: project.
 ]

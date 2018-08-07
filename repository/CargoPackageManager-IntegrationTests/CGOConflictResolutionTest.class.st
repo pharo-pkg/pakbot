@@ -7,8 +7,8 @@ Class {
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAVersion [
 
-	| testRegistry projectOne dep2 dep1 conflict solution resolution |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne dep2 dep1 conflict solution resolution |
+
 	dep2 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -44,8 +44,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUs
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAnotherVersion [
 
-	| testRegistry projectOne dep2 dep1 conflict solution resolution |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne dep2 dep1 conflict solution resolution |
+
 	dep2 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -81,8 +81,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUs
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasConflicts [
 
-	| testRegistry projectOne |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
@@ -101,8 +101,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasCon
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOneConflictForTheDependency [
 
-	| testRegistry projectOne dep2 dep1 |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne dep2 dep1 |
+
 	dep2 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -129,8 +129,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOne
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException [
 
-	| testRegistry projectOne |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
@@ -147,8 +147,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionHasBothVersions [
 
-	| project testRegistry configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new
@@ -175,8 +175,8 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsin
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionResolvedWithInstalledDoesNotInstallNothing [
 
-	| project testRegistry configurationProjectV1 resolution conflict solution |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProjectV1 resolution conflict solution |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new

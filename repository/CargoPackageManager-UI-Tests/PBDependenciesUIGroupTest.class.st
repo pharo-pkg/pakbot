@@ -11,7 +11,7 @@ Class {
 PBDependenciesUIGroupTest >> testProjectWithDependenciesShowsDependencieItem [
 
 	| dep |
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -31,7 +31,7 @@ PBDependenciesUIGroupTest >> testProjectWithDependenciesShowsDependencieItem [
 PBDependenciesUIGroupTest >> testProjectWithDependenciesShowsDependencies [
 
 	| dependencies |
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -50,7 +50,7 @@ PBDependenciesUIGroupTest >> testProjectWithDependenciesShowsDependencies [
 PBDependenciesUIGroupTest >> testProjectWithoutDependenciesDoesNotShowDependencies [
 
 	| dependencies |
-	registry newProjectNamed: 'TestProject'.
+	testRegistry newProjectNamed: 'TestProject'.
 
 	self openBrowser.
 	self expandNodeNamed: 'TestProject'.

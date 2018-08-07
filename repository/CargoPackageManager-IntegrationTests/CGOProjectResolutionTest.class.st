@@ -7,8 +7,8 @@ Class {
 { #category : #'cargo-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBothProjectAndDependency [
 
-	| project testRegistry resolution pakbotProject |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution pakbotProject |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	pakbotProject := PBPakbotProjectDependency
@@ -25,8 +25,7 @@ CGOProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBo
 { #category : #'cargo-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithCargoOngoingProjectDependenciesIncludesBothProjectAndDependency [
 
-	| testRegistry resolution projectOne projectTwo |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne projectTwo |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
@@ -43,8 +42,8 @@ CGOProjectResolutionTest >> testProjectResolutionWithCargoOngoingProjectDependen
 { #category : #'cargo-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesIncludesBothProjectAndDependencies [
 
-	| projectOne projectTwo testRegistry resolution pakbotProject |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo resolution pakbotProject |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -66,8 +65,8 @@ CGOProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesIn
 { #category : #'baseline-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloBaselineDependenciesIncludesBothProjectAndDependencies [
 
-	| projectOne projectTwo testRegistry resolution baselineDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo resolution baselineDependency |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -90,8 +89,8 @@ CGOProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloBaselineDe
 { #category : #'configuration-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloConfigurationDependenciesIncludesBothProjectAndDependencies [
 
-	| projectOne projectTwo testRegistry resolution configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo resolution configurationProject |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -114,8 +113,8 @@ CGOProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloConfigurat
 { #category : #'baseline-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithMetacelloBaselineDependenciesIncludesBothProjectAndDependency [
 
-	| project testRegistry resolution baselineDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution baselineDependency |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	baselineDependency := PBMetacelloBaselineProjectDependency
@@ -134,8 +133,8 @@ CGOProjectResolutionTest >> testProjectResolutionWithMetacelloBaselineDependenci
 { #category : #'configuration-dependencies' }
 CGOProjectResolutionTest >> testProjectResolutionWithMetacelloConfigurationDependenciesIncludesBothProjectAndDependency [
 
-	| project testRegistry resolution configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProject |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := PBMetacelloConfigurationProjectDependency
@@ -154,8 +153,7 @@ CGOProjectResolutionTest >> testProjectResolutionWithMetacelloConfigurationDepen
 { #category : #'no-dependencies' }
 CGOProjectResolutionTest >> testProjectWithoutDependenciesResolvesToItself [
 
-	| project testRegistry resolution |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution |
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	resolution := testRegistry newSolver solveProject: project.
@@ -166,8 +164,7 @@ CGOProjectResolutionTest >> testProjectWithoutDependenciesResolvesToItself [
 { #category : #'cargo-dependencies' }
 CGOProjectResolutionTest >> testResolutionOfCargoDependencyIsResolvedDependency [
 
-	| testRegistry resolution projectOne pakbotProject |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne pakbotProject |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	pakbotProject := PBPakbotProjectDependency
@@ -182,8 +179,7 @@ CGOProjectResolutionTest >> testResolutionOfCargoDependencyIsResolvedDependency 
 { #category : #'baseline-dependencies' }
 CGOProjectResolutionTest >> testResolutionOfMetacelloBaselineDependencyIsResolvedDependency [
 
-	| testRegistry resolution projectOne baselineDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne baselineDependency |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	baselineDependency := PBMetacelloBaselineProjectDependency
@@ -199,8 +195,7 @@ CGOProjectResolutionTest >> testResolutionOfMetacelloBaselineDependencyIsResolve
 { #category : #'configuration-dependencies' }
 CGOProjectResolutionTest >> testResolutionOfMetacelloConfigurationDependencyIsResolvedDependency [
 
-	| testRegistry resolution projectOne configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne configurationProject |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	configurationProject := PBMetacelloConfigurationProjectDependency 
@@ -217,7 +212,7 @@ CGOProjectResolutionTest >> testResolutionOfMetacelloConfigurationDependencyIsRe
 CGOProjectResolutionTest >> testResolutionOfProjectIsResolutionRoot [
 
 	| testRegistry resolution projectOne |
-	testRegistry := CGOPackageRegistry new.	
+	testRegistry := PBPackageRegistry new.	
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	resolution := projectOne resolve.

@@ -53,7 +53,6 @@ CGOOngoingPackageUnitTest >> testComparisonWithSamePackageUnitReturnsTrue [
 
 { #category : #'test data' }
 CGOOngoingPackageUnitTest >> unitTestV2 [
-	^ (PBPackage named: #Test project: ongoingProject)
-		description: 'A simple ongoing package unit 2.';
-		yourself
+	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Test ]
+
 ]

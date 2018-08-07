@@ -2,7 +2,6 @@ Class {
 	#name : #CGODependencyStatusTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
-		'registry',
 		'project',
 		'dependencyToProject',
 		'dependencyToPackage'
@@ -30,9 +29,9 @@ CGODependencyStatusTest >> installProject [
 { #category : #running }
 CGODependencyStatusTest >> setUp [
 	super setUp.
-	registry := CGOPackageRegistry new.
+
 	project := PBProject named: 'ATestProject'.
-	registry register: project.
+	testRegistry register: project.
 
 	dependencyToProject := self createProjectDependency.
 

@@ -5,7 +5,6 @@ Class {
 		'systemEnvironment',
 		'navigationEnvironment',
 		'scope',
-		'registry',
 		'query',
 		'project',
 		'browser'
@@ -93,11 +92,10 @@ PBAbstractCalypsoTest >> openBrowser [
 { #category : #running }
 PBAbstractCalypsoTest >> setUp [
 	super setUp.
-	registry := CGOPackageRegistry new.
 	systemEnvironment := ClySystemEnvironment new.
 
 	systemEnvironment projectManager
-		registerProjectManager: (CGOCalypsoPackageManager forRegistry: registry).
+		registerProjectManager: (CGOCalypsoPackageManager forRegistry: testRegistry).
 
 	navigationEnvironment := ClyNavigationEnvironment
 		overSystemEnvironment: systemEnvironment.

@@ -171,11 +171,6 @@ CGOPackageVersion >> project [
 ]
 
 { #category : #private }
-CGOPackageVersion >> projectFromRegistry [
-	^ CGOPackageRegistry default packageNamed: projectName
-]
-
-{ #category : #private }
 CGOPackageVersion >> projectFromSCM [
 	self subclassResponsibility
 ]

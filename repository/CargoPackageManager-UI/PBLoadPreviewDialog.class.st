@@ -39,7 +39,7 @@ PBLoadPreviewDialog class >> example [
 
 	| resolution |
 
-	resolution := (CGOPackageRegistry default projectNamed: #PharoLauncher) resolve.
+	resolution := (PBPackageRegistry default projectNamed: #PharoLauncher) resolve.
 	(self on: resolution) openDialogWithSpec
 ]
 

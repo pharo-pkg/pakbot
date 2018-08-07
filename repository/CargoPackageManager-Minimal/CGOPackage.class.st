@@ -27,7 +27,7 @@ CGOPackage class >> stonName [
 
 { #category : #protocol }
 CGOPackage >> dependentPackages [
-	^ CGOPackageRegistry default installedPackages
+	^ PBPackageRegistry default installedPackages
 		collect: [ :aPackage | aPackage dependencies
 								select: [ : aDependency | aDependency targetedPackage = self ] ]
 ]

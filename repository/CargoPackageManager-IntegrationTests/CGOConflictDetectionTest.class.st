@@ -8,8 +8,7 @@ Class {
 CGOConflictDetectionTest >> testConflictingCargoDependencyAndInstalledMetacelloProjectHasConflict [
 
 	<expectedFailure>
-	| project testRegistry resolution configurationProjectV1 project2 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 project2 configurationProjectV2 |
 
 	project := testRegistry newProjectNamed: 'Test'.
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency 
@@ -32,8 +31,8 @@ CGOConflictDetectionTest >> testConflictingCargoDependencyAndInstalledMetacelloP
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingIndirectMetacelloDependenciesHasConflicts [
 
-	| testRegistry projectOne projectTwo |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -55,8 +54,8 @@ CGOConflictDetectionTest >> testConflictingIndirectMetacelloDependenciesHasConfl
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesHasConflicts [
 
-	| project testRegistry resolution configurationProjectV1 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 configurationProjectV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	testRegistry newProjectNamed: 'CargoTestExample'.
 	
@@ -79,8 +78,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesHasConfl
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesThenResolvedDependenciesHaveEachOtherConflict [
 
-	| project testRegistry resolution configurationProjectV1 configurationProjectV2 resolutionOfV1 resolutionOfV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 configurationProjectV2 resolutionOfV1 resolutionOfV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	testRegistry newProjectNamed: 'CargoTestExample'.
 	
@@ -107,8 +106,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesThenReso
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependenciesHasConflicts [
 
-	| project testRegistry resolution configurationProjectV1 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 configurationProjectV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -131,8 +130,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependenciesHasConflicts [
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependenciesResolutionsKnowTheirConflictingPairs [
 
-	| project testRegistry resolution configurationProjectV1 configurationProjectV2 v1Resolution v2Resolution |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 configurationProjectV2 v1Resolution v2Resolution |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -159,8 +158,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependenciesResolutionsKnowT
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledCargoProjectHasConflict [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	testRegistry newProjectNamed: 'CargoTestExample'.
 	
@@ -178,8 +177,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledCargoP
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledMetacelloProjectHasConflict [
 
-	| project testRegistry resolution configurationProjectV1 project2 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 project2 configurationProjectV2 |
 
 	project := testRegistry newProjectNamed: 'Test'.
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -203,8 +201,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyAndInstalledMetace
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionInstalledIsConflict [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new
@@ -227,8 +225,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsing
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingSameVersionInstalledIsNotConflict [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new
@@ -251,8 +249,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsing
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingStableAndDifferentVersionInstalledIsConflict [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new
@@ -275,8 +273,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsing
 { #category : #tests }
 CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsingStableAndSameVersionInstalledIsNotConflict [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	Metacello new
@@ -299,8 +297,8 @@ CGOConflictDetectionTest >> testConflictingMetacelloDependencyWithInstalledUsing
 { #category : #tests }
 CGOConflictDetectionTest >> testEqualMetacelloDependenciesHasNoConflicts [
 
-	| project testRegistry resolution configurationProjectV1 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 configurationProjectV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -323,8 +321,8 @@ CGOConflictDetectionTest >> testEqualMetacelloDependenciesHasNoConflicts [
 { #category : #tests }
 CGOConflictDetectionTest >> testNonConflictingDependencyResolutionsHaveNoConflictingDependencies [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -341,8 +339,8 @@ CGOConflictDetectionTest >> testNonConflictingDependencyResolutionsHaveNoConflic
 { #category : #tests }
 CGOConflictDetectionTest >> testNonConflictingIndirectMetacelloDependenciesHasNoConflicts [
 
-	| testRegistry projectOne projectTwo |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -364,8 +362,8 @@ CGOConflictDetectionTest >> testNonConflictingIndirectMetacelloDependenciesHasNo
 { #category : #tests }
 CGOConflictDetectionTest >> testNonConflictingMetacelloDependenciesHasNoConflicts [
 
-	| project testRegistry resolution configurationProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project resolution configurationProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency

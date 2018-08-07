@@ -6,7 +6,7 @@ Registry used to hold description of packages installed in the image.
 - registeredProjects contains the list of projects having at least one of this package installed in the image
 "
 Class {
-	#name : #CGOPackageRegistry,
+	#name : #PBPackageRegistry,
 	#superclass : #Object,
 	#instVars : [
 		'installedPackages',
@@ -20,26 +20,33 @@ Class {
 }
 
 { #category : #accessing }
-CGOPackageRegistry class >> default [
+PBPackageRegistry class >> default [
 	^ Default
-		ifNil: [ Default := self new ]
+		ifNil: [ Default := self new registerInSystem; yourself ]
 ]
 
 { #category : #accessing }
-CGOPackageRegistry class >> default: aCGOPackageRegistry [
+PBPackageRegistry class >> default: aCGOPackageRegistry [
+	
+	self reset.
 	Default := aCGOPackageRegistry
 ]
 
-{ #category : #private }
-CGOPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
-	^ [ self packageNamed: aPackageName.
-		CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
-		on: CGOPackageNotFoundError
-		do: [ "ignore: package not registered. It is safe to register a new one" ]
+{ #category : #accessing }
+PBPackageRegistry class >> reset [
+	Default ifNotNil: [ Default unregisterFromSystem. Default := nil ]
 ]
 
 { #category : #private }
-CGOPackageRegistry >> checkProjectRegistrationOf: aProjectName [
+PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
+	
+	(self hasInstalledPackageNamed: aPackageName)
+		ifTrue: [ CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
+
+]
+
+{ #category : #private }
+PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 	^ [ self projectNamed: aProjectName.
 		CGOPackageAlreadyRegistered signal: aProjectName , ' is already a registered project in the registry!' ]
 		on: CGOPackageNotFoundError
@@ -47,7 +54,7 @@ CGOPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 ]
 
 { #category : #'compatilibility-repository' }
-CGOPackageRegistry >> fetch: aPackageName version: aVersion [
+PBPackageRegistry >> fetch: aPackageName version: aVersion [
 	
 	| package |
 	package := self packageNamed: aPackageName.
@@ -56,20 +63,26 @@ CGOPackageRegistry >> fetch: aPackageName version: aVersion [
 	^ package
 ]
 
+{ #category : #testing }
+PBPackageRegistry >> hasInstalledPackageNamed: fullyQualifiedName [
+
+	^ self installedPackages anySatisfy: [ :each | each fullyQualifiedName = fullyQualifiedName]
+]
+
 { #category : #initialization }
-CGOPackageRegistry >> initialize [
+PBPackageRegistry >> initialize [
 	super initialize.
 	installedPackages := Set new.
 	registeredProjects := Set new.
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> installedPackages [
+PBPackageRegistry >> installedPackages [
 	^ installedPackages
 ]
 
 { #category : #quering }
-CGOPackageRegistry >> isInstalled: aPackageDependency [ 
+PBPackageRegistry >> isInstalled: aPackageDependency [ 
 	
 	| found |
 	found := self packageNamed: aPackageDependency fullyQualifiedName ifAbsent: [ ^ false ].
@@ -77,7 +90,7 @@ CGOPackageRegistry >> isInstalled: aPackageDependency [
 ]
 
 { #category : #testing }
-CGOPackageRegistry >> isOutSync: anUnit [ 
+PBPackageRegistry >> isOutSync: anUnit [ 
 
 	| found |
 	found := self packageNamed: anUnit fullyQualifiedName ifAbsent: [ ^ false ].
@@ -85,19 +98,19 @@ CGOPackageRegistry >> isOutSync: anUnit [
 ]
 
 { #category : #testing }
-CGOPackageRegistry >> isProjectInstalled: aCGOOngoingProject [ 
+PBPackageRegistry >> isProjectInstalled: aCGOOngoingProject [ 
 	
 	^ registeredProjects includes: aCGOOngoingProject
 ]
 
 { #category : #'compatibility-repository' }
-CGOPackageRegistry >> isVirtual: aString [ 
+PBPackageRegistry >> isVirtual: aString [ 
 	
 	^ (self packageNamed: aString) isVirtual
 ]
 
 { #category : #projects }
-CGOPackageRegistry >> newProjectNamed: aString [ 
+PBPackageRegistry >> newProjectNamed: aString [ 
 	
 	| project |
 	project := PBProject named: aString.
@@ -107,7 +120,7 @@ CGOPackageRegistry >> newProjectNamed: aString [
 ]
 
 { #category : #factory }
-CGOPackageRegistry >> newSolver [
+PBPackageRegistry >> newSolver [
 	
 	^ CGOSolver new
 		registry: self;
@@ -115,35 +128,57 @@ CGOPackageRegistry >> newSolver [
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> packageNamed: aName [
+PBPackageRegistry >> packageNamed: aName [
 	^ self 
 		packageNamed: aName 
 		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
+PBPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 	^ installedPackages 
 		detect: [ :package | package fullyQualifiedName = aName ]
 		ifNone: absentBlock
 ]
 
+{ #category : #'system-events' }
+PBPackageRegistry >> packageRenamed: aRPackageRenamed [ 
+
+	| packages |
+	
+	packages := installedPackages select: [ :each | each name = aRPackageRenamed oldName ].
+	packages do: [ :each | each name: aRPackageRenamed newName. each project announceChanged ]
+
+]
+
+{ #category : #'system-events' }
+PBPackageRegistry >> packageUnregistered: aRPackageUnregistered [ 
+
+	| packages |
+	
+	packages := installedPackages select: [ :each | each name = aRPackageUnregistered package name ].
+	installedPackages removeAll: packages.
+	
+	packages do: [ :each | each project announceChanged ]
+
+]
+
 { #category : #acccessing }
-CGOPackageRegistry >> projectNamed: aName [
+PBPackageRegistry >> projectNamed: aName [
 	^ self 
 		projectNamed: aName 
 		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
+PBPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 	^ registeredProjects 
 		detect: [ :project | project name = aName asSymbol ]
 		ifNone: absentBlock
 ]
 
 { #category : #registering }
-CGOPackageRegistry >> register: aLoadableUnit [
+PBPackageRegistry >> register: aLoadableUnit [
 	aLoadableUnit registry: self.
 	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
 	installedPackages add: aLoadableUnit.
@@ -153,8 +188,22 @@ CGOPackageRegistry >> register: aLoadableUnit [
 	^ aLoadableUnit
 ]
 
+{ #category : #'system-announcements' }
+PBPackageRegistry >> registerInSystem [
+
+	SystemAnnouncer uniqueInstance
+		subscribe: RPackageUnregistered
+		send: #packageUnregistered:
+		to: self.
+		
+	SystemAnnouncer uniqueInstance
+		subscribe: RPackageRenamed
+		send: #packageRenamed:
+		to: self.	
+]
+
 { #category : #registering }
-CGOPackageRegistry >> registerProject: aCGOProject [
+PBPackageRegistry >> registerProject: aCGOProject [
 	
 	self checkProjectRegistrationOf: aCGOProject name.
 	
@@ -164,28 +213,28 @@ CGOPackageRegistry >> registerProject: aCGOProject [
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> registeredProjects [
+PBPackageRegistry >> registeredProjects [
 	^ registeredProjects
 ]
 
 { #category : #cleaning }
-CGOPackageRegistry >> reset [
+PBPackageRegistry >> reset [
 	self initialize
 ]
 
 { #category : #acccessing }
-CGOPackageRegistry >> systemPackageOrganizer [
+PBPackageRegistry >> systemPackageOrganizer [
 
 	^ systemPackageOrganizer ifNil: [ RPackage organizer ]
 ]
 
 { #category : #accessing }
-CGOPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [ 
+PBPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [ 
 	systemPackageOrganizer := aRPackageOrganizer
 ]
 
 { #category : #registering }
-CGOPackageRegistry >> unregister: aPackageVersion [
+PBPackageRegistry >> unregister: aPackageVersion [
 	installedPackages remove: aPackageVersion ifAbsent: [ ^ self ].
 	installedPackages 
 		detect: [ :packageVersion | packageVersion project = aPackageVersion project ]
@@ -194,8 +243,14 @@ CGOPackageRegistry >> unregister: aPackageVersion [
 
 ]
 
+{ #category : #'system-announcements' }
+PBPackageRegistry >> unregisterFromSystem [
+
+	SystemAnnouncer uniqueInstance unsubscribe: self
+]
+
 { #category : #registering }
-CGOPackageRegistry >> unregisterProject: aProject [
+PBPackageRegistry >> unregisterProject: aProject [
 
 	registeredProjects remove: aProject.
 	installedPackages remove: aProject ifAbsent: ["Nothing To DO"].

@@ -12,7 +12,7 @@ Class {
 { #category : #running }
 CGOUpdateProjectRepairActionTest >> setUp [
 	super setUp.
-	registry := CGOPackageRegistry new.
+	registry := PBPackageRegistry new.
 	project := registry newProjectNamed:'ATestProject'.
 
 	dependencyToProject := (PBMetacelloConfigurationProjectDependency   

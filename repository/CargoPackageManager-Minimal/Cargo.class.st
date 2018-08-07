@@ -73,7 +73,7 @@ Cargo >> initialize [
 	projectMetadataFromSCM := CGOScmPackageMetadata new.
 	repositories := { projectMetadataFromSCM ". self class defaultPackageRepository" } asOrderedCollection.
 	packages := OrderedCollection new.
-	registry := CGOPackageRegistry default.
+	registry := PBPackageRegistry default.
 ]
 
 { #category : #actions }

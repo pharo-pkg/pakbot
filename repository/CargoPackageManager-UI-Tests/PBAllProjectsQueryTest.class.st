@@ -16,7 +16,7 @@ PBAllProjectsQueryTest >> testWithOneProjectHasTheCorrectName [
 
 	
 	| result |
-	registry newProjectNamed: 'TestProject'.
+	testRegistry newProjectNamed: 'TestProject'.
 	
 	result := query execute items.
 	
@@ -27,7 +27,7 @@ PBAllProjectsQueryTest >> testWithOneProjectHasTheCorrectName [
 PBAllProjectsQueryTest >> testWithOneProjectIsNotEmpty [
 
 	
-	registry newProjectNamed: 'TestProject'.
+	testRegistry newProjectNamed: 'TestProject'.
 	
 	self deny: query execute items isEmpty
 ]
@@ -37,7 +37,7 @@ PBAllProjectsQueryTest >> testWithOneProjectReturnsTheCorrectUIInstance [
 
 	
 	| result |
-	registry newProjectNamed: 'TestProject'.
+	testRegistry newProjectNamed: 'TestProject'.
 	
 	result := query execute items.
 	
