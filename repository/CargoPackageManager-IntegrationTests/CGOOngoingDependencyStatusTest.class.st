@@ -15,6 +15,6 @@ CGOOngoingDependencyStatusTest >> installProject [
 	
 	| newProject |
 	newProject := PBProject named: 'AnotherProject'.
-	registry register: newProject.
+	testRegistry register: newProject.
 	newProject importPackageNamed: #AnotherPackage.
 ]

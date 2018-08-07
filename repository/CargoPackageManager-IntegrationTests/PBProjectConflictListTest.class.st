@@ -18,7 +18,7 @@ PBProjectConflictListTest >> setUp [
 
 	super setUp.
 	
-	registry := CGOPackageRegistry new.	
+	registry := PBPackageRegistry new.	
 	project := registry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency

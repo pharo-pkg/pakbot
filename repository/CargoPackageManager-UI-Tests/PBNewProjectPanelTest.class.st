@@ -18,7 +18,7 @@ Class {
 PBNewProjectPanelTest >> setUp [
 
 	super setUp.
-	registry := CGOPackageRegistry new.
+	registry := PBPackageRegistry new.
 	
 	panel := PBNewProjectPanel new.
 	editionPanel := panel projectPanel.

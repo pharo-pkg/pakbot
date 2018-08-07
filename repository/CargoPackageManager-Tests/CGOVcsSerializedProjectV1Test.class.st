@@ -23,7 +23,7 @@ CGOVcsSerializedProjectV1Test >> counterUiProject [
 	project := (PBProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		addExternalCargoProject: dependency;
-		registry: CGOPackageRegistry new;
+		registry: PBPackageRegistry new;
 		yourself.
 	(project createPackageNamed: #'Counter-UI-Spec')
 		description: 'Core package with the counter UI based on Spec.';

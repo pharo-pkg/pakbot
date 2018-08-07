@@ -13,7 +13,7 @@ Class {
 CGOPackageImportTest >> setUp [
 
 	super setUp.
-	registry := CGOPackageRegistry new.
+	registry := PBPackageRegistry new.
 	project := PBProject named: 'test'.
 	registry register: project.
 	

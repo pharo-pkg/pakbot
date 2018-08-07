@@ -25,7 +25,7 @@ CGOCalypsoPackageManager class >> initialize [
 
 { #category : #accessing }
 CGOCalypsoPackageManager >> cargoRegistry [
-	^ registry ifNil: [ CGOPackageRegistry default ]
+	^ registry ifNil: [ PBPackageRegistry default ]
 ]
 
 { #category : #accessing }

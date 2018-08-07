@@ -47,7 +47,7 @@ PBProject class >> fromRepository: aCGOSourceRepository [
 PBProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 	| ongoing |
 	ongoing := self basicNew
-		registry: CGOPackageRegistry default;
+		registry: PBPackageRegistry default;
 		yourself.
 	aVcsSerializedProject flushIn: ongoing.
 	^ ongoing

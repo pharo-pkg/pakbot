@@ -1,6 +1,9 @@
 Class {
 	#name : #PBAbstractTest,
 	#superclass : #ParametrizedTestCase,
+	#instVars : [
+		'testRegistry'
+	],
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
@@ -10,6 +13,12 @@ PBAbstractTest >> expectedCargoResolvedProject [
 	^ (PBProject named: 'Counter')
 		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git');
 		version: (SemanticVersion fromString: '0-N/A')
+]
+
+{ #category : #tests }
+PBAbstractTest >> setUp [
+	super setUp.
+	testRegistry := PBPackageRegistry new
 ]
 
 { #category : #tests }

@@ -27,8 +27,7 @@ CGOProjectLoadingInstructionsTest >> tearDown [
 { #category : #tests }
 CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
 
-	| testRegistry resolution projectOne |
-	testRegistry := CGOPackageRegistry new.
+	| resolution projectOne |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
@@ -46,8 +45,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngo
 { #category : #tests }
 CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProjectDependencyHasCargoLoadingInstruction [
 
-	| testRegistry resolution projectOne dependency |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
 	dependency := PBPakbotProjectDependency
@@ -65,8 +63,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProj
 { #category : #tests }
 CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
 
-	| testRegistry resolution projectOne baselineDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne baselineDependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
 	baselineDependency := PBMetacelloBaselineProjectDependency
@@ -85,8 +82,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacello
 { #category : #tests }
 CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
 
-	| testRegistry resolution projectOne configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| resolution projectOne configurationProject |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := PBMetacelloConfigurationProjectDependency

@@ -102,7 +102,7 @@ PBParametrizedConflictTest >> installConfiguration: aString [
 { #category : #private }
 PBParametrizedConflictTest >> setUp [
 	super setUp.
-	registry := CGOPackageRegistry new.	
+	registry := PBPackageRegistry new.	
 
 ]
 

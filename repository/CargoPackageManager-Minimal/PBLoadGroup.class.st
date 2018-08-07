@@ -92,5 +92,5 @@ PBLoadGroup >> registerLoadedPackages [
 	self packageVersions
 		do: [ :pkgVersion | 
 			pkgVersion versionLoaded.
-			CGOPackageRegistry default register: pkgVersion ]
+			PBPackageRegistry default register: pkgVersion ]
 ]

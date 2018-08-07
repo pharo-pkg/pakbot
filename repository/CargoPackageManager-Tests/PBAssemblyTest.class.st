@@ -38,8 +38,7 @@ CGOPublishedPackageAssembly {
 { #category : #tests }
 PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 	
-	| testRegistry project package assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -53,8 +52,7 @@ PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 { #category : #tests }
 PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 	
-	| testRegistry project assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project assembly |
 	project := testRegistry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -67,8 +65,7 @@ PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 { #category : #tests }
 PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 	
-	| testRegistry project assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -84,8 +81,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 { #category : #tests }
 PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
 	
-	| testRegistry project package assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -99,8 +95,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
 { #category : #tests }
 PBAssemblyTest >> testDuplicatedAssemblyIsNotAddedInProject [
 	
-	| testRegistry project |
-	testRegistry := CGOPackageRegistry new.
+	| project |
 	project := testRegistry newProjectNamed: 'TestProject'.
 	
 	project addAssemblyNamed: 'Ass1'.
@@ -123,8 +118,7 @@ PBAssemblyTest >> testInitializeFromEmptyDictionary [
 { #category : #tests }
 PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 	
-	| testRegistry project package assembly1 assembly2 |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly1 assembly2 |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -142,8 +136,7 @@ PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 { #category : #tests }
 PBAssemblyTest >> testNewAssemblyIsListed [
 	
-	| testRegistry project assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project assembly |
 	project := testRegistry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -154,8 +147,7 @@ PBAssemblyTest >> testNewAssemblyIsListed [
 { #category : #tests }
 PBAssemblyTest >> testRemoveAssemblyUnlistsIt [
 	
-	| testRegistry project assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project assembly |
 	project := testRegistry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -166,8 +158,7 @@ PBAssemblyTest >> testRemoveAssemblyUnlistsIt [
 { #category : #tests }
 PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
 	
-	| testRegistry project package assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -182,8 +173,7 @@ PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
 { #category : #tests }
 PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
 	
-	| testRegistry project package assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -198,8 +188,7 @@ PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
 { #category : #tests }
 PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
 	
-	| testRegistry project package assembly |
-	testRegistry := CGOPackageRegistry new.
+	| project package assembly |
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
@@ -214,8 +203,7 @@ PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
 { #category : #tests }
 PBAssemblyTest >> testTwoProjectsCanHaveTheSameAssembly [
 	
-	| testRegistry project1 project2 assembly1 assembly2 |
-	testRegistry := CGOPackageRegistry new.
+	| project1 project2 assembly1 assembly2 |
 	project1 := testRegistry newProjectNamed: 'TestProject1'.
 	project2 := testRegistry newProjectNamed: 'TestProject2'.
 	

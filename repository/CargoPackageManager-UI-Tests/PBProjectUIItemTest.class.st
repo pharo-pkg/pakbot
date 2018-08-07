@@ -8,7 +8,7 @@ Class {
 PBProjectUIItemTest >> setUp [
 
 	super setUp.
-	registry newProjectNamed: 'TestProject'.
+	testRegistry newProjectNamed: 'TestProject'.
 	project := self findProject: 'TestProject'.	
 ]
 

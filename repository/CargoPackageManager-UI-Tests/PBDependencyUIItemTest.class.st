@@ -27,7 +27,7 @@ PBDependencyUIItemTest >> testProjectWithInstalledDependencyShowsNormalIcon [
 		version: '1.0';
 		load.
 
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	project addDependency: configurationProjectV1.
 
 	self openBrowser.
@@ -46,7 +46,7 @@ PBDependencyUIItemTest >> testProjectWithInstalledDependencyShowsNormalIcon [
 PBDependencyUIItemTest >> testProjectWithNotInstalledDependencyIsShownWithError [
 
 	| dependency |
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	project addDependency: configurationProjectV1.
 
 	self openBrowser.
@@ -72,7 +72,7 @@ PBDependencyUIItemTest >> testProjectWithNotInstalledDependencyIsShownWithWarnin
 		version: '1.0';
 		load.	
 	
-	project := registry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
 	project addDependency: configurationProjectV2.
 
 	self openBrowser.

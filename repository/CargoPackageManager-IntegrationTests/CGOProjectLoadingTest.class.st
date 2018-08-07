@@ -16,8 +16,8 @@ CGOProjectLoadingTest >> tearDown [
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithExcetion [
 
-	| testRegistry project baselineProjectV1 baselineProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project baselineProjectV1 baselineProjectV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
@@ -40,8 +40,8 @@ CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWi
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithExcetion [
 
-	| testRegistry project configurationProjectV1 configurationProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProjectV1 configurationProjectV2 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
@@ -64,8 +64,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFa
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorrespondingClassesInSystem [
 
-	| project testRegistry baselineProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project baselineProjectV1 |
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
@@ -84,8 +83,8 @@ CGOProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorresponding
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespondingClassesInSystem [
 
-	| project testRegistry configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProject |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := PBMetacelloConfigurationProjectDependency
@@ -104,8 +103,7 @@ CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespo
 { #category : #'tests-cargo-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded [
 
-	| testRegistry projectOne projectTwo |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
@@ -123,8 +121,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKe
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
 
-	| projectOne projectTwo testRegistry baselineProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo baselineProjectV1 |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -154,8 +152,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependen
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
 
-	| projectOne projectTwo testRegistry baselineProjectV2 |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo baselineProjectV2 |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -185,8 +183,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependen
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
-	| projectOne projectTwo testRegistry configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo configurationProject |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -216,8 +214,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDep
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
-	| projectOne projectTwo testRegistry configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| projectOne projectTwo configurationProject |
+
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
@@ -247,8 +245,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDep
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
 
-	| project testRegistry baselineProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project baselineProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
@@ -274,8 +272,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1Lo
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
 
-	| project testRegistry baselineProjectV1 |
-	testRegistry := CGOPackageRegistry new.	
+	| project baselineProjectV1 |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
@@ -301,8 +299,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2Lo
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
-	| project testRegistry configurationProjectDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProjectDependency |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProjectDependency := PBMetacelloConfigurationProjectDependency
@@ -328,8 +326,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependencie
 { #category : #'tests-configuration-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
-	| project testRegistry configurationProject |
-	testRegistry := CGOPackageRegistry new.	
+	| project configurationProject |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	configurationProject := PBMetacelloConfigurationProjectDependency
@@ -355,8 +353,8 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependencie
 { #category : #'tests-cargo-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
 
-	| project testRegistry pakbotProjectDependency |
-	testRegistry := CGOPackageRegistry new.	
+	| project pakbotProjectDependency |
+
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	pakbotProjectDependency := PBPakbotProjectDependency
