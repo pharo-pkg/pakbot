@@ -29,13 +29,27 @@ PBResolutionPanel class >> example [
 ]
 
 { #category : #initialization }
+PBResolutionPanel >> doExpandNodesWithConflicts: aCollection [ 
+	
+	aCollection do: [ :aNode |
+			aNode data hasToBeExpanded ifTrue: [ aNode expand ].
+			self doExpandNodesWithConflicts: aNode children ]
+]
+
+{ #category : #initialization }
+PBResolutionPanel >> expandNodesWithConflicts [
+	
+	self doExpandNodesWithConflicts: resolutionTree widget dataSource rootItem children
+
+]
+
+{ #category : #initialization }
 PBResolutionPanel >> initializeWidgets [
 	
 	resolutionTree := self newFastTreeTable.
 	
-	resolutionTree widget 
-		dataSource: self resolutionDataSource.
-		
+	resolutionTree widget dataSource: self resolutionDataSource.
+	self expandNodesWithConflicts	
 ]
 
 { #category : #initialization }
@@ -43,7 +57,8 @@ PBResolutionPanel >> resolutionDataSource [
 	| datasource |
 	datasource := PBResolutionDataSource
 		roots: {resolution}
-		children: [ :project | project subresolutions sorted: [ :a :b | a name < b name ] ].
+		children: [ :project | project nodesInResolutionTree sorted: [ :a :b | a name < b name ] ].
+		
 	^ datasource
 ]
 
@@ -61,5 +76,6 @@ PBResolutionPanel >> setModelBeforeInitialization: aModel [
 { #category : #updating }
 PBResolutionPanel >> updateResolutionTree [
 	
-	resolutionTree widget dataSource updateData
+	resolutionTree widget dataSource updateData.
+	self expandNodesWithConflicts
 ]
