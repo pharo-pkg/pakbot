@@ -17,8 +17,8 @@ PBPackageAnnouncementTest >> setUp [
 { #category : #tests }
 PBPackageAnnouncementTest >> tearDown [
 
-	('Test-APackage' asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.
-	('Test-APackageNew' asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem.
+	self removePackageIfExists: 'Test-APackage'.
+	self removePackageIfExists: 'Test-APackageNew'.
 
 	super tearDown
 ]

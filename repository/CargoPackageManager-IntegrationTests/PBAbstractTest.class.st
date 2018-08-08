@@ -21,6 +21,12 @@ PBAbstractTest >> expectedCargoResolvedProject [
 ]
 
 { #category : #tests }
+PBAbstractTest >> removePackageIfExists: aPackageName [
+
+	(aPackageName asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem
+]
+
+{ #category : #tests }
 PBAbstractTest >> setUp [
 	super setUp.
 	testRegistry := PBPackageRegistry new
@@ -45,9 +51,7 @@ PBAbstractTest >> tearDown [
 		at: configuration name 
 		ifPresent: [ :metacelloRegistration |
 			metacelloRegistration configurationProjectSpec version spec packages
-				do: [ :packageSpec | | packageOrNil |
-				packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
-				packageOrNil ifNotNil: #removeFromSystem ].
+				do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
 			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration	].
 
 	configuration package mcWorkingCopy unload.

@@ -383,9 +383,7 @@ CGOProjectLoadingTest >> unloadMetacelloBaseline [
 
 	metacelloRegistration := MetacelloProjectRegistration registry baselineRegistry at: baseline name.
 	metacelloRegistration baselineProjectSpec version spec packages
-		do: [ :packageSpec | | packageOrNil |
-			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
-			packageOrNil ifNotNil: #removeFromSystem ].
+		do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
 	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
 	baseline package removeFromSystem.
 	
@@ -405,9 +403,7 @@ CGOProjectLoadingTest >> unloadMetacelloConfiguration [
 		
 	metacelloRegistration := MetacelloProjectRegistration registry configurationRegistry at: configuration name.
 	metacelloRegistration configurationProjectSpec version spec packages
-		do: [ :packageSpec | | packageOrNil |
-			packageOrNil := packageSpec name asPackageIfAbsent: [ nil ].
-			packageOrNil ifNotNil: #removeFromSystem ].
+		do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
 	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
 	configuration package removeFromSystem.
 ]

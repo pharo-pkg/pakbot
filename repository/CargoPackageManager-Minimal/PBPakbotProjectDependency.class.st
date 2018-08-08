@@ -55,7 +55,7 @@ PBPakbotProjectDependency class >> named: aName version: aVersion [
 	
 	^ self new
 		name: aName;
-		constraints: {(CGODependencyConstraint fromString: aVersion)};
+		constraints: {(CGODependencyConstraint fromVersion: aVersion)};
 		yourself
 ]
 
