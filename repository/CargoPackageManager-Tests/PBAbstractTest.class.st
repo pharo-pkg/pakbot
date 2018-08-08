@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'testRegistry'
 	],
-	#category : #'CargoPackageManager-IntegrationTests'
+	#category : #'CargoPackageManager-Tests'
 }
 
 { #category : #private }
