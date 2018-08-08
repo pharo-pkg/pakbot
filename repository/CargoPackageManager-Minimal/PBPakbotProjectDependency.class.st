@@ -10,8 +10,7 @@ Class {
 	#instVars : [
 		'repository',
 		'name',
-		'constraints',
-		'version'
+		'constraints'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
@@ -43,25 +42,17 @@ PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString [
 { #category : #'instance creation' }
 PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString version: aCommitish [
 
-	| repo |
-	repo := aCommitish isEmpty 
-		ifTrue: [ nil ]
-		ifFalse: [CGOGitRepositoryCreator repositoryFromUrl: gitUrlString].
-
 	^ self new 
 		name: aName;
-		repository: repo;
-		version: aCommitish;
+		repositoryUrl: gitUrlString ;
+		version: aCommitish
 		yourself
 ]
 
 { #category : #'instance-creation' }
 PBPakbotProjectDependency class >> named: aName version: aVersion [ 
 	
-	^ self new
-		name: aName;
-		constraints: {(CGODependencyConstraint fromVersion: aVersion)};
-		yourself
+	^ self named: aName repositoryUrl: nil version: aVersion
 ]
 
 { #category : #accessing }
@@ -74,6 +65,18 @@ PBPakbotProjectDependency >> constraints [
 PBPakbotProjectDependency >> constraints: someConstraints [ 
 
 	constraints := someConstraints
+]
+
+{ #category : #displaying }
+PBPakbotProjectDependency >> displayStringOn: aStream [
+	
+	aStream
+		<< name asString
+		<< ' => '
+		<< self version asString
+		<< '('
+		<< self repositoryUrl asString
+		<< ')'
 ]
 
 { #category : #intialization }
@@ -104,7 +107,18 @@ PBPakbotProjectDependency >> repository: aRepository [
 
 { #category : #accessing }
 PBPakbotProjectDependency >> repositoryUrl [
+	repository ifNil: [ ^ '' ].
+	
 	^ repository repositoryUrl
+]
+
+{ #category : #accessing }
+PBPakbotProjectDependency >> repositoryUrl: aString [ 
+
+	repository := aString isEmptyOrNil 
+		ifTrue: [ nil ]
+		ifFalse: [CGOGitRepositoryCreator repositoryFromUrl: aString].
+
 ]
 
 { #category : #solving }
@@ -114,7 +128,7 @@ PBPakbotProjectDependency >> resolveInSolver: aCGOSolver [
 		ifTrue: [ ^ project registry projectNamed: self name ].
 	
 	"If it is not installed, we need to go fetch it from the INTERNET"
-	^ (repository fetchVersion: version)
+	^ (repository fetchVersion: self version)
 			registry: project registry;
 			yourself
 ]
@@ -129,12 +143,21 @@ PBPakbotProjectDependency >> stonOn: stonWriter [
 	stonWriter writeMap: (OrderedDictionary 
 		with: 	#name -> name
 		with:	#repository -> repository
-		with: 	#version -> version) 
+		with: 	#version -> self version) 
 
 ]
 
 { #category : #accessing }
+PBPakbotProjectDependency >> version [
+	"There is no implementation for more than one constraint"
+	self haltIf: [ constraints size ~= 1 ].
+
+	^ constraints anyOne version
+]
+
+{ #category : #acccessing }
 PBPakbotProjectDependency >> version: aString [ 
-	
-	version := aString
+
+	constraints := {(CGODependencyConstraint fromVersion: aString)}
+
 ]
