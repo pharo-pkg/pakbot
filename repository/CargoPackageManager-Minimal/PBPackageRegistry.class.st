@@ -53,9 +53,11 @@ PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 ]
 
 { #category : #'API -dependencies' }
-PBPackageRegistry >> dependantProjectsOf: aPBProject [ 
-	
-	^ registeredProjects select: [ :each | each ~= aPBProject and: [ each dependsOnProject: aPBProject ] ] 
+PBPackageRegistry >> dependantProjectsOf: aPBProject [
+
+	^ (registeredProjects
+		select: [ :each | each ~= aPBProject and: [ each dependsOnProject: aPBProject ] ])
+		asOrderedCollection
 ]
 
 { #category : #'compatilibility-repository' }
@@ -93,11 +95,14 @@ PBPackageRegistry >> installedPackages [
 ]
 
 { #category : #quering }
-PBPackageRegistry >> isInstalled: aPackageDependency [ 
+PBPackageRegistry >> isInstalled: aDependency [ 
 	
 	| found |
-	found := self packageNamed: aPackageDependency fullyQualifiedName ifAbsent: [ ^ false ].
-	^ aPackageDependency satisfyConstraints: found version 
+	found := self packageNamed: aDependency fullyQualifiedName ifAbsent: [ 
+			self projectNamed: aDependency fullyQualifiedName ifAbsent: [ ^ false ]
+		 ].
+	
+	^ aDependency satisfyConstraints: found version 
 ]
 
 { #category : #testing }

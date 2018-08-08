@@ -169,7 +169,8 @@ PBProjectUIItem >> representsItemOfType: aClass [
 ]
 
 { #category : #actions }
-PBProjectUIItem >> unregister [
+PBProjectUIItem >> unload [
 	
-	project registry unregisterProject: project.
+	(PBUnloadProjectDialog onProject: project)
+		openDialogWithSpec
 ]
