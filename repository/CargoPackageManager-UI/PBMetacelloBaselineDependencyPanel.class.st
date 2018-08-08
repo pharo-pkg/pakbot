@@ -1,5 +1,5 @@
 Class {
-	#name : #CGOMetacelloBaselineDependencyPanel,
+	#name : #PBMetacelloBaselineDependencyPanel,
 	#superclass : #ITOptionPanel,
 	#instVars : [
 		'baselineNameLabel',
@@ -14,11 +14,11 @@ Class {
 		'groupLabel',
 		'groupInputText'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI-NewDependency'
 }
 
 { #category : #specs }
-CGOMetacelloBaselineDependencyPanel class >> defaultSpec [
+PBMetacelloBaselineDependencyPanel class >> defaultSpec [
 	<spec: #default>
 
 	^ SpecLayout composed 
@@ -53,27 +53,27 @@ CGOMetacelloBaselineDependencyPanel class >> defaultSpec [
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> baselineNameInputText [
+PBMetacelloBaselineDependencyPanel >> baselineNameInputText [
 	^ baselineNameInputText
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> baselineNameInputText: anObject [
+PBMetacelloBaselineDependencyPanel >> baselineNameInputText: anObject [
 	baselineNameInputText := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> baselineNameLabel [
+PBMetacelloBaselineDependencyPanel >> baselineNameLabel [
 	^ baselineNameLabel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> baselineNameLabel: anObject [
+PBMetacelloBaselineDependencyPanel >> baselineNameLabel: anObject [
 	baselineNameLabel := anObject
 ]
 
 { #category : #building }
-CGOMetacelloBaselineDependencyPanel >> buildDependency [
+PBMetacelloBaselineDependencyPanel >> buildDependency [
 
 	"We should have validations, probably in the domain object itself"
 	self assert: self baselineNameInputText text notEmpty description: 'Invalid Baseline Name'.
@@ -87,39 +87,39 @@ CGOMetacelloBaselineDependencyPanel >> buildDependency [
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> groupInputText [
+PBMetacelloBaselineDependencyPanel >> groupInputText [
 	^ groupInputText
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> groupInputText: anObject [
+PBMetacelloBaselineDependencyPanel >> groupInputText: anObject [
 	groupInputText := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> groupLabel [
+PBMetacelloBaselineDependencyPanel >> groupLabel [
 	^ groupLabel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> groupLabel: anObject [
+PBMetacelloBaselineDependencyPanel >> groupLabel: anObject [
 	groupLabel := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> icon [
+PBMetacelloBaselineDependencyPanel >> icon [
 
 	^ self iconNamed: PBMetacelloBaselineProjectDependency iconName
 ]
 
 { #category : #initialization }
-CGOMetacelloBaselineDependencyPanel >> initializeSpacePanel [
+PBMetacelloBaselineDependencyPanel >> initializeSpacePanel [
 	"just to gain space"
 	spacePanel := self newPanel. 
 ]
 
 { #category : #initialization }
-CGOMetacelloBaselineDependencyPanel >> initializeWidgets [
+PBMetacelloBaselineDependencyPanel >> initializeWidgets [
 
 	self initializeSpacePanel.
 
@@ -156,84 +156,89 @@ CGOMetacelloBaselineDependencyPanel >> initializeWidgets [
 		add: self groupInputText
 ]
 
+{ #category : #validation }
+PBMetacelloBaselineDependencyPanel >> isValid [
+	^ true
+]
+
 { #category : #opening }
-CGOMetacelloBaselineDependencyPanel >> openDialogOnAccept: aBlockClosure onCancel: aBlockClosure2 [ 
+PBMetacelloBaselineDependencyPanel >> openDialogOnAccept: aBlockClosure onCancel: aBlockClosure2 [ 
 	
 	self openDialogWithSpec 
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> repositoryUrlInputText [
+PBMetacelloBaselineDependencyPanel >> repositoryUrlInputText [
 	^ repositoryUrlInputText
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> repositoryUrlInputText: anObject [
+PBMetacelloBaselineDependencyPanel >> repositoryUrlInputText: anObject [
 	repositoryUrlInputText := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> repositoryUrlLabel [
+PBMetacelloBaselineDependencyPanel >> repositoryUrlLabel [
 	^ repositoryUrlLabel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> repositoryUrlLabel: anObject [
+PBMetacelloBaselineDependencyPanel >> repositoryUrlLabel: anObject [
 	repositoryUrlLabel := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> sourceDirectoryInputText [
+PBMetacelloBaselineDependencyPanel >> sourceDirectoryInputText [
 	^ sourceDirectoryInputText
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> sourceDirectoryInputText: anObject [
+PBMetacelloBaselineDependencyPanel >> sourceDirectoryInputText: anObject [
 	sourceDirectoryInputText := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> sourceDirectoryLabel [
+PBMetacelloBaselineDependencyPanel >> sourceDirectoryLabel [
 	^ sourceDirectoryLabel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> sourceDirectoryLabel: anObject [
+PBMetacelloBaselineDependencyPanel >> sourceDirectoryLabel: anObject [
 	sourceDirectoryLabel := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> spacePanel [
+PBMetacelloBaselineDependencyPanel >> spacePanel [
 	^ spacePanel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> spacePanel: anObject [
+PBMetacelloBaselineDependencyPanel >> spacePanel: anObject [
 	spacePanel := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> title [
+PBMetacelloBaselineDependencyPanel >> title [
 
 	^ 'Metacello Baseline'
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> versionInputText [
+PBMetacelloBaselineDependencyPanel >> versionInputText [
 	^ versionInputText
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> versionInputText: anObject [
+PBMetacelloBaselineDependencyPanel >> versionInputText: anObject [
 	versionInputText := anObject
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> versionLabel [
+PBMetacelloBaselineDependencyPanel >> versionLabel [
 	^ versionLabel
 ]
 
 { #category : #accessing }
-CGOMetacelloBaselineDependencyPanel >> versionLabel: anObject [
+PBMetacelloBaselineDependencyPanel >> versionLabel: anObject [
 	versionLabel := anObject
 ]

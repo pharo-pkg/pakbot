@@ -43,9 +43,14 @@ PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString [
 { #category : #'instance creation' }
 PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString version: aCommitish [
 
+	| repo |
+	repo := aCommitish isEmpty 
+		ifTrue: [ nil ]
+		ifFalse: [CGOGitRepositoryCreator repositoryFromUrl: gitUrlString].
+
 	^ self new 
 		name: aName;
-		repository: (CGOGitRepositoryCreator repositoryFromUrl: gitUrlString);
+		repository: repo;
 		version: aCommitish;
 		yourself
 ]

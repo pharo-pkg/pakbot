@@ -15,7 +15,7 @@ CGOPackageDependenciesView class >> example [
 { #category : #actions }
 CGOPackageDependenciesView >> addAction [
 	
-	CGONewDependencyDialog new 
+	PBNewDependencyDialog new 
 		openDialogOnAccept: [ :dependency |
 			ongoingPackageVersion addDependency: dependency buildDependency.
 			self refreshUI ]
