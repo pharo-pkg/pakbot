@@ -373,26 +373,6 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 ]
 
 { #category : #running }
-CGOProjectLoadingTest >> unloadMetacelloBaseline [
-	
-	"We fetch the loaded configuration and remove it"
-	| baseline metacelloRegistration |
-	baseline := Smalltalk
-		at: 'BaselineOfPakbotTestExample' asSymbol
-		ifAbsent: [ ^ self ].
-
-	metacelloRegistration := MetacelloProjectRegistration registry baselineRegistry at: baseline name.
-	metacelloRegistration baselineProjectSpec version spec packages
-		do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
-	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
-	baseline package removeFromSystem.
-	
-	IceRepository registry
-		detect: [ :any | any name = 'PakbotTestExample' ]
-		ifFound: [ :found | found delete ].
-]
-
-{ #category : #running }
 CGOProjectLoadingTest >> unloadMetacelloConfiguration [
 	
 	"We fetch the loaded configuration and remove it"

@@ -45,7 +45,7 @@ PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString vers
 	^ self new 
 		name: aName;
 		repositoryUrl: gitUrlString ;
-		version: aCommitish
+		version: aCommitish asString
 		yourself
 ]
 
@@ -150,13 +150,16 @@ PBPakbotProjectDependency >> stonOn: stonWriter [
 { #category : #accessing }
 PBPakbotProjectDependency >> version [
 	"There is no implementation for more than one constraint"
+	constraints size = 0 ifTrue: [ ^ '' ].
 	self haltIf: [ constraints size ~= 1 ].
 
-	^ constraints anyOne version
+	^ constraints anyOne version asString
 ]
 
 { #category : #acccessing }
 PBPakbotProjectDependency >> version: aString [ 
+
+	aString isEmptyOrNil ifTrue: [ constraints := #(). ^ self].
 
 	constraints := {(CGODependencyConstraint fromVersion: aString)}
 
