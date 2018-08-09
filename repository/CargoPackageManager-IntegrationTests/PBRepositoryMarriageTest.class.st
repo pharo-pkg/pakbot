@@ -125,3 +125,17 @@ PBRepositoryMarriageTest >> testRepositoryWithNonLoadedPackageIsAddedToProjectAs
 	project addIcebergRepository: repository.
 	self deny: (project packageNamed: packageName) isLoaded
 ]
+
+{ #category : #'tests-sync' }
+PBRepositoryMarriageTest >> testUnloadPackageInMarriedProjectUnloadsPackageInRepository [
+
+	| package |
+	project createPackageNamed: 'NewPackage'.
+	project addIcebergRepository: repository.
+	
+	package := project packageNamed: 'NewPackage'.
+	package unload.
+	
+	self deny: package isLoaded.
+	self deny: (repository workingCopy packageNamed: 'NewPackage') isLoaded.
+]

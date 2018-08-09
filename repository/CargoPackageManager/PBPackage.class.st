@@ -142,7 +142,7 @@ PBPackage >> removeDependency: aPackageDependency [
 PBPackage >> removePackageFromSystem [
 	
 	| systemPackage |
-	systemPackage := self name asPackageIfAbsent: [ ^ self ].
+	systemPackage := project registry systemPackageOrganizer packageNamed: self name ifAbsent: [ ^ self ].
 	systemPackage removeFromSystem
 ]
 
@@ -156,6 +156,13 @@ PBPackage >> satisfyConstraints: aVersion [
 PBPackage >> systemPackage [
 	
 	^ RPackageOrganizer default packageNamed: self name
+]
+
+{ #category : #API }
+PBPackage >> unload [
+	"We should have an indirection to not access the real system directly..."
+	self removePackageFromSystem.
+	self project registry unregister: self.
 ]
 
 { #category : #updating }
