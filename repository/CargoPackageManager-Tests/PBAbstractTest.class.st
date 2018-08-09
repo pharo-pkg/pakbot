@@ -35,56 +35,65 @@ PBAbstractTest >> setUp [
 { #category : #tests }
 PBAbstractTest >> tearDown [
 
-	| configuration  |
 	super tearDown.
+	
+	testRegistry unregisterFromSystem.	
 	
 	IceRepository registry
 		detect: [ :any | any name = 'test-project-source-properties-tonel' ]
 		ifFound: [ :found | found delete ].
 
-	MetacelloProjectRegistration registry baselineRegistry 
-		at: 'BaselineOfPakbotTestExample'
-		ifPresent: [ :metacelloRegistration |
-			metacelloRegistration baselineProjectSpec version spec packages
-				do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
-			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration	].
-
-	
-	"We fetch the loaded configuration and remove it"
-	configuration := Smalltalk
-		at: 'ConfigurationOfCargoTestExample' asSymbol
-		ifAbsent: [ ^ self ].
-		
-	MetacelloProjectRegistration registry configurationRegistry 
-		at: configuration name 
-		ifPresent: [ :metacelloRegistration |
-			metacelloRegistration configurationProjectSpec version spec packages
-				do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
-			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration	].
-
-	configuration package mcWorkingCopy unload.
-	
 	self unloadMetacelloBaseline.
+	self unloadMetacelloConfiguration.
+	self unloadPakbotProject.
 	
-	testRegistry unregisterFromSystem
+	(MCRepositoryGroup default repositories select: [ :each | each species = IceMetacelloRepositoryAdapter and: [ each repository name = 'PakbotTestExample' ] ]) do: #unregister
 ]
 
 { #category : #running }
 PBAbstractTest >> unloadMetacelloBaseline [
 	
 	"We fetch the loaded configuration and remove it"
-	| baseline metacelloRegistration |
-	baseline := Smalltalk
-		at: 'BaselineOfPakbotTestExample' asSymbol
-		ifAbsent: [ ^ self ].
+	| metacelloRegistration |
 
-	metacelloRegistration := MetacelloProjectRegistration registry baselineRegistry at: baseline name ifAbsent: [^ self].
-	metacelloRegistration baselineProjectSpec version spec packages
-		do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
-	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
-	baseline package removeFromSystem.
-	
+	self removePackageIfExists: 'BaselineOfPakbotTestExample'.
+	self removePackageIfExists: 'PakbotTestExample-PackageA'.
+	self removePackageIfExists: 'PakbotTestExample-PackageB'.
+	self removePackageIfExists: 'PakbotTestExample-PackageC'.
+	self removePackageIfExists: 'PakbotTestExample-PackageD'.
+
 	IceRepository registry
 		detect: [ :any | any name = 'PakbotTestExample' ]
 		ifFound: [ :found | found delete ].
+
+	metacelloRegistration := MetacelloProjectRegistration registry baselineRegistry at: 'BaselineOfPakbotTestExample' ifAbsent: [^ self].
+	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
+	
+
+]
+
+{ #category : #running }
+PBAbstractTest >> unloadMetacelloConfiguration [
+	"We fetch the loaded configuration and remove it"
+
+	| configuration |
+	configuration := Smalltalk
+		at: 'ConfigurationOfCargoTestExample' asSymbol
+		ifAbsent: [ ('ConfigurationOfCargoTestExample' asPackageIfAbsent: nil) ifNotNil: #removeFromSystem.
+			^ self ].
+	MetacelloProjectRegistration registry configurationRegistry
+		at: configuration name
+		ifPresent: [ :metacelloRegistration | 
+			metacelloRegistration configurationProjectSpec version spec packages do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
+			MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration ].
+		
+	('ConfigurationOfCargoTestExample' asPackageIfAbsent: nil) ifNotNil: #removeFromSystem
+]
+
+{ #category : #running }
+PBAbstractTest >> unloadPakbotProject [
+	
+	#(#'Counter-Core' #'Counter-Tests') do: [ :each |
+		(RPackageOrganizer default includesPackageNamed: each)
+			ifTrue: [ (RPackageOrganizer default packageNamed: each) removeFromSystem ] ]
 ]

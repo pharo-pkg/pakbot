@@ -4,15 +4,6 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
-{ #category : #running }
-CGOProjectLoadingTest >> tearDown [
-
-	super tearDown.
-	self unloadMetacelloConfiguration.
-	self unloadMetacelloBaseline.
-	self unloadPakbotProject.
-]
-
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithExcetion [
 
@@ -370,28 +361,4 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 	
 	self assert: (Smalltalk globals at: 'Counter' asSymbol) version equals: 1.
 	self assert: (Smalltalk globals at: 'CounterTest' asSymbol) version equals: 1.
-]
-
-{ #category : #running }
-CGOProjectLoadingTest >> unloadMetacelloConfiguration [
-	
-	"We fetch the loaded configuration and remove it"
-	| configuration metacelloRegistration |
-	configuration := Smalltalk
-		at: 'ConfigurationOfCargoTestExample' asSymbol
-		ifAbsent: [ ^ self ].
-		
-	metacelloRegistration := MetacelloProjectRegistration registry configurationRegistry at: configuration name.
-	metacelloRegistration configurationProjectSpec version spec packages
-		do: [ :packageSpec | self removePackageIfExists: packageSpec name ].
-	MetacelloProjectRegistration registry unregisterProjectRegistration: metacelloRegistration.
-	configuration package removeFromSystem.
-]
-
-{ #category : #running }
-CGOProjectLoadingTest >> unloadPakbotProject [
-	
-	#(#'Counter-Core' #'Counter-Tests') do: [ :each |
-		(RPackageOrganizer default includesPackageNamed: each)
-			ifTrue: [ (RPackageOrganizer default packageNamed: each) removeFromSystem ] ]
 ]
