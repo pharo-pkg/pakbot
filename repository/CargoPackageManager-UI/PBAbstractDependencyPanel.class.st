@@ -42,7 +42,8 @@ PBAbstractDependencyPanel >> initializeForm [
 { #category : #initialization }
 PBAbstractDependencyPanel >> initializeWidgets [
 	self initializeForm.
-	self setInitialValues.
+
+	dependency ifNotNil: [ self setInitialValues ].
 ]
 
 { #category : #validation }

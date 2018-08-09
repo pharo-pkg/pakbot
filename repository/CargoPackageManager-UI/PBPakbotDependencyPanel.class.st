@@ -34,14 +34,12 @@ PBPakbotDependencyPanel >> initializeForm [
 		addTextField: #projectRepository label: 'Repository' ghost: 'e.g., github://project-owner/project';
 		validateOnChange;
 		whenChangedDo: [ self valueChanged ].
-		
-	self setInitialValues.
+
 ]
 
 { #category : #initialization }
 PBPakbotDependencyPanel >> setInitialValues [
 
-	dependency ifNil: [ ^ self ].
 	form valueNamed: #projectName set: dependency name.
 	form valueNamed: #projectRepository set: dependency repositoryUrl.
 	form valueNamed: #projectVersion set: dependency	version asString

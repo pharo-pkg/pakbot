@@ -30,7 +30,7 @@ PBMetacelloProjectDependency class >> fromSton: stonReader [
 
 	"ensure right types (e.g. url not string"
 	^ metacelloProject 
-		initializeWithName: metacelloProject name 
+		setName: metacelloProject name 
 		repositoryUrl: metacelloProject repositoryUrl
 		version: metacelloProject version
 ]
@@ -39,8 +39,9 @@ PBMetacelloProjectDependency class >> fromSton: stonReader [
 PBMetacelloProjectDependency class >> name: projectName repositoryUrl: repositoryString version: versionString [
 	| projectDependency |
 	projectDependency := self basicNew.
+	projectDependency initialize.
 	projectDependency
-		initializeWithName: projectName
+		setName: projectName
 		repositoryUrl: repositoryString
 		version: versionString.
 	^ projectDependency yourself
@@ -122,14 +123,6 @@ PBMetacelloProjectDependency >> hash [
 	^ self name hash
 ]
 
-{ #category : #initialization }
-PBMetacelloProjectDependency >> initializeWithName: projectName repositoryUrl: urlOrString version: aVersionString [ 
-	name := projectName asSymbol.
-	url := urlOrString.
-	version := aVersionString.
-	
-]
-
 { #category : #'querying - installed' }
 PBMetacelloProjectDependency >> isInstalled [
 	
@@ -167,6 +160,14 @@ PBMetacelloProjectDependency >> resolveInSolver: aCGOSolver [
 	"A metacello configuration project is already solved. It has only a single version and no other constraints, and a single url"
 	^ (PBMetacelloProject fromProjectDependency: self)
 			registry: project registry
+]
+
+{ #category : #initialization }
+PBMetacelloProjectDependency >> setName: projectName repositoryUrl: urlOrString version: aVersionString [ 
+	name := projectName asSymbol.
+	url := urlOrString.
+	version := aVersionString.
+	
 ]
 
 { #category : #ston }
