@@ -111,6 +111,8 @@ PBProject >> addIcebergRepository: anIceLibgitRepository [
 	projectPackages := self packages copy.
 	repositoryPackages := anIceLibgitRepository workingCopy packages copy.
 	
+	repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: self).
+	
 	(projectPackages \ repositoryPackages)
 		do: [ :each | anIceLibgitRepository workingCopy addPackageNamed: each name ].
 		
