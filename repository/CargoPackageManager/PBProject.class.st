@@ -102,6 +102,22 @@ PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 	externalProjects add: aCGOProjectDependencyDeclaration
 ]
 
+{ #category : #repository }
+PBProject >> addIcebergRepository: anIceLibgitRepository [
+	
+	| projectPackages repositoryPackages |
+	self repository: (CGOGitRepository repository: anIceLibgitRepository).
+	
+	projectPackages := self packages copy.
+	repositoryPackages := anIceLibgitRepository workingCopy packages copy.
+	
+	(projectPackages \ repositoryPackages)
+		do: [ :each | anIceLibgitRepository workingCopy addPackageNamed: each name ].
+		
+	(repositoryPackages \ projectPackages)
+		do: [ :each | self importPackageNamed: each name ].
+]
+
 { #category : #dependencies }
 PBProject >> allDependencies [
 	^ dependencies , (packages flatCollect: #allDependencies) asOrderedCollection.
@@ -250,6 +266,12 @@ PBProject >> hash [
 { #category : #packages }
 PBProject >> importPackageNamed: aString [
 	^ registry register: (self newNotLoadedPackage: aString)
+]
+
+{ #category : #testing }
+PBProject >> includesPackageNamed: aString [ 
+	
+	^ self hasPackageNamed: aString
 ]
 
 { #category : #initialization }
