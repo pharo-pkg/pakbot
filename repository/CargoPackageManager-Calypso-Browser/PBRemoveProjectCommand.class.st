@@ -24,6 +24,6 @@ PBRemoveProjectCommand class >> systemBrowserMenuActivator [
 { #category : #execution }
 PBRemoveProjectCommand >> execute [
 	
-	self project unregister.
+	self project unload.
 
 ]

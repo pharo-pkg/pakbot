@@ -51,11 +51,6 @@ PBProjectUIItem >> assemblyItems [
 ]
 
 { #category : #actions }
-PBProjectUIItem >> createNewPackageNamed: aString [ 
-	^ project createNewPackageNamed: aString 
-]
-
-{ #category : #actions }
 PBProjectUIItem >> createPackageNamed: aString [ 
 	
 	^ project createPackageNamed: aString
@@ -92,6 +87,12 @@ PBProjectUIItem >> dependenciesItems [
 	^ project dependencies
 		ifEmpty: [ ^ #() ]
 		ifNotEmpty: [ {(PBDependenciesUIGroup onProject: self project)} ]
+]
+
+{ #category : #adding }
+PBProjectUIItem >> importPackagesNamed: aCollection [ 
+	
+	aCollection do: [ :aName | project importPackageNamed: aName ]
 ]
 
 { #category : #testing }
@@ -135,6 +136,14 @@ PBProjectUIItem >> openRepairDialog [
 	^ (PBOpenRepairDialogAction onProject: self project) execute
 ]
 
+{ #category : #accessing }
+PBProjectUIItem >> packageCandidates [
+
+	^ (project registry systemPackageOrganizer packages
+		reject: [ :each | project hasPackageNamed: each name ])
+		asOrderedCollection
+]
+
 { #category : #items }
 PBProjectUIItem >> packageItems [
 	^ ((self project packages
@@ -160,7 +169,8 @@ PBProjectUIItem >> representsItemOfType: aClass [
 ]
 
 { #category : #actions }
-PBProjectUIItem >> unregister [
+PBProjectUIItem >> unload [
 	
-	project registry unregisterProject: project.
+	(PBUnloadProjectDialog onProject: project)
+		openDialogWithSpec
 ]

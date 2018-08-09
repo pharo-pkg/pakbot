@@ -215,6 +215,12 @@ PBProject >> defaultAssembly [
 		yourself
 ]
 
+{ #category : #'API-dependencies' }
+PBProject >> dependantProjects [
+	
+	^ registry dependantProjectsOf: self.
+]
+
 { #category : #dependencies }
 PBProject >> dependencies [
 	
@@ -224,6 +230,12 @@ PBProject >> dependencies [
 { #category : #dependencies }
 PBProject >> dependencies: aDependencyList [ 
 	dependencies := aDependencyList
+]
+
+{ #category : #'API-dependencies' }
+PBProject >> dependsOnProject: aPBProject [ 
+	
+	^ self resolve includesResolvedTarget: aPBProject 
 ]
 
 { #category : #accessing }
@@ -553,6 +565,19 @@ PBProject >> resolveInSolver: aCGOSolver [
 PBProject >> systemPackageOrganizer [
 	
 	^ registry systemPackageOrganizer
+]
+
+{ #category : #unloading }
+PBProject >> unload [
+	
+	registry unregisterProject: self
+]
+
+{ #category : #unloading }
+PBProject >> unloadRemovingPackages [
+	
+	registry unregisterProject: self.
+	packages do: [ :each | each removePackageFromSystem ]
 ]
 
 { #category : #accessing }

@@ -79,17 +79,3 @@ PBProjectUIItemTest >> testNewProjectIsEmpty [
 	"Check the setUp"
 	self assert: project isEmpty.	
 ]
-
-{ #category : #tests }
-PBProjectUIItemTest >> testRemoveProjectCommand [
-
-	| cmd pj |	
-	self openBrowser.
-	
-	cmd := self command: PBRemoveProjectCommand for: project.
-	cmd executeCommand.
-	
-	pj := self findUIItem: 'TestProject-Core'.
-	
-	self assert: pj isNil.
-]

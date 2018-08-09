@@ -47,10 +47,17 @@ PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
 
 { #category : #private }
 PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
-	^ [ self projectNamed: aProjectName.
-		CGOPackageAlreadyRegistered signal: aProjectName , ' is already a registered project in the registry!' ]
-		on: CGOPackageNotFoundError
-		do: [ "ignore: project not registered. It is safe to register a new one" ]
+	(self hasProjectNamed: aProjectName)
+		ifTrue: [ CGOPackageAlreadyRegistered
+				signal: aProjectName , ' is already a registered project in the registry!' ]
+]
+
+{ #category : #'API -dependencies' }
+PBPackageRegistry >> dependantProjectsOf: aPBProject [
+
+	^ (registeredProjects
+		select: [ :each | each ~= aPBProject and: [ each dependsOnProject: aPBProject ] ])
+		asOrderedCollection
 ]
 
 { #category : #'compatilibility-repository' }
@@ -69,6 +76,12 @@ PBPackageRegistry >> hasInstalledPackageNamed: fullyQualifiedName [
 	^ self installedPackages anySatisfy: [ :each | each fullyQualifiedName = fullyQualifiedName]
 ]
 
+{ #category : #testing }
+PBPackageRegistry >> hasProjectNamed: aName [
+
+	^ registeredProjects anySatisfy: [ :each | each name = aName]
+]
+
 { #category : #initialization }
 PBPackageRegistry >> initialize [
 	super initialize.
@@ -82,11 +95,14 @@ PBPackageRegistry >> installedPackages [
 ]
 
 { #category : #quering }
-PBPackageRegistry >> isInstalled: aPackageDependency [ 
+PBPackageRegistry >> isInstalled: aDependency [ 
 	
 	| found |
-	found := self packageNamed: aPackageDependency fullyQualifiedName ifAbsent: [ ^ false ].
-	^ aPackageDependency satisfyConstraints: found version 
+	found := self packageNamed: aDependency fullyQualifiedName ifAbsent: [ 
+			self projectNamed: aDependency fullyQualifiedName ifAbsent: [ ^ false ]
+		 ].
+	
+	^ aDependency satisfyConstraints: found version 
 ]
 
 { #category : #testing }
@@ -254,5 +270,8 @@ PBPackageRegistry >> unregisterProject: aProject [
 
 	registeredProjects remove: aProject.
 	installedPackages remove: aProject ifAbsent: ["Nothing To DO"].
+	
+	aProject packages do: [ :each | installedPackages remove: each ifAbsent: [  ] ].
+	
 	CGOProjectRemoved announceOnProject: aProject.
 ]

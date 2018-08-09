@@ -30,7 +30,7 @@ CGOMetacelloBaselineDependencyStatusTest >> tearDown [
 	#'PakbotTestExample-PackageB'
 	#'PakbotTestExample-PackageC'
 	#'PakbotTestExample-PackageD')
-		do: [ :each | (each asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem ].
+		do: [ :each | self removePackageIfExists: each ].
 		
 	MetacelloProjectRegistration registry baselineRegistry removeKey: 'BaselineOfPakbotTestExample' ifAbsent: [].
 	

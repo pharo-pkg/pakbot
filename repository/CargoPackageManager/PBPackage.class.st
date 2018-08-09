@@ -132,6 +132,14 @@ PBPackage >> removeDependency: aPackageDependency [
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
 ]
 
+{ #category : #'system-package' }
+PBPackage >> removePackageFromSystem [
+	
+	| systemPackage |
+	systemPackage := self name asPackageIfAbsent: [ ^ self ].
+	systemPackage removeFromSystem
+]
+
 { #category : #'querying - installed' }
 PBPackage >> satisfyConstraints: aVersion [ 
 

@@ -56,6 +56,6 @@ PBImportPackageInProjectCommand >> defaultMenuItemName [
 { #category : #execution }
 PBImportPackageInProjectCommand >> execute [
 	| dialog |
-	dialog := PBImportPackagesDialog on: project project.
-	dialog openDialogWithSpec okAction: [ dialog accept ]
+	dialog := PBSelectPackagesDialog on: project packageCandidates.
+	dialog openDialogWithSpec okAction: [ project importPackagesNamed: (dialog selectedItems collect: #name) ]
 ]
