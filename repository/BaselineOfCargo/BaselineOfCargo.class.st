@@ -40,8 +40,8 @@ BaselineOfCargo >> baseline: spec [
 				package: #'CargoPackageManager-Spec';
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
-				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources') ];
-				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'ParametrizedTests') ];
+				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
+				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];

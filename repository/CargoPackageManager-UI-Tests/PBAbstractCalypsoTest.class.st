@@ -112,7 +112,6 @@ PBAbstractCalypsoTest >> tearDown [
 	browser ifNotNil: [ browser close. browser := nil. ].
 	project ifNotNil: [ 
 		project installedSystemPackages do: #removeFromSystem ].
-	('TestProject-Core' asPackageIfAbsent: [ nil ])
-		ifNotNil: #removeFromSystem.
+	self removePackageIfExists: 'TestProject-Core'.
 	super tearDown
 ]

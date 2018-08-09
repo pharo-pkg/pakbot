@@ -22,6 +22,13 @@ CGODependencyConstraint class >> fromString: aString [
 	^ CGOFixedVersionConstraint with: (SemanticVersion fromString: constraintString )
 ]
 
+{ #category : #'instance creation' }
+CGODependencyConstraint class >> fromVersion: aStringOrVersion [
+
+	aStringOrVersion isString ifTrue: [ ^ self fromString: aStringOrVersion ].
+	^ CGOFixedVersionConstraint with: aStringOrVersion
+]
+
 { #category : #testing }
 CGODependencyConstraint >> isCompatibleWith: aSemanticVersion [ 
 	^ self subclassResponsibility 
