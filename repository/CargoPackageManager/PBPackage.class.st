@@ -101,6 +101,13 @@ PBPackage >> isInstalled [
 	^ (project registry isInstalled: self)
 ]
 
+{ #category : #'querying - installed' }
+PBPackage >> isLoaded [
+	
+	project registry systemPackageOrganizer packageNamed: self name ifAbsent: [ ^false ].
+	^ (project registry isInstalled: self)
+]
+
 { #category : #testing }
 PBPackage >> isUnit [
 	^ true
