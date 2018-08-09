@@ -1,5 +1,5 @@
 Class {
-	#name : #CGORepositoryMarriageTest,
+	#name : #PBRepositoryMarriageTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'repositoryLocation'
@@ -8,28 +8,28 @@ Class {
 }
 
 { #category : #tests }
-CGORepositoryMarriageTest >> repositoryLocation [
+PBRepositoryMarriageTest >> repositoryLocation [
 	
 	^ repositoryLocation
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> setUp [
+PBRepositoryMarriageTest >> setUp [
 
 	super setUp.
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
-	repositoryLocation := UUID new asString asFileReference
+	repositoryLocation := 'pakbot-test-repository' asFileReference.
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> tearDown [
+PBRepositoryMarriageTest >> tearDown [
 
 	repositoryLocation ensureDeleteAll.
 	super tearDown
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> testEmptyProjectToEmptyRepositoryDoesNotAddNewPackages [
+PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositoryDoesNotAddNewPackages [
 
 	| emptyProject repository |
 	emptyProject := testRegistry newProjectNamed: 'Empty'.
@@ -45,7 +45,7 @@ CGORepositoryMarriageTest >> testEmptyProjectToEmptyRepositoryDoesNotAddNewPacka
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> testEmptyProjectToEmptyRepositorySetsPakbotProject [
+PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositorySetsPakbotProject [
 
 	| emptyProject repository |
 	emptyProject := testRegistry newProjectNamed: 'Empty'.
@@ -60,7 +60,7 @@ CGORepositoryMarriageTest >> testEmptyProjectToEmptyRepositorySetsPakbotProject 
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> testProjectPackageIsAddedToRepository [
+PBRepositoryMarriageTest >> testProjectPackageIsAddedToRepository [
 
 	| emptyProject repository package |
 	emptyProject := testRegistry newProjectNamed: 'Empty'.
@@ -76,7 +76,7 @@ CGORepositoryMarriageTest >> testProjectPackageIsAddedToRepository [
 ]
 
 { #category : #tests }
-CGORepositoryMarriageTest >> testRepositoryPackageIsAddedToProject [
+PBRepositoryMarriageTest >> testRepositoryPackageIsAddedToProject [
 
 	| emptyProject repository |
 	emptyProject := testRegistry newProjectNamed: 'Empty'.
