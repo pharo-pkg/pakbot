@@ -9,13 +9,13 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
-{ #category : #tests }
+{ #category : #running }
 PBRepositoryMarriageTest >> repositoryLocation [
 	
 	^ repositoryLocation
 ]
 
-{ #category : #tests }
+{ #category : #running }
 PBRepositoryMarriageTest >> setUp [
 
 	super setUp.
@@ -28,7 +28,7 @@ PBRepositoryMarriageTest >> setUp [
 		createNewRepositoryNamed: 'Empty'.
 ]
 
-{ #category : #tests }
+{ #category : #running }
 PBRepositoryMarriageTest >> tearDown [
 
 	self removePackageIfExists: 'NewPackage'.
@@ -36,7 +36,17 @@ PBRepositoryMarriageTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : #'tests-sync' }
+PBRepositoryMarriageTest >> testAddPackageToMarriedProjectAddsPackageToRepository [
+
+	project addIcebergRepository: repository.
+	project createPackageNamed: 'NewPackage'.
+
+	self assert: (project includesPackageNamed: 'NewPackage').
+	self assert: (repository workingCopy includesPackageNamed: 'NewPackage').
+]
+
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositoryDoesNotAddNewPackages [
 		
 	project addIcebergRepository: repository.
@@ -45,7 +55,7 @@ PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositoryDoesNotAddNewPackag
 	self assert: repository workingCopy packages isEmpty.
 ]
 
-{ #category : #tests }
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositorySetsPakbotProject [
 
 	project addIcebergRepository: repository.
@@ -53,7 +63,7 @@ PBRepositoryMarriageTest >> testEmptyProjectToEmptyRepositorySetsPakbotProject [
 	self assert: repository workingCopy project pakbotProject equals: project.
 ]
 
-{ #category : #tests }
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testProjectPackageIsAddedToRepository [
 
 	| package |
@@ -63,7 +73,19 @@ PBRepositoryMarriageTest >> testProjectPackageIsAddedToRepository [
 	self assert: (repository workingCopy includesPackageNamed: package name)
 ]
 
-{ #category : #tests }
+{ #category : #'tests-sync' }
+PBRepositoryMarriageTest >> testRemovePackageFromMarriedProjectRemovesPackageFromRepository [
+
+	project createPackageNamed: 'NewPackage'.
+	project addIcebergRepository: repository.
+	self assert: (repository workingCopy includesPackageNamed: 'NewPackage').	
+
+	project removePackage: (project packageNamed: 'NewPackage').
+	self deny: (repository workingCopy includesPackageNamed: 'NewPackage').
+	
+]
+
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testRepositoryPackageIsAddedToProject [
 
 	repository workingCopy addPackageNamed: 'NewPackage'.
@@ -72,7 +94,7 @@ PBRepositoryMarriageTest >> testRepositoryPackageIsAddedToProject [
 	self assert: (project includesPackageNamed: 'NewPackage')
 ]
 
-{ #category : #tests }
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testRepositoryWithLoadedPackageIsAddedToProjectAsLoaded [
 
 	| packageName |
@@ -90,7 +112,7 @@ PBRepositoryMarriageTest >> testRepositoryWithLoadedPackageIsAddedToProjectAsLoa
 	self assert: (project packageNamed: packageName) isLoaded
 ]
 
-{ #category : #tests }
+{ #category : #'tests-marriage' }
 PBRepositoryMarriageTest >> testRepositoryWithNonLoadedPackageIsAddedToProjectAsNonLoaded [
 
 	| packageName |

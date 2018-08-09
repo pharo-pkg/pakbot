@@ -411,8 +411,8 @@ PBProject >> newNotLoadedPackage: aString [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 
 	packages add: package.
+	repository addPackage: package.
 	self announceChanged.
-	
 	^ package
 ]
 
@@ -526,6 +526,7 @@ PBProject >> removePackage: aPBPackage [
 	
 	packages remove: aPBPackage.
 	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ].
+	repository removePackage: aPBPackage.
 	self announceChanged.
 ]
 
