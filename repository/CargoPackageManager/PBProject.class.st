@@ -550,10 +550,3 @@ PBProject >> virtualPackages [
 PBProject >> virtualPackages: aListOfVirtualPackages [ 
 	virtualPackages := aListOfVirtualPackages
 ]
-
-{ #category : #private }
-PBProject >> withRepositoryDo: aBlock [
-	repository 
-		ifNil: [ CGOGitRepositoryCreationPanel withNewRepositoryDo: aBlock ]
-		ifNotNil: [ aBlock value: repository ]
-]
