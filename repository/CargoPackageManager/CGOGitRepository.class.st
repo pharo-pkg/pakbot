@@ -43,6 +43,12 @@ CGOGitRepository class >> url: anUrlOrString repository: anIceRepository version
 		yourself
 ]
 
+{ #category : #'package-synchronization' }
+CGOGitRepository >> addPackage: aPBPackage [ 
+	
+	iceRepository workingCopy addPackageNamed: aPBPackage name
+]
+
 { #category : #accessing }
 CGOGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
@@ -196,6 +202,12 @@ CGOGitRepository >> projectMetadataStonString [
 	self ensureCloned.
 	
 	^ (iceRepository headCommit fileSystem / self projectMetadataPath) contents
+]
+
+{ #category : #'package-synchronization' }
+CGOGitRepository >> removePackage: aPBPackage [ 
+	
+	iceRepository workingCopy removePackageNamed: aPBPackage name
 ]
 
 { #category : #accessing }

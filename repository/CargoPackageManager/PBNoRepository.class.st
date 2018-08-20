@@ -7,6 +7,12 @@ Class {
 	#category : #'CargoPackageManager-Loading'
 }
 
+{ #category : #'package-synchronization' }
+PBNoRepository >> addPackage: aPBPackage [ 
+	
+	"Nothing, I'm not a repository"
+]
+
 { #category : #testing }
 PBNoRepository >> isValidRepository [
 	

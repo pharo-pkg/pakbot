@@ -26,6 +26,12 @@ CGOSourceRepository class >> isGitRepositoryUrl: aString [
 		or: [ aString endsWith: '.git' ]
 ]
 
+{ #category : #'package-synchronization' }
+CGOSourceRepository >> addPackage: aPBPackage [ 
+	
+	self subclassResponsibility
+]
+
 { #category : #converting }
 CGOSourceRepository >> asSerializableRepository [
 	^ self copy
@@ -58,6 +64,12 @@ CGOSourceRepository >> projectMetadataFileName [
 
 { #category : #fetching }
 CGOSourceRepository >> projectMetadataStonString [
+	self subclassResponsibility
+]
+
+{ #category : #'package-synchronization' }
+CGOSourceRepository >> removePackage: aPBPackage [
+	
 	self subclassResponsibility
 ]
 

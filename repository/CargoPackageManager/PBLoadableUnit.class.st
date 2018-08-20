@@ -196,6 +196,12 @@ PBLoadableUnit >> repository [
 	^ self project repository
 ]
 
+{ #category : #API }
+PBLoadableUnit >> unload [
+	
+	self subclassResponsibility
+]
+
 { #category : #'compatibility - cargo solver' }
 PBLoadableUnit >> version [
 

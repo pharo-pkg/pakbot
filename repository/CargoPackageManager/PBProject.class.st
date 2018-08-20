@@ -102,6 +102,24 @@ PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [
 	externalProjects add: aCGOProjectDependencyDeclaration
 ]
 
+{ #category : #repository }
+PBProject >> addIcebergRepository: anIceLibgitRepository [
+	
+	| projectPackages repositoryPackages |
+	self repository: (CGOGitRepository repository: anIceLibgitRepository).
+	
+	projectPackages := self packages copy.
+	repositoryPackages := anIceLibgitRepository workingCopy packages copy.
+	
+	repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: self).
+	
+	(projectPackages \ repositoryPackages)
+		do: [ :each | anIceLibgitRepository workingCopy addPackageNamed: each name ].
+		
+	(repositoryPackages \ projectPackages)
+		do: [ :each | self importPackageNamed: each name ].
+]
+
 { #category : #dependencies }
 PBProject >> allDependencies [
 	^ dependencies , (packages flatCollect: #allDependencies) asOrderedCollection.
@@ -264,6 +282,12 @@ PBProject >> importPackageNamed: aString [
 	^ registry register: (self newNotLoadedPackage: aString)
 ]
 
+{ #category : #testing }
+PBProject >> includesPackageNamed: aString [ 
+	
+	^ self hasPackageNamed: aString
+]
+
 { #category : #initialization }
 PBProject >> initialize [
 	super initialize.
@@ -387,8 +411,8 @@ PBProject >> newNotLoadedPackage: aString [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 
 	packages add: package.
+	repository addPackage: package.
 	self announceChanged.
-	
 	^ package
 ]
 
@@ -502,6 +526,7 @@ PBProject >> removePackage: aPBPackage [
 	
 	packages remove: aPBPackage.
 	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ].
+	repository removePackage: aPBPackage.
 	self announceChanged.
 ]
 
@@ -574,11 +599,4 @@ PBProject >> virtualPackages [
 { #category : #updating }
 PBProject >> virtualPackages: aListOfVirtualPackages [ 
 	virtualPackages := aListOfVirtualPackages
-]
-
-{ #category : #private }
-PBProject >> withRepositoryDo: aBlock [
-	repository 
-		ifNil: [ CGOGitRepositoryCreationPanel withNewRepositoryDo: aBlock ]
-		ifNotNil: [ aBlock value: repository ]
 ]
