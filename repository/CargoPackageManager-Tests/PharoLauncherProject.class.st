@@ -1,9 +1,9 @@
 "
 Builder of Cargo metadata for the PharoLauncher project.
 
-	self buildAndRegisterIn: CGOPackageRegistry new
+	self buildAndRegisterIn: PBPackageRegistry default
 	
-	self buildWithoutPackageDependencyAndRegisterIn: CGOPackageRegistry default
+	self buildWithoutPackageDependencyAndRegisterIn: PBPackageRegistry default
 "
 Class {
 	#name : #PharoLauncherProject,
