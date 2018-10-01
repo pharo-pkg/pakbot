@@ -126,7 +126,7 @@ PBPackage >> provisions: aListOfVirtualPackageVersionsReference [
 	provisions := (CGOPackageUnit provisionsFromListOfProvisionStrings: aListOfVirtualPackageVersionsReference)	asOrderedCollection
 ]
 
-{ #category : #constrains }
+{ #category : #dependencies }
 PBPackage >> removeDependency: aPackageDependency [
 	dependencies := dependencies 
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
