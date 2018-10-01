@@ -3,7 +3,8 @@ Class {
 	#superclass : #PBAbstractAction,
 	#instVars : [
 		'project',
-		'acceptCallback'
+		'acceptCallback',
+		'dialog'
 	],
 	#category : #'CargoPackageManager-UI-Actions'
 }
@@ -25,16 +26,19 @@ PBOpenNewRepositoryDialogAction >> acceptCallback: aCallback [
 { #category : #execution }
 PBOpenNewRepositoryDialogAction >> doExecute [
 	
-	ITOptionDialog basicNew
+	dialog := ITOptionDialog basicNew
 		panels: {PBImportIcebergRepositoryPanel new} , IceTipRepositoryTypePanel allTypes;
 		initialize;
 		openDialogOnAccept: [ :selectedPanel | | repository |
-			repository := CGOGitRepository repository: selectedPanel accept.
+			dialog selectedType validate.
+			dialog selectedType newRepository.
+			repository := CGOGitRepository repository: dialog selectedType newRepository.
 			project project repository: repository.
 			
 			repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: project project).
 			acceptCallback value ]
-		onCancel: [  ]
+		onCancel: [  ];
+		yourself.
 ]
 
 { #category : #execution }
