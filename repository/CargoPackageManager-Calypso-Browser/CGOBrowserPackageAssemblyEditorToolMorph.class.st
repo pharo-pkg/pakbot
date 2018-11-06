@@ -3,30 +3,30 @@ Calypso plugin to display a tab when a package assembly is selected.
 This plugin will allow to show / edit package metadata.
 "
 Class {
-	#name : #CGOBrowserPackageAssemblyEditorTool,
-	#superclass : #ClyBrowserTool,
+	#name : #CGOBrowserPackageAssemblyEditorToolMorph,
+	#superclass : #ClyBrowserToolMorph,
 	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }
-CGOBrowserPackageAssemblyEditorTool class >> methodTabActivation [
+CGOBrowserPackageAssemblyEditorToolMorph class >> methodTabActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: CGOClyPackageAssembly asCalypsoItemContext 
 ]
 
 { #category : #accessing }
-CGOBrowserPackageAssemblyEditorTool class >> tabOrder [
+CGOBrowserPackageAssemblyEditorToolMorph class >> tabOrder [
 	^ 0
 ]
 
 { #category : #accessing }
-CGOBrowserPackageAssemblyEditorTool >> activeColor [
+CGOBrowserPackageAssemblyEditorToolMorph >> activeColor [
 	^ Color transparent
 ]
 
 { #category : #initialization }
-CGOBrowserPackageAssemblyEditorTool >> build [
+CGOBrowserPackageAssemblyEditorToolMorph >> build [
 	| managedAssembly |
 	managedAssembly := context lastSelectedProjectChild.
 	self 
@@ -35,6 +35,6 @@ CGOBrowserPackageAssemblyEditorTool >> build [
 ]
 
 { #category : #initialization }
-CGOBrowserPackageAssemblyEditorTool >> defaultTitle [
+CGOBrowserPackageAssemblyEditorToolMorph >> defaultTitle [
 	^ 'Assembly'
 ]
