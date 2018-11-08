@@ -37,5 +37,5 @@ PBRemovePackageReferenceFromAssemblyCommand >> defaultMenuItemName [
 { #category : #execution }
 PBRemovePackageReferenceFromAssemblyCommand >> execute [
 
-	self package removeFromAssembly
+	self packageItem removeFromAssembly
 ]

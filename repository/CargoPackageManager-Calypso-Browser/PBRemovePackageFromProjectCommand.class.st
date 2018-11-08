@@ -41,5 +41,5 @@ PBRemovePackageFromProjectCommand >> defaultMenuItemName [
 { #category : #execution }
 PBRemovePackageFromProjectCommand >> execute [
 
-	self package removeFromProject
+	self packageItem removeFromProject
 ]
