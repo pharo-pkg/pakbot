@@ -1,28 +1,28 @@
 Class {
-	#name : #CGOOngoingPackageUnitTest,
+	#name : #PBPackageTest,
 	#superclass : #CGOModelTest,
 	#instVars : [
 		'oldPackageRegistry'
 	],
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
-CGOOngoingPackageUnitTest >> testCanCreateMinimalOngoingPackageUnit [
+PBPackageTest >> testCanCreateMinimalPackage [
 	| unit |
 	unit := PBPackage named: #Test.
 	self assert: unit class equals: PBPackage
 ]
 
 { #category : #tests }
-CGOOngoingPackageUnitTest >> testCanGetProjectFromOngoingPackageUnit [
+PBPackageTest >> testCanGetProject [
 	self
 		assert: self unitTestV1 project 
 		equals: ongoingProject
 ]
 
 { #category : #tests }
-CGOOngoingPackageUnitTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted [
+PBPackageTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted [
 	| unit |
 	unit := self unitTestV1.
 			
@@ -37,7 +37,7 @@ CGOOngoingPackageUnitTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted
 ]
 
 { #category : #tests }
-CGOOngoingPackageUnitTest >> testComparisonWithPackageAssemblyReturnsFalse [
+PBPackageTest >> testComparisonWithPackageAssemblyReturnsFalse [
 	| unit assembly |
 	unit := PBPackage named: #Test.
 	assembly := PBAssembly named: 'Test'.
@@ -45,14 +45,14 @@ CGOOngoingPackageUnitTest >> testComparisonWithPackageAssemblyReturnsFalse [
 ]
 
 { #category : #tests }
-CGOOngoingPackageUnitTest >> testComparisonWithSamePackageUnitReturnsTrue [
+PBPackageTest >> testComparisonWithSamePackageReturnsTrue [
 	| unit |
 	unit := PBPackage named: #Test.
 	self assert: unit equals: unit copy
 ]
 
 { #category : #'test data' }
-CGOOngoingPackageUnitTest >> unitTestV2 [
+PBPackageTest >> unitTestV2 [
 	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Test ]
 
 ]
