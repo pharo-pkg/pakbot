@@ -15,7 +15,7 @@ PBOngoingProjectTest >> testCanGetProjectFromSCM [
 		allow: projectSourceRepositoryMock recv: #projectMetadataStonString;
 		=> (STON toStringPretty: PBProject example asVcsSerializedCargoProject).
 	project := PBProject fromRepository: projectSourceRepositoryMock.
-	registry reset.
+	testRegistry reset.
 	
 	self
 		assert: project 

@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'oldRegistry',
 		'ongoingProject',
-		'registry',
 		'unitTestV1',
 		'unitTestV2'
 	],
