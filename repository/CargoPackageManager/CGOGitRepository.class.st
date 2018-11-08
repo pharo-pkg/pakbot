@@ -162,6 +162,7 @@ CGOGitRepository >> isRepositoryAlreadyClonedInDefaultLocation [
 
 { #category : #loading }
 CGOGitRepository >> loadPackageNamed: aPackageName [
+	self ensureCloned.
 	iceRepository workingCopy loadPackageNamed: aPackageName
 ]
 

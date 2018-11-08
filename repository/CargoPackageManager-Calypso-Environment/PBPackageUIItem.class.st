@@ -103,6 +103,11 @@ PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
 		and: [ self systemPackage includesClassesAffectedBy: aSystemAnnouncement ]
 ]
 
+{ #category : #'as yet unclassified' }
+PBPackageUIItem >> isAboutPackage: aRPackage [ 
+	^ self systemPackage isAboutPackage: aRPackage 
+]
+
 { #category : #announcements }
 PBPackageUIItem >> isAffectedBy: anAnnouncement [
 	^ (anAnnouncement isKindOf: ClassAnnouncement)
@@ -126,9 +131,9 @@ PBPackageUIItem >> items [
 	^ self error: 'Should not be implemented, the packages have ClassGroups inside'
 ]
 
-{ #category : #loading }
+{ #category : #actions }
 PBPackageUIItem >> load [
-	self package basicLoad.
+	self package load.
 	PBPackageLoaded announceOnPackage: self package.
 ]
 

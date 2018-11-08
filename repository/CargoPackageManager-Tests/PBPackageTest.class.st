@@ -51,6 +51,19 @@ PBPackageTest >> testComparisonWithSamePackageReturnsTrue [
 	self assert: unit equals: unit copy
 ]
 
+{ #category : #tests }
+PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
+	| project package |
+	project := testRegistry newProjectNamed: 'Pharo-Counter-Test'.
+	project repository: CGOGitRepository example.
+	package := project newNotLoadedPackage: #'Counter-Core'.
+
+	package load.
+
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self assert: package isInstalled.
+]
+
 { #category : #'test data' }
 PBPackageTest >> unitTestV2 [
 	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Test ]

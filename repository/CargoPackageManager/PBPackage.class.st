@@ -106,6 +106,13 @@ PBPackage >> isUnit [
 	^ true
 ]
 
+{ #category : #loading }
+PBPackage >> load [
+
+	self basicLoad.
+	self registry register: self.
+]
+
 { #category : #accessing }
 PBPackage >> platformRequirements [
 	^ platformRequirements
