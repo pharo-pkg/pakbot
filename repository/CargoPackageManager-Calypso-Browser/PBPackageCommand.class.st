@@ -1,3 +1,6 @@
+"
+Abstract class for all the commands that works on packages.
+"
 Class {
 	#name : #PBPackageCommand,
 	#superclass : #PBProjectCommand,
