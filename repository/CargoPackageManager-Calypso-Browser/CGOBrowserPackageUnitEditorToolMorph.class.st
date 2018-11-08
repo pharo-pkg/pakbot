@@ -3,30 +3,30 @@ Calypso plugin to display a tab when a package unit is selected.
 This plugin will allow to show / edit package metadata.
 "
 Class {
-	#name : #CGOBrowserPackageUnitEditorTool,
-	#superclass : #ClyBrowserTool,
+	#name : #CGOBrowserPackageUnitEditorToolMorph,
+	#superclass : #ClyBrowserToolMorph,
 	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }
-CGOBrowserPackageUnitEditorTool class >> methodTabActivation [
+CGOBrowserPackageUnitEditorToolMorph class >> methodTabActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBPackageUIItem asCalypsoItemContext
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitEditorTool class >> tabOrder [
+CGOBrowserPackageUnitEditorToolMorph class >> tabOrder [
 	^ 0
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitEditorTool >> activeColor [
+CGOBrowserPackageUnitEditorToolMorph >> activeColor [
 	^ Color transparent
 ]
 
 { #category : #initialization }
-CGOBrowserPackageUnitEditorTool >> build [
+CGOBrowserPackageUnitEditorToolMorph >> build [
 	| aPackage |
 		
 	aPackage := context selectedItems first actualObject.
@@ -37,6 +37,6 @@ CGOBrowserPackageUnitEditorTool >> build [
 ]
 
 { #category : #initialization }
-CGOBrowserPackageUnitEditorTool >> defaultTitle [
+CGOBrowserPackageUnitEditorToolMorph >> defaultTitle [
 	^ 'Unit'
 ]

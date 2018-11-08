@@ -3,8 +3,8 @@ Calypso plugin to display a tab when a project is selected.
 This plugin will allow to show / edit project metadata.
 "
 Class {
-	#name : #CGOBrowserProjectEditorTool,
-	#superclass : #ClyBrowserTool,
+	#name : #CGOBrowserProjectEditorToolMorph,
+	#superclass : #ClyBrowserToolMorph,
 	#instVars : [
 		'managedProject'
 	],
@@ -12,67 +12,67 @@ Class {
 }
 
 { #category : #accessing }
-CGOBrowserProjectEditorTool class >> methodTabActivation [
+CGOBrowserProjectEditorToolMorph class >> methodTabActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
-CGOBrowserProjectEditorTool class >> methodTabActivationForDependencies [
+CGOBrowserProjectEditorToolMorph class >> methodTabActivationForDependencies [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBDependencyUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
-CGOBrowserProjectEditorTool class >> methodTabActivationForDependenciesGroup [
+CGOBrowserProjectEditorToolMorph class >> methodTabActivationForDependenciesGroup [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBDependenciesUIGroup asCalypsoItemContext 
 ]
 
 { #category : #accessing }
-CGOBrowserProjectEditorTool class >> tabOrder [
+CGOBrowserProjectEditorToolMorph class >> tabOrder [
 	^ 0
 ]
 
 { #category : #accessing }
-CGOBrowserProjectEditorTool >> activeColor [
+CGOBrowserProjectEditorToolMorph >> activeColor [
 	^ Color transparent
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> belongsToCurrentBrowserContext [
+CGOBrowserProjectEditorToolMorph >> belongsToCurrentBrowserContext [
 	^browser projectSelection includesActualObject: managedProject
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> build [
+CGOBrowserProjectEditorToolMorph >> build [
 	self 
 		addMorph: (PBProjectPanel buildOnOngoing: managedProject project asOngoingPackage)
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> defaultTitle [
+CGOBrowserProjectEditorToolMorph >> defaultTitle [
 	^ 'Project'
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> isSimilarTo: anotherTool [
+CGOBrowserProjectEditorToolMorph >> isSimilarTo: anotherTool [
 
 	^ (super isSimilarTo: anotherTool)
 		and: [ managedProject = anotherTool managedProject ]
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> managedProject [
+CGOBrowserProjectEditorToolMorph >> managedProject [
 
 	^ managedProject
 ]
 
 { #category : #initialization }
-CGOBrowserProjectEditorTool >> setUpModelFromContext [
+CGOBrowserProjectEditorToolMorph >> setUpModelFromContext [
 	managedProject := context lastSelectedProject.
 	
 ]
