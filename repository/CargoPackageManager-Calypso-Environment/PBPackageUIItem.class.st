@@ -126,6 +126,12 @@ PBPackageUIItem >> items [
 	^ self error: 'Should not be implemented, the packages have ClassGroups inside'
 ]
 
+{ #category : #loading }
+PBPackageUIItem >> load [
+	self package basicLoad.
+	PBPackageLoaded announceOnPackage: self package.
+]
+
 { #category : #accessing }
 PBPackageUIItem >> name [
 	^ package name
