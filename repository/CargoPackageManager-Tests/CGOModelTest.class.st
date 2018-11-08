@@ -5,7 +5,6 @@ Class {
 	#name : #CGOModelTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
-		'oldRegistry',
 		'ongoingProject',
 		'unitTestV1',
 		'unitTestV2'
