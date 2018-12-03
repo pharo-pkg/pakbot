@@ -2,18 +2,18 @@
 I am a menu group gathering together all SCM menu items (like commit, pull, push).
 "
 Class {
-	#name : #CGOSCMMenuGroup,
+	#name : #PBSCMMenuGroup,
 	#superclass : #CmdMenuGroup,
 	#category : #'CargoPackageManager-Calypso-Browser-Menu'
 }
 
 { #category : #accessing }
-CGOSCMMenuGroup >> name [
+PBSCMMenuGroup >> name [
 	^'Git SCM'
 ]
 
 { #category : #accessing }
-CGOSCMMenuGroup >> order [
+PBSCMMenuGroup >> order [
 
 	^ 10000
 ]

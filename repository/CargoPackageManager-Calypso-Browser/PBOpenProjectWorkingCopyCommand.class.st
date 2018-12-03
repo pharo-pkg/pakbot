@@ -13,8 +13,7 @@ PBOpenProjectWorkingCopyCommand class >> canBeExecutedInContext: aToolContext [
 
 { #category : #accessing }
 PBOpenProjectWorkingCopyCommand class >> defaultMenuIconName [
-	^#monticelloPackage
-	
+	^ #komitterSmalltalkhubRemote
 ]
 
 { #category : #activation }
@@ -22,7 +21,7 @@ PBOpenProjectWorkingCopyCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation
-		byItemOf: CGOSCMMenuGroup
+		byItemOf: PBSCMMenuGroup
 		order: 10000
 		for: PBProjectUIItem asCalypsoItemContext 
 ]
@@ -31,7 +30,7 @@ PBOpenProjectWorkingCopyCommand class >> systemBrowserMenuActivator [
 PBOpenProjectWorkingCopyCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
-	^ CmdShortcutActivation by: $s meta for: PBProjectUIItem asCalypsoItemContext 
+	^ CmdShortcutActivation by: $o meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }

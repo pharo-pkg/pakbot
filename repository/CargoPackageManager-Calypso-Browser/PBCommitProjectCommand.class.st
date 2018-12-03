@@ -25,7 +25,7 @@ PBCommitProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation
-		byItemOf: CGOSCMMenuGroup
+		byItemOf: PBSCMMenuGroup
 		order: 10000
 		for: PBProjectUIItem asCalypsoItemContext 
 ]

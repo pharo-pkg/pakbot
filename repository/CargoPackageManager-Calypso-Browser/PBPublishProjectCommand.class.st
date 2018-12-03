@@ -2,32 +2,32 @@
 A command to publish a project and all its packages to a package repository. It will publish to the default Cargo package repository.
 "
 Class {
-	#name : #CGOPublishProjectCommand,
+	#name : #PBPublishProjectCommand,
 	#superclass : #PBProjectCommand,
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
 { #category : #accessing }
-CGOPublishProjectCommand class >> defaultMenuIconName [
+PBPublishProjectCommand class >> defaultMenuIconName [
 	^#publish
 ]
 
 { #category : #activation }
-CGOPublishProjectCommand class >> systemBrowserMenuActivator [
+PBPublishProjectCommand class >> systemBrowserMenuActivator [
 	<classAnnotation>
 	
 	^ CmdContextMenuActivation byRootGroupItemFor: PBProjectUIItem asCalypsoItemContext, ClyEmptyClassSelectionContext new
 ]
 
 { #category : #activation }
-CGOPublishProjectCommand class >> systemBrowserShortcutActivator [
+PBPublishProjectCommand class >> systemBrowserShortcutActivator [
 	<classAnnotation>
 	
 	^ CmdShortcutActivation by: $p meta for: PBProjectUIItem asCalypsoItemContext 
 ]
 
 { #category : #activation }
-CGOPublishProjectCommand class >> systemBrowserToolbarActivator [
+PBPublishProjectCommand class >> systemBrowserToolbarActivator [
 	<classAnnotation>
 	
 	^ ClyToolbarActivation
@@ -37,11 +37,11 @@ CGOPublishProjectCommand class >> systemBrowserToolbarActivator [
 ]
 
 { #category : #initialization }
-CGOPublishProjectCommand >> defaultMenuItemName [
+PBPublishProjectCommand >> defaultMenuItemName [
 	^ 'Publish'
 ]
 
 { #category : #execution }
-CGOPublishProjectCommand >> execute [
+PBPublishProjectCommand >> execute [
 	project publishAll 
 ]
