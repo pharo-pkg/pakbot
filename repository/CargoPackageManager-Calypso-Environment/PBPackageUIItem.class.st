@@ -103,9 +103,11 @@ PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
 		and: [ self systemPackage includesClassesAffectedBy: aSystemAnnouncement ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #querying }
 PBPackageUIItem >> isAboutPackage: aRPackage [ 
-	^ self systemPackage isAboutPackage: aRPackage 
+	" We now have problems with extensions from project view. Let's just say no for now.
+	^ self systemPackage isAboutPackage: aRPackage "
+	^ false
 ]
 
 { #category : #announcements }

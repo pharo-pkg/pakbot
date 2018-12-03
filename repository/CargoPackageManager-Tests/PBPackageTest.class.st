@@ -58,6 +58,8 @@ PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 	project repository: CGOGitRepository example.
 	package := project newNotLoadedPackage: #'Counter-Core'.
 
+	self deny: package isInstalled.
+	
 	package load.
 
 	self assert: (Smalltalk globals hasClassNamed: 'Counter').

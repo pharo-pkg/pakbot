@@ -19,14 +19,6 @@ PBLoadPackageCommand class >> systemBrowserMenuActivator [
 	^ CmdContextMenuActivation byRootGroupItemOrder: 20 for: PBPackageUIItem asCalypsoItemContext
 ]
 
-{ #category : #execution }
-PBLoadPackageCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	[ aToolContext activeQueryView refreshTable ]
-	on: NotFound 
-	do: [ :e | "ignore. I do not get why this could happen. " ]
-]
-
 { #category : #accessing }
 PBLoadPackageCommand >> defaultMenuIcon [
 	^ Smalltalk ui theme iconNamed: #glamorousUp
