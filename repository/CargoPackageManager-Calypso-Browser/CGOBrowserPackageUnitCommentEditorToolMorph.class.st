@@ -1,6 +1,6 @@
 Class {
-	#name : #CGOBrowserPackageUnitCommentEditorTool,
-	#superclass : #ClyTextEditorTool,
+	#name : #CGOBrowserPackageUnitCommentEditorToolMorph,
+	#superclass : #ClyTextEditorToolMorph,
 	#instVars : [
 		'project'
 	],
@@ -8,45 +8,45 @@ Class {
 }
 
 { #category : #accessing }
-CGOBrowserPackageUnitCommentEditorTool class >> methodTabActivation [
+CGOBrowserPackageUnitCommentEditorToolMorph class >> methodTabActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBPackageUIItem asCalypsoItemContext 
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitCommentEditorTool class >> tabOrder [
+CGOBrowserPackageUnitCommentEditorToolMorph class >> tabOrder [
 	^ 0
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitCommentEditorTool >> activeColor [
+CGOBrowserPackageUnitCommentEditorToolMorph >> activeColor [
 	^ Color transparent
 ]
 
 { #category : #operations }
-CGOBrowserPackageUnitCommentEditorTool >> applyChanges [
+CGOBrowserPackageUnitCommentEditorToolMorph >> applyChanges [
 
 	self unit description: self pendingText asString.
 	^ true
 ]
 
 { #category : #initialization }
-CGOBrowserPackageUnitCommentEditorTool >> defaultTitle [
+CGOBrowserPackageUnitCommentEditorToolMorph >> defaultTitle [
 	^ 'Comment'
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitCommentEditorTool >> editingText [
+CGOBrowserPackageUnitCommentEditorToolMorph >> editingText [
 	^ self unit description ifNil: [ '' ]
 ]
 
 { #category : #accessing }
-CGOBrowserPackageUnitCommentEditorTool >> unit [
+CGOBrowserPackageUnitCommentEditorToolMorph >> unit [
 	^ context lastSelectedPBPackage cargoPackage
 ]
 
 { #category : #testing }
-CGOBrowserPackageUnitCommentEditorTool >> wantsTextStyling [
+CGOBrowserPackageUnitCommentEditorToolMorph >> wantsTextStyling [
 	^ false
 ]

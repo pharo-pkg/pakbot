@@ -103,6 +103,13 @@ PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
 		and: [ self systemPackage includesClassesAffectedBy: aSystemAnnouncement ]
 ]
 
+{ #category : #querying }
+PBPackageUIItem >> isAboutPackage: aRPackage [ 
+	" We now have problems with extensions from project view. Let's just say no for now.
+	^ self systemPackage isAboutPackage: aRPackage "
+	^ false
+]
+
 { #category : #announcements }
 PBPackageUIItem >> isAffectedBy: anAnnouncement [
 	^ (anAnnouncement isKindOf: ClassAnnouncement)
@@ -124,6 +131,12 @@ PBPackageUIItem >> isInstalled [
 { #category : #accessing }
 PBPackageUIItem >> items [
 	^ self error: 'Should not be implemented, the packages have ClassGroups inside'
+]
+
+{ #category : #actions }
+PBPackageUIItem >> load [
+	self package load.
+	PBPackageLoaded announceOnPackage: self package.
 ]
 
 { #category : #accessing }

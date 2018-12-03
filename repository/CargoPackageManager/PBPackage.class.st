@@ -106,6 +106,13 @@ PBPackage >> isUnit [
 	^ true
 ]
 
+{ #category : #loading }
+PBPackage >> load [
+
+	self basicLoad.
+	self registry register: self.
+]
+
 { #category : #accessing }
 PBPackage >> platformRequirements [
 	^ platformRequirements
@@ -126,7 +133,7 @@ PBPackage >> provisions: aListOfVirtualPackageVersionsReference [
 	provisions := (CGOPackageUnit provisionsFromListOfProvisionStrings: aListOfVirtualPackageVersionsReference)	asOrderedCollection
 ]
 
-{ #category : #constrains }
+{ #category : #dependencies }
 PBPackage >> removeDependency: aPackageDependency [
 	dependencies := dependencies 
 		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]

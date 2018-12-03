@@ -1,7 +1,7 @@
-Extension { #name : #ClyClassCreationTool }
+Extension { #name : #ClyClassCreationToolMorph }
 
 { #category : #'*CargoPackageManager-Calypso-Browser' }
-ClyClassCreationTool class >> fullBrowserProjectPackageActivation [
+ClyClassCreationToolMorph >> fullBrowserProjectPackageActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: PBPackageContextOfFullBrowser

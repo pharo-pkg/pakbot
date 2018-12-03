@@ -24,21 +24,6 @@ PBOngoingProjectFailingTest >> testAddingDependencyPerformAnnouncement [
 ]
 
 { #category : #tests }
-PBOngoingProjectFailingTest >> testCanGetProjectFromSCM [
-	| projectSourceRepositoryMock project |
-	projectSourceRepositoryMock := protocol mock: 'projectSourceRepositoryMock'.
-	protocol describe
-		allow: projectSourceRepositoryMock recv: #projectMetadataStonString;
-		=> (STON toStringPretty: PBProject example asVcsSerializedCargoProject).
-	project := PBProject fromRepository: projectSourceRepositoryMock.
-	registry reset.
-	
-	self
-		assert: project 
-		equals: PBProject example
-]
-
-{ #category : #tests }
 PBOngoingProjectFailingTest >> testCanPublishAProject [
 	| published |
 	ongoingProject publish.

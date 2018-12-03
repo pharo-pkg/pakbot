@@ -1,3 +1,6 @@
+"
+Calypso command providing a contextual menu to load a package defined as a Cargo package unit
+"
 Class {
 	#name : #PBLoadPackageCommand,
 	#superclass : #PBPackageCommand,
@@ -29,5 +32,5 @@ PBLoadPackageCommand >> defaultMenuItemName [
 { #category : #execution }
 PBLoadPackageCommand >> execute [
 
-	self package load
+	self packageItem load
 ]

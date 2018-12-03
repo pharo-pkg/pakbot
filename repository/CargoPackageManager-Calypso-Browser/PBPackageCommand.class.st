@@ -1,8 +1,11 @@
+"
+Abstract class for all the commands that works on packages.
+"
 Class {
 	#name : #PBPackageCommand,
 	#superclass : #PBProjectCommand,
 	#instVars : [
-		'package'
+		'packageItem'
 	],
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
@@ -13,15 +16,15 @@ PBPackageCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : #accessing }
-PBPackageCommand >> package [
+PBPackageCommand >> packageItem [
 
-	^ package
+	^ packageItem
 ]
 
 { #category : #execution }
 PBPackageCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
-	package := aToolContext lastSelectedObject.
+	packageItem := aToolContext lastSelectedObject.
 
 ]

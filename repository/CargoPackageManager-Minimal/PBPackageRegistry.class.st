@@ -60,7 +60,7 @@ PBPackageRegistry >> dependantProjectsOf: aPBProject [
 		asOrderedCollection
 ]
 
-{ #category : #'compatilibility-repository' }
+{ #category : #'compatibility-repository' }
 PBPackageRegistry >> fetch: aPackageName version: aVersion [
 	
 	| package |
@@ -89,7 +89,7 @@ PBPackageRegistry >> initialize [
 	registeredProjects := Set new.
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> installedPackages [
 	^ installedPackages
 ]
@@ -143,14 +143,14 @@ PBPackageRegistry >> newSolver [
 		yourself
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> packageNamed: aName [
 	^ self 
 		packageNamed: aName 
 		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
 	^ installedPackages 
 		detect: [ :package | package fullyQualifiedName = aName ]
@@ -179,14 +179,14 @@ PBPackageRegistry >> packageUnregistered: aRPackageUnregistered [
 
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> projectNamed: aName [
 	^ self 
 		projectNamed: aName 
 		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 	^ registeredProjects 
 		detect: [ :project | project name = aName asSymbol ]
@@ -228,7 +228,7 @@ PBPackageRegistry >> registerProject: aCGOProject [
 	^ aCGOProject
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> registeredProjects [
 	^ registeredProjects
 ]
@@ -238,7 +238,7 @@ PBPackageRegistry >> reset [
 	self initialize
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPackageRegistry >> systemPackageOrganizer [
 
 	^ systemPackageOrganizer ifNil: [ RPackage organizer ]

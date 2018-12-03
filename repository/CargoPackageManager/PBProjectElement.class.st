@@ -31,6 +31,11 @@ PBProjectElement >> project: aCGOOngoingProject [
 	project := aCGOOngoingProject
 ]
 
+{ #category : #accessing }
+PBProjectElement >> registry [
+	^ project registry
+]
+
 { #category : #actions }
 PBProjectElement >> remove [
 	

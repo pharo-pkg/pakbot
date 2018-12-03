@@ -3,30 +3,30 @@ Calypso plugin to display a tab when a virtual package is selected.
 This plugin will allow to show / edit package metadata.
 "
 Class {
-	#name : #CGOBrowserVirtualPackageEditorTool,
-	#superclass : #ClyBrowserTool,
+	#name : #CGOBrowserVirtualPackageEditorToolMorph,
+	#superclass : #ClyBrowserToolMorph,
 	#category : #'CargoPackageManager-Calypso-Browser-Tools'
 }
 
 { #category : #accessing }
-CGOBrowserVirtualPackageEditorTool class >> methodTabActivation [
+CGOBrowserVirtualPackageEditorToolMorph class >> methodTabActivation [
 	<classAnnotation>
 	
 	^ClyTabActivationStrategy for: CGOClyVirtualPackage asCalypsoItemContext  
 ]
 
 { #category : #accessing }
-CGOBrowserVirtualPackageEditorTool class >> tabOrder [
+CGOBrowserVirtualPackageEditorToolMorph class >> tabOrder [
 	^ 0
 ]
 
 { #category : #accessing }
-CGOBrowserVirtualPackageEditorTool >> activeColor [
+CGOBrowserVirtualPackageEditorToolMorph >> activeColor [
 	^ Color transparent
 ]
 
 { #category : #initialization }
-CGOBrowserVirtualPackageEditorTool >> build [
+CGOBrowserVirtualPackageEditorToolMorph >> build [
 	| virtual |
 	virtual := context lastSelectedProjectChild cargoPackage.
 	
@@ -36,6 +36,6 @@ CGOBrowserVirtualPackageEditorTool >> build [
 ]
 
 { #category : #initialization }
-CGOBrowserVirtualPackageEditorTool >> defaultTitle [
+CGOBrowserVirtualPackageEditorToolMorph >> defaultTitle [
 	^ 'Virtual'
 ]

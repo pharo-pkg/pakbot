@@ -1,3 +1,6 @@
+"
+Calypso command providing a contextual menu to remove the Rpackage associated to a package unit.
+"
 Class {
 	#name : #PBRemovePackageFromSystemCommand,
 	#superclass : #PBPackageCommand,
@@ -30,5 +33,5 @@ PBRemovePackageFromSystemCommand >> defaultMenuItemName [
 { #category : #execution }
 PBRemovePackageFromSystemCommand >> execute [
 
-	self package systemPackage removeFromSystem
+	self packageItem systemPackage removeFromSystem
 ]

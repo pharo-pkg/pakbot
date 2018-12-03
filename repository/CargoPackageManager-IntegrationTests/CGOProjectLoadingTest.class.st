@@ -91,24 +91,6 @@ CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespo
 	self deny: (Smalltalk globals hasClassNamed: 'ClassInPackageD').
 ]
 
-{ #category : #'tests-cargo-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithCargoOngoingProjectDependenciesKeepsThemLoaded [
-
-	| projectOne projectTwo |
-	
-	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
-	projectOne addDependency: (PBPakbotProjectDependency
-		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
-		
-	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectOne load.
-	
-	self assert: projectOne isLoaded.
-	self assert: projectTwo isLoaded.
-	self assert: projectOne isUpToDate.
-]
-
 { #category : #'tests-baseline-dependencies' }
 CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
 
@@ -361,4 +343,22 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 	
 	self assert: (Smalltalk globals at: 'Counter' asSymbol) version equals: 1.
 	self assert: (Smalltalk globals at: 'CounterTest' asSymbol) version equals: 1.
+]
+
+{ #category : #'tests-cargo-dependencies' }
+CGOProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKeepsThemLoaded [
+
+	| projectOne projectTwo |
+	
+	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
+	projectOne addDependency: (PBPakbotProjectDependency
+		named: 'ProjectTwo'
+		version: '=0.0.0-N/A').
+		
+	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectOne load.
+	
+	self assert: projectOne isLoaded.
+	self assert: projectTwo isLoaded.
+	self assert: projectOne isUpToDate.
 ]
