@@ -50,12 +50,6 @@ PBProjectUIItem >> assemblyItems [
 		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
-{ #category : #actions }
-PBProjectUIItem >> createPackageNamed: aString [ 
-	
-	^ project createPackageNamed: aString
-]
-
 { #category : #decorating }
 PBProjectUIItem >> decorateProblems: anItemCellMorph inContext: itemContext [
 	| button activator icon command |	
@@ -87,12 +81,6 @@ PBProjectUIItem >> dependenciesItems [
 	^ project dependencies
 		ifEmpty: [ ^ #() ]
 		ifNotEmpty: [ {(PBDependenciesUIGroup onProject: self project)} ]
-]
-
-{ #category : #adding }
-PBProjectUIItem >> importPackagesNamed: aCollection [ 
-	
-	aCollection do: [ :aName | project importPackageNamed: aName ]
 ]
 
 { #category : #testing }
@@ -134,14 +122,6 @@ PBProjectUIItem >> name [
 PBProjectUIItem >> openRepairDialog [
 
 	^ (PBOpenRepairDialogAction onProject: self project) execute
-]
-
-{ #category : #accessing }
-PBProjectUIItem >> packageCandidates [
-
-	^ (project registry systemPackageOrganizer packages
-		reject: [ :each | project hasPackageNamed: each name ])
-		asOrderedCollection
 ]
 
 { #category : #items }

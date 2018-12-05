@@ -20,7 +20,7 @@ PBProjectCommand class >> canBeExecutedInContext: aToolContext [
 PBProjectCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
-	project := aToolContext lastSelectedProject.
+	project := aToolContext lastSelectedProject project.
 
 ]
 

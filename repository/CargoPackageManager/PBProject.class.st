@@ -264,6 +264,12 @@ PBProject >> importPackageNamed: aString [
 	^ registry register: (self newNotLoadedPackage: aString)
 ]
 
+{ #category : #packages }
+PBProject >> importPackagesNamed: aCollection [ 
+	
+	aCollection do: [ :aName | self importPackageNamed: aName ]
+]
+
 { #category : #initialization }
 PBProject >> initialize [
 	super initialize.
@@ -403,6 +409,14 @@ PBProject >> newVirtualPackage: aName [
 		ifTrue: [ CGOPackageAlreadyRegistered signal ].
 	virtualPackages add: virtual.
 	^ registry register: virtual
+]
+
+{ #category : #'system-interaction' }
+PBProject >> packageCandidates [
+
+	^ (registry systemPackageOrganizer packages
+			reject: [ :each | self hasPackageNamed: each name ])
+		asOrderedCollection
 ]
 
 { #category : #accessing }

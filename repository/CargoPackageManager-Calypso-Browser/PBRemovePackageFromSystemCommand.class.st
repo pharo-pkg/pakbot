@@ -33,5 +33,5 @@ PBRemovePackageFromSystemCommand >> defaultMenuItemName [
 { #category : #execution }
 PBRemovePackageFromSystemCommand >> execute [
 
-	self packageItem systemPackage removeFromSystem
+	self package systemPackage removeFromSystem
 ]

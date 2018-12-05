@@ -14,10 +14,9 @@ PBAssemblyUIItem class >> on: aDependency [
 		yourself
 ]
 
-{ #category : #adding }
-PBAssemblyUIItem >> addPackages: aCollection [ 
-	
-	aCollection do: [ :each | assembly addPackage: each ]
+{ #category : #accessing }
+PBAssemblyUIItem >> assembly [
+	^ assembly
 ]
 
 { #category : #decorating }
@@ -58,18 +57,6 @@ PBAssemblyUIItem >> items [
 PBAssemblyUIItem >> name [
 	
 	^ assembly name
-]
-
-{ #category : #accessing }
-PBAssemblyUIItem >> packageCandidates [
-	
-	^ assembly packageCandidates
-]
-
-{ #category : #operations }
-PBAssemblyUIItem >> remove [
-	
-	assembly remove
 ]
 
 { #category : #testing }

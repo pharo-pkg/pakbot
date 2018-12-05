@@ -32,5 +32,5 @@ PBLoadPackageCommand >> defaultMenuItemName [
 { #category : #execution }
 PBLoadPackageCommand >> execute [
 
-	self packageItem load
+	self package load
 ]

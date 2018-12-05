@@ -32,5 +32,5 @@ PBCreateAssemblyCommand >> execute [
 		request: 'New assembly name' 
 		initialAnswer: project name, '-'.
 	assemblyName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ].
-	project project addAssemblyNamed: assemblyName.
+	project addAssemblyNamed: assemblyName.
 ]

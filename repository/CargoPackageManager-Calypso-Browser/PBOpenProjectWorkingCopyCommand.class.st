@@ -51,5 +51,5 @@ PBOpenProjectWorkingCopyCommand >> defaultMenuItemName [
 { #category : #execution }
 PBOpenProjectWorkingCopyCommand >> execute [
 	
-	(IceTipWorkingCopyBrowser onRepository: project project repository iceRepository) openWithSpec
+	(IceTipWorkingCopyBrowser onRepository: project repository iceRepository) openWithSpec
 ]

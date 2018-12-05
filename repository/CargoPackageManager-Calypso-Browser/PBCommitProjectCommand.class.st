@@ -55,5 +55,5 @@ PBCommitProjectCommand >> defaultMenuItemName [
 { #category : #execution }
 PBCommitProjectCommand >> execute [
 	
-	(IceTipCommitBrowser onRepository: project project repository iceRepository) openWithSpec
+	(IceTipCommitBrowser onRepository: project repository iceRepository) openWithSpec
 ]

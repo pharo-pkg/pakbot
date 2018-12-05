@@ -154,12 +154,6 @@ PBPackageUIItem >> package: anObject [
 	package := anObject
 ]
 
-{ #category : #actions }
-PBPackageUIItem >> removeFromProject [
-	
-	^ self package project removePackage: self package
-]
-
 { #category : #testing }
 PBPackageUIItem >> representsItemOfType: aClass [
 
@@ -169,6 +163,5 @@ PBPackageUIItem >> representsItemOfType: aClass [
 
 { #category : #accessing }
 PBPackageUIItem >> systemPackage [
-	
 	^ package systemPackage
 ]
