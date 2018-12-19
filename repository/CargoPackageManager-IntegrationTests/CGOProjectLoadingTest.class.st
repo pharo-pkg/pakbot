@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithExcetion [
+CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
 
 	| project baselineProjectV1 baselineProjectV2 |
 
@@ -29,7 +29,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWi
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithExcetion [
+CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithException [
 
 	| project configurationProjectV1 configurationProjectV2 |
 
