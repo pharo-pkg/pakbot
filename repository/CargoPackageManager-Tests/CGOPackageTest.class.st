@@ -2,18 +2,18 @@
 A PackageTest is a test class for testing the behavior of Package
 "
 Class {
-	#name : #PackageTest,
+	#name : #CGOPackageTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #accessing }
-PackageTest class >> resources [
+CGOPackageTest class >> resources [
 	^ #()
 ]
 
 { #category : #tests }
-PackageTest >> testIsPlatformPackage [
+CGOPackageTest >> testIsPlatformPackage [
 	| package |
 	
 	package := CGOPackageProvider default packageNamed: 'Test'.

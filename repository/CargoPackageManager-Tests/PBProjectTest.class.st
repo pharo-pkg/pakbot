@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOProjectTest,
+	#name : #PBProjectTest,
 	#superclass : #CGOModelTest,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
-CGOProjectTest >> testCanGetPackageUnits [
+PBProjectTest >> testCanGetPackageUnits [
 	| units |
 	units := ongoingProject packageUnits.
 	

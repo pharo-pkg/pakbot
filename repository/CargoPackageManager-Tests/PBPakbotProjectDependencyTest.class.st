@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOCargoProjectDependencyTest,
+	#name : #PBPakbotProjectDependencyTest,
 	#superclass : #TestCase,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
-CGOCargoProjectDependencyTest >> testCanCreateDependency [
+PBPakbotProjectDependencyTest >> testCanCreateDependency [
 	| dependency |
 	dependency := PBPakbotProjectDependency example.
 	self 
@@ -15,7 +15,7 @@ CGOCargoProjectDependencyTest >> testCanCreateDependency [
 ]
 
 { #category : #tests }
-CGOCargoProjectDependencyTest >> testCanDeserializeDependency [
+PBPakbotProjectDependencyTest >> testCanDeserializeDependency [
 	| dependency dict |
 	dict := STON fromString: '{
 	#name : ''pharo-counter'',
@@ -34,7 +34,7 @@ CGOCargoProjectDependencyTest >> testCanDeserializeDependency [
 ]
 
 { #category : #tests }
-CGOCargoProjectDependencyTest >> testCanSerializeDependency [
+PBPakbotProjectDependencyTest >> testCanSerializeDependency [
 	| projectDependency projectDependencyString |
 	projectDependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
 	projectDependency repository version: 'master'.
