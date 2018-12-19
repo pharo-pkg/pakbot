@@ -1,9 +1,13 @@
 "
 Builder of Cargo metadata for the PharoLauncher project.
 
-	self buildAndRegisterIn: PBPackageRegistry default
+	self buildAndRegisterIn: PBPackageRegistry default.
 	
-	self buildWithoutPackageDependencyAndRegisterIn: PBPackageRegistry default
+	self buildWithoutPackageDependencyAndRegisterIn: PBPackageRegistry default.
+	
+	self new 
+		buildProject;
+		buildExternalProjectDependencies.
 "
 Class {
 	#name : #PharoLauncherProject,
@@ -105,7 +109,7 @@ PharoLauncherProject >> buildProject [
     lets you create new images from any template,
     automatically find and download the appropriate VM to launch your images.';
 		repository: "self buildRepository" PBNoRepository new;
-		registry: registry;
+		registry: self registry;
 		yourself.
 		
 	registry register: project.
@@ -130,6 +134,11 @@ PharoLauncherProject >> buildWithoutPackageDependencyAndRegisterIn: aCGOPackageR
 		buildPackages;
 		removePackagesDependencies.
 	^ project
+]
+
+{ #category : #accessing }
+PharoLauncherProject >> registry [ 
+	^ registry ifNil: [ registry := PBPackageRegistry new ]
 ]
 
 { #category : #building }
