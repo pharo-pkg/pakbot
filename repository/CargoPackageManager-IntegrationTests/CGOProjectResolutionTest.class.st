@@ -23,7 +23,7 @@ CGOProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBo
 ]
 
 { #category : #'cargo-dependencies' }
-CGOProjectResolutionTest >> testProjectResolutionWithCargoOngoingProjectDependenciesIncludesBothProjectAndDependency [
+CGOProjectResolutionTest >> testProjectResolutionWithCargoProjectDependenciesIncludesBothProjectAndDependency [
 
 	| resolution projectOne projectTwo |
 	
