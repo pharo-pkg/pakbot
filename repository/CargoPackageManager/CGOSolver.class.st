@@ -12,6 +12,17 @@ Class {
 }
 
 { #category : #solving }
+CGOSolver >> checkConflictsOf: resolvedProject [
+	| dependencies |
+	dependencies := resolvedProject allResolvedDependencies.
+	dependencies
+		do: [ :each | 
+			each
+				checkConflictsWithDependencies: dependencies;
+				checkConflictsWithRegistry: self registry ]
+]
+
+{ #category : #solving }
 CGOSolver >> registry [
 
 	^ registry
@@ -24,21 +35,15 @@ CGOSolver >> registry: aRegistry [
 
 { #category : #solving }
 CGOSolver >> solveProject: aProject [
-	
-	| resolvedProject dependencies |
+	| resolvedProject |
+
 	resolvedProject := PBResolvedProject onProject: aProject.
-	
-	"Solve the project"
-	aProject dependencies do: [ :each |
-		resolvedProject addResolvedDependency: (PBResolvedDependency
-			onDependency: each
-			resolution: (self solveProject: (each resolveInSolver: self))) ].
-	
-	"Check conflicts"
-	dependencies := resolvedProject allResolvedDependencies.
-	dependencies do: [ :each | 
-		each
-			checkConflictsWithDependencies: dependencies;
-			checkConflictsWithRegistry: self registry ].
+	aProject dependencies
+		do: [ :each | 
+			resolvedProject addResolvedDependency:
+					(PBResolvedDependency
+						onDependency: each
+						resolution: (self solveProject: (each resolveInSolver: self))) ].
+	self checkConflictsOf: resolvedProject.
 	^ resolvedProject
 ]
