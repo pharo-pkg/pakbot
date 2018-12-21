@@ -1,11 +1,11 @@
 "
-I represent a Cargo package ready to be serialized.
-I factorize some fields declaration and some utilty methods.
+I represent a Pakbot artefact ready to be serialized.
+I factorize some fields declaration and some utility methods.
 
 Do not use me directly but use one of my subclasses!
 "
 Class {
-	#name : #CGOVcsSerializedPackage,
+	#name : #PBSerializedArtefact,
 	#superclass : #Object,
 	#instVars : [
 		'dict'
@@ -14,32 +14,39 @@ Class {
 }
 
 { #category : #'instance creation' }
-CGOVcsSerializedPackage class >> fromDictionary: aDictionary [ 
+PBSerializedArtefact class >> from: aPackage [
+	^ self new
+		initializeWithPackage: aPackage;
+		yourself
+]
+
+{ #category : #'instance creation' }
+PBSerializedArtefact class >> fromDictionary: aDictionary [ 
 	^ self basicNew 
 		initializeWithDictionary: aDictionary;
 		yourself.
 ]
 
 { #category : #utility }
-CGOVcsSerializedPackage >> addPropertyNamed: aString ifNotEmptyOrNil: aCollection [ 
+PBSerializedArtefact >> addPropertyNamed: aString ifNotEmptyOrNil: aCollection [ 
 	aCollection ifNil: [ ^ self ]. "NOOP"
 	^ aCollection
 		ifNotEmpty: [ dict at: aString  put: aCollection asArray ]
 ]
 
 { #category : #serialization }
-CGOVcsSerializedPackage >> asString [
+PBSerializedArtefact >> asString [
 	^ CGOPackageVersionWriterV1 toStringPretty: dict
 ]
 
 { #category : #serialization }
-CGOVcsSerializedPackage >> dependencyConstraintsMapping: aDependency [
+PBSerializedArtefact >> dependencyConstraintsMapping: aDependency [
 	^ (aDependency constraints collect: #asString)
 			ifEmpty: [ #() ]
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedPackage >> deserializedDependencies: aListOfSerializedDependencies [
+PBSerializedArtefact >> deserializedDependencies: aListOfSerializedDependencies [
 	^ aListOfSerializedDependencies 
 		ifNil: [ OrderedCollection empty ]
 		ifNotNil: [ aListOfSerializedDependencies collect:
@@ -50,28 +57,26 @@ CGOVcsSerializedPackage >> deserializedDependencies: aListOfSerializedDependenci
 					CGOPackageDependency newFrom: association ] ]
 ]
 
-{ #category : #utility }
-CGOVcsSerializedPackage >> dictionaryOrNilIfEmpty: aDictionary [
-	aDictionary ifNil: [ ^ nil ].
-	^ aDictionary ifEmpty: [ nil ]
-]
-
 { #category : #initialization }
-CGOVcsSerializedPackage >> initializeWithDictionary: aDictionary [ 
+PBSerializedArtefact >> initializeWithDictionary: aDictionary [ 
 	dict := aDictionary
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackage >> initializeWithOngoing: aCGOOngoingPackageUnit [
+PBSerializedArtefact >> initializeWithPackage: aPBPackage [
 	dict := OrderedDictionary new.
-	dict at: #name put: aCGOOngoingPackageUnit name.
-	aCGOOngoingPackageUnit description 
-		ifNotNil: [ dict at: #description put: aCGOOngoingPackageUnit description ].
-	
+	dict at: #name put: aPBPackage name.
+	aPBPackage description 
+		ifNotNil: [ dict at: #description put: aPBPackage description ].
+]
+
+{ #category : #accessing }
+PBSerializedArtefact >> propertyNamed: aName [
+	^ dict at: aName
 ]
 
 { #category : #serialization }
-CGOVcsSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
+PBSerializedArtefact >> serializedDependenciesOf: aPackageDependencyList [
 	^ self toArray:
 		(aPackageDependencyList
 			collect: [ :dependency |	| constraints |
@@ -81,27 +86,29 @@ CGOVcsSerializedPackage >> serializedDependenciesOf: aPackageDependencyList [
 					ifNotEmpty: [ Association key: dependency name value: constraints ] ])
 ]
 
+{ #category : #utility }
+PBSerializedArtefact >> sort: packages andCollect: aSelector [
+	^ (packages sorted: [ :a :b | a name < b name ])
+			collect: aSelector 
+]
+
 { #category : #serialization }
-CGOVcsSerializedPackage >> stonOn: stonWriter [
+PBSerializedArtefact >> stonOn: stonWriter [
+	"custimize ston serialization to only serialize dictionary"
 	stonWriter writeMap: dict
 ]
 
 { #category : #utility }
-CGOVcsSerializedPackage >> toArray: aCollection [
+PBSerializedArtefact >> toArray: aCollection [
 	^ aCollection 
 		ifNil: [ #() ]
 		ifNotNil: [ aCollection asArray ]
 ]
 
 { #category : #utility }
-CGOVcsSerializedPackage >> toArrayOrNilIfEmpty: aCollection [
+PBSerializedArtefact >> toArrayOrNilIfEmpty: aCollection [
 	aCollection ifNil: [ ^ nil ].
 	^ aCollection
 		ifEmpty: [ nil ]
 		ifNotEmpty: [aCollection asArray ]
-]
-
-{ #category : #utility }
-CGOVcsSerializedPackage >> toDictionary: aDictionaryOrNil [
-	^ aDictionaryOrNil ifNil: [ ^ Dictionary new ]
 ]

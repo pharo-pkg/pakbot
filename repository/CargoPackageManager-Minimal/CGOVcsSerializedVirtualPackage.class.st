@@ -3,13 +3,6 @@ I represent a Cargo virtual package ready to be serialized on a Version Control 
 "
 Class {
 	#name : #CGOVcsSerializedVirtualPackage,
-	#superclass : #CGOVcsSerializedPackage,
+	#superclass : #PBSerializedArtefact,
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
-
-{ #category : #'instance creation' }
-CGOVcsSerializedVirtualPackage class >> from: aVirtualPackageVersion [
-	^ self basicNew
-		initializeWithOngoing: aVirtualPackageVersion;
-		yourself
-]

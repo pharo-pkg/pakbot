@@ -4,19 +4,12 @@ I map some instance variables  to an easily serialized form and skip some others
 "
 Class {
 	#name : #CGOVcsSerializedPackageUnit,
-	#superclass : #CGOVcsSerializedPackage,
+	#superclass : #PBSerializedArtefact,
 	#instVars : [
 		'dependencies'
 	],
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
-
-{ #category : #'instance creation' }
-CGOVcsSerializedPackageUnit class >> from: aCGOOngoingPackageUnit [
-	^ self basicNew
-		initializeWithOngoing: aCGOOngoingPackageUnit;
-		yourself
-]
 
 { #category : #converting }
 CGOVcsSerializedPackageUnit >> asOngoingPackage [
@@ -46,8 +39,8 @@ CGOVcsSerializedPackageUnit >> dependencies [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackageUnit >> initializeWithOngoing: aCGOOngoingPackageUnit [
-	super initializeWithOngoing: aCGOOngoingPackageUnit.
+CGOVcsSerializedPackageUnit >> initializeWithPackage: aCGOOngoingPackageUnit [
+	super initializeWithPackage: aCGOOngoingPackageUnit.
 	self addPropertyNamed: #dependencies ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies).
 	self addPropertyNamed: #platformRequirements ifNotEmptyOrNil: aCGOOngoingPackageUnit platformRequirements.
 	self addPropertyNamed: #provisions ifNotEmptyOrNil: aCGOOngoingPackageUnit provisions.

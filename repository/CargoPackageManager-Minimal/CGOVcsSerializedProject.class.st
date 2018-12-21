@@ -4,16 +4,9 @@ I map some instance variables  to an easily serialized form.
 "
 Class {
 	#name : #CGOVcsSerializedProject,
-	#superclass : #CGOVcsSerializedPackage,
+	#superclass : #PBSerializedArtefact,
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
-
-{ #category : #'instance creation' }
-CGOVcsSerializedProject class >> from: aCGOOngoingProject [
-	^ self basicNew
-		initializeWithOngoing: aCGOOngoingProject;
-		yourself
-]
 
 { #category : #converting }
 CGOVcsSerializedProject >> asOngoingPackage [
@@ -56,8 +49,8 @@ CGOVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedProject >> initializeWithOngoing: aCGOOngoingProject [
-	super initializeWithOngoing: aCGOOngoingProject.
+CGOVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
+	super initializeWithPackage: aCGOOngoingProject.
 	self
 		addPropertyNamed: #externalProjects 
 		ifNotEmptyOrNil: (aCGOOngoingProject externalProjects).
@@ -101,10 +94,4 @@ CGOVcsSerializedProject >> projectDependenciesFrom: aCollection [
 		(projectDependencyDict includesKey: #baseline)
 			ifTrue: [ self baselineProjectDependencyFrom: projectDependencyDict ].
 		self pakbotProjectDependencyFrom: projectDependencyDict. ]	
-]
-
-{ #category : #utility }
-CGOVcsSerializedProject >> sort: packages andCollect: aSelector [
-	^ (packages sorted: [ :a :b | a name < b name ])
-			collect: aSelector 
 ]

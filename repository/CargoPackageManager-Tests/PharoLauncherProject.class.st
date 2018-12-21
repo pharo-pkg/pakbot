@@ -73,6 +73,7 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 			name: 'XMLParser'
 			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
 			version: #stable).
+	^ project
 ]
 
 { #category : #building }
@@ -96,6 +97,7 @@ PharoLauncherProject >> buildPackages [
 	(project newNotLoadedPackage: #'PharoLauncher-Tests-Core')
 		description: 'Tests of the PharoLauncher-Core package..';
 		addDependencyOn: #'PharoLauncher-Core'.
+	^ project
 ]
 
 { #category : #building }
@@ -144,5 +146,6 @@ PharoLauncherProject >> registry [
 { #category : #building }
 PharoLauncherProject >> removePackagesDependencies [
 	project packageUnits do: [ :unit |
-		unit dependencies: OrderedCollection new ]
+		unit dependencies: OrderedCollection new ].
+	^ project
 ]

@@ -1,5 +1,5 @@
 "
-Class used to represent a dependency that has been resolved. It means that we know the specific version of a package to load. To be able to understand the solving afterwards, a link to origin dependencies is kept.
+Class used to represent a project whose dependencies have been resolved. It means that we know the specific version of a package to load. To be able to understand the solving afterwards, a link to origin dependencies is kept.
 "
 Class {
 	#name : #PBResolvedProject,

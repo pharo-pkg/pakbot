@@ -1,12 +1,12 @@
 Class {
 	#name : #CGOOngoingProjectTest,
-	#superclass : #CGOProjectTest,
+	#superclass : #PBProjectTest,
 	#instVars : [
 		'defaultPackageRepository',
 		'testPackageRepository',
 		'fs'
 	],
-	#category : 'CargoPackageManager-Tests'
+	#category : #'CargoPackageManager-Tests'
 }
 
 { #category : #running }

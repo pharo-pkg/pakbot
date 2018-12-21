@@ -45,6 +45,12 @@ PBPackage >> asPackageDependency [
 ]
 
 { #category : #converting }
+PBPackage >> asSerializedPackage [
+	"Package repository version of the unit metadata (i.e. full metadata)"
+	^ PBSerializedPackage from: self
+]
+
+{ #category : #converting }
 PBPackage >> asVcsSerializedPackageUnit [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedPackageUnit from: self

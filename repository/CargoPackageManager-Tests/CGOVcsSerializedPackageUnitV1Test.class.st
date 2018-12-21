@@ -5,22 +5,22 @@ Class {
 }
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [	
+CGOVcsSerializedPackageUnitV1Test >> serializedClass [
+	^ CGOVcsSerializedPackageUnit
+]
+
+{ #category : #tests }
+CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [
 	| unit dict dependency |
-	dict := Dictionary 
+	dict := Dictionary
 		with: #name -> #Bar
 		with: #dependencies -> #(#Project::Foo).
+		
+	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
 	
-	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
-
 	dependency := unit dependencies first.
-	self 
-		assert: dependency targetedPackage 
-		equals: #Foo.
-	self 
-		assert: dependency scope
-		equals: #Project.
-
+	self assert: dependency targetedPackage equals: #Foo.
+	self assert: dependency scope equals: #Project
 ]
 
 { #category : #tests }
@@ -30,7 +30,7 @@ CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociat
 		with: #name -> 'Foo'
 		with: #dependencies -> {#Project::Foo -> #('=1.1')}.
 
-	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
+	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
 	
 	dependency := unit dependencies first.
 	self 
@@ -51,7 +51,7 @@ CGOVcsSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
 		with: #name -> 'Foo'
 		with: #dependencies -> #().
 	
-	unit := (CGOVcsSerializedPackageUnit fromDictionary: dict) asOngoingPackage.
+	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
 	
 	self assert: unit dependencies isEmpty
 ]

@@ -129,9 +129,9 @@ PBProject >> asOngoingPackage [
 ]
 
 { #category : #converting }
-PBProject >> asSerializedCargoProject [
-	"VCS version of the project metadata (i.e. minimum metadata)"
-	^ CGOVcsSerializedProject from: self
+PBProject >> asSerializedPackage [
+	"Package repository version of the project metadata (i.e. full metadata)"
+	^ PBSerializedProject from: self
 ]
 
 { #category : #converting }
@@ -484,8 +484,13 @@ PBProject >> project [
 
 { #category : #publishing }
 PBProject >> publish [
+	
+	self publishOn: Cargo defaultPackageRepository
+]
 
-	Cargo defaultPackageRepository savePackageVersion: self
+{ #category : #publishing }
+PBProject >> publishOn: aPackageRepository [
+	aPackageRepository saveProject: self
 ]
 
 { #category : #accessing }

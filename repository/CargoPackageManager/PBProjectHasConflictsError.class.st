@@ -1,5 +1,5 @@
 "
-This error is signaled when a project with conflicts is tried to be loaded.
+This error is signaled when a project with conflicts is tried to be loaded or published.
 "
 Class {
 	#name : #PBProjectHasConflictsError,

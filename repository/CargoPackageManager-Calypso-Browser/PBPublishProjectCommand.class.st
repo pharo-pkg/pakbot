@@ -43,5 +43,5 @@ PBPublishProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 PBPublishProjectCommand >> execute [
-	project publishAll 
+	project publish
 ]

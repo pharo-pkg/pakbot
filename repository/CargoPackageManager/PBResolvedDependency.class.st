@@ -1,3 +1,6 @@
+"
+Class used to represent a dependency that has been resolved. It means that we know the specific version of a package to load. 
+"
 Class {
 	#name : #PBResolvedDependency,
 	#superclass : #Object,
@@ -170,6 +173,18 @@ PBResolvedDependency >> resolvesProject: aProject [
 PBResolvedDependency >> resolvesTarget: aResolutionTarget [ 
 	
 	^ self resolution resolvedProjectVersion = aResolutionTarget
+]
+
+{ #category : #ston }
+PBResolvedDependency >> stonOn: stonWriter [
+	| resolvedVersion |
+	self originalResolution hasConflicts 
+		ifTrue: [ PBProjectHasConflictsError signalOnResolution: self originalResolution ].
+	resolvedVersion := self originalResolution resolvedProjectVersion resolvedVersion.
+	stonWriter writeMap: (OrderedDictionary 
+		with: 	#configuration -> dependency name
+		with:	#url -> dependency repositoryUrl asString
+		with: 	#version -> resolvedVersion)
 ]
 
 { #category : #accessing }

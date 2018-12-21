@@ -3,19 +3,12 @@ I represent a Cargo package assembly ready to be serialized on a Version Control
 "
 Class {
 	#name : #CGOVcsSerializedPackageAssembly,
-	#superclass : #CGOVcsSerializedPackage,
+	#superclass : #PBSerializedArtefact,
 	#instVars : [
 		'parts'
 	],
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
-
-{ #category : #'instance creation' }
-CGOVcsSerializedPackageAssembly class >> from: aCGOOngoingPackageAssembly [
-	^ self basicNew
-		initializeWithOngoing: aCGOOngoingPackageAssembly;
-		yourself
-]
 
 { #category : #converting }
 CGOVcsSerializedPackageAssembly >> asOngoingPackage [
@@ -39,8 +32,8 @@ CGOVcsSerializedPackageAssembly >> initializePartsWith: aCGOOngoingPackageAssemb
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackageAssembly >> initializeWithOngoing: aCGOOngoingPackageAssembly [
-	super initializeWithOngoing: aCGOOngoingPackageAssembly.
+CGOVcsSerializedPackageAssembly >> initializeWithPackage: aCGOOngoingPackageAssembly [
+	super initializeWithPackage: aCGOOngoingPackageAssembly.
 	self 
 		addPropertyNamed: #parts
 		ifNotEmptyOrNil: aCGOOngoingPackageAssembly parts.

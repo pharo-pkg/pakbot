@@ -62,6 +62,11 @@ PBMetacelloConfigurationProjectDependency >> isMetacelloConfiguration [
 	^ true
 ]
 
+{ #category : #printing }
+PBMetacelloConfigurationProjectDependency >> printOn: aStream [
+	aStream << self class name << '(' << name << ')'
+]
+
 { #category : #ston }
 PBMetacelloConfigurationProjectDependency >> stonOn: stonWriter [
 	stonWriter writeMap: (OrderedDictionary 

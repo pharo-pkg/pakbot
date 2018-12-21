@@ -71,6 +71,12 @@ PBAssembly >> allPackageUnits [
 ]
 
 { #category : #converting }
+PBAssembly >> asSerializedPackage [
+	"Package repository version of the assembly metadata (i.e. full metadata)"
+	^ PBSerializedAssembly from: self
+]
+
+{ #category : #converting }
 PBAssembly >> asVcsSerializedPackageAssembly [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
 	^ CGOVcsSerializedPackageAssembly from: self
