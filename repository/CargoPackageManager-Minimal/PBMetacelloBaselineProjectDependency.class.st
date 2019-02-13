@@ -24,7 +24,7 @@ PBMetacelloBaselineProjectDependency class >> fromMetacelloSpec: aMetacelloSpec 
 	
 	version := metacelloUrlParts size > 2
 		ifTrue: [ metacelloUrlParts last ]
-		ifFalse: [ self halt: 'No version specified?' ].
+		ifFalse: [ nil. "No version specified? We cannot compare versions so we build the dependency from the info we have to further handle a conflict if needed" ].
 
 	dependencyUrl := metacelloUrlParts first , ':', metacelloUrlParts second.
 
@@ -62,9 +62,14 @@ PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 ]
 
 { #category : #ston }
-PBMetacelloBaselineProjectDependency >> stonOn: stonWriter [
-	stonWriter writeMap: (OrderedDictionary 
+PBMetacelloBaselineProjectDependency >> stonMap [
+	^ OrderedDictionary 
 		with: #baseline -> name
 		with:	#url -> url asString
-		with: 	#version -> version)
+		with: 	#version -> version
+]
+
+{ #category : #ston }
+PBMetacelloBaselineProjectDependency >> stonOn: stonWriter [
+	stonWriter writeMap: self stonMap
 ]

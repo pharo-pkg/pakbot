@@ -48,11 +48,6 @@ PharoLauncherProject >> buildAndRegisterIn: aCGOPackageRegistry [
 
 { #category : #building }
 PharoLauncherProject >> buildExternalProjectDependencies [
-	project addDependency:
-		(PBMetacelloConfigurationProjectDependency
-			name: 'JSON' 
-			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/JSON/main/'
-			version: #stable).
 	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'Ston'
@@ -73,6 +68,11 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 			name: 'XMLParser'
 			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
 			version: #stable).
+	project addDependency: 
+		(PBMetacelloBaselineProjectDependency  
+			name: 'Icetray'
+			repositoryUrl: 'https://github.com/pharo-spec/icetray.git'
+			version: #master).
 	^ project
 ]
 

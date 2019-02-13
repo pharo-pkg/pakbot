@@ -20,9 +20,9 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 	#version : ''1.0.0'',
 	#dependencies : [
 		{
-			#configuration : #JSON,
-			#url : ''http://smalltalkhub.com/mc/PharoExtras/JSON/main/'',
-			#version : ''1.2''
+			#baseline : #Icetray,
+			#url : ''https://github.com/pharo-spec/icetray.git'',
+			#version : #master
 		},
 		{
 			#configuration : #OSProcess,
@@ -104,7 +104,9 @@ PBSerializedProjectV1Test >> testCanSerializeProjectWithDependencies [
 		buildProject;
 		buildExternalProjectDependencies.
 	project version: '1.0' asSemanticVersion.
-	serializedProject := project asSerializedPackage.
+	[ serializedProject := project asSerializedPackage ]
+		on: PBProjectHasConflictsError
+		do: [ :e | e resume "ignore for now" ].
 	
 	dependenciesVersions := self serializedPropertiesOfDependencies: (serializedProject propertyNamed: #dependencies).
 	self 
@@ -143,4 +145,29 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	self
 		assert: serializedProject asString
 		equals: self stonStringForSimpleProject
+]
+
+{ #category : #tests }
+PBSerializedProjectV1Test >> testErrorSignaledWhenTryingToSerializeProjectWithConflictingDependencies [
+	| project serializedProject |
+	
+	project := PBProject example.
+	project 
+		version: '1.0' asSemanticVersion;
+		registry: PBPackageRegistry new.
+
+	project addDependency:
+		(PBMetacelloConfigurationProjectDependency
+			name: 'XMLParser' 
+			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
+			version: #stable).
+	project addDependency: 
+		(PBMetacelloConfigurationProjectDependency 
+			name: 'XMLParser'
+			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
+			version: '1.0').
+
+	self
+		should: [ project asSerializedPackage ]
+		raise: PBProjectHasConflictsError 
 ]

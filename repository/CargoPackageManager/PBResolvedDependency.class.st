@@ -177,14 +177,14 @@ PBResolvedDependency >> resolvesTarget: aResolutionTarget [
 
 { #category : #ston }
 PBResolvedDependency >> stonOn: stonWriter [
-	| resolvedVersion |
+	| resolvedVersion map |
 	self originalResolution hasConflicts 
 		ifTrue: [ PBProjectHasConflictsError signalOnResolution: self originalResolution ].
 	resolvedVersion := self originalResolution resolvedProjectVersion resolvedVersion.
-	stonWriter writeMap: (OrderedDictionary 
-		with: 	#configuration -> dependency name
-		with:	#url -> dependency repositoryUrl asString
-		with: 	#version -> resolvedVersion)
+	map := dependency stonMap 
+		at: #version put: resolvedVersion;
+		yourself.
+	stonWriter writeMap: map.
 ]
 
 { #category : #accessing }

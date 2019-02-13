@@ -68,9 +68,14 @@ PBMetacelloConfigurationProjectDependency >> printOn: aStream [
 ]
 
 { #category : #ston }
-PBMetacelloConfigurationProjectDependency >> stonOn: stonWriter [
-	stonWriter writeMap: (OrderedDictionary 
+PBMetacelloConfigurationProjectDependency >> stonMap [
+	^ OrderedDictionary 
 		with: 	#configuration -> name
 		with:	#url -> url asString
-		with: 	#version -> version)
+		with: 	#version -> version
+]
+
+{ #category : #ston }
+PBMetacelloConfigurationProjectDependency >> stonOn: stonWriter [
+	stonWriter writeMap: self stonMap
 ]

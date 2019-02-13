@@ -10,11 +10,15 @@ Class {
 
 { #category : #initialization }
 PBSerializedProject >> initializeWithPackage: aPBProject [
+	| resolvedProject |
 	super initializeWithPackage: aPBProject.
 	dict at: #version put: aPBProject version asString.
+	resolvedProject := aPBProject resolve.
+	resolvedProject hasConflicts 
+		ifTrue: [ PBProjectHasConflictsError signalOnResolution: resolvedProject ].
 	self
 		addPropertyNamed: #dependencies 
-		ifNotEmptyOrNil: ((aPBProject resolve resolvedDependencies) 
+		ifNotEmptyOrNil: ((resolvedProject resolvedDependencies) 
 								sorted: [ :first :second | first name < second name ]).
 	"used for package dependencies
 	self
