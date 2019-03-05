@@ -6,7 +6,8 @@ SmalltalkCISpec {
       #baseline : 'Cargo',
       #directory : 'repository',
       #platforms : [ #pharo ],
-	  #load : ['tests-client']
+      #load : ['tests-client'],
+      #onConflict : #useLoaded
     }
   ],
   #testing : {
