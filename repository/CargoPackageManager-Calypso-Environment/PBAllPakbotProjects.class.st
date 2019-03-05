@@ -1,6 +1,6 @@
 Class {
 	#name : #PBAllPakbotProjects,
-	#superclass : #ClyAllProjects,
+	#superclass : #ClyAllProjectsQuery,
 	#category : #'CargoPackageManager-Calypso-Environment-Queries'
 }
 
