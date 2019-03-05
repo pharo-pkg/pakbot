@@ -71,7 +71,7 @@ BaselineOfCargo >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfCargo >> icetray: spec [
-	spec baseline: 'Icetray' with: [ spec repository: 'github://guillep/icetray/src' ]
+	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
 ]
 
 { #category : #baseline }
