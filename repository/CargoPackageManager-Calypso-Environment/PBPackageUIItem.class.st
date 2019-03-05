@@ -34,14 +34,14 @@ PBPackageUIItem class >> on: aPackage [
 { #category : #queries }
 PBPackageUIItem class >> prepareClassQueriesFrom: packages in: aNavigationEnvironment [
 		
-	^ { ClyAllClasses from: PBProjectPackageScope ofAll: packages in: aNavigationEnvironment }.
+	^ { ClyAllClassesQuery from: PBProjectPackageScope ofAll: packages in: aNavigationEnvironment }.
 
 ]
 
 { #category : #queries }
 PBPackageUIItem class >> prepareProjectItemsQueryFrom: anItem in: aNavigationEnvironment [ 
 		
-	^ ClyAllClassGroups from: PBProjectPackageScope ofAll: {anItem} in: aNavigationEnvironment.
+	^ ClyAllClassGroupsQuery from: PBProjectPackageScope ofAll: {anItem} in: aNavigationEnvironment.
 
 ]
 
