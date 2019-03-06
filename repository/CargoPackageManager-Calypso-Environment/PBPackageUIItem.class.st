@@ -154,6 +154,11 @@ PBPackageUIItem >> package: anObject [
 	package := anObject
 ]
 
+{ #category : #accessing }
+PBPackageUIItem >> project [
+	^ package project
+]
+
 { #category : #testing }
 PBPackageUIItem >> representsItemOfType: aClass [
 
