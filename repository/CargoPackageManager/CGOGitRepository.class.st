@@ -23,12 +23,25 @@ CGOGitRepository class >> example [
 	^ CGOGitRepositoryCreator example
 ]
 
+{ #category : #'instance creation' }
+CGOGitRepository class >> fromDictionary: aDictionary [
+	^ CGOGitRepositoryCreator new
+		url: (aDictionary at: #repositoryUrl);
+		version: (aDictionary at: #version ifAbsent: [ nil ]);
+		create.
+]
+
 { #category : #'instance-creation' }
 CGOGitRepository class >> repository: anIceLibgitRepository [ 
 	
 	^ self new
 		repository: anIceLibgitRepository;
 		yourself
+]
+
+{ #category : #accessing }
+CGOGitRepository class >> type [ 
+	^ #git
 ]
 
 { #category : #'instance creation' }
@@ -91,7 +104,7 @@ CGOGitRepository >> fetchVersion: aString [
 		ifNotEmpty: [ iceRepository revparse: aString ].
 
 
-	project := PBProject fromStonString: (commitish fileSystem / self projectMetadataPath) contents.
+	project := PBProject fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project
 ]
@@ -232,12 +245,13 @@ CGOGitRepository >> sourcePackageVersionClass [
 
 { #category : #serialization }
 CGOGitRepository >> stonOn: stonWriter [
-	| url |
+	| url  dict |
 	url := CGOGitRepositoryCreator urlWithScheme: repositoryUrl.
-	stonWriter writeMap: (OrderedDictionary 
-		with: #type -> #git
-		with: 	#repositoryUrl -> url asString
-		with: 	#version -> version)
+	dict := OrderedDictionary 
+		with: #type -> self class type
+		with: 	#repositoryUrl -> url asString.
+	version ifNotNil: [ dict at: #version put: version ].
+	stonWriter writeMap: dict
 ]
 
 { #category : #accessing }

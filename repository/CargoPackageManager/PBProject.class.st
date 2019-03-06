@@ -38,7 +38,7 @@ PBProject class >> for: aProjectName [
 { #category : #'instance creation' }
 PBProject class >> fromRepository: aCGOSourceRepository [
 	| ongoing |
-	ongoing := self fromStonString: aCGOSourceRepository projectMetadataStonString.
+	ongoing := self fromVcsStonString: aCGOSourceRepository projectMetadataStonString.
 	ongoing repository: aCGOSourceRepository.
 	^ ongoing
 ]
@@ -137,7 +137,7 @@ PBProject >> asSerializedPackage [
 { #category : #converting }
 PBProject >> asVcsSerializedCargoProject [
 	"VCS version of the project metadata (i.e. minimum metadata)"
-	^ CGOVcsSerializedProject from: self
+	^ PBVcsSerializedProject from: self
 ]
 
 { #category : #accessing }

@@ -1,5 +1,5 @@
 Class {
-	#name : #CGOVcsSerializedProjectV1Test,
+	#name : #PBVcsSerializedProjectV1Test,
 	#superclass : #CGOTest,
 	#instVars : [
 		'repository',
@@ -9,12 +9,12 @@ Class {
 }
 
 { #category : #accessing }
-CGOVcsSerializedProjectV1Test class >> resources [
+PBVcsSerializedProjectV1Test class >> resources [
 	^ #()
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> counterUiProject [
+PBVcsSerializedProjectV1Test >> counterUiProject [
 	| project dependency |
 	
 	dependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
@@ -33,7 +33,7 @@ CGOVcsSerializedProjectV1Test >> counterUiProject [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> counterUiStonString [
+PBVcsSerializedProjectV1Test >> counterUiStonString [
 	" STON toStringPretty: (self new counterUiProject asVcsSerializedCargoProject) "
 	^ '{#version:''1.0''}
 {
@@ -48,7 +48,7 @@ CGOVcsSerializedProjectV1Test >> counterUiStonString [
 			]
 		}
 	],
-	#externalProjects : [
+	#dependencies : [
 		{
 			#name : ''pharo-counter'',
 			#repository : {
@@ -63,14 +63,58 @@ CGOVcsSerializedProjectV1Test >> counterUiStonString [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> iceRepositoryLocation [
+PBVcsSerializedProjectV1Test >> iceRepositoryLocation [
 	^ iceRepositoryLocation
 		ifNil: [ iceRepositoryLocation := FileLocator temp
 				/ ('pakbot-project-serialization-tests-' , DateAndTime now asFileNameCompatibleString) ]
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> setUp [
+PBVcsSerializedProjectV1Test >> projectWithBaselineDependencyStonString [
+	^ '{#version:''1.0''}
+{
+	#name : #Foo,
+	#description : ''Foo project for test purposes. I have a baseline dependency'',
+	#units : [
+		{
+			#name : #Foo-Bar,
+			#description : ''A package foo bar.''
+		}
+	],
+	#dependencies : [
+		{
+			#baseline : #Icetray,
+			#url : ''https://github.com/pharo-spec/icetray.git'',
+			#version : #master
+		}
+	]
+}'
+]
+
+{ #category : #'test data' }
+PBVcsSerializedProjectV1Test >> projectWithConfigurationDependencyStonString [
+	^ '{#version:''1.0''}
+{
+	#name : #Foo,
+	#description : ''Foo project for test purposes. I have a configuration dependency'',
+	#units : [
+		{
+			#name : #Foo-Bar,
+			#description : ''A package foo bar.''
+		}
+	],
+	#dependencies : [
+		{
+			#configuration : #Ston,
+			#url : ''http://ss3.gemstone.com/ss/STON'',
+			#version : #stable
+		}
+	]
+}'
+]
+
+{ #category : #'test data' }
+PBVcsSerializedProjectV1Test >> setUp [
 	self iceRepositoryLocation ensureDeleteAll.
 	repository := IceRepositoryCreator new 
 			location: self iceRepositoryLocation;
@@ -80,7 +124,7 @@ CGOVcsSerializedProjectV1Test >> setUp [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
+PBVcsSerializedProjectV1Test >> stonStringForExampleProject [
 	"
 		STON toStringPretty: PBProject example asVcsSerializedCargoProject
 	"
@@ -98,7 +142,7 @@ CGOVcsSerializedProjectV1Test >> stonStringForExampleProject [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> tearDown [
+PBVcsSerializedProjectV1Test >> tearDown [
 
 	self unloadCounterUI.
 	repository forget.
@@ -108,10 +152,83 @@ CGOVcsSerializedProjectV1Test >> tearDown [
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
+PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalBaselineProject [
+	| project dependency |
+	
+	project := PBProject fromVcsStonString: self projectWithBaselineDependencyStonString.
+	
+	dependency := project dependencies anyOne.
+
+	self 
+		assert: project dependencies size 
+		equals: 1.
+	self 
+		assert: dependency name
+		equals: #Icetray.
+			
+	self
+		assert: dependency class 
+		equals: PBMetacelloBaselineProjectDependency.
+	self
+		assert: dependency repositoryUrl 
+		equals: 'https://github.com/pharo-spec/icetray.git'.
+]
+
+{ #category : #tests }
+PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalConfigurationProject [
+	| project dependency |
+	
+	project := PBProject fromVcsStonString: self projectWithConfigurationDependencyStonString.
+	
+	dependency := project dependencies anyOne.
+
+	self 
+		assert: project dependencies size 
+		equals: 1.
+	self 
+		assert: dependency name
+		equals: #Ston.
+			
+	self
+		assert: dependency class 
+		equals: PBMetacelloConfigurationProjectDependency.
+	self
+		assert: dependency repositoryUrl 
+		equals: 'http://ss3.gemstone.com/ss/STON'.
+]
+
+{ #category : #tests }
+PBVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
+	| project dependency externalProject |
+	
+	project := PBProject fromVcsStonString: self counterUiStonString.
+	
+	dependency := project packageUnits anyOne dependencies first.
+	self 
+		assert: dependency dependencyName
+		equals: 'Counter::Counter-Core'.
+	
+	self 
+		assert: project dependencies size 
+		equals: 1.
+	self 
+		assert: project dependencies anyOne name
+		equals: #'pharo-counter'.
+			
+	externalProject := project dependencies anyOne.
+	self
+		assert: externalProject class 
+		equals: PBPakbotProjectDependency.
+	self
+		assert: externalProject repositoryUrl 
+		equals: 'git://git@github.com/demarey/pharo-counter.git'.
+]
+
+{ #category : #tests }
+PBVcsSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 	| project packageUnit |
 	
-	project := PBProject fromStonString: self stonStringForExampleProject.
+	project := PBProject fromVcsStonString: self stonStringForExampleProject.
 	
 	self
 		assert: project
@@ -133,34 +250,7 @@ CGOVcsSerializedProjectV1Test >> testCanDeserializationSimpleProject [
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
-	| project dependency externalProject |
-	
-	project := PBProject fromStonString: self counterUiStonString.
-	
-	dependency := project packageUnits anyOne dependencies first.
-	self 
-		assert: dependency dependencyName
-		equals: 'Counter::Counter-Core'.
-	
-	self 
-		assert: project externalProjects size 
-		equals: 1.
-	self 
-		assert: project externalProjects anyOne name
-		equals: #'pharo-counter'.
-			
-	externalProject := project externalProjects anyOne.
-	self
-		assert: externalProject class 
-		equals: PBPakbotProjectDependency.
-	self
-		assert: externalProject repositoryUrl 
-		equals: 'git://git@github.com/demarey/pharo-counter.git'.
-]
-
-{ #category : #tests }
-CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCargoProject [
+PBVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCargoProject [
 	| project projectStonString |
 	
 	project := self counterUiProject.
@@ -195,7 +285,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCar
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssembly [
+PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssembly [
 	| project iceProject deserializedProject |
 	
 	project := PBProject example.
@@ -225,7 +315,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssem
 ]
 
 { #category : #tests }
-CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
+PBVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	
 	serializedProject := PBProject example asVcsSerializedCargoProject.
@@ -236,7 +326,7 @@ CGOVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 ]
 
 { #category : #'test data' }
-CGOVcsSerializedProjectV1Test >> unloadCounterUI [
+PBVcsSerializedProjectV1Test >> unloadCounterUI [
 
 	| counterUIPackage |
 	counterUIPackage := #'Counter-UI-Spec' asPackageIfAbsent: [ ^ self ].

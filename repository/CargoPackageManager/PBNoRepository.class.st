@@ -12,3 +12,9 @@ PBNoRepository >> isValidRepository [
 	
 	^ false
 ]
+
+{ #category : #serialization }
+PBNoRepository >> stonOn: stonWriter [
+	PBError new 
+		signal: 'Cannot serialize a Project with no repository defined!'
+]

@@ -2,7 +2,7 @@
 I represent a Cargo package assembly ready to be serialized on a Version Control System (e.g. git).
 "
 Class {
-	#name : #CGOVcsSerializedPackageAssembly,
+	#name : #PBVcsSerializedPackageAssembly,
 	#superclass : #PBSerializedArtefact,
 	#instVars : [
 		'parts'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #converting }
-CGOVcsSerializedPackageAssembly >> asOngoingPackage [
+PBVcsSerializedPackageAssembly >> asOngoingPackage [
 	| assembly |
 	dict 
 		at: #name
@@ -27,19 +27,19 @@ CGOVcsSerializedPackageAssembly >> asOngoingPackage [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackageAssembly >> initializePartsWith: aCGOOngoingPackageAssembly [
-	parts := self serializedDependenciesOf: aCGOOngoingPackageAssembly parts
+PBVcsSerializedPackageAssembly >> initializePartsWith: aPBAssembly [
+	parts := self serializedDependenciesOf: aPBAssembly parts
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackageAssembly >> initializeWithPackage: aCGOOngoingPackageAssembly [
-	super initializeWithPackage: aCGOOngoingPackageAssembly.
+PBVcsSerializedPackageAssembly >> initializeWithPackage: aPBAssembly [
+	super initializeWithPackage: aPBAssembly.
 	self 
 		addPropertyNamed: #parts
-		ifNotEmptyOrNil: aCGOOngoingPackageAssembly parts.
+		ifNotEmptyOrNil: aPBAssembly parts.
 ]
 
 { #category : #accessing }
-CGOVcsSerializedPackageAssembly >> parts [
+PBVcsSerializedPackageAssembly >> parts [
 	^ parts
 ]

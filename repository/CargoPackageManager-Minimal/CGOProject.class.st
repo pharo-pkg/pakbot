@@ -65,7 +65,7 @@ CGOProject >> asSerializableCargoProject [
 
 { #category : #converting }
 CGOProject >> asVcsSerializedCargoProject [
-	^ CGOVcsSerializedProject from: self
+	^ PBVcsSerializedProject from: self
 ]
 
 { #category : #accessing }

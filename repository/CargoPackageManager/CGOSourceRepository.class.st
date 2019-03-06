@@ -11,6 +11,18 @@ Class {
 }
 
 { #category : #'instance creation' }
+CGOSourceRepository class >> classFor: repositoryTypeString [
+	^ self subclasses detect: [ :class | class type = repositoryTypeString ]
+]
+
+{ #category : #'instance creation' }
+CGOSourceRepository class >> fromDictionary: aDictionary [ 
+	| class |
+	class := self classFor: (aDictionary at: #type).
+	^ class fromDictionary: aDictionary
+]
+
+{ #category : #'instance creation' }
 CGOSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 	^ (self isGitRepositoryUrl: url)
 		ifTrue: [ CGOGitRepositoryCreator new
@@ -24,6 +36,11 @@ CGOSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 CGOSourceRepository class >> isGitRepositoryUrl: aString [
 	^ (aString beginsWith: 'git@') 
 		or: [ aString endsWith: '.git' ]
+]
+
+{ #category : #accessing }
+CGOSourceRepository class >> type [
+	^ self subclassResponsibility
 ]
 
 { #category : #converting }

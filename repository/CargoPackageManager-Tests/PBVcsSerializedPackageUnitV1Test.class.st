@@ -1,16 +1,16 @@
 Class {
-	#name : #CGOVcsSerializedPackageUnitV1Test,
+	#name : #PBVcsSerializedPackageUnitV1Test,
 	#superclass : #TestCase,
 	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitV1Test >> serializedClass [
-	^ CGOVcsSerializedPackageUnit
+PBVcsSerializedPackageUnitV1Test >> serializedClass [
+	^ PBVcsSerializedPackageUnit
 ]
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [
+PBVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [
 	| unit dict dependency |
 	dict := Dictionary
 		with: #name -> #Bar
@@ -24,7 +24,7 @@ CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [
 ]
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociation [	
+PBVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociation [	
 	| unit dict dependency |
 	dict := Dictionary 
 		with: #name -> 'Foo'
@@ -45,7 +45,7 @@ CGOVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociat
 ]
 
 { #category : #tests }
-CGOVcsSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
+PBVcsSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
 	| unit dict |
 	dict := Dictionary 
 		with: #name -> 'Foo'

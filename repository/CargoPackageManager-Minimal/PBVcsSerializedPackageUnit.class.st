@@ -3,7 +3,7 @@ I represent a Cargo package unit ready to be serialized on a Version Control Sys
 I map some instance variables  to an easily serialized form and skip some others variables for the serialization.
 "
 Class {
-	#name : #CGOVcsSerializedPackageUnit,
+	#name : #PBVcsSerializedPackageUnit,
 	#superclass : #PBSerializedArtefact,
 	#instVars : [
 		'dependencies'
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #converting }
-CGOVcsSerializedPackageUnit >> asOngoingPackage [
+PBVcsSerializedPackageUnit >> asOngoingPackage [
 	| unit |
 	dict 
 		at: #name
@@ -31,7 +31,7 @@ CGOVcsSerializedPackageUnit >> asOngoingPackage [
 ]
 
 { #category : #accessing }
-CGOVcsSerializedPackageUnit >> dependencies [
+PBVcsSerializedPackageUnit >> dependencies [
 	^ dependencies collect: [ :each |
 		each isSymbol 	
 			ifTrue: [ Association key: each value: #() ]
@@ -39,9 +39,9 @@ CGOVcsSerializedPackageUnit >> dependencies [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedPackageUnit >> initializeWithPackage: aCGOOngoingPackageUnit [
-	super initializeWithPackage: aCGOOngoingPackageUnit.
-	self addPropertyNamed: #dependencies ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies).
-	self addPropertyNamed: #platformRequirements ifNotEmptyOrNil: aCGOOngoingPackageUnit platformRequirements.
-	self addPropertyNamed: #provisions ifNotEmptyOrNil: aCGOOngoingPackageUnit provisions.
+PBVcsSerializedPackageUnit >> initializeWithPackage: aPBPackageUnit [
+	super initializeWithPackage: aPBPackageUnit.
+	self addPropertyNamed: #dependencies ifNotEmptyOrNil: (self serializedDependenciesOf: aPBPackageUnit dependencies).
+	self addPropertyNamed: #platformRequirements ifNotEmptyOrNil: aPBPackageUnit platformRequirements.
+	self addPropertyNamed: #provisions ifNotEmptyOrNil: aPBPackageUnit provisions.
 ]

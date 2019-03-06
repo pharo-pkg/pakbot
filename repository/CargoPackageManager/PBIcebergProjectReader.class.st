@@ -31,7 +31,7 @@ PBIcebergProjectReader >> readProjectFromCommitish: aCommitish [
 			version := stonReader next at: #version.
 			properties := stonReader next ].
 	pakbotProject := CGOPackageVersionWriterV1
-		deserializeProject: properties
+		deserializeVcsProject: properties
 		version: version.
 	^ (PBIcebergProject onCommitish: aCommitish project: pakbotProject)
 		sourceDirectory: (self srcDirectoryFromCommitish: aCommitish);

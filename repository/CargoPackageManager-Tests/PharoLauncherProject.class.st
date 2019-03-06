@@ -120,11 +120,13 @@ PharoLauncherProject >> buildProject [
 
 { #category : #building }
 PharoLauncherProject >> buildRepository [
-	^ CGOGitRepositoryCreator new
-		url: 'https://github.com/pharo-project/pharo-launcher.git';
-		version: 'development';
-		subdirectory: 'src';
-		create
+	 project repository: 
+		(CGOGitRepositoryCreator new
+			url: 'https://github.com/pharo-project/pharo-launcher.git';
+			version: 'development';
+			subdirectory: 'src';
+			create).
+	^ project
 ]
 
 { #category : #'instance creation' }

@@ -4,15 +4,15 @@ I map some instance variables of PackageVersion to an easily serialized form (e.
 "
 Class {
 	#name : #PBSerializedPackage,
-	#superclass : #CGOVcsSerializedPackageUnit,
+	#superclass : #PBVcsSerializedPackageUnit,
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #initialization }
 PBSerializedPackage >> initializeWithPackage: aCGOOngoingPackageUnit [
 	super initializeWithPackage: aCGOOngoingPackageUnit.
-	self 
+	"self 
 		addPropertyNamed: #dependencies 
-		ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies).
+		ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies)."
 
 ]
