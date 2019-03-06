@@ -27,7 +27,7 @@ Cargo >> install [
 { #category : #'*CargoPackageManager' }
 Cargo >> loadInstructions [
 	| resolution |
-	resolution := CGOSolver new
+	resolution := PBSolver new
 		repositories: repositories;
 		solveProject: self rootDependency.
 	^ CGOLoadInstructionsBuilder new

@@ -258,6 +258,6 @@ CGODataHolder >> seaside31PPMResolution [
 								on: aPackageVersion package
 								for: nil
 								withConstraints: (CGOFixedVersionConstraint with: '3.1').
-	CGOSolver new	solveDependency: dependencyToSolve.
+	PBSolver new	solveDependency: dependencyToSolve.
 
 ]

@@ -3,16 +3,16 @@ This solver is in charge of the dependencies resolution.
 It goes through all transitive dependencies and tries to find a solution matching all specifications / requirements. If a package is alaready present in the installed package list, then the package is skipped for the resolution.
 "
 Class {
-	#name : #CGOSolver,
+	#name : #PBSolver,
 	#superclass : #Object,
 	#instVars : [
 		'registry'
 	],
-	#category : 'CargoPackageManager-Solver'
+	#category : #'CargoPackageManager-Solver'
 }
 
 { #category : #solving }
-CGOSolver >> checkConflictsOf: resolvedProject [
+PBSolver >> checkConflictsOf: resolvedProject [
 	| dependencies |
 	dependencies := resolvedProject allResolvedDependencies.
 	dependencies
@@ -23,18 +23,18 @@ CGOSolver >> checkConflictsOf: resolvedProject [
 ]
 
 { #category : #solving }
-CGOSolver >> registry [
+PBSolver >> registry [
 
 	^ registry
 ]
 
 { #category : #accessing }
-CGOSolver >> registry: aRegistry [ 
+PBSolver >> registry: aRegistry [ 
 	registry := aRegistry
 ]
 
 { #category : #solving }
-CGOSolver >> solveProject: aProject [
+PBSolver >> solveProject: aProject [
 	| resolvedProject |
 
 	resolvedProject := PBResolvedProject onProject: aProject.

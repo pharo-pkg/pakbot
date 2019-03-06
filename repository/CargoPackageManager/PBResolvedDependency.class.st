@@ -54,7 +54,7 @@ PBResolvedDependency >> conflictingInstalledProjects: aCGOPackageRegistry [
 	| conflicts |
 	conflicts := (aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), 
 						dependency additionalConflictingInstalledProjects.
-	^ conflicts collect: [ :each | CGOInstalledDependency onResolved: (PBResolvedProject onProject: each)]
+	^ conflicts collect: [ :each | PBInstalledDependency onResolved: (PBResolvedProject onProject: each)]
 ]
 
 { #category : #accessing }

@@ -184,7 +184,7 @@ PBResolvedProject >> resolution: aPackageVersionReference [
 	pkgVersion := aPackageVersionReference.
 	pkgVersion fitsPlatformRequirements
 			ifTrue: [ resolvedProjectVersion := pkgVersion ]
-			ifFalse: [ CGODependencyRequirementsUnmet signal ]
+			ifFalse: [ PBDependencyRequirementsUnmet signal ]
 ]
 
 { #category : #lookup }

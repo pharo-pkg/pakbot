@@ -102,7 +102,7 @@ CGOSolverTest >> testResolutionOfConflictShouldFail [
 	repository savePackageVersion: self oneDependencyPackageBiggerVersion.
 	repository savePackageVersion: self packageWithManyDependencies.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	self should: [solver solvePackageNamed: #'ManyDependencies' version: '1.0'] raise: CGODependencyConflictError
 ]
@@ -116,7 +116,7 @@ CGOSolverTest >> testResolutionOfPackageWithManyDependenciesShouldShieldManyLoad
 	repository savePackageVersion: self oneDependencyPackage.
 	repository savePackageVersion: self packageWithManyDependencies.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: 'ManyDependencies' version: '1.0'.
 	
@@ -142,7 +142,7 @@ CGOSolverTest >> testResolutionOfPackageWithManyDependenciesShouldShieldNotEmpty
 	repository savePackageVersion: self oneDependencyPackage.
 	repository savePackageVersion: self packageWithManyDependencies.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: 'ManyDependencies' version: '1.0'.
 	
@@ -156,7 +156,7 @@ CGOSolverTest >> testResolutionOfPackageWithNoDependenciesShouldShieldLoadInstru
 	repository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	repository savePackageVersion: self noDependenciesPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'NoDependencies' version: '17'.
 	
@@ -173,7 +173,7 @@ CGOSolverTest >> testResolutionOfPackageWithNoDependenciesShouldShieldNotEmptyRe
 	repository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	repository savePackageVersion: self noDependenciesPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'NoDependencies' version: '17'.
 	
@@ -188,7 +188,7 @@ CGOSolverTest >> testResolutionOfPackageWithOneDependencyShouldShieldLoadInstruc
 	repository savePackageVersion: self noDependenciesPackage.
 	repository savePackageVersion: self oneDependencyPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'OneDependency' version: '1'.
 	
@@ -210,7 +210,7 @@ CGOSolverTest >> testResolutionOfPackageWithOneDependencyShouldShieldNotEmptyRes
 	repository savePackageVersion: self noDependenciesPackage.
 	repository savePackageVersion: self oneDependencyPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver repositories: { repository }.
 	resolution := solver solvePackageNamed: #'OneDependency' version: '1'.
 	
@@ -221,7 +221,7 @@ CGOSolverTest >> testResolutionOfPackageWithOneDependencyShouldShieldNotEmptyRes
 CGOSolverTest >> testResolutionOfUnexistentPackageVersionShouldFail [
 
 	| solver |
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	self should: [ solver solvePackageNamed: #'Unexistent' version: '1.0' ] raise: CGOPackageNotFoundError
 ]
 
@@ -234,7 +234,7 @@ CGOSolverTest >> testShouldGetDependencyConflictErrorWhenAskingToInstallAPackage
 		yourself.
 	repository savePackageVersion: installedPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver 
 		repositories: { repository };
 		installedPackages: { installedPackage }.
@@ -250,7 +250,7 @@ CGOSolverTest >> testShouldGetEmptyLoadInstructionsWhenAskingToInstallAPackageAl
 	repository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	repository savePackageVersion: self noDependenciesPackage.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver 
 		repositories: { repository };
 		installedPackages: { self noDependenciesPackage }.
@@ -268,7 +268,7 @@ CGOSolverTest >> testShouldNotGetAlreadyInstalledPackagesInLoadInstructionsWhenR
 	repository savePackageVersion: self oneDependencyPackage.
 	repository savePackageVersion: self packageWithManyDependencies.
 	
-	solver := CGOSolver new.
+	solver := PBSolver new.
 	solver 
 		repositories: { repository };
 		installedPackages: { self noDependenciesPackage }.

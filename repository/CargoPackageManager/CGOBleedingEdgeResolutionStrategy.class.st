@@ -28,6 +28,6 @@ CGOBleedingEdgeResolutionStrategy >> versionOf: aCGOPackageDependency in: aRepos
 		ifTrue: [ ^ candidates anyOne ].
 	candidates := candidates groupedBy: #packageName.
 	(candidates size > 1)
-		ifTrue: [ CGOUnresolvedDependency package: packageName candidates: candidates ].
+		ifTrue: [ PBUnresolvedDependency package: packageName candidates: candidates ].
 	^ (candidates at: packageName) detectMax: [ :v | v ]
 ]

@@ -2,7 +2,7 @@
 Error thrown when a dependency is not resolved to a specific package version at the call time.
 "
 Class {
-	#name : #CGOUnresolvedDependency,
+	#name : #PBUnresolvedDependency,
 	#superclass : #PBError,
 	#instVars : [
 		'candidates'
@@ -11,29 +11,29 @@ Class {
 }
 
 { #category : #signaling }
-CGOUnresolvedDependency class >> package: aPackageName [
+PBUnresolvedDependency class >> package: aPackageName [
 	^ self new 
 		package: aPackageName
 ]
 
 { #category : #signaling }
-CGOUnresolvedDependency class >> package: aPackageName candidates: aPackageVersionReferenceList [
+PBUnresolvedDependency class >> package: aPackageName candidates: aPackageVersionReferenceList [
 	^ self new 
 		package: aPackageName candidates: aPackageVersionReferenceList
 ]
 
 { #category : #accessing }
-CGOUnresolvedDependency >> candidates [
+PBUnresolvedDependency >> candidates [
 	^ candidates
 ]
 
 { #category : #signaling }
-CGOUnresolvedDependency >> package: aPackageName [
+PBUnresolvedDependency >> package: aPackageName [
 	^ self signal: 'Unresolved dependency: ' , aPackageName
 ]
 
 { #category : #signaling }
-CGOUnresolvedDependency >> package: aPackageName candidates: aPackageVersionReferenceList [
+PBUnresolvedDependency >> package: aPackageName candidates: aPackageVersionReferenceList [
 	candidates := aPackageVersionReferenceList.
 	^ self signal: 'Unresolved dependency: ' , aPackageName , ' has ' , aPackageVersionReferenceList size asString , ' candidates!'
 ]

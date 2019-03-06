@@ -21,7 +21,7 @@ CGOSeaside31Visualization >> open [
 									on: package package
 									for: nil
 									withConstraints: { CGOFixedVersionConstraint with: '3.1' }.
-	resolution := CGOSolver new solveDependency: seaside31Dependency.
+	resolution := PBSolver new solveDependency: seaside31Dependency.
 	
 	builder := ROMondrianViewBuilder new.
 	builder zoomInButton;zoomOutButton.

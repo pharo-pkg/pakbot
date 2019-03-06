@@ -10,7 +10,7 @@ Class {
 { #category : #running }
 CGOSolverSeasideTest >> setUp [
 	super setUp.
-	solver := CGOSolver new
+	solver := PBSolver new
 		repositories: { repository };
 		yourself.
 	Cargo platformAttributes: #(#squeakCommon #pharo #'pharo4.x' #'pharo4.0.x').
@@ -146,7 +146,7 @@ CGOSolverSeasideTest >> testSolvePackageWithNonFixedConstraintDependencyRaisesUn
 	
 	self 
 		should: [ solver solveDependency: dependency ]
-		raise: CGOUnresolvedDependency.
+		raise: PBUnresolvedDependency.
 ]
 
 { #category : #'tests - packages' }
@@ -176,7 +176,7 @@ CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByMoreThanOnePackageRa
 
 	self 	
 		should: [ solver solveDependency: dependency  ]
-		raise: CGOUnresolvedDependency
+		raise: PBUnresolvedDependency
 		withExceptionDo: [ :exception |
 			self assert: exception candidates notNil.
 			self assert: exception candidates size equals: 2 ]
@@ -194,7 +194,7 @@ CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByNoPackageRaisesUnres
 
 	self 	
 		should: [ solver solveDependency: dependency  ]
-		raise: CGOUnresolvedDependency.
+		raise: PBUnresolvedDependency.
 		
 	
 ]

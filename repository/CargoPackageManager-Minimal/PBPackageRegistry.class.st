@@ -138,7 +138,7 @@ PBPackageRegistry >> newProjectNamed: aString [
 { #category : #factory }
 PBPackageRegistry >> newSolver [
 	
-	^ CGOSolver new
+	^ PBSolver new
 		registry: self;
 		yourself
 ]

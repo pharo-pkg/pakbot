@@ -4,7 +4,7 @@ I am polimorphic with CGOResolvedDependency.  I am used by the resolution of con
 See PBConflict
 "
 Class {
-	#name : #CGOInstalledDependency,
+	#name : #PBInstalledDependency,
 	#superclass : #Object,
 	#instVars : [
 		'resolved'
@@ -13,30 +13,30 @@ Class {
 }
 
 { #category : #'instance creation' }
-CGOInstalledDependency class >> onResolved: aProject [
+PBInstalledDependency class >> onResolved: aProject [
 	^ self new
 		resolved: aProject;
 		yourself
 ]
 
 { #category : #accessing }
-CGOInstalledDependency >> dependency [
+PBInstalledDependency >> dependency [
 	^ resolved resolvedProjectVersion 
 ]
 
 { #category : #testing }
-CGOInstalledDependency >> isInstalledDependency [
+PBInstalledDependency >> isInstalledDependency [
 
 	^ true
 ]
 
 { #category : #accessing }
-CGOInstalledDependency >> originalResolution [
+PBInstalledDependency >> originalResolution [
 	^ self resolution
 ]
 
 { #category : #printing }
-CGOInstalledDependency >> printOn: aStream [
+PBInstalledDependency >> printOn: aStream [
 
 	aStream
 		nextPutAll: self class name;
@@ -46,22 +46,22 @@ CGOInstalledDependency >> printOn: aStream [
 ]
 
 { #category : #accessing }
-CGOInstalledDependency >> projectName [
+PBInstalledDependency >> projectName [
 	^ resolved name
 ]
 
 { #category : #accessing }
-CGOInstalledDependency >> resolution [
+PBInstalledDependency >> resolution [
 	^ resolved
 ]
 
 { #category : #resolving }
-CGOInstalledDependency >> resolveWith: aResolved [ 
+PBInstalledDependency >> resolveWith: aResolved [ 
 	
 	"Nothing to do"
 ]
 
 { #category : #accessing }
-CGOInstalledDependency >> resolved: aProject [ 
+PBInstalledDependency >> resolved: aProject [ 
 	resolved := aProject
 ]

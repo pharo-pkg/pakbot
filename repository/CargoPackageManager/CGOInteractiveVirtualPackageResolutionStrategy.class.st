@@ -20,7 +20,7 @@ CGOInteractiveVirtualPackageResolutionStrategy >> solve: aDependency candidates:
 	
 	^ (candidates size = 1)
 		ifTrue: [ (candidates values first detectMax: #versionNumber) asString ]
-		ifFalse: [ CGOUnresolvedDependency 
+		ifFalse: [ PBUnresolvedDependency 
 			package: aDependency targetedPackage 
 			candidates: (candidates values collect: [ :each | each detectMax: #versionNumber ]) ]
 ]
