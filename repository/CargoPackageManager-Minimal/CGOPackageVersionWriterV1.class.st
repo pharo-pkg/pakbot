@@ -8,13 +8,27 @@ Class {
 }
 
 { #category : #deserialization }
-CGOPackageVersionWriterV1 class >> deserializeProject: aDictionary version: aString [ 
-	^ self deserializeV1Project: aDictionary
+CGOPackageVersionWriterV1 class >> deserializeProject: aDictionary version: formatVersionString [ 
+	"formatVersionString is the encoding format version.
+	For now, there is only one format: v1"
+	^ self deserializeV1ProjectWith: aDictionary
 ]
 
 { #category : #deserialization }
-CGOPackageVersionWriterV1 class >> deserializeV1Project: aDictionary [ 
-	^ (CGOVcsSerializedProject fromDictionary: aDictionary) asOngoingProject
+CGOPackageVersionWriterV1 class >> deserializeV1ProjectFromVcsWith: aDictionary [ 
+	^ (PBVcsSerializedProject fromDictionary: aDictionary) asOngoingProject
+]
+
+{ #category : #deserialization }
+CGOPackageVersionWriterV1 class >> deserializeV1ProjectWith: aDictionary [ 
+	^ (PBSerializedProject fromDictionary: aDictionary) asProject
+]
+
+{ #category : #deserialization }
+CGOPackageVersionWriterV1 class >> deserializeVcsProject: aDictionary version: formatVersionString [ 
+	"formatVersionString is the encoding format version.
+	For now, there is only one format: v1"
+	^ self deserializeV1ProjectFromVcsWith: aDictionary
 ]
 
 { #category : #convenience }

@@ -6,7 +6,7 @@ Class {
 		'testPackageRepository',
 		'fs'
 	],
-	#category : #'CargoPackageManager-Tests'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #running }

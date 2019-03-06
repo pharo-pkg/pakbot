@@ -26,7 +26,7 @@ PBPakbotProjectDependencyTest >> testCanDeserializeDependency [
 	},
 	#version : ''''
 }'.
-	dependency := CGOVcsSerializedProject new pakbotProjectDependencyFrom: dict.
+	dependency := PBVcsSerializedProject new pakbotProjectDependencyFrom: dict.
 	self 
 		assert: dependency repositoryUrl
 		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.

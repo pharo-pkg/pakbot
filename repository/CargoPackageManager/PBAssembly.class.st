@@ -79,7 +79,7 @@ PBAssembly >> asSerializedPackage [
 { #category : #converting }
 PBAssembly >> asVcsSerializedPackageAssembly [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
-	^ CGOVcsSerializedPackageAssembly from: self
+	^ PBVcsSerializedPackageAssembly from: self
 ]
 
 { #category : #accessing }

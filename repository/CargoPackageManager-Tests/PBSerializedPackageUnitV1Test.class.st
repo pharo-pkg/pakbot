@@ -1,6 +1,6 @@
 Class {
 	#name : #PBSerializedPackageUnitV1Test,
-	#superclass : #CGOVcsSerializedPackageUnitV1Test,
+	#superclass : #PBVcsSerializedPackageUnitV1Test,
 	#category : #'CargoPackageManager-Tests-Model-Serialization'
 }
 

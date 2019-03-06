@@ -3,18 +3,18 @@ I represent a Cargo project ready to be serialized on a Version Control System (
 I map some instance variables  to an easily serialized form.
 "
 Class {
-	#name : #CGOVcsSerializedProject,
+	#name : #PBVcsSerializedProject,
 	#superclass : #PBSerializedArtefact,
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #converting }
-CGOVcsSerializedProject >> asOngoingPackage [
+PBVcsSerializedProject >> asOngoingPackage [
 	^ PBProject fromVcsSerializedProject: self
 ]
 
 { #category : #converting }
-CGOVcsSerializedProject >> asOngoingProject [
+PBVcsSerializedProject >> asOngoingProject [
 	"Flush information from this VcsSerializedProject into the provided CGOProject.
 	All instance variables will be set with values from the SerializableProject"
 	| project |
@@ -32,8 +32,8 @@ CGOVcsSerializedProject >> asOngoingProject [
 		project assemblies: (self ongoingPackageAssembliesFrom: assemblies) ].
 	dict at: #virtualPackages ifPresent: [ :virtualPackages | 
 		project virtualPackages: (self ongoingVirtualPackagesFrom: virtualPackages) ].
-	dict at: #externalProjects ifPresent: [ :externalProjects | 
-		project externalProjects: (self projectDependenciesFrom: externalProjects) ].
+	dict at: #dependencies ifPresent: [ :projectDependencies | 
+		project dependencies: (self projectDependenciesFrom: projectDependencies) ].
 		
 	project packages do: [:package | package project: project ].
 	
@@ -41,7 +41,25 @@ CGOVcsSerializedProject >> asOngoingProject [
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedProject >> gitRepositoryFrom: aDictionnary [ 
+PBVcsSerializedProject >> baselineProjectDependencyFrom: aDictionary [
+	^ PBMetacelloBaselineProjectDependency 
+		name: (aDictionary at: #baseline) 
+		repositoryUrl: (aDictionary at: #url)
+		version: (aDictionary at: #version)
+		
+]
+
+{ #category : #deserialization }
+PBVcsSerializedProject >> configurationProjectDependencyFrom: aDictionary [
+	^ PBMetacelloConfigurationProjectDependency 
+		name: (aDictionary at: #configuration) 
+		repositoryUrl: (aDictionary at: #url)
+		version: (aDictionary at: #version)
+		
+]
+
+{ #category : #deserialization }
+PBVcsSerializedProject >> gitRepositoryFrom: aDictionnary [ 
 	^ CGOGitRepositoryCreator new
 		url: (aDictionnary at: #repositoryUrl);
 		version: (aDictionnary at: #version);
@@ -49,7 +67,7 @@ CGOVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 ]
 
 { #category : #initialization }
-CGOVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
+PBVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
 	super initializeWithPackage: aCGOOngoingProject.
 	self
 		addPropertyNamed: #externalProjects 
@@ -66,17 +84,17 @@ CGOVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedProject >> ongoingPackageAssembliesFrom: aCollection [ 
-	^ aCollection collect: [ :each | (CGOVcsSerializedPackageAssembly fromDictionary: each) asOngoingPackage ]	
+PBVcsSerializedProject >> ongoingPackageAssembliesFrom: aCollection [ 
+	^ aCollection collect: [ :each | (PBVcsSerializedPackageAssembly fromDictionary: each) asOngoingPackage ]	
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
-	^ aCollection collect: [ :each | (CGOVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]	
+PBVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
+	^ aCollection collect: [ :each | (PBVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]	
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [ 
+PBVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [ 
 	| repository |
 	repository := self gitRepositoryFrom: (aDictionary at: #repository).
 	^ PBPakbotProjectDependency 
@@ -87,11 +105,11 @@ CGOVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [
 ]
 
 { #category : #deserialization }
-CGOVcsSerializedProject >> projectDependenciesFrom: aCollection [ 
+PBVcsSerializedProject >> projectDependenciesFrom: aCollection [ 
 	^ aCollection collect: [ :projectDependencyDict | 
 		(projectDependencyDict includesKey: #configuration)
-			ifTrue: [ self configurationProjectDependencyFrom: projectDependencyDict ].
-		(projectDependencyDict includesKey: #baseline)
-			ifTrue: [ self baselineProjectDependencyFrom: projectDependencyDict ].
-		self pakbotProjectDependencyFrom: projectDependencyDict. ]	
+			ifTrue: [ self configurationProjectDependencyFrom: projectDependencyDict ]
+			ifFalse: [ (projectDependencyDict includesKey: #baseline)
+				ifTrue: [ self baselineProjectDependencyFrom: projectDependencyDict ]
+				ifFalse: [ self pakbotProjectDependencyFrom: projectDependencyDict ] ]	]
 ]

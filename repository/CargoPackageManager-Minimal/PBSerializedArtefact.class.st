@@ -94,7 +94,7 @@ PBSerializedArtefact >> sort: packages andCollect: aSelector [
 
 { #category : #serialization }
 PBSerializedArtefact >> stonOn: stonWriter [
-	"custimize ston serialization to only serialize dictionary"
+	"customize ston serialization to only serialize dictionary"
 	stonWriter writeMap: dict
 ]
 

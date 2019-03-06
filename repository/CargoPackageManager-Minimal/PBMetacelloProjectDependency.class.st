@@ -149,6 +149,11 @@ PBMetacelloProjectDependency >> name [
 	^ name
 ]
 
+{ #category : #printing }
+PBMetacelloProjectDependency >> printOn: aStream [
+	aStream << self class name << '(' << name << ')'
+]
+
 { #category : #accessing }
 PBMetacelloProjectDependency >> repositoryUrl [
 	^ url

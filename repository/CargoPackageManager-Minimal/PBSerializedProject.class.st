@@ -4,9 +4,31 @@ I map some instance variables to an easily serialized form.
 "
 Class {
 	#name : #PBSerializedProject,
-	#superclass : #PBSerializedArtefact,
+	#superclass : #PBVcsSerializedProject,
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
+
+{ #category : #converting }
+PBSerializedProject >> asProject [
+	"Convert this SerializedProject into a Project.
+	All instance variables will be set with values from the SerializableProject"
+	| project |
+	
+	project := self asOngoingProject.
+	dict 
+		at: #version
+		ifAbsent: [ PBError new 
+						signal: 'Cannot deserialize a Project with no version defined!' ].
+	project version: (dict at: #version) asSemanticVersion.
+
+	dict 
+		at: #repositoryUrl
+		ifAbsent: [ PBError new 
+						signal: 'Cannot deserialize a Project with no source repository defined!' ].
+	project repository: (CGOSourceRepository fromDictionary: (dict at: #repositoryUrl)).
+					
+	^ project 
+]
 
 { #category : #initialization }
 PBSerializedProject >> initializeWithPackage: aPBProject [
@@ -33,4 +55,7 @@ PBSerializedProject >> initializeWithPackage: aPBProject [
 	self 
 		addPropertyNamed: #virtualPackages 
 		ifNotEmptyOrNil: (self sort: aPBProject virtualPackages andCollect: #asSerializedPackage).
+	dict
+		at: #repositoryUrl
+		put: aPBProject repository asSerializableRepository
 ]

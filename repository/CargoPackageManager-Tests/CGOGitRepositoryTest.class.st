@@ -75,6 +75,24 @@ CGOGitRepositoryTest >> stonCargoMinimalB9eeHttpsUrl [
 ]
 
 { #category : #tests }
+CGOGitRepositoryTest >> testCanBeDeserialized [
+	| repositoryStonString deserializedRepository dict |
+	repository := self pharoCounterMasterCloned.
+	repositoryStonString := STON toStringPretty: repository.
+	
+	dict := STON fromString: repositoryStonString.
+	deserializedRepository := CGOSourceRepository fromDictionary: dict.
+	
+	self 
+		assert: deserializedRepository repositoryUrl 
+		equals: repository repositoryUrl.
+		
+	self 
+		assert: deserializedRepository version 
+		equals: repository version.
+]
+
+{ #category : #tests }
 CGOGitRepositoryTest >> testCanBeSerializedInSton [
 	| repositoryStonString |
 	repository := self pharoCounterMasterCloned.
@@ -177,7 +195,7 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
-	project := PBProject fromStonString: repository projectMetadataStonString.
+	project := PBProject fromVcsStonString: repository projectMetadataStonString.
 	
 	self 
 		assert: project name

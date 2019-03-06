@@ -53,7 +53,7 @@ PBPackage >> asSerializedPackage [
 { #category : #converting }
 PBPackage >> asVcsSerializedPackageUnit [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
-	^ CGOVcsSerializedPackageUnit from: self
+	^ PBVcsSerializedPackageUnit from: self
 ]
 
 { #category : #'private-loading' }

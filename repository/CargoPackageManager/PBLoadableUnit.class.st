@@ -54,6 +54,18 @@ PBLoadableUnit class >> fromStonString: aStonString [
 ]
 
 { #category : #'instance creation' }
+PBLoadableUnit class >> fromVcsStonString: aStonString [
+	| reader version project |
+	reader := STON reader on: aStonString readStream.
+	version := reader next at: #version.
+	project:= reader next.
+
+	^ CGOPackageVersionWriterV1 deserializeVcsProject: project version: version.
+	
+
+]
+
+{ #category : #'instance creation' }
 PBLoadableUnit class >> named: aPackageName [
 	^ self named: aPackageName project: nil 
 ]

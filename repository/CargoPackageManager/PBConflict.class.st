@@ -1,3 +1,12 @@
+"
+I represent a conflict for a project.
+It happens when asking to install a project (could be a transitive dependency) but there is: 
+- either another dependency on the same project with a different version / url,
+- or the project is already installed in the registry (Cargo or Metacello) in a different version / url.
+
+You can see confliciting objects with #dependencies.
+The conflict can be solved by using selectedResolution: and provide one of the possible resolutions.
+"
 Class {
 	#name : #PBConflict,
 	#superclass : #Object,

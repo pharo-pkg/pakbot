@@ -44,7 +44,12 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 			#url : ''http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'',
 			#version : ''3.5.0''
 		}
-	]
+	],
+	#repositoryUrl : {
+		#type : #git,
+		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
+		#version : ''development''
+	}
 }'
 ]
 
@@ -54,7 +59,6 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 {
 	#name : #PharoLauncher,
 	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
-	#version : ''1.0.0'',
 	#units : [
 		{
 			#name : #PharoLauncher-Core,
@@ -76,7 +80,13 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 			#name : #PharoLauncher-Tests-Download,
 			#description : ''Tests of the PharoLauncher-Download package.''
 		}
-	]
+	],
+	#version : ''1.0.0'',
+	#repositoryUrl : {
+		#type : #git,
+		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
+		#version : ''development''
+	}
 }'
 ]
 
@@ -86,14 +96,61 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
-	#version : ''1.0.0'',
 	#units : [
 		{
 			#name : #UnitTest,
 			#description : ''A simple ongoing package unit.''
 		}
-	]
+	],
+	#version : ''1.0.0'',
+	#repositoryUrl : {
+		#type : #git,
+		#repositoryUrl : ''git://git@github.com/foo/bar.git''
+	}
 }'
+]
+
+{ #category : #tests }
+PBSerializedProjectV1Test >> testCanDeSerializeProjectWithDependencies [
+	| project expectedDependencies |
+	
+	project := PBProject fromStonString: self stonStringForProjectWithDependencies.
+	
+	self
+		assert: project dependencies size
+		equals: 5.
+		
+	expectedDependencies := (PharoLauncherProject new 
+		buildProject; 
+		buildExternalProjectDependencies)	dependencies.
+	self
+		assertCollection: (project dependencies collect: #name)
+		hasSameElements: (expectedDependencies collect: #name)
+]
+
+{ #category : #tests }
+PBSerializedProjectV1Test >> testCanDeserializeSimpleProject [
+	| project packageUnit |
+	
+	project := PBProject fromStonString: self stonStringForSimpleProject.
+	
+	self
+		assert: project
+		equals: PBProject example.
+		
+	self assert: project assemblies isEmpty.
+	self 
+		assertCollection: project packageNames asArray
+		hasSameElements: #('UnitTest').
+
+	packageUnit := project packageUnits anyOne.
+	self
+		assert: packageUnit project 
+		equals: project.
+	self
+		assertCollection: packageUnit platformRequirements 
+		hasSameElements: #()
+	
 ]
 
 { #category : #tests }
@@ -102,6 +159,7 @@ PBSerializedProjectV1Test >> testCanSerializeProjectWithDependencies [
 	
 	project := PharoLauncherProject new
 		buildProject;
+		buildRepository;
 		buildExternalProjectDependencies.
 	project version: '1.0' asSemanticVersion.
 	[ serializedProject := project asSerializedPackage ]
@@ -123,6 +181,7 @@ PBSerializedProjectV1Test >> testCanSerializeProjectWithPackages [
 	
 	project := PharoLauncherProject new
 		buildProject;
+		buildRepository;
 		buildPackages;
 		removePackagesDependencies.
 	project version: '1.0' asSemanticVersion.
@@ -140,6 +199,7 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	serializedProject := PBProject example 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
+		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
 		asSerializedPackage.
 	
 	self
@@ -149,7 +209,7 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 
 { #category : #tests }
 PBSerializedProjectV1Test >> testErrorSignaledWhenTryingToSerializeProjectWithConflictingDependencies [
-	| project serializedProject |
+	| project |
 	
 	project := PBProject example.
 	project 
