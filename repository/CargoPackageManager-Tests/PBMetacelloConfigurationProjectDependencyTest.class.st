@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOMetacelloConfigurationProjectDependencyTest,
+	#name : #PBMetacelloConfigurationProjectDependencyTest,
 	#superclass : #TestCase,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
-CGOMetacelloConfigurationProjectDependencyTest >> testCanCreateDependency [
+PBMetacelloConfigurationProjectDependencyTest >> testCanCreateDependency [
 	| dependency |
 	dependency := PBMetacelloConfigurationProjectDependency example.
 	self 
@@ -20,7 +20,7 @@ CGOMetacelloConfigurationProjectDependencyTest >> testCanCreateDependency [
 ]
 
 { #category : #tests }
-CGOMetacelloConfigurationProjectDependencyTest >> testCanDeserializeDependency [
+PBMetacelloConfigurationProjectDependencyTest >> testCanDeserializeDependency [
 	| dependency |
 	dependency := STON fromString: 'MetacelloConfigurationProject {
 	#configuration : #JSON,
@@ -36,7 +36,7 @@ CGOMetacelloConfigurationProjectDependencyTest >> testCanDeserializeDependency [
 ]
 
 { #category : #tests }
-CGOMetacelloConfigurationProjectDependencyTest >> testCanSerializeDependency [
+PBMetacelloConfigurationProjectDependencyTest >> testCanSerializeDependency [
 	| projectDependencyString |
 	projectDependencyString := STON toStringPretty: PBMetacelloConfigurationProjectDependency example.
 	

@@ -1,19 +1,19 @@
 Class {
-	#name : #CGOPackageRegistryTest,
+	#name : #PBPackageRegistryTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'registry'
 	],
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #initialization }
-CGOPackageRegistryTest >> setUp [
+PBPackageRegistryTest >> setUp [
 	registry := PBPackageRegistry new.
 ]
 
 { #category : #tests }
-CGOPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
+PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 	| project unit |
 	project := PBProject example.
 	unit := project packageUnits anyOne.
@@ -26,7 +26,7 @@ CGOPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 ]
 
 { #category : #tests }
-CGOPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
+PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 	| project unit |
 	project := PBProject example.
 	unit := project packageUnits anyOne.
@@ -39,7 +39,7 @@ CGOPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 ]
 
 { #category : #tests }
-CGOPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
+PBPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
 	| project unit unit2 |
 	project := PBProject example.
 	project registry: registry.
@@ -55,7 +55,7 @@ CGOPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregistere
 ]
 
 { #category : #tests }
-CGOPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
+PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 	| project unit |
 	project := PBProject example.
 	unit := project packageUnits anyOne.

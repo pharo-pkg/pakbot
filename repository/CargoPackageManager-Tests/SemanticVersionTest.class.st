@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOSemanticVersionTest,
+	#name : #SemanticVersionTest,
 	#superclass : #TestCase,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #helpers }
-CGOSemanticVersionTest >> assertVersion: aSymbolicVersionString printStringEquals: aString [
+SemanticVersionTest >> assertVersion: aSymbolicVersionString printStringEquals: aString [
 	| version |
 	
 	version := SemanticVersion fromString: aSymbolicVersionString.
@@ -13,7 +13,7 @@ CGOSemanticVersionTest >> assertVersion: aSymbolicVersionString printStringEqual
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> assertVersionFromString: aString major: major minor: minor patch: patch suffix: suffix [
+SemanticVersionTest >> assertVersionFromString: aString major: major minor: minor patch: patch suffix: suffix [
 	| version |
 	
 	version := SemanticVersion fromString: aString.
@@ -25,12 +25,12 @@ CGOSemanticVersionTest >> assertVersionFromString: aString major: major minor: m
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> stonSerializationFor: aString [
+SemanticVersionTest >> stonSerializationFor: aString [
 	^ CGOPackageVersionWriterV1 toStringPretty: (SemanticVersion fromString: aString)
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testExtractSuffixSuffixedVersionStringShouldReturnSuffix [
+SemanticVersionTest >> testExtractSuffixSuffixedVersionStringShouldReturnSuffix [
 	
 	self 
 		assert: (SemanticVersion suffixFrom: '0-RC1')
@@ -38,7 +38,7 @@ CGOSemanticVersionTest >> testExtractSuffixSuffixedVersionStringShouldReturnSuff
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testPrintString [
+SemanticVersionTest >> testPrintString [
 
 	self assertVersion: '2' printStringEquals: '2.0.0'.
 	self assertVersion: '1.2' printStringEquals: '1.2.0'.
@@ -47,7 +47,7 @@ CGOSemanticVersionTest >> testPrintString [
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testRegEx [
+SemanticVersionTest >> testRegEx [
 
 	self assert: (SemanticVersion parsingRegex matches: '1').
 	self assert: (SemanticVersion parsingRegex matches: '1.0').
@@ -59,7 +59,7 @@ CGOSemanticVersionTest >> testRegEx [
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorAndSmallerMinorNumber [
+SemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorAndSmallerMinorNumber [
 
 	self assert: self v11 > self v10.
 	
@@ -68,13 +68,13 @@ CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorAnd
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorEqualMinorAndSmallerPatchNumber [
+SemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorEqualMinorAndSmallerPatchNumber [
 
 	self assert: self v111 > self v100
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithSmallerMajorNumber [
+SemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithSmallerMajorNumber [
 
 	self assert: self v2 > self v1.
 	
@@ -89,55 +89,55 @@ CGOSemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithSmallerMajorN
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringInvalidShouldFail [
+SemanticVersionTest >> testVersionStringInvalidShouldFail [
 
 	self assert: (SemanticVersion fromString: 'toto') isInvalid
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithMajorNumberShouldOnlyHaveMajorVersionNumber [
+SemanticVersionTest >> testVersionStringWithMajorNumberShouldOnlyHaveMajorVersionNumber [
 
 	self assertVersionFromString: '2' major: 2 minor: 0 patch: 0 suffix: nil
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithMinorNumberShouldOnlyHaveMajorAndMinorVersionNumber [
+SemanticVersionTest >> testVersionStringWithMinorNumberShouldOnlyHaveMajorAndMinorVersionNumber [
 
 	self assertVersionFromString: '1.2' major: 1 minor: 2 patch: 0 suffix: nil
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithMoreThanThreeComponentsShouldFail [
+SemanticVersionTest >> testVersionStringWithMoreThanThreeComponentsShouldFail [
 
 	self assert: (SemanticVersion fromString: '1.2.3.4') isInvalid
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithPatchNumberShouldOnlyHaveMajorAndMinorAndPatchVersionNumber [
+SemanticVersionTest >> testVersionStringWithPatchNumberShouldOnlyHaveMajorAndMinorAndPatchVersionNumber [
 
 	self assertVersionFromString: '1.1.3' major: 1 minor: 1 patch: 3 suffix: nil
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithSuffixButNoMinorNorPatchNumberShouldHaveSuffix [
+SemanticVersionTest >> testVersionStringWithSuffixButNoMinorNorPatchNumberShouldHaveSuffix [
 
 	self assertVersionFromString: '1-RC1' major: 1 minor: 0 patch: 0 suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithSuffixButNoPatchNumberShouldHaveSuffix [
+SemanticVersionTest >> testVersionStringWithSuffixButNoPatchNumberShouldHaveSuffix [
 
 	self assertVersionFromString: '1.1-RC1' major: 1 minor: 1 patch: 0 suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
-CGOSemanticVersionTest >> testVersionStringWithSuffixShouldHaveSuffix [
+SemanticVersionTest >> testVersionStringWithSuffixShouldHaveSuffix [
 
 	self assertVersionFromString: '1.1.3-RC1' major: 1 minor: 1 patch: 3 suffix: 'RC1'
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionWithNoMinorNumberShouldHaveMinorNumberEqualsToZero [
+SemanticVersionTest >> testVersionWithNoMinorNumberShouldHaveMinorNumberEqualsToZero [
 	| v1 v2 |
 	
 	v1 := SemanticVersion fromString: '1'.
@@ -147,13 +147,13 @@ CGOSemanticVersionTest >> testVersionWithNoMinorNumberShouldHaveMinorNumberEqual
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionWithNoMinorNumberShouldHavePatchNumberEqualsToZero [
+SemanticVersionTest >> testVersionWithNoMinorNumberShouldHavePatchNumberEqualsToZero [
 
 	self assert: self v1 equals: self v100.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionWithNoPatchNumberShouldHavePatchNumberEqualsToZero [
+SemanticVersionTest >> testVersionWithNoPatchNumberShouldHavePatchNumberEqualsToZero [
 	| v1 v2 |
 	
 	v1 := SemanticVersion fromString: '1.1'.
@@ -163,151 +163,151 @@ CGOSemanticVersionTest >> testVersionWithNoPatchNumberShouldHavePatchNumberEqual
 ]
 
 { #category : #'tests-development versions' }
-CGOSemanticVersionTest >> testVersionWithSuffixDevShouldBeADevelopmentVersion [
+SemanticVersionTest >> testVersionWithSuffixDevShouldBeADevelopmentVersion [
 	
 	self assert: (SemanticVersion fromString: '1.0-dev') isDevelopmentVersion
 ]
 
 { #category : #'tests-development versions' }
-CGOSemanticVersionTest >> testVersionWithoutSuffixDevShouldNotBeADevelopmentVersion [
+SemanticVersionTest >> testVersionWithoutSuffixDevShouldNotBeADevelopmentVersion [
 	
 	self deny: (SemanticVersion fromString: '1.0-devv') isDevelopmentVersion
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithDifferentMajorVersionNumberShouldBeDifferent [
+SemanticVersionTest >> testVersionsWithDifferentMajorVersionNumberShouldBeDifferent [
 
 	self deny: self v1 = self v2.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithDifferentMinorVersionNumberShouldBeDifferent [
+SemanticVersionTest >> testVersionsWithDifferentMinorVersionNumberShouldBeDifferent [
 
 	self deny: self v11 = self v12.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithDifferentPatchVersionNumberShouldBeDifferent [
+SemanticVersionTest >> testVersionsWithDifferentPatchVersionNumberShouldBeDifferent [
 
 	self deny: self v111 = self v112.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithEqualSemanticVersionsShouldBeEqual [
+SemanticVersionTest >> testVersionsWithEqualSemanticVersionsShouldBeEqual [
 
 	self assert: self v123 equals: self v123.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithEqualSemanticVersionsWithNoMinorNumberShouldBeEqual [
+SemanticVersionTest >> testVersionsWithEqualSemanticVersionsWithNoMinorNumberShouldBeEqual [
 
 	self assert: self v1 equals: self v1.
 ]
 
 { #category : #'tests-comparison' }
-CGOSemanticVersionTest >> testVersionsWithEqualSemanticVersionsWithNoPatchNumberShouldBeEqual [
+SemanticVersionTest >> testVersionsWithEqualSemanticVersionsWithNoPatchNumberShouldBeEqual [
 
 	self assert: self v12 equals: self v12.
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v1 [
+SemanticVersionTest >> v1 [
 
 	^ SemanticVersion fromString: '1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v10 [
+SemanticVersionTest >> v10 [
 
 	^ SemanticVersion fromString: '1.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v100 [
+SemanticVersionTest >> v100 [
 
 	^ SemanticVersion fromString: '1.0.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v101 [
+SemanticVersionTest >> v101 [
 
 	^ SemanticVersion fromString: '1.0.1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v11 [
+SemanticVersionTest >> v11 [
 
 	^ SemanticVersion fromString: '1.1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v110 [
+SemanticVersionTest >> v110 [
 
 	^ SemanticVersion fromString: '1.1.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v111 [
+SemanticVersionTest >> v111 [
 
 	^ SemanticVersion fromString: '1.1.1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v112 [
+SemanticVersionTest >> v112 [
 
 	^ SemanticVersion fromString: '1.1.2'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v12 [
+SemanticVersionTest >> v12 [
 
 	^ SemanticVersion fromString: '1.2'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v123 [
+SemanticVersionTest >> v123 [
 
 	^ SemanticVersion fromString: '1.2.3'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v2 [
+SemanticVersionTest >> v2 [
 
 	^ SemanticVersion fromString: '2'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v20 [
+SemanticVersionTest >> v20 [
 
 	^ SemanticVersion fromString: '2.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v200 [
+SemanticVersionTest >> v200 [
 
 	^ SemanticVersion fromString: '2.0.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v201 [
+SemanticVersionTest >> v201 [
 
 	^ SemanticVersion fromString: '2.0.1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v21 [
+SemanticVersionTest >> v21 [
 
 	^ SemanticVersion fromString: '2.1'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v210 [
+SemanticVersionTest >> v210 [
 
 	^ SemanticVersion fromString: '2.1.0'
 ]
 
 { #category : #helpers }
-CGOSemanticVersionTest >> v211 [
+SemanticVersionTest >> v211 [
 
 	^ SemanticVersion fromString: '2.1.1'
 ]
