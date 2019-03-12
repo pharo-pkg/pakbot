@@ -32,6 +32,11 @@ BaselineOfCargo >> baseline: spec [
 				package: #CargoPackageManager
 					with: [ spec requires: #('CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos') ];
 
+				package: #'PakbotPackageManager-Repository'
+					with: [ spec requires: #(CargoPackageManager) ];
+				package: #'PakbotPackageManager-Repository-Tests'
+					with: [ spec requires: #('PakbotPackageManager-Repository') ];
+					
 				package: #'CargoPackageManager-Repository'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' 'ZincHTTPComponents') ];
 				package: #'CargoPackageManager-RepositoryBackend'
@@ -60,8 +65,11 @@ BaselineOfCargo >> baseline: spec [
 				group: 'server'
 					with:
 					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 'utils' 'CargoPackageManager-Utils-Tests' 'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 'CargoPackageManager-IntegrationTests'
-'CargoPackageManager-UI-Tests');
+				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 
+					'utils' 'CargoPackageManager-Utils-Tests' 
+					'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 					'CargoPackageManager-IntegrationTests'
+					'CargoPackageManager-UI-Tests' 
+					'PakbotPackageManager-Repository-Tests');
 				group: 'tests-server' with: #('server' 'tests-client');
 				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
