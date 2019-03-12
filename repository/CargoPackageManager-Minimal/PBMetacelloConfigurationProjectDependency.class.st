@@ -39,15 +39,18 @@ PBMetacelloConfigurationProjectDependency class >> stonName [
 ]
 
 { #category : #'querying - installed' }
-PBMetacelloConfigurationProjectDependency >> isInstalledInMetacello [
-	
+PBMetacelloConfigurationProjectDependency >> isInstalledInMetacello [	
 	| conf |
-	conf := MetacelloProjectRegistration registry configurationRegistry at: (#ConfigurationOf , name) ifAbsent: [ ^ false ].	
+	conf := self metacelloProjectRegistry configurationRegistry 
+		at: (#ConfigurationOf , name) 
+		ifAbsent: [ ^ false ].	
 	
 	^ version isSymbol ifTrue: [  
 		self isInstalledSymbolicVersion: conf.
 	] ifFalse: [  
-		conf version = version and: [ conf loadedInImage and: [ conf configurationProjectSpec loads isEmpty ]]
+		conf version = version 
+			and: [ conf loadedInImage 
+			and: [ conf configurationProjectSpec loads isEmpty ] ]
 	]
 	
 ]

@@ -65,8 +65,8 @@ PBMetacelloProjectDependency >> = anotherObject [
 PBMetacelloProjectDependency >> additionalConflictingInstalledProjects [
 
 	| metacelloProjectRegistration |
-
-	metacelloProjectRegistration := MetacelloProjectRegistration registry
+ 
+	metacelloProjectRegistration := self metacelloProjectRegistry
 		registrationForClassNamed: self name
 		ifAbsent: [ ^ #() ].
 	
@@ -142,6 +142,11 @@ PBMetacelloProjectDependency >> isMetacelloConfiguration [
 { #category : #testing }
 PBMetacelloProjectDependency >> isMetacelloProjectDependency [
 	^ true
+]
+
+{ #category : #accessing }
+PBMetacelloProjectDependency >> metacelloProjectRegistry [
+	^ project registry metacelloProjectRegistry
 ]
 
 { #category : #accessing }

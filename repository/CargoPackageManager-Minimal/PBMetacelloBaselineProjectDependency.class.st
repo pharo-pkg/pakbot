@@ -53,7 +53,7 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	| baseline |
 	
-	baseline := MetacelloProjectRegistration registry baselineRegistry 
+	baseline := self metacelloProjectRegistry baselineRegistry 
 		at: #BaselineOf , name 
 		ifAbsent: [ ^ false ].
 	^ baseline currentVersionString = version 

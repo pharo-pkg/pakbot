@@ -4,6 +4,7 @@ Registry used to hold description of packages installed in the image.
 
 - installedPackages contains the list of all installed packges in the image.
 - registeredProjects contains the list of projects having at least one of this package installed in the image
+- metacelloProjectRegistry is a reference to the metacello project registry. It allows to use a custom registry for tests.
 "
 Class {
 	#name : #PBPackageRegistry,
@@ -11,7 +12,8 @@ Class {
 	#instVars : [
 		'installedPackages',
 		'registeredProjects',
-		'systemPackageOrganizer'
+		'systemPackageOrganizer',
+		'metacelloProjectRegistry'
 	],
 	#classVars : [
 		'Default'
@@ -123,6 +125,16 @@ PBPackageRegistry >> isProjectInstalled: aCGOOngoingProject [
 PBPackageRegistry >> isVirtual: aString [ 
 	
 	^ (self packageNamed: aString) isVirtual
+]
+
+{ #category : #accessing }
+PBPackageRegistry >> metacelloProjectRegistry [
+	^ metacelloProjectRegistry ifNil: [ MetacelloProjectRegistration registry ]
+]
+
+{ #category : #accessing }
+PBPackageRegistry >> metacelloProjectRegistry: aMetacelloProjectRegistry [
+	metacelloProjectRegistry := aMetacelloProjectRegistry
 ]
 
 { #category : #projects }
