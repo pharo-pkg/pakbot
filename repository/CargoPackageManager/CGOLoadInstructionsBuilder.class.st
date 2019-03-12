@@ -52,7 +52,10 @@ CGOLoadInstructionsBuilder >> reducedGraph [
 
 	^ MalGraphReducer new
 		addNodesFrom: resolution
-		childrenBlock: [ :resolvedDependency | resolvedDependency resolvedDependencies collect: [ :each | each resolution ] ];
+		childrenBlock: [ :resolvedDependency | 
+			resolvedDependency resolvedDependencies 
+				collect: [ :each | each resolution ]
+				thenReject: [ :each | each isInstalledInImage ] ];
 		run
 ]
 

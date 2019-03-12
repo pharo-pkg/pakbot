@@ -1,6 +1,6 @@
 "
-I represent a conflicting project that is installed in the image.
-I am polimorphic with CGOResolvedDependency.  I am used by the resolution of conflicts.
+I  represent a conflicting project that is installed in the image.
+I  am polymorphic with PBResolvedDependency. I  am used by the resolution of conflicts.
 See PBConflict
 "
 Class {
@@ -62,6 +62,7 @@ PBInstalledDependency >> resolveWith: aResolved [
 ]
 
 { #category : #accessing }
-PBInstalledDependency >> resolved: aProject [ 
-	resolved := aProject
+PBInstalledDependency >> resolved: aResolvedProject [ 
+	resolved := aResolvedProject.
+	aResolvedProject beInstalledInImage.
 ]

@@ -63,6 +63,15 @@ PBConflict >> resolutionFor: aDependency [
 ]
 
 { #category : #resolving }
+PBConflict >> resolveWithAlreadyInstalled [
+	| dependency |
+	dependency := dependencies detect: #isInstalledDependency.
+	self selectedResolution: dependency resolution.
+	self resolveWithSelected
+
+]
+
+{ #category : #resolving }
 PBConflict >> resolveWithSelected [
 	selectedResolution
 		ifNotNil: [ dependencies do: [ :each | each resolveWith: selectedResolution ] ]

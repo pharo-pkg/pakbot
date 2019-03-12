@@ -23,6 +23,40 @@ CGOProjectLoadingInstructionsTest >> tearDown [
 ]
 
 { #category : #tests }
+CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotIncludeInstalledDependencies [
+	| resolution projectOne projectTwoName projectTwoRegistration |
+	
+	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
+	projectTwoName := 'PakbotTestExample'.
+	projectOne addDependency: (PBMetacelloBaselineProjectDependency  
+			name: projectTwoName
+			repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+			version: #master).
+	testRegistry metacelloProjectRegistry: MetacelloProjectRegistry new.
+	projectTwoRegistration := (MetacelloProjectRegistration new
+		projectName: projectTwoName;
+		baselineProjectSpec: (Metacello new
+			baseline: projectTwoName;
+			repository: 'github://pharo-pkg/PakbotTestExample:master';
+			record) projectSpecsFromRepositoryArg first;
+		yourself).
+	testRegistry metacelloProjectRegistry baselineRegistry
+        at: #BaselineOf , projectTwoName
+        put: projectTwoRegistration.
+		
+	resolution := projectOne resolve.
+	self flag: 'todo: for now master is compared to the commit hash => need to use icerepository revparse: version to compare (but requires to first clone the repository)'.
+	resolution conflicts anyOne resolveWithAlreadyInstalled.
+
+	"Since the project and its dependencies are already loaded and up to date,
+	the calculated load instructions should strip out all installed things and then be empty"
+	self 
+		assert: resolution resolvedDependencies size 
+		equals: 1.
+	self assert: resolution loadInstructions isEmpty
+]
+
+{ #category : #tests }
 CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
 
 	| resolution projectOne |

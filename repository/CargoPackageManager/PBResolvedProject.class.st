@@ -51,6 +51,13 @@ PBResolvedProject >> allSubResolutions [
 	^ self subresolutions asArray , (self subresolutions asArray flatCollect: [ :each | each allSubResolutions asArray ])
 ]
 
+{ #category : #accessing }
+PBResolvedProject >> beInstalledInImage [
+	"tells that this project is already installed into the image, no need to load it.
+	It is used for Metacello projects not loaded through Cargo but installed and registered in Metacello registry"
+	isInstalledInImage := true.
+]
+
 { #category : #conflicts }
 PBResolvedProject >> conflictingDependencies [
 	
@@ -111,6 +118,7 @@ PBResolvedProject >> initialize [
 	super initialize.
 	originDependencies := Set new.
 	resolvedDependencies := Set new.
+	isInstalledInImage := false
 ]
 
 { #category : #comparing }
@@ -121,8 +129,16 @@ PBResolvedProject >> isEquivalentTo: aCGOResolvedProject [
 
 { #category : #testing }
 PBResolvedProject >> isInstalled [
-	
+	"tells if the project is already installed AND registered in Pakbot registry.
+	For a Metacello project, will answer false if project is installed and registered in Metacello registry."
 	^ resolvedProjectVersion isInstalled
+]
+
+{ #category : #testing }
+PBResolvedProject >> isInstalledInImage [
+	"tells if this project is already installed into the image (no need to load it).
+	It is used for Metacello projects not loaded through Cargo but installed and registered in Metacello registry"
+	^ isInstalledInImage 
 ]
 
 { #category : #testing }

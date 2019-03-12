@@ -1,5 +1,6 @@
 "
 Class used to represent a dependency that has been resolved. It means that we know the specific version of a package to load. 
+originalDependency instance variable keeps a reference to the dependency that is now solved.
 "
 Class {
 	#name : #PBResolvedDependency,
@@ -153,9 +154,9 @@ PBResolvedDependency >> resolution [
 ]
 
 { #category : #resolving }
-PBResolvedDependency >> resolveWith: aCGOResolvedProject [ 
+PBResolvedDependency >> resolveWith: aPBResolvedProject [ 
 
-	dependencyState := dependencyState resolveWith: aCGOResolvedProject
+	dependencyState := dependencyState resolveWith: aPBResolvedProject
 
 ]
 
