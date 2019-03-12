@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'originDependencies',
 		'resolvedProjectVersion',
-		'resolvedDependencies'
+		'resolvedDependencies',
+		'isInstalledInImage'
 	],
 	#category : #'CargoPackageManager-Solver'
 }
@@ -112,7 +113,7 @@ PBResolvedProject >> initialize [
 	resolvedDependencies := Set new.
 ]
 
-{ #category : #comparison }
+{ #category : #comparing }
 PBResolvedProject >> isEquivalentTo: aCGOResolvedProject [ 
 	
 	^ self resolution isEquivalentTo: aCGOResolvedProject resolution
@@ -167,7 +168,7 @@ PBResolvedProject >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accesskng }
+{ #category : #accessing }
 PBResolvedProject >> projectVersion [
 	^ resolvedProjectVersion version
 ]
@@ -178,7 +179,7 @@ PBResolvedProject >> resolution [
 	^ resolvedProjectVersion
 ]
 
-{ #category : #resolution }
+{ #category : #solving }
 PBResolvedProject >> resolution: aPackageVersionReference [
 	| pkgVersion |
 	pkgVersion := aPackageVersionReference.
@@ -212,13 +213,13 @@ PBResolvedProject >> resolvedProjectVersion: anObject [
 	resolvedProjectVersion := anObject
 ]
 
-{ #category : #resolving }
+{ #category : #solving }
 PBResolvedProject >> resolvesDependency: aDependency [
 	
 	^ false
 ]
 
-{ #category : #resolution }
+{ #category : #solving }
 PBResolvedProject >> resolvesProject: aProject [ 
 	
 	^ resolvedProjectVersion = aProject
