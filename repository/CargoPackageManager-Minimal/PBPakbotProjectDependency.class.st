@@ -133,7 +133,7 @@ PBPakbotProjectDependency >> resolveInSolver: aCGOSolver [
 			yourself
 ]
 
-{ #category : #constrains }
+{ #category : #constraints }
 PBPakbotProjectDependency >> satisfyConstraints: aSemanticVersion [ 
 	^ constraints allSatisfy: [ :each | each isCompatibleWith: aSemanticVersion ]
 ]
@@ -156,7 +156,7 @@ PBPakbotProjectDependency >> version [
 	^ constraints anyOne version asString
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PBPakbotProjectDependency >> version: aString [ 
 
 	aString isEmptyOrNil ifTrue: [ constraints := #(). ^ self].
