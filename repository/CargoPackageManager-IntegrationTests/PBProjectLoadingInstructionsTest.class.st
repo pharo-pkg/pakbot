@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOProjectLoadingInstructionsTest,
+	#name : #PBProjectLoadingInstructionsTest,
 	#superclass : #PBAbstractTest,
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> tearDown [
+PBProjectLoadingInstructionsTest >> tearDown [
 
 	| configuration metacelloRegistration |
 	super tearDown.
@@ -23,7 +23,7 @@ CGOProjectLoadingInstructionsTest >> tearDown [
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotIncludeInstalledDependencies [
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotIncludeInstalledDependencies [
 	| resolution projectOne projectTwoName projectTwoRegistration |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
@@ -57,7 +57,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotInclud
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
 
 	| resolution projectOne |
 	
@@ -75,7 +75,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngo
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProjectDependencyHasCargoLoadingInstruction [
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProjectDependencyHasCargoLoadingInstruction [
 
 	| resolution projectOne dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
@@ -93,7 +93,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProj
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
 
 	| resolution projectOne baselineDependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
@@ -112,7 +112,7 @@ CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacello
 ]
 
 { #category : #tests }
-CGOProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
 
 	| resolution projectOne configurationProject |
 	projectOne := testRegistry newProjectNamed: 'Test'.

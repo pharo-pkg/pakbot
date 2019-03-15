@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOProjectLoadingTest,
+	#name : #PBProjectLoadingTest,
 	#superclass : #PBAbstractTest,
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
+PBProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
 
 	| project baselineProjectV1 baselineProjectV2 |
 
@@ -29,7 +29,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWi
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithException [
+PBProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFailsWithException [
 
 	| project configurationProjectV1 configurationProjectV2 |
 
@@ -53,7 +53,7 @@ CGOProjectLoadingTest >> testLoadingProjectWithMetacelloConfigurationConflictsFa
 ]
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorrespondingClassesInSystem [
 
 	| project baselineProjectV1 |
 	project := testRegistry newProjectNamed: 'Test'.
@@ -72,7 +72,7 @@ CGOProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorresponding
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespondingClassesInSystem [
 
 	| project configurationProject |
 
@@ -92,7 +92,7 @@ CGOProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespo
 ]
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo baselineProjectV1 |
 
@@ -123,7 +123,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependen
 ]
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo baselineProjectV2 |
 
@@ -154,7 +154,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependen
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo configurationProject |
 
@@ -185,7 +185,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDep
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| projectOne projectTwo configurationProject |
 
@@ -216,7 +216,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDep
 ]
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project baselineProjectV1 |
 
@@ -243,7 +243,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV1Lo
 ]
 
 { #category : #'tests-baseline-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| project baselineProjectV1 |
 
@@ -270,7 +270,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloBaselineDependenciesV2Lo
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project configurationProjectDependency |
 
@@ -297,7 +297,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependencie
 ]
 
 { #category : #'tests-configuration-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependenciesV2LoadsCorrespondingClassesInSystem [
 
 	| project configurationProject |
 
@@ -324,7 +324,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependencie
 ]
 
 { #category : #'tests-cargo-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
+PBProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project pakbotProjectDependency |
 
@@ -346,7 +346,7 @@ CGOProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespo
 ]
 
 { #category : #'tests-cargo-dependencies' }
-CGOProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKeepsThemLoaded [
+PBProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKeepsThemLoaded [
 
 	| projectOne projectTwo |
 	

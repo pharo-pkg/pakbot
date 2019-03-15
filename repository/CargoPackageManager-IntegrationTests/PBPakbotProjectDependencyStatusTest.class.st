@@ -1,17 +1,17 @@
 Class {
-	#name : #CGOPakbotProjectDependencyStatusTest,
-	#superclass : #CGODependencyStatusTest,
+	#name : #PBPakbotProjectDependencyStatusTest,
+	#superclass : #PBDependencyStatusTest,
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #utils }
-CGOPakbotProjectDependencyStatusTest >> createProjectDependency [
+PBPakbotProjectDependencyStatusTest >> createProjectDependency [
 	^ PBPakbotProjectDependency named: 'AnotherProject' version: '=0.0.0-N/A'
 		
 ]
 
 { #category : #utils }
-CGOPakbotProjectDependencyStatusTest >> installProject [
+PBPakbotProjectDependencyStatusTest >> installProject [
 	
 	| newProject |
 	newProject := PBProject named: 'AnotherProject'.

@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOMetacelloConfigurationDependencyStatusWithSymbolicTest,
-	#superclass : #CGODependencyStatusTest,
+	#name : #PBMetacelloConfigurationDependencyStatusWithSymbolicTest,
+	#superclass : #PBDependencyStatusTest,
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #utils }
-CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> createProjectDependency [
+PBMetacelloConfigurationDependencyStatusWithSymbolicTest >> createProjectDependency [
 
 	^ PBMetacelloConfigurationProjectDependency  
 		name: 'CargoTestExample'
@@ -14,7 +14,7 @@ CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> createProjectDepend
 ]
 
 { #category : #utils }
-CGOMetacelloConfigurationDependencyStatusWithSymbolicTest >> installProject [
+PBMetacelloConfigurationDependencyStatusWithSymbolicTest >> installProject [
 
 	Metacello new
 		configuration: 'CargoTestExample';

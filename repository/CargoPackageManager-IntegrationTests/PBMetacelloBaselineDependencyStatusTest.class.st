@@ -1,11 +1,11 @@
 Class {
-	#name : #CGOMetacelloBaselineDependencyStatusTest,
-	#superclass : #CGODependencyStatusTest,
-	#category : 'CargoPackageManager-IntegrationTests'
+	#name : #PBMetacelloBaselineDependencyStatusTest,
+	#superclass : #PBDependencyStatusTest,
+	#category : #'CargoPackageManager-IntegrationTests'
 }
 
 { #category : #utils }
-CGOMetacelloBaselineDependencyStatusTest >> createProjectDependency [
+PBMetacelloBaselineDependencyStatusTest >> createProjectDependency [
 	^ PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
 		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
@@ -13,7 +13,7 @@ CGOMetacelloBaselineDependencyStatusTest >> createProjectDependency [
 ]
 
 { #category : #utils }
-CGOMetacelloBaselineDependencyStatusTest >> installProject [
+PBMetacelloBaselineDependencyStatusTest >> installProject [
 
 	Metacello new
 		baseline: 'PakbotTestExample';
@@ -23,7 +23,7 @@ CGOMetacelloBaselineDependencyStatusTest >> installProject [
 ]
 
 { #category : #running }
-CGOMetacelloBaselineDependencyStatusTest >> tearDown [
+PBMetacelloBaselineDependencyStatusTest >> tearDown [
 
 	#(#'BaselineOfPakbotTestExample'
 	#'PakbotTestExample-PackageA'

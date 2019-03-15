@@ -1,5 +1,5 @@
 Class {
-	#name : #CGODependencyStatusTest,
+	#name : #PBDependencyStatusTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
@@ -10,24 +10,24 @@ Class {
 }
 
 { #category : #testing }
-CGODependencyStatusTest class >> isAbstract [
-	^ self = CGODependencyStatusTest 
+PBDependencyStatusTest class >> isAbstract [
+	^ self = PBDependencyStatusTest 
 ]
 
 { #category : #utils }
-CGODependencyStatusTest >> createProjectDependency [
+PBDependencyStatusTest >> createProjectDependency [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #utils }
-CGODependencyStatusTest >> installProject [
+PBDependencyStatusTest >> installProject [
 	
 	self subclassResponsibility 
 ]
 
 { #category : #running }
-CGODependencyStatusTest >> setUp [
+PBDependencyStatusTest >> setUp [
 	super setUp.
 
 	project := PBProject named: 'ATestProject'.
@@ -40,27 +40,27 @@ CGODependencyStatusTest >> setUp [
 ]
 
 { #category : #tests }
-CGODependencyStatusTest >> testProjectDependencyIsNotSatisfied [
+PBDependencyStatusTest >> testProjectDependencyIsNotSatisfied [
 
 	self deny: dependencyToProject isInstalled.
 ]
 
 { #category : #tests }
-CGODependencyStatusTest >> testProjectDependencyIsSatisfied [
+PBDependencyStatusTest >> testProjectDependencyIsSatisfied [
 
 	self installProject.
 	self assert: dependencyToProject isInstalled.
 ]
 
 { #category : #tests }
-CGODependencyStatusTest >> testProjectIsNotUpToDate [
+PBDependencyStatusTest >> testProjectIsNotUpToDate [
 
 	self deny: project isUpToDate.
 	self assert: project hasProblems.
 ]
 
 { #category : #tests }
-CGODependencyStatusTest >> testProjectIsUpToDate [
+PBDependencyStatusTest >> testProjectIsUpToDate [
 
 	self installProject.
 	self assert: project isUpToDate.
