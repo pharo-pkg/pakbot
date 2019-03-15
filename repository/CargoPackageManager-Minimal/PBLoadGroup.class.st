@@ -19,6 +19,15 @@ PBLoadGroup class >> newWithAll: aListOfPackageVersionReferenceStrings [
 		
 ]
 
+{ #category : #comparing }
+PBLoadGroup >> = anotherObject [
+	self species = anotherObject species
+		ifFalse: [ ^ false ].
+		
+	^ self name = anotherObject name
+		and: [ self loadableUnits = anotherObject loadableUnits ]
+]
+
 { #category : #private }
 PBLoadGroup >> computeName [
 	name := ', ' join: (loadableUnits collect: #name)

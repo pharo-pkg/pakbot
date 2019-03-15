@@ -14,6 +14,14 @@ Class {
 	#category : 'CargoPackageManager-Minimal-Loader'
 }
 
+{ #category : #comparing }
+CGOLoadInstructions >> = anotherObject [
+	self species = anotherObject species
+		ifFalse: [ ^ false ].
+		
+	^ self groups = anotherObject groups
+]
+
 { #category : #adding }
 CGOLoadInstructions >> addGroup: aPackageLoadGroup [
 	groups add: aPackageLoadGroup
