@@ -6,7 +6,7 @@ sudo: false
 # Select operating system(s)
 os:
   - linux
-  - osx
+# random SSL error with iceberg  - osx
 
 # Select compatible Smalltalk image(s)
 smalltalk:
