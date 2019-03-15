@@ -211,7 +211,8 @@ PBProject >> dependencies [
 
 { #category : #dependencies }
 PBProject >> dependencies: aDependencyList [ 
-	dependencies := aDependencyList
+	dependencies := aDependencyList.
+	dependencies do: [ :dependency | dependency project: self ]
 ]
 
 { #category : #'API-dependencies' }

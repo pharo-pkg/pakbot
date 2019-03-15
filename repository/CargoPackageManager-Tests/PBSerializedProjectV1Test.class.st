@@ -111,7 +111,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 ]
 
 { #category : #tests }
-PBSerializedProjectV1Test >> testCanDeSerializeProjectWithDependencies [
+PBSerializedProjectV1Test >> testCanDeserializeProjectWithDependencies [
 	| project expectedDependencies |
 	
 	project := PBProject fromStonString: self stonStringForProjectWithDependencies.
@@ -125,7 +125,10 @@ PBSerializedProjectV1Test >> testCanDeSerializeProjectWithDependencies [
 		buildExternalProjectDependencies)	dependencies.
 	self
 		assertCollection: (project dependencies collect: #name)
-		hasSameElements: (expectedDependencies collect: #name)
+		hasSameElements: (expectedDependencies collect: #name).
+		
+
+	self assert: (project dependencies allSatisfy: [ :each | (each instVarNamed: 'project') notNil ]).
 ]
 
 { #category : #tests }
