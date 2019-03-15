@@ -117,6 +117,21 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [
 ]
 
 { #category : #tests }
+PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublication [
+	| repository project |
+	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	project := PBProject example.
+	project registry: PBPackageRegistry new.
+	
+	self 
+		should: [ project publishOn: repository ]
+		raise: PBError.
+		
+	self deny: (repository fileForPackageNamed: project name version: project version asString) exists
+
+]
+
+{ #category : #tests }
 PBPackageRepositoryTest >> testPublishedProjectHasASourceRepository [
 	| repository project fetchedProject |
 	repository := PBPackageRepository

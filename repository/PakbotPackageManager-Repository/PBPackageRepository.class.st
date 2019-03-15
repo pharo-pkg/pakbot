@@ -56,7 +56,9 @@ PBPackageRepository >> saveProject: aPBProject [
 	file exists
 		ifTrue: [ CGOPackageVersionAlreadyExistsError
 				signal: aPBProject name , ' already defined' ]
-		ifFalse: [ file parent ensureCreateDirectory.
-			file writeStreamDo: [ :stream | 
-				stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProject asSerializedPackage) ] ]
+		ifFalse: [ | fileContent |
+			fileContent := String streamContents: [ :stream | 
+				stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProject asSerializedPackage) ].
+			file parent ensureCreateDirectory.
+			file writeStreamDo: [ :stream | stream nextPutAll: fileContent] ].
 ]
