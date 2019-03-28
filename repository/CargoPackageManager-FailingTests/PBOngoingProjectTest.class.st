@@ -1,6 +1,6 @@
 Class {
 	#name : #PBOngoingProjectTest,
-	#superclass : #CGOOngoingProjectTest,
+	#superclass : #PBProjectTest,
 	#instVars : [
 		'protocol'
 	],
