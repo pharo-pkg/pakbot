@@ -31,7 +31,6 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 		initialize;
 		openDialogOnAccept: [ :selectedPanel | | repository |
 			dialog selectedType validate.
-			dialog selectedType newRepository.
 			repository := CGOGitRepository repository: dialog selectedType newRepository.
 			project project repository: repository.
 			
