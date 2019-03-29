@@ -58,7 +58,7 @@ PBIcebergProject >> contentsString [
 PBIcebergProject >> initialize [
 
 	super initialize.
-	sourceDirectory := 'src'
+	sourceDirectory := ''
 ]
 
 { #category : #accessing }

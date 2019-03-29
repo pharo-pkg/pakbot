@@ -43,6 +43,12 @@ PBImportIcebergRepositoryPanel >> initializeWidgets [
 ]
 
 { #category : #accessing }
+PBImportIcebergRepositoryPanel >> newRepository [ 
+	"polymorphic with other iceberg creation panels"
+	^ repositoryList selectedItem
+]
+
+{ #category : #accessing }
 PBImportIcebergRepositoryPanel >> repositoryList [
 	^ repositoryList
 ]
@@ -55,4 +61,9 @@ PBImportIcebergRepositoryPanel >> repositoryList: anObject [
 { #category : #specs }
 PBImportIcebergRepositoryPanel >> title [
 	^ 'Existing Iceberg Repository'
+]
+
+{ #category : #accepting }
+PBImportIcebergRepositoryPanel >> validate [ 	
+	"We import an existing repository => no validation"
 ]

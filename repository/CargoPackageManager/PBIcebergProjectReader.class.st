@@ -43,5 +43,5 @@ PBIcebergProjectReader >> srcDirectoryFromCommitish: aCommitish [
 	properties at: 'srcDirectory' ifPresent: [ :srcDir | ^ srcDir ].
 	^ (IceBasicProjectReader new canReadProjectFromCommitish: aCommitish) 
 		ifTrue: [ (IceBasicProjectReader new readProjectFromCommitish: aCommitish) sourceDirectory ]
-		ifFalse: [ 'src' ]
+		ifFalse: [ '' ]
 ]
