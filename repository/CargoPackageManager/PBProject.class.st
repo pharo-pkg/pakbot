@@ -335,6 +335,11 @@ PBProject >> isEquivalentTo: anotherProject [
 ]
 
 { #category : #testing }
+PBProject >> isFixedVersion [
+	^ (version major = 0 and: [ version minor = 0 and: [ version patch = 0 ] ]) not
+]
+
+{ #category : #testing }
 PBProject >> isInstalled [
 	
 	^ self isLoaded
@@ -583,7 +588,7 @@ PBProject >> version [
 
 { #category : #accessing }
 PBProject >> version: anObject [
-	version := anObject
+	version := anObject asSemanticVersion
 ]
 
 { #category : #accessing }

@@ -55,6 +55,7 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 	project
 		registry: PBPackageRegistry new;
 		repository: 	CGOGitRepository example;
+		version: '0.1' asSemanticVersion;
 		publishOn: repository.
 	
 	self 
@@ -79,6 +80,23 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 ]
 
 { #category : #tests }
+PBPackageRepositoryTest >> testCannotPublishAProjectHavingNonFixedVersion [
+	| repository project |
+	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	project := PBProject example.
+	project
+		registry: PBPackageRegistry new;
+		repository: 	CGOGitRepository example.
+	
+	self 
+		should: [ project publishOn: repository ]
+		raise: PBPublicationError.
+	
+	self assert: repository packages isEmpty
+
+]
+
+{ #category : #tests }
 PBPackageRepositoryTest >> testCannotPublishAProjectWhenHavingDependencyOnNonFixedVersion [
 	self flag: 'TODO'.
 	self skip
@@ -87,12 +105,13 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenHavingDependencyOnNonFix
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished [
-	| repository project published |
+	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
 	project := PBProject example.
 	project
 		registry: PBPackageRegistry new;
 		repository: 	CGOGitRepository example;
+		version: '0.1' asSemanticVersion;	
 		publishOn: repository.
 	
 	self 
@@ -109,11 +128,16 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
 	project := PBProject example.
-	project registry: PBPackageRegistry new.
+	project 
+		registry: PBPackageRegistry new;
+		version: '0.1' asSemanticVersion.
 	
 	self 
 		should: [ project publishOn: repository ]
 		raise: PBError
+		whoseDescriptionIncludes: 'no repository defined'
+		description: 'Did not get right exception when trying to publish a project with no repository set'.
+
 ]
 
 { #category : #tests }
@@ -121,7 +145,8 @@ PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublica
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
 	project := PBProject example.
-	project registry: PBPackageRegistry new.
+	project 
+		registry: PBPackageRegistry new.
 	
 	self 
 		should: [ project publishOn: repository ]

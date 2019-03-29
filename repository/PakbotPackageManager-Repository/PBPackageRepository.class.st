@@ -51,14 +51,17 @@ PBPackageRepository >> root: aFileReference [
 
 { #category : #saving }
 PBPackageRepository >> saveProject: aPBProject [ 
-	| file |
+	| file fileContent |
 	file := self fileForPackage: aPBProject.
 	file exists
-		ifTrue: [ CGOPackageVersionAlreadyExistsError
-				signal: aPBProject name , ' already defined' ]
-		ifFalse: [ | fileContent |
-			fileContent := String streamContents: [ :stream | 
-				stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProject asSerializedPackage) ].
-			file parent ensureCreateDirectory.
-			file writeStreamDo: [ :stream | stream nextPutAll: fileContent] ].
+		ifTrue: [ CGOPackageVersionAlreadyExistsError signal: aPBProject name , ' already defined'.
+				^ self. ].
+	aPBProject isFixedVersion
+		ifFalse: [ PBPublicationError signal: aPBProject name, ' ' , aPBProject version asString, ' is not a fixed version.'.
+			^ self ].
+	
+	fileContent := String streamContents: [ :stream | 
+		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProject asSerializedPackage) ].
+	file parent ensureCreateDirectory.
+	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].
 ]
