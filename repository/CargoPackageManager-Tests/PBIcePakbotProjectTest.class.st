@@ -24,7 +24,7 @@ PBIcePakbotProjectTest >> setUp [
 			subdirectory: '';
 			createRepository.
 			
-	pakbotProject := (CGOGitRepository url: repository origin url repository: repository) project
+	pakbotProject := (PBGitRepository url: repository origin url repository: repository) project
 
 ]
 

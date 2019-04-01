@@ -2,30 +2,30 @@
 I'm an abstraction on a Source Code Management system (e.g. git, monticello) where Smalltalk code can be store.
 "
 Class {
-	#name : #CGOSourceRepository,
+	#name : #PBSourceRepository,
 	#superclass : #Object,
 	#instVars : [
 		'repositoryUrl'
 	],
-	#category : 'CargoPackageManager-Loading'
+	#category : #'CargoPackageManager-Loading'
 }
 
 { #category : #'instance creation' }
-CGOSourceRepository class >> classFor: repositoryTypeString [
+PBSourceRepository class >> classFor: repositoryTypeString [
 	^ self subclasses detect: [ :class | class type = repositoryTypeString ]
 ]
 
 { #category : #'instance creation' }
-CGOSourceRepository class >> fromDictionary: aDictionary [ 
+PBSourceRepository class >> fromDictionary: aDictionary [ 
 	| class |
 	class := self classFor: (aDictionary at: #type).
 	^ class fromDictionary: aDictionary
 ]
 
 { #category : #'instance creation' }
-CGOSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
+PBSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 	^ (self isGitRepositoryUrl: url)
-		ifTrue: [ CGOGitRepositoryCreator new
+		ifTrue: [ PBGitRepositoryCreator new
 			githubUrl: url;
 			subdirectory: subdirectoryName;
 			create ]
@@ -33,67 +33,67 @@ CGOSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 ]
 
 { #category : #testing }
-CGOSourceRepository class >> isGitRepositoryUrl: aString [
+PBSourceRepository class >> isGitRepositoryUrl: aString [
 	^ (aString beginsWith: 'git@') 
 		or: [ aString endsWith: '.git' ]
 ]
 
 { #category : #accessing }
-CGOSourceRepository class >> type [
+PBSourceRepository class >> type [
 	^ self subclassResponsibility
 ]
 
 { #category : #converting }
-CGOSourceRepository >> asSerializableRepository [
+PBSourceRepository >> asSerializableRepository [
 	^ self copy
 		instVarNamed: 'repositoryUrl' put: repositoryUrl asString;
 		yourself 
 ]
 
 { #category : #serialization }
-CGOSourceRepository >> fromSton: stonReader [
+PBSourceRepository >> fromSton: stonReader [
 	super fromSton: stonReader.
 	self isGitRepositoryUrl
 		ifFalse: [ repositoryUrl := repositoryUrl asUrl ]
 ]
 
 { #category : #serialization }
-CGOSourceRepository >> isGitRepositoryUrl [
+PBSourceRepository >> isGitRepositoryUrl [
 	^ self class isGitRepositoryUrl: repositoryUrl
 ]
 
 { #category : #testing }
-CGOSourceRepository >> isValidRepository [
+PBSourceRepository >> isValidRepository [
 	
 	^ true
 ]
 
 { #category : #saving }
-CGOSourceRepository >> projectMetadataFileName [
+PBSourceRepository >> projectMetadataFileName [
 	^ 'project-metadata.ston'
 ]
 
 { #category : #fetching }
-CGOSourceRepository >> projectMetadataStonString [
+PBSourceRepository >> projectMetadataStonString [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-CGOSourceRepository >> repositoryUrl [
+PBSourceRepository >> repositoryUrl [
 	^ repositoryUrl
 ]
 
 { #category : #saving }
-CGOSourceRepository >> savePackageUnits: packageUnits	andProjectMetadata: serializableProject	withMessage: commitMessage [
+PBSourceRepository >> savePackageUnits: packageUnits	andProjectMetadata: serializableProject	withMessage: commitMessage [
 	self subclassResponsibility
 ]
 
 { #category : #querying }
-CGOSourceRepository >> sourcePackageVersionClass [
+PBSourceRepository >> sourcePackageVersionClass [
 	self subclassResponsibility
 ]
 
 { #category : #serialization }
-CGOSourceRepository >> stonOn: stonWriter [
+PBSourceRepository >> stonOn: stonWriter [
 	stonWriter writeObject: self asSerializableRepository
 ]

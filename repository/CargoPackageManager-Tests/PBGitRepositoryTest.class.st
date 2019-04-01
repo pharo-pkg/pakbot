@@ -1,16 +1,16 @@
 Class {
-	#name : #CGOGitRepositoryTest,
-	#superclass : #CGOGitCreationTest,
-	#category : 'CargoPackageManager-Tests-SCM'
+	#name : #PBGitRepositoryTest,
+	#superclass : #PBGitCreationTest,
+	#category : #'CargoPackageManager-Tests-SCM'
 }
 
 { #category : #accessing }
-CGOGitRepositoryTest class >> defaultTimeLimit [ 
+PBGitRepositoryTest class >> defaultTimeLimit [ 
 	^10 minutes
 ]
 
 { #category : #asserting }
-CGOGitRepositoryTest >> assertSrcPackageVersion: srcPackageVersion hasSameUrlAs: anotherPackageVersion [
+PBGitRepositoryTest >> assertSrcPackageVersion: srcPackageVersion hasSameUrlAs: anotherPackageVersion [
 	| repoUrl expectedUrl |
 	repoUrl := ((srcPackageVersion instVarNamed: 'repository')
 						instVarNamed: 'repositoryUrl').
@@ -21,7 +21,7 @@ CGOGitRepositoryTest >> assertSrcPackageVersion: srcPackageVersion hasSameUrlAs:
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> cargoMinimalB9ee [
+PBGitRepositoryTest >> cargoMinimalB9ee [
 	^ CGOGitHostedPackageVersionEnforcingProtocol
 		repositoryUrl: 'git@github.com:demarey/cargo.git'
 		subdirectory: 'repository'
@@ -30,7 +30,7 @@ CGOGitRepositoryTest >> cargoMinimalB9ee [
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
+PBGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
 	^ CGOGitHostedPackageVersion
 		repositoryUrl: 'https://github.com/demarey/cargo.git'
 		subdirectory: 'repository'
@@ -39,8 +39,8 @@ CGOGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> pharoCounterMaster [
-	^ CGOGitRepositoryCreator new
+PBGitRepositoryTest >> pharoCounterMaster [
+	^ PBGitRepositoryCreator new
 		githubUrl: 'https://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		version: 'master';
@@ -49,14 +49,14 @@ CGOGitRepositoryTest >> pharoCounterMaster [
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> pharoCounterMasterCloned [
+PBGitRepositoryTest >> pharoCounterMasterCloned [
 	^ self pharoCounterMaster 
 		ensureCloned;
 		yourself
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> pharoCounterTestsOriginRepo [
+PBGitRepositoryTest >> pharoCounterTestsOriginRepo [
 	^ CGOGitHostedPackageVersion
 		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
 		subdirectory: ''
@@ -65,23 +65,23 @@ CGOGitRepositoryTest >> pharoCounterTestsOriginRepo [
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> stonCargoMinimalB9ee [
+PBGitRepositoryTest >> stonCargoMinimalB9ee [
 	^ 'CGOGitHostedPackageVersion{#repository:CGOGitRepository{#repositoryUrl:''git@github.com:demarey/cargo.git'',#subdirectory:''repository''},#packageName:#CargoPackageManager-Minimal,#commitish:''b9ee048f40e500198120aedf8db60266caa9ece9''}'
 ]
 
 { #category : #'tests - test data' }
-CGOGitRepositoryTest >> stonCargoMinimalB9eeHttpsUrl [
+PBGitRepositoryTest >> stonCargoMinimalB9eeHttpsUrl [
 	^ 'CGOGitHostedPackageVersion{#repository:CGOGitRepository{#repositoryUrl:''https://github.com/demarey/cargo.git'',#subdirectory:''repository''},#packageName:#CargoPackageManager-Minimal,#commitish:''b9ee048f40e500198120aedf8db60266caa9ece9''}'
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanBeDeserialized [
+PBGitRepositoryTest >> testCanBeDeserialized [
 	| repositoryStonString deserializedRepository dict |
 	repository := self pharoCounterMasterCloned.
 	repositoryStonString := STON toStringPretty: repository.
 	
 	dict := STON fromString: repositoryStonString.
-	deserializedRepository := CGOSourceRepository fromDictionary: dict.
+	deserializedRepository := PBSourceRepository fromDictionary: dict.
 	
 	self 
 		assert: deserializedRepository repositoryUrl 
@@ -93,7 +93,7 @@ CGOGitRepositoryTest >> testCanBeDeserialized [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanBeSerializedInSton [
+PBGitRepositoryTest >> testCanBeSerializedInSton [
 	| repositoryStonString |
 	repository := self pharoCounterMasterCloned.
 	repositoryStonString := STON toStringPretty: repository.
@@ -108,7 +108,7 @@ CGOGitRepositoryTest >> testCanBeSerializedInSton [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanDetectGitRepositoryCloned [
+PBGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 	| location |
 	location := self iceRepositoryLocation.
 	IceRepositoryCreator new 
@@ -116,7 +116,7 @@ CGOGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 			subdirectory: '';
 			location: location;
 			createRepository.
-	repository := CGOGitRepositoryCreator new
+	repository := PBGitRepositoryCreator new
 		githubUrl: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
@@ -126,7 +126,7 @@ CGOGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanDetectGitRepositoryNotClonedWhenMissingLocation [
+PBGitRepositoryTest >> testCanDetectGitRepositoryNotClonedWhenMissingLocation [
 
 	repository := self pharoCounterMaster.
 	self deny: repository isCloned
@@ -134,7 +134,7 @@ CGOGitRepositoryTest >> testCanDetectGitRepositoryNotClonedWhenMissingLocation [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepositoryClonedInSameBranchAndDetachedHead [
+PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepositoryClonedInSameBranchAndDetachedHead [
 	| iceRepository location |
 	<expectedFailure>
 	location := self iceRepositoryLocation.
@@ -144,7 +144,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 			location: location;
 			createRepository.
 	(iceRepository lookupCommit: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8') checkout.
-	repository := CGOGitRepositoryCreator new
+	repository := PBGitRepositoryCreator new
 		githubUrl: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
@@ -161,9 +161,9 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenRepos
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
+PBGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 
-	repository := CGOGitRepositoryCreator new
+	repository := PBGitRepositoryCreator new
 		githubUrl: 'http://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		create.
@@ -179,7 +179,7 @@ CGOGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned 
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
+PBGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 	| result |
 	
 	self flag:#todo.
@@ -192,7 +192,7 @@ CGOGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
+PBGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
 	project := PBProject fromVcsStonString: repository projectMetadataStonString.
@@ -219,7 +219,7 @@ CGOGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testCanSavePackageAndItsMetadata [
+PBGitRepositoryTest >> testCanSavePackageAndItsMetadata [
 	| mcVersion message |
 	
 	self flag:#todo.
@@ -236,7 +236,7 @@ CGOGitRepositoryTest >> testCanSavePackageAndItsMetadata [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
+PBGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 	self 
 		should: [ IceRepositoryCreator new 
 			addRemote: 'https://github.com/foo/bar.git';
@@ -247,9 +247,9 @@ CGOGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 ]
 
 { #category : #tests }
-CGOGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
+PBGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
 
-	repository := CGOGitRepositoryCreator new
+	repository := PBGitRepositoryCreator new
 		githubUrl: 'http://github.com/demarey/HotelApp.git';
 		location: self iceRepositoryLocation;
 		createAndClone.

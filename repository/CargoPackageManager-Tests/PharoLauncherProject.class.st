@@ -121,7 +121,7 @@ PharoLauncherProject >> buildProject [
 { #category : #building }
 PharoLauncherProject >> buildRepository [
 	 project repository: 
-		(CGOGitRepositoryCreator new
+		(PBGitRepositoryCreator new
 			url: 'https://github.com/pharo-project/pharo-launcher.git';
 			version: 'development';
 			subdirectory: 'src';

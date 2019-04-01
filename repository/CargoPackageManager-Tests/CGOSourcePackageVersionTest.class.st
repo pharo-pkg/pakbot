@@ -9,7 +9,7 @@ CGOSourcePackageVersionTest >> testCanInstantiateGitHostedPackageVersionFromAGit
 	| sourcePackageVersion |
 	
 	sourcePackageVersion := CGOSourcePackageVersion 
-		repository: 	CGOGitRepository example
+		repository: 	PBGitRepository example
 		packageName: 'Foo'.
 	
 	self 

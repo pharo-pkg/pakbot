@@ -1,17 +1,17 @@
-Extension { #name : #CGOSourceRepository }
+Extension { #name : #PBSourceRepository }
 
 { #category : #'*CargoPackageManager-UI' }
-CGOSourceRepository >> description [
+PBSourceRepository >> description [
 	self subclassResponsibility
 ]
 
 { #category : #'*CargoPackageManager-UI' }
-CGOSourceRepository >> editionIconName [
+PBSourceRepository >> editionIconName [
 	^ #glamorousBrowse
 ]
 
 { #category : #'*CargoPackageManager-UI' }
-CGOSourceRepository >> iconName [
+PBSourceRepository >> iconName [
 	
 	^ #''
 ]

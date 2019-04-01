@@ -3,7 +3,7 @@ I am a null object representing the absence of repository configured for a proje
 "
 Class {
 	#name : #PBNoRepository,
-	#superclass : #CGOSourceRepository,
+	#superclass : #PBSourceRepository,
 	#category : #'CargoPackageManager-Loading'
 }
 

@@ -31,7 +31,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 		initialize;
 		openDialogOnAccept: [ :selectedPanel | | repository |
 			dialog selectedType validate.
-			repository := CGOGitRepository repository: dialog selectedType newRepository.
+			repository := PBGitRepository repository: dialog selectedType newRepository.
 			project project repository: repository.
 			
 			repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: project project).

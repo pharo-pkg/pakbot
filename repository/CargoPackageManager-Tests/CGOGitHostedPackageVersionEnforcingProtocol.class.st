@@ -38,7 +38,7 @@ CGOGitHostedPackageVersionEnforcingProtocol >> httpUrlFrom: aString [
 
 { #category : #initialization }
 CGOGitHostedPackageVersionEnforcingProtocol >> repositoryUrl: gitUrlString	subdirectory: directoryName	packageName: pkgName commitish: commitOrTag [
-	repository:= CGOGitRepository 
+	repository:= PBGitRepository 
 		repositoryUrl: (useHttpsUrl 
 			ifTrue: [ self httpUrlFrom: gitUrlString ]
 			ifFalse: [ self sshUrlFrom: gitUrlString ])

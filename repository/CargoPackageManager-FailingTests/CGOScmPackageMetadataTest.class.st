@@ -6,7 +6,7 @@ Class {
 
 { #category : #'test data' }
 CGOScmPackageMetadataTest >> greaseRepository [
-	^ (CGOGitRepositoryCreator repositoryCreatorWithUrl: 'https://github.com/demarey/Grease-cargo.git')
+	^ (PBGitRepositoryCreator repositoryCreatorWithUrl: 'https://github.com/demarey/Grease-cargo.git')
 		subdirectory: 'repository';
 		create
 ]

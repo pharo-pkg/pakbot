@@ -2,7 +2,7 @@
 super class used to set up credentials to perform git operations (i.e. clone)
 "
 Class {
-	#name : #CGOGitCreationTest,
+	#name : #PBGitCreationTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'iceCredentialsProviderBackup',
@@ -10,18 +10,18 @@ Class {
 		'repository',
 		'iceRepositoryLocation'
 	],
-	#category : 'CargoPackageManager-Tests-SCM'
+	#category : #'CargoPackageManager-Tests-SCM'
 }
 
 { #category : #accessing }
-CGOGitCreationTest >> iceRepositoryLocation [
+PBGitCreationTest >> iceRepositoryLocation [
 	^ iceRepositoryLocation
 		ifNil: [ iceRepositoryLocation := FileLocator temp
 				/ ('pharo-tests-' , DateAndTime now asFileNameCompatibleString) ]
 ]
 
 { #category : #running }
-CGOGitCreationTest >> setUp [
+PBGitCreationTest >> setUp [
 	oldRemoteTypeSelector := Iceberg remoteTypeSelector.
 	iceCredentialsProviderBackup := IceCredentialsProvider providerType.
 
@@ -41,7 +41,7 @@ CGOGitCreationTest >> setUp [
 ]
 
 { #category : #running }
-CGOGitCreationTest >> tearDown [
+PBGitCreationTest >> tearDown [
 	IceCredentialsProvider providerType: iceCredentialsProviderBackup.
 	Iceberg remoteTypeSelector: oldRemoteTypeSelector.
 

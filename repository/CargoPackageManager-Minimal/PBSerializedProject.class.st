@@ -25,7 +25,7 @@ PBSerializedProject >> asProject [
 		at: #repositoryUrl
 		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no source repository defined!' ].
-	project repository: (CGOSourceRepository fromDictionary: (dict at: #repositoryUrl)).
+	project repository: (PBSourceRepository fromDictionary: (dict at: #repositoryUrl)).
 					
 	^ project 
 ]

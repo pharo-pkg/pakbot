@@ -1,14 +1,14 @@
-Extension { #name : #CGOGitRepository }
+Extension { #name : #PBGitRepository }
 
 { #category : #'*CargoPackageManager-UI' }
-CGOGitRepository >> description [
+PBGitRepository >> description [
 	
 	iceRepository remotes ifEmpty: [ ^ 'No remote configured for this project' ].
 	^ iceRepository remotes anyOne url
 ]
 
 { #category : #'*CargoPackageManager-UI' }
-CGOGitRepository >> iconName [
+PBGitRepository >> iconName [
 	
 	^ #git
 ]

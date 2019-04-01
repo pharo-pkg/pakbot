@@ -30,7 +30,7 @@ PBPackageRepositoryPublishAndLoadTest >> testCanLoadProjectFromProjectPublishedI
 { #category : #tests }
 PBPackageRepositoryPublishAndLoadTest >> testCanLoadProjectFromScmAndPublishItToPackageRepository [
 	| repository project publishedProject |
-	repository := CGOGitRepositoryCreator new
+	repository := PBGitRepositoryCreator new
 		url: 'git://git@github.com/pharo-pkg/pharo-counter.git';
 		version: 'master';
 		create.		

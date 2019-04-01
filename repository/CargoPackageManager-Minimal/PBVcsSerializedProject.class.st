@@ -60,7 +60,7 @@ PBVcsSerializedProject >> configurationProjectDependencyFrom: aDictionary [
 
 { #category : #deserialization }
 PBVcsSerializedProject >> gitRepositoryFrom: aDictionnary [ 
-	^ CGOGitRepositoryCreator new
+	^ PBGitRepositoryCreator new
 		url: (aDictionnary at: #repositoryUrl);
 		version: (aDictionnary at: #version);
 		create.

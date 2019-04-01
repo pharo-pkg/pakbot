@@ -202,7 +202,7 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	serializedProject := PBProject example 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
-		repository: (CGOGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
+		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
 		asSerializedPackage.
 	
 	self

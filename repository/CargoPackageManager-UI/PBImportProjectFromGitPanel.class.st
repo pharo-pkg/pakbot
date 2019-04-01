@@ -35,7 +35,7 @@ PBImportProjectFromGitPanel class >> defaultSpec [
 PBImportProjectFromGitPanel >> accept [
 	| project |
 	
-	project := (CGOGitRepositoryCreator new
+	project := (PBGitRepositoryCreator new
 		githubUrl: repositoryUrlInputText text;
 		version: versionInputText text;
 		createAndClone) project.

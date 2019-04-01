@@ -55,7 +55,7 @@ PBPackageTest >> testComparisonWithSamePackageReturnsTrue [
 PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 	| project package |
 	project := testRegistry newProjectNamed: 'Pharo-Counter-Test'.
-	project repository: CGOGitRepository example.
+	project repository: PBGitRepository example.
 	package := project newNotLoadedPackage: #'Counter-Core'.
 
 	self deny: package isInstalled.

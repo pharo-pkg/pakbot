@@ -13,7 +13,7 @@ PBPackageRepositoryTest >> tempIceRepository [
 		location: fs;
 		init;
 		yourself."
-	^ CGOGitRepository example
+	^ PBGitRepository example
 ]
 
 { #category : #tests }
@@ -34,7 +34,7 @@ PBPackageRepositoryTest >> testCanFetchAProject [
 	project 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
-		repository: 	CGOGitRepository example;
+		repository: 	PBGitRepository example;
 		publishOn: repository.
 	
 	published := repository fetch: project name version: project version.
@@ -54,7 +54,7 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 	project := PBProject example.
 	project
 		registry: PBPackageRegistry new;
-		repository: 	CGOGitRepository example;
+		repository: 	PBGitRepository example;
 		version: '0.1' asSemanticVersion;
 		publishOn: repository.
 	
@@ -86,7 +86,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectHavingNonFixedVersion [
 	project := PBProject example.
 	project
 		registry: PBPackageRegistry new;
-		repository: 	CGOGitRepository example.
+		repository: 	PBGitRepository example.
 	
 	self 
 		should: [ project publishOn: repository ]
@@ -110,7 +110,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished 
 	project := PBProject example.
 	project
 		registry: PBPackageRegistry new;
-		repository: 	CGOGitRepository example;
+		repository: 	PBGitRepository example;
 		version: '0.1' asSemanticVersion;	
 		publishOn: repository.
 	

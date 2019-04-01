@@ -117,7 +117,7 @@ PBPakbotProjectDependency >> repositoryUrl: aString [
 
 	repository := aString isEmptyOrNil 
 		ifTrue: [ nil ]
-		ifFalse: [CGOGitRepositoryCreator repositoryFromUrl: aString].
+		ifFalse: [PBGitRepositoryCreator repositoryFromUrl: aString].
 
 ]
 

@@ -8,8 +8,8 @@ I hold a reference to an Iceberg repository to use it for some git operations.
 	self example inspect
 "
 Class {
-	#name : #CGOGitRepository,
-	#superclass : #CGOSourceRepository,
+	#name : #PBGitRepository,
+	#superclass : #PBSourceRepository,
 	#instVars : [
 		'iceRepository',
 		'version',
@@ -19,20 +19,20 @@ Class {
 }
 
 { #category : #example }
-CGOGitRepository class >> example [
-	^ CGOGitRepositoryCreator example
+PBGitRepository class >> example [
+	^ PBGitRepositoryCreator example
 ]
 
 { #category : #'instance creation' }
-CGOGitRepository class >> fromDictionary: aDictionary [
-	^ CGOGitRepositoryCreator new
+PBGitRepository class >> fromDictionary: aDictionary [
+	^ PBGitRepositoryCreator new
 		url: (aDictionary at: #repositoryUrl);
 		version: (aDictionary at: #version ifAbsent: [ nil ]);
 		create.
 ]
 
 { #category : #'instance-creation' }
-CGOGitRepository class >> repository: anIceLibgitRepository [ 
+PBGitRepository class >> repository: anIceLibgitRepository [ 
 	
 	^ self new
 		repository: anIceLibgitRepository;
@@ -40,34 +40,34 @@ CGOGitRepository class >> repository: anIceLibgitRepository [
 ]
 
 { #category : #accessing }
-CGOGitRepository class >> type [ 
+PBGitRepository class >> type [ 
 	^ #git
 ]
 
 { #category : #'instance creation' }
-CGOGitRepository class >> url: anUrlOrString repository: anIceRepository [
+PBGitRepository class >> url: anUrlOrString repository: anIceRepository [
 	^ self url: anUrlOrString repository: anIceRepository version: nil
 ]
 
 { #category : #'instance creation' }
-CGOGitRepository class >> url: anUrlOrString repository: anIceRepository version: aCommitishString [
+PBGitRepository class >> url: anUrlOrString repository: anIceRepository version: aCommitishString [
 	^ self basicNew 
 		initializeWithUrl: anUrlOrString repository: anIceRepository andVersion: aCommitishString;
 		yourself
 ]
 
 { #category : #accessing }
-CGOGitRepository >> codeDirectoryRelativePath [
+PBGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
 ]
 
 { #category : #querying }
-CGOGitRepository >> currentCommitId [
+PBGitRepository >> currentCommitId [
 	^ iceRepository headCommit id
 ]
 
 { #category : #actions }
-CGOGitRepository >> ensureCloned [
+PBGitRepository >> ensureCloned [
 	| commitish |
 	self isCloned
 		ifFalse: [ iceRepository := iceRepository createRepository ].
@@ -81,20 +81,20 @@ CGOGitRepository >> ensureCloned [
 ]
 
 { #category : #private }
-CGOGitRepository >> ensureIcePackageNamed: aPackageName [
+PBGitRepository >> ensureIcePackageNamed: aPackageName [
 	^ [ self iceRepository packageNamed: aPackageName ]
 		on: NotFound 
 		do: [ self iceRepository addPackageNamed: aPackageName ]
 ]
 
 { #category : #fetching }
-CGOGitRepository >> fetchHeadVersion [
+PBGitRepository >> fetchHeadVersion [
 	
 	^ self fetchVersion: ''
 ]
 
 { #category : #fetching }
-CGOGitRepository >> fetchVersion: aString [
+PBGitRepository >> fetchVersion: aString [
 	
 	| commitish project |
 	self ensureCloned.
@@ -110,41 +110,41 @@ CGOGitRepository >> fetchVersion: aString [
 ]
 
 { #category : #accessing }
-CGOGitRepository >> iceRepository [
+PBGitRepository >> iceRepository [
 	^ iceRepository
 ]
 
 { #category : #querying }
-CGOGitRepository >> iceSavedPackageVersionFor: packageName [
+PBGitRepository >> iceSavedPackageVersionFor: packageName [
 	^ iceRepository workingCopy versionFor: packageName
 ]
 
 { #category : #initialization }
-CGOGitRepository >> initialize [
+PBGitRepository >> initialize [
 	version := nil
 ]
 
 { #category : #initialization }
-CGOGitRepository >> initializeWithUrl: anUrlOrString repository: anIceRepository [
+PBGitRepository >> initializeWithUrl: anUrlOrString repository: anIceRepository [
 	self initialize.
 	repositoryUrl := anUrlOrString.
 	iceRepository := anIceRepository
 ]
 
 { #category : #initialization }
-CGOGitRepository >> initializeWithUrl: anUrlOrString repository: anIceRepository andVersion: aCommitishString [
+PBGitRepository >> initializeWithUrl: anUrlOrString repository: anIceRepository andVersion: aCommitishString [
 	self initializeWithUrl: anUrlOrString repository: anIceRepository.
 	version := aCommitishString
 ]
 
 { #category : #private }
-CGOGitRepository >> isBranch: commitish [
+PBGitRepository >> isBranch: commitish [
 	^ iceRepository allBranches
 		anySatisfy: [ :branch | branch name = commitish or: [ branch name endsWith: '/' , commitish ] ]
 ]
 
 { #category : #private }
-CGOGitRepository >> isCloned [
+PBGitRepository >> isCloned [
 	self isIceRepositoryValid
 		ifTrue: [ ^ true ].
 	(self isRepositoryAlreadyClonedInDefaultLocation or: [ self isRepositoryAlreadyCloned ])
@@ -154,45 +154,45 @@ CGOGitRepository >> isCloned [
 ]
 
 { #category : #private }
-CGOGitRepository >> isIceRepositoryValid [
+PBGitRepository >> isIceRepositoryValid [
 	^ (iceRepository isKindOf: IceRepository)
 		and: [ iceRepository isValid ]
 ]
 
 { #category : #private }
-CGOGitRepository >> isRepositoryAlreadyCloned [
+PBGitRepository >> isRepositoryAlreadyCloned [
 	^ iceRepository location isNotNil
 		and: [ iceRepository location exists
 				and: [ iceRepository location hasChildren ] ]
 ]
 
 { #category : #private }
-CGOGitRepository >> isRepositoryAlreadyClonedInDefaultLocation [
+PBGitRepository >> isRepositoryAlreadyClonedInDefaultLocation [
 	^ iceRepository location isNil
 		and: [ iceRepository defaultLocation exists
 				and: [ iceRepository defaultLocation hasChildren ] ]
 ]
 
 { #category : #loading }
-CGOGitRepository >> loadPackageNamed: aPackageName [
+PBGitRepository >> loadPackageNamed: aPackageName [
 	self ensureCloned.
 	iceRepository workingCopy loadPackageNamed: aPackageName
 ]
 
 { #category : #querying }
-CGOGitRepository >> mcVersionFor: aPackageVersion [
+PBGitRepository >> mcVersionFor: aPackageVersion [
 	self ensureCloned.
 	^ (self iceSavedPackageVersionFor: aPackageVersion packageName) mcVersion
 ]
 
 { #category : #private }
-CGOGitRepository >> metadataStringFor: aPackageUnit [
+PBGitRepository >> metadataStringFor: aPackageUnit [
 	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
 ]
 
 { #category : #fetching }
-CGOGitRepository >> project [
+PBGitRepository >> project [
 	| iceProject |
 	iceProject := iceRepository project.
 	^ iceProject isUnborn
@@ -201,25 +201,25 @@ CGOGitRepository >> project [
 ]
 
 { #category : #accessing }
-CGOGitRepository >> projectMetadataPath [
+PBGitRepository >> projectMetadataPath [
 	^ self codeDirectoryRelativePath , self projectMetadataFileName
 ]
 
 { #category : #fetching }
-CGOGitRepository >> projectMetadataStonString [
+PBGitRepository >> projectMetadataStonString [
 	self ensureCloned.
 	
 	^ (iceRepository headCommit fileSystem / self projectMetadataPath) contents
 ]
 
 { #category : #accessing }
-CGOGitRepository >> repository: anIceLibgitRepository [ 
+PBGitRepository >> repository: anIceLibgitRepository [ 
 	
 	iceRepository := anIceLibgitRepository
 ]
 
 { #category : #saving }
-CGOGitRepository >> savePackageUnit: packageUnit withMessage: commitMessage [
+PBGitRepository >> savePackageUnit: packageUnit withMessage: commitMessage [
 	| iceSavedPackage newMcVersion |
 	iceSavedPackage := self ensureIcePackageNamed: packageUnit packageName.
 	iceSavedPackage repository workingCopy ifNil: [ ^ nil "nothing to save" ].
@@ -232,21 +232,21 @@ CGOGitRepository >> savePackageUnit: packageUnit withMessage: commitMessage [
 ]
 
 { #category : #saving }
-CGOGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
+PBGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
 	packageUnits 
 		do: [ :unit |
 				self savePackageUnit: unit withMessage: commitMessage ]
 ]
 
 { #category : #querying }
-CGOGitRepository >> sourcePackageVersionClass [
+PBGitRepository >> sourcePackageVersionClass [
 	^ CGOGitHostedPackageVersion
 ]
 
 { #category : #serialization }
-CGOGitRepository >> stonOn: stonWriter [
+PBGitRepository >> stonOn: stonWriter [
 	| url  dict |
-	url := CGOGitRepositoryCreator urlWithScheme: repositoryUrl.
+	url := PBGitRepositoryCreator urlWithScheme: repositoryUrl.
 	dict := OrderedDictionary 
 		with: #type -> self class type
 		with: 	#repositoryUrl -> url asString.
@@ -255,22 +255,22 @@ CGOGitRepository >> stonOn: stonWriter [
 ]
 
 { #category : #accessing }
-CGOGitRepository >> subdirectory [
+PBGitRepository >> subdirectory [
 	^ iceRepository subdirectory
 ]
 
 { #category : #accessing }
-CGOGitRepository >> version [
+PBGitRepository >> version [
 	^ version
 ]
 
 { #category : #accessing }
-CGOGitRepository >> version: aString [ 
+PBGitRepository >> version: aString [ 
 	version := aString
 ]
 
 { #category : #notifying }
-CGOGitRepository >> versionLoaded: packageName [
+PBGitRepository >> versionLoaded: packageName [
 	self flag: 'TODO: check if I need to notify Iceberg that a package has been loaded. See IceWorkingCopy>>loadPackagesNamed: aCollection fromCommit: aCommit'
 	"iceRepository versionLoaded: 
 		(self iceSavedPackageVersionFor: packageName)"

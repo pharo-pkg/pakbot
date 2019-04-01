@@ -5,8 +5,8 @@ I represent a repository containing source code hosted on a Monticello SCM.
 "
 Class {
 	#name : #CGOMonticelloRepository,
-	#superclass : #CGOSourceRepository,
-	#category : 'CargoPackageManager-Loading'
+	#superclass : #PBSourceRepository,
+	#category : #'CargoPackageManager-Loading'
 }
 
 { #category : #example }

@@ -87,7 +87,7 @@ CGOGitHostedPackageVersion >> metadataPath [
 
 { #category : #initialization }
 CGOGitHostedPackageVersion >> repositoryUrl: gitUrlString	subdirectory: directoryName	packageName: pkgName commitish: commitOrTag [
-	repository:= CGOGitRepository 
+	repository:= PBGitRepository 
 		repositoryUrl: gitUrlString
 		subdirectory: directoryName.
 	packageName := pkgName asSymbol.
