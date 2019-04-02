@@ -31,23 +31,26 @@ CGOPackageVersionWriterV1 class >> deserializeVcsProject: aDictionary version: f
 	^ self deserializeV1ProjectFromVcsWith: aDictionary
 ]
 
-{ #category : #convenience }
-CGOPackageVersionWriterV1 class >> put: anObject onStreamPretty: aWriteStream [
-	(self new on: aWriteStream)
+{ #category : #private }
+CGOPackageVersionWriterV1 class >> newConfiguredWriterOn: aWriteStream [
+	^ (self new on: aWriteStream)
+		newLine: String crlf;
 		prettyPrint: false;
 		nextPut: {#version -> '1.0'} asDictionary;
 		prettyPrint: true;
 		newLine;
+		yourself
+]
+
+{ #category : #convenience }
+CGOPackageVersionWriterV1 class >> put: anObject onStreamPretty: aWriteStream [
+	(self newConfiguredWriterOn: aWriteStream)
 		nextPut: anObject
 ]
 
 { #category : #convenience }
 CGOPackageVersionWriterV1 class >> putDictionary: aDictionary onStreamPretty: aWriteStream [
-	(self new on: aWriteStream)
-		prettyPrint: false;
-		nextPut: {#version -> '1.0'} asDictionary;
-		prettyPrint: true;
-		newLine;
+	(self newConfiguredWriterOn: aWriteStream)
 		writeMap: aDictionary
 ]
 
