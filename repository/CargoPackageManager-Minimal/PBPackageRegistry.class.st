@@ -36,6 +36,7 @@ PBPackageRegistry class >> default: aCGOPackageRegistry [
 
 { #category : #accessing }
 PBPackageRegistry class >> reset [
+	<script>
 	Default ifNotNil: [ Default unregisterFromSystem. Default := nil ]
 ]
 
