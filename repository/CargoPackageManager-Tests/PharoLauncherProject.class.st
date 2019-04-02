@@ -73,30 +73,48 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 			name: 'Icetray'
 			repositoryUrl: 'https://github.com/pharo-spec/icetray.git'
 			version: #master).
+	project addDependency: 
+		(PBMetacelloBaselineProjectDependency  
+			name: 'FastTableExtentions'
+			repositoryUrl: 'https://github.com/sbragagnolo/FastTableExtention.git' "/src"
+			version: #master).
+	project addDependency: 
+		(PBMetacelloBaselineProjectDependency  
+			name: 'TaskIt'
+			repositoryUrl: 'https://github.com/sbragagnolo/taskit.git'
+			version: 'v1.0.1').
 	^ project
 ]
 
 { #category : #building }
 PharoLauncherProject >> buildPackages [
-	(project newNotLoadedPackage: #'PharoLauncher-Download')
-		description: 'Package dealing with image / VM detection and download.';
-		addDependencyOn: #'OSProcess::Core with Output';
-		addDependencyOn: #'ProcessWrapper::Core'.
+	(project newNotLoadedPackage: #'PharoLauncher-ZipArchive')
+		description: 'Package allowing to use file references with Zip Archive (integrated in Pharo 8.0).'.
 	(project newNotLoadedPackage: #'PharoLauncher-Core')
 		description: 'Core package with the model, commands and settings.';
-		addDependencyOn: #'PharoLauncher-Download';
+		addDependencyOn: #'PharoLauncher-ZipArchive';
 		addDependencyOn: #'XMLParser::Core';
 		addDependencyOn: #'Ston';
-		addDependencyOn: #'JSON'.
+		addDependencyOn: #'ProcessWrapper';
+		addDependencyOn: #'OSProcess'.
 	(project newNotLoadedPackage: #'PharoLauncher-Spec')
-		description: 'PharoLauncher UI.';
+		description: 'PharoLauncher UI done in pure Spec.';
+		addDependencyOn: #'PharoLauncher-Core'.
+	(project newNotLoadedPackage: #'PharoLauncher-IceTray')
+		description: 'PharoLauncher UI parts done with IceTray.';
+		addDependencyOn: #'PharoLauncher-Core';
+		addDependencyOn: #'IceTray';
+		addDependencyOn: #'FastTableExtentions'.
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-Core')
+		description: 'Tests of the PharoLauncher-Core package.';
 		addDependencyOn: #'PharoLauncher-Core'.
 	(project newNotLoadedPackage: #'PharoLauncher-Tests-Download')
 		description: 'Tests of the PharoLauncher-Download package.';
-		addDependencyOn: #'PharoLauncher-Download'.
-	(project newNotLoadedPackage: #'PharoLauncher-Tests-Core')
-		description: 'Tests of the PharoLauncher-Core package..';
 		addDependencyOn: #'PharoLauncher-Core'.
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-Functional')
+		description: 'Tests of the PharoLauncher-Download package.';
+		addDependencyOn: #'PharoLauncher-Core';
+		addDependencyOn: #'PharoLauncher-Tests-Download'.
 	^ project
 ]
 
@@ -120,12 +138,7 @@ PharoLauncherProject >> buildProject [
 
 { #category : #building }
 PharoLauncherProject >> buildRepository [
-	 project repository: 
-		(PBGitRepositoryCreator new
-			url: 'https://github.com/pharo-project/pharo-launcher.git';
-			version: 'development';
-			subdirectory: 'src';
-			create).
+	 project repository: self repository.
 	^ project
 ]
 
@@ -150,4 +163,13 @@ PharoLauncherProject >> removePackagesDependencies [
 	project packageUnits do: [ :unit |
 		unit dependencies: OrderedCollection new ].
 	^ project
+]
+
+{ #category : #building }
+PharoLauncherProject >> repository [
+	^ PBGitRepositoryCreator new
+			url: 'https://github.com/pharo-project/pharo-launcher.git';
+			version: 'development';
+			subdirectory: 'src';
+			create
 ]
