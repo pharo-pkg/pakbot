@@ -22,6 +22,11 @@ CGOMonticelloRepository class >> repositoryUrl: aStringOrUrl [
 		yourself
 ]
 
+{ #category : #accessing }
+CGOMonticelloRepository class >> type [ 
+	^ #monticello
+]
+
 { #category : #initialization }
 CGOMonticelloRepository >> initializeWithRepositoryUrl: aStringOrUrl [
 	repositoryUrl := aStringOrUrl
