@@ -1,6 +1,6 @@
 "
 I am a package repository used to host the meta data of Packbot packages / projects.
-I use a git repository as backend.
+I use a file system as backend.
 "
 Class {
 	#name : #PBPackageRepository,
@@ -35,18 +35,18 @@ PBPackageRepository >> fileForPackage: aPackage [
 
 { #category : #private }
 PBPackageRepository >> fileForPackageNamed: aPackageName version: aVersionString [
-	^ root / aPackageName / (aPackageName , ' - ', aVersionString , '.ston')
+	^ root / aPackageName / (aPackageName , '-', aVersionString , '.ston')
 ]
 
 { #category : #accessing }
 PBPackageRepository >> packages [
-	^ root directoryNames 
+	^ root directoryNames reject: [ :each | each beginsWith: '.' ]
 ]
 
 { #category : #initializing }
 PBPackageRepository >> root: aFileReference [ 
 	"The root folder containing the package repository"
-	root := aFileReference
+	root := aFileReference asFileReference
 ]
 
 { #category : #saving }
