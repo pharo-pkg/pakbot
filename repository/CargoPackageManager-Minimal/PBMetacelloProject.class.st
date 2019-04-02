@@ -19,11 +19,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-PBMetacelloProject class >> fromProjectDependency: aCGOMetacelloProjectDependency [
-	^ aCGOMetacelloProjectDependency class projectClass
-		repository: aCGOMetacelloProjectDependency repositoryUrl
-		name: aCGOMetacelloProjectDependency name
-		version: aCGOMetacelloProjectDependency version
+PBMetacelloProject class >> fromProjectDependency: aPBMetacelloProjectDependency [
+	^ aPBMetacelloProjectDependency class projectClass
+		repository: aPBMetacelloProjectDependency repositoryUrl
+		name: aPBMetacelloProjectDependency name
+		version: aPBMetacelloProjectDependency version
 ]
 
 { #category : #'instance creation' }
