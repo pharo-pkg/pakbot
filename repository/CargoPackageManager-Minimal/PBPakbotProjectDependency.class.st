@@ -79,6 +79,18 @@ PBPakbotProjectDependency >> displayStringOn: aStream [
 		<< ')'
 ]
 
+{ #category : #fetching }
+PBPakbotProjectDependency >> fetch [
+	^ self fetchFromScm
+]
+
+{ #category : #fetching }
+PBPakbotProjectDependency >> fetchFromScm [
+	^ (repository fetchVersion: self version)
+		registry: project registry;
+		yourself
+]
+
 { #category : #intialization }
 PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
 	repository := aCGOGitRepository
@@ -123,14 +135,11 @@ PBPakbotProjectDependency >> repositoryUrl: aString [
 
 { #category : #solving }
 PBPakbotProjectDependency >> resolveInSolver: aCGOSolver [
-	
 	self isInstalled
 		ifTrue: [ ^ project registry projectNamed: self name ].
-	
+
 	"If it is not installed, we need to go fetch it from the INTERNET"
-	^ (repository fetchVersion: self version)
-			registry: project registry;
-			yourself
+	^ self fetch
 ]
 
 { #category : #constraints }
