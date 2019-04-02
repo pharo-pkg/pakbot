@@ -6,23 +6,14 @@ I represent a Metacello Project using a BaselineOf and act as a Cargo project.
 Class {
 	#name : #PBMetacelloBaselineProject,
 	#superclass : #PBMetacelloProject,
-	#instVars : [
-		'subdirectory'
-	],
 	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #loading }
 PBMetacelloBaselineProject >> basicLoad [
 
-	| url metacelloUrlWithVersionAndSubdirectory |
-	url := repository asZnUrl.
-	
-	metacelloUrlWithVersionAndSubdirectory := url scheme , '://' , url host, '/', url segments first , ':', version.
-	subdirectory ifNotEmpty: [ metacelloUrlWithVersionAndSubdirectory := metacelloUrlWithVersionAndSubdirectory , '/' , subdirectory ].
-
 	Metacello new 
-		repository: metacelloUrlWithVersionAndSubdirectory;
+		repository: self metacelloUrl;
 		baseline: name;
 		load: packageNames asArray.
 ]
@@ -30,7 +21,6 @@ PBMetacelloBaselineProject >> basicLoad [
 { #category : #initialization }
 PBMetacelloBaselineProject >> initialize [
 	super initialize.
-	subdirectory := ''
 ]
 
 { #category : #accessing }
@@ -38,7 +28,30 @@ PBMetacelloBaselineProject >> isConfiguration [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+PBMetacelloBaselineProject >> metacelloUrl [
+	| url |
+	(repository beginsWith: 'git@')
+		ifTrue: [ 
+			url := repository copyReplaceAll: 'github.com:' with: 'github.com/'.
+			url := ('git+ssh://', url) asZnUrl ]
+		ifFalse: [ url := repository asZnUrl ].
+	^ String streamContents: [ :stream |
+		url host = 'github.com'
+			ifTrue: [ stream nextPutAll: 'github://' ].
+		url host = 'gitlab.com'
+			ifTrue: [ stream nextPutAll: 'gitlab://' ].
+		url host = 'bitbucket.org'
+			ifTrue: [ stream nextPutAll:'bitbucket://' ].
+	
+		stream nextPutAll: (($/ join: url segments) withoutSuffix: '.git').
+		version ifNotNil: [ stream nextPut: $:; nextPutAll: version ] .
+		"subdirectory ifNotNil: [ stream nextPutAll: subdirectory ]" ]
+		
+
+]
+
+{ #category : #accessing }
 PBMetacelloBaselineProject >> resolvedVersion [
 	^ self version
 ]
