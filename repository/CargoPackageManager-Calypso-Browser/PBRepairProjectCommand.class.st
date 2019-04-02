@@ -31,6 +31,5 @@ PBRepairProjectCommand class >> systemBrowserMenuActivator [
 { #category : #execution }
 PBRepairProjectCommand >> execute [
 	
-	self project openRepairDialog.
-
+	(PBOpenRepairDialogAction onProject: self project) execute
 ]

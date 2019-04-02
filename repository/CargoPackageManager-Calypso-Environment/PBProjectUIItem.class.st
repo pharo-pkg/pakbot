@@ -118,12 +118,6 @@ PBProjectUIItem >> name [
 	^ project name
 ]
 
-{ #category : #actions }
-PBProjectUIItem >> openRepairDialog [
-
-	^ (PBOpenRepairDialogAction onProject: self project) execute
-]
-
 { #category : #items }
 PBProjectUIItem >> packageItems [
 	^ ((self project packages
