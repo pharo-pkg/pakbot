@@ -2,5 +2,5 @@ Extension { #name : #PBPackage }
 
 { #category : #'*CargoPackageManager' }
 PBPackage >> versionLoaded [
-	self repository versionLoaded: self packageName.
+	self repository versionLoaded: self name.
 ]

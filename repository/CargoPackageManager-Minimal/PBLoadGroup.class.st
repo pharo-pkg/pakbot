@@ -55,7 +55,8 @@ PBLoadGroup >> intializeWithPackageVersions: aListOfPackageVersions [
 { #category : #loading }
 PBLoadGroup >> load [
 
-	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit basicLoad ]
+	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit basicLoad ].
+	self registerLoadedPackages.
 ]
 
 { #category : #accessing }
@@ -98,7 +99,7 @@ PBLoadGroup >> printOn: aStream [
 
 { #category : #loading }
 PBLoadGroup >> registerLoadedPackages [
-	self packageVersions
+	self loadableUnits
 		do: [ :pkgVersion | 
 			pkgVersion versionLoaded.
 			PBPackageRegistry default register: pkgVersion ]

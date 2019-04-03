@@ -162,7 +162,7 @@ PBProject >> authors [
 { #category : #'private-loading' }
 PBProject >> basicLoad [
 	registry registerProject: self.
-	self packageUnits do: #basicLoad.
+	self packageUnits do: #load.
 	CGOProjectLoaded announceOnProject: self. 
 ]
 
