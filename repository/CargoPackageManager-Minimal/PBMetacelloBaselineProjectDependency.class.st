@@ -56,9 +56,23 @@ PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	baseline := self metacelloProjectRegistry baselineRegistry 
 		at: #BaselineOf , name 
 		ifAbsent: [ ^ false ].
-	^ baseline currentVersionString = version 
+	^ (self isSameVersionAs: baseline currentVersionString)
 		and: [ baseline loadedInImage 
-			and: [ baseline baselineProjectSpec loads isEmpty ] ]
+			and: [ baseline baselineProjectSpec loads isEmptyOrNil ] ]
+]
+
+{ #category : #'querying - installed' }
+PBMetacelloBaselineProjectDependency >> isSameVersionAs: aVersionString [
+	| repository |
+	
+	repository := IceRepository registry 
+		detect: [ :repo | 
+			repo remotes 
+				anySatisfy: [ :remote | remote referencesSameRemoteLocationAs: (IceGitRemote url: url) ] ].
+	
+	^ aVersionString = version 
+		or: [ aVersionString = repository head commit id ]
+		
 ]
 
 { #category : #ston }
