@@ -92,7 +92,8 @@ CGOCalypsoPackageManager >> projectOf: aCGOPackageVersion [
 { #category : #accessing }
 CGOCalypsoPackageManager >> projects [
 	^ self cargoRegistry registeredProjects 
-		collect: 	[ :each | PBProjectUIItem forProject: each]
+		reject: #isMetacelloProject
+		thenCollect: [ :each | PBProjectUIItem forProject: each]
 ]
 
 { #category : #'api - queries' }
