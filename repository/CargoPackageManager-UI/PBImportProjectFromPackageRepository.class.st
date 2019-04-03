@@ -31,9 +31,12 @@ PBImportProjectFromPackageRepository class >> defaultSpec [
 
 { #category : #action }
 PBImportProjectFromPackageRepository >> accept [
-	| project |
+	| project selection |
 	
-	project := packageRepository fetch: project name version: project version.
+	selection := self selectedPackage.
+	selection ifNil: [ ^ nil ].
+	
+	project := packageRepository fetch: selection "name" version: '1.8.1'"selection version".
 	project registry: PBPackageRegistry default.
 	
 	(PBLoadProjectDialog onProject: project) openDialogWithSpec.
@@ -107,6 +110,15 @@ PBImportProjectFromPackageRepository >> repositoryUrlInputText [
 { #category : #accessing }
 PBImportProjectFromPackageRepository >> repositoryUrlLabel [
 	^ repositoryUrlLabel
+]
+
+{ #category : #accessing }
+PBImportProjectFromPackageRepository >> selectedPackage [
+	| selectedIndex |
+	selectedIndex := packageTree widget selectedRowIndex.
+	selectedIndex = 0 ifTrue: [ ^ nil ].
+	
+	^ packageTree widget dataSource elementAt: selectedIndex
 ]
 
 { #category : #accessing }
