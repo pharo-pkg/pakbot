@@ -99,6 +99,11 @@ PBMetacelloProject >> hasPackage: aPackageName [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+PBMetacelloProject >> hasProblems [
+	^ false
+]
+
 { #category : #comparing }
 PBMetacelloProject >> hash [
 
@@ -177,6 +182,11 @@ PBMetacelloProject >> packageName [
 
 { #category : #'compatibility - CGOProject' }
 PBMetacelloProject >> packageUnits [
+	^ #()
+]
+
+{ #category : #'as yet unclassified' }
+PBMetacelloProject >> packages [
 	^ #()
 ]
 

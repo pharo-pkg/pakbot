@@ -65,6 +65,11 @@ PBMetacelloConfigurationProjectDependency >> isMetacelloConfiguration [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+PBMetacelloConfigurationProjectDependency >> satisfyConstraints: aString [ 
+	^ version = aString
+]
+
 { #category : #ston }
 PBMetacelloConfigurationProjectDependency >> stonMap [
 	^ OrderedDictionary 

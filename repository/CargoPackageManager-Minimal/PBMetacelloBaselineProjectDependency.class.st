@@ -75,6 +75,11 @@ PBMetacelloBaselineProjectDependency >> isSameVersionAs: aVersionString [
 		
 ]
 
+{ #category : #'as yet unclassified' }
+PBMetacelloBaselineProjectDependency >> satisfyConstraints: aVersionString [ 
+	^ self isSameVersionAs: aVersionString
+]
+
 { #category : #ston }
 PBMetacelloBaselineProjectDependency >> stonMap [
 	^ OrderedDictionary 

@@ -378,6 +378,7 @@ PBProject >> isVirtual [
 PBProject >> load [
 	
 	self resolve load.
+	self packages do: [ :package | registry register: package ].
 	
 	CGOProjectLoaded announceOnProject: self. 
 ]
