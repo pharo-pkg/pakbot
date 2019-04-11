@@ -21,8 +21,7 @@ PBProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
 
 { #category : #example }
 PBProjectPanel class >> example [
-	^ self basicNew
-		initializeWith: PBProject example;
+	^ (self on: PBProject example)
 		openWithSpec
 ]
 
