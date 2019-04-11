@@ -38,6 +38,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 			acceptCallback value ]
 		onCancel: [  ];
 		yourself.
+	^ dialog
 ]
 
 { #category : #execution }
