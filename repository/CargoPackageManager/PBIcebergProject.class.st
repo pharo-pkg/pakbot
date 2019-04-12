@@ -8,7 +8,7 @@ Class {
 		'pakbotProject',
 		'sourceDirectory'
 	],
-	#category : #CargoPackageManager
+	#category : #'CargoPackageManager-Iceberg-Integration'
 }
 
 { #category : #'instance creation' }
@@ -59,6 +59,11 @@ PBIcebergProject >> initialize [
 
 	super initialize.
 	sourceDirectory := ''
+]
+
+{ #category : #testing }
+PBIcebergProject >> isPakbotProject [
+	^ true
 ]
 
 { #category : #accessing }

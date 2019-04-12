@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'properties'
 	],
-	#category : #CargoPackageManager
+	#category : #'CargoPackageManager-Iceberg-Integration'
 }
 
 { #category : #testing }
