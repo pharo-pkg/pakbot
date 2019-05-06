@@ -34,6 +34,11 @@ PBIceMemoryRepository >> isMissing [
 		or: [ self repositoryDirectory exists not ]
 ]
 
+{ #category : #'as yet unclassified' }
+PBIceMemoryRepository >> location [
+	^ location
+]
+
 { #category : #accessing }
 PBIceMemoryRepository >> location: aPathString [ 
 	location := fs referenceTo: aPathString.

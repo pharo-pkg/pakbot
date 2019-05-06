@@ -6,7 +6,8 @@ Class {
 		'repositoryUrlInputText',
 		'versionLabel',
 		'versionInputText',
-		'spacePanel'
+		'spacePanel',
+		'iceErrorVisitor'
 	],
 	#category : #'CargoPackageManager-UI-NewProject'
 }
@@ -34,18 +35,30 @@ PBImportProjectFromGitPanel class >> defaultSpec [
 { #category : #accessing }
 PBImportProjectFromGitPanel >> accept [
 	| project repository |
-	
-	repository := PBGitRepositoryCreator new
+	[ repository := PBGitRepositoryCreator new
 		githubUrl: repositoryUrlInputText text;
 		version: versionInputText text;
-		createAndClone.
+		createAndClone ]
+		on: IceCloneError
+		do: [ :error | 
+			error acceptError: self iceErrorVisitor.
+			^ nil ].
 	project := repository project.
-	project 
+	project
 		registry: PBPackageRegistry default;
 		repository: repository.
-	
 	(PBLoadProjectDialog onProject: project) openDialogWithSpec.
 	^ project
+]
+
+{ #category : #accessing }
+PBImportProjectFromGitPanel >> iceErrorVisitor [
+	^ iceErrorVisitor ifNil: [ iceErrorVisitor := IceTipInteractiveErrorVisitor new ]
+]
+
+{ #category : #accessing }
+PBImportProjectFromGitPanel >> iceErrorVisitor: aVisitor [
+	iceErrorVisitor := aVisitor 
 ]
 
 { #category : #accessing }
