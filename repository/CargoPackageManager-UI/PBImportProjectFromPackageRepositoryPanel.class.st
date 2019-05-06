@@ -1,5 +1,5 @@
 Class {
-	#name : #PBImportProjectFromPackageRepository,
+	#name : #PBImportProjectFromPackageRepositoryPanel,
 	#superclass : #ITOptionPanel,
 	#instVars : [
 		'repositoryUrlLabel',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #specs }
-PBImportProjectFromPackageRepository class >> defaultSpec [
+PBImportProjectFromPackageRepositoryPanel class >> defaultSpec [
 	<spec: #default>
 
 	^ SpecLayout composed 
@@ -30,7 +30,7 @@ PBImportProjectFromPackageRepository class >> defaultSpec [
 ]
 
 { #category : #action }
-PBImportProjectFromPackageRepository >> accept [
+PBImportProjectFromPackageRepositoryPanel >> accept [
 	| project selection |
 	
 	selection := self selectedPackage.
@@ -44,31 +44,31 @@ PBImportProjectFromPackageRepository >> accept [
 ]
 
 { #category : #'data source' }
-PBImportProjectFromPackageRepository >> buildRoots [
+PBImportProjectFromPackageRepositoryPanel >> buildRoots [
 	^ packageRepository packages
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> icon [
+PBImportProjectFromPackageRepositoryPanel >> icon [
 
 	^ self iconNamed: #git
 ]
 
 { #category : #initialization }
-PBImportProjectFromPackageRepository >> initialize [
+PBImportProjectFromPackageRepositoryPanel >> initialize [
 	packageRepository := PBPackageRepository newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo'.
 	super initialize.
 
 ]
 
 { #category : #initialization }
-PBImportProjectFromPackageRepository >> initializeSpacePanel [
+PBImportProjectFromPackageRepositoryPanel >> initializeSpacePanel [
 	"just to gain space"
 	spacePanel := self newPanel. 
 ]
 
 { #category : #initialization }
-PBImportProjectFromPackageRepository >> initializeWidgets [
+PBImportProjectFromPackageRepositoryPanel >> initializeWidgets [
 
 	self initializeSpacePanel.
 
@@ -83,7 +83,7 @@ PBImportProjectFromPackageRepository >> initializeWidgets [
 ]
 
 { #category : #'data source' }
-PBImportProjectFromPackageRepository >> newDataSource [
+PBImportProjectFromPackageRepositoryPanel >> newDataSource [
 	
 	^ FTEasyListDataSource new 
 		elements: self buildRoots;
@@ -93,27 +93,27 @@ PBImportProjectFromPackageRepository >> newDataSource [
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> packageLabel [
+PBImportProjectFromPackageRepositoryPanel >> packageLabel [
 	^ packageLabel
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> packageTree [
+PBImportProjectFromPackageRepositoryPanel >> packageTree [
 	^ packageTree
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> repositoryUrlInputText [
+PBImportProjectFromPackageRepositoryPanel >> repositoryUrlInputText [
 	^ repositoryUrlInputText
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> repositoryUrlLabel [
+PBImportProjectFromPackageRepositoryPanel >> repositoryUrlLabel [
 	^ repositoryUrlLabel
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> selectedPackage [
+PBImportProjectFromPackageRepositoryPanel >> selectedPackage [
 	| selectedIndex |
 	selectedIndex := packageTree widget selectedRowIndex.
 	selectedIndex = 0 ifTrue: [ ^ nil ].
@@ -122,12 +122,12 @@ PBImportProjectFromPackageRepository >> selectedPackage [
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> spacePanel [
+PBImportProjectFromPackageRepositoryPanel >> spacePanel [
 	^ spacePanel
 ]
 
 { #category : #accessing }
-PBImportProjectFromPackageRepository >> title [
+PBImportProjectFromPackageRepositoryPanel >> title [
 
 	^ 'Import from Repository'
 ]

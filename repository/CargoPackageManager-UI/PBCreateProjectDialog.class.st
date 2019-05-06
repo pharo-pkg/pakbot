@@ -15,7 +15,7 @@ PBCreateProjectDialog >> initialize [
 	panels := {
 		PBNewProjectPanel new.
 		PBImportProjectFromGitPanel new.
-		PBImportProjectFromPackageRepository new }.
+		PBImportProjectFromPackageRepositoryPanel new }.
 	super initialize.
 	self title: 'Create new Project'.
 ]

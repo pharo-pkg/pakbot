@@ -1,5 +1,5 @@
 Class {
-	#name : #PBImportProjectPanelTest,
+	#name : #PBImportProjectFromGitTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #tests }
-PBImportProjectPanelTest >> setUp [
+PBImportProjectFromGitTest >> setUp [
 	super setUp.
 	
 	defaultRegistry := PBPackageRegistry default.
@@ -30,14 +30,14 @@ PBImportProjectPanelTest >> setUp [
 ]
 
 { #category : #tests }
-PBImportProjectPanelTest >> tearDown [ 
+PBImportProjectFromGitTest >> tearDown [ 
 	super tearDown.
 	
 	PBPackageRegistry default: defaultRegistry.
 ]
 
 { #category : #tests }
-PBImportProjectPanelTest >> testCloneErrorIsCaptured [
+PBImportProjectFromGitTest >> testCloneErrorIsCaptured [
 
 	url := 'git@github.com:pharo-pkg/unexisting-repo.git'.
 	importPanel repositoryUrlInputText text: url.
@@ -50,7 +50,26 @@ PBImportProjectPanelTest >> testCloneErrorIsCaptured [
 ]
 
 { #category : #tests }
-PBImportProjectPanelTest >> testProjectIsFilledAfterAccept [
+PBImportProjectFromGitTest >> testGetRequiredProjectVersionAfterAccept [
+	self skip.
+	self flag: 'first need tag support'.
+	version := '0.1'.
+	importPanel repositoryUrlInputText text: url.
+	importPanel versionInputText text: version.
+	
+	project := importPanel accept.
+	
+	"Once the project is imported, load project dialog pops up"
+	PBLoadProjectDialog allInstances do: #delete.
+	
+	self assert: project notNil description: 'Unexpected nil project'.
+	self assert: project name equals: name.
+	self assert: project version printString equals: '0.1'.
+	self assert: project description equals: description.
+]
+
+{ #category : #tests }
+PBImportProjectFromGitTest >> testProjectIsFilledAfterAccept [
 
 	version := ''.
 	importPanel repositoryUrlInputText text: url.
