@@ -7,6 +7,14 @@ Class {
 	#category : #'CargoPackageManager-UI-Tests'
 }
 
+{ #category : #running }
+PBProjectUIItemTest >> assertCommands: activators includes: aClass [
+	^ activators 
+		detect:  [ :each | each command class = aClass ]
+		ifFound: [ :activator | activator ]
+		ifNone: [ self fail: 'cannot find command ' , aClass name ]
+]
+
 { #category : #utility }
 PBProjectUIItemTest >> projectUIItem [
 	^ projectUIItem
@@ -79,10 +87,13 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommandsWhenRepositoryIsSe
 
 	self openBrowser.
 	commands := self commandsOfItem: projectUIItem.
-
-	self assertCommands: commands includes: PBCommitProjectCommand.
-	self assertCommands: commands includes: PBTagProjectCommand.
-	self assertCommands: commands includes: PBOpenProjectWorkingCopyCommand.
+	
+	{ PBCommitProjectCommand . PBTagProjectCommand . PBOpenProjectWorkingCopyCommand } 
+		do: [ :commandClass | | activator |
+				activator := self assertCommands: commands includes: commandClass.
+				self assert: activator command project isNil.
+				activator prepareCommandForExecution.
+				self assert: (activator command project isKindOf: PBProject) ].
 ]
 
 { #category : #tests }
