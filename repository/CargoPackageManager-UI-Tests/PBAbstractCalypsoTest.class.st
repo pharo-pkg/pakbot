@@ -74,10 +74,9 @@ PBAbstractCalypsoTest >> findProject: aName [
 
 { #category : #utility }
 PBAbstractCalypsoTest >> findUIItem: aName [
-	| projectUI |
-	
-	projectUI := self findProject: project name.
-	^ projectUI items detect: [ :each | each name = aName ] ifNone: [ nil ]
+	^ self projectUIItem items
+		detect: [ :each | each name = aName ]
+		ifNone: [ nil ]
 ]
 
 { #category : #running }
@@ -87,6 +86,11 @@ PBAbstractCalypsoTest >> openBrowser [
 		systemScope: navigationEnvironment systemScope.
 	browser switchToProjects.
 	browser open
+]
+
+{ #category : #utility }
+PBAbstractCalypsoTest >> projectUIItem [
+	^ self findProject: project name
 ]
 
 { #category : #running }
