@@ -34,6 +34,11 @@ PBIceMemoryRepository >> isMissing [
 		or: [ self repositoryDirectory exists not ]
 ]
 
+{ #category : #testing }
+PBIceMemoryRepository >> isValidRepository [
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 PBIceMemoryRepository >> location [
 	^ location

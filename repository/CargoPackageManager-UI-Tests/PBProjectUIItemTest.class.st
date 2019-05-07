@@ -67,6 +67,25 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 ]
 
 { #category : #tests }
+PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommandsWhenRepositoryIsSet [
+
+	| repository commands |
+	repository := PBIceMemoryRepository new.
+	repository 
+		name: projectUIItem project name;
+		location: '/'.
+	PBTestIcebergWorkingCopy repository: repository.
+	projectUIItem project repository: repository.
+
+	self openBrowser.
+	commands := self commandsOfItem: projectUIItem.
+
+	self assertCommands: commands includes: PBCommitProjectCommand.
+	self assertCommands: commands includes: PBTagProjectCommand.
+	self assertCommands: commands includes: PBOpenProjectWorkingCopyCommand.
+]
+
+{ #category : #tests }
 PBProjectUIItemTest >> testCreatingAProjectCreatesTheCorrectUIItem [
 
 	"Check the setUp"
