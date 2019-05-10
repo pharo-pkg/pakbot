@@ -262,7 +262,10 @@ PBProject >> hash [
 
 { #category : #packages }
 PBProject >> importPackageNamed: aString [
-	^ registry register: (self newNotLoadedPackage: aString)
+	| package |
+	package := self newNotLoadedPackage: aString.
+	repository addPackageNamed: aString. "Bind the package with the new repository."
+	^ registry register: package
 ]
 
 { #category : #packages }
@@ -546,8 +549,8 @@ PBProject >> repository [
 ]
 
 { #category : #updating }
-PBProject >> repository: aCGOSourceRepository [ 
-	repository := aCGOSourceRepository
+PBProject >> repository: aPBSourceRepository [ 
+	repository := aPBSourceRepository.
 ]
 
 { #category : #loading }

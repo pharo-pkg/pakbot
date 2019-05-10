@@ -43,6 +43,11 @@ PBSourceRepository class >> type [
 	^ self subclassResponsibility
 ]
 
+{ #category : #updating }
+PBSourceRepository >> addPackageNamed: aPackageName [
+	self subclassResponsibility
+]
+
 { #category : #converting }
 PBSourceRepository >> asSerializableRepository [
 	^ self copy

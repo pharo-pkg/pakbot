@@ -82,10 +82,10 @@ PBGitRepositoryCreator >> commitishFrom: anUrl [
 PBGitRepositoryCreator >> create [
 	| iceRepository |
 	iceRepository := IceRepositoryCreator new 
-			addRemote: url;
 			subdirectory: subdirectory;
 			location: location";
 			To fix: iceRepository".
+	url ifNotNil: [ iceRepository addRemote: url ].
 	^ PBGitRepository 
 		url: url
 		repository: iceRepository
@@ -97,6 +97,16 @@ PBGitRepositoryCreator >> createAndClone [
 	^ self create
 		ensureCloned;
 		yourself
+]
+
+{ #category : #building }
+PBGitRepositoryCreator >> createNewRepositoryNamed: aString [ 
+	| iceRepository |
+	iceRepository := IceRepositoryCreator new 
+		location: location;
+		createNewRepositoryNamed: aString.
+			
+	^ PBGitRepository repository: iceRepository
 ]
 
 { #category : #setting }

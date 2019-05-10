@@ -56,6 +56,11 @@ PBGitRepository class >> url: anUrlOrString repository: anIceRepository version:
 		yourself
 ]
 
+{ #category : #updating }
+PBGitRepository >> addPackageNamed: aPackageName [
+	^ iceRepository workingCopy addPackageNamed: aPackageName
+]
+
 { #category : #accessing }
 PBGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
@@ -198,6 +203,14 @@ PBGitRepository >> project [
 	^ iceProject isUnborn
 		ifTrue: [ PBProjectMetadataNotFound signal ]
 		ifFalse: [ iceProject pakbotProject ]
+]
+
+{ #category : #configuring }
+PBGitRepository >> project: aPBIcebergProject [
+	"Used to set the Pakbot Project when creating a new project."
+	iceRepository workingCopy basicSetProject: aPBIcebergProject.
+
+
 ]
 
 { #category : #accessing }
