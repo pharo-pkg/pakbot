@@ -1,5 +1,5 @@
 "
-A visitor of nodes used by Iceberg diff allowing to get the list of modifications.
+A visitor of nodes used by Iceberg diff allwing to get the list of modifications.
 "
 Class {
 	#name : #IceDiffListingVisitor,
