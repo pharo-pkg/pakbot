@@ -69,7 +69,9 @@ PBCommitProjectCommandTest >> testGivenAProjectWhenDeletingPackageInMetadataThen
 	self
 		assert: IceTipCommitBrowser allInstances size isZero
 		description: 'Cannot run this test if a commit windows is already open'.
+		
 	command execute.
+	
 	self
 		assert: IceTipCommitBrowser allInstances size = 1
 		description: 'Error: got many commit windows! Only one expected'.
@@ -78,6 +80,7 @@ PBCommitProjectCommandTest >> testGivenAProjectWhenDeletingPackageInMetadataThen
 	visitor := IceDiffListingVisitor new.
 	commitBrowser diffPanel selectedItems
 		do: [ :each | visitor visitTreeNode: each ].
+		
 	self assert: visitor removals isEmpty.
 	packageModifications := visitor modifications.
 	self assert: packageModifications size equals: 1.
