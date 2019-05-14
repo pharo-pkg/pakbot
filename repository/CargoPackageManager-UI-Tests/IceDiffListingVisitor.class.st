@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'patcher',
 		'additions',
-		'removals'
+		'removals',
+		'modifications'
 	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
@@ -21,6 +22,12 @@ IceDiffListingVisitor >> additions [
 IceDiffListingVisitor >> initialize [ 
 	additions := OrderedCollection new.
 	removals := OrderedCollection new.
+	modifications := OrderedCollection new.
+]
+
+{ #category : #accessing }
+IceDiffListingVisitor >> modifications [
+	^ modifications
 ]
 
 { #category : #accessing }
@@ -32,6 +39,11 @@ IceDiffListingVisitor >> removals [
 IceDiffListingVisitor >> visitAddition: anIceAddition [ 
 	additions add: anIceAddition definition.
 	self visitChildrenOf: currentNode
+]
+
+{ #category : #visiting }
+IceDiffListingVisitor >> visitModification: anIceModification [ 
+	modifications add: anIceModification
 ]
 
 { #category : #visiting }

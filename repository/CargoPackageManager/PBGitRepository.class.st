@@ -82,7 +82,7 @@ PBGitRepository >> ensureCloned [
 		
 	[ iceRepository register ]
 		on: IceDuplicatedRepository 
-		do: [ "reposiotry already added to Iceberg. Ignore the warning and do not add it again." ] 
+		do: [ "repository already added to Iceberg. Ignore the warning and do not add it again." ] 
 ]
 
 { #category : #private }
