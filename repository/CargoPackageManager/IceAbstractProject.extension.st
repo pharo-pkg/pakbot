@@ -4,3 +4,8 @@ Extension { #name : #IceAbstractProject }
 IceAbstractProject >> isPakbotProject [
 	^ false
 ]
+
+{ #category : #'*CargoPackageManager' }
+IceAbstractProject >> pakbotProject [
+	PBProjectMetadataNotFound signal: 'Iceberg project reader does not understand pakbot project metadata'
+]

@@ -1,3 +1,6 @@
+"
+tests of PBIcebergProject
+"
 Class {
 	#name : #PBIcePakbotProjectTest,
 	#superclass : #TestCase,

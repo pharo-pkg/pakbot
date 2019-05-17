@@ -21,21 +21,12 @@ PBGitRepositoryTest >> assertSrcPackageVersion: srcPackageVersion hasSameUrlAs: 
 ]
 
 { #category : #'tests - test data' }
-PBGitRepositoryTest >> cargoMinimalB9ee [
-	^ CGOGitHostedPackageVersionEnforcingProtocol
-		repositoryUrl: 'git@github.com:demarey/cargo.git'
-		subdirectory: 'repository'
-		packageName: 'CargoPackageManager-Minimal'
-		commitish: 'b9ee048f40e500198120aedf8db60266caa9ece9' 
-]
-
-{ #category : #'tests - test data' }
-PBGitRepositoryTest >> cargoMinimalB9eeHttpsUrl [
-	^ CGOGitHostedPackageVersion
-		repositoryUrl: 'https://github.com/demarey/cargo.git'
-		subdirectory: 'repository'
-		packageName: 'CargoPackageManager-Minimal'
-		commitish: 'b9ee048f40e500198120aedf8db60266caa9ece9'
+PBGitRepositoryTest >> pakbotTestExampleMasterCloned [
+	^ PBGitRepositoryCreator new
+		githubUrl: 'https://github.com/pharo-pkg/PakbotTestExample.git';
+		location: self iceRepositoryLocation;
+		version: 'master';
+		createAndClone
 ]
 
 { #category : #'tests - test data' }
@@ -53,25 +44,6 @@ PBGitRepositoryTest >> pharoCounterMasterCloned [
 	^ self pharoCounterMaster 
 		ensureCloned;
 		yourself
-]
-
-{ #category : #'tests - test data' }
-PBGitRepositoryTest >> pharoCounterTestsOriginRepo [
-	^ CGOGitHostedPackageVersion
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
-		subdirectory: ''
-		packageName: 'Counter-Tests'
-		commitish: 'master'
-]
-
-{ #category : #'tests - test data' }
-PBGitRepositoryTest >> stonCargoMinimalB9ee [
-	^ 'CGOGitHostedPackageVersion{#repository:CGOGitRepository{#repositoryUrl:''git@github.com:demarey/cargo.git'',#subdirectory:''repository''},#packageName:#CargoPackageManager-Minimal,#commitish:''b9ee048f40e500198120aedf8db60266caa9ece9''}'
-]
-
-{ #category : #'tests - test data' }
-PBGitRepositoryTest >> stonCargoMinimalB9eeHttpsUrl [
-	^ 'CGOGitHostedPackageVersion{#repository:CGOGitRepository{#repositoryUrl:''https://github.com/demarey/cargo.git'',#subdirectory:''repository''},#packageName:#CargoPackageManager-Minimal,#commitish:''b9ee048f40e500198120aedf8db60266caa9ece9''}'
 ]
 
 { #category : #tests }
@@ -195,7 +167,7 @@ PBGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
 PBGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 	| project |
 	repository := self pharoCounterMasterCloned.
-	project := PBProject fromVcsStonString: repository projectMetadataStonString.
+	project := repository project.
 	
 	self 
 		assert: project name
@@ -255,4 +227,13 @@ PBGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent
 		createAndClone.
 
 	self should: [ repository project ] raise: PBProjectMetadataNotFound
+]
+
+{ #category : #tests }
+PBGitRepositoryTest >> testGivenAGitRepositoryWhenNoPakbotMetadataPresentThenGetException [
+	repository := self pakbotTestExampleMasterCloned.
+	
+	self 
+		should: [ repository project ]
+		raise: PBProjectMetadataNotFound 
 ]
