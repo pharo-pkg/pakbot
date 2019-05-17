@@ -55,5 +55,11 @@ PBCommitProjectCommand >> defaultMenuItemName [
 { #category : #execution }
 PBCommitProjectCommand >> execute [
 	
-	(IceTipCommitBrowser onRepository: project repository iceRepository) openWithSpec
+	[ (IceTipCommitBrowser onRepository: project repository iceRepository) openWithSpec ]
+	on: IceNotInBranch 
+	do: [ UIManager default 
+		alert: ('The commit project command failed because you are not in a branch!' , String cr, 
+		'Open a repository window and click on repair action to create a new branch or checkout an existing branch.', String cr ,
+		'Once done, you will be able to commit the project.' )
+		title: 'Commit project failed'	 ]
 ]
