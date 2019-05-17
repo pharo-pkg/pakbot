@@ -19,12 +19,7 @@ PBTagProjectCommandTest >> setUp [
 	repository := PBGitRepositoryCreator new
 		location: repositoryLocation;
 		url: 'git@github.com:pharo-pkg/pharo-counter.git';
-		createAndClone.
-	project := PBProject fromRepository: repository.
-	repository project:
-		(PBIcebergProject
-				onRepository: repository iceRepository
-				project: project)
+		create.
 ]
 
 { #category : #running }
@@ -38,6 +33,11 @@ PBTagProjectCommandTest >> tearDown [
 PBTagProjectCommandTest >> testCanTagAProject [ 
 	| command tagPanel tagName currentCommit tagCommit |
 	
+	project := PBProject fromRepository: repository.
+	repository project:
+		(PBIcebergProject
+				onRepository: repository iceRepository
+				project: project).
 	currentCommit := repository headCommit.
 	command := PBTagProjectCommand new
 		project: project;
@@ -53,4 +53,25 @@ PBTagProjectCommandTest >> testCanTagAProject [
 	self
 		assert: tagCommit id
 		equals: currentCommit id
+]
+
+{ #category : #tests }
+PBTagProjectCommandTest >> testCanTagAProjectWhoseRepositoryIsOnlyDeclared [
+	"test when the repository is not yet cloned"
+	| command tagPanel tagName tagCommit |
+	
+	project := PBProject named: 'Pharo-Counter'.
+	project repository: repository.
+	command := PBTagProjectCommand new
+		project: project;
+		yourself.
+		
+	presenterToDelete := tagPanel := command execute.
+	tagName := 'v2'.
+	tagPanel tagNameInputText text: tagName.
+	tagPanel accept.
+
+	tagCommit := repository iceRepository lookupCommit: tagName.
+	self assert: tagCommit notNil.
+	"Cannot assert commit id since it would imply to first clone the repository to get the current commit id"
 ]

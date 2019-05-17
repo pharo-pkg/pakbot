@@ -56,6 +56,7 @@ PBTagProjectCommand >> defaultMenuItemName [
 PBTagProjectCommand >> execute [
 	| repositoryModel panel |
 	
+	project repository ensureCloned.
 	repositoryModel := (IceTipRepositoryModel on: project repository iceRepository) beCached.
 	panel := IceTipCreateTagPanel on: repositoryModel.
 	panel openDialogWithSpec.
