@@ -100,18 +100,20 @@ PBGitRepository >> fetchHeadVersion [
 
 { #category : #fetching }
 PBGitRepository >> fetchVersion: aString [
-	
 	| commitish project |
 	self ensureCloned.
-	
 	commitish := aString
-		ifEmpty: [ iceRepository headCommit ]
+		ifEmpty: [ self headCommit ]
 		ifNotEmpty: [ iceRepository revparse: aString ].
-
-
-	project := PBProject fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
+	project := PBProject
+		fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project
+]
+
+{ #category : #accessing }
+PBGitRepository >> headCommit [
+	^ iceRepository headCommit
 ]
 
 { #category : #accessing }

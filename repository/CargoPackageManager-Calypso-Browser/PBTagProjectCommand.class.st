@@ -54,8 +54,10 @@ PBTagProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 PBTagProjectCommand >> execute [
-	| repositoryModel |
+	| repositoryModel panel |
 	
 	repositoryModel := (IceTipRepositoryModel on: project repository iceRepository) beCached.
-	(IceTipCreateTagPanel on: repositoryModel) openDialogWithSpec.
+	panel := IceTipCreateTagPanel on: repositoryModel.
+	panel openDialogWithSpec.
+	^ panel
 ]
