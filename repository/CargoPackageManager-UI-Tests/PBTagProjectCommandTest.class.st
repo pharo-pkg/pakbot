@@ -1,8 +1,3 @@
-"
-Some tests could fail because some presenter are not garbage collected properly (weak reference?).
-Is so, you can run a garbage collect to have them working again:
-	3 timesRepeat: [ Smalltalk garbageCollect ]
-"
 Class {
 	#name : #PBTagProjectCommandTest,
 	#superclass : #TestCase,
@@ -23,7 +18,7 @@ PBTagProjectCommandTest >> setUp [
 	repositoryLocation := FileLocator temp / ('pharo-' , self class name , '-', DateAndTime now asFileNameCompatibleString).
 	repository := PBGitRepositoryCreator new
 		location: repositoryLocation;
-		url: 'git@github.com:demarey/pharo-counter.git';
+		url: 'git@github.com:pharo-pkg/pharo-counter.git';
 		createAndClone.
 	project := PBProject fromRepository: repository.
 	repository project:
