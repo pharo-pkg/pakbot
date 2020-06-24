@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfCargo,
+	#name : #BaselineOfPakbot,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfCargo'
+	#category : #BaselineOfPakbot
 }
 
 { #category : #baseline }
-BaselineOfCargo >> babyMock: spec [
+BaselineOfPakbot >> babyMock: spec [
 	spec
 		project: 'BabyMock2'
 		with: [ spec
@@ -15,7 +15,7 @@ BaselineOfCargo >> babyMock: spec [
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> baseline: spec [
+BaselineOfPakbot >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
@@ -78,28 +78,26 @@ BaselineOfCargo >> baseline: spec [
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> icetray: spec [
+BaselineOfPakbot >> icetray: spec [
 	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> mooseAlgos: spec [
+BaselineOfPakbot >> mooseAlgos: spec [
 	spec
-		project: 'MooseAlgos'
-		with: [ spec
-				className: #ConfigurationOfMooseAlgos;
-				versionString: #bleedingEdge;
-				loads: #('Moose-Algos-Graph');
-				repository: 'http://smalltalkhub.com/mc/Moose/MooseAlgos/main/' ]
+    	baseline: 'MooseAlgos'
+    	with: [ spec 
+					repository: 'github://moosetechnology/MooseAlgos:master/src';
+					loads: #('Moose-Algos-Graph') ]
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> parametrizedTests: spec [
+BaselineOfPakbot >> parametrizedTests: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> voyage: spec [
+BaselineOfPakbot >> voyage: spec [
 	spec
 		baseline: 'Voyage'
 		with: [ spec
@@ -108,13 +106,10 @@ BaselineOfCargo >> voyage: spec [
 ]
 
 { #category : #baseline }
-BaselineOfCargo >> zincHttpComponents: spec [
+BaselineOfPakbot >> zincHttpComponents: spec [
 	spec
-		project: 'ZincHTTPComponents'
-		with: [ spec
-				className: #ConfigurationOfZincHTTPComponents;
-				versionString: #bleedingEdge;
-				loads: #('REST');
-				repository:
-					'http://smalltalkhub.com/mc/SvenVanCaekenberghe/ZincHTTPComponents/main/' ]
+		baseline: 'ZincHTTPComponents'
+		with: [ spec 
+					repository: 'github://svenvc/zinc/repository';
+					loads: #('REST') ]
 ]
