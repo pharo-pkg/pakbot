@@ -145,11 +145,11 @@ SemanticVersion >> patch [
 
 { #category : #printing }
 SemanticVersion >> printOn: aStream [
-	aStream << major.
+	aStream << major asString.
 	minor ifNil: [ ^self ].
-	aStream << $. << minor.
+	aStream << $. << minor asString.
 	patch ifNil: [ ^self ].
-	aStream << $. << patch.
+	aStream << $. << patch asString.
 	suffix ifNotNil: [ aStream << '-' << suffix ]
 ]
 

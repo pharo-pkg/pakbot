@@ -40,12 +40,14 @@ PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 
 { #category : #tests }
 PBPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
-	| project unit unit2 |
+	| project unit |
 	project := PBProject example.
-	project registry: registry.
+	project 
+		registry: registry;
+		repository: PBGitMemoryRepository new.
 	unit := project packageUnits anyOne.
 	registry register: unit.
-	unit2 := project importPackageNamed: #Unit2. "registers #Unit2"
+	project importPackageNamed: #Unit2. "registers #Unit2"
 	
 	registry unregister: unit.
 	

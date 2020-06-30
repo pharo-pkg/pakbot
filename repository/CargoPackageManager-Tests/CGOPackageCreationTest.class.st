@@ -13,6 +13,7 @@ CGOPackageCreationTest >> setUp [
 
 	super setUp.
 	project := testRegistry newProjectNamed: 'test'.
+	project repository: PBGitMemoryRepository new.
 	
 	systemPackageOrganizer := RPackageOrganizer new.
 	testRegistry systemPackageOrganizer: systemPackageOrganizer.

@@ -20,17 +20,18 @@ BaselineOfPakbot >> baseline: spec [
 	spec
 		for: #common
 		do: [ 
-			self icetray: spec.
+			"self icetray: spec."
 			self babyMock: spec.
 			self mooseAlgos: spec.
 			self voyage: spec.
-			self zincHttpComponents: spec.
+			"self zincHttpComponents: spec."
+			self iceberg: spec.
 			self parametrizedTests: spec.
 			
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'ZincHTTPComponents' 'MooseAlgos') ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'MooseAlgos') ];
 
 				package: #'PakbotPackageManager-Repository'
 					with: [ spec requires: #(CargoPackageManager) ];
@@ -38,7 +39,7 @@ BaselineOfPakbot >> baseline: spec [
 					with: [ spec requires: #('PakbotPackageManager-Repository') ];
 					
 				package: #'CargoPackageManager-Repository'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' 'ZincHTTPComponents') ];
+					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' "'ZincHTTPComponents'") ];
 				package: #'CargoPackageManager-RepositoryBackend'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'Voyage') ];
 					
@@ -49,7 +50,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
-				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];
+				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
 				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI') ];
 				package: #'CargoPackageManager-Calypso-Environment'
 					with: [ spec requires: #(CargoPackageManager) ];
@@ -75,6 +76,21 @@ BaselineOfPakbot >> baseline: spec [
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
 				group: 'development' with: #(client server tests utils);
 				group: 'default' with: 'tests-client' ]
+]
+
+{ #category : #baseline }
+BaselineOfPakbot >> iceberg: spec [
+	| repository |
+	"re := '[:space:]*repository\:[:space:]*(.+)' asRegex.
+	re matchesIn:
+		((BaselineOfIDE>>#loadIceberg) sourceCode lines 
+		detect: [ :line | line includesSubstring: 'repository:' ])."
+	
+	spec
+		baseline: 'Iceberg'
+		with: [ spec
+				repository: 'github://pharo-vcs/iceberg:v1.8.3';
+				loads: #('Iceberg-Memory') ]
 ]
 
 { #category : #baseline }

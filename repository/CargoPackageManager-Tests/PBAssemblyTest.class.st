@@ -42,6 +42,7 @@ PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly addPackage: package.
@@ -69,6 +70,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	project createPackageNamed: 'NewPackage'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -85,6 +87,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	assembly := project addAssemblyNamed: 'Ass1'.
 
 	package := assembly createPackageNamed: 'NewPackage'.
@@ -122,6 +125,7 @@ PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly1 := project addAssemblyNamed: 'Ass1'.
 	assembly2 := project addAssemblyNamed: 'Ass2'.
@@ -162,6 +166,7 @@ PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly addPackage: package.
@@ -177,6 +182,7 @@ PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly addPackage: package.
@@ -192,6 +198,7 @@ PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
 	testRegistry systemPackageOrganizer: RPackageOrganizer new.
 	
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly addPackage: package.

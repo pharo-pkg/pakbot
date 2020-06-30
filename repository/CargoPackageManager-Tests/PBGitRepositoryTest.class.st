@@ -215,7 +215,7 @@ PBGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 			location: FileLocator temp / ('pharo-tests-' , DateAndTime now asFileNameCompatibleString);
 			subdirectory: '';
 			createRepository ]
-		raise: IceGenericError
+		raise: IceError
 ]
 
 { #category : #tests }
