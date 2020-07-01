@@ -11,11 +11,15 @@ Class {
 
 { #category : #loading }
 PBMetacelloBaselineProject >> basicLoad [
-
-	Metacello new 
+	| metacello |
+	
+	metacello := Metacello new 
 		repository: self metacelloUrl;
-		baseline: name;
-		load: packageNames asArray.
+		baseline: name.
+	
+	packageNames 
+		ifEmpty: [ metacello load ]
+		ifNotEmpty: [ metacello load: packageNames asArray ].
 ]
 
 { #category : #initialization }
