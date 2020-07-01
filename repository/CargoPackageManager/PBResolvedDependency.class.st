@@ -89,10 +89,10 @@ PBResolvedDependency >> initialize [
 ]
 
 { #category : #conflicts }
-PBResolvedDependency >> isConflictingWith: aCGOResolvedDependency [ 
+PBResolvedDependency >> isConflictingWith: aPBResolvedDependency [ 
 	
-	^ (self dependency isSameProjectAs: aCGOResolvedDependency dependency)
-		and: [ (self resolution isEquivalentTo: aCGOResolvedDependency resolution) not ]
+	^ (self dependency isSameProjectAs: aPBResolvedDependency dependency)
+		and: [ (self resolution isEquivalentTo: aPBResolvedDependency resolution) not ]
 ]
 
 { #category : #testing }

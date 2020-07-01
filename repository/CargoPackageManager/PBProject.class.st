@@ -318,10 +318,10 @@ PBProject >> isAssembly [
 ]
 
 { #category : #conflicts }
-PBProject >> isConflictingWith: aCGOResolvedDependency [ 
+PBProject >> isConflictingWith: aPBResolvedDependency [ 
 	
-	^ (self name = aCGOResolvedDependency name)
-		and: [ self ~= aCGOResolvedDependency resolution resolvedProjectVersion ]
+	^ (self name = aPBResolvedDependency name)
+		and: [ self ~= aPBResolvedDependency resolution resolvedProjectVersion ]
 ]
 
 { #category : #testing }
