@@ -40,6 +40,15 @@ PBPackageRegistry class >> reset [
 	Default ifNotNil: [ Default unregisterFromSystem. Default := nil ]
 ]
 
+{ #category : #'as yet unclassified' }
+PBPackageRegistry class >> useDefaultRegistry: aPBPackageRegistry during: aBlock [
+	| default |
+	default := self default.
+	[ self default: aPBPackageRegistry.
+	aBlock value ]
+		ensure: [ self default: default ]
+]
+
 { #category : #private }
 PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
 	
