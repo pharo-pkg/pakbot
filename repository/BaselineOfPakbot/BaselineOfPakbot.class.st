@@ -47,7 +47,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
 				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
-				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager') ];
+				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
