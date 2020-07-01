@@ -129,6 +129,13 @@ PBMetacelloProject >> isConfiguration [
 	self subclassResponsibility
 ]
 
+{ #category : #conflicts }
+PBMetacelloProject >> isConflictingWith: aPBResolvedDependency [ 
+	
+	^ (self name = aPBResolvedDependency name)
+		and: [ self ~= aPBResolvedDependency resolution resolvedProjectVersion ]
+]
+
 { #category : #comparing }
 PBMetacelloProject >> isEquivalentTo: anotherProject [
 	"In this comparison the project is compared against the resolved version. 
