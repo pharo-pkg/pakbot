@@ -15,7 +15,7 @@ Class {
 		'packageNames',
 		'registry'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -99,7 +99,7 @@ PBMetacelloProject >> hasPackage: aPackageName [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 PBMetacelloProject >> hasProblems [
 	^ false
 ]
@@ -185,7 +185,7 @@ PBMetacelloProject >> packageUnits [
 	^ #()
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PBMetacelloProject >> packages [
 	^ #()
 ]
