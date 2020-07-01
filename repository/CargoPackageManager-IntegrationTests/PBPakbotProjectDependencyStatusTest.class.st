@@ -15,6 +15,7 @@ PBPakbotProjectDependencyStatusTest >> installProject [
 	
 	| newProject |
 	newProject := PBProject named: 'AnotherProject'.
+	newProject repository: PBGitMemoryRepository new.
 	testRegistry register: newProject.
 	newProject importPackageNamed: #AnotherPackage.
 ]

@@ -12,8 +12,10 @@ PBProjectUnloadTest >> setUp [
 	super setUp.
 
 	project := testRegistry newProjectNamed: 'TestProject'.
-	project createPackageNamed: 'TestProject-Pck1'.
-	project newNotLoadedPackage: 'TestProject-Pck2'.
+	project 
+		repository: PBGitMemoryRepository new;
+		createPackageNamed: 'TestProject-Pck1';
+		newNotLoadedPackage: 'TestProject-Pck2'.
 ]
 
 { #category : #tests }

@@ -35,8 +35,10 @@ PBDependencyStatusTest >> setUp [
 
 	dependencyToProject := self createProjectDependency.
 
-	project importPackageNamed: #APackage.
-	project addDependency: dependencyToProject
+	project 
+		repository: PBGitMemoryRepository new;
+		importPackageNamed: #APackage;
+		addDependency: dependencyToProject
 ]
 
 { #category : #tests }

@@ -27,7 +27,9 @@ PBPackageAnnouncementTest >> tearDown [
 PBPackageAnnouncementTest >> testPackageRemovedFromSystemKeptThePackageInTheProjectButNotInstalled [
 
 	project := testRegistry newProjectNamed: 'Test'.
-	project createPackageNamed: 'Test-APackage'.
+	project 
+		repository: PBGitMemoryRepository new;
+		createPackageNamed: 'Test-APackage'.
 	
 	'Test-APackage' asPackage removeFromSystem.
 	
@@ -39,7 +41,9 @@ PBPackageAnnouncementTest >> testPackageRemovedFromSystemKeptThePackageInTheProj
 PBPackageAnnouncementTest >> testPackageRemovedFromSystemUpdateRegistry [
 
 	project := testRegistry newProjectNamed: 'Test'.
-	project createPackageNamed: 'Test-APackage'.
+	project 
+		repository: PBGitMemoryRepository new;
+		createPackageNamed: 'Test-APackage'.
 	
 	'Test-APackage' asPackage removeFromSystem.
 	
@@ -50,7 +54,9 @@ PBPackageAnnouncementTest >> testPackageRemovedFromSystemUpdateRegistry [
 PBPackageAnnouncementTest >> testPackageRenamedUpdateProject [
 
 	project := testRegistry newProjectNamed: 'Test'.
-	project createPackageNamed: 'Test-APackage'.
+	project 
+		repository: PBGitMemoryRepository new;
+		createPackageNamed: 'Test-APackage'.
 	
 	'Test-APackage' asPackage renameTo: 'Test-APackageNew'.
 	
@@ -62,7 +68,9 @@ PBPackageAnnouncementTest >> testPackageRenamedUpdateProject [
 PBPackageAnnouncementTest >> testPackageRenamedUpdateRegistry [
 
 	project := testRegistry newProjectNamed: 'Test'.
-	project createPackageNamed: 'Test-APackage'.
+	project 
+		repository: PBGitMemoryRepository new;
+		createPackageNamed: 'Test-APackage'.
 	
 	'Test-APackage' asPackage renameTo: 'Test-APackageNew'.
 	
