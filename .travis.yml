@@ -10,7 +10,7 @@ os:
 
 # Select compatible Smalltalk image(s)
 smalltalk:
-  - Pharo-9.0
+  - Pharo64-9.0
   
 matrix:
   include: 
