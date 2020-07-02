@@ -1,12 +1,11 @@
 SmalltalkCISpec {
-  #name : 'Cargo',
-  #preLoading : 'scripts/updateIceberg.st',
+  #name : 'Pakbot',
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'Cargo',
+      #baseline : 'Pakbot',
       #directory : 'repository',
       #platforms : [ #pharo ],
-      #load : ['tests-client'],
+      #load : ['CargoPackageManager-IntegrationTests'],
       #onConflict : #useLoaded
     }
   ],

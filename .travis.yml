@@ -10,7 +10,7 @@ os:
 
 # Select compatible Smalltalk image(s)
 smalltalk:
-  - Pharo-7.0
+  - Pharo-9.0
   
 matrix:
   include: 
@@ -22,4 +22,4 @@ matrix:
 # configuration
 before_script:
   - git config --global user.name 'Travis CI'
-  - git config --global user.email 'cargo-ci@travis-ci.org'
+  - git config --global user.email 'pakbot-ci@travis-ci.org'
