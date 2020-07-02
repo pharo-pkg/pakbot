@@ -4,7 +4,7 @@ I represent a dependency to a project managed by a Metacello ConfigurationOf.
 Class {
 	#name : #PBMetacelloConfigurationProjectDependency,
 	#superclass : #PBMetacelloProjectDependency,
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #example }
@@ -65,7 +65,7 @@ PBMetacelloConfigurationProjectDependency >> isMetacelloConfiguration [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'querying - installed' }
 PBMetacelloConfigurationProjectDependency >> satisfyConstraints: aString [ 
 	^ version = aString
 ]

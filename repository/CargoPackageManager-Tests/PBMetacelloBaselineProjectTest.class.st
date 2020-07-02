@@ -31,3 +31,17 @@ PBMetacelloBaselineProjectTest >> testCanConvertGitOverSSHUrlPointingToGitHubToM
 		assert: project metacelloUrl
 		equals: 'github://sbragagnolo/taskit:v1.0.1'
 ]
+
+{ #category : #tests }
+PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlToMetacelloUrl [
+	| project |
+	
+	project := PBMetacelloBaselineProject 
+		repository: 'github://pharo-pkg/PakbotTestExample' 
+		name: 'PakbotTestExample' 
+		version: '1.0'.
+	
+	self
+		assert: project metacelloUrl
+		equals: 'github://pharo-pkg/PakbotTestExample:1.0'
+]

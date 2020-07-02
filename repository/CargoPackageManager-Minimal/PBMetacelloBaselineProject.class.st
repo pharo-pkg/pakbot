@@ -40,6 +40,13 @@ PBMetacelloBaselineProject >> metacelloUrl [
 			url := repository copyReplaceAll: 'github.com:' with: 'github.com/'.
 			url := ('git+ssh://', url) asZnUrl ]
 		ifFalse: [ url := repository asZnUrl ].
+		
+	((MCGitBasedNetworkRepository subclasses collect: #basicDescription) includes: url scheme)
+		ifTrue: [ "already a metacello url"
+					^ version 
+						ifNil: [ repository ]
+						ifNotNil: [ repository , ':' , version ] ].
+	
 	^ String streamContents: [ :stream |
 		url host = 'github.com'
 			ifTrue: [ stream nextPutAll: 'github://' ].

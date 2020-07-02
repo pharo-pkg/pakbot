@@ -4,7 +4,7 @@ I represent a dependency to a project managed by a Metacello BaselineOf.
 Class {
 	#name : #PBMetacelloBaselineProjectDependency,
 	#superclass : #PBMetacelloProjectDependency,
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #example }
@@ -50,6 +50,16 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 ]
 
 { #category : #'querying - installed' }
+PBMetacelloBaselineProjectDependency >> icebergUrl [
+	| znUrl |
+	(url beginsWith: 'git@') ifTrue: [ ^ url ].
+	znUrl := url asZnUrl.
+	(znUrl isHttp or: [ znUrl isHttps or: [ znUrl scheme = #git ] ]) ifTrue: [ ^ url ].
+	
+	^ IceMetacelloRepositoryType httpsUrlFor: url
+]
+
+{ #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	| baseline |
 	
@@ -61,21 +71,22 @@ PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 			and: [ baseline baselineProjectSpec loads isEmptyOrNil ] ]
 ]
 
+{ #category : #testing }
+PBMetacelloBaselineProjectDependency >> isMetacelloConfiguration [
+	^ false
+]
+
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> isSameVersionAs: aVersionString [
 	| repository |
-	
-	repository := IceRepository registry 
-		detect: [ :repo | 
-			repo remotes 
-				anySatisfy: [ :remote | remote referencesSameRemoteLocationAs: (IceGitRemote url: url) ] ].
-	
-	^ aVersionString = version 
-		or: [ aVersionString = repository head commit id ]
-		
+	repository := IceRepository registry detect: [ :repo | 
+		              repo remotes anySatisfy: [ :remote | 
+			              remote referencesSameRemoteLocationAs: (IceGitRemote url: self icebergUrl) ] ].
+	^ aVersionString = version or: [ 
+		  aVersionString = repository head commit id ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> satisfyConstraints: aVersionString [ 
 	^ self isSameVersionAs: aVersionString
 ]

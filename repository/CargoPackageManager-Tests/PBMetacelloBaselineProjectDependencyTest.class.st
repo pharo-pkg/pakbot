@@ -48,3 +48,29 @@ PBMetacelloBaselineProjectDependencyTest >> testCanSerializeDependency [
 	#version : ''0866472ddded2a8fc36d3bae23f01aecfe947dc7''
 }'.
 ]
+
+{ #category : #tests }
+PBMetacelloBaselineProjectDependencyTest >> testIcebergUrlWhenGitUrlProvided [
+	| dependency |
+	dependency := PBMetacelloBaselineProjectDependency 
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '2.0'.
+		
+	self 
+		assert: dependency icebergUrl
+		equals: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'.
+]
+
+{ #category : #tests }
+PBMetacelloBaselineProjectDependencyTest >> testIcebergUrlWhenMetacelloGithubUrlProvided [
+	| dependency |
+	dependency := PBMetacelloBaselineProjectDependency 
+		name: 'PakbotTestExample'
+		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
+		version: '2.0'.
+		
+	self 
+		assert: dependency icebergUrl
+		equals: 'https://github.com/pharo-pkg/PakbotTestExample.git'.
+]
