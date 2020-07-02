@@ -26,6 +26,13 @@ PBDependencyStatusTest >> installProject [
 	self subclassResponsibility 
 ]
 
+{ #category : #private }
+PBDependencyStatusTest >> performTest [ 
+	PBPackageRegistry 
+		useDefaultRegistry: testRegistry
+		during: [ self perform: testSelector asSymbol ]
+]
+
 { #category : #running }
 PBDependencyStatusTest >> setUp [
 	super setUp.

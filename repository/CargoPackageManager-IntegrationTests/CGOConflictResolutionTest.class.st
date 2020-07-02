@@ -4,6 +4,13 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
 }
 
+{ #category : #private }
+CGOConflictResolutionTest >> performTest [
+	PBPackageRegistry 
+		useDefaultRegistry: testRegistry
+		during: [ self perform: testSelector asSymbol ]
+]
+
 { #category : #tests }
 CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAVersion [
 

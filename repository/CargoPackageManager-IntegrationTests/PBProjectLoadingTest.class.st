@@ -4,6 +4,13 @@ Class {
 	#category : #'CargoPackageManager-IntegrationTests'
 }
 
+{ #category : #private }
+PBProjectLoadingTest >> performTest [
+	PBPackageRegistry 
+		useDefaultRegistry: testRegistry
+		during: [ self perform: testSelector asSymbol ]
+]
+
 { #category : #'tests-baseline-dependencies' }
 PBProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
 
