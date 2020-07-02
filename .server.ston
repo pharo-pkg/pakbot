@@ -1,8 +1,8 @@
 SmalltalkCISpec {
-  #name : 'Cargo',
+  #name : 'Pakbot (server)',
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'Cargo',
+      #baseline : 'Pakbot',
       #directory : 'repository',
       #platforms : [ #pharo ],
 	  #load : ['tests-server']

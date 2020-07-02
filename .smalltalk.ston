@@ -1,5 +1,5 @@
 SmalltalkCISpec {
-  #name : 'Pakbot',
+  #name : 'Pakbot (client)',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Pakbot',

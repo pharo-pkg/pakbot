@@ -12,13 +12,14 @@ os:
 smalltalk:
   - Pharo64-9.0
   
-matrix:
-  include: 
-    - smalltalk_config: .server.ston
-    - smalltalk_config: .failingTests.ston
-  allow_failures: # Allow bleeding edge builds to fail
-    - smalltalk_config: .server.ston
-    - smalltalk_config: .failingTests.ston
+# default config: .smalltalk.ston (client)
+#matrix:
+#  include: 
+#    - smalltalk_config: .server.ston
+#    - smalltalk_config: .failingTests.ston
+#  allow_failures: 
+#    - smalltalk_config: .failingTests.ston
+
 # configuration
 before_script:
   - git config --global user.name 'Travis CI'
