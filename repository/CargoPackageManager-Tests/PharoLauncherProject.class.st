@@ -49,65 +49,50 @@ PharoLauncherProject >> buildAndRegisterIn: aCGOPackageRegistry [
 { #category : #building }
 PharoLauncherProject >> buildExternalProjectDependencies [
 	project addDependency: 
-		(PBMetacelloConfigurationProjectDependency 
-			name: 'Ston'
-			repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
-			version: #stable).
+		(PBMetacelloBaselineProjectDependency  
+			name: 'OSSubprocess'
+			repositoryUrl: 'https://github.com/pharo-contributions/OSSubprocess.git'
+			version: 'v1.2.1').
 	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
-			name: 'OSProcess'
-			repositoryUrl: 'http://www.squeaksource.com/MetacelloRepository'
-			version: #stable).
-	project addDependency: 
-		(PBMetacelloConfigurationProjectDependency 
-			name: 'ProcessWrapper'
-			repositoryUrl: 'http://smalltalkhub.com/mc/hernan/ProcessWrapper/main/'
-			version: #bleedingEdge).
+			name: 'OSWinSubprocess'
+			repositoryUrl: 'https://github.com/pharo-contributions/OSWinSubprocess.git'
+			version: 'v1').
 	project addDependency: 
 		(PBMetacelloConfigurationProjectDependency 
 			name: 'XMLParser'
 			repositoryUrl: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/'
 			version: #stable).
-	project addDependency: 
-		(PBMetacelloBaselineProjectDependency  
-			name: 'Icetray'
-			repositoryUrl: 'https://github.com/pharo-spec/icetray.git'
-			version: #master).
-	project addDependency: 
-		(PBMetacelloBaselineProjectDependency  
-			name: 'FastTableExtentions'
-			repositoryUrl: 'https://github.com/sbragagnolo/FastTableExtention.git' "/src"
-			version: #master).
-	project addDependency: 
-		(PBMetacelloBaselineProjectDependency  
-			name: 'TaskIt'
-			repositoryUrl: 'https://github.com/sbragagnolo/taskit.git'
-			version: 'v1.0.1').
 	^ project
 ]
 
 { #category : #building }
 PharoLauncherProject >> buildPackages [
-	(project newNotLoadedPackage: #'PharoLauncher-ZipArchive')
-		description: 'Package allowing to use file references with Zip Archive (integrated in Pharo 8.0).'.
 	(project newNotLoadedPackage: #'PharoLauncher-Core')
 		description: 'Core package with the model, commands and settings.';
-		addDependencyOn: #'PharoLauncher-ZipArchive';
 		addDependencyOn: #'XMLParser::Core';
-		addDependencyOn: #'Ston';
-		addDependencyOn: #'ProcessWrapper';
-		addDependencyOn: #'OSProcess'.
-	(project newNotLoadedPackage: #'PharoLauncher-Spec')
-		description: 'PharoLauncher UI done in pure Spec.';
-		addDependencyOn: #'PharoLauncher-Core'.
-	(project newNotLoadedPackage: #'PharoLauncher-IceTray')
-		description: 'PharoLauncher UI parts done with IceTray.';
-		addDependencyOn: #'PharoLauncher-Core';
-		addDependencyOn: #'IceTray';
-		addDependencyOn: #'FastTableExtentions'.
+		addDependencyOn: #'OSSubprocess';
+		addDependencyOn: #'OSWinSubprocess';
+		addDependencyOn: #'PharoLauncher-80Compatibility';
+		addDependencyOn: #'PharoLauncher-Pharo9ToRemove-FileLocator'.
+	(project newNotLoadedPackage: #'PharoLauncher-Spec2')
+		description: 'PharoLauncher UI done in Spec 2.';
+		addDependencyOn: #'PharoLauncher-Core'. "Spec2 already loaded in P9"
+	(project newNotLoadedPackage: #'PharoLauncher-80Compatibility')
+		description: 'extensions needed for Pharo 8'.
+	(project newNotLoadedPackage: #'PharoLauncher-Pharo9ToRemove-FileLocator')
+		description: 'File locator extension integrated into Pharo 9'.
+
 	(project newNotLoadedPackage: #'PharoLauncher-Tests-Core')
 		description: 'Tests of the PharoLauncher-Core package.';
-		addDependencyOn: #'PharoLauncher-Core'.
+		addDependencyOn: #'PharoLauncher-Spec2'.
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-Commands')
+		description: 'Tests of PharoLauncher commands.';
+		addDependencyOn: #'PharoLauncher-Spec2'.
+	(project newNotLoadedPackage: #'PharoLauncher-Tests-SpecUI')
+		description: 'Tests of the PharoLauncher UI.';
+		addDependencyOn: #'PharoLauncher-Core';
+		addDependencyOn: #'PharoLauncher-Spec2'.
 	(project newNotLoadedPackage: #'PharoLauncher-Tests-Download')
 		description: 'Tests of the PharoLauncher-Download package.';
 		addDependencyOn: #'PharoLauncher-Core'.

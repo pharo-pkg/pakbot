@@ -20,24 +20,14 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 	#version : ''1.0.0'',
 	#dependencies : [
 		{
-			#baseline : #Icetray,
-			#url : ''https://github.com/pharo-spec/icetray.git'',
-			#version : #master
+			#baseline : #OSSubprocess,
+			#url : ''https://github.com/pharo-contributions/OSSubprocess.git'',
+			#version : ''v1.2.1''
 		},
 		{
-			#configuration : #OSProcess,
-			#url : ''http://www.squeaksource.com/MetacelloRepository'',
-			#version : ''4.6.13''
-		},
-		{
-			#configuration : #ProcessWrapper,
-			#url : ''http://smalltalkhub.com/mc/hernan/ProcessWrapper/main/'',
-			#version : ''0.1-baseline''
-		},
-		{
-			#configuration : #Ston,
-			#url : ''http://ss3.gemstone.com/ss/STON'',
-			#version : ''0.27''
+			#configuration : #OSWinSubprocess,
+			#url : ''https://github.com/pharo-contributions/OSWinSubprocess.git'',
+			#version : ''v1''
 		},
 		{
 			#configuration : #XMLParser,
@@ -50,7 +40,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
 		#version : ''development''
 	}
-}'
+}' withInternetLineEndings
 ]
 
 { #category : #'expected values' }
@@ -61,24 +51,40 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
 	#units : [
 		{
+			#name : #PharoLauncher-80Compatibility,
+			#description : ''extensions needed for Pharo 8''
+		},
+		{
 			#name : #PharoLauncher-Core,
 			#description : ''Core package with the model, commands and settings.''
 		},
 		{
-			#name : #PharoLauncher-Download,
-			#description : ''Package dealing with image / VM detection and download.''
+			#name : #PharoLauncher-Pharo9ToRemove-FileLocator,
+			#description : ''File locator extension integrated into Pharo 9''
 		},
 		{
-			#name : #PharoLauncher-Spec,
-			#description : ''PharoLauncher UI.''
+			#name : #PharoLauncher-Spec2,
+			#description : ''PharoLauncher UI done in Spec 2.''
+		},
+		{
+			#name : #PharoLauncher-Tests-Commands,
+			#description : ''Tests of PharoLauncher commands.''
 		},
 		{
 			#name : #PharoLauncher-Tests-Core,
-			#description : ''Tests of the PharoLauncher-Core package..''
+			#description : ''Tests of the PharoLauncher-Core package.''
 		},
 		{
 			#name : #PharoLauncher-Tests-Download,
 			#description : ''Tests of the PharoLauncher-Download package.''
+		},
+		{
+			#name : #PharoLauncher-Tests-Functional,
+			#description : ''Tests of the PharoLauncher-Download package.''
+		},
+		{
+			#name : #PharoLauncher-Tests-SpecUI,
+			#description : ''Tests of the PharoLauncher UI.''
 		}
 	],
 	#version : ''1.0.0'',
@@ -87,7 +93,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
 		#version : ''development''
 	}
-}'
+}' withInternetLineEndings
 ]
 
 { #category : #'expected values' }
@@ -107,7 +113,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 		#type : #git,
 		#repositoryUrl : ''git://git@github.com/foo/bar.git''
 	}
-}'
+}' withInternetLineEndings 
 ]
 
 { #category : #tests }
@@ -118,7 +124,7 @@ PBSerializedProjectV1Test >> testCanDeserializeProjectWithDependencies [
 	
 	self
 		assert: project dependencies size
-		equals: 5.
+		equals: 3.
 		
 	expectedDependencies := (PharoLauncherProject new 
 		buildProject; 
