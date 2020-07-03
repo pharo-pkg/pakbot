@@ -40,10 +40,10 @@ PBParametrizedConflictTest >> createConfiguration: aVersion [
 { #category : #utilities }
 PBParametrizedConflictTest >> createInstalledBaseline: aString [
 
-	| conf |
-	conf := self createBaseline: aString.
-	(PBMetacelloBaselineProject fromProjectDependency: conf) basicLoad.
-	^ conf
+	| baseline |
+	baseline := self createBaseline: aString.
+	(PBMetacelloBaselineProject fromProjectDependency: baseline) basicLoad.
+	^ baseline
 ]
 
 { #category : #utilities }
@@ -88,8 +88,7 @@ PBParametrizedConflictTest >> expectedConflicts: anObject [
 { #category : #utilities }
 PBParametrizedConflictTest >> installBaseline: aString [
 
-	self createInstalledBaseline: aString.
-	^ nil
+	^ self createInstalledBaseline: aString
 ]
 
 { #category : #utilities }
