@@ -22,6 +22,7 @@ PBVcsSerializedProjectV1Test >> counterUiProject [
 
 	project := (PBProject named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
+		repository: PBGitMemoryRepository new;
 		addExternalCargoProject: dependency;
 		registry: PBPackageRegistry new;
 		yourself.
@@ -138,7 +139,7 @@ PBVcsSerializedProjectV1Test >> stonStringForExampleProject [
 			#description : ''A simple ongoing package unit.''
 		}
 	]
-}'
+}' withInternetLineEndings
 ]
 
 { #category : #'test data' }
