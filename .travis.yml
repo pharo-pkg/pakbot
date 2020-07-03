@@ -12,13 +12,14 @@ os:
 smalltalk:
   - Pharo64-9.0
   
-# default config: .smalltalk.ston (client)
-#matrix:
-#  include: 
-#    - smalltalk_config: .server.ston
-#    - smalltalk_config: .failingTests.ston
-#  allow_failures: 
-#    - smalltalk_config: .failingTests.ston
+matrix:
+  include: 
+    - smalltlak_config: .client.ston 
+    - smalltalk_config: .server.ston
+    - smalltalk_config: .failingTests.ston
+  allow_failures: 
+    - smalltalk_config: .server.ston
+    - smalltalk_config: .failingTests.ston
 
 # configuration
 before_script:
