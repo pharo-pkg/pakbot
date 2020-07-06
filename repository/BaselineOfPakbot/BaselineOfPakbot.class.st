@@ -68,9 +68,14 @@ BaselineOfPakbot >> baseline: spec [
 				group: 'server'
 					with:
 					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests-client' with: #('client' 'CargoPackageManager-Tests' 
-					'utils' 'CargoPackageManager-Utils-Tests' 
-					'CargoPackageManager-FailingTests' 'CargoPackageManager-Utils-FailingTests' 					'CargoPackageManager-IntegrationTests'
+				group: 'tests-client' with: 
+					#('client' 
+					'CargoPackageManager-Tests' 
+					'utils' 
+					'CargoPackageManager-Utils-Tests' 
+					'CargoPackageManager-FailingTests' 
+					'CargoPackageManager-Utils-FailingTests'
+					'CargoPackageManager-IntegrationTests'
 					'CargoPackageManager-UI-Tests' 
 					'PakbotPackageManager-Repository-Tests');
 				group: 'tests-server' with: #('server' 'tests-client');
