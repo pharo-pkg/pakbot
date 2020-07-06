@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'packageRepository'
 	],
-	#category : #'CargoPackageManager-IntegrationTests'
+	#category : #'PakbotPackageManager-Repository-IntegrationTests'
 }
 
 { #category : #tests }
