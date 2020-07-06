@@ -5,6 +5,19 @@ Class {
 }
 
 { #category : #tests }
+PBGitRepositoryCreatorTest >> testCanCreateLocalDirectory [
+	| tempFolder |
+	tempFolder := FileLocator temp	/
+			('pharo-tests-PBGitRepositoryCreatorTest-', DateAndTime now asFileNameCompatibleString).
+	PBGitRepository newLocalRepositoryIn: tempFolder.
+	
+	self assert: tempFolder exists.
+	self assert: ( tempFolder / '.git' ) isDirectory.
+	
+	tempFolder ensureDeleteAll.
+]
+
+{ #category : #tests }
 PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 
 	repository := PBGitRepositoryCreator new

@@ -31,7 +31,16 @@ PBGitRepository class >> fromDictionary: aDictionary [
 		create.
 ]
 
-{ #category : #'instance-creation' }
+{ #category : #'instance creation' }
+PBGitRepository class >> newLocalRepositoryIn: aFileReference [
+
+	^ PBGitRepositoryCreator new
+		url: 'file://', aFileReference fullName;
+		location: aFileReference;
+		createAndClone
+]
+
+{ #category : #'instance creation' }
 PBGitRepository class >> repository: anIceLibgitRepository [ 
 	
 	^ self new
@@ -66,6 +75,11 @@ PBGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
 ]
 
+{ #category : #actions }
+PBGitRepository >> createTag: aString [ 
+	self iceRepository createTag: aString.
+]
+
 { #category : #querying }
 PBGitRepository >> currentCommitId [
 	^ iceRepository headCommit id
@@ -73,7 +87,6 @@ PBGitRepository >> currentCommitId [
 
 { #category : #actions }
 PBGitRepository >> ensureCloned [
-	| commitish |
 	self isCloned
 		ifFalse: [ iceRepository := iceRepository createRepository ].
 
@@ -82,7 +95,9 @@ PBGitRepository >> ensureCloned [
 		
 	[ iceRepository register ]
 		on: IceDuplicatedRepository 
-		do: [ "repository already added to Iceberg. Ignore the warning and do not add it again." ] 
+		do: [ "repository already added to Iceberg. Ignore the warning and do not add it again." ].
+		
+	^ self
 ]
 
 { #category : #private }
@@ -109,6 +124,11 @@ PBGitRepository >> fetchVersion: aString [
 		fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project
+]
+
+{ #category : #testing }
+PBGitRepository >> hasTagNamed: aString [ 
+	^ self iceRepository hasTagNamed: aString
 ]
 
 { #category : #accessing }

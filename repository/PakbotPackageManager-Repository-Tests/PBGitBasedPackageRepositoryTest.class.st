@@ -1,6 +1,10 @@
 Class {
 	#name : #PBGitBasedPackageRepositoryTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'tempFolder',
+		'tempFolder2'
+	],
 	#category : #'PakbotPackageManager-Repository-Tests'
 }
 
@@ -8,25 +12,38 @@ Class {
 PBGitBasedPackageRepositoryTest >> newLocalPBGitBasedPackageRepository [
 	| repository |
 	repository := PBGitBasedPackageRepository
-		newLocalRepositoryIn: self tempFolder.
+		newEmptyLocalRepositoryIn: tempFolder.
 	(repository iceRepository getConfigurationGlobal: false)
 		username: 'unit tester';
 		email: 'test@nowhere.com'.
 	^ repository
 ]
 
-{ #category : #utils }
-PBGitBasedPackageRepositoryTest >> tempFolder [
-	^ FileLocator temp	/
-			('pharo-tests-PBGitBasedPkgRepo-', DateAndTime now asFileNameCompatibleString).
+{ #category : #running }
+PBGitBasedPackageRepositoryTest >> setUp [
+	| baseFolderName |
+	super setUp.
+	
+	baseFolderName := 'pharo-tests-PBGitBasedPkgRepo-', DateAndTime now asFileNameCompatibleString.
+	tempFolder := FileLocator temp	/ baseFolderName.
+	tempFolder2 := FileLocator temp	/ (baseFolderName , '-2').
 
 ]
 
+{ #category : #running }
+PBGitBasedPackageRepositoryTest >> tearDown [ 
+	tempFolder ifExists: [ :folder | folder ensureDeleteAll ].
+	tempFolder2 ifExists: [ :folder | folder ensureDeleteAll ].
+	
+	super tearDown.
+]
+
 { #category : #tests }
-PBGitBasedPackageRepositoryTest >> testCanCreateALocalRepository [
+PBGitBasedPackageRepositoryTest >> testCanCreateALocalCloneOfPackageRepository [
 	| repository |
 	
-	repository := PBGitBasedPackageRepository newLocalRepositoryIn: self tempFolder.
+	repository := PBGitBasedPackageRepository newLocalRepositoryIn: tempFolder.
+	(repository iceRepository remoteBranchNamed: 'origin/empty-repo') checkout.
 	
 	self assert: repository packages size equals: 0
 ]
@@ -80,36 +97,38 @@ PBGitBasedPackageRepositoryTest >> testCanPublishAProject [
 ]
 
 { #category : #tests }
-PBGitBasedPackageRepositoryTest >> testCannotPublishedIfTagAlreadyExists [
+PBGitBasedPackageRepositoryTest >> testCannotPublishedIfAlreadyPublished [
 	| repository project |
 	repository := self newLocalPBGitBasedPackageRepository.
-	repository iceRepository createTag: '0.1'.
 	project := PBProject example.
 
 	project
 		registry: PBPackageRegistry new;
 		repository: PBGitRepository example;
 		version: '0.1' asSemanticVersion.
+	project publishOn: repository.
 	
 	self
 		should: [ project publishOn: repository ]
 		raise: PBPublicationError
-		whoseDescriptionIncludes: ' has already been tagged'
-		description: 'Cannot publish a project if version is already tagged'
+		whoseDescriptionIncludes: ' has already been published'
+		description: 'Cannot publish a project if version is already published'
 	
 ]
 
 { #category : #tests }
 PBGitBasedPackageRepositoryTest >> testPublishedProjectIsTagged [
-	| repository project |
-	repository := self newLocalPBGitBasedPackageRepository.
+	| packageRepository project repository |
+	packageRepository := self newLocalPBGitBasedPackageRepository.
 	project := PBProject example.
-	
+	repository := (PBGitRepository newLocalRepositoryIn: tempFolder2) ensureCloned.
+	repository iceRepository commitWithMessage: 'initial commit'.
+
 	project
 		registry: PBPackageRegistry new;
-		repository: PBGitRepository example;
+		repository: repository;
 		version: '0.1' asSemanticVersion;
-		publishOn: repository.
+		publishOn: packageRepository.
 		
 	self 
 		assert: project repository iceRepository tags size 

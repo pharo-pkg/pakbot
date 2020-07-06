@@ -19,6 +19,14 @@ PBGitBasedPackageRepository class >> defaultGitUrl [
 ]
 
 { #category : #'instance creation' }
+PBGitBasedPackageRepository class >> newEmptyLocalRepositoryIn: aFileReference [ 
+	^ self basicNew 
+		root: aFileReference;
+		initializeEmptyRepository;
+		yourself
+]
+
+{ #category : #'instance creation' }
 PBGitBasedPackageRepository class >> newLocalRepositoryIn: aFileReference [ 
 	^ self basicNew 
 		root: aFileReference;
@@ -43,6 +51,15 @@ PBGitBasedPackageRepository >> initialize [
 		location: root;
 		createAndClone.
 	root := self workingCopy fileSystem
+]
+
+{ #category : #initialization }
+PBGitBasedPackageRepository >> initializeEmptyRepository [
+	repository := PBGitRepositoryCreator new
+		url: 'file://', root fullName;
+		location: root;
+		createAndClone.
+	root := self workingCopy fileSystem.
 ]
 
 { #category : #saving }

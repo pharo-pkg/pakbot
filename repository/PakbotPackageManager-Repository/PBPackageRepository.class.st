@@ -54,7 +54,7 @@ PBPackageRepository >> saveProject: aPBProject [
 	| file fileContent |
 	file := self fileForPackage: aPBProject.
 	file exists
-		ifTrue: [ CGOPackageVersionAlreadyExistsError signal: aPBProject name , ' already defined'.
+		ifTrue: [ PBPublicationError signal: aPBProject name , ' has already been published'.
 				^ self. ].
 	aPBProject isFixedVersion
 		ifFalse: [ PBPublicationError signal: aPBProject name, ' ' , aPBProject version asString, ' is not a fixed version.'.

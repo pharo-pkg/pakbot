@@ -148,7 +148,7 @@ PBGitRepositoryCreator >> subdirectory: aString [
 { #category : #setting }
 PBGitRepositoryCreator >> url: aStringOrUrl [
 
-	url := aStringOrUrl asString
+	url := aStringOrUrl ifNotNil: [ aStringOrUrl asString ]
 ]
 
 { #category : #setting }

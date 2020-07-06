@@ -221,6 +221,13 @@ PBProject >> dependsOnProject: aPBProject [
 	^ self resolve includesResolvedTarget: aPBProject 
 ]
 
+{ #category : #publishing }
+PBProject >> ensureIsTagged [
+	"Ensure project version is already tagged, else tag the current version in the git repository."
+	(self repository hasTagNamed: self version asString)
+		ifFalse: [ self repository createTag: self version asString ]
+]
+
 { #category : #accessing }
 PBProject >> externalProjects [
 	^ externalProjects
@@ -500,7 +507,9 @@ PBProject >> publish [
 
 { #category : #publishing }
 PBProject >> publishOn: aPackageRepository [
-	aPackageRepository saveProject: self
+	self ensureIsTagged.
+	aPackageRepository saveProject: self.
+
 ]
 
 { #category : #accessing }
