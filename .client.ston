@@ -5,7 +5,7 @@ SmalltalkCISpec {
       #baseline : 'Pakbot',
       #directory : 'repository',
       #platforms : [ #pharo ],
-      #load : ['CargoPackageManager-IntegrationTests'],
+      #load : ['tests-client-pharo9'],
       #onConflict : #useLoaded
     }
   ],
