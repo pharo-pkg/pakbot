@@ -140,7 +140,7 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 		location: self iceRepositoryLocation;
 		create.
 		
-	self deny: repository iceRepository location exists.
+	self deny: self iceRepositoryLocation exists.
 	
 	repository ensureCloned.
 	

@@ -2,6 +2,8 @@
 I represent a repository containing source code hosted on a Git server.
 I hold a reference to an Iceberg repository to use it for some git operations.
 
+- iceRepositoryCreator: In soma cases, you do not want to clone the git repository. It is not possible with an IceRepository always refering to a cloned git repository. To workaround that, we keep a reference to an IceRepositoryCreator that keeps all data needed to create the IceRepository. IceRepository will be nil until we need to call it, and so clone the repository. 
+- iceRepository: a reference to the Iceberg repository to use to get data
 - version : I can refer to a specific branch, tag or commit hash of the given git repository. If not, default version will be 'master.
 - repositoryUrl: I also keep the origin url as it can be changed so that Iceberg accepts it. It is the same URL but with a different form (e.g. github://demarey/cargo:master vs git@gihub.com:demarey/cargo.git
 
@@ -11,6 +13,7 @@ Class {
 	#name : #PBGitRepository,
 	#superclass : #PBSourceRepository,
 	#instVars : [
+		'iceRepositoryCreator',
 		'iceRepository',
 		'version',
 		'subdirectory'
@@ -65,9 +68,16 @@ PBGitRepository class >> url: anUrlOrString repository: anIceRepository version:
 		yourself
 ]
 
+{ #category : #'instance creation' }
+PBGitRepository class >> url: anUrlOrString repositoryCreator: anIceRepositoryCreator version: aCommitishString [
+	^ self basicNew 
+		initializeWithUrl: anUrlOrString repositoryCreator: anIceRepositoryCreator andVersion: aCommitishString;
+		yourself
+]
+
 { #category : #updating }
 PBGitRepository >> addPackageNamed: aPackageName [
-	^ iceRepository workingCopy addPackageNamed: aPackageName
+	^ self iceRepository workingCopy addPackageNamed: aPackageName
 ]
 
 { #category : #accessing }
@@ -82,14 +92,14 @@ PBGitRepository >> createTag: aString [
 
 { #category : #querying }
 PBGitRepository >> currentCommitId [
-	^ iceRepository headCommit id
+	^ self iceRepository headCommit id
 ]
 
 { #category : #actions }
 PBGitRepository >> ensureCloned [
 	self isCloned
-		ifFalse: [ iceRepository := iceRepository createRepository ].
-
+		ifFalse: [ iceRepository := iceRepositoryCreator createRepository.
+					iceRepositoryCreator := nil. ].
 
 	version isEmptyOrNil ifFalse: [ (iceRepository lookupCommit: version) checkout ].
 		
@@ -116,10 +126,9 @@ PBGitRepository >> fetchHeadVersion [
 { #category : #fetching }
 PBGitRepository >> fetchVersion: aString [
 	| commitish project |
-	self ensureCloned.
 	commitish := aString
 		ifEmpty: [ self headCommit ]
-		ifNotEmpty: [ iceRepository revparse: aString ].
+		ifNotEmpty: [ self iceRepository revparse: aString ].
 	project := PBProject
 		fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
@@ -133,17 +142,17 @@ PBGitRepository >> hasTagNamed: aString [
 
 { #category : #accessing }
 PBGitRepository >> headCommit [
-	^ iceRepository headCommit
+	^ self iceRepository headCommit
 ]
 
 { #category : #accessing }
 PBGitRepository >> iceRepository [
-	^ iceRepository
+	^ iceRepository ifNil: [ self ensureCloned. iceRepository ]
 ]
 
 { #category : #querying }
 PBGitRepository >> iceSavedPackageVersionFor: packageName [
-	^ iceRepository workingCopy versionFor: packageName
+	^ self iceRepository workingCopy versionFor: packageName
 ]
 
 { #category : #initialization }
@@ -164,9 +173,22 @@ PBGitRepository >> initializeWithUrl: anUrlOrString repository: anIceRepository 
 	version := aCommitishString
 ]
 
+{ #category : #initialization }
+PBGitRepository >> initializeWithUrl: anUrlOrString repositoryCreator: anIceRepositoryCreator [
+	self initialize.
+	repositoryUrl := anUrlOrString.
+	iceRepositoryCreator := anIceRepositoryCreator
+]
+
+{ #category : #initialization }
+PBGitRepository >> initializeWithUrl: anUrlOrString repositoryCreator: anIceRepositoryCreator andVersion: aCommitishString [
+	self initializeWithUrl: anUrlOrString repositoryCreator: anIceRepositoryCreator.
+	version := aCommitishString
+]
+
 { #category : #private }
 PBGitRepository >> isBranch: commitish [
-	^ iceRepository allBranches
+	^ self iceRepository allBranches
 		anySatisfy: [ :branch | branch name = commitish or: [ branch name endsWith: '/' , commitish ] ]
 ]
 
@@ -175,40 +197,37 @@ PBGitRepository >> isCloned [
 	self isIceRepositoryValid
 		ifTrue: [ ^ true ].
 	(self isRepositoryAlreadyClonedInDefaultLocation or: [ self isRepositoryAlreadyCloned ])
-		ifTrue: [ iceRepository := iceRepository addLocalRepository.
+		ifTrue: [ iceRepository := iceRepositoryCreator addLocalRepository.
 			^ true ].
 	^ false
 ]
 
 { #category : #private }
 PBGitRepository >> isIceRepositoryValid [
-	^ (iceRepository isKindOf: IceRepository)
-		and: [ iceRepository isValid ]
+	^ iceRepository isNotNil	and: [ iceRepository isValid ]
 ]
 
 { #category : #private }
 PBGitRepository >> isRepositoryAlreadyCloned [
-	^ iceRepository location isNotNil
-		and: [ iceRepository location exists
-				and: [ iceRepository location hasChildren ] ]
+	^ iceRepositoryCreator location isNotNil
+		and: [ iceRepositoryCreator location exists
+				and: [ iceRepositoryCreator location hasChildren ] ]
 ]
 
 { #category : #private }
 PBGitRepository >> isRepositoryAlreadyClonedInDefaultLocation [
-	^ iceRepository location isNil
-		and: [ iceRepository defaultLocation exists
-				and: [ iceRepository defaultLocation hasChildren ] ]
+	^ iceRepositoryCreator location isNil
+		and: [ iceRepositoryCreator defaultLocation exists
+				and: [ iceRepositoryCreator defaultLocation hasChildren ] ]
 ]
 
 { #category : #loading }
 PBGitRepository >> loadPackageNamed: aPackageName [
-	self ensureCloned.
-	iceRepository workingCopy loadPackageNamed: aPackageName
+	self iceRepository workingCopy loadPackageNamed: aPackageName
 ]
 
 { #category : #querying }
 PBGitRepository >> mcVersionFor: aPackageVersion [
-	self ensureCloned.
 	^ (self iceSavedPackageVersionFor: aPackageVersion packageName) mcVersion
 ]
 
@@ -221,7 +240,7 @@ PBGitRepository >> metadataStringFor: aPackageUnit [
 { #category : #fetching }
 PBGitRepository >> project [
 	| iceProject |
-	iceProject := iceRepository project.
+	iceProject := self iceRepository project.
 	^ iceProject isUnborn
 		ifTrue: [ PBProjectMetadataNotFound signal ]
 		ifFalse: [ iceProject pakbotProject ]
@@ -230,7 +249,7 @@ PBGitRepository >> project [
 { #category : #configuring }
 PBGitRepository >> project: aPBIcebergProject [
 	"Used to set the Pakbot Project when creating a new project."
-	iceRepository workingCopy basicSetProject: aPBIcebergProject.
+	self iceRepository workingCopy basicSetProject: aPBIcebergProject.
 
 
 ]
@@ -242,9 +261,8 @@ PBGitRepository >> projectMetadataPath [
 
 { #category : #fetching }
 PBGitRepository >> projectMetadataStonString [
-	self ensureCloned.
 	
-	^ (iceRepository headCommit fileSystem / self projectMetadataPath) contents
+	^ (self iceRepository headCommit fileSystem / self projectMetadataPath) contents
 ]
 
 { #category : #accessing }
@@ -291,7 +309,7 @@ PBGitRepository >> stonOn: stonWriter [
 
 { #category : #accessing }
 PBGitRepository >> subdirectory [
-	^ iceRepository subdirectory
+	^ self iceRepository subdirectory
 ]
 
 { #category : #accessing }

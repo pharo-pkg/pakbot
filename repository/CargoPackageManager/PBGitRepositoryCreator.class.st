@@ -1,5 +1,5 @@
 "
-Builder to create IceRepository objetcs.
+Builder to create IceRepository objects.
 
 You can use it to set:
 - git url
@@ -80,15 +80,15 @@ PBGitRepositoryCreator >> commitishFrom: anUrl [
 
 { #category : #building }
 PBGitRepositoryCreator >> create [
-	| iceRepository |
-	iceRepository := IceRepositoryCreator new 
+	| creator |
+	creator := IceRepositoryCreator new 
 			subdirectory: subdirectory;
-			location: location";
-			To fix: iceRepository".
-	url ifNotNil: [ iceRepository addRemote: url ].
+			location: location;
+			yourself.
+	url ifNotNil: [ creator addRemote: url ].
 	^ PBGitRepository 
 		url: url
-		repository: iceRepository
+		repositoryCreator: creator
 		version: version
 ]
 

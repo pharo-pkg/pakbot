@@ -120,7 +120,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished 
 		
 	self
 		should: [ project publishOn: repository ]
-		raise: CGOPackageVersionAlreadyExistsError
+		raise: PBPublicationError
 ]
 
 { #category : #tests }
@@ -146,11 +146,14 @@ PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublica
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
 	project := PBProject example.
 	project 
-		registry: PBPackageRegistry new.
+		registry: PBPackageRegistry new;
+		repository: 	PBGitRepository example.
 	
 	self 
 		should: [ project publishOn: repository ]
-		raise: PBError.
+		raise: PBPublicationError
+		whoseDescriptionIncludes: 'is not a fixed version.'
+		description: 'No error signaled when publishing a project with no fixed version'.
 		
 	self deny: (repository fileForPackageNamed: project name version: project version asString) exists
 

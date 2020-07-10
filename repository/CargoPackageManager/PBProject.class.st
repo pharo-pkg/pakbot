@@ -507,6 +507,7 @@ PBProject >> publish [
 
 { #category : #publishing }
 PBProject >> publishOn: aPackageRepository [
+	self hasRepository ifFalse: [ PBError signal: 'Cannot publish a Project with no repository defined!' ].
 	self ensureIsTagged.
 	aPackageRepository saveProject: self.
 

@@ -11,6 +11,11 @@ Class {
 	#category : #'CargoPackageManager-Tests-Model'
 }
 
+{ #category : #accessing }
+PBGitMemoryRepository class >> type [
+	^ #memory
+]
+
 { #category : #updating }
 PBGitMemoryRepository >> addPackageNamed: aPackageName [
 	packages add: aPackageName

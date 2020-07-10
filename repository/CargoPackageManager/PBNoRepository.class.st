@@ -7,6 +7,11 @@ Class {
 	#category : #'CargoPackageManager-Loading'
 }
 
+{ #category : #accessing }
+PBNoRepository class >> type [
+	^ #'NOTYPE'
+]
+
 { #category : #testing }
 PBNoRepository >> isValidRepository [
 	
