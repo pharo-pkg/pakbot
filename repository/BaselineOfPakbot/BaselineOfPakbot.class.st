@@ -38,7 +38,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'PakbotPackageManager-Repository-Tests'
 					with: [ spec requires: #('PakbotPackageManager-Repository') ];
 				package: #'PakbotPackageManager-Repository-IntegrationTests'
-					with: [ spec requires: #('PakbotPackageManager-Repository') ];
+					with: [ spec requires: #('PakbotPackageManager-Repository' 'CargoPackageManager-Tests') ];
 					
 				package: #'CargoPackageManager-Repository'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' "'ZincHTTPComponents'") ];
