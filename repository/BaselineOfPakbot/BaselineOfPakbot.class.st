@@ -20,7 +20,7 @@ BaselineOfPakbot >> baseline: spec [
 	spec
 		for: #common
 		do: [ 
-			"self icetray: spec."
+			self icetray: spec.
 			self babyMock: spec.
 			self mooseAlgos: spec.
 			self voyage: spec.
@@ -52,7 +52,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
-				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
+				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];
 				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser') ];
 				package: #'CargoPackageManager-Calypso-Environment'
 					with: [ spec requires: #(CargoPackageManager) ];
