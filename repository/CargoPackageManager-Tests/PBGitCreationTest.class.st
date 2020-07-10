@@ -45,8 +45,9 @@ PBGitCreationTest >> tearDown [
 	IceCredentialsProvider providerType: iceCredentialsProviderBackup.
 	Iceberg remoteTypeSelector: oldRemoteTypeSelector.
 
-	"I know this is awful, but the CGOGitRepository is using IceRepository and IceRepositoryCreator as polymorphic (shhhhh..... they are not!)"
-	repository ifNotNil: [ repository iceRepository ifNotNil: [ :aRepositoryOrRepositoryCreator | (aRepositoryOrRepositoryCreator isKindOf: IceRepository) ifTrue: [ aRepositoryOrRepositoryCreator delete ] ] ].
+	repository ifNotNil: 
+		[ (repository instVarNamed: 'iceRepository') ifNotNil: "do not call the accessor that will force the repository clone"
+			[ :aRepository | aRepository delete ] ].
 	
 	iceRepositoryLocation ifNotNil: #ensureDeleteAll.
 ]

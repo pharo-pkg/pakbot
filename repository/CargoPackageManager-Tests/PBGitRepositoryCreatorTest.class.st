@@ -28,7 +28,7 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 		assert: repository class
 		equals: PBGitRepository.
 	self 
-		assert: repository iceRepository remote url
+		assert: repository iceRepositoryCreator remote url
 		equals: 'git@github.com:demarey/pharo-counter.git'
 ]
 
@@ -36,7 +36,7 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromHttpUrl [
 
 	repository := PBGitRepositoryCreator new
-		url: 'https://github.com/demarey/cargo.git';
+		url: 'https://github.com/demarey/pharo-counter.git';
 		version: 'master';
 		create.
 		
@@ -44,8 +44,8 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromHttpUrl [
 		assert: repository class 
 		equals: PBGitRepository.
 	self 
-		assert: repository iceRepository remote url
-		equals: 'https://github.com/demarey/cargo.git'
+		assert: repository iceRepositoryCreator remote url
+		equals: 'https://github.com/demarey/pharo-counter.git'
 ]
 
 { #category : #tests }
@@ -78,7 +78,7 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromSshUrl [
 		assert: repository class 
 		equals: PBGitRepository.
 	self 
-		assert: repository iceRepository remote url
+		assert: repository iceRepositoryCreator remote url
 		equals: 'git://git@github.com/demarey/pharo-counter.git'
 ]
 
