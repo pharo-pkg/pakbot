@@ -2,7 +2,6 @@ Class {
 	#name : #PBNewProjectPanelTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
-		'registry',
 		'project',
 		'panel',
 		'name',
@@ -18,12 +17,11 @@ Class {
 PBNewProjectPanelTest >> setUp [
 
 	super setUp.
-	registry := PBPackageRegistry new.
 	
 	panel := PBNewProjectPanel new.
 	editionPanel := panel projectPanel.
 	project := editionPanel loadableUnit.
-	editionPanel registry: registry.
+	editionPanel registry: testRegistry.
 	
 	name := 'aName'.
 	url := 'git@github.com:pharo-vcs/iceberg.git'.
@@ -52,7 +50,7 @@ PBNewProjectPanelTest >> testProjectIsNotInstalledBeforeAccept [
 	editionPanel versionInputField text: version.
 	editionPanel descriptionText text: description.
 	
-	self deny: (registry isProjectInstalled: project)
+	self deny: (testRegistry isProjectInstalled: project)
 
 ]
 
@@ -65,5 +63,5 @@ PBNewProjectPanelTest >> testProjectIsRegisteredAfterAccept [
 	
 	panel accept.
 	
-	self assert: (registry isProjectInstalled: project)
+	self assert: (testRegistry isProjectInstalled: project)
 ]
