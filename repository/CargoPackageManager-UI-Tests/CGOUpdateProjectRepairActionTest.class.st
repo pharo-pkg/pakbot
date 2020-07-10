@@ -20,7 +20,9 @@ CGOUpdateProjectRepairActionTest >> setUp [
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '2.0').
 
-	project importPackageNamed: #APackage.
+	project 
+		repository: PBGitMemoryRepository new;
+		importPackageNamed: #APackage.
 	project addDependency: dependencyToProject
 ]
 

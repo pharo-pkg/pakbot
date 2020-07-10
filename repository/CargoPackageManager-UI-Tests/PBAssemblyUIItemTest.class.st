@@ -19,6 +19,7 @@ PBAssemblyUIItemTest >> setUp [
 	super setUp.
 
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	assembly := project addAssemblyNamed: 'Assembly'.
 	package := project createPackageNamed: 'TestProject-Core'.
 	assembly addPackage: package

@@ -53,7 +53,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
 				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
-				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI') ];
+				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser') ];
 				package: #'CargoPackageManager-Calypso-Environment'
 					with: [ spec requires: #(CargoPackageManager) ];
 				package: #'CargoPackageManager-Calypso-Browser'

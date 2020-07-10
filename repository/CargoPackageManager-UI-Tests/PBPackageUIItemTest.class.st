@@ -18,6 +18,7 @@ PBPackageUIItemTest >> setUp [
 	super setUp.
 
 	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	loadedPackage := project createPackageNamed: 'TestProject-Loaded'.
 	notLoadedPackage := project newNotLoadedPackage: 'TestProject-NotLoaded'.	
 ]

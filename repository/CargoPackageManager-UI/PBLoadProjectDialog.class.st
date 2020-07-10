@@ -61,16 +61,13 @@ PBLoadProjectDialog >> initialExtent [
 
 { #category : #initialization }
 PBLoadProjectDialog >> initializeWidgets [
-	
 	optionsList := self newFastTable.
 	detailPanel := self newReadOnlyText.
 
-	optionsList widget 
+	optionsList widget
 		dataSource: self loadOptionsDataSource;
 		onAnnouncement: FTSelectionChanged send: #selectionChanged: to: self;
-		selectRowIndex: 1. 
-
-
+		selectIndex: 1
 ]
 
 { #category : #initialization }
@@ -103,11 +100,10 @@ PBLoadProjectDialog >> optionsList [
 
 { #category : #private }
 PBLoadProjectDialog >> selectedAction [
-
 	| selectedIndex |
-	selectedIndex := optionsList widget selectedRowIndex.
-	selectedIndex = 0 ifTrue: [ ^ nil ].	
-	^ optionsList widget dataSource elementAt: selectedIndex 
+	selectedIndex := optionsList widget selectedIndex.
+	selectedIndex = 0 ifTrue: [ ^ nil ].
+	^ optionsList widget dataSource elementAt: selectedIndex
 ]
 
 { #category : #private }

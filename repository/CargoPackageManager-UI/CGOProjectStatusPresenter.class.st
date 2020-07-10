@@ -27,7 +27,7 @@ CGOProjectStatusPresenter class >> defaultSpec [
 ]
 
 { #category : #specs }
-CGOProjectStatusPresenter class >> newOn: aProject owner: anOwner. [
+CGOProjectStatusPresenter class >> newOn: aProject owner: anOwner [.
 
 	^ self basicNew
 		project: aProject;

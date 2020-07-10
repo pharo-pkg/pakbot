@@ -24,7 +24,8 @@ PBProjectUIItemTest >> projectUIItem [
 PBProjectUIItemTest >> setUp [
 
 	super setUp.
-	testRegistry newProjectNamed: 'TestProject'.
+	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
 	projectUIItem := self findProject: 'TestProject'.	
 ]
 
