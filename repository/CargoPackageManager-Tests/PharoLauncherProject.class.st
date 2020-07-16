@@ -154,7 +154,7 @@ PharoLauncherProject >> removePackagesDependencies [
 PharoLauncherProject >> repository [
 	^ PBGitRepositoryCreator new
 			url: 'https://github.com/pharo-project/pharo-launcher.git';
-			version: 'development';
+			version: 'dev';
 			subdirectory: 'src';
 			create
 ]
