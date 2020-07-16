@@ -9,7 +9,8 @@ Class {
 		'version',
 		'description',
 		'importPanel',
-		'defaultRegistry'
+		'defaultRegistry',
+		'gitCredentials'
 	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
@@ -26,7 +27,11 @@ PBImportProjectFromGitTest >> setUp [
 		
 	name := #'PharoCounter'.
 	url := 'git@github.com:pharo-pkg/Pharo-Counter.git'.
-	description := 'A simple counter project. You can increment it, decrement it and get the value from the counter.'
+	description := 'A simple counter project. You can increment it, decrement it and get the value from the counter.'.
+	
+	"workaround. Cannot inherit from PBTestCaseWithGitCredentials"
+	gitCredentials := PBTestCaseWithGitCredentials new. 
+	gitCredentials setUp.
 ]
 
 { #category : #tests }
@@ -34,6 +39,7 @@ PBImportProjectFromGitTest >> tearDown [
 	super tearDown.
 	
 	PBPackageRegistry default: defaultRegistry.
+	gitCredentials tearDown.
 ]
 
 { #category : #tests }
