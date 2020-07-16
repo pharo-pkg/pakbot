@@ -1,6 +1,6 @@
 Class {
 	#name : #PBTagProjectCommandTest,
-	#superclass : #TestCase,
+	#superclass : #PBTestCaseWithGitCredentials,
 	#instVars : [
 		'location',
 		'projectName',
