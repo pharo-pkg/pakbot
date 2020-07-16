@@ -1,6 +1,6 @@
 Class {
 	#name : #PBGitBasedPackageRepositoryTest,
-	#superclass : #TestCase,
+	#superclass : #PBTestCaseWithGitCredentials,
 	#instVars : [
 		'tempFolder',
 		'tempFolder2'
