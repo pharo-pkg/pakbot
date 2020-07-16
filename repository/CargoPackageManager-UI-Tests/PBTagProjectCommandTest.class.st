@@ -18,7 +18,7 @@ PBTagProjectCommandTest >> setUp [
 	repositoryLocation := FileLocator temp / ('pharo-' , self class name , '-', DateAndTime now asFileNameCompatibleString).
 	repository := PBGitRepositoryCreator new
 		location: repositoryLocation;
-		url: 'git@github.com:pharo-pkg/pharo-counter.git';
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
 		create.
 ]
 
