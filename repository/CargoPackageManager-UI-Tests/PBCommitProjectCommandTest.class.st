@@ -27,7 +27,7 @@ PBCommitProjectCommandTest >> setUp [
 PBCommitProjectCommandTest >> setUpExistingRepository [
 	repository := PBGitRepositoryCreator new
 		location: repositoryLocation;
-		url: 'git@github.com:demarey/pharo-counter.git';
+		url: 'https://github.com/demarey/pharo-counter.git';
 		createAndClone.
 	project := PBProject fromRepository: repository.
 	repository project:
@@ -53,7 +53,8 @@ PBCommitProjectCommandTest >> setUpNewRepository [
 PBCommitProjectCommandTest >> tearDown [ 
 	super tearDown.
 	repository ifNotNil: [ :repo | repo iceRepository forget ].
-	presenterToDelete ifNotNil: [ presenterToDelete delete ]
+	presenterToDelete ifNotNil: [ presenterToDelete delete ].
+	repositoryLocation ensureDeleteAll.
 ]
 
 { #category : #tests }
