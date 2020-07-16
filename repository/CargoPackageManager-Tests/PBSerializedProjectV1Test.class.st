@@ -38,7 +38,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 	#repositoryUrl : {
 		#type : #git,
 		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
-		#version : ''development''
+		#version : ''dev''
 	}
 }' withInternetLineEndings
 ]
