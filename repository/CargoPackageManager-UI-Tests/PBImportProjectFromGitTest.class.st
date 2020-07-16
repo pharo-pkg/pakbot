@@ -26,7 +26,7 @@ PBImportProjectFromGitTest >> setUp [
 	importPanel iceErrorVisitor: IceErrorVisitorForTests new.
 		
 	name := #'PharoCounter'.
-	url := 'git@github.com:pharo-pkg/Pharo-Counter.git'.
+	url := 'https://github.com/pharo-pkg/pharo-counter.git'.
 	description := 'A simple counter project. You can increment it, decrement it and get the value from the counter.'.
 	
 	"workaround. Cannot inherit from PBTestCaseWithGitCredentials"
