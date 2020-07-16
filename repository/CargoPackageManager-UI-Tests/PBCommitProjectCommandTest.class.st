@@ -52,7 +52,7 @@ PBCommitProjectCommandTest >> setUpNewRepository [
 { #category : #running }
 PBCommitProjectCommandTest >> tearDown [ 
 	super tearDown.
-	repository iceRepository ifNotNil: [ :repo | repo forget ].
+	repository ifNotNil: [ :repo | repo iceRepository forget ].
 	presenterToDelete ifNotNil: [ presenterToDelete delete ]
 ]
 
