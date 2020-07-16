@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'repositoryList'
 	],
-	#category : #'CargoPackageManager-Calypso-Browser-Dialogs'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }
