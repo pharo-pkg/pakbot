@@ -82,8 +82,8 @@ BaselineOfPakbot >> baseline: spec [
 				group: 'tests-client-pharo9' with: 
 					#(CargoPackageManager 
 					'CargoPackageManager-Tests' 
-					"'utils' 
-					'CargoPackageManager-Utils-Tests' 
+					'utils' 
+					"'CargoPackageManager-Utils-Tests' 
 					'CargoPackageManager-FailingTests' 
 					'CargoPackageManager-Utils-FailingTests'"
 					'CargoPackageManager-IntegrationTests'

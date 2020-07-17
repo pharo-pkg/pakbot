@@ -1,8 +1,3 @@
-"
-Some tests could fail because some presenter are not garbage collected properly (weak reference?).
-Is so, you can run a garbage collect to have them working again:
-	3 timesRepeat: [ Smalltalk garbageCollect ]
-"
 Class {
 	#name : #PBCommitProjectCommandTest,
 	#superclass : #TestCase,
@@ -67,21 +62,13 @@ PBCommitProjectCommandTest >> testGivenAProjectWhenDeletingPackageInMetadataThen
 	command := PBCommitProjectCommand new
 		project: project;
 		yourself.
-	self
-		assert: IceTipCommitBrowser allInstances size isZero
-		description: 'Cannot run this test if a commit windows is already open'.
 		
-	command execute.
+	commitBrowser := command execute.
 	
-	self
-		assert: IceTipCommitBrowser allInstances size = 1
-		description: 'Error: got many commit windows! Only one expected'.
-	presenterToDelete := commitBrowser := IceTipCommitBrowser
-		allInstances first.
+	presenterToDelete := commitBrowser.
 	visitor := IceDiffListingVisitor new.
 	commitBrowser diffPanel selectedItems
-		do: [ :each | visitor visitTreeNode: each ].
-		
+		do: [ :each | visitor visitTreeNode: each ].		
 	self assert: visitor removals isEmpty.
 	packageModifications := visitor modifications.
 	self assert: packageModifications size equals: 1.
@@ -96,22 +83,13 @@ PBCommitProjectCommandTest >> testGivenNewProjectAndFreshlyCreatedRepositoryThen
 	self setUpNewRepository.
 	command := PBCommitProjectCommand new 
 		project: project;
-		yourself.
+		yourself.	
+			
+	commitBrowser := command execute.	
 		
-	self
-		assert: IceTipCommitBrowser allInstances size isZero
-		description: 'Cannot run this test if a commit windows is already open'.
-		
-	command execute.
-	
-	self
-		assert: IceTipCommitBrowser allInstances size = 1
-		description: 'Error: got many commit windows! Only one expected'.
-	presenterToDelete := commitBrowser := IceTipCommitBrowser allInstances first.
-	
+	presenterToDelete := commitBrowser.
 	visitor := IceDiffListingVisitor new.
 	commitBrowser diffPanel selectedItems do: [ :each | visitor visitTreeNode: each ].
-
 	self assert: visitor removals isEmpty.
 	self 
 		assert: visitor additions size 
@@ -131,20 +109,12 @@ PBCommitProjectCommandTest >> testGivenNewProjectAndRepositoryWhenAddingNewPacka
 	command := PBCommitProjectCommand new 
 		project: project;
 		yourself.		
-	self
-		assert: IceTipCommitBrowser allInstances size isZero
-		description: 'Cannot run this test if a commit windows is already open'.
-		
-	command execute.
+				
+	commitBrowser := command execute.
 	
-	self
-		assert: IceTipCommitBrowser allInstances size = 1
-		description: 'Error: got many commit windows! Only one expected'.
-	presenterToDelete := commitBrowser := IceTipCommitBrowser allInstances first.
-	
+	presenterToDelete := commitBrowser.
 	visitor := IceDiffListingVisitor new.
 	commitBrowser diffPanel selectedItems do: [ :each | visitor visitTreeNode: each ].
-
 	self assert: visitor removals isEmpty.
 	packageAdditions := visitor additions select: #isPackageDefinition.
 	self 
