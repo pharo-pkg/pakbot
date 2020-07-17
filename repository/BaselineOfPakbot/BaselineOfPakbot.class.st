@@ -79,17 +79,6 @@ BaselineOfPakbot >> baseline: spec [
 					'CargoPackageManager-UI-Tests' 
 					'PakbotPackageManager-Repository-Tests'
 					'PakbotPackageManager-Repository-IntegrationTests');
-				group: 'tests-client-pharo9' with: 
-					#(CargoPackageManager 
-					'CargoPackageManager-Tests' 
-					'utils' 
-					"'CargoPackageManager-Utils-Tests' 
-					'CargoPackageManager-FailingTests' 
-					'CargoPackageManager-Utils-FailingTests'"
-					'CargoPackageManager-IntegrationTests'
-					'CargoPackageManager-UI-Tests' 
-					'PakbotPackageManager-Repository-Tests'
-					'PakbotPackageManager-Repository-IntegrationTests');
 				group: 'tests-server' with: #('server' 'tests-client');
 				group: 'tests' with: #('tests-client' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
