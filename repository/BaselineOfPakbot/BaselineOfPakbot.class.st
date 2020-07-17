@@ -36,7 +36,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'PakbotPackageManager-Repository'
 					with: [ spec requires: #(CargoPackageManager) ];
 				package: #'PakbotPackageManager-Repository-Tests'
-					with: [ spec requires: #('PakbotPackageManager-Repository') ];
+					with: [ spec requires: #('PakbotPackageManager-Repository' 'CargoPackageManager-Tests') ];
 				package: #'PakbotPackageManager-Repository-IntegrationTests'
 					with: [ spec requires: #('PakbotPackageManager-Repository' 'CargoPackageManager-Tests') ];
 					
