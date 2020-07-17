@@ -1,8 +1,18 @@
 Class {
 	#name : #PBOpenNewRepositoryDialogActionTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'tempFolder',
+		'counterIceRepository'
+	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
+
+{ #category : #running }
+PBOpenNewRepositoryDialogActionTest >> tearDown [ 
+	tempFolder ifNotNil: [ tempFolder ensureDeleteAll ].
+	counterIceRepository ifNotNil: [ counterIceRepository forget ].
+]
 
 { #category : #tests }
 PBOpenNewRepositoryDialogActionTest >> testCanCreateNewProject [
@@ -34,16 +44,25 @@ PBOpenNewRepositoryDialogActionTest >> testCanCreateNewProject [
 
 { #category : #tests }
 PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
-	| presenter importRepositoryPresenter project iceRepository |
+	| presenter importRepositoryPresenter project iceRepository projectName |
 
-	project := PBProject named: ''.
+	projectName := 'pakbot-testCanImportProject'.
+	tempFolder := FileLocator temp / projectName.
+	counterIceRepository := (IceRepositoryCreator new 
+		location: tempFolder;
+		remote: (IceGitRemote url: 'https://github.com/pharo-pkg/pharo-counter.git');
+		createRepository)
+	register;
+	yourself. 
+	
+	project := PBProject named: projectName.
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
 	self 
 		assert: presenter selectedType class
 		equals: PBImportIcebergRepositoryPanel.
 		
 	importRepositoryPresenter := presenter selectedType.
-	iceRepository := importRepositoryPresenter repositoryList listItems first.
+	iceRepository := importRepositoryPresenter repositoryList listItems detect: [ :repo | repo name = projectName ].
 	importRepositoryPresenter repositoryList setSelectedItem: iceRepository.
 	
 	self deny: project repository isValidRepository.
@@ -58,4 +77,5 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 		assert: project repository iceRepository
 		equals: iceRepository.
 
+	tempFolder ensureDeleteAll.
 ]
