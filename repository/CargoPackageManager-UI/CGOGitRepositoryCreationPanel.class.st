@@ -15,7 +15,7 @@ Class {
 		'addLocalRepositoryButton',
 		'onNewRepositoryBlock'
 	],
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #specs }
@@ -37,7 +37,9 @@ CGOGitRepositoryCreationPanel class >> withNewRepositoryDo: aBlock [
 
 { #category : #actions }
 CGOGitRepositoryCreationPanel >> addLocalRepository [
-	IceImportLocalRepositoryModel new openWithSpec
+	self flag: 'TODO'.
+	"IceTipLocalRepositoryPanel ?"
+	#IceImportLocalRepositoryModel new openWithSpec
 ]
 
 { #category : #accessing }
@@ -47,7 +49,9 @@ CGOGitRepositoryCreationPanel >> addLocalRepositoryButton [
 
 { #category : #actions }
 CGOGitRepositoryCreationPanel >> cloneRepository [
-	IceCloneRepositoryModel new openWithSpec
+	self flag: 'TODO'.
+	"IceTipGitProviderRepositoryPanel?"
+	#IceCloneRepositoryModel new openWithSpec
 ]
 
 { #category : #accessing }
@@ -93,7 +97,7 @@ CGOGitRepositoryCreationPanel >> initializeWidgets [
 
 { #category : #actions }
 CGOGitRepositoryCreationPanel >> newRepository [
-	IceNewRepositoryModel new openWithSpec
+	IceTipNewRepositoryPanel new openWithSpec
 ]
 
 { #category : #accessing }
