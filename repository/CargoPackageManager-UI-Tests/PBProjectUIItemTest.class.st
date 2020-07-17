@@ -65,6 +65,7 @@ PBProjectUIItemTest >> testAddPackageCommand [
 PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommands [
 
 	| commands |
+	project repository: PBNoRepository new.
 	self openBrowser.
 	commands := self commandsOfItem: projectUIItem.
 
