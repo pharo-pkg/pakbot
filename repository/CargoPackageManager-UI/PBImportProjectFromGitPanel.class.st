@@ -39,7 +39,7 @@ PBImportProjectFromGitPanel >> accept [
 		githubUrl: repositoryUrlInputText text;
 		version: versionInputText text;
 		createAndClone ]
-		on: IceCloneError
+		on: IceCloneError, IceAuthenticationError
 		do: [ :error | 
 			error acceptError: self iceErrorVisitor.
 			^ nil ].

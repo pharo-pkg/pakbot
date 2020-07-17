@@ -45,12 +45,12 @@ PBImportProjectFromGitTest >> tearDown [
 { #category : #tests }
 PBImportProjectFromGitTest >> testCloneErrorIsCaptured [
 
-	url := 'git@github.com:pharo-pkg/unexisting-repo.git'.
+	url := 'https://github.com/pharo-pkg/unexisting-repo.git'.
 	importPanel repositoryUrlInputText text: url.
 	
 	self 
 		shouldnt: [ importPanel accept ]
-		raise: IceCloneError.
+		raise: IceCloneError, IceAuthenticationError.
 	
 	self assert: project isNil description: 'Expected nil project'.
 ]
