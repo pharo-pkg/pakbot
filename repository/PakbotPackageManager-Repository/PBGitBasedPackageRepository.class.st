@@ -15,7 +15,7 @@ Class {
 
 { #category : #initialization }
 PBGitBasedPackageRepository class >> defaultGitUrl [
-	^ 'git@github.com:pharo-pkg/project-repository.git'
+	^ 'https://github.com/pharo-pkg/project-repository.git'
 ]
 
 { #category : #'instance creation' }
