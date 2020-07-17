@@ -211,8 +211,7 @@ PBProjectResolutionTest >> testResolutionOfMetacelloConfigurationDependencyIsRes
 { #category : #'no-dependencies' }
 PBProjectResolutionTest >> testResolutionOfProjectIsResolutionRoot [
 
-	| testRegistry resolution projectOne |
-	testRegistry := PBPackageRegistry new.	
+	| resolution projectOne |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	resolution := projectOne resolve.
