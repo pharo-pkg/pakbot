@@ -14,6 +14,7 @@ PBProjectUnloadTest >> setUp [
 	project := testRegistry newProjectNamed: 'TestProject'.
 	project 
 		repository: PBGitMemoryRepository new;
+		version: '1.0';
 		createPackageNamed: 'TestProject-Pck1';
 		newNotLoadedPackage: 'TestProject-Pck2'.
 ]
@@ -32,7 +33,9 @@ PBProjectUnloadTest >> testAProjectToRemoveKnowsTheProjectsThatAffect [
 	| project2 project3 |
 
 	project2 := testRegistry newProjectNamed: 'TestProject2'.
+	project2 version: '1.2'.
 	project3 := testRegistry newProjectNamed: 'TestProject3'.
+	project3 version: '1.3'.
 	
 	project2 addDependency: (PBPakbotProjectDependency named: 'TestProject' version: project version ).
 	project3 addDependency: (PBPakbotProjectDependency named: 'TestProject2' version: project2 version ).	

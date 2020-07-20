@@ -64,9 +64,9 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoi
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
-	testRegistry newProjectNamed: 'ProjectTwo'.
+	(testRegistry newProjectNamed: 'ProjectTwo') version: '0.1'.
 	resolution := projectOne resolve.
 
 	"Since the project and its dependencies are already loaded and up to date,

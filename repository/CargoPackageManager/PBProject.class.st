@@ -285,7 +285,6 @@ PBProject >> importPackagesNamed: aCollection [
 PBProject >> initialize [
 	super initialize.
 	repository := PBNoRepository new.
-	version := '0.0.0-N/A' asSemanticVersion.
 	description := ''.
 ]
 
@@ -508,6 +507,7 @@ PBProject >> publish [
 { #category : #publishing }
 PBProject >> publishOn: aPackageRepository [
 	self hasRepository ifFalse: [ PBError signal: 'Cannot publish a Project with no repository defined!' ].
+	self version ifNil: [ PBError signal: 'Cannot publish a Project with no version defined!' ].
 	self ensureIsTagged.
 	aPackageRepository saveProject: self.
 

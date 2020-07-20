@@ -30,9 +30,10 @@ PBProjectResolutionTest >> testProjectResolutionWithCargoProjectDependenciesIncl
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	resolution := projectOne resolve.
 	
 	self assert: (resolution includesResolvedTarget: projectOne).
@@ -47,9 +48,10 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesInc
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	pakbotProject := PBPakbotProjectDependency
 		named: 'Counter'
 		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
@@ -70,9 +72,10 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloBaselineDep
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	baselineDependency := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
 		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
@@ -94,9 +97,10 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloConfigurati
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	configurationProject := PBMetacelloConfigurationProjectDependency 
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'

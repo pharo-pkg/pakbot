@@ -106,9 +106,10 @@ PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenc
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
 		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
@@ -137,9 +138,10 @@ PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloBaselineDependenc
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	baselineProjectV2 := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
 		repositoryUrl: 'github://pharo-pkg/PakbotTestExample'
@@ -168,9 +170,10 @@ PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDepe
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	configurationProject := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -199,9 +202,10 @@ PBProjectLoadingTest >> testProjectLoadingWithIndirectMetacelloConfigurationDepe
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	configurationProject := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
@@ -360,9 +364,10 @@ PBProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKe
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.1').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
+	projectTwo version: '0.1'.
 	projectOne load.
 	
 	self assert: projectOne isLoaded.
