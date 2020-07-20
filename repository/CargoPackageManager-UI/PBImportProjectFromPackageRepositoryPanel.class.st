@@ -115,9 +115,8 @@ PBImportProjectFromPackageRepositoryPanel >> repositoryUrlLabel [
 { #category : #accessing }
 PBImportProjectFromPackageRepositoryPanel >> selectedPackage [
 	| selectedIndex |
-	selectedIndex := packageTree widget selectedRowIndex.
+	selectedIndex := packageTree widget selectedIndex.
 	selectedIndex = 0 ifTrue: [ ^ nil ].
-	
 	^ packageTree widget dataSource elementAt: selectedIndex
 ]
 

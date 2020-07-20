@@ -3,12 +3,11 @@ Extension { #name : #PBGitRepository }
 { #category : #'*CargoPackageManager-UI' }
 PBGitRepository >> description [
 	
-	[ ^ iceRepository remote url ] "IceRepositoryCreator"
-		on: MessageNotUnderstood
-		do: [ iceRepository remotes 
-			ifEmpty: [ ^ 'No remote configured for this project' ] ].
+	iceRepositoryCreator ifNotNil: [ ^ iceRepositoryCreator remote url ].
 	
-	^ iceRepository remotes anyOne url
+	^ self iceRepository remotes 
+		ifEmpty: [ 'No remote configured for this project' ]
+		ifNotEmpty: [ :remotes | remotes anyOne url ]
 ]
 
 { #category : #'*CargoPackageManager-UI' }
