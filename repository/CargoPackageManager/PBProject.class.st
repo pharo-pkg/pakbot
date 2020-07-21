@@ -345,7 +345,7 @@ PBProject >> isEquivalentTo: anotherProject [
 
 { #category : #testing }
 PBProject >> isFixedVersion [
-	^ (version major = 0 and: [ version minor = 0 and: [ version patch = 0 ] ]) not
+	^ version notNil and: [ (version major = 0 and: [ version minor = 0 and: [ version patch = 0 ] ]) not ]
 ]
 
 { #category : #testing }
@@ -506,8 +506,8 @@ PBProject >> publish [
 
 { #category : #publishing }
 PBProject >> publishOn: aPackageRepository [
-	self hasRepository ifFalse: [ PBError signal: 'Cannot publish a Project with no repository defined!' ].
-	self version ifNil: [ PBError signal: 'Cannot publish a Project with no version defined!' ].
+	self hasRepository ifFalse: [ PBPublicationError signal: 'Cannot publish a Project with no repository defined!' ].
+	self version ifNil: [ PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
 	self ensureIsTagged.
 	aPackageRepository saveProject: self.
 

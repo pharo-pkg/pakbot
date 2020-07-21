@@ -152,7 +152,7 @@ PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublica
 	self 
 		should: [ project publishOn: repository ]
 		raise: PBPublicationError
-		whoseDescriptionIncludes: 'is not a fixed version.'
+		whoseDescriptionIncludes: 'no version defined!'
 		description: 'No error signaled when publishing a project with no fixed version'.
 		
 	self deny: (repository fileForPackageNamed: project name version: project version asString) exists
