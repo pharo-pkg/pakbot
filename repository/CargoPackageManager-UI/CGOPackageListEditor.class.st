@@ -156,10 +156,8 @@ CGOPackageListEditor >> selectedPackage [
 
 { #category : #initialization }
 CGOPackageListEditor >> selectionChanged: ann [
-	
-	removeButton enabled: ann newSelectedRowIndexes notEmpty.
-	editButton enabled: ann newSelectedRowIndexes notEmpty.
-
+	removeButton enabled: ann newSelectedIndexes notEmpty.
+	editButton enabled: ann newSelectedIndexes notEmpty
 ]
 
 { #category : #initialization }

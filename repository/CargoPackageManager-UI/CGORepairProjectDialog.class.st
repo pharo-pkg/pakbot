@@ -7,7 +7,7 @@ Class {
 		'detailPanel',
 		'optionsList'
 	],
-	#category : 'CargoPackageManager-UI-Repair'
+	#category : #'CargoPackageManager-UI-Repair'
 }
 
 { #category : #specs }
@@ -48,19 +48,16 @@ CGORepairProjectDialog >> initialExtent [
 
 { #category : #initialization }
 CGORepairProjectDialog >> initializeWidgets [
-	
 	reasonPanel := self newReadOnlyText.
 	optionsList := self newFastTable.
 	detailPanel := self newReadOnlyText.
-
+	
 	reasonPanel widget contentsWrapped: project problemLongDescription.
-
-	optionsList widget 
+	
+	optionsList widget
 		dataSource: self newActionsDataSource;
 		onAnnouncement: FTSelectionChanged send: #selectionChanged: to: self;
-		selectRowIndex: 1. 
-
-
+		selectIndex: 1
 ]
 
 { #category : #initialization }
@@ -98,12 +95,10 @@ CGORepairProjectDialog >> reasonPanel [
 
 { #category : #selection }
 CGORepairProjectDialog >> selectedAction [
-
 	| selectedIndex |
-	selectedIndex := optionsList widget selectedRowIndex.
-	selectedIndex = 0 ifTrue: [ ^ nil ].	
-	^ optionsList widget dataSource elementAt: selectedIndex 
-		
+	selectedIndex := optionsList widget selectedIndex.
+	selectedIndex = 0 ifTrue: [ ^ nil ].
+	^ optionsList widget dataSource elementAt: selectedIndex
 ]
 
 { #category : #selection }
