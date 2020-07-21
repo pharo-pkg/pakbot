@@ -25,7 +25,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 			#version : ''v1.2.1''
 		},
 		{
-			#configuration : #OSWinSubprocess,
+			#baseline : #OSWinSubprocess,
 			#url : ''https://github.com/pharo-contributions/OSWinSubprocess.git'',
 			#version : ''v1''
 		},

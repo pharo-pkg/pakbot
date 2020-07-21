@@ -54,7 +54,7 @@ PharoLauncherProject >> buildExternalProjectDependencies [
 			repositoryUrl: 'https://github.com/pharo-contributions/OSSubprocess.git'
 			version: 'v1.2.1').
 	project addDependency: 
-		(PBMetacelloConfigurationProjectDependency 
+		(PBMetacelloBaselineProjectDependency 
 			name: 'OSWinSubprocess'
 			repositoryUrl: 'https://github.com/pharo-contributions/OSWinSubprocess.git'
 			version: 'v1').
@@ -113,9 +113,10 @@ PharoLauncherProject >> buildProject [
     lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);
     lets you create new images from any template,
     automatically find and download the appropriate VM to launch your images.';
-		repository: "self buildRepository" PBNoRepository new;
+		repository: PBNoRepository new;
 		registry: self registry;
 		yourself.
+	self buildRepository.
 		
 	registry register: project.
 	^ project
