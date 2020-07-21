@@ -9,7 +9,7 @@ Class {
 		'provisions',
 		'platformRequirements'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #utility }
@@ -92,7 +92,11 @@ CGOPackageUnit >> platformRequirements [
 
 { #category : #printing }
 CGOPackageUnit >> printOn: aStream [
-	aStream << self name << '@' << self version asString << ' (unit)'
+	aStream 
+		<< self name 
+		<< '@' 
+		<< self version ifNil: [ 'N/A' ] ifNotNil: [ self version asString ]
+		<< ' (unit)'
 ]
 
 { #category : #testing }
