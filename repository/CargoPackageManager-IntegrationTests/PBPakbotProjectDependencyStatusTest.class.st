@@ -6,7 +6,7 @@ Class {
 
 { #category : #utils }
 PBPakbotProjectDependencyStatusTest >> createProjectDependency [
-	^ PBPakbotProjectDependency named: 'AnotherProject' version: '=0.0.0-N/A'
+	^ PBPakbotProjectDependency named: 'AnotherProject' version: '=0.1'
 		
 ]
 
@@ -15,7 +15,9 @@ PBPakbotProjectDependencyStatusTest >> installProject [
 	
 	| newProject |
 	newProject := PBProject named: 'AnotherProject'.
-	newProject repository: PBGitMemoryRepository new.
+	newProject 
+		repository: PBGitMemoryRepository new;
+		version: '0.1'.
 	testRegistry register: newProject.
 	newProject importPackageNamed: #AnotherPackage.
 ]

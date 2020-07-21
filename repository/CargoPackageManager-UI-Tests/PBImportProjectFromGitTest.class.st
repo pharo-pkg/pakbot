@@ -88,6 +88,6 @@ PBImportProjectFromGitTest >> testProjectIsFilledAfterAccept [
 	
 	self assert: project notNil description: 'Unexpected nil project'.
 	self assert: project name equals: name.
-	self assert: project version printString equals: '0.0.0-N/A'.
+	self assert: project version equals: nil.
 	self assert: project description equals: description.
 ]

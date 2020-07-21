@@ -43,17 +43,19 @@ CGOConflictDetectionTest >> testConflictingIndirectMetacelloDependenciesHasConfl
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '0.2').
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectTwo addDependency: (PBMetacelloConfigurationProjectDependency
-		name: 'CargoTestExample'
-		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '2.0').
+	projectTwo 
+		version: '0.2';
+		addDependency: (PBMetacelloConfigurationProjectDependency
+			name: 'CargoTestExample'
+			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+			version: '2.0').
 
 	self assert: projectOne resolve hasConflicts
 ]
@@ -64,7 +66,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesHasConfl
 	| project resolution configurationProjectV1 configurationProjectV2 |
 
 	project := testRegistry newProjectNamed: 'Test'.
-	testRegistry newProjectNamed: 'CargoTestExample'.
+	(testRegistry newProjectNamed: 'CargoTestExample') version: '0.3'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
@@ -73,7 +75,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesHasConfl
 
 	configurationProjectV2 := PBPakbotProjectDependency
 		named: 'CargoTestExample'
-		version: '=0.0.0-N/A'.
+		version: '=0.3'.
 
 	project addDependency: configurationProjectV1.
 	project addDependency: configurationProjectV2.	
@@ -88,7 +90,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesThenReso
 	| project resolution configurationProjectV1 configurationProjectV2 resolutionOfV1 resolutionOfV2 |
 
 	project := testRegistry newProjectNamed: 'Test'.
-	testRegistry newProjectNamed: 'CargoTestExample'.
+	(testRegistry newProjectNamed: 'CargoTestExample') version: '0.3'.
 	
 	configurationProjectV1 := PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
@@ -97,7 +99,7 @@ CGOConflictDetectionTest >> testConflictingMetacelloAndCargoDependenciesThenReso
 
 	configurationProjectV2 := PBPakbotProjectDependency
 		named: 'CargoTestExample'
-		version: '=0.0.0-N/A'.
+		version: '=0.3'.
 
 	project addDependency: configurationProjectV1.
 	project addDependency: configurationProjectV2.	
@@ -351,17 +353,19 @@ CGOConflictDetectionTest >> testNonConflictingIndirectMetacelloDependenciesHasNo
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	projectOne addDependency: (PBPakbotProjectDependency
 		named: 'ProjectTwo'
-		version: '=0.0.0-N/A').
+		version: '=0.2').
 	projectOne addDependency: (PBMetacelloConfigurationProjectDependency
 		name: 'CargoTestExample'
 		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
 		version: '1.0').
 		
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
-	projectTwo addDependency: (PBMetacelloConfigurationProjectDependency
-		name: 'CargoTestExample'
-		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '1.0').
+	projectTwo 
+		version: '0.2';
+		addDependency: (PBMetacelloConfigurationProjectDependency
+			name: 'CargoTestExample'
+			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+			version: '1.0').
 
 	self deny: projectOne resolve hasConflicts
 ]
