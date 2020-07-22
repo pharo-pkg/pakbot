@@ -6,8 +6,7 @@ Class {
 	#superclass : #PBProjectDependencyDeclaration,
 	#instVars : [
 		'url',
-		'version',
-		'name'
+		'version'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
@@ -147,16 +146,6 @@ PBMetacelloProjectDependency >> isMetacelloProjectDependency [
 { #category : #accessing }
 PBMetacelloProjectDependency >> metacelloProjectRegistry [
 	^ project registry metacelloProjectRegistry
-]
-
-{ #category : #accessing }
-PBMetacelloProjectDependency >> name [
-	^ name
-]
-
-{ #category : #printing }
-PBMetacelloProjectDependency >> printOn: aStream [
-	aStream << self class name << '(' << name << ')'
 ]
 
 { #category : #accessing }

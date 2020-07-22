@@ -9,7 +9,6 @@ Class {
 	#superclass : #PBProjectDependencyDeclaration,
 	#instVars : [
 		'repository',
-		'name',
 		'constraints'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
@@ -94,11 +93,6 @@ PBPakbotProjectDependency >> fetchFromScm [
 { #category : #intialization }
 PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
 	repository := aCGOGitRepository
-]
-
-{ #category : #accessing }
-PBPakbotProjectDependency >> name [
-	^ name
 ]
 
 { #category : #accessing }

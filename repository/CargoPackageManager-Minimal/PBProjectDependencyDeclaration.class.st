@@ -8,6 +8,9 @@ My subclasses contains external project dependencies on:
 Class {
 	#name : #PBProjectDependencyDeclaration,
 	#superclass : #CGOAbstractDependency,
+	#instVars : [
+		'name'
+	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
@@ -32,4 +35,14 @@ PBProjectDependencyDeclaration >> isResolvedBy: aResolution [
 PBProjectDependencyDeclaration >> isSameProjectAs: anotherProject [ 
 	
 	^ self name = anotherProject name
+]
+
+{ #category : #accessing }
+PBProjectDependencyDeclaration >> name [
+	^ name
+]
+
+{ #category : #printing }
+PBProjectDependencyDeclaration >> printOn: aStream [
+	aStream << 'a ' << self class name << '(' << name << ')'
 ]
