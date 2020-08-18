@@ -1,3 +1,11 @@
+"
+I'm a visitor for Metacello Baselines.
+I build a Pakbot project from the information I get from the baseline.
+The project will not be registered in the default registry but in a new one created for the context of this visitor.
+
+Usage:
+	self projectFor: BaselineOfPakbot.
+"
 Class {
 	#name : #PBBaselineVisitor,
 	#superclass : #Object,
@@ -5,8 +13,16 @@ Class {
 		'project',
 		'projectDependencyProperties'
 	],
-	#category : #CargoPackageManager
+	#category : #'CargoPackageManager-Metacello'
 }
+
+{ #category : #accessing }
+PBBaselineVisitor class >> projectFor: aBaselineOf [
+	| visitor |
+	visitor := self new. 
+	aBaselineOf new baseline: visitor.
+	^ visitor project
+]
 
 { #category : #visiting }
 PBBaselineVisitor >> baseline: aBaseline [

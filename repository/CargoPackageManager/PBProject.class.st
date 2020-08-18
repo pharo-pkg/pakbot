@@ -151,6 +151,12 @@ PBProject >> assemblies: aListOfPackageAssemblies [
 ]
 
 { #category : #accessing }
+PBProject >> assemblyNamed: aString [ 
+	
+	^ assemblies detect: [ :each | each name = aString ]
+]
+
+{ #category : #accessing }
 PBProject >> authors [
 	self flag: 'TODO'.
 	" Use libigt to get the result of this command?
