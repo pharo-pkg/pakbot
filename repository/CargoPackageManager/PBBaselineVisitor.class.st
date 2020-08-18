@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #visiting }
+PBBaselineVisitor >> baseline: aBaseline [
+	| projectName |
+	projectName := aBaseline class name allButFirst: 'BaselineOf' size.
+	project name: projectName.
+	aBaseline baseline: self
+]
+
+{ #category : #visiting }
 PBBaselineVisitor >> baseline: aName with: aBlockClosure [
 	projectDependencyProperties := Dictionary with: 'version' -> 'master'.
 	aBlockClosure value.
@@ -62,9 +70,21 @@ PBBaselineVisitor >> package: aName with: aBlockClosure [
 	self flag: 'TODO: handle dependencies'.
 ]
 
+{ #category : #visiting }
+PBBaselineVisitor >> postLoadDoIt: aString [ 
+	"ignore for now"
+]
+
 { #category : #accessing }
 PBBaselineVisitor >> project [
 	^ project
+]
+
+{ #category : #visiting }
+PBBaselineVisitor >> project: aString copyFrom: aString2 with: aBlockClosure [ 
+	self flag: #TODO.
+	"this should be done when resolving within a project is doable"
+	"ignore for now"
 ]
 
 { #category : #visiting }
