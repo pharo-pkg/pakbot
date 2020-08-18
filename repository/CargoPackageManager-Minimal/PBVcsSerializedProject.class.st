@@ -10,7 +10,7 @@ Class {
 
 { #category : #converting }
 PBVcsSerializedProject >> asOngoingPackage [
-	^ PBProject fromVcsSerializedProject: self
+	^ PBProjectVersion fromVcsSerializedProject: self
 ]
 
 { #category : #converting }
@@ -24,7 +24,7 @@ PBVcsSerializedProject >> asOngoingProject [
 		ifAbsent: [ PBError new 
 						signal: 'Cannot deserialize a Project with no name defined!' ].
 					
-	project := PBProject named: (dict at: #name).
+	project := PBProjectVersion named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
 		project packages: (self ongoingPackageUnitsFrom: units) ].

@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOSerializedProjectTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-FailingTests-Model-Serialization'
+	#category : #'CargoPackageManager-FailingTests-Model-Serialization'
 }
 
 { #category : #'test data' }
@@ -29,7 +29,7 @@ CGOSerializedProjectTest >> testFromSton [
 	
 	self
 		assert: project
-		equals: PBProject example asCargoProject.
+		equals: PBProjectVersion example asCargoProject.
 		
 	self assert: project authors isEmpty.
 	self 
@@ -54,7 +54,7 @@ CGOSerializedProjectTest >> testFromStonTargetClass [
 CGOSerializedProjectTest >> testStonOn [
 	| project |
 	
-	project := PBProject example asCargoProject asSerializableCargoProject.
+	project := PBProjectVersion example asCargoProject asSerializableCargoProject.
 	
 	self
 		assert: (CGOPackageVersionWriterV1 toStringPretty: project)

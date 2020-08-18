@@ -33,7 +33,7 @@ PBTagProjectCommandTest >> tearDown [
 PBTagProjectCommandTest >> testCanTagAProject [ 
 	| command tagPanel tagName currentCommit tagCommit |
 	
-	project := PBProject fromRepository: repository.
+	project := PBProjectVersion fromRepository: repository.
 	repository project:
 		(PBIcebergProject
 				onRepository: repository iceRepository
@@ -60,7 +60,7 @@ PBTagProjectCommandTest >> testCanTagAProjectWhoseRepositoryIsOnlyDeclared [
 	"test when the repository is not yet cloned"
 	| command tagPanel tagName tagCommit |
 	
-	project := PBProject named: 'Pharo-Counter'.
+	project := PBProjectVersion named: 'Pharo-Counter'.
 	project repository: repository.
 	command := PBTagProjectCommand new
 		project: project;

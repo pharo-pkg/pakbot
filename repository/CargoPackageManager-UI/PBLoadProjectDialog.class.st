@@ -29,7 +29,7 @@ PBLoadProjectDialog class >> defaultSpec [
 PBLoadProjectDialog class >> example [
 	<example>
 	| project |
-	project := PBProject example
+	project := PBProjectVersion example
 		assemblies: {PBAssembly example};
 		yourself.
 		

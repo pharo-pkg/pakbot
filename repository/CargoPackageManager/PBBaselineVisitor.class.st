@@ -66,7 +66,7 @@ PBBaselineVisitor >> group: aName with: aCollection [
 
 { #category : #initialization }
 PBBaselineVisitor >> initialize [
-	project := PBProject named: 'BaselineVisitorProject'.
+	project := PBProjectVersion named: 'BaselineVisitorProject'.
 	project registry: PBPackageRegistry new.
 ]
 

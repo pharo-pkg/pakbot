@@ -1,9 +1,10 @@
 "
-I represent a software project. I store basic metadata for the project.
-A Cargo project holds the list of assemblies (convenient and logical group of project packages) and virtual packages as well as the names of the package units (representing source code package) part of this project.
+I represent a version of a software project, e.g. Pakbot v1.0. 
+I store basic metadata for the project.
+A Pakbot project holds the list of assemblies (convenient and logical group of project packages) and virtual packages as well as the names of the package units (representing source code package) part of this project.
 "
 Class {
-	#name : #PBProject,
+	#name : #PBProjectVersion,
 	#superclass : #PBLoadableUnit,
 	#instVars : [
 		'assemblies',
@@ -18,7 +19,7 @@ Class {
 }
 
 { #category : #example }
-PBProject class >> example [
+PBProjectVersion class >> example [
 	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
 		packages: { PBPackage example };
@@ -26,7 +27,7 @@ PBProject class >> example [
 ]
 
 { #category : #'instance creation' }
-PBProject class >> for: aProjectName [
+PBProjectVersion class >> for: aProjectName [
 	
 	self deprecated: 'Please use #named: instead'
 		transformWith: '`@receiver for: `@statements1' 
@@ -36,7 +37,7 @@ PBProject class >> for: aProjectName [
 ]
 
 { #category : #'instance creation' }
-PBProject class >> fromRepository: aCGOSourceRepository [
+PBProjectVersion class >> fromRepository: aCGOSourceRepository [
 	| ongoing |
 	ongoing := self fromVcsStonString: aCGOSourceRepository projectMetadataStonString.
 	ongoing repository: aCGOSourceRepository.
@@ -44,7 +45,7 @@ PBProject class >> fromRepository: aCGOSourceRepository [
 ]
 
 { #category : #'instance creation' }
-PBProject class >> fromVcsSerializedProject: aVcsSerializedProject [
+PBProjectVersion class >> fromVcsSerializedProject: aVcsSerializedProject [
 	| ongoing |
 	ongoing := self basicNew
 		registry: PBPackageRegistry default;
@@ -54,26 +55,26 @@ PBProject class >> fromVcsSerializedProject: aVcsSerializedProject [
 ]
 
 { #category : #'instance creation' }
-PBProject class >> named: aProjectName [
+PBProjectVersion class >> named: aProjectName [
 	^ self basicNew
 		initializeWithProjectName: aProjectName;
 		yourself 
 ]
 
 { #category : #'instance creation' }
-PBProject class >> new [
+PBProjectVersion class >> new [
 
 	self error: 'Please use #named:'
 ]
 
 { #category : #comparing }
-PBProject >> = other [
+PBProjectVersion >> = other [
 	self species == other species ifFalse: [ ^ false ].
 	^ self name = other name
 ]
 
 { #category : #assemblies }
-PBProject >> addAssemblyNamed: aName [
+PBProjectVersion >> addAssemblyNamed: aName [
 	| assembly |
 	
 	assembly := PBAssembly 
@@ -89,7 +90,7 @@ PBProject >> addAssemblyNamed: aName [
 ]
 
 { #category : #dependencies }
-PBProject >> addDependency: aDependency [
+PBProjectVersion >> addDependency: aDependency [
 
 	dependencies add: aDependency.
 	aDependency project: self.
@@ -98,66 +99,66 @@ PBProject >> addDependency: aDependency [
 ]
 
 { #category : #updating }
-PBProject >> addExternalCargoProject: aCGOProjectDependencyDeclaration [ 
+PBProjectVersion >> addExternalCargoProject: aCGOProjectDependencyDeclaration [ 
 	externalProjects add: aCGOProjectDependencyDeclaration
 ]
 
 { #category : #dependencies }
-PBProject >> allDependencies [
+PBProjectVersion >> allDependencies [
 	^ dependencies , (packages flatCollect: #allDependencies) asOrderedCollection.
 ]
 
 { #category : #dependencies }
-PBProject >> announceChangeInDependencies [
+PBProjectVersion >> announceChangeInDependencies [
 	CGODependenciesChanged announceOnProject: self
 ]
 
 { #category : #packages }
-PBProject >> announceChanged [
+PBProjectVersion >> announceChanged [
 
 	CGOProjectPartsChanged announceOnProject: self.
 ]
 
 { #category : #converting }
-PBProject >> asCargoProject [
+PBProjectVersion >> asCargoProject [
 	^ CGOProject fromOngoing: self
 ]
 
 { #category : #converting }
-PBProject >> asOngoingPackage [
+PBProjectVersion >> asOngoingPackage [
 	^ self
 ]
 
 { #category : #converting }
-PBProject >> asSerializedPackage [
+PBProjectVersion >> asSerializedPackage [
 	"Package repository version of the project metadata (i.e. full metadata)"
 	^ PBSerializedProject from: self
 ]
 
 { #category : #converting }
-PBProject >> asVcsSerializedCargoProject [
+PBProjectVersion >> asVcsSerializedCargoProject [
 	"VCS version of the project metadata (i.e. minimum metadata)"
 	^ PBVcsSerializedProject from: self
 ]
 
 { #category : #accessing }
-PBProject >> assemblies [
+PBProjectVersion >> assemblies [
 	^ assemblies
 ]
 
 { #category : #updating }
-PBProject >> assemblies: aListOfPackageAssemblies [
+PBProjectVersion >> assemblies: aListOfPackageAssemblies [
 	assemblies := aListOfPackageAssemblies
 ]
 
 { #category : #accessing }
-PBProject >> assemblyNamed: aString [ 
+PBProjectVersion >> assemblyNamed: aString [ 
 	
 	^ assemblies detect: [ :each | each name = aString ]
 ]
 
 { #category : #accessing }
-PBProject >> authors [
+PBProjectVersion >> authors [
 	self flag: 'TODO'.
 	" Use libigt to get the result of this command?
 		git log 5c3843fd626b6ce88b74302ba9d2af6bc93904a9 --format='%aN' --reverse
@@ -166,24 +167,24 @@ PBProject >> authors [
 ]
 
 { #category : #'private-loading' }
-PBProject >> basicLoad [
+PBProjectVersion >> basicLoad [
 	registry registerProject: self.
 	self packageUnits do: #basicLoad.
 	CGOProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #accessing }
-PBProject >> cargoProjectDependencies [
+PBProjectVersion >> cargoProjectDependencies [
 	^ externalProjects reject: #isMetacelloProjectDependency
 ]
 
 { #category : #accessing }
-PBProject >> children [
+PBProjectVersion >> children [
 	^ self packageUnits , self assemblies, self virtualPackages
 ]
 
 { #category : #packages }
-PBProject >> createPackageNamed: aString [ 
+PBProjectVersion >> createPackageNamed: aString [ 
 	
 	"We delegate to the system the creation of a package first.
 	This will fail if a package with that name already exists.
@@ -196,7 +197,7 @@ PBProject >> createPackageNamed: aString [
 ]
 
 { #category : #accessing }
-PBProject >> defaultAssembly [
+PBProjectVersion >> defaultAssembly [
 
 	^ (PBAssembly named: #default inProject: self)
 		parts: packages copy;
@@ -204,77 +205,77 @@ PBProject >> defaultAssembly [
 ]
 
 { #category : #'API-dependencies' }
-PBProject >> dependantProjects [
+PBProjectVersion >> dependantProjects [
 	
 	^ registry dependantProjectsOf: self.
 ]
 
 { #category : #dependencies }
-PBProject >> dependencies [
+PBProjectVersion >> dependencies [
 	
 	^ dependencies
 ]
 
 { #category : #dependencies }
-PBProject >> dependencies: aDependencyList [ 
+PBProjectVersion >> dependencies: aDependencyList [ 
 	dependencies := aDependencyList.
 	dependencies do: [ :dependency | dependency project: self ]
 ]
 
 { #category : #'API-dependencies' }
-PBProject >> dependsOnProject: aPBProject [ 
+PBProjectVersion >> dependsOnProject: aPBProjectVersion [ 
 	
-	^ self resolve includesResolvedTarget: aPBProject 
+	^ self resolve includesResolvedTarget: aPBProjectVersion 
 ]
 
 { #category : #publishing }
-PBProject >> ensureIsTagged [
+PBProjectVersion >> ensureIsTagged [
 	"Ensure project version is already tagged, else tag the current version in the git repository."
 	(self repository hasTagNamed: self version asString)
 		ifFalse: [ self repository createTag: self version asString ]
 ]
 
 { #category : #accessing }
-PBProject >> externalProjects [
+PBProjectVersion >> externalProjects [
 	^ externalProjects
 ]
 
 { #category : #updating }
-PBProject >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
+PBProjectVersion >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
 	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration
 ]
 
 { #category : #accessing }
-PBProject >> fullyQualifiedName [
+PBProjectVersion >> fullyQualifiedName [
 
 	 ^ self name
 ]
 
 { #category : #testing }
-PBProject >> hasPackageNamed: aString [ 
+PBProjectVersion >> hasPackageNamed: aString [ 
 	
 	^ packages anySatisfy: [ :any | any name = aString ]
 ]
 
 { #category : #testing }
-PBProject >> hasProblems [
+PBProjectVersion >> hasProblems [
 	^ self isUpToDate not
 ]
 
 { #category : #testing }
-PBProject >> hasRepository [
+PBProjectVersion >> hasRepository [
 	
 	^ repository isValidRepository
 ]
 
 { #category : #comparing }
-PBProject >> hash [
+PBProjectVersion >> hash [
 
 	^ self name hash
 ]
 
 { #category : #packages }
-PBProject >> importPackageNamed: aString [
+PBProjectVersion >> importPackageNamed: aString [
 	| package |
 	package := self newNotLoadedPackage: aString.
 	repository addPackageNamed: aString. "Bind the package with the new repository."
@@ -282,20 +283,20 @@ PBProject >> importPackageNamed: aString [
 ]
 
 { #category : #packages }
-PBProject >> importPackagesNamed: aCollection [ 
+PBProjectVersion >> importPackagesNamed: aCollection [ 
 	
 	aCollection do: [ :aName | self importPackageNamed: aName ]
 ]
 
 { #category : #initialization }
-PBProject >> initialize [
+PBProjectVersion >> initialize [
 	super initialize.
 	repository := PBNoRepository new.
-	description := ''.
+	description := PBNoVersion new.
 ]
 
 { #category : #initialization }
-PBProject >> initializeFromProject: aCGOProject [
+PBProjectVersion >> initializeFromProject: aCGOProject [
 	self initialize.
 	description := aCGOProject description copy.
 	packages := aCGOProject packageUnits collect: #asOngoingPackageVersion as: OrderedCollection.
@@ -305,7 +306,7 @@ PBProject >> initializeFromProject: aCGOProject [
 ]
 
 { #category : #initialization }
-PBProject >> initializeWithProjectName: aProjectName [
+PBProjectVersion >> initializeWithProjectName: aProjectName [
 	"The packages is an OrderedCollection, the unicity of the elements is guarantee in other part of the code."
 	
 	self initialize.
@@ -318,79 +319,79 @@ PBProject >> initializeWithProjectName: aProjectName [
 ]
 
 { #category : #accessing }
-PBProject >> installedSystemPackages [
+PBProjectVersion >> installedSystemPackages [
 	
 	^ self packages select: [ :each | each isInstalled ] thenCollect: [ :each | each systemPackage ]
 ]
 
 { #category : #'compatibility - cargo solver' }
-PBProject >> isAssembly [
+PBProjectVersion >> isAssembly [
 	"Needed so that Cargo solver can use a project as a standard package assembly"
 	^ true
 ]
 
 { #category : #conflicts }
-PBProject >> isConflictingWith: aPBResolvedDependency [ 
+PBProjectVersion >> isConflictingWith: aPBResolvedDependency [ 
 	
 	^ (self name = aPBResolvedDependency name)
 		and: [ self ~= aPBResolvedDependency resolution resolvedProjectVersion ]
 ]
 
 { #category : #testing }
-PBProject >> isEmpty [
+PBProjectVersion >> isEmpty [
 	^ self packageNames isEmpty 
 		and: [self assemblies isEmpty 
 			and: [self virtualPackages isEmpty] ]
 ]
 
 { #category : #comparing }
-PBProject >> isEquivalentTo: anotherProject [
+PBProjectVersion >> isEquivalentTo: anotherProject [
 	"This method is used when the comparison requires the resolution of the project"
 	^ self = anotherProject 
 ]
 
 { #category : #testing }
-PBProject >> isFixedVersion [
+PBProjectVersion >> isFixedVersion [
 	^ version notNil and: [ (version major = 0 and: [ version minor = 0 and: [ version patch = 0 ] ]) not ]
 ]
 
 { #category : #testing }
-PBProject >> isInstalled [
+PBProjectVersion >> isInstalled [
 	
 	^ self isLoaded
 ]
 
 { #category : #testing }
-PBProject >> isLoaded [
+PBProjectVersion >> isLoaded [
 	
 	^ registry notNil
 		and: [ registry isProjectInstalled: self ]
 ]
 
 { #category : #testing }
-PBProject >> isProject [
+PBProjectVersion >> isProject [
 	^ true
 ]
 
 { #category : #resolution }
-PBProject >> isResolvedBy: aResolution [
+PBProjectVersion >> isResolvedBy: aResolution [
 	
 	^ aResolution resolvesProject: self
 ]
 
 { #category : #'querying - installed' }
-PBProject >> isUpToDate [
+PBProjectVersion >> isUpToDate [
 	
 	^ self allDependencies allSatisfy: [ :each | each isInstalled ]
 ]
 
 { #category : #'compatibility - package repository' }
-PBProject >> isVirtual [
+PBProjectVersion >> isVirtual [
 	^ false
 ]
 
 { #category : #loading }
-PBProject >> load [
+PBProjectVersion >> load [
 	
 	self resolve load.
 	self packages do: [ :package | registry register: package ].
@@ -399,14 +400,14 @@ PBProject >> load [
 ]
 
 { #category : #accessing }
-PBProject >> metacelloProjects [
+PBProjectVersion >> metacelloProjects [
 	^ externalProjects 
 		select: #isMetacelloProjectDependency
 		thenCollect: [ :projectDependency | PBMetacelloProject fromProjectDependency: projectDependency ]
 ]
 
 { #category : #packages }
-PBProject >> newNotLoadedPackage: aString [ 
+PBProjectVersion >> newNotLoadedPackage: aString [ 
 	| package |
 
 	package := PBPackage named: aString asSymbol project: self.
@@ -421,7 +422,7 @@ PBProject >> newNotLoadedPackage: aString [
 ]
 
 { #category : #updating }
-PBProject >> newVirtualPackage: aName [
+PBProjectVersion >> newVirtualPackage: aName [
 	| virtual |
 	
 	virtual := PBVirtualPackage 
@@ -434,7 +435,7 @@ PBProject >> newVirtualPackage: aName [
 ]
 
 { #category : #'system-interaction' }
-PBProject >> packageCandidates [
+PBProjectVersion >> packageCandidates [
 
 	^ (registry systemPackageOrganizer packages
 			reject: [ :each | self hasPackageNamed: each name ])
@@ -442,35 +443,35 @@ PBProject >> packageCandidates [
 ]
 
 { #category : #accessing }
-PBProject >> packageNamed: aString [ 
+PBProjectVersion >> packageNamed: aString [ 
 	
 	^ packages detect: [ :each | each name = aString ]
 ]
 
 { #category : #accessing }
-PBProject >> packageNames [
+PBProjectVersion >> packageNames [
 	^ packages collect: #name
 ]
 
 { #category : #accessing }
-PBProject >> packageUnits [
+PBProjectVersion >> packageUnits [
 	^ packages
 ]
 
 { #category : #updating }
-PBProject >> packages [
+PBProjectVersion >> packages [
 
 	^ packages
 ]
 
 { #category : #updating }
-PBProject >> packages: aListOfPackageUnits [
+PBProjectVersion >> packages: aListOfPackageUnits [
 	packages := aListOfPackageUnits asOrderedCollection.
 	packages do: [ :each | each project: self ]
 ]
 
 { #category : #printing }
-PBProject >> printOn: aStream [
+PBProjectVersion >> printOn: aStream [
 	aStream 
 		<< self class name
 		<< '('
@@ -479,12 +480,12 @@ PBProject >> printOn: aStream [
 ]
 
 { #category : #problems }
-PBProject >> problemIcon [
+PBProjectVersion >> problemIcon [
 	^ #error
 ]
 
 { #category : #problems }
-PBProject >> problemLongDescription [
+PBProjectVersion >> problemLongDescription [
 	self isUpToDate ifFalse: [ ^ 'One or more dependencies are not up to date.
 Please update the whole project or fix the dependencies.'].
 	
@@ -492,7 +493,7 @@ Please update the whole project or fix the dependencies.'].
 ]
 
 { #category : #problems }
-PBProject >> problemShortDescription [
+PBProjectVersion >> problemShortDescription [
 	
 	self isUpToDate ifFalse: [ ^ 'One or more dependencies are not up to date.' ].
 	
@@ -500,18 +501,18 @@ PBProject >> problemShortDescription [
 ]
 
 { #category : #accessing }
-PBProject >> project [
+PBProjectVersion >> project [
 	^ self
 ]
 
 { #category : #publishing }
-PBProject >> publish [
+PBProjectVersion >> publish [
 	
 	self publishOn: Cargo defaultPackageRepository
 ]
 
 { #category : #publishing }
-PBProject >> publishOn: aPackageRepository [
+PBProjectVersion >> publishOn: aPackageRepository [
 	self hasRepository ifFalse: [ PBPublicationError signal: 'Cannot publish a Project with no repository defined!' ].
 	self version ifNil: [ PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
 	self ensureIsTagged.
@@ -520,30 +521,30 @@ PBProject >> publishOn: aPackageRepository [
 ]
 
 { #category : #accessing }
-PBProject >> registry [
+PBProjectVersion >> registry [
 	^ registry
 ]
 
 { #category : #accessing }
-PBProject >> registry: aCGOPackageRegistry [ 
+PBProjectVersion >> registry: aCGOPackageRegistry [ 
 	registry := aCGOPackageRegistry
 ]
 
 { #category : #assemblies }
-PBProject >> removeAssembly: aPBAssembly [ 
+PBProjectVersion >> removeAssembly: aPBAssembly [ 
 	
 	assemblies remove: aPBAssembly.	
 	self announceChanged.
 ]
 
 { #category : #dependencies }
-PBProject >> removeDependency: aDependency [
+PBProjectVersion >> removeDependency: aDependency [
 	dependencies remove: aDependency.
 	self announceChangeInDependencies
 ]
 
 { #category : #packages }
-PBProject >> removePackage: aPBPackage [ 
+PBProjectVersion >> removePackage: aPBPackage [ 
 	
 	packages remove: aPBPackage.
 	assemblies do: [ :each | each removePackage: aPBPackage ifAbsent: [ "Nothing" ] ].
@@ -551,7 +552,7 @@ PBProject >> removePackage: aPBPackage [
 ]
 
 { #category : #removing }
-PBProject >> removePart: aCGOPackageVersion [
+PBProjectVersion >> removePart: aCGOPackageVersion [
 	registry unregister: aCGOPackageVersion.
 
 	assemblies 
@@ -560,69 +561,69 @@ PBProject >> removePart: aCGOPackageVersion [
 ]
 
 { #category : #accessing }
-PBProject >> repository [
+PBProjectVersion >> repository [
 	^ repository
 ]
 
 { #category : #updating }
-PBProject >> repository: aPBSourceRepository [ 
+PBProjectVersion >> repository: aPBSourceRepository [ 
 	repository := aPBSourceRepository.
 ]
 
 { #category : #loading }
-PBProject >> resolve [
+PBProjectVersion >> resolve [
 	
 	^ registry newSolver solveProject: self
 ]
 
 { #category : #solving }
-PBProject >> resolveInSolver: aCGOSolver [ 
+PBProjectVersion >> resolveInSolver: aCGOSolver [ 
 	
 	"An ongoing project is already solved, we need the version in the image"
 	^ self
 ]
 
 { #category : #'system-interaction' }
-PBProject >> systemPackageOrganizer [
+PBProjectVersion >> systemPackageOrganizer [
 	
 	^ registry systemPackageOrganizer
 ]
 
 { #category : #unloading }
-PBProject >> unload [
+PBProjectVersion >> unload [
 	
 	registry unregisterProject: self
 ]
 
 { #category : #unloading }
-PBProject >> unloadRemovingPackages [
+PBProjectVersion >> unloadRemovingPackages [
 	
 	registry unregisterProject: self.
 	packages do: [ :each | each removePackageFromSystem ]
 ]
 
 { #category : #accessing }
-PBProject >> version [
+PBProjectVersion >> version [
 	^ version
 ]
 
 { #category : #accessing }
-PBProject >> version: anObject [
+PBProjectVersion >> version: anObject [
 	version := anObject asSemanticVersion
 ]
 
 { #category : #accessing }
-PBProject >> virtualPackages [
+PBProjectVersion >> virtualPackages [
 	^ virtualPackages
 ]
 
 { #category : #updating }
-PBProject >> virtualPackages: aListOfVirtualPackages [ 
+PBProjectVersion >> virtualPackages: aListOfVirtualPackages [ 
 	virtualPackages := aListOfVirtualPackages
 ]
 
 { #category : #private }
-PBProject >> withRepositoryDo: aBlock [
+PBProjectVersion >> withRepositoryDo: aBlock [
 	repository 
 		ifNil: [ CGOGitRepositoryCreationPanel withNewRepositoryDo: aBlock ]
 		ifNotNil: [ aBlock value: repository ]

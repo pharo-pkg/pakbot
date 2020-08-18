@@ -63,9 +63,9 @@ PBGitBasedPackageRepository >> initializeEmptyRepository [
 ]
 
 { #category : #saving }
-PBGitBasedPackageRepository >> saveProject: aPBProject [
-	super saveProject: aPBProject.
-	self iceRepository commitIndexWithMessage: aPBProject name, ' ', aPBProject version asString
+PBGitBasedPackageRepository >> saveProject: aPBProjectVersion [
+	super saveProject: aPBProjectVersion.
+	self iceRepository commitIndexWithMessage: aPBProjectVersion name, ' ', aPBProjectVersion version asString
 		andParents: { self iceRepository headCommit }.
 ]
 

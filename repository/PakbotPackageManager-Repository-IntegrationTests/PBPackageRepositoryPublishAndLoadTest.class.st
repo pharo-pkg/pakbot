@@ -34,7 +34,7 @@ PBPackageRepositoryPublishAndLoadTest >> testCanLoadProjectFromScmAndPublishItTo
 		url: 'git://git@github.com/pharo-pkg/pharo-counter.git';
 		version: 'master';
 		create.		
-	project := PBProject fromRepository: repository.
+	project := PBProjectVersion fromRepository: repository.
 	
 	project 
 		registry: PBPackageRegistry new;

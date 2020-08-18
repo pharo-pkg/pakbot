@@ -7,7 +7,7 @@ Class {
 		'emptyRepository',
 		'greaseRepository'
 	],
-	#category : 'CargoPackageManager-FailingTests-PackageRepository'
+	#category : #'CargoPackageManager-FailingTests-PackageRepository'
 }
 
 { #category : #accessing }
@@ -19,7 +19,7 @@ CGODirectoryPackageRepositoryTest class >> resources [
 CGODirectoryPackageRepositoryTest >> setUp [
 	super setUp.
 	greaseRepository := GreaseTestResource current cargoLocalRepository.
-	greaseRepository savePackageVersion: PBProject example asCargoProject. "ensure a project dos not introduce mess in a package repository"
+	greaseRepository savePackageVersion: PBProjectVersion example asCargoProject. "ensure a project dos not introduce mess in a package repository"
 	emptyRepository := CGODirectoryPackageRepository newInDirectory: FileSystem memory root.
 	temporaryPath := '/tmp/cargo-repo-test' asFileReference.
 ]
@@ -199,7 +199,7 @@ CGODirectoryPackageRepositoryTest >> testSaveDevelopmentVersionShouldOverrideOld
 CGODirectoryPackageRepositoryTest >> testSavePackageVersionCanSaveCargoProject [
 	| project |
 
-	project := PBProject example asCargoProject.
+	project := PBProjectVersion example asCargoProject.
 
 	emptyRepository savePackageVersion: project.
 	

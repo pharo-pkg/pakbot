@@ -9,7 +9,7 @@ Class {
 		'repository',
 		'projects'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'versions fetching' }
@@ -121,6 +121,6 @@ CGOScmPackageMetadata >> registerProjectFromSourceRepository: aCGOSourceReposito
 { #category : #adding }
 CGOScmPackageMetadata >> registerProjectFromSourceRepository: aCGOSourceRepository at: projectId [
 	^ self 
-		registerProject: (PBProject fromRepository: aCGOSourceRepository)
+		registerProject: (PBProjectVersion fromRepository: aCGOSourceRepository)
 		at: projectId
 ]

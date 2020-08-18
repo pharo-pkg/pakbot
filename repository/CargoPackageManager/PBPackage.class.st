@@ -13,7 +13,7 @@ Class {
 
 { #category : #example }
 PBPackage class >> example [
-	^ (self named: #UnitTest project: (PBProject named: #MyProject))
+	^ (self named: #UnitTest project: (PBProjectVersion named: #MyProject))
 		description: 'A simple ongoing package unit.';
 		yourself
 ]

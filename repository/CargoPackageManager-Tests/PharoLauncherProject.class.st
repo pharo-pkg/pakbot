@@ -105,7 +105,7 @@ PharoLauncherProject >> buildPackages [
 
 { #category : #building }
 PharoLauncherProject >> buildProject [
-	project := (PBProject named: #PharoLauncher)
+	project := (PBProjectVersion named: #PharoLauncher)
 		description:
 			'Pharo Launcher is a cross-platform application that
 

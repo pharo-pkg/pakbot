@@ -31,11 +31,11 @@ PBSerializedProject >> asProject [
 ]
 
 { #category : #initialization }
-PBSerializedProject >> initializeWithPackage: aPBProject [
+PBSerializedProject >> initializeWithPackage: aPBProjectVersion [
 	| resolvedProject |
-	super initializeWithPackage: aPBProject.
-	dict at: #version put: aPBProject version asString.
-	resolvedProject := aPBProject resolve.
+	super initializeWithPackage: aPBProjectVersion.
+	dict at: #version put: aPBProjectVersion version asString.
+	resolvedProject := aPBProjectVersion resolve.
 	resolvedProject hasConflicts 
 		ifTrue: [ PBProjectHasConflictsError signalOnResolution: resolvedProject ].
 	self
@@ -48,14 +48,14 @@ PBSerializedProject >> initializeWithPackage: aPBProject [
 		ifNotEmptyOrNil: (aPBProject externalProjects)."
 	self 
 		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aPBProject packageUnits andCollect: #asSerializedPackage).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion packageUnits andCollect: #asSerializedPackage).
 	self
 		addPropertyNamed: #assemblies 
-		ifNotEmptyOrNil: (self sort: aPBProject assemblies andCollect: #asSerializedPackage).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asSerializedPackage).
 	self 
 		addPropertyNamed: #virtualPackages 
-		ifNotEmptyOrNil: (self sort: aPBProject virtualPackages andCollect: #asSerializedPackage).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion virtualPackages andCollect: #asSerializedPackage).
 	dict
 		at: #repositoryUrl
-		put: aPBProject repository asSerializableRepository
+		put: aPBProjectVersion repository asSerializableRepository
 ]

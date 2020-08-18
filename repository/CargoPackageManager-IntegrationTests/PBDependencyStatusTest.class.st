@@ -37,7 +37,7 @@ PBDependencyStatusTest >> performTest [
 PBDependencyStatusTest >> setUp [
 	super setUp.
 
-	project := PBProject named: 'ATestProject'.
+	project := PBProjectVersion named: 'ATestProject'.
 	testRegistry register: project.
 
 	dependencyToProject := self createProjectDependency.

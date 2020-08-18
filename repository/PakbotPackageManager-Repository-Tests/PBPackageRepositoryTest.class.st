@@ -30,7 +30,7 @@ PBPackageRepositoryTest >> testCanCreateALocalRepository [
 PBPackageRepositoryTest >> testCanFetchAProject [
 	| repository project published |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
@@ -51,7 +51,7 @@ PBPackageRepositoryTest >> testCanFetchAProject [
 PBPackageRepositoryTest >> testCanPublishAProject [ 
 	| repository project published |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
 		repository: 	PBGitRepository example;
@@ -73,7 +73,7 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 
 	self 
 		assert: published class
-		equals: PBProject.
+		equals: PBProjectVersion.
 	self 
 		assertCollection: published packageNames
 		hasSameElements: #(#UnitTest)
@@ -83,7 +83,7 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 PBPackageRepositoryTest >> testCannotPublishAProjectHavingNonFixedVersion [
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
 		repository: 	PBGitRepository example.
@@ -107,7 +107,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenHavingDependencyOnNonFix
 PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished [
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
 		repository: 	PBGitRepository example;
@@ -127,7 +127,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished 
 PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [ 
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		registry: PBPackageRegistry new;
 		version: '0.1' asSemanticVersion.
@@ -144,7 +144,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [
 PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublication [
 	| repository project |
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		registry: PBPackageRegistry new;
 		repository: 	PBGitRepository example.
@@ -164,7 +164,7 @@ PBPackageRepositoryTest >> testPublishedProjectHasASourceRepository [
 	| repository project fetchedProject |
 	repository := PBPackageRepository
 		newLocalRepositoryIn: FileSystem memory root.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
 		repository: self tempIceRepository;

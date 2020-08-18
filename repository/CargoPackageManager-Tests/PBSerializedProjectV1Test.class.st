@@ -120,7 +120,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 PBSerializedProjectV1Test >> testCanDeserializeProjectWithDependencies [
 	| project expectedDependencies |
 	
-	project := PBProject fromStonString: self stonStringForProjectWithDependencies.
+	project := PBProjectVersion fromStonString: self stonStringForProjectWithDependencies.
 	
 	self
 		assert: project dependencies size
@@ -141,11 +141,11 @@ PBSerializedProjectV1Test >> testCanDeserializeProjectWithDependencies [
 PBSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 	| project packageUnit |
 	
-	project := PBProject fromStonString: self stonStringForSimpleProject.
+	project := PBProjectVersion fromStonString: self stonStringForSimpleProject.
 	
 	self
 		assert: project
-		equals: PBProject example.
+		equals: PBProjectVersion example.
 		
 	self assert: project assemblies isEmpty.
 	self 
@@ -205,7 +205,7 @@ PBSerializedProjectV1Test >> testCanSerializeProjectWithPackages [
 PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	
-	serializedProject := PBProject example 
+	serializedProject := PBProjectVersion example 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
 		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
@@ -220,7 +220,7 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 PBSerializedProjectV1Test >> testErrorSignaledWhenTryingToSerializeProjectWithConflictingDependencies [
 	| project |
 	
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new.

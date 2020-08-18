@@ -14,7 +14,7 @@ PBPakbotProjectDependencyStatusTest >> createProjectDependency [
 PBPakbotProjectDependencyStatusTest >> installProject [
 	
 	| newProject |
-	newProject := PBProject named: 'AnotherProject'.
+	newProject := PBProjectVersion named: 'AnotherProject'.
 	newProject 
 		repository: PBGitMemoryRepository new;
 		version: '0.1'.

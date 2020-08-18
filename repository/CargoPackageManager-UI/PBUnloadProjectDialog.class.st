@@ -120,8 +120,8 @@ PBUnloadProjectDialog >> openDialogWithSpec [
 ]
 
 { #category : #accessing }
-PBUnloadProjectDialog >> project: aPBProject [ 
-	project := aPBProject
+PBUnloadProjectDialog >> project: aPBProjectVersion [ 
+	project := aPBProjectVersion
 ]
 
 { #category : #accessing }

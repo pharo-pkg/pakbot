@@ -50,18 +50,18 @@ PBPackageRepository >> root: aFileReference [
 ]
 
 { #category : #saving }
-PBPackageRepository >> saveProject: aPBProject [ 
+PBPackageRepository >> saveProject: aPBProjectVersion [ 
 	| file fileContent |
-	file := self fileForPackage: aPBProject.
+	file := self fileForPackage: aPBProjectVersion.
 	file exists
-		ifTrue: [ PBPublicationError signal: aPBProject name , ' has already been published'.
+		ifTrue: [ PBPublicationError signal: aPBProjectVersion name , ' has already been published'.
 				^ self. ].
-	aPBProject isFixedVersion
-		ifFalse: [ PBPublicationError signal: aPBProject name, ' ' , aPBProject version asString, ' is not a fixed version.'.
+	aPBProjectVersion isFixedVersion
+		ifFalse: [ PBPublicationError signal: aPBProjectVersion name, ' ' , aPBProjectVersion version asString, ' is not a fixed version.'.
 			^ self ].
 	
 	fileContent := String streamContents: [ :stream | 
-		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProject asSerializedPackage) ].
+		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
 	file parent ensureCreateDirectory.
 	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].
 ]

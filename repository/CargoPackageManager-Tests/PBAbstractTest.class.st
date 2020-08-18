@@ -15,7 +15,7 @@ PBAbstractTest class >> isAbstract [
 { #category : #tests }
 PBAbstractTest >> expectedCargoResolvedProject [
 
-	^ (PBProject named: 'Counter')
+	^ (PBProjectVersion named: 'Counter')
 		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git');
 		version: (SemanticVersion fromString: '0-N/A')
 ]

@@ -52,7 +52,7 @@ PBGitBasedPackageRepositoryTest >> testCanCreateALocalCloneOfPackageRepository [
 PBGitBasedPackageRepositoryTest >> testCanFetchAProject [
 	| repository project published |
 	repository := self newLocalPBGitBasedPackageRepository.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
@@ -73,7 +73,7 @@ PBGitBasedPackageRepositoryTest >> testCanFetchAProject [
 PBGitBasedPackageRepositoryTest >> testCanPublishAProject [
 	| repository project published |
 	repository := self newLocalPBGitBasedPackageRepository.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	
 	project
 		registry: PBPackageRegistry new;
@@ -90,7 +90,7 @@ PBGitBasedPackageRepositoryTest >> testCanPublishAProject [
 	
 	self assert: published name equals: project name.
 	self assert: published version equals: project version.
-	self assert: published class equals: PBProject.
+	self assert: published class equals: PBProjectVersion.
 	self
 		assertCollection: published packageNames
 		hasSameElements: #(#UnitTest)
@@ -100,7 +100,7 @@ PBGitBasedPackageRepositoryTest >> testCanPublishAProject [
 PBGitBasedPackageRepositoryTest >> testCannotPublishedIfAlreadyPublished [
 	| repository project |
 	repository := self newLocalPBGitBasedPackageRepository.
-	project := PBProject example.
+	project := PBProjectVersion example.
 
 	project
 		registry: PBPackageRegistry new;
@@ -120,7 +120,7 @@ PBGitBasedPackageRepositoryTest >> testCannotPublishedIfAlreadyPublished [
 PBGitBasedPackageRepositoryTest >> testPublishedProjectIsTagged [
 	| packageRepository project repository |
 	packageRepository := self newLocalPBGitBasedPackageRepository.
-	project := PBProject example.
+	project := PBProjectVersion example.
 	repository := (PBGitRepository newLocalRepositoryIn: tempFolder2) ensureCloned.
 	repository iceRepository commitWithMessage: 'initial commit'.
 

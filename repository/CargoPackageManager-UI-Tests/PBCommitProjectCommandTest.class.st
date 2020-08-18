@@ -24,7 +24,7 @@ PBCommitProjectCommandTest >> setUpExistingRepository [
 		location: repositoryLocation;
 		url: 'https://github.com/demarey/pharo-counter.git';
 		createAndClone.
-	project := PBProject fromRepository: repository.
+	project := PBProjectVersion fromRepository: repository.
 	repository project:
 		(PBIcebergProject
 				onRepository: repository iceRepository
@@ -33,7 +33,7 @@ PBCommitProjectCommandTest >> setUpExistingRepository [
 
 { #category : #running }
 PBCommitProjectCommandTest >> setUpNewRepository [
-	project := PBProject named: 'test-project'.
+	project := PBProjectVersion named: 'test-project'.
 	project registry: PBPackageRegistry new.
 	
 	repository := PBGitRepositoryCreator new

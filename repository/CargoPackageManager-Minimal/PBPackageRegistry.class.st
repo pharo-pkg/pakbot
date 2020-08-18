@@ -65,10 +65,10 @@ PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 ]
 
 { #category : #'API -dependencies' }
-PBPackageRegistry >> dependantProjectsOf: aPBProject [
+PBPackageRegistry >> dependantProjectsOf: aPBProjectVersion [
 
 	^ (registeredProjects
-		select: [ :each | each ~= aPBProject and: [ each dependsOnProject: aPBProject ] ])
+		select: [ :each | each ~= aPBProjectVersion and: [ each dependsOnProject: aPBProjectVersion ] ])
 		asOrderedCollection
 ]
 
@@ -151,7 +151,7 @@ PBPackageRegistry >> metacelloProjectRegistry: aMetacelloProjectRegistry [
 PBPackageRegistry >> newProjectNamed: aString [ 
 	
 	| project |
-	project := PBProject named: aString.
+	project := PBProjectVersion named: aString.
 	self register: project.
 	CGOProjectCreated announceOnProject: project.
 	^ project

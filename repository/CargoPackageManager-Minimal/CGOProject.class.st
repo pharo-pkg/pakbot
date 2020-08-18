@@ -21,7 +21,7 @@ Class {
 
 { #category : #example }
 CGOProject class >> example [
-	^ (self fromOngoing: PBProject example)
+	^ (self fromOngoing: PBProjectVersion example)
 		instVarNamed: 'version' put: '2.1.0' asSemanticVersion;
 		yourself
 ]

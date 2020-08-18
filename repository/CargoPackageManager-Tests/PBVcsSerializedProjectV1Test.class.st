@@ -20,7 +20,7 @@ PBVcsSerializedProjectV1Test >> counterUiProject [
 	dependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
 	dependency repository version: 'master'.
 
-	project := (PBProject named: #'Counter-UI')
+	project := (PBProjectVersion named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		repository: PBGitMemoryRepository new;
 		addExternalCargoProject: dependency;
@@ -127,7 +127,7 @@ PBVcsSerializedProjectV1Test >> setUp [
 { #category : #'test data' }
 PBVcsSerializedProjectV1Test >> stonStringForExampleProject [
 	"
-		STON toStringPretty: PBProject example asVcsSerializedCargoProject
+		STON toStringPretty: aPBProjectVersion example asVcsSerializedCargoProject
 	"
 	^ '{#version:''1.0''}
 {
@@ -156,7 +156,7 @@ PBVcsSerializedProjectV1Test >> tearDown [
 PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalBaselineProject [
 	| project dependency |
 	
-	project := PBProject fromVcsStonString: self projectWithBaselineDependencyStonString.
+	project := PBProjectVersion fromVcsStonString: self projectWithBaselineDependencyStonString.
 	
 	dependency := project dependencies anyOne.
 
@@ -179,7 +179,7 @@ PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalBaselineP
 PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalConfigurationProject [
 	| project dependency |
 	
-	project := PBProject fromVcsStonString: self projectWithConfigurationDependencyStonString.
+	project := PBProjectVersion fromVcsStonString: self projectWithConfigurationDependencyStonString.
 	
 	dependency := project dependencies anyOne.
 
@@ -202,7 +202,7 @@ PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalConfigura
 PBVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
 	| project dependency externalProject |
 	
-	project := PBProject fromVcsStonString: self counterUiStonString.
+	project := PBProjectVersion fromVcsStonString: self counterUiStonString.
 	
 	dependency := project packageUnits anyOne dependencies first.
 	self 
@@ -229,11 +229,11 @@ PBVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCa
 PBVcsSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 	| project packageUnit |
 	
-	project := PBProject fromVcsStonString: self stonStringForExampleProject.
+	project := PBProjectVersion fromVcsStonString: self stonStringForExampleProject.
 	
 	self
 		assert: project
-		equals: PBProject example.
+		equals: PBProjectVersion example.
 		
 	self assert: project assemblies isEmpty.
 	self 
@@ -289,7 +289,7 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCarg
 PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssembly [
 	| project iceProject deserializedProject |
 	
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project assemblies: { PBAssembly example }.
 	iceProject := PBIcebergProject onRepository: repository project: project.
 	repository workingCopy basicSetProject: iceProject.
@@ -319,7 +319,7 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssemb
 PBVcsSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	
-	serializedProject := PBProject example asVcsSerializedCargoProject.
+	serializedProject := PBProjectVersion example asVcsSerializedCargoProject.
 	
 	self
 		assert: serializedProject asString

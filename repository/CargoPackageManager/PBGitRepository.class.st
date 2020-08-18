@@ -129,7 +129,7 @@ PBGitRepository >> fetchVersion: aString [
 	commitish := aString
 		ifEmpty: [ self headCommit ]
 		ifNotEmpty: [ self iceRepository revparse: aString ].
-	project := PBProject
+	project := PBProjectVersion
 		fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project

@@ -15,7 +15,7 @@ PBPackageRegistryTest >> setUp [
 { #category : #tests }
 PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 	| project unit |
-	project := PBProject example.
+	project := PBProjectVersion example.
 	unit := project packageUnits anyOne.
 	
 	registry register: unit.
@@ -28,7 +28,7 @@ PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 { #category : #tests }
 PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 	| project unit |
-	project := PBProject example.
+	project := PBProjectVersion example.
 	unit := project packageUnits anyOne.
 	
 	registry register: unit.
@@ -41,7 +41,7 @@ PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 { #category : #tests }
 PBPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
 	| project unit |
-	project := PBProject example.
+	project := PBProjectVersion example.
 	project 
 		registry: registry;
 		repository: PBGitMemoryRepository new.
@@ -59,7 +59,7 @@ PBPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregistered
 { #category : #tests }
 PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 	| project unit |
-	project := PBProject example.
+	project := PBProjectVersion example.
 	unit := project packageUnits anyOne.
 	registry register: unit.
 	

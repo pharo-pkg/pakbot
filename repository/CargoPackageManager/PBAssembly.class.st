@@ -15,7 +15,7 @@ PBAssembly class >> example [
 	^ (self named: #TestAssembly)
 		description: 'A simple ongoing package assembly.';
 		parts: #('Unit1' 'Unit2');
-		project: (PBProject named: #MyProject);
+		project: (PBProjectVersion named: #MyProject);
 		yourself
 ]
 

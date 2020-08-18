@@ -95,7 +95,7 @@ PBProjectUIItemTest >> testAnEmptyProjectHasTheCorrectCommandsWhenRepositoryIsSe
 				activator := self assertCommands: commands includes: commandClass.
 				self assert: activator command project isNil.
 				activator prepareCommandForExecution.
-				self assert: (activator command project isKindOf: PBProject) ].
+				self assert: (activator command project isKindOf: PBProjectVersion) ].
 ]
 
 { #category : #tests }

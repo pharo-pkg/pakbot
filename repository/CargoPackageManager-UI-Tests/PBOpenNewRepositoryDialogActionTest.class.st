@@ -18,7 +18,7 @@ PBOpenNewRepositoryDialogActionTest >> tearDown [
 PBOpenNewRepositoryDialogActionTest >> testCanCreateNewProject [
 	| presenter newRepositoryPresenter project |
 
-	project := PBProject named: ''.
+	project := PBProjectVersion named: ''.
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
 	presenter selectionChanged: (FTSelectionChanged from: #(1) to: #(2)). "select new repository panel"
 	self 
@@ -55,7 +55,7 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	register;
 	yourself. 
 	
-	project := PBProject named: projectName.
+	project := PBProjectVersion named: projectName.
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
 	self 
 		assert: presenter selectedType class
