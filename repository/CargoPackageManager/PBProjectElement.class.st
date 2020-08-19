@@ -1,3 +1,6 @@
+"
+I represent a part of a project
+"
 Class {
 	#name : #PBProjectElement,
 	#superclass : #PBLoadableUnit,
