@@ -20,7 +20,7 @@ Class {
 PBBaselineVisitor class >> projectFor: aBaselineOf [
 	| visitor |
 	visitor := self new. 
-	aBaselineOf new baseline: visitor.
+	visitor baseline: aBaselineOf new.
 	^ visitor project
 ]
 
