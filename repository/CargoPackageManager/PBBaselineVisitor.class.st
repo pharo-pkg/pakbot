@@ -34,12 +34,16 @@ PBBaselineVisitor >> baseline: aBaseline [
 
 { #category : #visiting }
 PBBaselineVisitor >> baseline: aName with: aBlockClosure [
+	| dependency |
 	projectDependencyProperties := Dictionary with: 'version' -> 'master'.
 	aBlockClosure value.
-	project addExternalCargoProject: (PBMetacelloBaselineProjectDependency
+	dependency := PBMetacelloBaselineProjectDependency
 				name: aName
 				repositoryUrl: (projectDependencyProperties at: 'repository')
-				version: (projectDependencyProperties at: 'version')).
+				version: (projectDependencyProperties at: 'version').
+	project addExternalCargoProject: dependency.
+	"for now, pakbot only supports project dependencies. Add these external projects as dependencies"
+	project addDependency: dependency.
 ]
 
 { #category : #visiting }

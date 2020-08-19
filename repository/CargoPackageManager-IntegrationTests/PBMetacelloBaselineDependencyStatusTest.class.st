@@ -45,3 +45,24 @@ PBMetacelloBaselineDependencyStatusTest >> tearDown [
 	super tearDown.
 	
 ]
+
+{ #category : #tests }
+PBMetacelloBaselineDependencyStatusTest >> testDependencyIsSatisfiedIfBaselineFoundButNoIceRepositoryToCheckTheVersion [
+	| dependency |
+	self flag: 'This has probably to change with next development of Pakbot'.
+
+	dependency := self createProjectDependency.
+	project := (PBProjectVersion named: 'Foo')
+		registry: PBPackageRegistry new;
+		yourself.
+	dependency project: project.
+	project registry metacelloProjectRegistry: MetacelloProjectRegistry new.
+	project registry metacelloProjectRegistry baselineRegistry
+		at: #BaselineOf , dependency name 
+		put: ((MetacelloProjectRegistration
+        fromMCBaselineProjectSpec: BaselineOfUI project projectSpec asBaselineProjectSpec) "just use any baseline we know is loaded without an associated iceberg repository"
+			loadedInImage: true;
+			yourself).
+	
+	self assert: dependency isInstalledInMetacello
+]

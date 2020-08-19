@@ -79,9 +79,11 @@ PBMetacelloBaselineProjectDependency >> isMetacelloConfiguration [
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> isSameVersionAs: aVersionString [
 	| repository |
-	repository := IceRepository registry detect: [ :repo | 
-		              repo remotes anySatisfy: [ :remote | 
-			              remote referencesSameRemoteLocationAs: (IceGitRemote url: self icebergUrl) ] ].
+	repository := IceRepository registry 
+		detect: [ :repo | 
+					repo remotes anySatisfy: [ :remote | 
+			      remote referencesSameRemoteLocationAs: (IceGitRemote url: self icebergUrl) ] ]
+		ifNone: [ ^ true ]. "See #testDependencyIsSatisfiedIfBaselineFoundButNoIceRepositoryToCheckTheVersion"
 	^ aVersionString = version or: [ 
 		  aVersionString = repository head commit id ]
 ]
