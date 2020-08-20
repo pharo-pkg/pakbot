@@ -271,7 +271,7 @@ PBGitRepository >> project [
 		ifTrue: [ PBProjectMetadataNotFound signal ]
 		ifFalse: [ [ iceProject pakbotProject ] 
 						on: PBProjectMetadataNotFound
-						do: [ self pakbotProjecctFromMetacelloBaseline ] ]
+						do: [ self pakbotProjecctFromMetacelloBaseline ifNil: [ PBProjectMetadataNotFound signal ] ] ]
 ]
 
 { #category : #configuring }

@@ -245,12 +245,3 @@ PBGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent
 
 	self should: [ repository project ] raise: PBProjectMetadataNotFound
 ]
-
-{ #category : #tests }
-PBGitRepositoryTest >> testGivenAGitRepositoryWhenNoPakbotMetadataPresentThenGetException [
-	repository := self pakbotTestExampleMasterCloned.
-	
-	self 
-		should: [ repository project ]
-		raise: PBProjectMetadataNotFound 
-]
