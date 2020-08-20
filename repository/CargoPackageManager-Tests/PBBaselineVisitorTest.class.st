@@ -1,5 +1,5 @@
 Class {
-	#name : #BaselineVisitorTest,
+	#name : #PBBaselineVisitorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'visitor'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'test data' }
-BaselineVisitorTest >> babyMockConfiguration: spec [
+PBBaselineVisitorTest >> babyMockConfiguration: spec [
 	spec
 		project: 'BabyMock2'
 		with: [ spec
@@ -18,18 +18,18 @@ BaselineVisitorTest >> babyMockConfiguration: spec [
 ]
 
 { #category : #'test data' }
-BaselineVisitorTest >> parametrizedTestsBaseline: spec [
+PBBaselineVisitorTest >> parametrizedTestsBaseline: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
 
 { #category : #running }
-BaselineVisitorTest >> setUp [
+PBBaselineVisitorTest >> setUp [
 	super setUp.
 	visitor := PBBaselineVisitor new.
 ]
 
 { #category : #'test data' }
-BaselineVisitorTest >> simpleBaseline: spec [
+PBBaselineVisitorTest >> simpleBaseline: spec [
 	<baseline>
 	spec
 		for: #common
@@ -47,7 +47,7 @@ group: 'Leaves' with: #( 'PakbotTestExample-PackageA' 'PakbotTestExample-Package
 ]
 
 { #category : #tests }
-BaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 	| dependency |
 	
 	self simpleBaseline: visitor.
@@ -69,7 +69,7 @@ BaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 ]
 
 { #category : #tests }
-BaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
 	| dependency |
 	
 	self simpleBaseline: visitor.
@@ -91,7 +91,7 @@ BaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
 ]
 
 { #category : #tests }
-BaselineVisitorTest >> testCanGetGroups [
+PBBaselineVisitorTest >> testCanGetGroups [
 
 	self simpleBaseline: visitor.
 	self
@@ -103,7 +103,7 @@ BaselineVisitorTest >> testCanGetGroups [
 ]
 
 { #category : #tests }
-BaselineVisitorTest >> testCanGetPackages [
+PBBaselineVisitorTest >> testCanGetPackages [
 
 	self simpleBaseline: visitor.
 	self
