@@ -7,6 +7,16 @@ Class {
 	#category : #'CargoPackageManager-Model'
 }
 
+{ #category : #comparing }
+PBNoVersion >> = anObject [
+	^ anObject class == self class
+]
+
+{ #category : #testing }
+PBNoVersion >> isInvalid [
+	^ true
+]
+
 { #category : #printing }
 PBNoVersion >> printOn: aStream [
 	aStream nextPutAll: 'no version set'

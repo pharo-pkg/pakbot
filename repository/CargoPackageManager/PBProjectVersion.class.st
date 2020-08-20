@@ -515,7 +515,7 @@ PBProjectVersion >> publish [
 { #category : #publishing }
 PBProjectVersion >> publishOn: aPackageRepository [
 	self hasRepository ifFalse: [ PBPublicationError signal: 'Cannot publish a Project with no repository defined!' ].
-	self version ifNil: [ PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
+	self version isInvalid ifTrue: [ PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
 	self ensureIsTagged.
 	aPackageRepository saveProject: self.
 
