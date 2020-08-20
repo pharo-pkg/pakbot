@@ -292,7 +292,8 @@ PBProjectVersion >> importPackagesNamed: aCollection [
 PBProjectVersion >> initialize [
 	super initialize.
 	repository := PBNoRepository new.
-	description := PBNoVersion new.
+	version := PBNoVersion new.
+	description := ''.
 ]
 
 { #category : #initialization }
