@@ -80,6 +80,23 @@ PBGitRepositoryTest >> testCanBeSerializedInSton [
 ]
 
 { #category : #tests }
+PBGitRepositoryTest >> testCanDetectBaselines [
+	
+	| baselines |
+	repository := PBGitRepositoryCreator new
+		githubUrl: 'https://github.com/pharo-pkg/PakbotTestExample.git';
+		location: self iceRepositoryLocation;
+		createAndClone.
+
+	self assert: repository hasBaseline.
+	
+	baselines := repository baselines.
+	self assert: baselines size equals: 1.
+	self assert: baselines anyOne name equals: 'BaselineOfPakbotTestExample'
+
+]
+
+{ #category : #tests }
 PBGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 	| location |
 	location := self iceRepositoryLocation.

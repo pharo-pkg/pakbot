@@ -80,6 +80,13 @@ PBGitRepository >> addPackageNamed: aPackageName [
 	^ self iceRepository workingCopy addPackageNamed: aPackageName
 ]
 
+{ #category : #baselines }
+PBGitRepository >> baselines [
+	^ (self iceRepository workingCopy packages
+		select: [ :each | each name beginsWith: 'BaselineOf' ])
+		sorted: [ :a :b | a name < b name ].
+]
+
 { #category : #accessing }
 PBGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
@@ -133,6 +140,11 @@ PBGitRepository >> fetchVersion: aString [
 		fromVcsStonString: (commitish fileSystem / self projectMetadataPath) contents.
 	project repository: self.
 	^ project
+]
+
+{ #category : #baselines }
+PBGitRepository >> hasBaseline [
+	^ self baselines size > 0
 ]
 
 { #category : #testing }
