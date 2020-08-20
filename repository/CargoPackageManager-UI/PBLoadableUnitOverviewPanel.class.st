@@ -73,9 +73,9 @@ PBLoadableUnitOverviewPanel class >> minimalSpec [
 ]
 
 { #category : #'instance creation' }
-PBLoadableUnitOverviewPanel class >> newOn: anOngoingPackageVersion owner: owner [
+PBLoadableUnitOverviewPanel class >> newOn: aPBLoadableUnit owner: owner [
 	^ self basicNew
-		initializeWith: anOngoingPackageVersion;
+		loadableUnit: aPBLoadableUnit;
 		yourself
 ]
 
