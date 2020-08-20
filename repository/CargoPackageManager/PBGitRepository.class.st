@@ -249,13 +249,29 @@ PBGitRepository >> metadataStringFor: aPackageUnit [
 
 ]
 
+{ #category : #converting }
+PBGitRepository >> pakbotProjecctFromMetacelloBaseline [
+
+	| baselinePackage baseline project |
+	self hasBaseline ifFalse: [ ^ nil ].
+
+	self flag: 'TODO: what to do if many baselines?'.
+	baselinePackage := self baselines first load.
+	baseline := self class environment at: baselinePackage name asSymbol.
+	project := PBBaselineVisitor projectFor: baseline.
+	project version: (SemanticVersion fromString: self headCommit id).
+	^ project
+]
+
 { #category : #fetching }
 PBGitRepository >> project [
 	| iceProject |
 	iceProject := self iceRepository project.
 	^ iceProject isUnborn
 		ifTrue: [ PBProjectMetadataNotFound signal ]
-		ifFalse: [ iceProject pakbotProject ]
+		ifFalse: [ [ iceProject pakbotProject ] 
+						on: PBProjectMetadataNotFound
+						do: [ self pakbotProjecctFromMetacelloBaseline ] ]
 ]
 
 { #category : #configuring }

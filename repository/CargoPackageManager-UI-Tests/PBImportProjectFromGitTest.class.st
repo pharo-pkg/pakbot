@@ -43,6 +43,24 @@ PBImportProjectFromGitTest >> tearDown [
 ]
 
 { #category : #tests }
+PBImportProjectFromGitTest >> testCanImportProjectWhenNoMetadataFound [
+	version := '1.0'.
+	url := 'git@github.com:pharo-pkg/PakbotTestExample.git'.
+	importPanel repositoryUrlInputText text: url.
+	importPanel versionInputText text: version.
+	
+	project := importPanel accept.
+	
+	"Once the project is imported, load project dialog pops up"
+	PBLoadProjectDialog allInstances do: #delete.
+	
+	self assert: project notNil description: 'Unexpected nil project'.
+	self assert: project name equals: 'PakbotTestExample'.
+	self assert: project version printString equals: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'. "v1 commitish"
+	self assert: project description equals: ''. "no description"
+]
+
+{ #category : #tests }
 PBImportProjectFromGitTest >> testCloneErrorIsCaptured [
 
 	url := 'https://github.com/pharo-pkg/unexisting-repo.git'.
