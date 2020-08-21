@@ -45,7 +45,7 @@ PBImportProjectFromGitTest >> tearDown [
 { #category : #tests }
 PBImportProjectFromGitTest >> testCanImportProjectWhenNoMetadataFound [
 	version := '1.0'.
-	url := 'git@github.com:pharo-pkg/PakbotTestExample.git'.
+	url := 'https://github.com/pharo-pkg/PakbotTestExample.git'.
 	importPanel repositoryUrlInputText text: url.
 	importPanel versionInputText text: version.
 	
