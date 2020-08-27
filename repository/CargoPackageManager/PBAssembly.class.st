@@ -163,7 +163,7 @@ PBAssembly >> packageCandidates [
 
 { #category : #accessing }
 PBAssembly >> packageNames [
-	^ self packageUnits collect: #packageName
+	^ self packages collect: #name
 ]
 
 { #category : #accessing }

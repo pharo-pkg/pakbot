@@ -64,8 +64,8 @@ PBBaselineVisitor >> for: platformAttribute do: aBlockClosure [
 { #category : #visiting }
 PBBaselineVisitor >> group: aName with: aCollection [
 	| assembly |
-	assembly := project addAssemblyNamed: aName. 
-	assembly parts: aCollection
+	assembly := project addAssemblyNamed: aName.
+	aCollection do: [ :each | assembly addPackage: (project packageNamed: each) ]
 ]
 
 { #category : #initialization }

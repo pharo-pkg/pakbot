@@ -47,6 +47,18 @@ group: 'Leaves' with: #( 'PakbotTestExample-PackageA' 'PakbotTestExample-Package
 ]
 
 { #category : #tests }
+PBBaselineVisitorTest >> testAssembliesOnlyContainPackages [
+
+	self simpleBaseline: visitor.
+	
+	visitor project assemblies do: 
+		[ :assembly |
+		 self
+			assert: (assembly parts allSatisfy: [ :part | part isUnit or: [ assembly isAssembly ] ])
+			description: 'Assembly should only contains package units or assemblies' ].
+]
+
+{ #category : #tests }
 PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 	| dependency |
 	
@@ -98,7 +110,7 @@ PBBaselineVisitorTest >> testCanGetGroups [
 		assert: visitor project assemblies size
 		equals: 2.
 	self
-		assertCollection: (visitor project assemblyNamed: 'Leaves') parts
+		assertCollection: (visitor project assemblyNamed: 'Leaves') packageNames
 		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageC')
 ]
 
