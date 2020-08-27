@@ -1,5 +1,7 @@
 "
 API for common package / projet dependencies
+
+project instance variable holds a reference to the project declaring the dependency.
 "
 Class {
 	#name : #CGOAbstractDependency,
@@ -7,7 +9,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #conflicts }

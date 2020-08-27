@@ -57,7 +57,9 @@ PBAssembly >> addPart: aPackageNameOraPackageVersionReference [
 	constraints := pkgVersionRef versionNumber 
 		ifNil: [ #() ]
 		ifNotNil: [ Array with: '=' , pkgVersionRef versionString ].
-	packages add: (CGOPackageDependency newFrom: pkgVersionRef packageName  -> constraints)
+	packages add: ((CGOPackageDependency newFrom: pkgVersionRef packageName  -> constraints)
+							project: project;
+							yourself)
 ]
 
 { #category : #accessing }
