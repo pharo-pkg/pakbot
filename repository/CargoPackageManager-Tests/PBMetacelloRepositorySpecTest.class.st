@@ -26,7 +26,7 @@ PBMetacelloRepositorySpecTest >> testCanBeConvertedToGitUrl [
 
 	self
 		assert: spec asGitUrl scpUrl
-		equals: 'git@github.com/marianopeck/FFICHeaderExtractor.git'
+		equals: 'git@github.com:marianopeck/FFICHeaderExtractor.git'
 ]
 
 { #category : #tests }

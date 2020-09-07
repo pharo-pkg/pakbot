@@ -108,5 +108,5 @@ PBGitUrlTest >> testCanGetHttpUrl [
 PBGitUrlTest >> testCanGetScpUrl [
 	self
 		assert: (PBGitUrl url: 'https://github.com/demarey/pharo-counter.git') scpUrl
-		equals: 'git@github.com/demarey/pharo-counter.git'
+		equals: 'git@github.com:demarey/pharo-counter.git'
 ]
