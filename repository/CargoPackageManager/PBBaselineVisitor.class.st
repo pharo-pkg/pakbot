@@ -35,6 +35,7 @@ PBBaselineVisitor >> baseline: aBaseline [
 { #category : #visiting }
 PBBaselineVisitor >> baseline: aName with: aBlockClosure [
 	| dependency |
+
 	projectDependencyProperties := Dictionary with: 'version' -> 'master'.
 	aBlockClosure value.
 	dependency := PBMetacelloBaselineProjectDependency

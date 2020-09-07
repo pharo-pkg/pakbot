@@ -59,7 +59,7 @@ PBMetacelloBaselineProjectDependencyTest >> testIcebergUrlWhenGitUrlProvided [
 		
 	self 
 		assert: dependency icebergUrl
-		equals: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'.
+		equals: 'git@github.com/pharo-pkg/PakbotTestExample.git'.
 ]
 
 { #category : #tests }
@@ -72,5 +72,5 @@ PBMetacelloBaselineProjectDependencyTest >> testIcebergUrlWhenMetacelloGithubUrl
 		
 	self 
 		assert: dependency icebergUrl
-		equals: 'https://github.com/pharo-pkg/PakbotTestExample.git'.
+		equals: 'git@github.com/pharo-pkg/PakbotTestExample.git'.
 ]

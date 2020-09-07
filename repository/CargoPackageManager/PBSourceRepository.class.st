@@ -26,7 +26,7 @@ PBSourceRepository class >> fromDictionary: aDictionary [
 PBSourceRepository class >> fromStringUrl: url subdirectory: subdirectoryName [
 	^ (self isGitRepositoryUrl: url)
 		ifTrue: [ PBGitRepositoryCreator new
-			githubUrl: url;
+			url: url;
 			subdirectory: subdirectoryName;
 			create ]
 		ifFalse: [ CGOMonticelloRepository repositoryUrl: url ]

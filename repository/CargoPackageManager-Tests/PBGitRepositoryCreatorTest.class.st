@@ -21,7 +21,7 @@ PBGitRepositoryCreatorTest >> testCanCreateLocalDirectory [
 PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromGitHubUrl [
 
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/pharo-counter.git';
+		url: 'git@github.com:demarey/pharo-counter.git';
 		create.
 
 	self 	
@@ -92,5 +92,5 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromSshUrlWithNoProtocol [
 		equals: PBGitRepository.
 	self 
 		assert: repository repositoryUrl
-		equals: 'git://git@github.com/demarey/pharo-counter.git'.
+		equals: 'git@github.com:demarey/pharo-counter.git'.
 ]

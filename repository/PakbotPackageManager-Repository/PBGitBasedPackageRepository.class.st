@@ -47,7 +47,7 @@ PBGitBasedPackageRepository >> iceRepository [
 { #category : #initialization }
 PBGitBasedPackageRepository >> initialize [
 	repository := PBGitRepositoryCreator new
-		githubUrl: self class defaultGitUrl;
+		url: self class defaultGitUrl;
 		location: root;
 		createAndClone.
 	root := self workingCopy fileSystem

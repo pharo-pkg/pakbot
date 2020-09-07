@@ -36,7 +36,7 @@ PBImportProjectFromGitPanel class >> defaultSpec [
 PBImportProjectFromGitPanel >> accept [
 	| project repository |
 	[ repository := PBGitRepositoryCreator new
-		githubUrl: repositoryUrlInputText text;
+		url: repositoryUrlInputText text;
 		version: versionInputText text;
 		createAndClone ]
 		on: IceCloneError, IceAuthenticationError

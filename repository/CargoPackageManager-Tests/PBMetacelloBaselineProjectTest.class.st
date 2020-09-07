@@ -45,3 +45,17 @@ PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlToMetacelloUrl
 		assert: project metacelloUrl
 		equals: 'github://pharo-pkg/PakbotTestExample:1.0'
 ]
+
+{ #category : #tests }
+PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlWithSubdirectoryToMetacelloUrl [
+	| project |
+	
+	project := PBMetacelloBaselineProject 
+		repository: 'github://pharo-pkg/PakbotTestExample' 
+		name: 'PakbotTestExample' 
+		version: '1.0'.
+	
+	self
+		assert: project metacelloUrl
+		equals: 'github://pharo-pkg/PakbotTestExample:1.0'
+]

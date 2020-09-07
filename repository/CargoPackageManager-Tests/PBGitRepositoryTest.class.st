@@ -23,7 +23,7 @@ PBGitRepositoryTest >> assertSrcPackageVersion: srcPackageVersion hasSameUrlAs: 
 { #category : #'tests - test data' }
 PBGitRepositoryTest >> pakbotTestExampleMasterCloned [
 	^ PBGitRepositoryCreator new
-		githubUrl: 'https://github.com/pharo-pkg/PakbotTestExample.git';
+		url: 'https://github.com/pharo-pkg/PakbotTestExample.git';
 		location: self iceRepositoryLocation;
 		version: 'master';
 		createAndClone
@@ -32,7 +32,7 @@ PBGitRepositoryTest >> pakbotTestExampleMasterCloned [
 { #category : #'tests - test data' }
 PBGitRepositoryTest >> pharoCounterMaster [
 	^ PBGitRepositoryCreator new
-		githubUrl: 'https://github.com/demarey/pharo-counter.git';
+		url: 'https://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		version: 'master';
 		create
@@ -84,7 +84,7 @@ PBGitRepositoryTest >> testCanDetectBaselines [
 	
 	| baselines |
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'https://github.com/pharo-pkg/PakbotTestExample.git';
+		url: 'https://github.com/pharo-pkg/PakbotTestExample.git';
 		location: self iceRepositoryLocation;
 		createAndClone.
 
@@ -106,7 +106,7 @@ PBGitRepositoryTest >> testCanDetectGitRepositoryCloned [
 			location: location;
 			createRepository.
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/pharo-counter.git';
+		url: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
 	
@@ -134,7 +134,7 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenReposi
 			createRepository.
 	(iceRepository lookupCommit: '749fcd4dd78387b6d46ed93dc5fda8a289d872f8') checkout.
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'git@github.com:demarey/pharo-counter.git';
+		url: 'git@github.com:demarey/pharo-counter.git';
 		location: location;
 		create.
 	
@@ -153,7 +153,7 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenReposi
 PBGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'http://github.com/demarey/pharo-counter.git';
+		url: 'http://github.com/demarey/pharo-counter.git';
 		location: self iceRepositoryLocation;
 		create.
 		
@@ -239,7 +239,7 @@ PBGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 PBGitRepositoryTest >> testGetPackageMetadataNotFoundErrorWhenMetadataFileAbsent [
 
 	repository := PBGitRepositoryCreator new
-		githubUrl: 'http://github.com/demarey/HotelApp.git';
+		url: 'http://github.com/demarey/HotelApp.git';
 		location: self iceRepositoryLocation;
 		createAndClone.
 

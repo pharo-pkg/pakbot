@@ -36,14 +36,10 @@ PBMetacelloProjectDependency class >> fromSton: stonReader [
 
 { #category : #'instance creation' }
 PBMetacelloProjectDependency class >> name: projectName repositoryUrl: repositoryString version: versionString [
-	| projectDependency |
-	projectDependency := self basicNew.
-	projectDependency initialize.
-	projectDependency
-		setName: projectName
-		repositoryUrl: repositoryString
-		version: versionString.
-	^ projectDependency yourself
+	^ self basicNew
+		initialize;
+		setName: projectName repositoryUrl: repositoryString version: versionString;
+		yourself 
 ]
 
 { #category : #accessing }

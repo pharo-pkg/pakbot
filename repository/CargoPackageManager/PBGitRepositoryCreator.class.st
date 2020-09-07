@@ -39,16 +39,10 @@ PBGitRepositoryCreator class >> normalizeUrl: aString [
 ]
 
 { #category : #action }
-PBGitRepositoryCreator class >> repositoryCreatorWithUrl: urlOrString [
-	| url |
-	url := self urlWithScheme: urlOrString.
-	^ (self isGitHubScheme: url)
-		ifTrue: [ self new 
-						githubUrl: url;
-						yourself ]
-		ifFalse: [ self new
-						url: url;
-						yourself ]
+PBGitRepositoryCreator class >> repositoryCreatorWithUrl: urlString [
+	^ self new 
+		url: urlString;
+		yourself
 ]
 
 { #category : #action }
@@ -109,30 +103,14 @@ PBGitRepositoryCreator >> createNewRepositoryNamed: aString [
 	^ PBGitRepository repository: iceRepository
 ]
 
-{ #category : #setting }
-PBGitRepositoryCreator >> githubUrl: aStringOrUrl [
-
-	self url: aStringOrUrl
-]
-
 { #category : #converting }
 PBGitRepositoryCreator >> icebergUrl [
-	^ self isGitOverSshScheme
-		ifTrue: [ String streamContents: [ :stream | | path |
-				url printAuthorityOn: stream.
-				path := String streamContents: [ :pathStream | url printPathQueryFragmentOn: pathStream  ].
-				stream << $: << path allButFirst. "ZnUrl adds a $/ as first path segment. Not a valid url for iceberg" ] ]
-		ifFalse: [ url asString ]
+	^ url asGitUrl scpUrl
 ]
 
 { #category : #initialization }
 PBGitRepositoryCreator >> initialize [
 	location := nil
-]
-
-{ #category : #testing }
-PBGitRepositoryCreator >> isGitOverSshScheme [
-	^ url scheme = #'git+ssh'
 ]
 
 { #category : #setting }
@@ -146,9 +124,9 @@ PBGitRepositoryCreator >> subdirectory: aString [
 ]
 
 { #category : #setting }
-PBGitRepositoryCreator >> url: aStringOrUrl [
+PBGitRepositoryCreator >> url: aString [
 
-	url := aStringOrUrl ifNotNil: [ aStringOrUrl asString ]
+	url := aString
 ]
 
 { #category : #setting }

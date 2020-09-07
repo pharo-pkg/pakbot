@@ -18,20 +18,15 @@ PBMetacelloBaselineProjectDependency class >> example [
 { #category : #'instance-creation' }
 PBMetacelloBaselineProjectDependency class >> fromMetacelloSpec: aMetacelloSpec [
 
-	| metacelloUrl metacelloUrlParts version dependencyUrl |
+	| metacelloUrl repoSpec |
 	metacelloUrl := aMetacelloSpec repositories map values first description.
-	metacelloUrlParts := metacelloUrl substrings: ':'.
+	repoSpec := PBMetacelloRepositorySpec url: metacelloUrl.
 	
-	version := metacelloUrlParts size > 2
-		ifTrue: [ metacelloUrlParts last ]
-		ifFalse: [ nil. "No version specified? We cannot compare versions so we build the dependency from the info we have to further handle a conflict if needed" ].
-
-	dependencyUrl := metacelloUrlParts first , ':', metacelloUrlParts second.
-
+	"No version specified? We cannot compare versions so we build the dependency from the info we have to further handle a conflict if needed"
 	^ self
 		name: aMetacelloSpec name
-		repositoryUrl: dependencyUrl
-		version: version
+		repositoryUrl: repoSpec
+		version: repoSpec version
 ]
 
 { #category : #accessing }
@@ -51,12 +46,7 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> icebergUrl [
-	| znUrl |
-	(url beginsWith: 'git@') ifTrue: [ ^ url ].
-	znUrl := url asZnUrl.
-	(znUrl isHttp or: [ znUrl isHttps or: [ znUrl scheme = #git ] ]) ifTrue: [ ^ url ].
-	
-	^ IceMetacelloRepositoryType httpsUrlFor: url
+	^ url asGitUrl scpUrl
 ]
 
 { #category : #'querying - installed' }
