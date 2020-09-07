@@ -98,7 +98,7 @@ PBGitUrl >> scheme [
 
 { #category : #accessing }
 PBGitUrl >> scpUrl [
-	^ 'git://{user}@{host}/{owner}/{project}.git' format: 
+	^ '{user}@{host}:{owner}/{project}.git' format: 
 		( Dictionary 
 			with: 'user' -> (self user ifNil: ['git'])
 			with: 'host' -> self host

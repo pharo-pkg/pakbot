@@ -199,3 +199,8 @@ PBMetacelloRepositorySpec >> urlWithoutVersion [
 PBMetacelloRepositorySpec >> version [
 	^ version
 ]
+
+{ #category : #accessing }
+PBMetacelloRepositorySpec >> version: aVersionString [
+	version := aVersionString
+]

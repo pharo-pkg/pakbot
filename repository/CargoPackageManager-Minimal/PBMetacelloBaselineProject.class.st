@@ -41,8 +41,9 @@ PBMetacelloBaselineProject >> isConfiguration [
 
 { #category : #accessing }
 PBMetacelloBaselineProject >> metacelloUrl [
-	
-	^ repository asMetacelloRepositorySpec asMetacelloUrl
+	^ repository asMetacelloRepositorySpec
+		version: self version;
+		asMetacelloUrl
 ]
 
 { #category : #accessing }
