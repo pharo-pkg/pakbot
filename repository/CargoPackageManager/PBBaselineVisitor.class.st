@@ -48,6 +48,11 @@ PBBaselineVisitor >> baseline: aName with: aBlockClosure [
 ]
 
 { #category : #visiting }
+PBBaselineVisitor >> blessing: aString [ 
+	" ignore "
+]
+
+{ #category : #visiting }
 PBBaselineVisitor >> className: aString [
 	"class name of the ConfigurationOf
 	ignored for now."
