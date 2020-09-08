@@ -1,5 +1,6 @@
 "
 I represent an url referering to a git repository.
+Valid git URLs are described at [https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols).
 It can be either an HTTP or a git URL.
 Some examples
 •	'git@github.com:demarey/pharo-counter.git'
