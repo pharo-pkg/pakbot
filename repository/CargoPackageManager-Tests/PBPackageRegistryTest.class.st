@@ -13,6 +13,21 @@ PBPackageRegistryTest >> setUp [
 ]
 
 { #category : #tests }
+PBPackageRegistryTest >> testCanDetectAMetacelloBaselineProjectIsAlreadyInstalled [
+	"Pakbot can automatically convert a Metacello baseline to a Pakbot Project.
+	When loading a Metacello baseline, the corresponding PBMetacelloBaselineProject is registered as a Pakbot project.
+	This project must answer if it is already installed"
+	
+	| project |
+	project := PBMetacelloBaselineProject example.
+	registry registerProject: project.
+	
+	self 
+		assert: project isInstalled
+		description: 'Cannot detect if a Metacello Baseline Project is already installed!'
+]
+
+{ #category : #tests }
 PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 	| project unit |
 	project := PBProjectVersion example.

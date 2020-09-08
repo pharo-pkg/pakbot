@@ -16,6 +16,14 @@ PBMetacelloBaselineProject class >> example [
 		fromProjectDependency: PBMetacelloBaselineProjectDependency example
 ]
 
+{ #category : #converting }
+PBMetacelloBaselineProject >> asDependency [
+	^ PBMetacelloBaselineProjectDependency
+		name: self name
+		repositoryUrl: self repository
+		version: self version
+]
+
 { #category : #loading }
 PBMetacelloBaselineProject >> basicLoad [
 	| metacello |
@@ -49,4 +57,9 @@ PBMetacelloBaselineProject >> metacelloUrl [
 { #category : #accessing }
 PBMetacelloBaselineProject >> resolvedVersion [
 	^ self version
+]
+
+{ #category : #testing }
+PBMetacelloBaselineProject >> satisfyConstraints: aVersionString [ 
+	^ self asDependency satisfyConstraints: aVersionString
 ]
