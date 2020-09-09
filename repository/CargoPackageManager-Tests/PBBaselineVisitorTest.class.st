@@ -18,6 +18,31 @@ PBBaselineVisitorTest >> babyMockConfiguration: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithForwardReference: spec [
+	<baseline>
+	spec
+		for: #common
+		do: [ spec
+				package: 'PakbotTestExample-PackageA';
+				group: 'groupWithFR' with: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageB' );
+				package: 'PakbotTestExample-PackageB' ]
+]
+
+{ #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithGroupForwardReference: spec [
+	<baseline>
+	spec
+		for: #common
+		do: [ spec
+				package: 'PakbotTestExample-PackageA';
+				package: 'PakbotTestExample-PackageB';
+				group: 'groupWithFR1' with: #(groupWithFR2 'PakbotTestExample-PackageC');
+				group: 'groupWithFR2' with: #('PakbotTestExample-PackageA' 'groupB');
+				group: 'groupB' with: #('PakbotTestExample-PackageB');
+				package: 'PakbotTestExample-PackageC' ]
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> parametrizedTestsBaseline: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
@@ -43,7 +68,7 @@ PBBaselineVisitorTest >> simpleBaseline: spec [
 				
 				spec
 			group: 'ALL' with: #( 'PakbotTestExample-PackageB' 'PakbotTestExample-PackageD' );
-group: 'Leaves' with: #( 'PakbotTestExample-PackageA' 'PakbotTestExample-PackageC' ) ]
+			group: 'Leaves' with: #( 'PakbotTestExample-PackageA' 'PakbotTestExample-PackageC' ) ]
 ]
 
 { #category : #tests }
@@ -64,6 +89,7 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 	
 	self simpleBaseline: visitor.
 	self parametrizedTestsBaseline: visitor.
+	visitor generateProject.
 	
 	self
 		assert: visitor project metacelloProjects size
@@ -86,6 +112,7 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
 	
 	self simpleBaseline: visitor.
 	self babyMockConfiguration: visitor.
+	visitor generateProject.
 	
 	self
 		assert: visitor project metacelloProjects size
@@ -106,6 +133,8 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
 PBBaselineVisitorTest >> testCanGetGroups [
 
 	self simpleBaseline: visitor.
+	visitor generateProject.
+
 	self
 		assert: visitor project assemblies size
 		equals: 2.
@@ -121,4 +150,35 @@ PBBaselineVisitorTest >> testCanGetPackages [
 	self
 		assertCollection: visitor project packageNames
 		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageB' 'PakbotTestExample-PackageC' 'PakbotTestExample-PackageD')
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanHandleForwardReferences [
+
+	| assembly |
+	self baselineWithForwardReference: visitor.
+	visitor generateProject.
+	
+	assembly := visitor project assemblies anyOne.
+	self
+		assertCollection: (assembly parts collect: #name)
+		hasSameElements: #(#'PakbotTestExample-PackageA' #'PakbotTestExample-PackageB')
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanHandleGroupForwardReferences [
+
+	| assembly |
+	self baselineWithGroupForwardReference: visitor.
+	visitor generateProject.
+	
+	assembly := visitor project assemblyNamed: #groupWithFR1.
+	self
+		assertCollection: (assembly parts collect: #name)
+		hasSameElements: #(groupWithFR2 'PakbotTestExample-PackageC').
+		
+	assembly := visitor project assemblyNamed: #groupWithFR2.
+	self
+		assertCollection: (assembly parts collect: #name)
+		hasSameElements: #('PakbotTestExample-PackageA' 'groupB')
 ]

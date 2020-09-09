@@ -3,15 +3,18 @@ I'm a visitor for Metacello Baselines.
 I build a Pakbot project from the information I get from the baseline.
 The project will not be registered in the default registry but in a new one created for the context of this visitor.
 
-Usage:
+Usage: 
+```
 	self projectFor: BaselineOfPakbot.
+```
 "
 Class {
 	#name : #PBBaselineVisitor,
 	#superclass : #Object,
 	#instVars : [
 		'project',
-		'projectDependencyProperties'
+		'projectDependencyProperties',
+		'groups'
 	],
 	#category : #'CargoPackageManager-Metacello'
 }
@@ -29,7 +32,8 @@ PBBaselineVisitor >> baseline: aBaseline [
 	| projectName |
 	projectName := aBaseline class name allButFirst: 'BaselineOf' size.
 	project name: projectName.
-	aBaseline baseline: self
+	aBaseline baseline: self.
+	self generateProject.
 ]
 
 { #category : #visiting }
@@ -67,16 +71,33 @@ PBBaselineVisitor >> for: platformAttribute do: aBlockClosure [
 	
 ]
 
+{ #category : #generating }
+PBBaselineVisitor >> generateAssemblies [
+	self sortedGroups do: [ :group | self generateAssemblyFor: group ]
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> generateAssemblyFor: group [
+	| assembly |
+	assembly := project addAssemblyNamed: group key.
+	group value do: [ :each | assembly addPackage: (project packageOrAssemblyNamed: each) ]
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> generateProject [
+	self generateAssemblies.
+	^ project
+]
+
 { #category : #visiting }
 PBBaselineVisitor >> group: aName with: aCollection [
-	| assembly |
-	assembly := project addAssemblyNamed: aName.
-	aCollection do: [ :each | assembly addPackage: (project packageNamed: each) ]
+	groups add: aName -> aCollection
 ]
 
 { #category : #initialization }
 PBBaselineVisitor >> initialize [
 	project := PBProjectVersion named: 'BaselineVisitorProject'.
+	groups := OrderedCollection new.
 	project registry: PBPackageRegistry new.
 ]
 
@@ -128,6 +149,19 @@ PBBaselineVisitor >> repository: aRepositoryUrlString [
 	projectDependencyProperties 
 		at: 'repository'
 		put: aRepositoryUrlString 
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> sortedGroups [
+	"sort groups so that their parts are already defined in project"
+	| sorter groupNames nodes |
+	sorter := MalTopologicalSorting new.
+	groupNames := groups collect: #key.
+	nodes := Set withAll: groupNames. "We ignore package as they are already added to the project".
+	sorter nodes: nodes.
+	sorter edges: groups from: #key toAll: #value.
+	
+	^ sorter run collect: [ :node | groups detect: [ :group | group key = node model ] ]
 ]
 
 { #category : #visiting }

@@ -455,6 +455,14 @@ PBProjectVersion >> packageNames [
 ]
 
 { #category : #accessing }
+PBProjectVersion >> packageOrAssemblyNamed: aString [ 
+	
+	^ [ self packageNamed: aString ]
+		on: NotFound 
+		do: [ self assemblyNamed: aString ]
+]
+
+{ #category : #accessing }
 PBProjectVersion >> packageUnits [
 	^ packages
 ]
