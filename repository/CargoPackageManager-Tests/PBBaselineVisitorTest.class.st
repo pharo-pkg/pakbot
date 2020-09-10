@@ -23,9 +23,9 @@ PBBaselineVisitorTest >> baselineWithForwardReference: spec [
 	spec
 		for: #common
 		do: [ spec
-				package: 'PakbotTestExample-PackageA';
-				group: 'groupWithFR' with: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageB' );
-				package: 'PakbotTestExample-PackageB' ]
+					package: 'PakbotTestExample-PackageA';
+					group: 'groupWithFR' with: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageB');
+					package: 'PakbotTestExample-PackageB' ]
 ]
 
 { #category : #'test data' }
@@ -34,17 +34,25 @@ PBBaselineVisitorTest >> baselineWithGroupForwardReference: spec [
 	spec
 		for: #common
 		do: [ spec
-				package: 'PakbotTestExample-PackageA';
-				package: 'PakbotTestExample-PackageB';
-				group: 'groupWithFR1' with: #(groupWithFR2 'PakbotTestExample-PackageC');
-				group: 'groupWithFR2' with: #('PakbotTestExample-PackageA' 'groupB');
-				group: 'groupB' with: #('PakbotTestExample-PackageB');
-				package: 'PakbotTestExample-PackageC' ]
+					package: 'PakbotTestExample-PackageA';
+					package: 'PakbotTestExample-PackageB';
+					group: 'groupWithFR1' with: #(groupWithFR2 'PakbotTestExample-PackageC');
+					group: 'groupWithFR2' with: #('PakbotTestExample-PackageA' 'groupB');
+					group: 'groupB' with: #('PakbotTestExample-PackageB');
+					package: 'PakbotTestExample-PackageC' ]
 ]
 
 { #category : #'test data' }
 PBBaselineVisitorTest >> parametrizedTestsBaseline: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
+]
+
+{ #category : #'test data' }
+PBBaselineVisitorTest >> processWrapperConfiguration: spec [
+	spec configuration: 'ProcessWrapper' 
+				with: [ spec
+					versionString: '1.2';
+					repository: 'http://smalltalkhub.com/mc/hernan/ProcessWrapper/main' ].
 ]
 
 { #category : #running }
@@ -107,7 +115,30 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 ]
 
 { #category : #tests }
-PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfiguration [
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWtihConfigurationWith [
+	| dependency |
+	
+	self simpleBaseline: visitor.
+	self processWrapperConfiguration: visitor.
+	visitor generateProject.
+	
+	self
+		assert: visitor project metacelloProjects size
+		equals: 1.
+	dependency := visitor project metacelloProjects anyOne.
+	self
+		assert: dependency name 
+		equals: #ProcessWrapper.
+	self
+		assert: dependency repository
+		equals: 'http://smalltalkhub.com/mc/hernan/ProcessWrapper/main'.
+	self
+		assert: dependency version 
+		equals: '1.2'.
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWtihProjectWith [
 	| dependency |
 	
 	self simpleBaseline: visitor.

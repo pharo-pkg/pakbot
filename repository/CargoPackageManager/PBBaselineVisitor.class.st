@@ -14,7 +14,8 @@ Class {
 	#instVars : [
 		'project',
 		'projectDependencyProperties',
-		'groups'
+		'groups',
+		'currentAttributes'
 	],
 	#category : #'CargoPackageManager-Metacello'
 }
@@ -60,6 +61,11 @@ PBBaselineVisitor >> blessing: aString [
 PBBaselineVisitor >> className: aString [
 	"class name of the ConfigurationOf
 	ignored for now."
+]
+
+{ #category : #visiting }
+PBBaselineVisitor >> configuration: aString with: aBlock [ 
+	self project: aString with: aBlock
 ]
 
 { #category : #visiting }
