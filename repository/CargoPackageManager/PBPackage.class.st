@@ -74,7 +74,7 @@ PBPackage >> dependencies: aDependencyList [
 
 { #category : #testing }
 PBPackage >> fitsPlatformRequirements [
-	^ Cargo platformAttributes includesAll: platformRequirements
+	^ Pakbot platformAttributes includesAll: platformRequirements
 ]
 
 { #category : #comparing }
