@@ -60,7 +60,7 @@ PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 	
 	self
 		should: [ assembly := project addAssemblyNamed: 'Ass1' ]
-		raise: CGOPackageAlreadyRegistered
+		raise: PBPackageAlreadyRegistered
 ]
 
 { #category : #tests }
@@ -105,7 +105,7 @@ PBAssemblyTest >> testDuplicatedAssemblyIsNotAddedInProject [
 	
 	[ project addAssemblyNamed: 'Ass1'.
 		self fail ]
-			on: CGOPackageAlreadyRegistered
+			on: PBPackageAlreadyRegistered
 			do: [ "Ignore the exception" ].
 			
 	self assert: project assemblies size equals: 1

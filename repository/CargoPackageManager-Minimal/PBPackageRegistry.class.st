@@ -53,14 +53,14 @@ PBPackageRegistry class >> useDefaultRegistry: aPBPackageRegistry during: aBlock
 PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
 	
 	(self hasInstalledPackageNamed: aPackageName)
-		ifTrue: [ CGOPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
+		ifTrue: [ PBPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
 
 ]
 
 { #category : #private }
 PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
 	(self hasProjectNamed: aProjectName)
-		ifTrue: [ CGOPackageAlreadyRegistered
+		ifTrue: [ PBPackageAlreadyRegistered
 				signal: aProjectName , ' is already a registered project in the registry!' ]
 ]
 

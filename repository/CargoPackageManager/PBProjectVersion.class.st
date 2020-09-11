@@ -81,7 +81,7 @@ PBProjectVersion >> addAssemblyNamed: aName [
 		named: aName asSymbol
 		project: self.
 	(assemblies includes: assembly)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].		
+		ifTrue: [ PBPackageAlreadyRegistered signal ].		
 	assemblies add: assembly.
 	registry register: assembly.
 	self announceChanged.
@@ -414,7 +414,7 @@ PBProjectVersion >> newNotLoadedPackage: aString [
 	package := PBPackage named: aString asSymbol project: self.
 
 	(packages includes: package)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+		ifTrue: [ PBPackageAlreadyRegistered signal ].
 
 	packages add: package.
 	self announceChanged.
@@ -430,7 +430,7 @@ PBProjectVersion >> newVirtualPackage: aName [
 		for: aName asSymbol 
 		project: self.
 	(virtualPackages includes: virtual)
-		ifTrue: [ CGOPackageAlreadyRegistered signal ].
+		ifTrue: [ PBPackageAlreadyRegistered signal ].
 	virtualPackages add: virtual.
 	^ registry register: virtual
 ]
