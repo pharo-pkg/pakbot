@@ -18,6 +18,28 @@ PBBaselineVisitorTest >> babyMockConfiguration: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithConditionalPackageDeclaration: spec [
+	<baseline>
+	spec
+		for: #all do: [ 
+			spec 
+				package: 'PakbotTestExample-CommonPackage';
+				for: #bar do: [ spec package: 'PakbotTestExample-BarPackage' ]. ];
+		for: #foo do: [ spec package: 'PakbotTestExample-FooPackage' ].
+]
+
+{ #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithConditionalPackageDependencyDeclaration: spec [
+	<baseline>
+	spec
+		for: #common do: [ spec package: 'PakbotTestExample-PackageA' ];
+		for: #foo do: [ spec package: 'PakbotTestExample-FooPackage'.
+							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-FooPackage' ] ];
+		for: #bar do: [ spec package: 'PakbotTestExample-BarPackage'.
+							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-BarPackage' ] ].
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> baselineWithForwardReference: spec [
 	<baseline>
 	spec
@@ -89,6 +111,33 @@ PBBaselineVisitorTest >> testAssembliesOnlyContainPackages [
 		 self
 			assert: (assembly parts allSatisfy: [ :part | part isUnit or: [ assembly isAssembly ] ])
 			description: 'Assembly should only contains package units or assemblies' ].
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetDependenciesWhenDeclaredConditionally [
+	| project packageADependencies |
+	self baselineWithConditionalPackageDependencyDeclaration: visitor.
+	project := visitor 
+		generateProject;
+		project.
+	
+	self
+		assert: project packages size 
+		equals: 3.
+	self
+		assertCollection: project packageNames 
+		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-FooPackage' 'PakbotTestExample-BarPackage').
+	
+	packageADependencies := (project packageNamed: #'PakbotTestExample-PackageA') dependencies.
+	self
+		assert: packageADependencies size
+		equals: 2.
+	self
+		assertCollection: (packageADependencies detect: [ :e | e name = #'PakbotTestExample-FooPackage' ]) platformRequirements 
+		hasSameElements: #( #'foo' ).
+	self
+		assertCollection: (packageADependencies detect: [ :e | e name = #'PakbotTestExample-BarPackage' ]) platformRequirements 
+		hasSameElements: #( #'bar' ).
 ]
 
 { #category : #tests }
@@ -175,12 +224,53 @@ PBBaselineVisitorTest >> testCanGetGroups [
 ]
 
 { #category : #tests }
+PBBaselineVisitorTest >> testCanGetPackageDependencies [
+
+	| dependencies project |
+	self simpleBaseline: visitor.
+	project := visitor generateProject.
+	dependencies := (visitor project packageNamed: #'PakbotTestExample-PackageB') dependencies.
+	
+	self
+		assert: dependencies size
+		equals: 1.
+	self
+		assert: dependencies first targetedPackage
+		equals: #'PakbotTestExample-PackageA'
+]
+
+{ #category : #tests }
 PBBaselineVisitorTest >> testCanGetPackages [
 
+	| project |
 	self simpleBaseline: visitor.
+	project := visitor generateProject.
 	self
-		assertCollection: visitor project packageNames
+		assertCollection: project packageNames
 		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageB' 'PakbotTestExample-PackageC' 'PakbotTestExample-PackageD')
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetPackagesWhenDeclaredConditionally [
+	"ex: spec for: #windows do: [ ... ]"
+	| project |
+	self baselineWithConditionalPackageDeclaration: visitor.
+	project := visitor 
+		generateProject;
+		project.
+	
+	self
+		assert: project packages size 
+		equals: 3.
+	self
+		assertCollection: (project packageNamed: #'PakbotTestExample-CommonPackage') platformRequirements 
+		hasSameElements: #(#'all' ).
+	self
+		assertCollection: (project packageNamed: #'PakbotTestExample-FooPackage') platformRequirements 
+		hasSameElements: #(#'foo' ).
+	self
+		assertCollection: (project packageNamed: #'PakbotTestExample-BarPackage') platformRequirements 
+		hasSameElements: #( #'all' #'bar' ).
 ]
 
 { #category : #tests }

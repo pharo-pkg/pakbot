@@ -2,6 +2,7 @@
 This class represents a package dependency.
 The dependent is the package where this dependency was expressed.
 Scope is a Symbol reprensenting the name of an external project dependency declared. It is optional and could be nil. 
+Platform requirements allow conditional loading of the dependency (ex: only on Windows).
 "
 Class {
 	#name : #CGOPackageDependency,
@@ -9,9 +10,10 @@ Class {
 	#instVars : [
 		'dependent',
 		'constraints',
-		'scope'
+		'scope',
+		'platformRequirements'
 	],
-	#category : 'CargoPackageManager-Minimal-Dependencies'
+	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
 
 { #category : #'instance creation' }
@@ -112,9 +114,9 @@ CGOPackageDependency >> indexOfScope: packageName [
 
 { #category : #initialization }
 CGOPackageDependency >> initializeOn: aPackageName withConstraints: aConstraintList [
-	super initialize.
 	self initializeTargetAndScopeFrom: aPackageName.
-	constraints := Array newFrom: aConstraintList
+	constraints := Array newFrom: aConstraintList.
+	platformRequirements := Array new.
 ]
 
 { #category : #initialization }
@@ -152,6 +154,16 @@ CGOPackageDependency >> name [
 { #category : #accessing }
 CGOPackageDependency >> packageName [
 	^ targetedPackage
+]
+
+{ #category : #accessing }
+CGOPackageDependency >> platformRequirements [ 
+	^ platformRequirements
+]
+
+{ #category : #accessing }
+CGOPackageDependency >> platformRequirements: alistOfPlatformRequirement [
+	platformRequirements := alistOfPlatformRequirement asArray
 ]
 
 { #category : #printing }

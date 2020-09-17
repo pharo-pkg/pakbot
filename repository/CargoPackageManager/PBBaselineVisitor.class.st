@@ -15,7 +15,9 @@ Class {
 		'project',
 		'projectDependencyProperties',
 		'groups',
-		'currentAttributes'
+		'currentAttributes',
+		'currentElement',
+		'specs'
 	],
 	#category : #'CargoPackageManager-Metacello'
 }
@@ -26,6 +28,11 @@ PBBaselineVisitor class >> projectFor: aBaselineOf [
 	visitor := self new. 
 	visitor baseline: aBaselineOf new.
 	^ visitor project
+]
+
+{ #category : #accessing }
+PBBaselineVisitor >> attributesSeparator [
+	^ $:
 ]
 
 { #category : #visiting }
@@ -68,12 +75,32 @@ PBBaselineVisitor >> configuration: aString with: aBlock [
 	self project: aString with: aBlock
 ]
 
+{ #category : #accessing }
+PBBaselineVisitor >> currentAttributes [
+	^ currentAttributes
+]
+
+{ #category : #accessing }
+PBBaselineVisitor >> currentAttributesString [
+	^ (self attributesSeparator join: self currentAttributes)
+]
+
+{ #category : #accessing }
+PBBaselineVisitor >> currentSpec [ 
+	^ specs 
+		at: self currentAttributesString
+		ifAbsentPut: [ OrderedCollection new ]
+]
+
 { #category : #visiting }
 PBBaselineVisitor >> for: platformAttribute do: aBlockClosure [
-	(#common = platformAttribute or: [ Smalltalk image metacelloPlatformAttributes includes: platformAttribute ])
-		ifFalse: [ "spec is not for this platform" ^ self ].
-	
-	aBlockClosure value. 
+	"(#common = platformAttribute or: [ Smalltalk image metacelloPlatformAttributes includes: platformAttribute ])
+		ifFalse: [ ""spec is not for this platform"" ^ self ]."
+
+	currentAttributes add: platformAttribute.
+
+	[ aBlockClosure value ]
+		ensure: [ [ currentAttributes removeLast ] on: CollectionIsEmpty do: [ "ignore" ] ] 
 	
 ]
 
@@ -90,7 +117,27 @@ PBBaselineVisitor >> generateAssemblyFor: group [
 ]
 
 { #category : #generating }
+PBBaselineVisitor >> generatePackageFor: packageSpecs [
+	
+	packageSpecs size = 1
+		ifTrue: [	packageSpecs first asPakbotPackageIn: project ]
+		ifFalse: [ | package |
+			"Will generate a pakbot package by merging information available for me and the list of package specs given as argument"
+			package := project newNotLoadedPackage: packageSpecs first name.
+			packageSpecs do: [ :spec | spec mergeIn: package ] ].
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> generatePackages [
+		
+	self specsByPackage
+		do: [ :packageSpecs | self generatePackageFor: packageSpecs ].
+
+]
+
+{ #category : #generating }
 PBBaselineVisitor >> generateProject [
+	self generatePackages.
 	self generateAssemblies.
 	^ project
 ]
@@ -105,6 +152,8 @@ PBBaselineVisitor >> initialize [
 	project := PBProjectVersion named: 'BaselineVisitorProject'.
 	groups := OrderedCollection new.
 	project registry: PBPackageRegistry new.
+	currentAttributes := OrderedCollection new.
+	specs := Dictionary new.
 ]
 
 { #category : #visiting }
@@ -114,13 +163,15 @@ PBBaselineVisitor >> loads: parts [
 
 { #category : #visiting }
 PBBaselineVisitor >> package: aName [ 
-	project newNotLoadedPackage: aName.
+	^ self currentSpec add: (PBMetacelloPackageSpec named: aName)
 ]
 
 { #category : #visiting }
 PBBaselineVisitor >> package: aName with: aBlockClosure [ 
-	self package: aName.
-	self flag: 'TODO: handle dependencies'.
+
+	currentElement := self package: aName.
+	aBlockClosure value
+
 ]
 
 { #category : #visiting }
@@ -157,6 +208,11 @@ PBBaselineVisitor >> repository: aRepositoryUrlString [
 		put: aRepositoryUrlString 
 ]
 
+{ #category : #visiting }
+PBBaselineVisitor >> requires: aNameOrAListOfNames [
+	currentElement addRequirements: aNameOrAListOfNames
+]
+
 { #category : #generating }
 PBBaselineVisitor >> sortedGroups [
 	"sort groups so that their parts are already defined in project"
@@ -168,6 +224,17 @@ PBBaselineVisitor >> sortedGroups [
 	sorter edges: groups from: #key toAll: #value.
 	
 	^ sorter run collect: [ :node | groups detect: [ :group | group key = node model ] ]
+]
+
+{ #category : #accessing }
+PBBaselineVisitor >> specsByPackage [
+	| dict |
+	dict := Dictionary new.
+	specs keysAndValuesDo: [ :attributeString :specList |
+		specList do: [ :spec | 
+			spec attributes: (self attributesSeparator split: attributeString).
+			(dict at: spec name ifAbsentPut: OrderedCollection new) add: spec ] ].
+	^ dict
 ]
 
 { #category : #visiting }
