@@ -23,6 +23,7 @@ PBAssemblyUIItem >> assembly [
 PBAssemblyUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
 
 	| morph |
+	
 	morph := (self iconNamed: assembly iconName) asAlphaImageMorph.
 	morph setBalloonText: assembly balloonText.
 	self isInstalled ifFalse: [ morph alpha: 0.6 ].

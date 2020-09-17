@@ -8,7 +8,7 @@ Class {
 	#category : #'CargoPackageManager-Calypso-Environment-Items'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 PBPackageReferenceUIItem class >> on: aPackage inAssembly: anAssembly [
 
 	^ (self on: aPackage)
