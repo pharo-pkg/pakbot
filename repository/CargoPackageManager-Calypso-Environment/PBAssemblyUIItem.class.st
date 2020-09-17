@@ -23,9 +23,12 @@ PBAssemblyUIItem >> assembly [
 PBAssemblyUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
 
 	| morph |
-	morph := (Smalltalk ui theme iconNamed: assembly iconName) asMorph.
+	morph := (self iconNamed: assembly iconName) asAlphaImageMorph.
 	morph setBalloonText: assembly balloonText.
+	self isInstalled ifFalse: [ morph alpha: 0.6 ].
 	anItemCellMorph definitionMorph: morph
+	
+
 ]
 
 { #category : #accessing }
@@ -44,6 +47,12 @@ PBAssemblyUIItem >> isAffectedBy: anAnnouncement [
 PBAssemblyUIItem >> isAssembly [
 	
 	^ true
+]
+
+{ #category : #testing }
+PBAssemblyUIItem >> isInstalled [
+	
+	^ assembly isInstalled
 ]
 
 { #category : #accessing }
