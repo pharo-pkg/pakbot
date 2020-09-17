@@ -153,7 +153,7 @@ PBAssembly >> isEmpty [
 { #category : #'querying - installed' }
 PBAssembly >> isInstalled [
 	
-	^ (self parts collect: #asPackageDependency) allSatisfy: #isInstalled
+	^ self parts allSatisfy: #isInstalled
 ]
 
 { #category : #'support-ui' }
