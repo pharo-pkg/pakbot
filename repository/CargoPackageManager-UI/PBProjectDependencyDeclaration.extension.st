@@ -1,11 +1,11 @@
 Extension { #name : #PBProjectDependencyDeclaration }
 
 { #category : #'*CargoPackageManager-UI' }
-PBProjectDependencyDeclaration >> iconName [
-	^ self class iconName
+PBProjectDependencyDeclaration class >> iconName [
+	self subclassResponsibility
 ]
 
 { #category : #'*CargoPackageManager-UI' }
-PBProjectDependencyDeclaration class >> iconName [
-	self subclassResponsibility
+PBProjectDependencyDeclaration >> iconName [
+	^ self class iconName
 ]

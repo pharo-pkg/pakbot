@@ -79,12 +79,11 @@ PBPackageUIItem >> decorate: aBrowserItem [
 
 { #category : #decorating }
 PBPackageUIItem >> decorateTableCell: anItemCellMorph inContext: itemContext [
-
 	self isInstalled
-		ifTrue: [ anItemCellMorph definitionIcon: #package ]
+		ifTrue: [ anItemCellMorph definitionIcon: self package iconName ]
 		ifFalse: [ anItemCellMorph
 				definitionMorph:
-					((self iconNamed: #package) asAlphaImageMorph
+					((self iconNamed: self package iconName) asAlphaImageMorph
 						alpha: 0.6;
 						yourself) ]
 ]
