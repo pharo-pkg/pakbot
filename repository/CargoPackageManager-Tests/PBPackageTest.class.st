@@ -8,6 +8,34 @@ Class {
 }
 
 { #category : #tests }
+PBPackageTest >> testCanAddDependencyToAProject [
+	| unit |
+	unit := PBPackage example.
+	unit addDependency: (PBPakbotProjectDependency example).
+	
+	self 
+		assert: unit dependencies size 
+		equals: 1.
+	self
+		assert: unit dependencies first name
+		equals: 'pharo-counter'
+]
+
+{ #category : #tests }
+PBPackageTest >> testCanAddDependencyToAnotherPackage [
+	| unit |
+	unit := PBPackage example.
+	unit addDependency: (CGOPackageDependency on: 'DependentPackage').
+	
+	self 
+		assert: unit dependencies size 
+		equals: 1.
+	self
+		assert: unit dependencies first name
+		equals: 'DependentPackage'
+]
+
+{ #category : #tests }
 PBPackageTest >> testCanCreateMinimalPackage [
 	| unit |
 	unit := PBPackage named: #Test.
