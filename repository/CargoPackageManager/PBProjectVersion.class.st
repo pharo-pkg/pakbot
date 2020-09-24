@@ -174,11 +174,6 @@ PBProjectVersion >> basicLoad [
 ]
 
 { #category : #accessing }
-PBProjectVersion >> cargoProjectDependencies [
-	^ externalProjects reject: #isMetacelloProjectDependency
-]
-
-{ #category : #accessing }
 PBProjectVersion >> children [
 	^ self packageUnits , self assemblies, self virtualPackages
 ]
@@ -485,6 +480,11 @@ PBProjectVersion >> packages [
 PBProjectVersion >> packages: aListOfPackageUnits [
 	packages := aListOfPackageUnits asOrderedCollection.
 	packages do: [ :each | each project: self ]
+]
+
+{ #category : #accessing }
+PBProjectVersion >> pakbotProjectDependencies [
+	^ externalProjects reject: #isMetacelloProjectDependency
 ]
 
 { #category : #printing }

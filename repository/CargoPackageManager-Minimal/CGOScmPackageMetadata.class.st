@@ -84,7 +84,7 @@ CGOScmPackageMetadata >> packagesProviding: aName version: aSemanticVersion forE
 { #category : #private }
 CGOScmPackageMetadata >> registerExternalProjectsOf: aCGOProject [
 	"Add external projects metadata to this SCM package repository"
-	aCGOProject cargoProjectDependencies
+	aCGOProject pakbotProjectDependencies
 		do: [ :projectDependency | 
 			self
 				registerProjectFromSourceRepository: projectDependency repository

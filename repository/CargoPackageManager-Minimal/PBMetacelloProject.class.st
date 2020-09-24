@@ -71,11 +71,6 @@ PBMetacelloProject >> basicLoad [
 	self subclassResponsibility 
 ]
 
-{ #category : #'compatibility - CGOProject' }
-PBMetacelloProject >> cargoProjectDependencies [
-	^ #()
-]
-
 { #category : #accessing }
 PBMetacelloProject >> dependencies [
 	^ #()
@@ -194,6 +189,11 @@ PBMetacelloProject >> packageUnits [
 
 { #category : #accessing }
 PBMetacelloProject >> packages [
+	^ #()
+]
+
+{ #category : #'compatibility - CGOProject' }
+PBMetacelloProject >> pakbotProjectDependencies [
 	^ #()
 ]
 
