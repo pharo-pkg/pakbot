@@ -153,6 +153,12 @@ PBPackage >> removePackageFromSystem [
 	systemPackage removeFromSystem
 ]
 
+{ #category : #solving }
+PBPackage >> resolve [
+	
+	^ self project registry newSolver solvePackage: self
+]
+
 { #category : #'querying - installed' }
 PBPackage >> satisfyConstraints: aVersion [ 
 

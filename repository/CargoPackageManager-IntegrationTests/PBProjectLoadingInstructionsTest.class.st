@@ -23,6 +23,30 @@ PBProjectLoadingInstructionsTest >> tearDown [
 ]
 
 { #category : #tests }
+PBProjectLoadingInstructionsTest >> testPackageLoadingInstructionsWithBothProjectAndPackageDependency [
+
+	| resolution projectOne loadInstructions packageA |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	testRegistry reset. "unregister projectOne so that it will be installed"
+	
+	projectOne 
+		addDependency: (PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependencyOn: 'PackageB'.
+	projectOne newNotLoadedPackage: 'PackageB'.
+	resolution := packageA resolve.
+
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 1.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
+		(loadableUnit name = 'Test')
+			and: [ loadableUnit packagesToLoad includesAll: #('PackageA' 'PackageB')] ]).
+	"Counter is a project dependency, should not be loaded if not expressed in the package dependencies"
+]
+
+{ #category : #tests }
 PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotIncludeInstalledDependencies [
 	| resolution projectOne projectTwoName projectTwoRegistration |
 	
@@ -57,6 +81,31 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotInclude
 ]
 
 { #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithBothProjectAndPackageDependency [
+
+	| resolution projectOne loadInstructions packageA |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	testRegistry reset. "unregister projectOne so that it will be installed"
+	
+	projectOne 
+		addDependency: (PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependencyOn: 'PackageB'.
+	projectOne newNotLoadedPackage: 'PackageB'.
+	resolution := projectOne resolve.
+
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
+		(loadableUnit name = 'Test')
+			and: [ loadableUnit packagesToLoad asArray = #("We load all packages of the project")] ]).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+
+]
+
+{ #category : #tests }
 PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
 
 	| resolution projectOne |
@@ -86,8 +135,6 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProje
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
 
-	"Since the project and its dependencies are already loaded and up to date,
-	the calculated load instructions should strip out all installed things and then be empty"
 	self assert: resolution loadInstructions size equals: 1.
 	self assert: (resolution loadInstructions includes: self expectedCargoResolvedProject)
 ]
@@ -128,4 +175,23 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloC
 	the calculated load instructions should strip out all installed things and then be empty"
 	self assert: resolution loadInstructions size equals: 1.
 	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: configurationProject))
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithPackageDependency [
+
+	| resolution projectOne packageA loadInstructions |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	testRegistry reset. "unregister projectOne so that it will be installed"
+	
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: (PBPakbotProjectDependency example).
+	resolution := packageA resolve.
+	
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
+		(loadableUnit name = 'Test')
+			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
 ]

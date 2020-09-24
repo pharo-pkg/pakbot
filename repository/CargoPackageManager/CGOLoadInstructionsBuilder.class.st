@@ -14,13 +14,11 @@ Class {
 
 { #category : #'loading order' }
 CGOLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
-	| packageVersions |
+	| resolvedProjects |
 
-	packageVersions := ( resolvedDependencies
-		collect: [ :each | each resolution]
-		thenReject: [ :each | each isInstalled ] ) asArray.
-	packageVersions 
-		ifNotEmpty: [ loadInstructions addGroup: (PBLoadGroup newWithAll: packageVersions) ]
+	resolvedProjects := (resolvedDependencies reject: #isInstalled) asArray.
+	resolvedProjects 
+		ifNotEmpty: [ loadInstructions addGroup: (PBLoadGroup newWithAll: resolvedProjects) ]
 ]
 
 { #category : #'loading order' }

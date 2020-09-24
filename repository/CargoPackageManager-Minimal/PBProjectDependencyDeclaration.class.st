@@ -9,7 +9,8 @@ Class {
 	#name : #PBProjectDependencyDeclaration,
 	#superclass : #CGOAbstractDependency,
 	#instVars : [
-		'name'
+		'name',
+		'packagesToLoad'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
@@ -18,6 +19,11 @@ Class {
 PBProjectDependencyDeclaration >> constraints [
 	
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+PBProjectDependencyDeclaration >> initialize [ 
+	packagesToLoad := Set new.
 ]
 
 { #category : #testing }
@@ -45,4 +51,13 @@ PBProjectDependencyDeclaration >> name [
 { #category : #printing }
 PBProjectDependencyDeclaration >> printOn: aStream [
 	aStream << 'a ' << self class name << '(' << name << ')'
+]
+
+{ #category : #solving }
+PBProjectDependencyDeclaration >> resolveIn: aPBResolvedProject solver: aPBSolver [
+
+	aPBResolvedProject addResolvedDependency: 
+		(PBResolvedDependency
+			 onDependency: self
+			 resolution: (aPBSolver solveProject: self resolvedDependency))
 ]

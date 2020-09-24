@@ -28,6 +28,12 @@ PBLoadGroup >> = anotherObject [
 		and: [ self loadableUnits = anotherObject loadableUnits ]
 ]
 
+{ #category : #testing }
+PBLoadGroup >> anySatisfy: aBlock [
+	
+	^ loadableUnits anySatisfy: aBlock
+]
+
 { #category : #private }
 PBLoadGroup >> computeName [
 	name := ', ' join: (loadableUnits collect: #name)
@@ -43,7 +49,10 @@ PBLoadGroup >> fetchInto: aMCRepository [
 { #category : #testing }
 PBLoadGroup >> includes: aLoadableUnit [ 
 
-	^ loadableUnits includes: aLoadableUnit
+	^ loadableUnits 
+		detect: [ :each | each resolvedProjectVersion = aLoadableUnit ]   
+		ifFound: [ true ]
+		ifNone: [ false ]
 ]
 
 { #category : #initialization }
@@ -100,7 +109,7 @@ PBLoadGroup >> printOn: aStream [
 { #category : #loading }
 PBLoadGroup >> registerLoadedPackages [
 	self loadableUnits
-		do: [ :pkgVersion | 
-			pkgVersion versionLoaded.
-			PBPackageRegistry default register: pkgVersion ]
+		do: [ :resolvedProject | 
+			resolvedProject versionLoaded.
+			PBPackageRegistry default register: resolvedProject resolvedProjectVersion  ]
 ]

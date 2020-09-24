@@ -34,16 +34,25 @@ PBSolver >> registry: aRegistry [
 ]
 
 { #category : #solving }
-PBSolver >> solveProject: aProject [
+PBSolver >> solvePackage: aPBPackage [ 
 	| resolvedProject |
 
+	resolvedProject := PBResolvedProject onProject: aPBPackage project.
+	resolvedProject addToLoadList: aPBPackage name.
+
+	aPBPackage dependencies
+		do: [ :dep | dep resolveIn: resolvedProject solver: self ].
+
+	self checkConflictsOf: resolvedProject.
+	^ resolvedProject
+]
+
+{ #category : #solving }
+PBSolver >> solveProject: aProject [
+
+	| resolvedProject |
 	resolvedProject := PBResolvedProject onProject: aProject.
-	aProject dependencies
-		do: [ :each | 
-			resolvedProject addResolvedDependency:
-					(PBResolvedDependency
-						onDependency: each
-						resolution: (self solveProject: (each resolveInSolver: self))) ].
+	aProject dependencies do: [ :dep | dep resolveIn: resolvedProject solver: self ].
 	self checkConflictsOf: resolvedProject.
 	^ resolvedProject
 ]

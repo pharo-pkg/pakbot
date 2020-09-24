@@ -377,7 +377,7 @@ PBProjectVersion >> isProject [
 	^ true
 ]
 
-{ #category : #resolution }
+{ #category : #solving }
 PBProjectVersion >> isResolvedBy: aResolution [
 	
 	^ aResolution resolvesProject: self
@@ -594,9 +594,9 @@ PBProjectVersion >> resolve [
 ]
 
 { #category : #solving }
-PBProjectVersion >> resolveInSolver: aCGOSolver [ 
+PBProjectVersion >> resolvedDependency [ 
 	
-	"An ongoing project is already solved, we need the version in the image"
+	"A PBProjectVersion is already solved, we need the version in the image"
 	^ self
 ]
 

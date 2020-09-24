@@ -61,7 +61,7 @@ CGOAbstractDependency >> project: aCGOOngoingProject [
 ]
 
 { #category : #solving }
-CGOAbstractDependency >> resolveInSolver: aCGOSolver [ 
+CGOAbstractDependency >> resolvedDependency [ 
 	
 	self subclassResponsibility
 ]

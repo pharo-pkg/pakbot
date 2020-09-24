@@ -8,7 +8,8 @@ Class {
 		'originDependencies',
 		'resolvedProjectVersion',
 		'resolvedDependencies',
-		'isInstalledInImage'
+		'isInstalledInImage',
+		'packagesToLoad'
 	],
 	#category : #'CargoPackageManager-Solver'
 }
@@ -36,6 +37,11 @@ PBResolvedProject >> addResolvedDependency: aResolvedDependency [
 	resolvedDependencies add: aResolvedDependency 
 ]
 
+{ #category : #adding }
+PBResolvedProject >> addToLoadList: aPackageName [
+	packagesToLoad add: aPackageName
+]
+
 { #category : #accessing }
 PBResolvedProject >> allResolvedDependencies [
 	
@@ -49,6 +55,13 @@ PBResolvedProject >> allResolvedDependencies [
 PBResolvedProject >> allSubResolutions [
 	
 	^ self subresolutions asArray , (self subresolutions asArray flatCollect: [ :each | each allSubResolutions asArray ])
+]
+
+{ #category : #loading }
+PBResolvedProject >> basicLoad [
+	packagesToLoad 
+		ifEmpty: [ self resolvedProjectVersion basicLoad ]
+		ifNotEmpty: [ self resolvedProjectVersion basicLoad: packagesToLoad ] 
 ]
 
 { #category : #accessing }
@@ -118,7 +131,8 @@ PBResolvedProject >> initialize [
 	super initialize.
 	originDependencies := Set new.
 	resolvedDependencies := Set new.
-	isInstalledInImage := false
+	isInstalledInImage := false.
+	packagesToLoad := Set new.
 ]
 
 { #category : #comparing }
@@ -173,6 +187,11 @@ PBResolvedProject >> nameWithVersion [
 { #category : #accessing }
 PBResolvedProject >> originDependencies [
 	^ originDependencies
+]
+
+{ #category : #accessing }
+PBResolvedProject >> packagesToLoad [
+	^ packagesToLoad
 ]
 
 { #category : #printing }
@@ -262,4 +281,10 @@ PBResolvedProject >> subresolutions [
 PBResolvedProject >> version [
 	
 	^ resolvedProjectVersion version
+]
+
+{ #category : #loading }
+PBResolvedProject >> versionLoaded [
+	"for now, do nothing.
+	Maybe we should call versionLoaded on each loaded package?"
 ]

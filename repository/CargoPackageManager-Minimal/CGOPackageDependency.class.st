@@ -173,6 +173,21 @@ CGOPackageDependency >> printOn: aStream [
 	aStream << ')'.
 ]
 
+{ #category : #solving }
+CGOPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
+
+	aPBResolvedProject addToLoadList: self packageName.
+	self resolvedDependency dependencies 
+		do: [ :dep | 
+				dep resolveIn: aPBResolvedProject solver: aPBSolver ]
+
+]
+
+{ #category : #solving }
+CGOPackageDependency >> resolvedDependency [
+	^ project packageNamed: self packageName
+]
+
 { #category : #constrains }
 CGOPackageDependency >> satisfyConstraints: aSemanticVersion [ 
 	^ constraints allSatisfy: [ :each | each isCompatibleWith: aSemanticVersion ]

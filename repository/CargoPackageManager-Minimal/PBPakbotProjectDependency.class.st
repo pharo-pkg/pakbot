@@ -128,7 +128,7 @@ PBPakbotProjectDependency >> repositoryUrl: aString [
 ]
 
 { #category : #solving }
-PBPakbotProjectDependency >> resolveInSolver: aCGOSolver [
+PBPakbotProjectDependency >> resolvedDependency [
 	self isInstalled
 		ifTrue: [ ^ project registry projectNamed: self name ].
 
