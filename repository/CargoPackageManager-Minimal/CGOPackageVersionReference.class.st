@@ -12,7 +12,7 @@ Class {
 		'packageName',
 		'version'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -73,7 +73,7 @@ CGOPackageVersionReference >> fetchFromRepositories [
 	packageRepositories do: 
 		[ :repository |
 		[ ^ repository fetch: packageName version: version ]
-			on: CGOPackageNotFoundError, CGOPackageVersionNotFoundError
+			on: PBPackageNotFoundError, CGOPackageVersionNotFoundError
 			do: [ "ignore, let's iterate on the next repository" ] ].
 	CGOPackageVersionNotFoundError signal: 'Cannot find ' , self asString
 ]

@@ -4,7 +4,7 @@ A BleedingEdgeUpdatePolicy is used to specify that we should always take the lat
 Class {
 	#name : #CGOBleedingEdgeResolutionStrategy,
 	#superclass : #CGOPackageVersionResolutionStrategy,
-	#category : 'CargoPackageManager-SolverStrategies'
+	#category : #'CargoPackageManager-SolverStrategies'
 }
 
 { #category : #printing }
@@ -21,9 +21,9 @@ CGOBleedingEdgeResolutionStrategy >> versionOf: aCGOPackageDependency in: aRepos
 	aRepositoryList 
 		do: [ :repository | 
 			[ candidates add: (repository latestVersionOfPackage: packageName suitableForEnvironment: platformAttributes) asPackageVersionReference ]
-				on: CGOPackageNotFoundError
+				on: PBPackageNotFoundError
 				do: [ "ignore" ] ].
-	candidates ifEmpty: [ CGOPackageNotFoundError signal: packageName ].
+	candidates ifEmpty: [ PBPackageNotFoundError signal: packageName ].
 	(candidates size = 1)
 		ifTrue: [ ^ candidates anyOne ].
 	candidates := candidates groupedBy: #packageName.

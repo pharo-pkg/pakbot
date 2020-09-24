@@ -80,7 +80,7 @@ CGODirectoryPackageRepositoryTest >> testFetchExactPackageVersionShouldFailIfAbs
 	packageName := 'Grease-Core-Not-There'.
 	version := '1.1.13'.
 	
-	self should: [ greaseRepository fetch: packageName version: version ] raise: CGOPackageNotFoundError
+	self should: [ greaseRepository fetch: packageName version: version ] raise: PBPackageNotFoundError
 ]
 
 { #category : #tests }
@@ -129,7 +129,7 @@ CGODirectoryPackageRepositoryTest >> testFetchExactVirtualPackageVersionShouldFa
 	
 	self 
 		should: [ greaseRepository fetch: packageName version: version ]
-		raise: CGOPackageNotFoundError
+		raise: PBPackageNotFoundError
 ]
 
 { #category : #tests }

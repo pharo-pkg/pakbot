@@ -12,7 +12,7 @@ Class {
 		'znClient',
 		'packageVersionCache'
 	],
-	#category : 'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Model'
 }
 
 { #category : #'versions fetching' }
@@ -56,7 +56,7 @@ CGORemoteRepositoryProxy >> latestVersionOfPackage: aPackageName suitableForEnvi
 	on: ZnHttpUnsuccessful 
 	do: [ :error |
 		znClient isNotFound 
-			ifTrue: [ CGOPackageNotFoundError signal: aPackageName ]
+			ifTrue: [ PBPackageNotFoundError signal: aPackageName ]
 			ifFalse: [ error signal ] ]
 ]
 
@@ -70,7 +70,7 @@ CGORemoteRepositoryProxy >> package: aPackageName [
 	on: ZnHttpUnsuccessful 
 	do: [ :error |
 		znClient isNotFound 
-			ifTrue: [ CGOPackageNotFoundError signal: aPackageName ]
+			ifTrue: [ PBPackageNotFoundError signal: aPackageName ]
 			ifFalse: [ error signal ] ]
 ]
 
@@ -131,6 +131,6 @@ CGORemoteRepositoryProxy >> versionStringsOf: aPackageName [
 	on: ZnHttpUnsuccessful 
 	do: [ :error |
 		znClient isNotFound 
-			ifTrue: [ CGOPackageNotFoundError signal: aPackageName ]
+			ifTrue: [ PBPackageNotFoundError signal: aPackageName ]
 			ifFalse: [ error signal ] ]
 ]

@@ -24,7 +24,7 @@ PBPackageRepository >> fetch: aPackageName version: aVersion [
 	file := self fileForPackageNamed: aPackageName version: aVersion asString.
 	file exists 
 		ifTrue: [ ^ PBLoadableUnit fromStonString: file contents ]
-		ifFalse: [ CGOPackageNotFoundError signal ]
+		ifFalse: [ PBPackageNotFoundError signal ]
 
 ]
 

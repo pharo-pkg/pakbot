@@ -18,7 +18,7 @@ Class {
 	#instVars : [
 		'rootDirectory'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -54,7 +54,7 @@ CGODirectoryPackageRepository >> fetch: aPackageName version: aVersion [
 	| packageFolder packageVersionString |
 	packageFolder := self rootDirectory / aPackageName asLowercase.
 	packageFolder exists
-		ifFalse: [ CGOPackageNotFoundError signal: aPackageName ].
+		ifFalse: [ PBPackageNotFoundError signal: aPackageName ].
 	packageVersionString := aPackageName asLowercase, '@', aVersion asString.
 	(packageFolder / packageVersionString) exists 
 		ifTrue: [ ^ CGOPackageVersion fromStonString: (packageFolder / packageVersionString) contents ]
@@ -67,7 +67,7 @@ CGODirectoryPackageRepository >> fetchVirtual: aVirtualPackageName version: aVer
 	| packageFolder packageVersionString |
 	packageFolder := self virtualDirectory / aVirtualPackageName asLowercase.
 	packageFolder exists
-		ifFalse: [ CGOPackageNotFoundError signal: aVirtualPackageName ].
+		ifFalse: [ PBPackageNotFoundError signal: aVirtualPackageName ].
 	packageVersionString := aVirtualPackageName asLowercase, '@', aVersion asSemanticVersion asString.
 	(packageFolder / packageVersionString) exists 
 		ifTrue: [ ^ CGOVirtualPackageVersion fromStonString: (packageFolder / packageVersionString) contents ]
@@ -100,7 +100,7 @@ CGODirectoryPackageRepository >> package: aPackageName [
 		ifTrue: [ CGOPackageProvider default packageNamed: aPackageName ]
 		ifFalse: [ (self virtualDirectory / aPackageName asLowercase) exists
 			ifTrue: [ CGOPackageProvider default virtualPackageNamed: aPackageName ]
-			ifFalse: [ CGOPackageNotFoundError signal: aPackageName ] ]
+			ifFalse: [ PBPackageNotFoundError signal: aPackageName ] ]
 ]
 
 { #category : #'versions fetching' }

@@ -170,7 +170,7 @@ PBProjectVersion >> authors [
 PBProjectVersion >> basicLoad [
 	registry registerProject: self.
 	self packageUnits do: #basicLoad.
-	CGOProjectLoaded announceOnProject: self. 
+	PBProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #accessing }
@@ -397,7 +397,7 @@ PBProjectVersion >> load [
 	self resolve load.
 	self packages do: [ :package | registry register: package ].
 	
-	CGOProjectLoaded announceOnProject: self. 
+	PBProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #accessing }

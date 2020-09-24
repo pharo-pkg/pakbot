@@ -169,7 +169,7 @@ PBPackageRegistry >> newSolver [
 PBPackageRegistry >> packageNamed: aName [
 	^ self 
 		packageNamed: aName 
-		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
+		ifAbsent: [ PBPackageNotFoundError signal: aName asString ]
 ]
 
 { #category : #accessing }
@@ -205,7 +205,7 @@ PBPackageRegistry >> packageUnregistered: aRPackageUnregistered [
 PBPackageRegistry >> projectNamed: aName [
 	^ self 
 		projectNamed: aName 
-		ifAbsent: [ CGOPackageNotFoundError signal: aName asString ]
+		ifAbsent: [ PBPackageNotFoundError signal: aName asString ]
 ]
 
 { #category : #accessing }

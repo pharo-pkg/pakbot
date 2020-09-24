@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOSolverTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-FailingTests-Solver'
+	#category : #'CargoPackageManager-FailingTests-Solver'
 }
 
 { #category : #helpers }
@@ -222,7 +222,7 @@ CGOSolverTest >> testResolutionOfUnexistentPackageVersionShouldFail [
 
 	| solver |
 	solver := PBSolver new.
-	self should: [ solver solvePackageNamed: #'Unexistent' version: '1.0' ] raise: CGOPackageNotFoundError
+	self should: [ solver solvePackageNamed: #'Unexistent' version: '1.0' ] raise: PBPackageNotFoundError
 ]
 
 { #category : #tests }

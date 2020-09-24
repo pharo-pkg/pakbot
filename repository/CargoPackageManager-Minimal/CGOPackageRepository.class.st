@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'baseUrl'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -32,7 +32,7 @@ CGOPackageRepository >> checkPreviousRegistrationOf: aPackageVersion [
 			[ CGOPackageVersionAlreadyExistsError
 				signal: aPackageVersion asString , ' already defined' ] ]
 		on:
-			CGOPackageNotFoundError , CGOPackageVersionNotFoundError
+			PBPackageNotFoundError , CGOPackageVersionNotFoundError
 		do: [  ].	"no version found for release versions => ok"
 	^ existingPackageVersion
 ]

@@ -9,7 +9,7 @@ Class {
 		'resolution',
 		'loadInstructions'
 	],
-	#category : 'CargoPackageManager-Loading'
+	#category : #'CargoPackageManager-Loading'
 }
 
 { #category : #'loading order' }
@@ -25,7 +25,7 @@ CGOLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
 
 { #category : #'loading order' }
 CGOLoadInstructionsBuilder >> loadInstructions [
-	loadInstructions := CGOLoadInstructions new.
+	loadInstructions := PBLoadInstructions new.
 	self loadOrder do: 
 		[ :resolvedDependencyOrCollection | 
 		self addLoadGroupFor: resolvedDependencyOrCollection asOrderedCollection ].
