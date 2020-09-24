@@ -23,7 +23,7 @@ PBVcsSerializedProjectV1Test >> counterUiProject [
 	project := (PBProjectVersion named: #'Counter-UI')
 		description: 'Small UI for the counter model.';
 		repository: PBGitMemoryRepository new;
-		addExternalCargoProject: dependency;
+		addExternalProjectRequirement: dependency;
 		registry: PBPackageRegistry new;
 		yourself.
 	(project createPackageNamed: #'Counter-UI-Spec')

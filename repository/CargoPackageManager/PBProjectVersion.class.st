@@ -99,8 +99,8 @@ PBProjectVersion >> addDependency: aDependency [
 ]
 
 { #category : #updating }
-PBProjectVersion >> addExternalCargoProject: aCGOProjectDependencyDeclaration [ 
-	externalProjects add: aCGOProjectDependencyDeclaration
+PBProjectVersion >> addExternalProjectRequirement: aPBProjectDependencyDeclaration [ 
+	externalProjects add: aPBProjectDependencyDeclaration
 ]
 
 { #category : #dependencies }
@@ -236,13 +236,21 @@ PBProjectVersion >> ensureIsTagged [
 ]
 
 { #category : #accessing }
+PBProjectVersion >> externalProjectNamed: aName [
+	"replace dependencies by externalProjects?"
+	^ dependencies
+		detect: [ :dep | dep name = aName ]
+		ifNone: [ PBPackageNotFoundError signal: aName ]
+]
+
+{ #category : #accessing }
 PBProjectVersion >> externalProjects [
 	^ externalProjects
 ]
 
 { #category : #updating }
-PBProjectVersion >> externalProjects: aDictionnaryOfCGOProjectDependencyDeclaration [  
-	externalProjects := aDictionnaryOfCGOProjectDependencyDeclaration
+PBProjectVersion >> externalProjects: aDictionnaryOfPBProjectDependencyDeclaration [  
+	externalProjects := aDictionnaryOfPBProjectDependencyDeclaration
 ]
 
 { #category : #accessing }

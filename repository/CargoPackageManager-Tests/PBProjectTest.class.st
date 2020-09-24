@@ -25,7 +25,7 @@ PBProjectTest >> testAddingDependencyPerformAnnouncement [
 PBProjectTest >> testCanGetMetacelloProjects [
 	| metacelloProjects |
 	ongoingProject 
-		addExternalCargoProject: 
+		addExternalProjectRequirement: 
 			(PBMetacelloConfigurationProjectDependency
 				name: 'Ston'
 				repositoryUrl: 'http://ss3.gemstone.com/ss/STON'
