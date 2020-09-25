@@ -126,9 +126,9 @@ PBPackageRegistry >> isOutSync: anUnit [
 ]
 
 { #category : #testing }
-PBPackageRegistry >> isProjectInstalled: aCGOOngoingProject [ 
+PBPackageRegistry >> isProjectInstalled: aPBProjectVersion [
 	
-	^ registeredProjects includes: aCGOOngoingProject
+	^ registeredProjects includes: aPBProjectVersion
 ]
 
 { #category : #'compatibility-repository' }
