@@ -250,7 +250,7 @@ PBGitRepository >> metadataStringFor: aPackageUnit [
 ]
 
 { #category : #converting }
-PBGitRepository >> pakbotProjecctFromMetacelloBaseline [
+PBGitRepository >> pakbotProjectFromMetacelloBaseline [
 
 	| baselinePackage baseline project |
 	self hasBaseline ifFalse: [ ^ nil ].
@@ -271,7 +271,7 @@ PBGitRepository >> project [
 		ifTrue: [ PBProjectMetadataNotFound signal ]
 		ifFalse: [ [ iceProject pakbotProject ] 
 						on: PBProjectMetadataNotFound
-						do: [ self pakbotProjecctFromMetacelloBaseline ifNil: [ PBProjectMetadataNotFound signal ] ] ]
+						do: [ self pakbotProjectFromMetacelloBaseline ifNil: [ PBProjectMetadataNotFound signal ] ] ]
 ]
 
 { #category : #configuring }
