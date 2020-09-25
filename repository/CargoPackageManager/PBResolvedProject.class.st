@@ -146,7 +146,7 @@ PBResolvedProject >> isInstalled [
 	"tells if the project is already installed AND registered in Pakbot registry. A project is already installed if ALL the project packages are installed in the system."
 	
 	| packagesToCheck |
-	packagesToCheck := packagesToLoad ifEmpty: [ resolvedProjectVersion packageNames ].
+	packagesToCheck := packagesToLoad ifEmpty: [ resolvedProjectVersion packages collect: #name ].
 	
 	^ resolvedProjectVersion isInstalled and: [ (resolvedProjectVersion installedPackages collect: #name) includesAll: packagesToCheck ]
 ]
