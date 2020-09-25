@@ -37,10 +37,10 @@ CGOAbstractDependency >> isInstalled [
 ]
 
 { #category : #testing }
-CGOAbstractDependency >> isOutSync [	
+CGOAbstractDependency >> isOutOfSync [	
 	"Returns true if there is a version of the project installed but not the correct version"
 	
-	^ project registry isOutSync: self.
+	^ project registry isOutOfSync: self.
 ]
 
 { #category : #testing }

@@ -58,7 +58,7 @@ PBProjectUnloadTest >> testUnloadRemovesTheProjectFromTheRegistry [
 	
 	project unload.
 	
-	self deny: (testRegistry hasProjectNamed: 'TestProject').
+	self deny: (testRegistry isProjectInstalled: 'TestProject').
 ]
 
 { #category : #tests }
@@ -76,5 +76,5 @@ PBProjectUnloadTest >> testUnloadRemovingPackagesRemovesTheProjectFromTheRegistr
 	
 	project unloadRemovingPackages.
 	
-	self deny: (testRegistry hasProjectNamed: 'TestProject').
+	self deny: (testRegistry isProjectInstalled: project).
 ]

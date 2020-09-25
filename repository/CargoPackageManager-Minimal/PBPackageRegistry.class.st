@@ -58,10 +58,10 @@ PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
 ]
 
 { #category : #private }
-PBPackageRegistry >> checkProjectRegistrationOf: aProjectName [
-	(self hasProjectNamed: aProjectName)
+PBPackageRegistry >> checkProjectRegistrationOf: aPBProjectVersion [
+	(self isProjectInstalled: aPBProjectVersion)
 		ifTrue: [ PBPackageAlreadyRegistered
-				signal: aProjectName , ' is already a registered project in the registry!' ]
+				signal: aPBProjectVersion name , ' is already a registered project in the registry!' ]
 ]
 
 { #category : #'API -dependencies' }
@@ -88,12 +88,6 @@ PBPackageRegistry >> hasInstalledPackageNamed: fullyQualifiedName [
 	^ self installedPackages anySatisfy: [ :each | each fullyQualifiedName = fullyQualifiedName]
 ]
 
-{ #category : #testing }
-PBPackageRegistry >> hasProjectNamed: aName [
-
-	^ registeredProjects anySatisfy: [ :each | each name = aName]
-]
-
 { #category : #initialization }
 PBPackageRegistry >> initialize [
 	super initialize.
@@ -118,7 +112,7 @@ PBPackageRegistry >> isInstalled: aDependency [
 ]
 
 { #category : #testing }
-PBPackageRegistry >> isOutSync: anUnit [ 
+PBPackageRegistry >> isOutOfSync: anUnit [ 
 
 	| found |
 	found := self packageNamed: anUnit fullyQualifiedName ifAbsent: [ ^ false ].
@@ -239,13 +233,13 @@ PBPackageRegistry >> registerInSystem [
 ]
 
 { #category : #registering }
-PBPackageRegistry >> registerProject: aCGOProject [
+PBPackageRegistry >> registerProject: aPBProjectVersion [
 	
-	self checkProjectRegistrationOf: aCGOProject name.
+	self checkProjectRegistrationOf: aPBProjectVersion.
 	
-	aCGOProject registry: self.
-	registeredProjects add: aCGOProject.
-	^ aCGOProject
+	aPBProjectVersion registry: self.
+	registeredProjects add: aPBProjectVersion.
+	^ aPBProjectVersion
 ]
 
 { #category : #accessing }
