@@ -173,6 +173,13 @@ PBProjectVersion >> basicLoad [
 	PBProjectLoaded announceOnProject: self. 
 ]
 
+{ #category : #'private-loading' }
+PBProjectVersion >> basicLoad: aListOfPackageName [
+	registry registerProject: self.
+	aListOfPackageName do: [ :pkgName | (self packageNamed: pkgName) basicLoad ].
+	PBProjectLoaded announceOnProject: self. 
+]
+
 { #category : #accessing }
 PBProjectVersion >> children [
 	^ self packageUnits , self assemblies, self virtualPackages
@@ -323,9 +330,15 @@ PBProjectVersion >> initializeWithProjectName: aProjectName [
 ]
 
 { #category : #accessing }
+PBProjectVersion >> installedPackages [
+	
+	^ self packages select: [ :each | each isInstalled ]
+]
+
+{ #category : #accessing }
 PBProjectVersion >> installedSystemPackages [
 	
-	^ self packages select: [ :each | each isInstalled ] thenCollect: [ :each | each systemPackage ]
+	^ self installedPackages collect: [ :each | each systemPackage ]
 ]
 
 { #category : #'compatibility - cargo solver' }

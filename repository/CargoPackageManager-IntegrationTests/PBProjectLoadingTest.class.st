@@ -11,6 +11,61 @@ PBProjectLoadingTest >> performTest [
 		during: [ self perform: testSelector asSymbol ]
 ]
 
+{ #category : #'tests-cargo-dependencies' }
+PBProjectLoadingTest >> testAResolvedProjectIsInstalledWhenAllPackagesToLoadAreInstalled [
+
+	| project repository resolvedProject |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	resolvedProject := project resolve.
+	resolvedProject load.
+	
+	self assert: resolvedProject isInstalled.
+]
+
+{ #category : #'tests-cargo-dependencies' }
+PBProjectLoadingTest >> testAResolvedProjectIsNotInstalledWhenAtLeastOnePackageToLoadIsNotInstalled [
+
+	| project repository packageCore resolvedProject |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	testRegistry registerProject: project.
+	
+	packageCore := project packageNamed: 'Counter-Core'.
+	resolvedProject := project resolve.
+	
+	self deny: resolvedProject isInstalled.
+
+]
+
+{ #category : #'tests-cargo-dependencies' }
+PBProjectLoadingTest >> testCanLoadAProjectPackage [
+
+	| project packageCore repository |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	packageCore resolve load.
+	
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self deny: (Smalltalk globals hasClassNamed: 'CounterTest').
+]
+
 { #category : #'tests-baseline-dependencies' }
 PBProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
 

@@ -61,7 +61,7 @@ PBResolvedProject >> allSubResolutions [
 PBResolvedProject >> basicLoad [
 	packagesToLoad 
 		ifEmpty: [ self resolvedProjectVersion basicLoad ]
-		ifNotEmpty: [ self resolvedProjectVersion basicLoad: packagesToLoad ] 
+		ifNotEmpty: [ self resolvedProjectVersion basicLoad: self packagesNotAlreadyInstalledToLoad ] 
 ]
 
 { #category : #accessing }
@@ -143,9 +143,12 @@ PBResolvedProject >> isEquivalentTo: aCGOResolvedProject [
 
 { #category : #testing }
 PBResolvedProject >> isInstalled [
-	"tells if the project is already installed AND registered in Pakbot registry.
-	For a Metacello project, will answer false if project is installed and registered in Metacello registry."
-	^ resolvedProjectVersion isInstalled
+	"tells if the project is already installed AND registered in Pakbot registry. A project is already installed if ALL the project packages are installed in the system."
+	
+	| packagesToCheck |
+	packagesToCheck := packagesToLoad ifEmpty: [ resolvedProjectVersion packageNames ].
+	
+	^ resolvedProjectVersion isInstalled and: [ (resolvedProjectVersion installedPackages collect: #name) includesAll: packagesToCheck ]
 ]
 
 { #category : #testing }
@@ -187,6 +190,11 @@ PBResolvedProject >> nameWithVersion [
 { #category : #accessing }
 PBResolvedProject >> originDependencies [
 	^ originDependencies
+]
+
+{ #category : #loading }
+PBResolvedProject >> packagesNotAlreadyInstalledToLoad [
+	^ packagesToLoad reject: [ :name | (self resolvedProjectVersion packageNamed: name) isInstalled ]
 ]
 
 { #category : #accessing }
