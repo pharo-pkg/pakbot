@@ -4,13 +4,8 @@ A virtual package is a generic name that applies to any one of a group of packag
 Class {
 	#name : #CGOVirtualPackage,
 	#superclass : #CGOPackage,
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
-
-{ #category : #testing }
-CGOVirtualPackage >> isPlatformPackage [
-	^ name endsWith: self platformSuffix
-]
 
 { #category : #testing }
 CGOVirtualPackage >> isVirtual [

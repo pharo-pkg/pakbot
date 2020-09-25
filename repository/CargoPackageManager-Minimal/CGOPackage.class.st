@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -36,11 +36,6 @@ CGOPackage >> dependentPackages [
 CGOPackage >> initializeWithName: aName [
 	super initialize.
 	name := aName
-]
-
-{ #category : #testing }
-CGOPackage >> isPlatformPackage [
-	^ false
 ]
 
 { #category : #testing }
