@@ -80,6 +80,15 @@ PBPackageTest >> testComparisonWithSamePackageReturnsTrue [
 ]
 
 { #category : #tests }
+PBPackageTest >> testPackageIsInstalledIfSystemPackageWithSameNameExists [
+	| project package |
+	project := testRegistry newProjectNamed: 'PBPackageTest'.
+	package := project newNotLoadedPackage: #'Kernel'.
+	
+	self assert: package isInstalled
+]
+
+{ #category : #tests }
 PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 	| project package |
 	project := testRegistry newProjectNamed: 'Pharo-Counter-Test'.
@@ -92,6 +101,15 @@ PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 
 	self assert: (Smalltalk globals hasClassNamed: 'Counter').
 	self assert: package isInstalled.
+]
+
+{ #category : #tests }
+PBPackageTest >> testPackageIsNotInstalledIfNoSystemPackageWithSameName [
+	| project package |
+	project := testRegistry newProjectNamed: 'PBPackageTest'.
+	package := project newNotLoadedPackage: #'BlaBla'.
+	
+	self deny: package isInstalled
 ]
 
 { #category : #'test data' }

@@ -104,7 +104,8 @@ PBPackage >> initializeWithPackageName: aPackageName andProject: aCargoProject [
 PBPackage >> isInstalled [
 	
 	project registry systemPackageOrganizer packageNamed: self name ifAbsent: [ ^false ].
-	^ (project registry isInstalled: self)
+	^ true
+	" To avoid overriding of an existing system package, we do not check package registration in the registry."
 ]
 
 { #category : #testing }
