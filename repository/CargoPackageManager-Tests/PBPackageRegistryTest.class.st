@@ -41,6 +41,22 @@ PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
 ]
 
 { #category : #tests }
+PBPackageRegistryTest >> testProjectCannotBeRegisteredIfAlreadyRegisteredWithDifferentVersionOrRepository [
+	| project |
+	registry registerProject:  PBProjectVersion example.
+	project := PBProjectVersion example.
+	project version: '1.1'.
+	
+	self 
+		should: [ registry registerProject: project ]
+		raise: PBPackageAlreadyRegistered.
+	
+	self 
+		assert: registry registeredProjects size 
+		equals: 1.
+]
+
+{ #category : #tests }
 PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 	| project unit |
 	project := PBProjectVersion example.
@@ -82,4 +98,19 @@ PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 	
 	self 
 		assert: registry registeredProjects isEmpty.
+]
+
+{ #category : #tests }
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredDoesNotRaiseAlreadyRegisteredIfSameVersionAndSameRepository [
+	| project |
+	project := PBProjectVersion example.
+	registry registerProject: project.
+	
+	self 
+		shouldnt: [ registry registerProject: project ]
+		raise: PBPackageAlreadyRegistered.
+	
+	self 
+		assert: registry registeredProjects size 
+		equals: 1.
 ]

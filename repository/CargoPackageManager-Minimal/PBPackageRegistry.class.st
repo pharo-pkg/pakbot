@@ -59,9 +59,15 @@ PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
 
 { #category : #private }
 PBPackageRegistry >> checkProjectRegistrationOf: aPBProjectVersion [
-	(self isProjectInstalled: aPBProjectVersion)
-		ifTrue: [ PBPackageAlreadyRegistered
-				signal: aPBProjectVersion name , ' is already a registered project in the registry!' ]
+	| installedProject |
+	
+	(self isProjectInstalled: aPBProjectVersion) ifFalse: [ ^ self ].
+	
+	installedProject := self projectNamed: aPBProjectVersion name.
+	(installedProject version = aPBProjectVersion version
+		and: [ installedProject repository = aPBProjectVersion repository ])
+			ifTrue: [ ^ self ].
+	PBPackageAlreadyRegistered signal: aPBProjectVersion name , ' is already a registered project in the registry!'.
 ]
 
 { #category : #'API -dependencies' }
