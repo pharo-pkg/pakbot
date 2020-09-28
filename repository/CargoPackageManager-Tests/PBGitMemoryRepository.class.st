@@ -26,3 +26,9 @@ PBGitMemoryRepository >> initialize [
 	super initialize.
 	packages := OrderedCollection new.
 ]
+
+{ #category : #loading }
+PBGitMemoryRepository >> loadPackageNamed: aString [ 
+	(packages includes: aString)
+		ifFalse: [ self error: 'package not found!' ]
+]
