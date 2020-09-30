@@ -1,7 +1,8 @@
 "
 I represent a Metacello Project and act as a Cargo project.
 Dependencies of this project will be loaded by Metacello as a black box for Cargo.
-I specify one or many packages / groups to load. Package dependencies are not described and so, a package/group can be seen as a package unit with no dependencies.
+I can specify one or many packages / groups to load. In this case, I remember the loads instructions in `loadedPackages` i.v.
+Package dependencies are not described and so, a package/group can be seen as a package unit with no dependencies.
 
 	See my subclasses for examples
 "
@@ -13,7 +14,8 @@ Class {
 		'name',
 		'version',
 		'packageNames',
-		'registry'
+		'registry',
+		'loadedPackages'
 	],
 	#category : #'CargoPackageManager-Minimal-Model'
 }
@@ -61,7 +63,7 @@ PBMetacelloProject >> asPackageVersionReference [
 		version: (SemanticVersion fromString: version)
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> assemblies [
 	^ #()
 ]
@@ -76,7 +78,7 @@ PBMetacelloProject >> dependencies [
 	^ #()
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> fitsPlatformRequirements [
 	^ true "it should be managed by Metecello"
 ]
@@ -113,7 +115,7 @@ PBMetacelloProject >> initializeWithRepository: repositoryString name: projectNa
 	packageNames := OrderedCollection new.
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> isAssembly [
 	" Let's say a CGOMetacelloProject is an assembly so that it will be ignored by PackageGroup mcVersions loading. "
 	^ true
@@ -167,7 +169,7 @@ PBMetacelloProject >> isVirtual [
 	^ false
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> metacelloProjects [
 	^ #()
 ]
@@ -177,12 +179,12 @@ PBMetacelloProject >> name [
 	^ name
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> packageName [
 	^ name
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> packageUnits [
 	^ #()
 ]
@@ -192,7 +194,7 @@ PBMetacelloProject >> packages [
 	^ #()
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> pakbotProjectDependencies [
 	^ #()
 ]
@@ -202,7 +204,7 @@ PBMetacelloProject >> printOn: aStream [
 	aStream << self class name << '(' << name << ')'
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> project [
 	^ self
 ]
@@ -228,7 +230,7 @@ PBMetacelloProject >> versionLoaded [
 	"Nothing to do"
 ]
 
-{ #category : #'compatibility - CGOProject' }
+{ #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> virtualPackages [
 	^ #()
 ]
