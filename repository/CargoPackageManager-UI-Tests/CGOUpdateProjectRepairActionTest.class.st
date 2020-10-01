@@ -9,10 +9,18 @@ Class {
 	#category : #'CargoPackageManager-UI-Tests'
 }
 
+{ #category : #'mocking RPackageOrganizer' }
+CGOUpdateProjectRepairActionTest >> packageNamed: aString ifAbsent: aBlock [
+	^ (project packageNames includes: aString)
+		ifTrue: [ RPackage named: aString ] 
+		ifFalse: [ aBlock value ]
+]
+
 { #category : #running }
 CGOUpdateProjectRepairActionTest >> setUp [
 	super setUp.
 	registry := PBPackageRegistry new.
+	registry systemPackageOrganizer: self.
 	project := registry newProjectNamed:'ATestProject'.
 
 	dependencyToProject := (PBMetacelloConfigurationProjectDependency   
