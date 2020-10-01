@@ -145,6 +145,11 @@ PBMetacelloProjectDependency >> metacelloProjectRegistry [
 ]
 
 { #category : #accessing }
+PBMetacelloProjectDependency >> packagesToLoad [
+	^ packagesToLoad
+]
+
+{ #category : #accessing }
 PBMetacelloProjectDependency >> repositoryUrl [
 	^ url
 ]

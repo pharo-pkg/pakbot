@@ -29,6 +29,12 @@ PBResolvedProject >> = anotherProject [
 		ifFalse: [ ^ false ].
 		
 	^ self resolution = anotherProject resolution
+		and: [ self packagesToLoad = anotherProject packagesToLoad ]
+]
+
+{ #category : #adding }
+PBResolvedProject >> addAllToLoadList: aListOfPackageName [
+	packagesToLoad addAll: aListOfPackageName
 ]
 
 { #category : #adding }
@@ -252,8 +258,8 @@ PBResolvedProject >> resolvedProjectVersion [
 ]
 
 { #category : #accessing }
-PBResolvedProject >> resolvedProjectVersion: anObject [
-	resolvedProjectVersion := anObject
+PBResolvedProject >> resolvedProjectVersion: aPBProject [
+	resolvedProjectVersion := aPBProject.
 ]
 
 { #category : #solving }

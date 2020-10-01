@@ -65,7 +65,6 @@ PBLoadGroup >> intializeWithPackageVersions: aListOfPackageVersions [
 PBLoadGroup >> load [
 
 	self loadableUnits do: [ :aLoadableUnit | aLoadableUnit basicLoad ].
-	self registerLoadedPackages.
 ]
 
 { #category : #accessing }
@@ -104,12 +103,4 @@ PBLoadGroup >> printOn: aStream [
 		<< '::'
 		<< loadableUnits asString
 		<< ')'
-]
-
-{ #category : #loading }
-PBLoadGroup >> registerLoadedPackages [
-	self loadableUnits
-		do: [ :resolvedProject | 
-			resolvedProject versionLoaded.
-			PBPackageRegistry default register: resolvedProject resolvedProjectVersion  ]
 ]

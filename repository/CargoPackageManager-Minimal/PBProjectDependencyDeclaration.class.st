@@ -44,8 +44,18 @@ PBProjectDependencyDeclaration >> isSameProjectAs: anotherProject [
 ]
 
 { #category : #accessing }
+PBProjectDependencyDeclaration >> loads: aListOfNames [ 
+	packagesToLoad addAll: aListOfNames
+]
+
+{ #category : #accessing }
 PBProjectDependencyDeclaration >> name [
 	^ name
+]
+
+{ #category : #accessing }
+PBProjectDependencyDeclaration >> packagesToLoad [
+	^ packagesToLoad
 ]
 
 { #category : #printing }
@@ -59,5 +69,5 @@ PBProjectDependencyDeclaration >> resolveIn: aPBResolvedProject solver: aPBSolve
 	aPBResolvedProject addResolvedDependency: 
 		(PBResolvedDependency
 			 onDependency: self
-			 resolution: (aPBSolver solveProject: self resolvedDependency))
+			 resolution: (aPBSolver solveProject: self resolvedDependency loads: self packagesToLoad))
 ]

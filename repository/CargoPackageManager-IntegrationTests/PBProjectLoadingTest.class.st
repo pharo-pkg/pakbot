@@ -67,6 +67,36 @@ PBProjectLoadingTest >> testCanLoadAProjectPackage [
 ]
 
 { #category : #'tests-baseline-dependencies' }
+PBProjectLoadingTest >> testLoadingProjectWithDependenciesToSameProjectButDifferentPackagesLoadBothPackages [
+
+	| project baselineProjectPkgA baselineProjectPkgB |
+
+	project := testRegistry newProjectNamed: 'Test'.
+	baselineProjectPkgA := (PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '1.0')
+			loads: #('PakbotTestExample-PackageA');
+			yourself.
+	baselineProjectPkgB := (PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '1.0')
+			loads: #('PakbotTestExample-PackageB');
+			yourself.
+
+	project addDependency: baselineProjectPkgA.
+	project addDependency: baselineProjectPkgB.
+	project load.
+	
+	self assert: project isLoaded.
+	self assert: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageA').
+	self assert: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageB').
+	self deny: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageC').
+	self deny: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageD').
+]
+
+{ #category : #'tests-baseline-dependencies' }
 PBProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWithException [
 
 	| project baselineProjectV1 baselineProjectV2 |

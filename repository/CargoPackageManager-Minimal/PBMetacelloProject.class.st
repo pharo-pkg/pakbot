@@ -22,10 +22,16 @@ Class {
 
 { #category : #'instance creation' }
 PBMetacelloProject class >> fromProjectDependency: aPBMetacelloProjectDependency [
-	^ aPBMetacelloProjectDependency class projectClass
+	| project |
+	project := aPBMetacelloProjectDependency class projectClass
 		repository: aPBMetacelloProjectDependency repositoryUrl
 		name: aPBMetacelloProjectDependency name
-		version: aPBMetacelloProjectDependency version
+		version: aPBMetacelloProjectDependency version.
+	
+	aPBMetacelloProjectDependency packagesToLoad 
+		ifNotEmpty: [ :names | project loadedPackages: names ].
+	
+	^ project
 ]
 
 { #category : #'instance creation' }
@@ -53,6 +59,11 @@ PBMetacelloProject >> = anotherProject [
 		ifFalse: [ ^ false ].
 		
 	^ true
+]
+
+{ #category : #accessing }
+PBMetacelloProject >> addAllLoadedPackages: aListOfNames [
+	loadedPackages addAll: aListOfNames
 ]
 
 { #category : #converting }
@@ -96,6 +107,14 @@ PBMetacelloProject >> hasPackage: aPackageName [
 	^ true
 ]
 
+{ #category : #accessing }
+PBMetacelloProject >> hasPackagesLoaded: aListOfPackageNames [
+	loadedPackages ifEmpty: [ ^ true ]. "Project loaded fully"
+	aListOfPackageNames ifEmpty: [ ^ false ]. "Project not loaded fully but requested to be installed fully"
+	
+	^ loadedPackages includesAll: aListOfPackageNames
+]
+
 { #category : #testing }
 PBMetacelloProject >> hasProblems [
 	^ false
@@ -112,7 +131,9 @@ PBMetacelloProject >> initializeWithRepository: repositoryString name: projectNa
 	repository := repositoryString.
 	name := projectName.
 	version := versionString.
-	packageNames := OrderedCollection new.
+	loadedPackages := Set new.
+	packageNames := Set new.
+
 ]
 
 { #category : #'compatibility - PBProjectVersion' }
@@ -169,6 +190,17 @@ PBMetacelloProject >> isVirtual [
 	^ false
 ]
 
+{ #category : #accessing }
+PBMetacelloProject >> loadedPackages [ 
+	" Gives the list of elements present in the Metacello #loads: directive if any"
+	^ loadedPackages
+]
+
+{ #category : #accessing }
+PBMetacelloProject >> loadedPackages: aListOfNames [
+	loadedPackages := Set withAll: aListOfNames
+]
+
 { #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> metacelloProjects [
 	^ #()
@@ -182,6 +214,13 @@ PBMetacelloProject >> name [
 { #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> packageName [
 	^ name
+]
+
+{ #category : #'compatibility - PBProjectVersion' }
+PBMetacelloProject >> packageNamed: aName [ 
+	"Used by PBResolvedProject>>#packagesNotAlreadyInstalledToLoad.
+	I will always return a PBPackage on which I can ask if it is installed: uses system package organizer"
+	^ PBPackage named: aName project: self
 ]
 
 { #category : #'compatibility - PBProjectVersion' }
@@ -207,6 +246,11 @@ PBMetacelloProject >> printOn: aStream [
 { #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> project [
 	^ self
+]
+
+{ #category : #accessing }
+PBMetacelloProject >> registry [
+	^ registry
 ]
 
 { #category : #accessing }

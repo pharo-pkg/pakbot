@@ -37,6 +37,14 @@ PBMetacelloBaselineProject >> basicLoad [
 		ifNotEmpty: [ metacello load: packageNames asArray ].
 ]
 
+{ #category : #loading }
+PBMetacelloBaselineProject >> basicLoad: aListOfPackageName [
+	Metacello new 
+		repository: self metacelloUrl;
+		baseline: name;
+		load: aListOfPackageName asArray.
+]
+
 { #category : #initialization }
 PBMetacelloBaselineProject >> initialize [
 	super initialize.

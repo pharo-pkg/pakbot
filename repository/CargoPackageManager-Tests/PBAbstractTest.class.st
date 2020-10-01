@@ -93,7 +93,8 @@ PBAbstractTest >> unloadMetacelloConfiguration [
 { #category : #running }
 PBAbstractTest >> unloadPakbotProject [
 	
-	#(#'Counter-Core' #'Counter-Tests') do: [ :each |
-		(RPackageOrganizer default includesPackageNamed: each)
-			ifTrue: [ (RPackageOrganizer default packageNamed: each) removeFromSystem ] ]
+	#(#'Counter-Core' #'Counter-Tests' #'PakbotTestExample-PackageA' #'PakbotTestExample-PackageB' #'PakbotTestExample-PackageC' #'PakbotTestExample-PackageD') 
+		do: [ :each |
+			(RPackageOrganizer default includesPackageNamed: each)
+				ifTrue: [ (RPackageOrganizer default packageNamed: each) removeFromSystem ] ].
 ]

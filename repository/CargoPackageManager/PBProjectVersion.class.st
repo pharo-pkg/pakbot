@@ -267,6 +267,12 @@ PBProjectVersion >> hasPackageNamed: aString [
 	^ packages anySatisfy: [ :any | any name = aString ]
 ]
 
+{ #category : #'polymorphism - PBMetacelloProject' }
+PBProjectVersion >> hasPackagesLoaded: aListOfPackageNames [
+	^ (self installedPackages collect: #name)
+			includesAll: aListOfPackageNames
+]
+
 { #category : #testing }
 PBProjectVersion >> hasProblems [
 	^ self isUpToDate not
@@ -414,6 +420,11 @@ PBProjectVersion >> load [
 	self packages do: [ :package | registry register: package ].
 	
 	PBProjectLoaded announceOnProject: self. 
+]
+
+{ #category : #'polymorphism - PBMetacelloProject' }
+PBProjectVersion >> loadedPackages [
+	^ self installedPackages
 ]
 
 { #category : #accessing }

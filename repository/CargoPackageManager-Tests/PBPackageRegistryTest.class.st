@@ -101,13 +101,27 @@ PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 ]
 
 { #category : #tests }
-PBPackageRegistryTest >> testProjectfAlreadyRegisteredDoesNotRaiseAlreadyRegisteredIfSameVersionAndSameRepository [
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredAndFullyLoadedRaisesAlreadyRegistered [
+	registry registerProject: PBMetacelloBaselineProject example.
+	
+	self 
+		should: [ registry registerProject: PBMetacelloBaselineProject example ]
+		raise: PBPackageAlreadyRegistered.
+	
+	self 
+		assert: registry registeredProjects size 
+		equals: 1.
+]
+
+{ #category : #tests }
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredButPartiallyLoadedDoesNotRaiseAlreadyRegisteredIfHavingNewPackageToLoad [
 	| project |
-	project := PBProjectVersion example.
+	project := PBMetacelloBaselineProject example.
+	project loadedPackages: #('A'). 
 	registry registerProject: project.
 	
 	self 
-		shouldnt: [ registry registerProject: project ]
+		shouldnt: [ registry registerProject: PBMetacelloBaselineProject example ]
 		raise: PBPackageAlreadyRegistered.
 	
 	self 

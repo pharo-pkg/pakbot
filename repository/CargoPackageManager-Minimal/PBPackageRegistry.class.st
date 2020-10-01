@@ -240,12 +240,25 @@ PBPackageRegistry >> registerInSystem [
 
 { #category : #registering }
 PBPackageRegistry >> registerProject: aPBProjectVersion [
+	| installedProject |
 	
-	self checkProjectRegistrationOf: aPBProjectVersion.
+	(self isProjectInstalled: aPBProjectVersion) 
+		ifFalse: [ aPBProjectVersion registry: self.
+					registeredProjects add: aPBProjectVersion.
+					^ aPBProjectVersion ].
 	
-	aPBProjectVersion registry: self.
-	registeredProjects add: aPBProjectVersion.
-	^ aPBProjectVersion
+	installedProject := self projectNamed: aPBProjectVersion name.
+	(installedProject version = aPBProjectVersion version
+		and: [ installedProject repository = aPBProjectVersion repository ])
+			ifTrue: [ (installedProject hasPackagesLoaded: aPBProjectVersion loadedPackages)
+							ifFalse: [ installedProject addAllLoadedPackages: aPBProjectVersion loadedPackages.
+										^ installedProject ] ].
+
+	" only raise an exception if 
+	- installedProject does not refer to the same version / repository
+	- aPBProjectVersion is already registered and all its packages loaded "
+	PBPackageAlreadyRegistered signal: aPBProjectVersion name , ' is already a registered project in the registry!'.
+
 ]
 
 { #category : #accessing }

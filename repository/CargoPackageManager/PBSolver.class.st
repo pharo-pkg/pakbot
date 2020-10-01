@@ -50,8 +50,16 @@ PBSolver >> solvePackage: aPBPackage [
 { #category : #solving }
 PBSolver >> solveProject: aProject [
 
+	^ self solveProject: aProject loads: #()
+]
+
+{ #category : #solving }
+PBSolver >> solveProject: aProject loads: aListOfPackageNameToLoad [
+
 	| resolvedProject |
 	resolvedProject := PBResolvedProject onProject: aProject.
+	aListOfPackageNameToLoad
+		ifNotEmpty: [ :packages | resolvedProject addAllToLoadList: packages ].
 	aProject dependencies do: [ :dep | dep resolveIn: resolvedProject solver: self ].
 	self checkConflictsOf: resolvedProject.
 	^ resolvedProject
