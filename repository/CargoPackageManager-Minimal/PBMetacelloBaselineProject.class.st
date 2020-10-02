@@ -39,6 +39,9 @@ PBMetacelloBaselineProject >> basicLoad [
 
 { #category : #loading }
 PBMetacelloBaselineProject >> basicLoad: aListOfPackageName [
+	aListOfPackageName 
+		ifEmpty: [ ^ self. "packages are laready installed. DO NOT trigger a full install of the project" ].
+	
 	Metacello new 
 		repository: self metacelloUrl;
 		baseline: name;
