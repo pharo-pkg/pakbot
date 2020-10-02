@@ -65,6 +65,15 @@ PBBaselineVisitorTest >> baselineWithGroupForwardReference: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithLoadDirective: spec [
+	spec
+		baseline: 'Mustache'
+					with: [  spec
+						repository: 'github://noha/mustache:v1.0/repository';
+						loads: #('Core' 'Tests') ]
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> parametrizedTestsBaseline: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
@@ -221,6 +230,19 @@ PBBaselineVisitorTest >> testCanGetGroups [
 	self
 		assertCollection: (visitor project assemblyNamed: 'Leaves') packageNames
 		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-PackageC')
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetLoadDirectives [
+
+	| baselineDependency |
+	self baselineWithLoadDirective: visitor.
+	visitor generateProject.
+
+	baselineDependency := visitor project dependencies first.
+	self
+		assertCollection: baselineDependency packagesToLoad
+		hasSameElements: #('Core' 'Tests').
 ]
 
 { #category : #tests }

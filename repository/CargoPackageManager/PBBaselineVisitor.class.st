@@ -54,6 +54,9 @@ PBBaselineVisitor >> baseline: aName with: aBlockClosure [
 				name: aName
 				repositoryUrl: (projectDependencyProperties at: 'repository')
 				version: (projectDependencyProperties at: 'version').
+	projectDependencyProperties 
+		at: 'loads'
+		ifPresent: [ :names | dependency loads: names ].
 	project addExternalProjectRequirement: dependency.
 	"for now, pakbot only supports project dependencies. Add these external projects as dependencies"
 	project addDependency: dependency.
@@ -158,7 +161,7 @@ PBBaselineVisitor >> initialize [
 
 { #category : #visiting }
 PBBaselineVisitor >> loads: parts [
-	self flag: 'TODO manage loads directives'
+	projectDependencyProperties at: 'loads' put: parts.
 ]
 
 { #category : #visiting }
