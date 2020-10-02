@@ -1,6 +1,6 @@
 Class {
 	#name : #PBPackageTest,
-	#superclass : #CGOModelTest,
+	#superclass : #PBModelTest,
 	#instVars : [
 		'oldPackageRegistry'
 	],

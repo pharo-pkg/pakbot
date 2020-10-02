@@ -1,5 +1,5 @@
 Class {
-	#name : #CGOPackageCreationTest,
+	#name : #PBPackageCreationTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #tests }
-CGOPackageCreationTest >> setUp [
+PBPackageCreationTest >> setUp [
 
 	super setUp.
 	project := testRegistry newProjectNamed: 'test'.
@@ -20,7 +20,7 @@ CGOPackageCreationTest >> setUp [
 ]
 
 { #category : #tests }
-CGOPackageCreationTest >> testCreateAlreadyExistingPackageRaisesException [
+PBPackageCreationTest >> testCreateAlreadyExistingPackageRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.
@@ -32,7 +32,7 @@ CGOPackageCreationTest >> testCreateAlreadyExistingPackageRaisesException [
 ]
 
 { #category : #tests }
-CGOPackageCreationTest >> testCreateExistingPackageInSystemRaisesException [
+PBPackageCreationTest >> testCreateExistingPackageInSystemRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.
@@ -44,7 +44,7 @@ CGOPackageCreationTest >> testCreateExistingPackageInSystemRaisesException [
 ]
 
 { #category : #tests }
-CGOPackageCreationTest >> testCreateNonExistingPackageSucceeds [
+PBPackageCreationTest >> testCreateNonExistingPackageSucceeds [
 
 	| packageName |
 	packageName := 'NewPackage'.

@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOPackageUnitTest,
-	#superclass : #CGOModelTest,
-	#category : 'CargoPackageManager-Tests-Model'
+	#superclass : #PBModelTest,
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }

@@ -1,7 +1,7 @@
 Class {
 	#name : #CGOVirtualPackageVersionTest,
-	#superclass : #CGOModelTest,
-	#category : 'CargoPackageManager-FailingTests-Model'
+	#superclass : #PBModelTest,
+	#category : #'CargoPackageManager-FailingTests-Model'
 }
 
 { #category : #tests }

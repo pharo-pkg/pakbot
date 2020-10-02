@@ -2,7 +2,7 @@
 Class used to set up test data for Cargo projects, units and assemblies
 "
 Class {
-	#name : #CGOModelTest,
+	#name : #PBModelTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'ongoingProject',
@@ -13,14 +13,14 @@ Class {
 }
 
 { #category : #'test data' }
-CGOModelTest >> project [
+PBModelTest >> project [
 	^ ongoingProject asCargoProject 
 		instVarNamed: 'version' put: '1' asSemanticVersion;
 		yourself
 ]
 
 { #category : #running }
-CGOModelTest >> setUp [
+PBModelTest >> setUp [
 	super setUp.
 	ongoingProject := testRegistry newProjectNamed: #'MyProject'.
 	ongoingProject description: 'A simple project used for illustration.'.
@@ -33,11 +33,11 @@ CGOModelTest >> setUp [
 ]
 
 { #category : #'test data' }
-CGOModelTest >> unitTestV1 [
+PBModelTest >> unitTestV1 [
 	^ unitTestV1 ifNil: [ unitTestV1 := ongoingProject newNotLoadedPackage: #Package1 ]
 ]
 
 { #category : #'test data' }
-CGOModelTest >> unitTestV2 [
+PBModelTest >> unitTestV2 [
 	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Package2]
 ]

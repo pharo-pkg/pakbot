@@ -1,5 +1,5 @@
 Class {
-	#name : #CGOPackageImportTest,
+	#name : #PBPackageImportTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #tests }
-CGOPackageImportTest >> setUp [
+PBPackageImportTest >> setUp [
 
 	super setUp.
 	project := testRegistry newProjectNamed: 'test'.
@@ -20,7 +20,7 @@ CGOPackageImportTest >> setUp [
 ]
 
 { #category : #tests }
-CGOPackageImportTest >> testImportAlreadyImportedPackageDoesNotImportItTwice [
+PBPackageImportTest >> testImportAlreadyImportedPackageDoesNotImportItTwice [
 
 	| packageName |
 	packageName := 'NewPackage'.
@@ -37,7 +37,7 @@ CGOPackageImportTest >> testImportAlreadyImportedPackageDoesNotImportItTwice [
 ]
 
 { #category : #tests }
-CGOPackageImportTest >> testImportAlreadyImportedPackageRaisesException [
+PBPackageImportTest >> testImportAlreadyImportedPackageRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.
@@ -50,7 +50,7 @@ CGOPackageImportTest >> testImportAlreadyImportedPackageRaisesException [
 ]
 
 { #category : #tests }
-CGOPackageImportTest >> testImportExistingPackageInSystemSucceeds [
+PBPackageImportTest >> testImportExistingPackageInSystemSucceeds [
 
 	| packageName |
 	packageName := 'NewPackage'.
@@ -61,7 +61,7 @@ CGOPackageImportTest >> testImportExistingPackageInSystemSucceeds [
 ]
 
 { #category : #tests }
-CGOPackageImportTest >> testImportNonExistingPackageInSystemRaisesException [
+PBPackageImportTest >> testImportNonExistingPackageInSystemRaisesException [
 
 	| packageName |
 	packageName := 'NewPackage'.

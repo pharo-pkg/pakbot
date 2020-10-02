@@ -1,6 +1,6 @@
 Class {
 	#name : #PBAssemblyTest,
-	#superclass : #CGOModelTest,
+	#superclass : #PBModelTest,
 	#category : #'CargoPackageManager-Tests-Model'
 }
 
