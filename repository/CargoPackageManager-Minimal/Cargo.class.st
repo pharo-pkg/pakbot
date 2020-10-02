@@ -19,7 +19,7 @@ Class {
 		'DefaultPackageRepository',
 		'PlatformAttributes'
 	],
-	#category : 'CargoPackageManager-Minimal'
+	#category : #'CargoPackageManager-Minimal'
 }
 
 { #category : #accessing }
@@ -124,7 +124,7 @@ Cargo >> registry: aCGOPackageRegistry [
 Cargo >> rootDependency [
 	| pkgVersionRef |
 	pkgVersionRef := packages first.
-	^ CGOPackageDependency 
+	^ PBPackageDependency 
 		on: pkgVersionRef packageName
 		for: nil 
 		withConstraints: (pkgVersionRef versionString

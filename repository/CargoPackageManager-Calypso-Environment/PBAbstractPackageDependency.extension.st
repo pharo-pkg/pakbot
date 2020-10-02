@@ -1,6 +1,6 @@
-Extension { #name : #CGOAbstractPackageDependency }
+Extension { #name : #PBAbstractPackageDependency }
 
 { #category : #'*CargoPackageManager-Calypso-Environment' }
-CGOAbstractPackageDependency >> managedByCalypsoUsing: aPackageManager [
+PBAbstractPackageDependency >> managedByCalypsoUsing: aPackageManager [
 	^CGOClyPackageDependency "of: (aPackageManager projectOf: self) "on: self
 ]

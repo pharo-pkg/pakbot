@@ -4,7 +4,7 @@ Dummy class used to keep some usefull pieces of code (easier to get them in a fr
 Class {
 	#name : #CGODataHolder,
 	#superclass : #Object,
-	#category : 'CargoPackageManager-Spec'
+	#category : #'CargoPackageManager-Spec'
 }
 
 { #category : #'as yet unclassified' }
@@ -254,7 +254,7 @@ CGODataHolder >> seaside31PPMResolution [
 	| aPackageVersion dependencyToSolve |
 	
 	aPackageVersion := Seaside31Spec new buildPackage.
-	dependencyToSolve := CGOPackageDependency 
+	dependencyToSolve := PBPackageDependency 
 								on: aPackageVersion package
 								for: nil
 								withConstraints: (CGOFixedVersionConstraint with: '3.1').

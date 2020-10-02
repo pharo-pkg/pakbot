@@ -5,8 +5,8 @@ Scope is a Symbol reprensenting the name of an external project dependency decla
 Platform requirements allow conditional loading of the dependency (ex: only on Windows).
 "
 Class {
-	#name : #CGOPackageDependency,
-	#superclass : #CGOAbstractPackageDependency,
+	#name : #PBPackageDependency,
+	#superclass : #PBAbstractPackageDependency,
 	#instVars : [
 		'dependent',
 		'constraints',
@@ -17,23 +17,23 @@ Class {
 }
 
 { #category : #'instance creation' }
-CGOPackageDependency class >> newFrom: anAssociation [
+PBPackageDependency class >> newFrom: anAssociation [
 	^ self new
 		initializeWith: anAssociation
 ]
 
 { #category : #'instance creation' }
-CGOPackageDependency class >> on: targetedPackageName [
+PBPackageDependency class >> on: targetedPackageName [
 	^ self on: targetedPackageName for: nil
 ]
 
 { #category : #'instance creation' }
-CGOPackageDependency class >> on: targetedPackageName for: aPackageName [
+PBPackageDependency class >> on: targetedPackageName for: aPackageName [
 	^ self on: targetedPackageName for: aPackageName withConstraints: #()
 ]
 
 { #category : #'instance creation' }
-CGOPackageDependency class >> on: targetedPackageName for: aPackageName withConstraints: contraints [
+PBPackageDependency class >> on: targetedPackageName for: aPackageName withConstraints: contraints [
 	self flag: 'TODO: set the dependent with aPackage'.
 	^ self new
 		initializeOn: targetedPackageName withConstraints: contraints;
@@ -41,12 +41,12 @@ CGOPackageDependency class >> on: targetedPackageName for: aPackageName withCons
 ]
 
 { #category : #accessing }
-CGOPackageDependency class >> scopeSeparator [
+PBPackageDependency class >> scopeSeparator [
 	^ '::'
 ]
 
 { #category : #comparing }
-CGOPackageDependency >> = other [
+PBPackageDependency >> = other [
 	(targetedPackage = other targetedPackage) ifFalse: [ ^ false ].
 	(constraints = other constraints) ifFalse: [ ^ false ].
 	(dependent = other dependent) ifFalse: [ ^ false ].
@@ -54,7 +54,7 @@ CGOPackageDependency >> = other [
 ]
 
 { #category : #updating }
-CGOPackageDependency >> addDefaultVersionConstraint: aResolutionStrategy from: repositories for: platformAttributes [
+PBPackageDependency >> addDefaultVersionConstraint: aResolutionStrategy from: repositories for: platformAttributes [
 	| defaultPackageVersionRef |
 	constraints ifNotEmpty: [ ^ self ].
 	defaultPackageVersionRef := aResolutionStrategy 
@@ -67,24 +67,24 @@ CGOPackageDependency >> addDefaultVersionConstraint: aResolutionStrategy from: r
 ]
 
 { #category : #converting }
-CGOPackageDependency >> asLiteral [
+PBPackageDependency >> asLiteral [
 	^ constraints 
 		ifEmpty: [ self packageName ]
 		ifNotEmpty: [ self packageName -> (constraints collect: #asString as: Array) ]
 ]
 
 { #category : #converting }
-CGOPackageDependency >> asPackageDependency [
+PBPackageDependency >> asPackageDependency [
 	^ self
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> constraints [
+PBPackageDependency >> constraints [
 	^ constraints
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> dependencyName [
+PBPackageDependency >> dependencyName [
 	"Name used to find the depencency in a package repository"
 	^ scope
 		ifNil: [ targetedPackage ]
@@ -92,35 +92,35 @@ CGOPackageDependency >> dependencyName [
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> dependent [
+PBPackageDependency >> dependent [
 	^ dependent
 ]
 
 { #category : #testing }
-CGOPackageDependency >> hasScope [
+PBPackageDependency >> hasScope [
 	^ scope isNotNil
 ]
 
 { #category : #comparing }
-CGOPackageDependency >> hash [
+PBPackageDependency >> hash [
 	^ targetedPackage hash 
 		bitXor: dependent hash
 ]
 
 { #category : #private }
-CGOPackageDependency >> indexOfScope: packageName [
+PBPackageDependency >> indexOfScope: packageName [
 	^ packageName indexOfSubCollection: self class scopeSeparator
 ]
 
 { #category : #initialization }
-CGOPackageDependency >> initializeOn: aPackageName withConstraints: aConstraintList [
+PBPackageDependency >> initializeOn: aPackageName withConstraints: aConstraintList [
 	self initializeTargetAndScopeFrom: aPackageName.
 	constraints := Array newFrom: aConstraintList.
 	platformRequirements := Array new.
 ]
 
 { #category : #initialization }
-CGOPackageDependency >> initializeTargetAndScopeFrom: aPackageName [
+PBPackageDependency >> initializeTargetAndScopeFrom: aPackageName [
 	| index |
 	index := self indexOfScope: aPackageName.
 	index = 0
@@ -132,7 +132,7 @@ CGOPackageDependency >> initializeTargetAndScopeFrom: aPackageName [
 ]
 
 { #category : #initialization }
-CGOPackageDependency >> initializeWith: anAssociation [ 
+PBPackageDependency >> initializeWith: anAssociation [ 
 	| constraintStringList |
 	self initializeTargetAndScopeFrom: anAssociation key asSymbol.
 	constraintStringList := anAssociation value.
@@ -141,40 +141,40 @@ CGOPackageDependency >> initializeWith: anAssociation [
 ]
 
 { #category : #testing }
-CGOPackageDependency >> isSolved [
+PBPackageDependency >> isSolved [
 	self shouldBeImplemented.
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> name [
+PBPackageDependency >> name [
 	
 	^ targetedPackage
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> packageName [
+PBPackageDependency >> packageName [
 	^ targetedPackage
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> platformRequirements [ 
+PBPackageDependency >> platformRequirements [ 
 	^ platformRequirements
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> platformRequirements: alistOfPlatformRequirement [
+PBPackageDependency >> platformRequirements: alistOfPlatformRequirement [
 	platformRequirements := alistOfPlatformRequirement asArray
 ]
 
 { #category : #printing }
-CGOPackageDependency >> printOn: aStream [
+PBPackageDependency >> printOn: aStream [
 	aStream << self packageName << ' ('.
 	constraints printOn: aStream delimiter: Character space.
 	aStream << ')'.
 ]
 
 { #category : #solving }
-CGOPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
+PBPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
 
 	aPBResolvedProject addToLoadList: self packageName.
 	self resolvedDependency dependencies 
@@ -184,16 +184,16 @@ CGOPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
 ]
 
 { #category : #solving }
-CGOPackageDependency >> resolvedDependency [
+PBPackageDependency >> resolvedDependency [
 	^ project packageNamed: self packageName
 ]
 
 { #category : #constrains }
-CGOPackageDependency >> satisfyConstraints: aSemanticVersion [ 
+PBPackageDependency >> satisfyConstraints: aSemanticVersion [ 
 	^ constraints allSatisfy: [ :each | each isCompatibleWith: aSemanticVersion ]
 ]
 
 { #category : #accessing }
-CGOPackageDependency >> scope [
+PBPackageDependency >> scope [
 	^ scope
 ]

@@ -72,7 +72,7 @@ PBAssemblyUIItem >> name [
 { #category : #testing }
 PBAssemblyUIItem >> representsItemOfType: aClass [
 
-	^ (CGOAbstractDependency includesBehavior: aClass)
+	^ (PBAbstractDependency includesBehavior: aClass)
 		or: [ self class includesBehavior: aClass ]
 ]
 

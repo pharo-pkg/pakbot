@@ -19,7 +19,7 @@ PBMetacelloPackageSpec class >> named: aName [
 PBMetacelloPackageSpec >> addRequirementsTo: aPBPackage [
 
 	requirements do: [ :requirement | | dependency |
-		dependency := CGOPackageDependency on: requirement.
+		dependency := PBPackageDependency on: requirement.
 		dependency platformRequirements: self nonCommonAttributes.
 		aPBPackage addDependency: dependency ]
 ]

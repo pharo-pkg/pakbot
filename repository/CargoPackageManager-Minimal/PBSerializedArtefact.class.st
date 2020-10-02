@@ -54,7 +54,7 @@ PBSerializedArtefact >> deserializedDependencies: aListOfSerializedDependencies 
 					association := associationOrString isString 
 						ifTrue: [ associationOrString -> #() ]
 						ifFalse: [ associationOrString ].
-					CGOPackageDependency newFrom: association ] ]
+					PBPackageDependency newFrom: association ] ]
 ]
 
 { #category : #initialization }

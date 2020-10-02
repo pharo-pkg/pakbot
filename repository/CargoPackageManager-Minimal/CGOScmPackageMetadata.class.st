@@ -46,7 +46,7 @@ CGOScmPackageMetadata >> latestVersionOfPackage: aPackageName suitableForEnviron
 { #category : #accessing }
 CGOScmPackageMetadata >> package: aPackageName [
 	| dependency |
-	dependency := CGOPackageDependency on: aPackageName.
+	dependency := PBPackageDependency on: aPackageName.
 	^ dependency hasScope
 		ifTrue: [ "For now, only Metacello projects have a scope"
 			(projects 

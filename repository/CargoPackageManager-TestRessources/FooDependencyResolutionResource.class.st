@@ -10,7 +10,7 @@ Class {
 		'packageProviderStrategyBackup',
 		'resolution'
 	],
-	#category : 'CargoPackageManager-TestRessources-Resources'
+	#category : #'CargoPackageManager-TestRessources-Resources'
 }
 
 { #category : #packages }
@@ -84,7 +84,7 @@ FooDependencyResolutionResource >> fooPackage [
 
 { #category : #building }
 FooDependencyResolutionResource >> rootDependency [
-	^ CGOPackageDependency 
+	^ PBPackageDependency 
 		on: self fooPackage packageName
 		for: nil
 		withConstraints: { CGOFixedVersionConstraint with: '1.0' }

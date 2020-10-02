@@ -1,7 +1,7 @@
 Class {
 	#name : #OngoingPackageResolutionTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-FailingTests-Solver'
+	#category : #'CargoPackageManager-FailingTests-Solver'
 }
 
 { #category : #accessing }
@@ -35,8 +35,8 @@ OngoingPackageResolutionTest >> testEquals [
 	resolvedDep2 resolvedProjectVersion: (CGOPackageVersion fromString: 'pkgA@1').
 	self assert: resolvedDep1 equals: resolvedDep2.
 
-	dep1 :=  CGOPackageDependency on: pkgA for: nil.
-	dep2 :=  CGOPackageDependency on: pkgB for: nil.
+	dep1 :=  PBPackageDependency on: pkgA for: nil.
+	dep2 :=  PBPackageDependency on: pkgB for: nil.
 	resolvedDep1 := PBResolvedProject new
 				instVarNamed: 'originDependencies' put: dep1;
 				yourself.
@@ -44,6 +44,6 @@ OngoingPackageResolutionTest >> testEquals [
 				instVarNamed: 'originDependencies' put: dep2;
 				yourself.
 	self assert: (resolvedDep1 = resolvedDep2) not.
-	resolvedDep2 instVarNamed: 'originDependencies' put: (CGOPackageDependency on: pkgA for: nil).
+	resolvedDep2 instVarNamed: 'originDependencies' put: (PBPackageDependency on: pkgA for: nil).
 	self assert: resolvedDep1 equals: resolvedDep2.
 ]

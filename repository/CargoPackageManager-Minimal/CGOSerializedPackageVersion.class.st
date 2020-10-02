@@ -10,7 +10,7 @@ Class {
 		'package',
 		'timestamp'
 	],
-	#category : 'CargoPackageManager-Minimal-Model-Serialization'
+	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
 { #category : #mapping }
@@ -28,7 +28,7 @@ CGOSerializedPackageVersion >> deserialize: instVarName in: aPackageVersion [
 		put: (deps 
 			ifNil: [ #() ]
 			ifNotNil: [ deps collect:
-				[ :association | CGOPackageDependency newFrom: association ] ])
+				[ :association | PBPackageDependency newFrom: association ] ])
 ]
 
 { #category : #deserialization }

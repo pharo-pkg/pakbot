@@ -28,7 +28,7 @@ PBPackage >> = anotherPackage [
 
 { #category : #adding }
 PBPackage >> addDependencyOn: aPackageName [
-	self addDependency: (CGOPackageDependency on: aPackageName)
+	self addDependency: (PBPackageDependency on: aPackageName)
 ]
 
 { #category : #'accessing - dependencies' }

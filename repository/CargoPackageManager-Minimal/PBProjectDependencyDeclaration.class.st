@@ -7,7 +7,7 @@ My subclasses contains external project dependencies on:
 "
 Class {
 	#name : #PBProjectDependencyDeclaration,
-	#superclass : #CGOAbstractDependency,
+	#superclass : #PBAbstractDependency,
 	#instVars : [
 		'name',
 		'packagesToLoad'

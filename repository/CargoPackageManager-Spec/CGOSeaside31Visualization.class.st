@@ -10,14 +10,14 @@ Seaside31Visualization new open
 Class {
 	#name : #CGOSeaside31Visualization,
 	#superclass : #Object,
-	#category : 'CargoPackageManager-Spec'
+	#category : #'CargoPackageManager-Spec'
 }
 
 { #category : #'as yet unclassified' }
 CGOSeaside31Visualization >> open [
 | package seaside31Dependency resolution builder  |
 	package := Seaside31Spec new buildPackage.
-	seaside31Dependency := CGOPackageDependency 
+	seaside31Dependency := PBPackageDependency 
 									on: package package
 									for: nil
 									withConstraints: { CGOFixedVersionConstraint with: '3.1' }.

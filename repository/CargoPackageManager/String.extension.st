@@ -20,7 +20,7 @@ String >> asMetacelloRepositorySpec [
 
 { #category : #'*CargoPackageManager' }
 String >> asPackageDependency [
-	^ CGOPackageDependency newFrom: self -> #()
+	^ PBPackageDependency newFrom: self -> #()
 ]
 
 { #category : #'*CargoPackageManager' }

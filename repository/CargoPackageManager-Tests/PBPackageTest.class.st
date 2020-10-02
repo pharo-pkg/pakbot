@@ -25,7 +25,7 @@ PBPackageTest >> testCanAddDependencyToAProject [
 PBPackageTest >> testCanAddDependencyToAnotherPackage [
 	| unit |
 	unit := PBPackage example.
-	unit addDependency: (CGOPackageDependency on: 'DependentPackage').
+	unit addDependency: (PBPackageDependency on: 'DependentPackage').
 	
 	self 
 		assert: unit dependencies size 

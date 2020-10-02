@@ -49,7 +49,7 @@ PBDependencyUIItem >> name [
 { #category : #testing }
 PBDependencyUIItem >> representsItemOfType: aClass [
 
-	^ (CGOAbstractDependency includesBehavior: aClass)
+	^ (PBAbstractDependency includesBehavior: aClass)
 		or: [ self class includesBehavior: aClass ]
 ]
 

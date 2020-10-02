@@ -4,7 +4,7 @@ API for common package / projet dependencies
 project instance variable holds a reference to the project declaring the dependency.
 "
 Class {
-	#name : #CGOAbstractDependency,
+	#name : #PBAbstractDependency,
 	#superclass : #Object,
 	#instVars : [
 		'project'
@@ -13,55 +13,55 @@ Class {
 }
 
 { #category : #conflicts }
-CGOAbstractDependency >> additionalConflictingInstalledProjects [
+PBAbstractDependency >> additionalConflictingInstalledProjects [
 
 	^ #()
 ]
 
 { #category : #testing }
-CGOAbstractDependency >> fitsPlatformRequirements [
+PBAbstractDependency >> fitsPlatformRequirements [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-CGOAbstractDependency >> fullyQualifiedName [
+PBAbstractDependency >> fullyQualifiedName [
 	^ self name
 ]
 
 { #category : #'querying - installed' }
-CGOAbstractDependency >> isInstalled [
+PBAbstractDependency >> isInstalled [
 	
 	"Returns true if the dependency is installed in the image with the same version"
 	^ project registry isInstalled: self
 ]
 
 { #category : #testing }
-CGOAbstractDependency >> isOutOfSync [	
+PBAbstractDependency >> isOutOfSync [	
 	"Returns true if there is a version of the project installed but not the correct version"
 	
 	^ project registry isOutOfSync: self.
 ]
 
 { #category : #testing }
-CGOAbstractDependency >> isSolved [
+PBAbstractDependency >> isSolved [
 	
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-CGOAbstractDependency >> name [
+PBAbstractDependency >> name [
 	self subclassResponsibility 
 ]
 
 { #category : #accessing }
-CGOAbstractDependency >> project: aCGOOngoingProject [ 
+PBAbstractDependency >> project: aCGOOngoingProject [ 
 
 	project := aCGOOngoingProject
 ]
 
 { #category : #solving }
-CGOAbstractDependency >> resolvedDependency [ 
+PBAbstractDependency >> resolvedDependency [ 
 	
 	self subclassResponsibility
 ]

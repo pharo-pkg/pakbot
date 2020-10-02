@@ -4,7 +4,7 @@ A SerializedPackageAssemblyTest is a test class for testing the behavior of Seri
 Class {
 	#name : #CGOSerializedPackageAssemblyTest,
 	#superclass : #TestCase,
-	#category : 'CargoPackageManager-FailingTests-Model-Serialization'
+	#category : #'CargoPackageManager-FailingTests-Model-Serialization'
 }
 
 { #category : #'test data' }
@@ -45,7 +45,7 @@ CGOSerializedPackageAssemblyTest >> testFromSton [
 	self
 		assert: pkgAssembly packageName
 		equals: 'Foo'.
-	self assert: ((pkgAssembly parts collect: #class) anySatisfy: [ :class | class = CGOPackageDependency ])
+	self assert: ((pkgAssembly parts collect: #class) anySatisfy: [ :class | class = PBPackageDependency ])
 ]
 
 { #category : #'tests-initialization' }

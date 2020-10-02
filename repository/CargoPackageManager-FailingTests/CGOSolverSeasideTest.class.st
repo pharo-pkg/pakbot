@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'solver'
 	],
-	#category : 'CargoPackageManager-FailingTests-Solver'
+	#category : #'CargoPackageManager-FailingTests-Solver'
 }
 
 { #category : #running }
@@ -28,7 +28,7 @@ CGOSolverSeasideTest >> testCanSolvePackageWithManyCompatibleConstraints [
 	
 	testPackage := #'Seaside-Core'.
 	version := '3.1' asSemanticVersion.					
-	dependency := CGOPackageDependency
+	dependency := PBPackageDependency
 						on: testPackage
 						for: nil
 						withConstraints: { CGOFixedVersionConstraint with: version . 
@@ -46,7 +46,7 @@ CGOSolverSeasideTest >> testCanSolvePackageWithSpecifiedVersion [
 	| testPackage dependency  version resolution |
 	testPackage := #'JQuery-Core'.
 	version := '3.1' asSemanticVersion.
-	dependency := CGOPackageDependency 
+	dependency := PBPackageDependency 
 		on: testPackage 
 		for: nil
 		withConstraints: {(CGOFixedVersionConstraint with: version)}.
@@ -64,7 +64,7 @@ CGOSolverSeasideTest >> testCanSolvePackageWithoutSpecifiedVersion [
 	| testPackage dependency resolution |
 	
 	testPackage := #'JQuery-Core'.
-	dependency := CGOPackageDependency 
+	dependency := PBPackageDependency 
 		on: testPackage
 		for: nil
 		withConstraints: #().
@@ -82,7 +82,7 @@ CGOSolverSeasideTest >> testCanSolveVirtualPackageWithSpecifiedVersion [
 	
 	testPackage := #'Seaside-Canvas-Platform'.
 	version := '1.0' asSemanticVersion.					
-	dependency := CGOPackageDependency
+	dependency := PBPackageDependency
 						on: testPackage
 						for: nil
 						withConstraints: { CGOFixedVersionConstraint with: version }.
@@ -104,7 +104,7 @@ CGOSolverSeasideTest >> testCanSolveVirtualPackageWithoutSpecifiedVersion [
 	| testPackage dependency resolution packageVersion |
 	
 	testPackage := #'Seaside-Continuation-Platform'.
-	dependency := CGOPackageDependency
+	dependency := PBPackageDependency
 						on: testPackage
 						for: nil
 						withConstraints: #().
@@ -125,7 +125,7 @@ CGOSolverSeasideTest >> testDefaultVersionIsAddedToConstraintsWhenNoConstraintAr
 	| resolution testPackage |
 	testPackage := #'Seaside-Pharo-Flow'.
 	
-	resolution := solver solveDependency: (CGOPackageDependency on: testPackage for: nil).
+	resolution := solver solveDependency: (PBPackageDependency on: testPackage for: nil).
 	
 	self 
 		assert: (resolution ongoingPackageResolutionFor: testPackage) resolvedProjectVersion version
@@ -139,7 +139,7 @@ CGOSolverSeasideTest >> testDefaultVersionIsAddedToConstraintsWhenNoConstraintAr
 CGOSolverSeasideTest >> testSolvePackageWithNonFixedConstraintDependencyRaisesUnresolvedDependency [
 	| testPackage dependency |
 	testPackage := #'JQuery-Core'.
-	dependency := CGOPackageDependency 
+	dependency := PBPackageDependency 
 		on: testPackage 
 		for: nil
 		withConstraints: { CGORangeVersionsConstraint between: '2.1' and: '2.4' }.
@@ -152,7 +152,7 @@ CGOSolverSeasideTest >> testSolvePackageWithNonFixedConstraintDependencyRaisesUn
 { #category : #'tests - packages' }
 CGOSolverSeasideTest >> testSolvingADependencyWithATransitiveDependencySolvesBothDependencies [
 	| dependencyToSolve resolution |
-	dependencyToSolve := CGOPackageDependency 
+	dependencyToSolve := PBPackageDependency 
 								on: 'Seaside-Flow-Platform'
 								for: nil
 								withConstraints: { CGOFixedVersionConstraint with: '1' }.
@@ -168,7 +168,7 @@ CGOSolverSeasideTest >> testSolvingADependencyWithATransitiveDependencySolvesBot
 CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByMoreThanOnePackageRaisesUnresolvedDependency [
 	| dependency |
 	
-	dependency := CGOPackageDependency
+	dependency := PBPackageDependency
 						on: #'Seaside-Canvas-Platform'
 						for: nil
 						withConstraints: #().
@@ -187,7 +187,7 @@ CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByMoreThanOnePackageRa
 CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByNoPackageRaisesUnresolvedDependency [
 	| dependency |
 	
-	dependency := CGOPackageDependency
+	dependency := PBPackageDependency
 						on: #'Seaside-Canvas-Platform'
 						for: nil
 						withConstraints: { CGOFixedVersionConstraint with: '99.5' }.
