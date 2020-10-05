@@ -10,8 +10,7 @@ Class {
 	#instVars : [
 		'dependent',
 		'constraints',
-		'scope',
-		'platformRequirements'
+		'scope'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
@@ -154,16 +153,6 @@ PBPackageDependency >> name [
 { #category : #accessing }
 PBPackageDependency >> packageName [
 	^ targetedPackage
-]
-
-{ #category : #accessing }
-PBPackageDependency >> platformRequirements [ 
-	^ platformRequirements
-]
-
-{ #category : #accessing }
-PBPackageDependency >> platformRequirements: alistOfPlatformRequirement [
-	platformRequirements := alistOfPlatformRequirement asArray
 ]
 
 { #category : #printing }

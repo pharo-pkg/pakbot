@@ -6,7 +6,8 @@ Class {
 	#name : #PBSolver,
 	#superclass : #Object,
 	#instVars : [
-		'registry'
+		'registry',
+		'platformAttributes'
 	],
 	#category : #'CargoPackageManager-Solver'
 }
@@ -20,6 +21,11 @@ PBSolver >> checkConflictsOf: resolvedProject [
 			each
 				checkConflictsWithDependencies: dependencies;
 				checkConflictsWithRegistry: self registry ]
+]
+
+{ #category : #accessing }
+PBSolver >> platformAttributes [
+	^ platformAttributes ifNil: [ PBPlatformAttributes new ]
 ]
 
 { #category : #solving }
@@ -41,7 +47,8 @@ PBSolver >> solvePackage: aPBPackage [
 	resolvedProject addToLoadList: aPBPackage name.
 
 	aPBPackage dependencies
-		do: [ :dep | dep resolveIn: resolvedProject solver: self ].
+		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
+		thenDo: [ :dep | dep resolveIn: resolvedProject solver: self ].
 
 	self checkConflictsOf: resolvedProject.
 	^ resolvedProject
@@ -60,7 +67,9 @@ PBSolver >> solveProject: aProject loads: aListOfPackageNameToLoad [
 	resolvedProject := PBResolvedProject onProject: aProject.
 	aListOfPackageNameToLoad
 		ifNotEmpty: [ :packages | resolvedProject addAllToLoadList: packages ].
-	aProject dependencies do: [ :dep | dep resolveIn: resolvedProject solver: self ].
+	aProject dependencies 
+		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
+		thenDo: [ :dep | dep resolveIn: resolvedProject solver: self ].
 	self checkConflictsOf: resolvedProject.
 	^ resolvedProject
 ]

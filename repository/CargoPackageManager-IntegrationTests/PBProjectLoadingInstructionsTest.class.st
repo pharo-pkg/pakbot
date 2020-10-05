@@ -195,3 +195,92 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithPackageDep
 		(loadableUnit name = 'Test')
 			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
 ]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDependency [
+	| resolution projectOne loadInstructions packageA |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: (PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
+	resolution := packageA resolve.
+
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDependencyDoesNotLoadDependencyWhenConditionUnmet [
+	| resolution projectOne loadInstructions packageA dependency |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	dependency := PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' "OSPlatform current family" }.
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: dependency;
+		yourself.
+	resolution := packageA resolve.
+
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 1.
+	self deny: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDependencyLoadsDependencyWhenConditionMet [
+	| resolution projectOne loadInstructions packageA dependency |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	dependency := PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: OSPlatform current family }.
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: dependency;
+		yourself.
+	resolution := packageA resolve.
+
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDependencyDoesNotLoadDependencyWhenConditionUnmet [
+	| resolution projectOne loadInstructions dependency |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	dependency := PBPakbotProjectDependency
+			named: 'Counter'
+			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' "OSPlatform current family" }.
+	projectOne addDependency: dependency.
+	resolution := projectOne resolve.
+	
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 0.
+	self deny: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDependencyLoadsDependencyWhenConditionMet [
+
+	| resolution projectOne dependency loadInstructions |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	
+	dependency := PBPakbotProjectDependency
+		named: 'Counter'
+		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: OSPlatform current family }.
+	projectOne addDependency: dependency.
+	resolution := projectOne resolve.
+	loadInstructions := resolution loadInstructions.
+
+	self assert: resolution loadInstructions size equals: 1.
+	self assert: (resolution loadInstructions includes: self expectedCargoResolvedProject)
+]

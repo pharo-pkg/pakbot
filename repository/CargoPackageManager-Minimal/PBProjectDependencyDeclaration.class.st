@@ -23,6 +23,7 @@ PBProjectDependencyDeclaration >> constraints [
 
 { #category : #initialization }
 PBProjectDependencyDeclaration >> initialize [ 
+	super initialize.
 	packagesToLoad := Set new.
 ]
 

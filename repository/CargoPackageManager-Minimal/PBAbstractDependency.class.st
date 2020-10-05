@@ -7,7 +7,8 @@ Class {
 	#name : #PBAbstractDependency,
 	#superclass : #Object,
 	#instVars : [
-		'project'
+		'project',
+		'platformRequirements'
 	],
 	#category : #'CargoPackageManager-Minimal-Dependencies'
 }
@@ -27,6 +28,12 @@ PBAbstractDependency >> fitsPlatformRequirements [
 { #category : #accessing }
 PBAbstractDependency >> fullyQualifiedName [
 	^ self name
+]
+
+{ #category : #initialization }
+PBAbstractDependency >> initialize [ 
+	super initialize.
+	platformRequirements := Set new.
 ]
 
 { #category : #'querying - installed' }
@@ -55,6 +62,16 @@ PBAbstractDependency >> name [
 ]
 
 { #category : #accessing }
+PBAbstractDependency >> platformRequirements [ 
+	^ platformRequirements
+]
+
+{ #category : #accessing }
+PBAbstractDependency >> platformRequirements: alistOfPlatformRequirement [
+	platformRequirements := alistOfPlatformRequirement asArray
+]
+
+{ #category : #accessing }
 PBAbstractDependency >> project: aCGOOngoingProject [ 
 
 	project := aCGOOngoingProject
@@ -64,4 +81,12 @@ PBAbstractDependency >> project: aCGOOngoingProject [
 PBAbstractDependency >> resolvedDependency [ 
 	
 	self subclassResponsibility
+]
+
+{ #category : #'conditional loading' }
+PBAbstractDependency >> satisfyPlatformRequirements: platformAttributes [
+
+	^ self platformRequirements allSatisfy: 
+		[ :requirement | 
+		platformAttributes satisfies: requirement ]
 ]
