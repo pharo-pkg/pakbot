@@ -35,6 +35,14 @@ PBBaselineVisitor >> attributesSeparator [
 	^ $:
 ]
 
+{ #category : #accessing }
+PBBaselineVisitor >> attributesStringFor: aNameOrListOfNames [
+
+	^ aNameOrListOfNames isString 
+					ifTrue: [ aNameOrListOfNames ] 
+					ifFalse: [ "many attributes" '|' join: aNameOrListOfNames ]
+]
+
 { #category : #visiting }
 PBBaselineVisitor >> baseline: aBaseline [
 	| projectName |
@@ -85,7 +93,9 @@ PBBaselineVisitor >> currentAttributes [
 
 { #category : #accessing }
 PBBaselineVisitor >> currentAttributesString [
-	^ (self attributesSeparator join: self currentAttributes)
+
+	^ self attributesSeparator join:
+			(self currentAttributes collect: [ :each | self attributesStringFor: each])
 ]
 
 { #category : #accessing }

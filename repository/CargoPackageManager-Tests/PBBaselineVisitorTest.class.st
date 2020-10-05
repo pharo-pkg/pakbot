@@ -25,7 +25,8 @@ PBBaselineVisitorTest >> baselineWithConditionalPackageDeclaration: spec [
 			spec 
 				package: 'PakbotTestExample-CommonPackage';
 				for: #bar do: [ spec package: 'PakbotTestExample-BarPackage' ]. ];
-		for: #foo do: [ spec package: 'PakbotTestExample-FooPackage' ].
+		for: #foo do: [ spec package: 'PakbotTestExample-FooPackage' ];
+		for: #(unix osx) do: [ spec package: 'PakbotTestExample-UnixLikePackage' ].
 ]
 
 { #category : #'test data' }
@@ -283,7 +284,7 @@ PBBaselineVisitorTest >> testCanGetPackagesWhenDeclaredConditionally [
 	
 	self
 		assert: project packages size 
-		equals: 3.
+		equals: 4.
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-CommonPackage') platformRequirements 
 		hasSameElements: #(#'all' ).
@@ -293,6 +294,9 @@ PBBaselineVisitorTest >> testCanGetPackagesWhenDeclaredConditionally [
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-BarPackage') platformRequirements 
 		hasSameElements: #( #'all' #'bar' ).
+	self
+		assertCollection: (project packageNamed: #'PakbotTestExample-UnixLikePackage') platformRequirements 
+		hasSameElements: #( #'unix|osx' ).
 ]
 
 { #category : #tests }
