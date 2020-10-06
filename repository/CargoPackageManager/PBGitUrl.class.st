@@ -60,7 +60,7 @@ PBGitUrl >> ensureScheme [
 	
 	[ url := ('git+ssh://' , originUrlString) asZnUrl ]
 		on: ZnPortNotANumber
-		do: [ url := ('git+ssh://' , (originUrlString replaceAll: $: with: $/)) asZnUrl ]
+		do: [ url := ('git+ssh://' , (originUrlString copyReplaceAll: $: with: $/)) asZnUrl ]
 ]
 
 { #category : #accessing }
