@@ -28,8 +28,10 @@ PBMetacelloSpec >> attributes [
 ]
 
 { #category : #accessing }
-PBMetacelloSpec >> attributes: aListOfAttributes [
-	attributes := aListOfAttributes copy
+PBMetacelloSpec >> attributes: anAttributeOrListOfAttributes [
+	attributes := anAttributeOrListOfAttributes isString 
+		ifTrue: [ Array with: anAttributeOrListOfAttributes ]
+		ifFalse: [ anAttributeOrListOfAttributes copy ]
 ]
 
 { #category : #initialization }

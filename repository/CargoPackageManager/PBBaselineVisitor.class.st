@@ -23,6 +23,11 @@ Class {
 }
 
 { #category : #accessing }
+PBBaselineVisitor class >> attributesConjonctionCharacter [
+	^ $|
+]
+
+{ #category : #accessing }
 PBBaselineVisitor class >> projectFor: aBaselineOf [
 	| visitor |
 	visitor := self new. 
@@ -40,7 +45,7 @@ PBBaselineVisitor >> attributesStringFor: aNameOrListOfNames [
 
 	^ aNameOrListOfNames isString 
 					ifTrue: [ aNameOrListOfNames ] 
-					ifFalse: [ "many attributes" '|' join: aNameOrListOfNames ]
+					ifFalse: [ "many attributes" self class attributesConjonctionCharacter join: aNameOrListOfNames ]
 ]
 
 { #category : #visiting }
@@ -245,7 +250,7 @@ PBBaselineVisitor >> specsByPackage [
 	dict := Dictionary new.
 	specs keysAndValuesDo: [ :attributeString :specList |
 		specList do: [ :spec | 
-			spec attributes: (self attributesSeparator split: attributeString).
+			spec attributes: attributeString.
 			(dict at: spec name ifAbsentPut: OrderedCollection new) add: spec ] ].
 	^ dict
 ]

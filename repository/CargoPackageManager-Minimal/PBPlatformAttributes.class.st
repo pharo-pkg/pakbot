@@ -24,8 +24,23 @@ PBPlatformAttributes class >> SmalltalkKey [
 ]
 
 { #category : #accessing }
+PBPlatformAttributes class >> macOSKey [
+	^ self OSKey , self separator , 'mac OS'
+]
+
+{ #category : #accessing }
 PBPlatformAttributes class >> separator [
 	^ '::'
+]
+
+{ #category : #accessing }
+PBPlatformAttributes class >> unixOSKey [
+	^ self OSKey , self separator , 'Unix'
+]
+
+{ #category : #accessing }
+PBPlatformAttributes class >> windowsOSKey [
+	^ self OSKey , self separator , 'Windows'
 ]
 
 { #category : #initialization }

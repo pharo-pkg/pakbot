@@ -37,7 +37,9 @@ PBBaselineVisitorTest >> baselineWithConditionalPackageDependencyDeclaration: sp
 		for: #foo do: [ spec package: 'PakbotTestExample-FooPackage'.
 							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-FooPackage' ] ];
 		for: #bar do: [ spec package: 'PakbotTestExample-BarPackage'.
-							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-BarPackage' ] ].
+							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-BarPackage' ] ];
+		for: #(#unix #osx) do: [ spec package: 'PakbotTestExample-UnixLikePackage'.
+							 spec package: 'PakbotTestExample-PackageA' with: [ spec requires: 'PakbotTestExample-UnixLikePackage' ] ].
 ]
 
 { #category : #'test data' }
@@ -133,21 +135,24 @@ PBBaselineVisitorTest >> testCanGetDependenciesWhenDeclaredConditionally [
 	
 	self
 		assert: project packages size 
-		equals: 3.
+		equals: 4.
 	self
 		assertCollection: project packageNames 
-		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-FooPackage' 'PakbotTestExample-BarPackage').
+		hasSameElements: #('PakbotTestExample-PackageA' 'PakbotTestExample-FooPackage' 'PakbotTestExample-BarPackage' 'PakbotTestExample-UnixLikePackage').
 	
 	packageADependencies := (project packageNamed: #'PakbotTestExample-PackageA') dependencies.
 	self
 		assert: packageADependencies size
-		equals: 2.
+		equals: 3.
 	self
 		assertCollection: (packageADependencies detect: [ :e | e name = #'PakbotTestExample-FooPackage' ]) platformRequirements 
 		hasSameElements: #( #'foo' ).
 	self
 		assertCollection: (packageADependencies detect: [ :e | e name = #'PakbotTestExample-BarPackage' ]) platformRequirements 
 		hasSameElements: #( #'bar' ).
+	self
+		assertCollection: (packageADependencies detect: [ :e | e name = #'PakbotTestExample-UnixLikePackage' ]) platformRequirements 
+		hasSameElements: { PBPlatformAttributes unixOSKey . PBPlatformAttributes macOSKey }.
 ]
 
 { #category : #tests }
@@ -287,16 +292,16 @@ PBBaselineVisitorTest >> testCanGetPackagesWhenDeclaredConditionally [
 		equals: 4.
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-CommonPackage') platformRequirements 
-		hasSameElements: #(#'all' ).
+		hasSameElements: #( #'all' ).
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-FooPackage') platformRequirements 
-		hasSameElements: #(#'foo' ).
+		hasSameElements: #( #'foo' ).
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-BarPackage') platformRequirements 
-		hasSameElements: #( #'all' #'bar' ).
+		hasSameElements: #( #'all:bar' ).
 	self
 		assertCollection: (project packageNamed: #'PakbotTestExample-UnixLikePackage') platformRequirements 
-		hasSameElements: #( #'unix|osx' ).
+		hasSameElements: { PBPlatformAttributes unixOSKey . PBPlatformAttributes macOSKey }.
 ]
 
 { #category : #tests }
