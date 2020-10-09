@@ -155,7 +155,7 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtGivenBranch [
 
 	location := self iceRepositoryLocation.
 	repository := PBGitRepositoryCreator new
-		url: 'git@github.com:pharo-pkg/pharo-counter.git';
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
 		location: location;
 		version: 'metadataless';
 		create.
