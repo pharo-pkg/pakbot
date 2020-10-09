@@ -1,11 +1,11 @@
 Class {
-	#name : #PBProjectTest,
+	#name : #PBProjectVersionTest,
 	#superclass : #PBModelTest,
 	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #tests }
-PBProjectTest >> testAddingDependencyPerformAnnouncement [
+PBProjectVersionTest >> testAddingDependencyPerformAnnouncement [
 	| announced subscription |
 
 	[ 
@@ -22,7 +22,7 @@ PBProjectTest >> testAddingDependencyPerformAnnouncement [
 ]
 
 { #category : #tests }
-PBProjectTest >> testCanGetMetacelloProjects [
+PBProjectVersionTest >> testCanGetMetacelloProjects [
 	| metacelloProjects |
 	ongoingProject 
 		addExternalProjectRequirement: 
@@ -50,7 +50,7 @@ PBProjectTest >> testCanGetMetacelloProjects [
 ]
 
 { #category : #tests }
-PBProjectTest >> testCanGetPackageUnits [
+PBProjectVersionTest >> testCanGetPackageUnits [
 	| units |
 	units := ongoingProject packageUnits.
 	
@@ -58,7 +58,7 @@ PBProjectTest >> testCanGetPackageUnits [
 ]
 
 { #category : #tests }
-PBProjectTest >> testRemovingDependencyPerformAnnouncement [
+PBProjectVersionTest >> testRemovingDependencyPerformAnnouncement [
 	| announced subscription dep |
 
 	dep := (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').

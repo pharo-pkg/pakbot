@@ -1,6 +1,6 @@
 Class {
 	#name : #PBOngoingProjectFailingTest,
-	#superclass : #PBProjectTest,
+	#superclass : #PBProjectVersionTest,
 	#instVars : [
 		'protocol'
 	],
