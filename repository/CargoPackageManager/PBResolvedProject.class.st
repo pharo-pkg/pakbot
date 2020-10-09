@@ -200,7 +200,7 @@ PBResolvedProject >> originDependencies [
 
 { #category : #loading }
 PBResolvedProject >> packagesNotAlreadyInstalledToLoad [
-	^ packagesToLoad reject: [ :name | (self resolvedProjectVersion packageNamed: name) isInstalled ]
+	^ packagesToLoad reject: [ :name | (self resolvedProjectVersion packageOrAssemblyNamed: name) isInstalled ]
 ]
 
 { #category : #accessing }

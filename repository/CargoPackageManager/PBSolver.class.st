@@ -40,18 +40,24 @@ PBSolver >> registry: aRegistry [
 ]
 
 { #category : #solving }
+PBSolver >> solveDependenciesOf: aPBLodoableElement in: aPBResolvedProject [
+
+	aPBLodoableElement dependencies
+		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
+		thenDo: [ :dep | dep resolveIn: aPBResolvedProject solver: self ].
+
+	self checkConflictsOf: aPBResolvedProject.
+	^ aPBResolvedProject
+]
+
+{ #category : #solving }
 PBSolver >> solvePackage: aPBPackage [ 
 	| resolvedProject |
 
 	resolvedProject := PBResolvedProject onProject: aPBPackage project.
 	resolvedProject addToLoadList: aPBPackage name.
 
-	aPBPackage dependencies
-		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
-		thenDo: [ :dep | dep resolveIn: resolvedProject solver: self ].
-
-	self checkConflictsOf: resolvedProject.
-	^ resolvedProject
+	^ self solveDependenciesOf: aPBPackage in: resolvedProject
 ]
 
 { #category : #solving }
@@ -67,9 +73,6 @@ PBSolver >> solveProject: aProject loads: aListOfPackageNameToLoad [
 	resolvedProject := PBResolvedProject onProject: aProject.
 	aListOfPackageNameToLoad
 		ifNotEmpty: [ :packages | resolvedProject addAllToLoadList: packages ].
-	aProject dependencies 
-		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
-		thenDo: [ :dep | dep resolveIn: resolvedProject solver: self ].
-	self checkConflictsOf: resolvedProject.
-	^ resolvedProject
+
+	^ self solveDependenciesOf: aProject in: resolvedProject
 ]

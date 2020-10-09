@@ -92,7 +92,14 @@ PBPackageDependency >> dependencyName [
 
 { #category : #accessing }
 PBPackageDependency >> dependent [
+	"Returns the entity that declared the dependency"
 	^ dependent
+]
+
+{ #category : #accessing }
+PBPackageDependency >> dependent: aPBLoadableUnit [
+
+	dependent := aPBLoadableUnit
 ]
 
 { #category : #testing }
@@ -162,9 +169,14 @@ PBPackageDependency >> printOn: aStream [
 	aStream << ')'.
 ]
 
+{ #category : #accessing }
+PBPackageDependency >> project [
+	"project is not set on dependencies after deserialization from STON"
+	^ project ifNil: [ dependent project ]
+]
+
 { #category : #solving }
 PBPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
-
 	aPBResolvedProject addToLoadList: self packageName.
 	self resolvedDependency dependencies 
 		do: [ :dep | 
@@ -174,7 +186,7 @@ PBPackageDependency >> resolveIn: aPBResolvedProject solver: aPBSolver [
 
 { #category : #solving }
 PBPackageDependency >> resolvedDependency [
-	^ project packageNamed: self packageName
+	^ self project packageNamed: self packageName
 ]
 
 { #category : #constrains }

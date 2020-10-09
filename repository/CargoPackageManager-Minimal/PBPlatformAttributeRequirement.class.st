@@ -21,7 +21,13 @@ PBPlatformAttributeRequirement class >> attributeSegments: aListOfNames [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
+PBPlatformAttributeRequirement class >> fromString: aString [
+
+	^ self attributeSegments: (PBPlatformAttributes separator split: aString)
+]
+
+{ #category : #'instance creation' }
 PBPlatformAttributeRequirement class >> osFamily: aName [
 	
 	^ self attributeSegments: { PBPlatformAttributes OSKey . aName }

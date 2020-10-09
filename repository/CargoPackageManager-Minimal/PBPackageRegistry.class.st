@@ -13,7 +13,8 @@ Class {
 		'installedPackages',
 		'registeredProjects',
 		'systemPackageOrganizer',
-		'metacelloProjectRegistry'
+		'metacelloProjectRegistry',
+		'platformRequirements'
 	],
 	#classVars : [
 		'Default'
@@ -68,6 +69,11 @@ PBPackageRegistry >> checkProjectRegistrationOf: aPBProjectVersion [
 		and: [ installedProject repository = aPBProjectVersion repository ])
 			ifTrue: [ ^ self ].
 	PBPackageAlreadyRegistered signal: aPBProjectVersion name , ' is already a registered project in the registry!'.
+]
+
+{ #category : #accessing }
+PBPackageRegistry >> currentPlatformRequirements [
+	^ platformRequirements ifNil: [ platformRequirements := PBPlatformAttributes new ]
 ]
 
 { #category : #'API -dependencies' }

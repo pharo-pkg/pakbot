@@ -69,7 +69,12 @@ PBPackage >> dependencies [
 
 { #category : #updating }
 PBPackage >> dependencies: aDependencyList [ 
-	dependencies := aDependencyList
+	dependencies := aDependencyList.
+	dependencies do: 
+		[ :dependency |
+			dependency 
+				dependent: self;
+				project: self project. ].
 ]
 
 { #category : #testing }
@@ -106,6 +111,11 @@ PBPackage >> isInstalled [
 	project registry systemPackageOrganizer packageNamed: self name ifAbsent: [ ^false ].
 	^ true
 	" To avoid overriding of an existing system package, we do not check package registration in the registry."
+]
+
+{ #category : #testing }
+PBPackage >> isLoadable [
+	^ self satisfyPlatformRequirements: self registry currentPlatformRequirements
 ]
 
 { #category : #testing }

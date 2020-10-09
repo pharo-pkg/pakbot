@@ -44,3 +44,10 @@ PBProjectElement >> remove [
 	
 	self subclassResponsibility
 ]
+
+{ #category : #'conditional loading' }
+PBProjectElement >> satisfyPlatformRequirements: platformAttributes [ 
+	^ self platformRequirements allSatisfy: 
+		[ :requirement | 
+		platformAttributes satisfies: (PBPlatformAttributeRequirement fromString: requirement) ]
+]

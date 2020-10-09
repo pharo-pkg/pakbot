@@ -23,7 +23,29 @@ PBProjectLoadingInstructionsTest >> tearDown [
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testPackageLoadingInstructionsWithBothProjectAndPackageDependency [
+PBProjectLoadingInstructionsTest >> testAssemblyLoading [
+
+	| resolution loadInstructions packageA packageB project assembly |
+	project := testRegistry newProjectNamed: 'Test'.
+	
+	packageA := project newNotLoadedPackage: 'PackageA'.
+	packageB := (project newNotLoadedPackage: 'PackageB') 
+		addDependency: (PBPakbotProjectDependency example).
+	assembly := project addAssemblyNamed: 'TestAssembly'.
+	assembly addPackage: packageA.
+	assembly addPackage: packageB.
+	resolution := assembly resolve.
+	
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
+		(loadableUnit name = 'Test')
+			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testPackageLoadingWithBothProjectAndPackageDependencyOnlyLoadsPackageDependencies [
 
 	| resolution projectOne loadInstructions packageA |
 	projectOne := testRegistry newProjectNamed: 'Test'.
@@ -47,7 +69,33 @@ PBProjectLoadingInstructionsTest >> testPackageLoadingInstructionsWithBothProjec
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotIncludeInstalledDependencies [
+PBProjectLoadingInstructionsTest >> testPackageLoadingWithConditionalPackage [
+		
+	"See tests in PBProjectLoading test"
+	
+	self skip.
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testPackageLoadingWithPackageDependency [
+
+	| resolution projectOne packageA loadInstructions |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: (PBPakbotProjectDependency example).
+	resolution := packageA resolve.
+	
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 2.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
+		(loadableUnit name = 'Test')
+			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingDoesNotIncludeInstalledDependencies [
 	| resolution projectOne projectTwoName projectTwoRegistration |
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
@@ -81,7 +129,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsDoesNotInclude
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithBothProjectAndPackageDependency [
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithBothProjectAndPackageDependencyOnlyLoadsProjectDependencies [
 
 	| resolution projectOne loadInstructions packageA |
 	projectOne := testRegistry newProjectNamed: 'Test'.
@@ -106,7 +154,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithBothProjec
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoingProjectHasEmptyLoadingInstructions [
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithCargoOngoingProjectHasEmptyLoadingInstructions [
 
 	| resolution projectOne |
 	
@@ -124,7 +172,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoOngoi
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProjectDependencyHasCargoLoadingInstruction [
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithCargoProjectDependencyHasCargoLoadingInstruction [
 
 	| resolution projectOne dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
@@ -140,76 +188,14 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithCargoProje
 ]
 
 { #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackage [
 
-	| resolution projectOne baselineDependency |
-	projectOne := testRegistry newProjectNamed: 'Test'.
+	"Cannot be tested here.
+	A project load implies a full load of the project.
+	Load instructions only knows that it has to load the full project.
+	See tests in PBProjectLoading test"
 	
-	baselineDependency := PBMetacelloBaselineProjectDependency
-		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
-		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
-	projectOne addDependency: baselineDependency.
-	resolution := projectOne resolve.
-
-	"Since the project and its dependencies are already loaded and up to date,
-	the calculated load instructions should strip out all installed things and then be empty"
-	self assert: resolution loadInstructions size equals: 1.
-	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: baselineDependency))
-]
-
-{ #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
-
-	| resolution projectOne configurationProject |
-	projectOne := testRegistry newProjectNamed: 'Test'.
-	
-	configurationProject := PBMetacelloConfigurationProjectDependency
-		name: 'CargoTestExample'
-		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
-		version: '1.0'.
-	projectOne addDependency: configurationProject.
-	resolution := projectOne resolve.
-
-	"Since the project and its dependencies are already loaded and up to date,
-	the calculated load instructions should strip out all installed things and then be empty"
-	self assert: resolution loadInstructions size equals: 1.
-	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: configurationProject))
-]
-
-{ #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingInstructionsWithPackageDependency [
-
-	| resolution projectOne packageA loadInstructions |
-	projectOne := testRegistry newProjectNamed: 'Test'.
-	testRegistry reset. "unregister projectOne so that it will be installed"
-	
-	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
-		addDependency: (PBPakbotProjectDependency example).
-	resolution := packageA resolve.
-	
-	loadInstructions := resolution loadInstructions.
-	self assert: loadInstructions size equals: 2.
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
-		(loadableUnit name = 'Test')
-			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
-]
-
-{ #category : #tests }
-PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDependency [
-	| resolution projectOne loadInstructions packageA |
-	projectOne := testRegistry newProjectNamed: 'Test'.
-	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
-		addDependency: (PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
-	resolution := packageA resolve.
-
-	loadInstructions := resolution loadInstructions.
-	self assert: loadInstructions size equals: 2.
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
-
+	self skip.
 ]
 
 { #category : #tests }
@@ -219,7 +205,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDepe
 	dependency := PBPakbotProjectDependency
 			named: 'Counter'
 			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
-	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' "OSPlatform current family" }.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' }.
 	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
 		addDependency: dependency;
 		yourself.
@@ -257,7 +243,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDepe
 	dependency := PBPakbotProjectDependency
 			named: 'Counter'
 			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
-	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' "OSPlatform current family" }.
+	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' }.
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
 	
@@ -283,4 +269,60 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDepe
 
 	self assert: resolution loadInstructions size equals: 1.
 	self assert: (resolution loadInstructions includes: self expectedCargoResolvedProject)
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithMetacelloBaselineProjectDependencyHasMetacelloLoadingInstruction [
+
+	| resolution projectOne baselineDependency |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	
+	baselineDependency := PBMetacelloBaselineProjectDependency
+		name: 'PakbotTestExample'
+		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
+	projectOne addDependency: baselineDependency.
+	resolution := projectOne resolve.
+
+	"Since the project and its dependencies are already loaded and up to date,
+	the calculated load instructions should strip out all installed things and then be empty"
+	self assert: resolution loadInstructions size equals: 1.
+	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: baselineDependency))
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithMetacelloConfigurationProjectDependencyHasMetacelloLoadingInstruction [
+
+	| resolution projectOne configurationProject |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	
+	configurationProject := PBMetacelloConfigurationProjectDependency
+		name: 'CargoTestExample'
+		repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+		version: '1.0'.
+	projectOne addDependency: configurationProject.
+	resolution := projectOne resolve.
+
+	"Since the project and its dependencies are already loaded and up to date,
+	the calculated load instructions should strip out all installed things and then be empty"
+	self assert: resolution loadInstructions size equals: 1.
+	self assert: (resolution loadInstructions includes: (PBMetacelloConfigurationProject fromProjectDependency: configurationProject))
+]
+
+{ #category : #tests }
+PBProjectLoadingInstructionsTest >> testProjectLoadingWithPackageDependency [
+
+	| resolution projectOne packageA loadInstructions |
+	projectOne := testRegistry newProjectNamed: 'Test'.
+	testRegistry reset. "unregister projectOne so that it will be installed"
+	
+	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
+		addDependency: (PBPakbotProjectDependency example).
+	resolution := projectOne resolve.
+	
+	loadInstructions := resolution loadInstructions.
+	self assert: loadInstructions size equals: 1.
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Test' ]).
+	"we load the full project, package A will be loaded.
+	Package A dependency is ignored because it is a package-level dependency and we load a project"
 ]

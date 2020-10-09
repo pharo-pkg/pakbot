@@ -72,6 +72,11 @@ PBAbstractDependency >> platformRequirements: alistOfPlatformRequirement [
 ]
 
 { #category : #accessing }
+PBAbstractDependency >> project [
+	^ project
+]
+
+{ #category : #accessing }
 PBAbstractDependency >> project: aCGOOngoingProject [ 
 
 	project := aCGOOngoingProject

@@ -83,7 +83,6 @@ PBProjectVersion >> addAssemblyNamed: aName [
 	(assemblies includes: assembly)
 		ifTrue: [ PBPackageAlreadyRegistered signal ].		
 	assemblies add: assembly.
-	registry register: assembly.
 	self announceChanged.
 
 	^ assembly
@@ -169,14 +168,19 @@ PBProjectVersion >> authors [
 { #category : #'private-loading' }
 PBProjectVersion >> basicLoad [
 	registry registerProject: self.
-	self packageUnits do: #basicLoad.
+	self packageUnits 
+		select: #isLoadable
+		thenDo: #basicLoad.
 	PBProjectLoaded announceOnProject: self. 
 ]
 
 { #category : #'private-loading' }
 PBProjectVersion >> basicLoad: aListOfPackageName [
 	registry registerProject: self.
-	aListOfPackageName do: [ :pkgName | (self packageNamed: pkgName) basicLoad ].
+	(aListOfPackageName 
+		collect: [ :pkgName | self packageOrAssemblyNamed: pkgName ]
+		thenSelect: #isLoadable) 
+			do: #basicLoad.
 	PBProjectLoaded announceOnProject: self. 
 ]
 

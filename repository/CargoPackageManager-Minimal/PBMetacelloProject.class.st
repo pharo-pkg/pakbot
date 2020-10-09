@@ -217,7 +217,7 @@ PBMetacelloProject >> packageName [
 ]
 
 { #category : #'compatibility - PBProjectVersion' }
-PBMetacelloProject >> packageNamed: aName [ 
+PBMetacelloProject >> packageOrAssemblyNamed: aName [ 
 	"Used by PBResolvedProject>>#packagesNotAlreadyInstalledToLoad.
 	I will always return a PBPackage on which I can ask if it is installed: uses system package organizer"
 	^ PBPackage named: aName project: self

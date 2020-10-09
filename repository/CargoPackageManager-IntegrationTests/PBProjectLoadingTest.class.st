@@ -47,6 +47,30 @@ PBProjectLoadingTest >> testAResolvedProjectIsNotInstalledWhenAtLeastOnePackageT
 ]
 
 { #category : #'tests-cargo-dependencies' }
+PBProjectLoadingTest >> testCanLoadAProjectAssembly [
+
+	| project repository packageCore packageTest assembly |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	packageTest := project packageNamed: 'Counter-Tests'.
+	assembly := project addAssemblyNamed: 'Counter-Assembly'.
+	assembly addPackage: packageCore.
+	assembly addPackage: packageTest.
+	assembly resolve load.
+	
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore . packageTest }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').
+]
+
+{ #category : #'tests-cargo-dependencies' }
 PBProjectLoadingTest >> testCanLoadAProjectPackage [
 
 	| project packageCore repository |
@@ -181,6 +205,98 @@ PBProjectLoadingTest >> testNotLoadingMetacelloConfigurationDoesNotLoadCorrespon
 	self deny: (Smalltalk globals hasClassNamed: 'ClassInPackageB').
 	self deny: (Smalltalk globals hasClassNamed: 'ClassInPackageC').
 	self deny: (Smalltalk globals hasClassNamed: 'ClassInPackageD').
+]
+
+{ #category : #'tests-conditional-dependencies' }
+PBProjectLoadingTest >> testPackageLoadingWithConditionalPackageDoesNotLoadPackageWhenConditionUnmet [
+
+	| assembly repository project packageCore conditionalPackage |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	conditionalPackage := project packageNamed: 'Counter-Tests'.
+	conditionalPackage platformRequirements: #( NON_EXISTING_PLATFORM_ATTRIBUTE ).
+	assembly := project addAssemblyNamed: 'Counter-Assembly'.
+	assembly addPackage: packageCore.
+	assembly addPackage: conditionalPackage.
+	assembly resolve load.
+
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self deny: (Smalltalk globals hasClassNamed: 'CounterTest').
+]
+
+{ #category : #'tests-conditional-dependencies' }
+PBProjectLoadingTest >> testPackageLoadingWithConditionalPackageLoadsPackageWhenConditionMet [
+
+	| assembly repository project packageCore conditionalPackage |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	conditionalPackage := project packageNamed: 'Counter-Tests'.
+	conditionalPackage platformRequirements: { PBPlatformAttributes new operatingSystem }.
+	assembly := project addAssemblyNamed: 'Counter-Assembly'.
+	assembly addPackage: packageCore.
+	assembly addPackage: conditionalPackage.
+	assembly resolve load.
+
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore . conditionalPackage }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').
+]
+
+{ #category : #'tests-conditional-dependencies' }
+PBProjectLoadingTest >> testProjectLoadingWithConditionalPackageDoesNotLoadPackageWhenConditionUnmet [
+	| repository project packageCore conditionalPackage |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	conditionalPackage := project packageNamed: 'Counter-Tests'.
+	conditionalPackage platformRequirements: #( NON_EXISTING_PLATFORM_ATTRIBUTE ).
+	project resolve load.
+
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self deny: (Smalltalk globals hasClassNamed: 'CounterTest').
+]
+
+{ #category : #'tests-conditional-dependencies' }
+PBProjectLoadingTest >> testProjectLoadingWithConditionalPackageLoadsPackageWhenConditionMet [
+	| repository project packageCore conditionalPackage |
+
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	project := repository project.
+	project 
+		registry: testRegistry;
+		repository: repository.
+	packageCore := project packageNamed: 'Counter-Core'.
+	conditionalPackage := project packageNamed: 'Counter-Tests'.
+	conditionalPackage platformRequirements: { PBPlatformAttributes new operatingSystem }.
+	project resolve load.
+
+	self 
+		assertCollection: project installedPackages 
+		hasSameElements: { packageCore . conditionalPackage }.
+	self assert: (Smalltalk globals hasClassNamed: 'Counter').
+	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').
 ]
 
 { #category : #'tests-baseline-dependencies' }

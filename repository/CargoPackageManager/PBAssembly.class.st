@@ -98,7 +98,9 @@ PBAssembly >> createPackageNamed: aString [
 { #category : #accessing }
 PBAssembly >> dependencies [
 	"for polymorphism with Package Unit"
-	^ self parts
+	^ (self parts collect: #asPackageDependency)
+		do: [ :dependency | dependency dependent: self ];
+		yourself
 ]
 
 { #category : #adding }
@@ -154,6 +156,14 @@ PBAssembly >> isEmpty [
 PBAssembly >> isInstalled [
 	
 	^ self parts allSatisfy: #isInstalled
+]
+
+{ #category : #testing }
+PBAssembly >> isLoadable [
+	"We do not load assemblies because assembly parts and dependencies
+	 are already part of the resolution."
+	
+	^ false
 ]
 
 { #category : #'support-ui' }
@@ -220,4 +230,10 @@ PBAssembly >> removePackage: aPBPackage ifAbsent: aBlockClosure [
 { #category : #updating }
 PBAssembly >> removePart: aCGOPackageDependency [ 
 	packages remove: aCGOPackageDependency
+]
+
+{ #category : #solving }
+PBAssembly >> resolve [
+	
+	^ self project registry newSolver solvePackage: self
 ]
