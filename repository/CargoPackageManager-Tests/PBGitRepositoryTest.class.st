@@ -150,6 +150,23 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtBranchOriginHeadWhenReposi
 ]
 
 { #category : #tests }
+PBGitRepositoryTest >> testCanEnsureRepositoryClonedAtGivenBranch [
+	| location |
+
+	location := self iceRepositoryLocation.
+	repository := PBGitRepositoryCreator new
+		url: 'git@github.com:pharo-pkg/pharo-counter.git';
+		location: location;
+		version: 'metadataless';
+		create.
+	repository ensureCloned.
+	
+	self 
+		assert: repository currentCommitId
+		equals: '26c4d6e2b755891e7bacdb3e0df0c8df4e09c22e'.
+]
+
+{ #category : #tests }
 PBGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 
 	repository := PBGitRepositoryCreator new
@@ -168,15 +185,11 @@ PBGitRepositoryTest >> testCanEnsureRepositoryClonedWhenRepositoryNotYetCloned [
 ]
 
 { #category : #tests }
-PBGitRepositoryTest >> testCanGetMCVersionWhenAOngoingPackageUnitProvided [
+PBGitRepositoryTest >> testCanGetMCVersionWhenAPackageProvided [
 	| result |
-	
-	self flag:#todo.
-	"This functionality uses old Iceberg API, should be migrated"
-	self skip.	
-	
+
 	repository := self pharoCounterMasterCloned.
-	result := repository mcVersionFor: (PBPackage for: 'Counter-Core').
+	result := repository mcVersionFor: (PBPackage named: 'Counter-Core').
 	self assert: (result isKindOf: MCVersion)
 ]
 

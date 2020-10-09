@@ -87,6 +87,18 @@ PBGitRepository >> baselines [
 		sorted: [ :a :b | a name < b name ].
 ]
 
+{ #category : #private }
+PBGitRepository >> checkoutVersionIfSpecified [
+	| commit |
+	version isEmptyOrNil ifTrue: [ ^ self ].
+	
+	commit := iceRepository lookupCommit: version.
+	commit isUnknownCommit 
+		ifTrue: [ commit := iceRepository remoteBranchNamed: 'origin/' , version ].
+	
+	commit checkout
+]
+
 { #category : #accessing }
 PBGitRepository >> codeDirectoryRelativePath [
 	^ self subdirectory ifNotEmpty: [ :subdirectoryName | subdirectoryName , '/' ]
@@ -108,7 +120,7 @@ PBGitRepository >> ensureCloned [
 		ifFalse: [ iceRepository := iceRepositoryCreator createRepository.
 					iceRepositoryCreator := nil. ].
 
-	version isEmptyOrNil ifFalse: [ (iceRepository lookupCommit: version) checkout ].
+	self checkoutVersionIfSpecified.
 		
 	[ iceRepository register ]
 		on: IceDuplicatedRepository 
@@ -164,7 +176,9 @@ PBGitRepository >> iceRepository [
 
 { #category : #querying }
 PBGitRepository >> iceSavedPackageVersionFor: packageName [
-	^ self iceRepository workingCopy versionFor: packageName
+	| wc |
+	wc := self iceRepository workingCopy.
+	^ wc versionFor: (wc packageNamed: packageName)
 ]
 
 { #category : #initialization }
@@ -239,8 +253,8 @@ PBGitRepository >> loadPackageNamed: aPackageName [
 ]
 
 { #category : #querying }
-PBGitRepository >> mcVersionFor: aPackageVersion [
-	^ (self iceSavedPackageVersionFor: aPackageVersion packageName) mcVersion
+PBGitRepository >> mcVersionFor: aPBPackage [
+	^ (self iceSavedPackageVersionFor: aPBPackage name) mcVersion
 ]
 
 { #category : #private }
