@@ -50,6 +50,22 @@ PBCommitProjectCommand class >> systemBrowserToolbarActivator [
 		for: PBProjectUIItem asCalypsoItemContext , ClyEmptyClassSelectionContext new
 ]
 
+{ #category : #execution }
+PBCommitProjectCommand >> askUseMetadata [
+
+	| answer |
+	answer := UIManager default
+		  question:
+		  'This project does not use Pakbot metadata yet. Use pakbot metadata?'
+		  title: 'Use pakbot metadata?'.
+	
+	"NonInteractiveUIManager does not answer a boolean. Ensure we get a valid answer"
+	^ answer class = Boolean 
+		ifTrue: [ answer ] 
+		ifFalse: [ false "default behaviour" ].
+		
+]
+
 { #category : #initialization }
 PBCommitProjectCommand >> defaultMenuItemName [
 	^ 'Commit...'
@@ -57,9 +73,7 @@ PBCommitProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 PBCommitProjectCommand >> execute [
-	usePakbot ifNil: [ usePakbot := UIManager default 
-		question: 'This project does not use Pakbot metadata yet. Use pakbot metadata?'
-		title: 'Use pakbot metadata?' ].
+	usePakbot ifNil: [ usePakbot := self askUseMetadata ].
 		
 	usePakbot ifNil: [ ^ nil "cancel command" ].
 	usePakbot ifTrue: [ project marryWith: project repository ].
