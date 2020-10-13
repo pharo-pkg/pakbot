@@ -31,6 +31,15 @@ PBCommitProjectCommandTest >> setUpExistingRepository [
 				project: project)
 ]
 
+{ #category : #tests }
+PBCommitProjectCommandTest >> setUpExistingRepositoryWithoutPakbotMetadata [
+	repository := (PBGitRepositoryCreator new
+		location: repositoryLocation;
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
+		version: 'metadataless';
+		yourself) createAndClone.
+]
+
 { #category : #running }
 PBCommitProjectCommandTest >> setUpNewRepository [
 	project := PBProjectVersion named: 'test-project'.
@@ -75,6 +84,56 @@ PBCommitProjectCommandTest >> testGivenAProjectWhenDeletingPackageInMetadataThen
 	self
 		assertCollection: packageModifications first oldNode path fullName
 		equals: PBSourceRepository new projectMetadataFileName
+]
+
+{ #category : #tests }
+PBCommitProjectCommandTest >> testGivenAProjectWhenNoPackbotMetadataThenCanCommitPackbotMetadataToRepository [
+	| command commitBrowser visitor packageAdditions |
+	
+	self setUpExistingRepositoryWithoutPakbotMetadata.
+	project := PBProjectVersion named: 'CounterWithPakbot'.
+	project repository: repository.
+	command := PBCommitProjectCommand new
+		project: project;
+		usePakbot: true;
+		yourself.
+		
+	commitBrowser := command execute.
+
+	presenterToDelete := commitBrowser.
+	visitor := IceDiffListingVisitor new.
+	commitBrowser diffPanel selectedItems
+		do: [ :each | visitor visitTreeNode: each ].		
+	self assert: visitor removals isEmpty.
+	self assert: visitor modifications isEmpty.
+	packageAdditions := visitor additions.
+	self assert: packageAdditions size equals: 1.
+	self
+		assertCollection: packageAdditions first path fullName
+		equals: PBSourceRepository new projectMetadataFileName.
+]
+
+{ #category : #tests }
+PBCommitProjectCommandTest >> testGivenAProjectWhenNoPackbotMetadataThenCanCommitWithoutPackbotMetadataToRepository [
+	| command commitBrowser visitor |
+	
+	self setUpExistingRepositoryWithoutPakbotMetadata.
+	project := PBProjectVersion named: 'CounterWithPakbot'.
+	project repository: repository.
+	command := PBCommitProjectCommand new
+		project: project;
+		usePakbot: false;
+		yourself.
+		
+	commitBrowser := command execute.
+
+	presenterToDelete := commitBrowser.
+	visitor := IceDiffListingVisitor new.
+	commitBrowser diffPanel selectedItems
+		do: [ :each | visitor visitTreeNode: each ].		
+	self assert: visitor removals isEmpty.
+	self assert: visitor modifications isEmpty.
+	self assert: visitor additions isEmpty.
 ]
 
 { #category : #tests }

@@ -4,6 +4,9 @@ Calypso command providing a contextual menu on Cargo project to allow a commit o
 Class {
 	#name : #PBCommitProjectCommand,
 	#superclass : #PBProjectCommand,
+	#instVars : [
+		'usePakbot'
+	],
 	#category : #'CargoPackageManager-Calypso-Browser-Commands'
 }
 
@@ -54,6 +57,13 @@ PBCommitProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 PBCommitProjectCommand >> execute [
+	usePakbot ifNil: [ usePakbot := UIManager default 
+		question: 'This project does not use Pakbot metadata yet. Use pakbot metadata?'
+		title: 'Use pakbot metadata?' ].
+		
+	usePakbot ifNil: [ ^ nil "cancel command" ].
+	usePakbot ifTrue: [ project marryWith: project repository ].
+	
 	[ ^ (IceTipCommitBrowser onRepository: project repository iceRepository)
 			openWithSpec;
 			yourself ]
@@ -63,4 +73,9 @@ PBCommitProjectCommand >> execute [
 		'Open a repository window and click on repair action to create a new branch or checkout an existing branch.', String cr ,
 		'Once done, you will be able to commit the project.' )
 		title: 'Commit project failed'	 ]
+]
+
+{ #category : #initialization }
+PBCommitProjectCommand >> usePakbot: aBoolean [ 
+	usePakbot := aBoolean
 ]

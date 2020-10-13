@@ -431,6 +431,19 @@ PBProjectVersion >> loadedPackages [
 	^ self installedPackages
 ]
 
+{ #category : #updating }
+PBProjectVersion >> marryWith: aPBGitRepository [
+	"Marry this project with the referenced iceberg repository.
+	It means iceberg project with be replaced by an PBIcebergProject referencing myself.
+	It will allows to commit pakbot metadata through iceberg for a project not using pakbot before."
+	
+	self repository: aPBGitRepository.
+	aPBGitRepository project:
+		(PBIcebergProject
+				onRepository: aPBGitRepository iceRepository
+				project: self)
+]
+
 { #category : #accessing }
 PBProjectVersion >> metacelloProjects [
 	^ externalProjects 

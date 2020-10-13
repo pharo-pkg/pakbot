@@ -1,12 +1,14 @@
 "
 I reprensent a Pakbot project. I'm able to serialize and provide changes to the project metadata.
+I keep a reference to non-pakbot project for compatibility purposes.
 "
 Class {
 	#name : #PBIcebergProject,
 	#superclass : #IceAbstractProject,
 	#instVars : [
 		'pakbotProject',
-		'sourceDirectory'
+		'sourceDirectory',
+		'nonPakbotProject'
 	],
 	#category : #'CargoPackageManager-Iceberg-Integration'
 }
@@ -21,7 +23,9 @@ PBIcebergProject class >> onCommitish: aCommitish project: aPakbotProject [
 
 { #category : #'instance creation' }
 PBIcebergProject class >> onRepository: aRepository project: aPakbotProject [ 
-	^ self onCommitish: aRepository workingCopy project: aPakbotProject
+	^ (self onCommitish: aRepository workingCopy project: aPakbotProject)
+			nonPakbotProject: aRepository project;
+			yourself.
 ]
 
 { #category : #comparing }
@@ -29,6 +33,14 @@ PBIcebergProject >> = anotherProject [
 
 	^ super = anotherProject 
 		and: [ self contentsString = anotherProject contentsString ]
+]
+
+{ #category : #changes }
+PBIcebergProject >> addIcebergProjectFileToChangeBuilder: anIceChangeImporter [ 
+	
+	nonPakbotProject ifNil: [ ^ self ].
+	
+	nonPakbotProject addProjectFileToChangeBuilder: anIceChangeImporter 
 ]
 
 { #category : #changes }
@@ -46,6 +58,7 @@ PBIcebergProject >> addToChangeBuilder: anIceChangeImporter [
 	"compute diff between cargo model and saved version?"
 	
 	self addProjectFileToChangeBuilder: anIceChangeImporter.
+	self addIcebergProjectFileToChangeBuilder: anIceChangeImporter.
 ]
 
 { #category : #writing }
@@ -70,6 +83,11 @@ PBIcebergProject >> isPakbotProject [
 PBIcebergProject >> name [
 	
 	^ pakbotProject name
+]
+
+{ #category : #accessing }
+PBIcebergProject >> nonPakbotProject: anIceProject [ 
+	nonPakbotProject := anIceProject
 ]
 
 { #category : #accessing }
