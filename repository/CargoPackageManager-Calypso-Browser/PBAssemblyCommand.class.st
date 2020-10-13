@@ -4,7 +4,7 @@ In particular extract an assembly from the calypso context.
 "
 Class {
 	#name : #PBAssemblyCommand,
-	#superclass : #CGOClyCommand,
+	#superclass : #PBClyCommand,
 	#instVars : [
 		'assembly'
 	],

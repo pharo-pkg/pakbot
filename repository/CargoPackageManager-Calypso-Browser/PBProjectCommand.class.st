@@ -3,7 +3,7 @@ Abstract class for all the commands that works on projects.
 "
 Class {
 	#name : #PBProjectCommand,
-	#superclass : #CGOClyCommand,
+	#superclass : #PBClyCommand,
 	#instVars : [
 		'project'
 	],

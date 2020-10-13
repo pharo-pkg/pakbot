@@ -3,7 +3,7 @@ Calypso command providing a contextual menu to create a new (empty) Cargo projec
 "
 Class {
 	#name : #PBCreateProjectCommand,
-	#superclass : #CGOClyCommand,
+	#superclass : #PBClyCommand,
 	#instVars : [
 		'projectName'
 	],

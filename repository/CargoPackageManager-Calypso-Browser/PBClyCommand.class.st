@@ -3,7 +3,7 @@ Common super class for Cargo commands.
 It provides a way to refresh Calypso UI while Cargo does not provide System announcements.
 "
 Class {
-	#name : #CGOClyCommand,
+	#name : #PBClyCommand,
 	#superclass : #CmdCommand,
 	#instVars : [
 		'toolContext',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #execution }
-CGOClyCommand >> prepareFullExecutionInContext: aToolContext [
+PBClyCommand >> prepareFullExecutionInContext: aToolContext [
 	| packageManagers |
 	super prepareFullExecutionInContext: aToolContext.
 	toolContext := aToolContext.
