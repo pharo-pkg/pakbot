@@ -316,7 +316,7 @@ PBGitRepository >> repository: anIceLibgitRepository [
 { #category : #saving }
 PBGitRepository >> savePackageUnit: packageUnit withMessage: commitMessage [
 	| iceSavedPackage newMcVersion |
-	iceSavedPackage := self ensureIcePackageNamed: packageUnit packageName.
+	iceSavedPackage := self ensureIcePackageNamed: packageUnit name.
 	iceSavedPackage repository workingCopy ifNil: [ ^ nil "nothing to save" ].
 	newMcVersion := self iceRepository 
 		internalSavePackage: iceSavedPackage
