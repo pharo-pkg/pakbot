@@ -294,6 +294,12 @@ PBProjectVersion >> hash [
 	^ self name hash
 ]
 
+{ #category : #'as yet unclassified' }
+PBProjectVersion >> ifNotMarried: aBlock [
+	repository isMarried
+		ifFalse: [ aBlock value ]
+]
+
 { #category : #packages }
 PBProjectVersion >> importPackageNamed: aString [
 	| package |

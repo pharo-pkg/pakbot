@@ -73,10 +73,10 @@ PBCommitProjectCommand >> defaultMenuItemName [
 
 { #category : #execution }
 PBCommitProjectCommand >> execute [
-	usePakbot ifNil: [ usePakbot := self askUseMetadata ].
-		
-	usePakbot ifNil: [ ^ nil "cancel command" ].
-	usePakbot ifTrue: [ project marryWith: project repository ].
+	project ifNotMarried: [ 
+		usePakbot ifNil: [ usePakbot := self askUseMetadata ifNil: [ ^ nil "cancel command" ] ].
+		usePakbot ifTrue: [ project marryWith: project repository ].
+	].
 	
 	[ ^ (IceTipCommitBrowser onRepository: project repository iceRepository)
 			openWithSpec;

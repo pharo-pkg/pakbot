@@ -233,6 +233,11 @@ PBGitRepository >> isIceRepositoryValid [
 	^ iceRepository isNotNil	and: [ iceRepository isValid ]
 ]
 
+{ #category : #'as yet unclassified' }
+PBGitRepository >> isMarried [
+	^ iceRepository project isPakbotProject
+]
+
 { #category : #private }
 PBGitRepository >> isRepositoryAlreadyCloned [
 	^ iceRepositoryCreator location isNotNil
