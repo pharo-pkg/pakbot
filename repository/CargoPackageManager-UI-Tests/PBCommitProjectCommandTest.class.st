@@ -152,10 +152,10 @@ PBCommitProjectCommandTest >> testGivenNewProjectAndFreshlyCreatedRepositoryThen
 	self assert: visitor removals isEmpty.
 	self 
 		assert: visitor additions size 
-		equals: 2.
+		equals: 3.
 	self 
 		assertCollection: (visitor additions collect: [ :addition | addition path fullName ])
-		 hasSameElements: { PBSourceRepository new projectMetadataFileName . IceRepositoryProperties propertiesFileName }.
+		hasSameElements: { PBSourceRepository new projectMetadataFileName . IceRepositoryProperties propertiesFileName . IceBasicProject new projectFilePath basename }.
 ]
 
 { #category : #tests }
