@@ -87,6 +87,8 @@ PBIcebergProject >> name [
 
 { #category : #accessing }
 PBIcebergProject >> nonPakbotProject: anIceProject [ 
+	anIceProject isPakbotProject ifTrue: [ ^ self ].
+	
 	nonPakbotProject := anIceProject
 ]
 
