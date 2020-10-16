@@ -257,6 +257,11 @@ PBGitRepository >> loadPackageNamed: aPackageName [
 	self iceRepository workingCopy loadPackageNamed: aPackageName
 ]
 
+{ #category : #loading }
+PBGitRepository >> loadPackagesNamed: aListOfPackageName [
+	self iceRepository workingCopy loadPackagesNamed: aListOfPackageName
+]
+
 { #category : #querying }
 PBGitRepository >> mcVersionFor: aPBPackage [
 	^ (self iceSavedPackageVersionFor: aPBPackage name) mcVersion

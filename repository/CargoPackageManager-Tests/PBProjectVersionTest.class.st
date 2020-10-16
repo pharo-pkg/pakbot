@@ -1,8 +1,19 @@
 Class {
 	#name : #PBProjectVersionTest,
 	#superclass : #PBModelTest,
+	#instVars : [
+		'repository'
+	],
 	#category : #'CargoPackageManager-Tests-Model'
 }
+
+{ #category : #running }
+PBProjectVersionTest >> tearDown [ 
+	repository ifNotNil: [:repo | repo iceRepository delete].
+	self removePackageIfExists: 'Counter-Core'.
+	self removePackageIfExists: 'Counter-Tests'.
+	super tearDown.
+]
 
 { #category : #tests }
 PBProjectVersionTest >> testAddingDependencyPerformAnnouncement [
@@ -55,6 +66,22 @@ PBProjectVersionTest >> testCanGetPackageUnits [
 	units := ongoingProject packageUnits.
 	
 	self assert: (units allSatisfy: #isUnit).
+]
+
+{ #category : #tests }
+PBProjectVersionTest >> testCanLoadProjectWithoutUnresolvedDependenciesWarning [
+
+	| project |
+	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
+	project := repository project.
+	project packages: { project packageNamed: 'Counter-Tests' . project packageNamed: 'Counter-Core' }. "ensure tests are loaded before core for the purpose of the test"
+	project 
+		registry: testRegistry;
+		repository: repository.
+
+	self
+		shouldnt: [ project load ]
+		raise: Warning.
 ]
 
 { #category : #tests }

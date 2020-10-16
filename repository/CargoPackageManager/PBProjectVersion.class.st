@@ -168,9 +168,9 @@ PBProjectVersion >> authors [
 { #category : #'private-loading' }
 PBProjectVersion >> basicLoad [
 	registry registerProject: self.
-	self packageUnits 
+	self repository loadPackagesNamed: (self packageUnits 
 		select: #isLoadable
-		thenDo: #basicLoad.
+		thenCollect: #name).
 	PBProjectLoaded announceOnProject: self. 
 ]
 
