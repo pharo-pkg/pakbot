@@ -111,6 +111,10 @@ PBIcebergProject >> projectFilePath [
 
 { #category : #accessing }
 PBIcebergProject >> projectFileReference [
+	"We need the iceberg basic project to know the path of Pharo sources in the repository.
+	Maybe sourceDirectory should be handled directly by Pakbot metadata in the future?"
+	(IceBasicProjectReader new canReadProjectFromCommitish: commitish)
+		ifTrue: [ nonPakbotProject := IceBasicProjectReader new readProjectFromCommitish: commitish ].
 
 	^ commitish fileSystem resolve: self projectFilePath 
 ]
