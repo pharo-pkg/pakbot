@@ -104,8 +104,9 @@ PBIcebergProject >> pakbotProject: aPakbotProject [
 
 { #category : #accessing }
 PBIcebergProject >> projectFilePath [
-
-	^ RelativePath with: 'project-metadata.ston'
+	^ nonPakbotProject 
+		ifNil: [ RelativePath with: 'project-metadata.ston' ]
+		ifNotNil: [ RelativePath withAll: { nonPakbotProject sourceDirectory . 'project-metadata.ston' } ]
 ]
 
 { #category : #accessing }

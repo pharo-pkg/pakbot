@@ -221,6 +221,28 @@ PBGitRepositoryTest >> testCanGetMetadataFromGitRepository [
 ]
 
 { #category : #tests }
+PBGitRepositoryTest >> testCanGetMetadataFromGitRepositoryWhenSourcesNotInRootFolder [
+	| project |
+	repository := PBGitRepositoryCreator new
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
+		location: self iceRepositoryLocation;
+		version: 'sources-in-subfolder';
+		createAndClone.
+	self 
+		assert: repository iceRepository head commit id 
+		equals: '718628ac627124b691062a3220369934143ec616'.
+		
+	project := repository project.
+	
+	self 
+		assert: project name
+		equals: #PharoCounter.	
+	self 
+		assertCollection: (project packageUnits collect: #name)
+		hasSameElements: #('Counter-Core' 'Counter-Tests').
+]
+
+{ #category : #tests }
 PBGitRepositoryTest >> testErrorRaisedWhenRepositoryUrlIsWrong [
 	self 
 		should: [ IceRepositoryCreator new 
