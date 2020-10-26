@@ -40,7 +40,7 @@ PBAbstractDependency >> initialize [
 PBAbstractDependency >> isInstalled [
 	
 	"Returns true if the dependency is installed in the image with the same version"
-	^ project registry isInstalled: self
+	^ self project registry isInstalled: self
 ]
 
 { #category : #testing }

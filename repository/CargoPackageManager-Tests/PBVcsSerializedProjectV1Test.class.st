@@ -199,33 +199,6 @@ PBVcsSerializedProjectV1Test >> testCanDeserializeADependencyOnExternalConfigura
 ]
 
 { #category : #tests }
-PBVcsSerializedProjectV1Test >> testCanDeserializeAPackageDependencyOnExternalCargoProject [
-	| project dependency externalProject |
-	
-	project := PBProjectVersion fromVcsStonString: self counterUiStonString.
-	
-	dependency := project packageUnits anyOne dependencies first.
-	self 
-		assert: dependency dependencyName
-		equals: 'Counter::Counter-Core'.
-	
-	self 
-		assert: project dependencies size 
-		equals: 1.
-	self 
-		assert: project dependencies anyOne name
-		equals: #'pharo-counter'.
-			
-	externalProject := project dependencies anyOne.
-	self
-		assert: externalProject class 
-		equals: PBPakbotProjectDependency.
-	self
-		assert: externalProject repositoryUrl 
-		equals: 'git://git@github.com/demarey/pharo-counter.git'.
-]
-
-{ #category : #tests }
 PBVcsSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 	| project packageUnit |
 	
@@ -251,38 +224,44 @@ PBVcsSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 ]
 
 { #category : #tests }
-PBVcsSerializedProjectV1Test >> testCanSerializeAPackageDependencyOnExternalCargoProject [
-	| project projectStonString |
+PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAPackageDependencyOnExternalPakbotProject [
+	| project iceProject deserializedProject packageDependency externalProject |
 	
 	project := self counterUiProject.
-	projectStonString := STON toStringPretty: project asVcsSerializedCargoProject.
+	iceProject := PBIcebergProject onRepository: repository project: project.
+	repository workingCopy basicSetProject: iceProject.
+	
+	repository commitWithMessage: 'commit from #testCanSerializeAndDeserializeAPackageDependencyOnExternalPakbotProject'.
+	repository workingCopy basicSetProject: nil. "ensure we read project from git"
+	deserializedProject := repository workingCopy project pakbotProject.
+	
+	self
+		assert: deserializedProject dependencies size
+		equals: project dependencies size.
+	
+	packageDependency := deserializedProject packageUnits anyOne dependencies first.
+	"dependency on 'Counter::Counter-Core'"
+	self 
+		assert: packageDependency dependencyName
+		equals: 'Counter-Core'.
+	"TODO: fix me!
+	self 
+		assert: dependency scope
+		equals: 'Counter'."
 	
 	self 
-		assert: projectStonString
-		equals: '{
-	#name : #Counter-UI,
-	#description : ''Small UI for the counter model.'',
-	#externalProjects : [
-		{
-			#name : ''pharo-counter'',
-			#repository : {
-				#type : #git,
-				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
-				#version : ''master''
-			},
-			#version : ''''
-		}
-	],
-	#units : [
-		{
-			#name : #Counter-UI-Spec,
-			#description : ''Core package with the counter UI based on Spec.'',
-			#dependencies : [
-				#Counter-Core
-			]
-		}
-	]
-}'
+		assert: project dependencies size 
+		equals: deserializedProject dependencies size.			
+	externalProject := deserializedProject dependencies anyOne.
+	self
+		assert: externalProject class 
+		equals: PBPakbotProjectDependency.
+	self
+		assert: externalProject repositoryUrl 
+		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
+	self 
+		assert: externalProject name
+		equals: #'pharo-counter'.
 ]
 
 { #category : #tests }
@@ -313,6 +292,39 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssemb
 	self
 		assertCollection: deserializedProject assemblies first parts
 		hasSameElements: project assemblies first parts.
+]
+
+{ #category : #tests }
+PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithDependencyOnExternalProject [
+	| project iceProject deserializedProject |
+	
+	project := PBProjectVersion example.
+	project addDependency: (PBMetacelloBaselineProjectDependency
+				name: #aPakbotProject
+				repositoryUrl: #'git@github.com:foo/bar.git'
+				version: '1.1').
+	iceProject := PBIcebergProject onRepository: repository project: project.
+	repository workingCopy basicSetProject: iceProject.
+	
+	repository commitWithMessage: 'commit from #testCanSerializeAndDeserializeAProjectWithDependencyOnExternalProject'.
+	repository workingCopy basicSetProject: nil. "ensure we read project from git"
+	deserializedProject := repository workingCopy project pakbotProject.
+	
+	self
+		assert: deserializedProject name 
+		equals: project name.
+	self
+		assert: deserializedProject version 
+		equals: project version.
+	self
+		assert: deserializedProject packages 
+		equals: project packages.
+	self
+		assertCollection: deserializedProject dependencies
+		hasSameElements: project dependencies.
+	self
+		assert: deserializedProject dependencies first
+		equals: project dependencies first.
 ]
 
 { #category : #tests }

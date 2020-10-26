@@ -70,8 +70,8 @@ PBVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 PBVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
 	super initializeWithPackage: aCGOOngoingProject.
 	self
-		addPropertyNamed: #externalProjects 
-		ifNotEmptyOrNil: (aCGOOngoingProject externalProjects).
+		addPropertyNamed: #dependencies 
+		ifNotEmptyOrNil: (aCGOOngoingProject dependencies).
 	self 
 		addPropertyNamed: #units
 		ifNotEmptyOrNil: (self sort: aCGOOngoingProject packageUnits andCollect: #asVcsSerializedPackageUnit).

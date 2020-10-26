@@ -99,7 +99,9 @@ PBProjectVersion >> addDependency: aDependency [
 
 { #category : #updating }
 PBProjectVersion >> addExternalProjectRequirement: aPBProjectDependencyDeclaration [ 
-	externalProjects add: aPBProjectDependencyDeclaration
+	externalProjects add: aPBProjectDependencyDeclaration.
+	"for now, pakbot only supports project dependencies. Add these external projects as dependencies"
+	self addDependency: aPBProjectDependencyDeclaration.
 ]
 
 { #category : #dependencies }
