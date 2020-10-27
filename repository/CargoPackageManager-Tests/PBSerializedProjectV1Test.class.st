@@ -49,6 +49,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 {
 	#name : #PharoLauncher,
 	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
+	#version : ''1.0.0'',
 	#units : [
 		{
 			#name : #PharoLauncher-80Compatibility,
@@ -87,7 +88,6 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 			#description : ''Tests of the PharoLauncher UI.''
 		}
 	],
-	#version : ''1.0.0'',
 	#repositoryUrl : {
 		#type : #git,
 		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
@@ -102,13 +102,13 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
+	#version : ''1.0.0'',
 	#units : [
 		{
 			#name : #UnitTest,
 			#description : ''A simple ongoing package unit.''
 		}
 	],
-	#version : ''1.0.0'',
 	#repositoryUrl : {
 		#type : #git,
 		#repositoryUrl : ''git://git@github.com/foo/bar.git''

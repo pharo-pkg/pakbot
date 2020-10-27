@@ -8,6 +8,13 @@ Class {
 	#category : #'CargoPackageManager-Minimal-Model-Serialization'
 }
 
+{ #category : #'instance creation' }
+PBVcsSerializedProject class >> from: aPBProjectVersion [
+	^ self new
+		initializeWithProject: aPBProjectVersion;
+		yourself
+]
+
 { #category : #converting }
 PBVcsSerializedProject >> asOngoingPackage [
 	^ PBProjectVersion fromVcsSerializedProject: self
@@ -67,20 +74,20 @@ PBVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 ]
 
 { #category : #initialization }
-PBVcsSerializedProject >> initializeWithPackage: aCGOOngoingProject [
-	super initializeWithPackage: aCGOOngoingProject.
+PBVcsSerializedProject >> initializeWithProject: aPBProjectVersion [
+	self initializeWithPackage: aPBProjectVersion.
 	self
 		addPropertyNamed: #dependencies 
-		ifNotEmptyOrNil: (aCGOOngoingProject dependencies).
+		ifNotEmptyOrNil: (aPBProjectVersion dependencies).
 	self 
 		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aCGOOngoingProject packageUnits andCollect: #asVcsSerializedPackageUnit).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion packageUnits andCollect: #asVcsSerializedPackageUnit).
 	self
 		addPropertyNamed: #assemblies 
-		ifNotEmptyOrNil: (self sort: aCGOOngoingProject assemblies andCollect: #asVcsSerializedPackageAssembly).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asVcsSerializedPackageAssembly).
 	self 
 		addPropertyNamed: #virtualPackages 
-		ifNotEmptyOrNil: (self sort: aCGOOngoingProject virtualPackages andCollect: #asVcsSerializablePackageVersion).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion virtualPackages andCollect: #asVcsSerializablePackageVersion).
 ]
 
 { #category : #deserialization }

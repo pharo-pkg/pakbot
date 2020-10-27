@@ -31,9 +31,9 @@ PBSerializedProject >> asProject [
 ]
 
 { #category : #initialization }
-PBSerializedProject >> initializeWithPackage: aPBProjectVersion [
+PBSerializedProject >> initializeWithProject: aPBProjectVersion [
 	| resolvedProject |
-	super initializeWithPackage: aPBProjectVersion.
+	self initializeWithPackage: aPBProjectVersion.
 	dict at: #version put: aPBProjectVersion version asString.
 	resolvedProject := aPBProjectVersion resolve.
 	resolvedProject hasConflicts 
