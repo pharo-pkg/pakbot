@@ -54,6 +54,11 @@ PBBaselineVisitorTest >> baselineWithForwardReference: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithGitUrlAndSrcFolderAndVersion: spec [
+	spec baseline: 'Pillar' with: [ spec repository: 'github://pillar-markup/pillar:v8.0.10/src' ]
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> baselineWithGroupForwardReference: spec [
 	<baseline>
 	spec
@@ -172,7 +177,7 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 		equals: #ParametrizedTests.
 	self
 		assert: dependency repository
-		equals: 'github://tesonep/ParametrizedTests/src'.
+		equals: 'git@github.com:tesonep/ParametrizedTests.git'.
 	self
 		assert: dependency version 
 		equals: #master.
@@ -222,6 +227,29 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWt
 	self
 		assert: dependency version 
 		equals: #stable.
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetDependencyUrlAndVersion [
+	| dependency |
+	
+	self simpleBaseline: visitor.
+	self baselineWithGitUrlAndSrcFolderAndVersion: visitor.
+	visitor generateProject.
+	
+	self
+		assert: visitor project metacelloProjects size
+		equals: 1.
+	dependency := visitor project metacelloProjects anyOne.
+	self
+		assert: dependency name 
+		equals: #Pillar.
+	self
+		assert: dependency repository
+		equals: 'git@github.com:pillar-markup/pillar.git'.
+	self
+		assert: dependency version 
+		equals: 'v8.0.10'.
 ]
 
 { #category : #tests }

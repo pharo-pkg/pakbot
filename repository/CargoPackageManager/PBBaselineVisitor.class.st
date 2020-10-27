@@ -59,14 +59,15 @@ PBBaselineVisitor >> baseline: aBaseline [
 
 { #category : #visiting }
 PBBaselineVisitor >> baseline: aName with: aBlockClosure [
-	| dependency |
+	| dependency repoSpec |
 
 	projectDependencyProperties := Dictionary with: 'version' -> 'master'.
 	aBlockClosure value.
+	repoSpec := PBMetacelloRepositorySpec url: (projectDependencyProperties at: 'repository').
 	dependency := PBMetacelloBaselineProjectDependency
 				name: aName
-				repositoryUrl: (projectDependencyProperties at: 'repository')
-				version: (projectDependencyProperties at: 'version').
+				repositoryUrl: repoSpec asGitUrl scpUrl
+				version: (repoSpec version ifNil: [ projectDependencyProperties at: 'version' ]).
 	projectDependencyProperties 
 		at: 'loads'
 		ifPresent: [ :names | dependency loads: names ].
