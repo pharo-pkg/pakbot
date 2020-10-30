@@ -85,11 +85,13 @@ PBMetacelloBaselineProjectDependency >> satisfyConstraints: aVersionString [
 
 { #category : #ston }
 PBMetacelloBaselineProjectDependency >> stonMap [
-	^ OrderedDictionary 
+	| dict |
+	dict := OrderedDictionary 
 		with: #baseline -> name
 		with:	#url -> url asString
-		with: 	#version -> version
-		with: #packagesToLoad -> packagesToLoad asArray
+		with: 	#version -> version.
+	packagesToLoad ifNotEmpty: [  dict at: #packagesToLoad put: packagesToLoad asArray ].
+	^ dict
 ]
 
 { #category : #ston }
