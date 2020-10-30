@@ -49,10 +49,13 @@ PBVcsSerializedProject >> asOngoingProject [
 
 { #category : #deserialization }
 PBVcsSerializedProject >> baselineProjectDependencyFrom: aDictionary [
-	^ PBMetacelloBaselineProjectDependency 
+	| baselineDep |
+	baselineDep := PBMetacelloBaselineProjectDependency 
 		name: (aDictionary at: #baseline) 
 		repositoryUrl: (aDictionary at: #url)
-		version: (aDictionary at: #version)
+		version: (aDictionary at: #version).
+	aDictionary at: #packagesToLoad ifPresent: [ :aCollection | baselineDep loads: aCollection asSet ].
+	^ baselineDep
 		
 ]
 

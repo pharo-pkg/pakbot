@@ -299,10 +299,12 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithDepend
 	| project iceProject deserializedProject |
 	
 	project := PBProjectVersion example.
-	project addDependency: (PBMetacelloBaselineProjectDependency
+	project addDependency: ((PBMetacelloBaselineProjectDependency
 				name: #aPakbotProject
 				repositoryUrl: #'git@github.com:foo/bar.git'
-				version: '1.1').
+				version: '1.1')
+					loads: #('Core');
+					yourself).
 	iceProject := PBIcebergProject onRepository: repository project: project.
 	repository workingCopy basicSetProject: iceProject.
 	
@@ -325,6 +327,9 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithDepend
 	self
 		assert: deserializedProject dependencies first
 		equals: project dependencies first.
+	self
+		assert: deserializedProject dependencies first packagesToLoad 
+		equals: project dependencies first packagesToLoad
 ]
 
 { #category : #tests }

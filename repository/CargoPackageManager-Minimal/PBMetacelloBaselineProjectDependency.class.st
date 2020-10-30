@@ -89,6 +89,7 @@ PBMetacelloBaselineProjectDependency >> stonMap [
 		with: #baseline -> name
 		with:	#url -> url asString
 		with: 	#version -> version
+		with: #packagesToLoad -> packagesToLoad asArray
 ]
 
 { #category : #ston }
