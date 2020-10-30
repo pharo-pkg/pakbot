@@ -98,6 +98,8 @@ PBPackageUIItem >> extendedClasses [
 
 { #category : #testing }
 PBPackageUIItem >> includesClassesAffectedBy: aSystemAnnouncement [
+	package isAssembly ifTrue: [ ^ false ].
+	
 	^ self isInstalled
 		and: [ self systemPackage includesClassesAffectedBy: aSystemAnnouncement ]
 ]
@@ -117,7 +119,8 @@ PBPackageUIItem >> isAffectedBy: anAnnouncement [
 
 { #category : #testing }
 PBPackageUIItem >> isEmpty [
-	"The package is empty if there are no class tags or is not installed"
+	package isAssembly ifTrue:[ ^ package isEmpty ].
+	
 	^ self isInstalled not or: [ self systemPackage actualClassTags isEmpty ]
 ]
 

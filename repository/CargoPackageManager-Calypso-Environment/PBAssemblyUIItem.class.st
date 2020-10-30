@@ -59,7 +59,7 @@ PBAssemblyUIItem >> isInstalled [
 { #category : #accessing }
 PBAssemblyUIItem >> items [
 	^ ((assembly packages
-		collect: [ :each | PBPackageReferenceUIItem on: each inAssembly: assembly ])
+		collect: [ :each | self uiItemFor: each ])
 		asSortedCollection: [ :a :b | a name < b name ]) asOrderedCollection
 ]
 
@@ -74,6 +74,11 @@ PBAssemblyUIItem >> representsItemOfType: aClass [
 
 	^ (PBAbstractDependency includesBehavior: aClass)
 		or: [ self class includesBehavior: aClass ]
+]
+
+{ #category : #accessing }
+PBAssemblyUIItem >> uiItemFor: assemblyPart [
+	^ assemblyPart uiItemIn: assemblyPart
 ]
 
 { #category : #testing }

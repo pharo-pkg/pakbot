@@ -11,3 +11,8 @@ PBAssembly >> iconName [
 	
 	^ #image
 ]
+
+{ #category : #'*CargoPackageManager-UI' }
+PBAssembly >> uiItemIn: anAssembly [
+	^ PBAssemblyUIItem on: self
+]
