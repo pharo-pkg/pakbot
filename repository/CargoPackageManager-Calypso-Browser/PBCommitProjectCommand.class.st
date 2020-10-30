@@ -60,7 +60,7 @@ PBCommitProjectCommand >> askUseMetadata [
 		  title: 'Use pakbot metadata?'.
 	
 	"NonInteractiveUIManager does not answer a boolean. Ensure we get a valid answer"
-	^ answer class = Boolean 
+	^ (answer isKindOf: Boolean)
 		ifTrue: [ answer ] 
 		ifFalse: [ false "default behaviour" ].
 		
@@ -75,7 +75,7 @@ PBCommitProjectCommand >> defaultMenuItemName [
 PBCommitProjectCommand >> execute [
 	project ifNotMarried: [ 
 		usePakbot ifNil: [ usePakbot := self askUseMetadata ifNil: [ ^ nil "cancel command" ] ].
-		usePakbot ifTrue: [ project marryWith: project repository ].
+		usePakbot ifTrue: [ project marryWith: project repository. usePakbot := nil ].
 	].
 	
 	[ ^ (IceTipCommitBrowser onRepository: project repository iceRepository)
