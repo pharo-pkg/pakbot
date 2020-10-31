@@ -24,7 +24,7 @@ PBVcsSerializedProject >> asOngoingPackage [
 PBVcsSerializedProject >> asOngoingProject [
 	"Flush information from this VcsSerializedProject into the provided CGOProject.
 	All instance variables will be set with values from the SerializableProject"
-	| project |
+	| project assemblies |
 	
 	dict 
 		at: #name
@@ -35,14 +35,17 @@ PBVcsSerializedProject >> asOngoingProject [
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
 		project packages: (self ongoingPackageUnitsFrom: units) ].
-	dict at: #assemblies ifPresent: [ :assemblies | 
-		project assemblies: (self ongoingPackageAssembliesFrom: assemblies) ].
+	dict at: #assemblies ifPresent: [ :packages | 
+		assemblies := (self ongoingPackageAssembliesFrom: packages) ].
 	dict at: #virtualPackages ifPresent: [ :virtualPackages | 
 		project virtualPackages: (self ongoingVirtualPackagesFrom: virtualPackages) ].
 	dict at: #dependencies ifPresent: [ :projectDependencies | 
 		project dependencies: (self projectDependenciesFrom: projectDependencies) ].
 		
 	project packages do: [:package | package project: project ].
+	assemblies do: [:assembly |
+		project addAssembly: assembly.
+		assembly parts: (assembly parts collect: [ :partName | project packageOrAssemblyNamed: partName ]) ].
 	
 	^ project 
 ]

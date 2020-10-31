@@ -266,10 +266,15 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAPackageDependency
 
 { #category : #tests }
 PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssembly [
-	| project iceProject deserializedProject |
+	| project iceProject deserializedProject assembly |
 	
 	project := PBProjectVersion example.
-	project assemblies: { PBAssembly example }.
+	project addAssemblyNamed: #NestedAssembly.
+	assembly := project addAssemblyNamed: #TestAssembly.
+	assembly
+		description: 'A simple ongoing package assembly.';
+		addPackage: (project packageOrAssemblyNamed: #UnitTest);
+		addPackage: (project packageOrAssemblyNamed: #NestedAssembly).
 	iceProject := PBIcebergProject onRepository: repository project: project.
 	repository workingCopy basicSetProject: iceProject.
 	
@@ -290,8 +295,8 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAProjectWithAssemb
 		assert: deserializedProject assemblies 
 		equals: project assemblies.
 	self
-		assertCollection: deserializedProject assemblies first parts
-		hasSameElements: project assemblies first parts.
+		assertCollection: (deserializedProject assemblyNamed: #TestAssembly) parts
+		hasSameElements: (project assemblyNamed: #TestAssembly) parts.
 ]
 
 { #category : #tests }

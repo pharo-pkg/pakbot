@@ -36,7 +36,7 @@ PBVcsSerializedPackageAssembly >> initializeWithPackage: aPBAssembly [
 	super initializeWithPackage: aPBAssembly.
 	self 
 		addPropertyNamed: #parts
-		ifNotEmptyOrNil: aPBAssembly parts.
+		ifNotEmptyOrNil: (aPBAssembly parts collect: #name).
 ]
 
 { #category : #accessing }

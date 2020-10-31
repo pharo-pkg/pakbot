@@ -74,18 +74,21 @@ PBProjectVersion >> = other [
 ]
 
 { #category : #assemblies }
-PBProjectVersion >> addAssemblyNamed: aName [
-	| assembly |
-	
-	assembly := PBAssembly 
-		named: aName asSymbol
-		project: self.
-	(assemblies includes: assembly)
+PBProjectVersion >> addAssembly: anAssembly [
+	(assemblies includes: anAssembly)
 		ifTrue: [ PBPackageAlreadyRegistered signal ].		
-	assemblies add: assembly.
+	assemblies add: anAssembly.
 	self announceChanged.
 
-	^ assembly
+	^ anAssembly
+]
+
+{ #category : #assemblies }
+PBProjectVersion >> addAssemblyNamed: aName [
+	^ self addAssembly: 
+		(PBAssembly 
+			named: aName asSymbol
+			project: self)
 ]
 
 { #category : #dependencies }
