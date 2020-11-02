@@ -35,8 +35,9 @@ PBVcsSerializedProject >> asOngoingProject [
 	dict at: #description ifPresent: [ :description | project description: description ].
 	dict at: #units ifPresent: [ :units | 
 		project packages: (self ongoingPackageUnitsFrom: units) ].
-	dict at: #assemblies ifPresent: [ :packages | 
-		assemblies := (self ongoingPackageAssembliesFrom: packages) ].
+	assemblies := dict at: #assemblies 
+		ifPresent: [ :packages | self ongoingPackageAssembliesFrom: packages ]
+		ifAbsent: [ #() ].
 	dict at: #virtualPackages ifPresent: [ :virtualPackages | 
 		project virtualPackages: (self ongoingVirtualPackagesFrom: virtualPackages) ].
 	dict at: #dependencies ifPresent: [ :projectDependencies | 
