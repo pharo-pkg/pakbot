@@ -72,8 +72,6 @@ PBBaselineVisitor >> baseline: aName with: aBlockClosure [
 		at: 'loads'
 		ifPresent: [ :names | dependency loads: names ].
 	project addExternalProjectRequirement: dependency.
-	"for now, pakbot only supports project dependencies. Add these external projects as dependencies"
-	project addDependency: dependency.
 ]
 
 { #category : #visiting }
