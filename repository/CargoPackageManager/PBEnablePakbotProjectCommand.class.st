@@ -10,34 +10,24 @@ Class {
 	#category : #'CargoPackageManager-Iceberg-Integration'
 }
 
-{ #category : #activation }
-PBEnablePakbotProjectCommand class >> browserRepositoryListActivation [
-	<classAnnotation>
-	
-	^ CmdContextMenuActivation
-		byItemOf: PBIcebergPakbotMenuGroup
-		order: 100
-		for: IceTipRepositoryListContext
-]
-
-{ #category : #testing }
-PBEnablePakbotProjectCommand class >> canBeExecutedInContext: aToolContext [
-	
-	^ aToolContext isRepositoryOperational
-		and: [ | workingCopy |
-			workingCopy := aToolContext repositoryModel entity workingCopy.
-			workingCopy project isPakbotProject not and: [ PBIcebergProjectReader new canReadProjectFromCommitish: workingCopy ] ]
-]
-
 { #category : #accessing }
-PBEnablePakbotProjectCommand class >> defaultMenuIconName [
-
+PBEnablePakbotProjectCommand class >> defaultIconName [
+	
 	^ #smallOk
 ]
 
 { #category : #accessing }
-PBEnablePakbotProjectCommand >> defaultMenuItemName [
+PBEnablePakbotProjectCommand class >> defaultName [
 	^ 'Enable Packbot project integration'
+]
+
+{ #category : #testing }
+PBEnablePakbotProjectCommand >> canBeExecuted [
+
+	^ self isRepositoryOperational
+		and: [ | workingCopy |
+			workingCopy := self repositoryModel entity workingCopy.
+			workingCopy project isPakbotProject not and: [ PBIcebergProjectReader new canReadProjectFromCommitish: workingCopy ] ]
 ]
 
 { #category : #execution }

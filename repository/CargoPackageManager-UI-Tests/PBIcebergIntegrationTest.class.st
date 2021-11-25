@@ -4,10 +4,27 @@ Class {
 	#instVars : [
 		'location',
 		'projectName',
-		'repository'
+		'repository',
+		'browser'
 	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
+
+{ #category : #utility }
+PBIcebergIntegrationTest >> openIcebergAndGetPakbotMenu [
+	| repositoryDataSource repositoryIndex menu |
+	browser := IceTipRepositoriesBrowser new 
+		openWithSpec;
+		yourself.
+	repositoryDataSource := browser repositoryList adapter widget dataSource.
+	repositoryIndex := repositoryDataSource elements detectIndex: [:repo | repo realObject entity == repository ].
+	browser repositoryList clickItem: repositoryIndex.
+	menu := repositoryDataSource menuColumn: 1 row: repositoryIndex.
+	menu instVarNamed: 'owner' put: browser repositoryList adapter widget.
+	
+	"(menu itemWithWording: 'Pakbot') select: (MouseMoveEvent new instVarNamed: 'source' put: World hands first; yourself)."
+	^ menu itemWithWording: 'Pakbot'.
+]
 
 { #category : #running }
 PBIcebergIntegrationTest >> setUp [
@@ -28,89 +45,55 @@ PBIcebergIntegrationTest >> setUp [
 { #category : #running }
 PBIcebergIntegrationTest >> tearDown [ 
 	super tearDown.
-	repository forget
+	repository forget.
+	browser ifNotNil: [ browser delete].
 ]
 
 { #category : #tests }
 PBIcebergIntegrationTest >> testDisablePakbotIntegrationIsAvailableWhenRepositoryUsesPakbotProject [
-	| browser repositoryDataSource repositoryIndex menu menuGroupItem menuItem |
+	| pakbotMenuGroup menuItem |
 	
 	(repository repositoryDirectory / PBSourceRepository new projectMetadataFileName) ensureCreateFile.
 	repository workingCopy basicSetProject: (PBIcebergProject onRepository: repository project: nil).
-	
 	self assert: (repository project isKindOf: PBIcebergProject).
 	
 	IceRepository registerRepository: repository.
-
-	browser := IceTipRepositoriesBrowser new 
-		openWithSpec;
-		yourself.
-	repositoryDataSource := browser repositoryList widget dataSource.
-	repositoryIndex := repositoryDataSource elements detectIndex: [:repo | repo realObject entity == repository ].
-	menu := repositoryDataSource menuColumn: 1 row: repositoryIndex.
-	menu instVarNamed: 'owner' put: browser repositoryList widget.
-	"(menu itemWithWording: 'Pakbot') select: (MouseMoveEvent new instVarNamed: 'source' put: World hands first; yourself)."
-
-	menuGroupItem := menu itemWithWording: 'Pakbot'.
-	self assert: menuGroupItem notNil.
-
-	menuItem := menuGroupItem subMenu itemWithWording: 'Disable Packbot project integration'.	
-	self assert: menuItem notNil.
-	menuItem := menuGroupItem subMenu itemWithWording: 'Enable Packbot project integration'.	
-	self assert: menuItem isNil.
+	pakbotMenuGroup := self openIcebergAndGetPakbotMenu.
 	
-	browser delete.
+	self assert: pakbotMenuGroup notNil.
+	menuItem := pakbotMenuGroup subMenu itemWithWording: 'Disable Packbot project integration'.	
+	self assert: menuItem notNil.
+	menuItem := pakbotMenuGroup subMenu itemWithWording: 'Enable Packbot project integration'.	
+	self assert: menuItem isNil.
 ]
 
 { #category : #tests }
 PBIcebergIntegrationTest >> testEnablePakbotIntegrationIsAvailableWhenRepositoryDoesNotUsePakbotProjectButMetadataIsAvailable [
-	| browser repositoryDataSource repositoryIndex menu menuGroupItem menuItem |
+	| pakbotMenuGroup menuItem |
 	
 	(repository repositoryDirectory / PBSourceRepository new projectMetadataFileName) ensureCreateFile.
-	
 	self deny: (repository project isKindOf: PBIcebergProject).
 	
 	IceRepository registerRepository: repository.
-
-	browser := IceTipRepositoriesBrowser new 
-		openWithSpec;
-		yourself.
-	repositoryDataSource := browser repositoryList widget dataSource.
-	repositoryIndex := repositoryDataSource elements detectIndex: [:repo | repo realObject entity == repository ].
-	menu := repositoryDataSource menuColumn: 1 row: repositoryIndex.
-	menu instVarNamed: 'owner' put: browser repositoryList widget.
-
-	menuGroupItem := menu itemWithWording: 'Pakbot'.
-	self assert: menuGroupItem notNil.
-
-	menuItem := menuGroupItem subMenu itemWithWording: 'Enable Packbot project integration'.	
-	self assert: menuItem notNil.
-	menuItem := menuGroupItem subMenu itemWithWording: 'Disable Packbot project integration'.	
-	self assert: menuItem isNil.
+	pakbotMenuGroup := self openIcebergAndGetPakbotMenu.
 	
-	browser delete.
+	self assert: pakbotMenuGroup notNil.
+	menuItem := pakbotMenuGroup subMenu itemWithWording: 'Enable Packbot project integration'.	
+	self assert: menuItem notNil.
+	menuItem := pakbotMenuGroup subMenu itemWithWording: 'Disable Packbot project integration'.	
+	self assert: menuItem isNil.
 ]
 
 { #category : #tests }
 PBIcebergIntegrationTest >> testPakbotIntegrationNotAvailableWhenRepositoryDoesNotHavePakbotMetadata [
-	| browser repositoryDataSource repositoryIndex menu menuGroupItem |
+	| pakbotMenuGroup |
 	
 	repository workingCopy basicSetProject: (IceBasicProject onRepository: repository).
 	
 	self assert: (repository project isKindOf: IceBasicProject).
 	
 	IceRepository registerRepository: repository.
-
-	browser := IceTipRepositoriesBrowser new 
-		openWithSpec;
-		yourself.
-	repositoryDataSource := browser repositoryList widget dataSource.
-	repositoryIndex := repositoryDataSource elements detectIndex: [:repo | repo realObject entity == repository ].
-	menu := repositoryDataSource menuColumn: 1 row: repositoryIndex.
-	menu instVarNamed: 'owner' put: browser repositoryList widget.
+	pakbotMenuGroup := self openIcebergAndGetPakbotMenu.
 	
-	menuGroupItem := menu itemWithWording: 'Pakbot'.
-	self assert: menuGroupItem isNil.
-
-	browser delete.
+	self assert: pakbotMenuGroup isNil.
 ]

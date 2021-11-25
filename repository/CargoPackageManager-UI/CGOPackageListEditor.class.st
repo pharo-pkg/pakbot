@@ -5,12 +5,11 @@ Class {
 	#name : #CGOPackageListEditor,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
-		'ongoingPackageVersion',
-		'packageTree',
 		'label',
 		'addButton',
 		'editButton',
-		'removeButton'
+		'removeButton',
+		'packageList'
 	],
 	#category : #'CargoPackageManager-UI'
 }

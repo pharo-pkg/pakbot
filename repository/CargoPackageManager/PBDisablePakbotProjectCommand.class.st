@@ -11,32 +11,23 @@ Class {
 	#category : #'CargoPackageManager-Iceberg-Integration'
 }
 
-{ #category : #activation }
-PBDisablePakbotProjectCommand class >> browserRepositoryListActivation [
-	<classAnnotation>
-	
-	^ CmdContextMenuActivation
-		byItemOf: PBIcebergPakbotMenuGroup
-		order: 100
-		for: IceTipRepositoryListContext
-]
-
-{ #category : #testing }
-PBDisablePakbotProjectCommand class >> canBeExecutedInContext: aToolContext [
-	
-	^ aToolContext isRepositoryOperational
-		and: [ aToolContext repositoryModel entity project isKindOf: PBIcebergProject ]
-]
-
 { #category : #accessing }
-PBDisablePakbotProjectCommand class >> defaultMenuIconName [
+PBDisablePakbotProjectCommand class >> defaultIconName [
 
 	^ #smallCancel
 ]
 
 { #category : #accessing }
-PBDisablePakbotProjectCommand >> defaultMenuItemName [
+PBDisablePakbotProjectCommand class >> defaultName [
+
 	^ 'Disable Packbot project integration'
+]
+
+{ #category : #testing }
+PBDisablePakbotProjectCommand >> canBeExecuted [
+	
+	^ self isRepositoryOperational
+		and: [ self repositoryModel entity project isKindOf: PBIcebergProject ]
 ]
 
 { #category : #execution }
