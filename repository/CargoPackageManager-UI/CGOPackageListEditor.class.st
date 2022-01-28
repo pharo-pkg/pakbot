@@ -14,30 +14,37 @@ Class {
 	#category : #'CargoPackageManager-UI'
 }
 
-{ #category : #specs }
-CGOPackageListEditor class >> defaultSpec [
-	^ SpecLayout composed
-		newColumn: [ :column |
-			column 
-				newRow: [ :toolbar |
-					toolbar
-						add: #label;
-						add: #addButton;
-						add: #editButton;
-						add: #removeButton ]
-				height: self toolbarHeight;
-				add: #packageTree ]
-
-]
-
-{ #category : #accessing }
-CGOPackageListEditor >> addButton [
-	^ addButton
-]
-
 { #category : #'private - displaying' }
 CGOPackageListEditor >> assemblyIcon [
 	^ self iconNamed: #groupIcon
+]
+
+{ #category : #initialization }
+CGOPackageListEditor >> connectPresenters [
+	super connectPresenters.
+	packageList whenSelectionChangedDo: [ :selection | | enabled |
+		enabled := selection isEmpty not.
+		removeButton enabled: enabled.
+		editButton enabled: enabled. ].
+	addButton action: [ self addAction ].
+	removeButton
+		action: [ self removeAction: self selectedPackage.
+			self refreshUI ].
+	editButton action: [ self editAction ]
+]
+
+{ #category : #layout }
+CGOPackageListEditor >> defaultLayout [
+	^ SpBoxLayout newTopToBottom 
+		add: (SpBoxLayout newLeftToRight 
+				add: label;
+				addLast: addButton expand: false;
+				addLast: editButton expand: false;
+				addLast: removeButton expand: false;
+				yourself)
+			expand: false;
+		add: #packageList;
+		yourself
 ]
 
 { #category : #'private - displaying' }
@@ -48,11 +55,6 @@ CGOPackageListEditor >> displayFor: aDependency [
 		yourself
 ]
 
-{ #category : #accessing }
-CGOPackageListEditor >> editButton [
-	^ editButton
-]
-
 { #category : #'private - displaying' }
 CGOPackageListEditor >> iconForPackage: aDependency [
 
@@ -61,48 +63,35 @@ CGOPackageListEditor >> iconForPackage: aDependency [
 ]
 
 { #category : #initialization }
-CGOPackageListEditor >> initializePresenter [
-	super initializePresenter.
-	packageTree widget onAnnouncement: FTSelectionChanged send: #selectionChanged: to: self.
-	addButton action: [ self addAction ].
-	removeButton
-		action: [ self removeAction: self selectedPackage.
-			self refreshUI ].
-	editButton action: [ self editAction ]
+CGOPackageListEditor >> initializePresenters [
+	(label := self newLabel) label: self packageListEditorLabel.
+	addButton := self newButton
+		icon: (self iconNamed: #addIcon);
+		enabled: true;
+		help: self addButtonHelpString.
+	editButton := self newButton
+		icon: (self iconNamed: #editIcon);
+		enabled: false;
+		help: self editButtonHelpString.
+	removeButton := self newButton
+		icon: (self iconNamed: #removeIcon);
+		enabled: false;
+		help: self removeButtonHelpString.
+	packageList := self newTable.
+	self initializeTable.
+	self layout: self defaultLayout.
+
 ]
 
 { #category : #initialization }
 CGOPackageListEditor >> initializeTable [
 
-	packageTree widget dataSource: self newDataSource
-]
-
-{ #category : #initialization }
-CGOPackageListEditor >> initializeWidgets [
-	(label := self newLabel) label: self packageListEditorLabel.
-	addButton := self newButton
-		label: nil;
-		icon: (self iconNamed: #addIcon);
-		enabled: true;
-		help: self addButtonHelpString.
-	editButton := self newButton
-		label: nil;
-		icon: (self iconNamed: #editIcon);
-		enabled: false;
-		help: self editButtonHelpString.
-	removeButton := self newButton
-		label: nil;
-		icon: (self iconNamed: #removeIcon);
-		enabled: false;
-		help: self removeButtonHelpString.
-	packageTree := self newFastTable.
-	self initializeTable
-
-]
-
-{ #category : #accessing }
-CGOPackageListEditor >> label [
-	^ label
+	packageList 
+		items: self roots;
+		addColumn: (SpCompositeTableColumn new
+			title: 'Name';
+			addColumn: (SpImageTableColumn evaluated: [ :each | self iconForPackage: each ]);
+			addColumn: (SpStringTableColumn evaluated: [ :each | self displayFor: each ])).
 ]
 
 { #category : #'private - displaying' }
@@ -112,16 +101,6 @@ CGOPackageListEditor >> morphIconFor: aPart [
 		 setBalloonText: aPart balloonText
 ]
 
-{ #category : #datasource }
-CGOPackageListEditor >> newDataSource [
-	
-	^ FTEasyListDataSource new 
-		elements: self buildRoots;
-		display: [ :each | self displayFor: each ];
-		icon: [ :each | self morphIconFor: each ];
-		yourself
-]
-
 { #category : #'private - displaying' }
 CGOPackageListEditor >> notInstalledIcon [
 	
@@ -129,39 +108,18 @@ CGOPackageListEditor >> notInstalledIcon [
 ]
 
 { #category : #accessing }
-CGOPackageListEditor >> packageTree [
-	^ packageTree
-]
-
-{ #category : #refreshing }
-CGOPackageListEditor >> refreshUI [
-	packageTree widget dataSource: self newDataSource.
-
+CGOPackageListEditor >> packageVersion [
+	^ self model
 ]
 
 { #category : #accessing }
-CGOPackageListEditor >> removeButton [
-	^ removeButton
+CGOPackageListEditor >> roots [
+	self subclassResponsibility 
 ]
 
 { #category : #accessing }
 CGOPackageListEditor >> selectedPackage [
-	| selectedIndex |
-	selectedIndex := packageTree widget selectedRowIndex.
-	selectedIndex = 0 ifTrue: [ ^ nil ].
-	
-	^ packageTree widget dataSource elementAt: selectedIndex
-]
-
-{ #category : #initialization }
-CGOPackageListEditor >> selectionChanged: ann [
-	removeButton enabled: ann newSelectedIndexes notEmpty.
-	editButton enabled: ann newSelectedIndexes notEmpty
-]
-
-{ #category : #initialization }
-CGOPackageListEditor >> setModelBeforeInitialization: aModel [
-	ongoingPackageVersion := aModel
+	^ packageList selectedItem
 ]
 
 { #category : #'private - displaying' }

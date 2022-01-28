@@ -7,16 +7,15 @@ Class {
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
 		'overview',
-		'ongoingPackageUnit',
 		'dependencies',
 		'projectStatus'
 	],
 	#category : #'CargoPackageManager-UI'
 }
 
-{ #category : #private }
-PBProjectPanel class >> buildOnOngoing: anOngoingPackageVersion [
-	^ (self on: anOngoingPackageVersion) buildWithSpec
+{ #category : #'instance creation' }
+PBProjectPanel class >> buildOnOngoing: aProjectVersion [
+	^ (self on: aProjectVersion) buildWithSpec
 ]
 
 { #category : #example }
@@ -26,59 +25,34 @@ PBProjectPanel class >> example [
 ]
 
 { #category : #specs }
-PBProjectPanel >> defaultSpec [
+PBProjectPanel >> defaultLayout [
 
-	^ SpecLayout composed
-		newColumn: [ :col |
-		 col
-			newRow: [ :row | row add: #projectStatus ] height: (projectStatus requiredHeight);
-			newRow: [ :row | 
-				row
-					add: #overview;
-					add: #dependencies ]]
-]
-
-{ #category : #initialization }
-PBProjectPanel >> dependencies [
-	^ dependencies
+	^ SpBoxLayout newTopToBottom 
+		add: projectStatus expand: false;
+		add: (	SpBoxLayout newLeftToRight
+			add: overview;
+			add: dependencies;
+			yourself);
+		yourself.
 ]
 
 { #category : #initialization }
 PBProjectPanel >> initializeWidgets [
 
-	overview := self instantiate: PBLoadableUnitOverviewPanel on: ongoingPackageUnit.
-	dependencies := self instantiate: CGOPackageDependenciesView on: ongoingPackageUnit.
-	projectStatus := self instantiate: CGOProjectStatusPresenter on: ongoingPackageUnit.
+	overview := self instantiate: PBLoadableUnitOverviewPanel on: self projectVersion.
+	dependencies := self instantiate: CGOPackageDependenciesView on: self projectVersion.
+	projectStatus := self instantiate: PBProjectStatusPresenter on: self projectVersion.
+	
+	self layout: self defaultLayout.
 ]
 
 { #category : #accessing }
-PBProjectPanel >> overview [
-	^ overview
-]
-
-{ #category : #accessing }
-PBProjectPanel >> projectStatus [
-
-	^ projectStatus
+PBProjectPanel >> projectVersion [ 
+	^ self model
 ]
 
 { #category : #specs }
 PBProjectPanel >> refreshUI [
 	self needRebuild: false.
-	self buildWithSpecLayout: (self retrieveSpec: spec selector).
-]
-
-{ #category : #specs }
-PBProjectPanel >> retrieveSpec: aSelector [
-
-	| layout |
-	
-	layout := self perform: aSelector.
-	layout isSpecLayout ifTrue: [ layout selector: aSelector ].
-	^ layout
-]
-
-{ #category : #initialization }
-PBProjectPanel >> setModelBeforeInitialization: anOngoingPackageUnit [
-	ongoingPackageUnit := anOngoingPackageUnit
+	self buildWithSpecLayout: self defaultLayout.
 ]

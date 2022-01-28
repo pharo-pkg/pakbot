@@ -9,44 +9,15 @@ Class {
 	#name : #PBLoadableUnitOverviewPanel,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
-		'nameLabel',
 		'nameInputField',
-		'versionLabel',
 		'versionInputField',
-		'descriptionLabel',
 		'descriptionText',
 		'registry',
-		'loadableUnit',
 		'autoAccept',
-		'repositoryLabel',
 		'repositoryInputField'
 	],
 	#category : #'CargoPackageManager-UI'
 }
-
-{ #category : #specs }
-PBLoadableUnitOverviewPanel class >> defaultSpec [
-	^ SpecLayout composed
-		newColumn: [ : column | 
-			column
-				newRow: [ :nameRow |
-					nameRow 
-						add: #nameLabel width: self labelSize;
-						add: #nameInputField ]
-				height: self inputTextHeight;
-				newRow: [ :versionRow |
-					versionRow 
-						add: #versionLabel width: self labelSize;
-						add: #versionInputField ]
-				height: self inputTextHeight;
-				newRow: [ :versionRow |
-					versionRow 
-						add: #repositoryLabel width: self labelSize;
-						add: #repositoryInputField ]
-				height: self inputTextHeight;
-				add: #descriptionLabel height: self inputTextHeight;
-			 	add: #descriptionText ]
-]
 
 { #category : #example }
 PBLoadableUnitOverviewPanel class >> example [
@@ -55,40 +26,40 @@ PBLoadableUnitOverviewPanel class >> example [
 
 { #category : #example }
 PBLoadableUnitOverviewPanel class >> example2 [
-	^ self openWithMinimalSpecOn: (PBPackage example)
+	^ self openWithMinimalLayoutOn: (PBPackage example)
 ]
 
 { #category : #specs }
-PBLoadableUnitOverviewPanel class >> minimalSpec [
-	^ SpecLayout composed
-		newColumn: [ : column | 
-			column
-				newRow: [ :nameRow |
-					nameRow 
-						add: #nameLabel width: self labelSize;
-						add: #nameInputField ]
-				height: self inputTextHeight;
-				add: #descriptionLabel height: self inputTextHeight;
-			 	add: #descriptionText ]
+PBLoadableUnitOverviewPanel class >> minimalLayout [
+
+	^ SpGridLayout new
+		  add: 'Name:' at: 1 @ 1;
+		  add: #nameInputField at: 2 @ 1;
+		  add: 'Description:' at: 1 @ 2;
+		  add: #descriptionText at: 2 @ 2;
+		  columnHomogeneous: false;
+		  column: 2 withConstraints: [ :c | c beExpand ];
+		  yourself
 ]
 
 { #category : #'instance creation' }
 PBLoadableUnitOverviewPanel class >> newOn: aPBLoadableUnit owner: owner [
-	^ self basicNew
-		loadableUnit: aPBLoadableUnit;
-		yourself
+	^ self 
+		newApplication: self currentApplication 
+		owner: owner
+		model: aPBLoadableUnit
 ]
 
 { #category : #opening }
 PBLoadableUnitOverviewPanel class >> openOn: anOngoingPackageVersion [
-	(self newOn: anOngoingPackageVersion owner: nil)
-		openWithSpec
+
+	(self newOn: anOngoingPackageVersion owner: nil) open
 ]
 
 { #category : #opening }
-PBLoadableUnitOverviewPanel class >> openWithMinimalSpecOn: anOngoingPackageVersion [
+PBLoadableUnitOverviewPanel class >> openWithMinimalLayoutOn: anOngoingPackageVersion [
 	(self newOn: anOngoingPackageVersion owner: nil)
-		openWithSpec: #minimalSpec
+		openWithLayout: self minimalLayout
 ]
 
 { #category : #initialization }
@@ -110,24 +81,35 @@ PBLoadableUnitOverviewPanel >> autoAccept: anObject [
 	autoAccept := anObject
 ]
 
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> descriptionLabel [
-	^ descriptionLabel
+{ #category : #initialization }
+PBLoadableUnitOverviewPanel >> connectPresenters [
+
+	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
+	versionInputField whenSubmitDo: [ self updateVersion ].
+	descriptionText whenSubmitDo: 
+		[ :newText | self updateDescription ].
+	self refreshWidgetValues
 ]
 
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> descriptionLabel: anObject [
-	^ descriptionLabel := anObject
-]
+{ #category : #layout }
+PBLoadableUnitOverviewPanel >> defaultLayout [
 
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> descriptionText [
-	^ descriptionText
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> descriptionText: anObject [
-	descriptionText := anObject
+	^ (SpGridLayout build: [ :builder | 
+			   builder
+				   add: 'Name:';
+				   add: #nameInputField;
+				   nextRow;
+				   add: 'Version:';
+				   add: #versionInputField;
+				   nextRow;
+				   add: 'Repository:';
+				   add: #repositoryInputField;
+				   nextRow;
+				   add: 'Description:';
+				   add: #descriptionText ])
+		  columnHomogeneous: false;
+		  column: 2 withConstraints: [ :c | c beExpand ];
+		  yourself
 ]
 
 { #category : #initialization }
@@ -143,69 +125,23 @@ PBLoadableUnitOverviewPanel >> initialize [
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverviewPanel >> initializePresenter [
-
-	"nameInputField acceptBlock: [ self error: 'Project name should not change' ]."
-	versionInputField acceptBlock: [ self updateVersion ].
-	descriptionText whenTextIsAccepted: 
-		[ :newText | self updateDescription ].
-	self refreshWidgetValues
-]
-
-{ #category : #initialization }
-PBLoadableUnitOverviewPanel >> initializeWidgets [
-	(nameLabel := self newLabel)
-		label: 'Name:'.
+PBLoadableUnitOverviewPanel >> initializePresenters [
 	self newTextInputField: #nameInputField description: 'MyProject'.
-		
-	(versionLabel := self newLabel)
-		label: 'Version:'.
 	self newTextInputField: #versionInputField description: '1.0.0'.
-	
-	(repositoryLabel := self newLabel)
-		label: 'Repository:'.
 	repositoryInputField := self instantiate: PBRepositoryInputField on: self loadableUnit.
-		
-	(descriptionLabel := self newLabel)
-		label: 'Description:'.
 	descriptionText := self newText
 ]
 
 { #category : #accessing }
 PBLoadableUnitOverviewPanel >> loadableUnit [
-	^ loadableUnit
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> loadableUnit: anObject [
-	loadableUnit := anObject
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> nameInputField [
-	^ nameInputField
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> nameInputField: anObject [
-	nameInputField := anObject
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> nameLabel [
-	^ nameLabel
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> nameLabel: anObject [
-	^ nameLabel := anObject
+	^ self model
 ]
 
 { #category : #initialization }
 PBLoadableUnitOverviewPanel >> refreshWidgetValues [
-	nameInputField text: loadableUnit name.
-	versionInputField text: loadableUnit version asString.
-	descriptionText text: loadableUnit description
+	nameInputField text: self loadableUnit name.
+	versionInputField text: self loadableUnit version asString.
+	descriptionText text: self loadableUnit description
 ]
 
 { #category : #accessing }
@@ -219,64 +155,19 @@ PBLoadableUnitOverviewPanel >> registry: aCGOPackageRegistry [
 	registry := aCGOPackageRegistry 
 ]
 
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryInputField [
-	^ repositoryInputField
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryInputField: anObject [
-	repositoryInputField := anObject
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryLabel [
-	^ repositoryLabel
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> repositoryLabel: anObject [
-	^ repositoryLabel := anObject
-]
-
-{ #category : #initialization }
-PBLoadableUnitOverviewPanel >> setModelBeforeInitialization: aDomainObject [
-	loadableUnit := aDomainObject
-]
-
 { #category : #updating }
 PBLoadableUnitOverviewPanel >> updateDescription [
-	loadableUnit description: descriptionText text asString
+	self loadableUnit description: descriptionText text asString
 ]
 
 { #category : #updating }
 PBLoadableUnitOverviewPanel >> updateName [
-	loadableUnit name: nameInputField text asSymbol
+	self loadableUnit name: nameInputField text asSymbol
 ]
 
 { #category : #updating }
 PBLoadableUnitOverviewPanel >> updateVersion [
 	| versionString |
 	versionString := versionInputField text.
-	loadableUnit version: versionString asSemanticVersion
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> versionInputField [
-	^ versionInputField
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> versionInputField: anObject [
-	versionInputField := anObject
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> versionLabel [
-	^ versionLabel
-]
-
-{ #category : #accessing }
-PBLoadableUnitOverviewPanel >> versionLabel: anObject [
-	^ versionLabel := anObject
+	self loadableUnit version: versionString asSemanticVersion
 ]

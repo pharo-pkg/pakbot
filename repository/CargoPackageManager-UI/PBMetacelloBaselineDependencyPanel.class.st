@@ -51,9 +51,9 @@ PBMetacelloBaselineDependencyPanel >> initializeForm [
 { #category : #initialization }
 PBMetacelloBaselineDependencyPanel >> setInitialValues [
 
-	form valueNamed: #name set: dependency name.
-	form valueNamed: #repositoryUrl set: dependency repositoryUrl.
-	form valueNamed: #version set: dependency version asString
+	form valueNamed: #name set: self dependency name.
+	form valueNamed: #repositoryUrl set: self dependency repositoryUrl.
+	form valueNamed: #version set: self dependency version asString
 
 ]
 
@@ -66,7 +66,7 @@ PBMetacelloBaselineDependencyPanel >> title [
 { #category : #building }
 PBMetacelloBaselineDependencyPanel >> updateDependency [
 	
-	dependency
+	self dependency
 		setName: (form valueNamed: #name)
 		repositoryUrl: (form valueNamed: #repositoryUrl)
 		version: (form valueNamed: #version)	

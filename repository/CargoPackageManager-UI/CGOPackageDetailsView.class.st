@@ -6,13 +6,9 @@ Class {
 	#name : #CGOPackageDetailsView,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
-		'ongoingPackageUnit',
 		'dependenciesView',
-		'provisionsLabel',
 		'provisionsInputField',
-		'fileLabel',
 		'fileInputField',
-		'platformRequirementsLabel',
 		'platformRequirementWidget',
 		'editPlatformRequirementsButton'
 	],
@@ -22,51 +18,14 @@ Class {
 	#category : #'CargoPackageManager-UI'
 }
 
-{ #category : #specs }
-CGOPackageDetailsView class >> defaultSpec [
-	^ SpecLayout composed
-		newColumn: [ :column |
-			column
-				newRow: [ :provisionsRow |
-					provisionsRow 
-						add: #provisionsLabel width: self labelSize;
-						add: #provisionsInputField ]
-				height: self inputTextHeight;
-				newRow: [ :platformRow |
-					platformRow 
-						add: #platformRequirementsLabel width: 130;
-						add: #editPlatformRequirementsButton width: 40;
-						add: #platformRequirementWidget ]
-				height: self inputTextHeight;
-				add: #dependenciesView";
-				newRow: [ :fileRow |
-					fileRow 
-						add: #fileLabel width: self labelSize;
-						add: #fileInputField ]
-				height: self inputTextHeight" ]
-]
-
 { #category : #example }
 CGOPackageDetailsView class >> example [
 	^ self openOn: (PBPackage example)
 ]
 
-{ #category : #'instance creation' }
-CGOPackageDetailsView class >> newOn: anOngoingPackageVersion owner: owner [
-	^ self basicNew
-		initializeWith: anOngoingPackageVersion;
-		yourself
-]
-
-{ #category : #opening }
-CGOPackageDetailsView class >> openOn: anOngoingPackageVersion [
-	(self newOn: anOngoingPackageVersion owner: nil)
-		openWithSpec
-]
-
 { #category : #building }
 CGOPackageDetailsView >> addPlatformRequirementTagsTo: morph [
-	ongoingPackageUnit platformRequirements do: [ :string | morph addMorph: (self tagFactory text: string asMorph) morph ]
+	self ongoingPackageUnit platformRequirements do: [ :string | morph addMorph: (self tagFactory text: string asMorph) morph ]
 ]
 
 { #category : #building }
@@ -81,6 +40,21 @@ CGOPackageDetailsView >> buildPlatformTagsMorph [
 	^ morph
 ]
 
+{ #category : #specs }
+CGOPackageDetailsView >> defaultLayout [
+	^ SpBoxLayout newTopToBottom 
+		add: (SpGridLayout build: [ :builder |
+			builder 
+				add: 'Provisions:' "width: self labelSize";
+				add: provisionsInputField;
+				nextRow;
+				add: 'Platform requirements:' "width: 130";
+				add: editPlatformRequirementsButton "width: 40"
+				"add: platformRequirementWidget; list of tags"  ]);
+			add: #dependenciesView;
+		yourself
+]
+
 { #category : #accessing }
 CGOPackageDetailsView >> dependenciesView [
 	^ dependenciesView
@@ -91,32 +65,17 @@ CGOPackageDetailsView >> editPlatformRequirements [
 	| requirementsString |
 	requirementsString := UIManager default
 		request: 'Platform requirements for this package (or empty if no constraint)'
-		initialAnswer: (ongoingPackageUnit platformRequirements
+		initialAnswer: (self ongoingPackageUnit platformRequirements
 			ifEmpty: [ '' ]
 			ifNotEmpty: [ :string | Character space join: string ])
-		title: 'Platform requirements of ' , ongoingPackageUnit packageName , ' package'.
+		title: 'Platform requirements of ' , self ongoingPackageUnit packageName , ' package'.
 	requirementsString ifNil: [ ^ self ].
-	ongoingPackageUnit platformRequirements: 
+	self ongoingPackageUnit platformRequirements: 
 		((Character space split: requirementsString)
 			collect: #asSymbol
 			as: Array).
 	
 	self updatePlatformRequirementsMorph
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> editPlatformRequirementsButton [
-	^ editPlatformRequirementsButton
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> fileInputField [
-	^ fileInputField
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> fileLabel [
-	^ fileLabel
 ]
 
 { #category : #initialization }
@@ -128,26 +87,18 @@ CGOPackageDetailsView >> initialExtent [
 CGOPackageDetailsView >> initializePresenter [
 	super initializePresenter.
 	editPlatformRequirementsButton action: [ self editPlatformRequirements ].
-	provisionsInputField acceptBlock: [ self updateProvisions ].
-	self refreshWidgetValues
+	provisionsInputField whenSubmitDo: [ self updateProvisions ].
+	self refreshWidgetValues.
+	
+	self layout: self defaultLayout.
 ]
 
 { #category : #initialization }
 CGOPackageDetailsView >> initializeWidgets [
-	dependenciesView := self instantiate: CGOPackageDependenciesView on: ongoingPackageUnit.
-
-	(provisionsLabel := self newLabel)
-		label: 'Provisions:'.
-	self newTextInputField: #provisionsInputField.
-	
-	(fileLabel := self newLabel)
-		label: 'File:'.
-	self newTextInputField: #fileInputField.
-	
-	(platformRequirementsLabel := self newLabel)
-		label: 'Platform requirements:'.
+	dependenciesView := self instantiate: CGOPackageDependenciesView on: self ongoingPackageUnit.
+	provisionsInputField := self newTextInput.
+	fileInputField := self newTextInput.
 	editPlatformRequirementsButton := self newButton
-		label: nil;
 		icon: (Smalltalk ui icons iconNamed: #editIcon);
 		enabled: true;
 		help: 'Edit platform requirements'.
@@ -157,42 +108,16 @@ CGOPackageDetailsView >> initializeWidgets [
 
 { #category : #accessing }
 CGOPackageDetailsView >> ongoingPackageUnit [
-	^ ongoingPackageUnit
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> platformRequirementWidget [
-	^ platformRequirementWidget
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> platformRequirementsLabel [
-	^ platformRequirementsLabel
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> provisionsInputField [
-	^ provisionsInputField
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> provisionsLabel [
-	^ provisionsLabel
+	^ self model
 ]
 
 { #category : #initialization }
 CGOPackageDetailsView >> refreshWidgetValues [
-	provisionsInputField text: (ongoingPackageUnit provisions
+	provisionsInputField text: (self ongoingPackageUnit provisions
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ Character space join: ongoingPackageUnit provisions ]).
+		ifNotEmpty: [ Character space join: self ongoingPackageUnit provisions ]).
 	"fileInputField text: ongoingPackageUnit file."
 	platformRequirementWidget := self buildPlatformTagsMorph asSpecAdapter
-]
-
-{ #category : #accessing }
-CGOPackageDetailsView >> setModelBeforeInitialization: aModel [
-
-	ongoingPackageUnit := aModel
 ]
 
 { #category : #'updating - ui' }
@@ -206,5 +131,5 @@ CGOPackageDetailsView >> updateProvisions [
 	| provisions |
 	provisions := (Character space split: provisionsInputField text) 
 		collect: #asSymbol as: Array.
-	ongoingPackageUnit provisions: provisions
+	self ongoingPackageUnit provisions: provisions
 ]

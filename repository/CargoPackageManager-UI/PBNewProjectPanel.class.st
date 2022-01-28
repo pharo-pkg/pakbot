@@ -1,19 +1,25 @@
 Class {
 	#name : #PBNewProjectPanel,
-	#superclass : #ITOptionPanel,
+	#superclass : #SpOptionPresenter,
 	#instVars : [
 		'projectPanel'
 	],
 	#category : #'CargoPackageManager-UI-NewProject'
 }
 
-{ #category : #specs }
-PBNewProjectPanel class >> defaultSpec [
-	<spec: #default>
-
-	^ SpecLayout composed 
-		newColumn: [ :col | 
-			col newRow: #projectPanel ]
+{ #category : #examples }
+PBNewProjectPanel class >> example [
+	| panel editionPanel |
+	
+	panel := self new.
+	editionPanel := panel projectPanel.
+	
+	editionPanel registry: PBPackageRegistry new.
+	editionPanel nameInputField text: 'aName'.
+	editionPanel versionInputField text: '1.0.0'.
+	editionPanel descriptionText text: 'A description'.
+	
+	panel openWithSpec
 ]
 
 { #category : #accepting }
@@ -24,6 +30,14 @@ PBNewProjectPanel >> accept [
 	project := projectPanel loadableUnit.
 	self registry registerProject: project.
 	^ project
+]
+
+{ #category : #layout }
+PBNewProjectPanel >> defaultLayout [
+
+	^ SpBoxLayout newTopToBottom  
+		add: projectPanel;
+		yourself
 ]
 
 { #category : #accessing }

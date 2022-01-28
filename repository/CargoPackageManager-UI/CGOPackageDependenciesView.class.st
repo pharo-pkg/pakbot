@@ -1,15 +1,24 @@
 "
-I display and allow edition of dependencies of the provided ongoingPackageVersion.
+I display and allow edition of dependencies of the provided PackageVersion.
 "
 Class {
 	#name : #CGOPackageDependenciesView,
 	#superclass : #CGOPackageListEditor,
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #example }
 CGOPackageDependenciesView class >> example [
-	^ self openOn: (PBPackage example)
+	| package registry project |
+	
+	registry := PBPackageRegistry new.
+	project := PBProjectVersion named: #Foo.
+	registry register: project.
+	package := PBPackage example.
+	package project registry: registry.
+	package addDependencyOn: #Foo.
+	
+	^ (self on: package) openWithSpec 
 ]
 
 { #category : #actions }
@@ -17,7 +26,7 @@ CGOPackageDependenciesView >> addAction [
 	
 	PBNewDependencyDialog new 
 		openDialogOnAccept: [ :dependency |
-			ongoingPackageVersion addDependency: dependency buildDependency.
+			self packageVersion addDependency: dependency buildDependency.
 			self refreshUI ]
 		onCancel: [ "Nothing" ]
 ]
@@ -25,12 +34,6 @@ CGOPackageDependenciesView >> addAction [
 { #category : #configuration }
 CGOPackageDependenciesView >> addButtonHelpString [
 	^ 'Add a new dependency'
-]
-
-{ #category : #'private - building' }
-CGOPackageDependenciesView >> buildRoots [
-	
-	^ ongoingPackageVersion dependencies
 ]
 
 { #category : #actions }
@@ -56,10 +59,16 @@ CGOPackageDependenciesView >> packageListEditorLabel [
 
 { #category : #actions }
 CGOPackageDependenciesView >> removeAction: aCGOPackageDependency [ 
-	ongoingPackageVersion removeDependency: aCGOPackageDependency
+	self packageVersion removeDependency: aCGOPackageDependency
 ]
 
 { #category : #configuration }
 CGOPackageDependenciesView >> removeButtonHelpString [
 	^ 'Remove the dependency'
+]
+
+{ #category : #'private - building' }
+CGOPackageDependenciesView >> roots [
+	
+	^ self packageVersion dependencies
 ]

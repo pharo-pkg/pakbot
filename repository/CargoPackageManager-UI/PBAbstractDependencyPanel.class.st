@@ -1,20 +1,11 @@
 Class {
 	#name : #PBAbstractDependencyPanel,
-	#superclass : #ITOptionPanel,
+	#superclass : #SpPresenterWithModel,
 	#instVars : [
-		'form',
-		'dependency'
+		'form'
 	],
 	#category : #'CargoPackageManager-UI-NewDependency'
 }
-
-{ #category : #specs }
-PBAbstractDependencyPanel class >> defaultSpec [
-	<spec: #default>
-
-	^ SpecLayout composed 
-		newColumn: #form
-]
 
 { #category : #testing }
 PBAbstractDependencyPanel class >> isAbstract [
@@ -28,9 +19,17 @@ PBAbstractDependencyPanel >> buildDependency [
 	^ self subclassResponsibility 
 ]
 
+{ #category : #specs }
+PBAbstractDependencyPanel >> defaultLayout [
+	
+	^ SpBoxLayout newTopToBottom 
+		add: form;
+		yourself
+]
+
 { #category : #accessing }
-PBAbstractDependencyPanel >> form [
-	^ form
+PBAbstractDependencyPanel >> dependency [
+	^ self model
 ]
 
 { #category : #initialization }
@@ -43,7 +42,9 @@ PBAbstractDependencyPanel >> initializeForm [
 PBAbstractDependencyPanel >> initializeWidgets [
 	self initializeForm.
 
-	dependency ifNotNil: [ self setInitialValues ].
+	self dependency ifNotNil: [ self setInitialValues ].
+	
+	self layout: self defaultLayout.
 ]
 
 { #category : #validation }
@@ -58,8 +59,8 @@ PBAbstractDependencyPanel >> openDialogOnAccept: acceptBlock onCancel: cancelBlo
 	dialog := self openDialogWithSpec
 		okAction: [ 
 			self updateDependency.
-			acceptBlock cull: dependency ];
-		cancelAction: [ cancelBlock cull: dependency ];
+			acceptBlock cull: self dependency ];
+		cancelAction: [ cancelBlock cull: self dependency ];
 		yourself.
 
 	self whenChangedDo: [ dialog toolbar okButton enabled: self isValid ].
@@ -71,12 +72,6 @@ PBAbstractDependencyPanel >> openDialogOnAccept: acceptBlock onCancel: cancelBlo
 PBAbstractDependencyPanel >> setInitialValues [
 
 	self subclassResponsibility 
-]
-
-{ #category : #initialization }
-PBAbstractDependencyPanel >> setModelBeforeInitialization: aDependency [
-	
-	dependency := aDependency
 ]
 
 { #category : #building }

@@ -6,7 +6,6 @@ Class {
 	#name : #CGOPackageAssemblyView,
 	#superclass : #PBLoadableUnitPanel,
 	#instVars : [
-		'ongoingPackageAssembly',
 		'partsView',
 		'packageOverview'
 	],
@@ -20,31 +19,19 @@ CGOPackageAssemblyView class >> buildOnOngoing: anOngoingPackageVersion [
 		buildWithSpec
 ]
 
-{ #category : #specs }
-CGOPackageAssemblyView class >> defaultSpec [
-	^ SpecLayout composed
-		newRow: [ :row |
-			row
-				add: #packageOverview  withSpec: #minimalSpec;
-				add: #partsView ]
-]
-
 { #category : #example }
 CGOPackageAssemblyView class >> example [
 	^ self openOn: (PBAssembly example)
 ]
 
-{ #category : #'instance creation' }
-CGOPackageAssemblyView class >> newOn: anOngoingPackageAssembly owner: owner [
-	^ self basicNew
-		initializeWith: anOngoingPackageAssembly;
+{ #category : #specs }
+CGOPackageAssemblyView >> defaultSpec [
+	packageOverview layout: packageOverview minimalLayout.
+	
+	^ SpBoxLayout newLeftToRight 
+		add: packageOverview;
+		add: partsView;
 		yourself
-]
-
-{ #category : #'instance creation' }
-CGOPackageAssemblyView class >> openOn: anOngoingPackageVersion [
-	(self newOn: anOngoingPackageVersion owner: nil)
-		openWithSpec
 ]
 
 { #category : #initialization }
@@ -54,22 +41,11 @@ CGOPackageAssemblyView >> initialExtent [
 
 { #category : #initialization }
 CGOPackageAssemblyView >> initializeWidgets [
-	packageOverview := PBLoadableUnitOverviewPanel newOn: ongoingPackageAssembly owner: self.
-	partsView := CGOPackageAssemblyPartsView newOn: ongoingPackageAssembly owner: self.
-]
-
-{ #category : #initialization }
-CGOPackageAssemblyView >> initializeWith: anOngoingPackageAssembly [
-	ongoingPackageAssembly := anOngoingPackageAssembly.
-	super initialize.
+	packageOverview := PBLoadableUnitOverviewPanel newOn: self ongoingPackageAssembly owner: self.
+	partsView := CGOPackageAssemblyPartsView newOn: self ongoingPackageAssembly owner: self.
 ]
 
 { #category : #accessing }
-CGOPackageAssemblyView >> packageOverview [
-	^  packageOverview
-]
-
-{ #category : #accessing }
-CGOPackageAssemblyView >> partsView [
-	^ partsView 
+CGOPackageAssemblyView >> ongoingPackageAssembly [
+	^ self model
 ]

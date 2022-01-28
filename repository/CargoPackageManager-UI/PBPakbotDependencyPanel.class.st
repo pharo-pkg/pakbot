@@ -1,15 +1,38 @@
 Class {
 	#name : #PBPakbotDependencyPanel,
 	#superclass : #PBAbstractDependencyPanel,
+	#instVars : [
+		'projectName',
+		'projectVersion',
+		'projectRepository'
+	],
 	#category : #'CargoPackageManager-UI-NewDependency'
 }
+
+{ #category : #examples }
+PBPakbotDependencyPanel class >> example [
+	(self on: nil) openWithSpec
+]
 
 { #category : #building }
 PBPakbotDependencyPanel >> buildDependency [
 	^ PBPakbotProjectDependency
-		named: (form valueNamed: #projectName)
-		repositoryUrl: (form valueNamed: #projectRepository)
-		version: (form valueNamed: #projectVersion)
+		named: projectName text
+		repositoryUrl: projectRepository text
+		version: projectVersion text
+]
+
+{ #category : #specs }
+PBPakbotDependencyPanel >> defaultLayout [ 
+	^ SpGridLayout new
+		add: 'Name' at: 1@1;
+		add: projectName at: 2@1;
+		add: 'Version' at: 1@2;
+		add: projectVersion at: 2@2;
+		add: 'Repository' at: 1@3;
+		add: projectRepository at: 2@3;
+		yourself
+		
 ]
 
 { #category : #accessing }
@@ -19,30 +42,39 @@ PBPakbotDependencyPanel >> icon [
 
 { #category : #initialization }
 PBPakbotDependencyPanel >> initializeForm [
-	form := ITForm owner: self.
-	form
-		addTextField: #projectName
-			label: 'Name'
-			ghost: 'e.g., My Project'
-			with: [ :field | field beRequired ];
+	projectName := (self instantiate: SpInputTextFieldWithStatusPresenter)
+			placeholder: 'e.g., My Project';
+			yourself.
+			"with: [ :field | field beRequired ];"
 
-		addTextField: #projectVersion
-			label: 'Version'
-			ghost: 'e.g., 1.0.1'
-			with: [ :field | field beRequired ];
+	projectVersion := (self instantiate: SpInputTextFieldWithStatusPresenter)
+			placeholder: 'e.g., 1.0.1';
+			yourself.
+			"with: [ :field | field beRequired ];"
 
-		addTextField: #projectRepository label: 'Repository' ghost: 'e.g., github://project-owner/project';
-		validateOnChange;
-		whenChangedDo: [ self valueChanged ].
+	projectRepository := (self instantiate: SpInputTextFieldWithStatusPresenter)
+		placeholder: 'e.g., github://project-owner/project';
+		yourself.
+		"validateOnChange;
+		whenChangedDo: [ self valueChanged ]."
 
+]
+
+{ #category : #initialization }
+PBPakbotDependencyPanel >> initializeWidgets [
+	self initializeForm.
+	
+	self dependency ifNotNil: [ self setInitialValues ].
+	
+	self layout: self defaultLayout.
 ]
 
 { #category : #initialization }
 PBPakbotDependencyPanel >> setInitialValues [
 
-	form valueNamed: #projectName set: dependency name.
-	form valueNamed: #projectRepository set: dependency repositoryUrl.
-	form valueNamed: #projectVersion set: dependency	version asString
+	projectName text: self dependency name.
+	projectRepository text: self dependency repositoryUrl.
+	projectVersion text: self dependency	version asString
 
 ]
 
@@ -54,8 +86,8 @@ PBPakbotDependencyPanel >> title [
 { #category : #building }
 PBPakbotDependencyPanel >> updateDependency [
 
-	dependency
-		name: (form valueNamed: #projectName);
-		repositoryUrl: (form valueNamed: #projectRepository);
-		version: (form valueNamed: #projectVersion)
+	self dependency
+		name: projectName text;
+		repositoryUrl: projectRepository text;
+		version: projectVersion text
 ]

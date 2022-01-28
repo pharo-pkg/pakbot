@@ -25,7 +25,7 @@ CGOPackageUnitView class >> defaultSpec [
 	^ SpecLayout composed
 		newRow: [ :row |
 			row
-				add: #packageOverview withSpec: #minimalSpec;
+				add: #packageOverview withSpec: #minimalLayout;
 				add: #detailsView ]
 ]
 

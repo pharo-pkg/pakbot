@@ -3,20 +3,12 @@ I am an option panel that lets the user select an already installed iceberg repo
 "
 Class {
 	#name : #PBImportIcebergRepositoryPanel,
-	#superclass : #ComposablePresenter,
+	#superclass : #SpOptionPresenter,
 	#instVars : [
 		'repositoryList'
 	],
 	#category : #'CargoPackageManager-UI'
 }
-
-{ #category : #specs }
-PBImportIcebergRepositoryPanel class >> defaultSpec [
-	<spec: #default>
-
-	^ SpecLayout composed 
-		newColumn: [ :col | col add: #repositoryList ]
-]
 
 { #category : #accepting }
 PBImportIcebergRepositoryPanel >> accept [
@@ -24,28 +16,43 @@ PBImportIcebergRepositoryPanel >> accept [
 	^ repositoryList selectedItem
 ]
 
-{ #category : #specs }
-PBImportIcebergRepositoryPanel >> icon [
-	^ self iconNamed: #komitterSmalltalkhubRemote
+{ #category : #initialization }
+PBImportIcebergRepositoryPanel >> connectPresenters [
+
+	repositoryList items:
+		(IceLibgitRepository registry sorted: [ :a :b | 
+			 a name asUppercase < b name asUppercase ])
+]
+
+{ #category : #layout }
+PBImportIcebergRepositoryPanel >> defaultLayout [
+
+	^ SpBoxLayout newTopToBottom 
+		add: repositoryList;
+		yourself
 ]
 
 { #category : #initialization }
-PBImportIcebergRepositoryPanel >> initializePresenter [
-	
-	repositoryList items: (IceLibgitRepository registry sorted: [ :a :b | a name asUppercase < b name asUppercase ]).
-]
-
-{ #category : #initialization }
-PBImportIcebergRepositoryPanel >> initializeWidgets [
+PBImportIcebergRepositoryPanel >> initializePresenters [
 	
 	repositoryList := self newList.
-	repositoryList displayBlock: [ :each | each name ]
+	repositoryList display: [ :each | each name ]
 ]
 
 { #category : #accessing }
 PBImportIcebergRepositoryPanel >> newRepository [ 
 	"polymorphic with other iceberg creation panels"
 	^ repositoryList selectedItem
+]
+
+{ #category : #specs }
+PBImportIcebergRepositoryPanel >> optionIcon [
+	^ self iconNamed: #komitterSmalltalkhubRemote
+]
+
+{ #category : #specs }
+PBImportIcebergRepositoryPanel >> optionTitle [ 
+	^ 'Existing Iceberg Repository'
 ]
 
 { #category : #accessing }
@@ -56,11 +63,6 @@ PBImportIcebergRepositoryPanel >> repositoryList [
 { #category : #accessing }
 PBImportIcebergRepositoryPanel >> repositoryList: anObject [
 	repositoryList := anObject
-]
-
-{ #category : #specs }
-PBImportIcebergRepositoryPanel >> title [
-	^ 'Existing Iceberg Repository'
 ]
 
 { #category : #accepting }

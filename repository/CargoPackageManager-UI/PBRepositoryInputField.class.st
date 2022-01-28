@@ -1,90 +1,71 @@
+"
+I'm an input widget representing a Git repository.
+I have a button allowing to change the repository URL either by selecting an existing repository (declared in Iceberg) or by creating a new one.
+"
 Class {
 	#name : #PBRepositoryInputField,
-	#superclass : #ComposablePresenter,
+	#superclass : #SpPresenterWithModel,
 	#instVars : [
-		'iconContainerPanel',
 		'label',
 		'button',
-		'project'
+		'icon'
 	],
 	#category : #'CargoPackageManager-UI'
 }
 
-{ #category : #specs }
-PBRepositoryInputField class >> defaultSpec [
-	<spec: #default>
+{ #category : #examples }
+PBRepositoryInputField class >> example [
+	<example>
 	
-	^ SpecLayout composed 
-		newRow: [ :column |
-			column 
-				newColumn: #iconContainerPanel width: self buttonWidth / 3;
-				newColumn: #label;
-				newColumn: #button width: self buttonWidth ]
-]
-
-{ #category : #accessing }
-PBRepositoryInputField >> button [
-	^ button
-]
-
-{ #category : #accessing }
-PBRepositoryInputField >> button: anObject [
-	button := anObject
-]
-
-{ #category : #accessing }
-PBRepositoryInputField >> iconContainerPanel [
-	^ iconContainerPanel
-]
-
-{ #category : #accessing }
-PBRepositoryInputField >> iconContainerPanel: anObject [
-	iconContainerPanel := anObject
+	^ (self on: PBProjectVersion example) 
+		openWithSpec
 ]
 
 { #category : #initialization }
-PBRepositoryInputField >> initializePresenter [
+PBRepositoryInputField >> connectPresenters [
 	
 	button action: [ 
-		(PBOpenNewRepositoryDialogAction onProject: project)
-			acceptCallback: [ self refresh ];
+		(PBOpenNewRepositoryDialogAction onProject: self project)
+			postActionCallback: [ self refresh ];
 			execute ].
+		
 	self refresh.
 ]
 
 { #category : #initialization }
-PBRepositoryInputField >> initializeWidgets [
+PBRepositoryInputField >> initializeLayout [
+
+	self layout: (SpBoxLayout newLeftToRight 
+			add: #icon expand: false;
+			add: #label;
+			add: #button expand: false;
+			yourself)
+]
+
+{ #category : #initialization }
+PBRepositoryInputField >> initializePresenters [
 	
-	iconContainerPanel := self newPanel.
+	icon := self newImage.
 	label := self newLabel.
 	button := self newButton.
+	
+	self initializeLayout.
+
 ]
 
 { #category : #accessing }
-PBRepositoryInputField >> label [
-	^ label
-]
-
-{ #category : #accessing }
-PBRepositoryInputField >> label: anObject [
-	label := anObject
+PBRepositoryInputField >> project [
+	^ self model
 ]
 
 { #category : #initialization }
 PBRepositoryInputField >> refresh [
-	
-	iconContainerPanel widget removeAllMorphs.
-	iconContainerPanel widget addMorphBack: 
-		((self iconNamed: project repository iconName) asMorph
-			hResizing: #spaceFill;
-			vResizing: #spaceFill).
-	label label: project repository description.
-	
-	button iconName: project repository editionIconName.
-]
 
-{ #category : #accessing }
-PBRepositoryInputField >> setModelBeforeInitialization: aProject [
-
-	project := aProject
+	| form repository |
+	repository := self project repository.
+	form := self iconNamed: repository iconName.
+	
+	icon image: form.
+	label label: repository description.
+	button iconName: repository editionIconName.
 ]

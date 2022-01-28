@@ -3,7 +3,7 @@ Common super class for PPM views woth some utility methods
 "
 Class {
 	#name : #PBLoadableUnitPanel,
-	#superclass : #ComposablePresenter,
+	#superclass : #SpPresenterWithModel,
 	#category : #'CargoPackageManager-UI'
 }
 
@@ -16,6 +16,12 @@ PBLoadableUnitPanel class >> isAbstract [
 { #category : #defaults }
 PBLoadableUnitPanel class >> labelSize [
 	^ 75
+]
+
+{ #category : #opening }
+PBLoadableUnitPanel class >> openOn: anOngoingPackageVersion [
+	(self owner: nil on: anOngoingPackageVersion)
+		openWithSpec
 ]
 
 { #category : #'building widgets' }
@@ -51,7 +57,6 @@ PBLoadableUnitPanel >> newTextInputField: textInputFieldModelName description: a
 	self
 		instVarNamed: textInputFieldModelName  
 		put: (self newTextInput
-			entryCompletion: nil;
-			acceptOnCR: true;
-			ghostText: 'e.g., ', aDescription)
+			removeEntryCompletion;
+			help: 'e.g., ', aDescription)
 ]

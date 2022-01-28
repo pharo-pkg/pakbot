@@ -21,7 +21,7 @@ CGOVirtualPackageView class >> buildOnOngoing: anOngoingVirtualPackageVersion [
 { #category : #specs }
 CGOVirtualPackageView class >> defaultSpec [
 	^ SpecLayout composed
-		add: #packageOverview withSpec: #minimalSpec
+		add: #packageOverview withSpec: #minimalLayout
 ]
 
 { #category : #example }

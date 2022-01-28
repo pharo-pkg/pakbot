@@ -4,7 +4,7 @@ I display and allow edition of parts  of the provided ongoing Package Assembly.
 Class {
 	#name : #CGOPackageAssemblyPartsView,
 	#superclass : #CGOPackageListEditor,
-	#category : 'CargoPackageManager-UI'
+	#category : #'CargoPackageManager-UI'
 }
 
 { #category : #example }
@@ -16,7 +16,7 @@ CGOPackageAssemblyPartsView class >> example [
 CGOPackageAssemblyPartsView >> addAction [
 	| package |
 	package := (self packageSelectionDialogFor: self candidatePackages) chooseFromOwner: self widget widget.
-	package ifNotNil: [ ongoingPackageVersion addPart: package packageName ].
+	package ifNotNil: [ packageVersion addPart: package packageName ].
 ]
 
 { #category : #configuration }
@@ -26,14 +26,14 @@ CGOPackageAssemblyPartsView >> addButtonHelpString [
 
 { #category : #private }
 CGOPackageAssemblyPartsView >> buildRoots [
-	^ ongoingPackageVersion parts
+	^ packageVersion parts
 ]
 
 { #category : #querying }
 CGOPackageAssemblyPartsView >> candidatePackages [
 	| partsNames |
-	partsNames := (ongoingPackageVersion parts collect: #targetedPackage) copyWith: ongoingPackageVersion packageName.
-	^ (ongoingPackageVersion registry installedPackages
+	partsNames := (packageVersion parts collect: #targetedPackage) copyWith: packageVersion packageName.
+	^ (packageVersion registry installedPackages
 		reject: [ :packageVersion |	partsNames includes: packageVersion packageName  ]) asArray
 ]
 
@@ -63,7 +63,7 @@ CGOPackageAssemblyPartsView >> packageSelectionDialogFor: aListOfPackages [
 
 { #category : #actions }
 CGOPackageAssemblyPartsView >> removeAction: aCGOPackageDependency [ 
-	ongoingPackageVersion removePart: aCGOPackageDependency
+	packageVersion removePart: aCGOPackageDependency
 ]
 
 { #category : #configuration }
