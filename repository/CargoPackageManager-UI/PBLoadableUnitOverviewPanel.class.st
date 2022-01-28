@@ -97,19 +97,24 @@ PBLoadableUnitOverviewPanel >> defaultLayout [
 	^ (SpGridLayout build: [ :builder | 
 			   builder
 				   add: 'Name:';
-				   add: #nameInputField;
+				   add: nameInputField;
 				   nextRow;
 				   add: 'Version:';
-				   add: #versionInputField;
+				   add: versionInputField;
 				   nextRow;
 				   add: 'Repository:';
-				   add: #repositoryInputField;
+				   add: repositoryInputField;
 				   nextRow;
 				   add: 'Description:';
-				   add: #descriptionText ])
+				   add: descriptionText ])
 		  columnHomogeneous: false;
 		  column: 2 withConstraints: [ :c | c beExpand ];
 		  yourself
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> description: aString [
+	descriptionText text: aString
 ]
 
 { #category : #initialization }
@@ -135,6 +140,11 @@ PBLoadableUnitOverviewPanel >> initializePresenters [
 { #category : #accessing }
 PBLoadableUnitOverviewPanel >> loadableUnit [
 	^ self model
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> name: aString [
+	nameInputField text: aString
 ]
 
 { #category : #initialization }
@@ -170,4 +180,9 @@ PBLoadableUnitOverviewPanel >> updateVersion [
 	| versionString |
 	versionString := versionInputField text.
 	self loadableUnit version: versionString asSemanticVersion
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPanel >> version: aString [
+	versionInputField text: aString
 ]

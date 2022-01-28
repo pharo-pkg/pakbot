@@ -6,8 +6,6 @@ Class {
 	#name : #PBOpenNewRepositoryDialogAction,
 	#superclass : #PBAbstractAction,
 	#instVars : [
-		'project',
-		'dialog',
 		'postActionCallback'
 	],
 	#category : #'CargoPackageManager-UI-Actions'
@@ -46,9 +44,4 @@ PBOpenNewRepositoryDialogAction >> doPostAction [
 PBOpenNewRepositoryDialogAction >> postActionCallback: aCallback [
 
 	postActionCallback := aCallback	
-]
-
-{ #category : #accessing }
-PBOpenNewRepositoryDialogAction >> project: aProject [
-	project := aProject
 ]

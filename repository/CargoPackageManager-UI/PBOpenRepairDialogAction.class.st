@@ -1,9 +1,9 @@
+"
+I trigger the project repair action
+"
 Class {
 	#name : #PBOpenRepairDialogAction,
 	#superclass : #PBAbstractAction,
-	#instVars : [
-		'project'
-	],
 	#category : #'CargoPackageManager-UI-Actions'
 }
 
@@ -17,15 +17,10 @@ PBOpenRepairDialogAction class >> onProject: aProject [
 
 { #category : #execution }
 PBOpenRepairDialogAction >> doExecute [
-	^ (CGORepairProjectDialog onProject: project) openDialogWithSpec 
+	^ (CGORepairProjectDialog onProject: project) openDialog
 ]
 
 { #category : #execution }
 PBOpenRepairDialogAction >> execute [
 	^ (CGORepairProjectDialog onProject: project) openDialogWithSpec 
-]
-
-{ #category : #acccessing }
-PBOpenRepairDialogAction >> project: aProject [
-	project := aProject
 ]

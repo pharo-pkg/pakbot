@@ -5,9 +5,6 @@ I have a class message #allAvailableFor: that returns all the applicable repair 
 Class {
 	#name : #CGORepairProjectAction,
 	#superclass : #PBAbstractAction,
-	#instVars : [
-		'project'
-	],
 	#category : #'CargoPackageManager-UI-Repair'
 }
 
@@ -58,10 +55,4 @@ CGORepairProjectAction >> isLoadProjectAction [
 { #category : #accessing }
 CGORepairProjectAction >> name [
 	^ self subclassResponsibility 
-]
-
-{ #category : #accessing }
-CGORepairProjectAction >> project: aProject [ 
-
-	project := aProject
 ]

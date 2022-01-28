@@ -1,5 +1,5 @@
 Class {
-	#name : #PBNewProjectPanelTest,
+	#name : #PBNewProjectPresenterTest,
 	#superclass : #PBAbstractTest,
 	#instVars : [
 		'project',
@@ -14,11 +14,11 @@ Class {
 }
 
 { #category : #tests }
-PBNewProjectPanelTest >> setUp [
+PBNewProjectPresenterTest >> setUp [
 
 	super setUp.
 	
-	panel := PBNewProjectPanel new.
+	panel := PBNewProjectPresenter new.
 	editionPanel := panel projectPanel.
 	project := editionPanel loadableUnit.
 	editionPanel registry: testRegistry.
@@ -30,11 +30,11 @@ PBNewProjectPanelTest >> setUp [
 ]
 
 { #category : #tests }
-PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
+PBNewProjectPresenterTest >> testProjectIsFilledAfterAccept [
 
-	editionPanel nameInputField text: name.
-	editionPanel versionInputField text: version.
-	editionPanel descriptionText text: description.
+	editionPanel name: name.
+	editionPanel version: version.
+	editionPanel description: description.
 	
 	panel accept.
 	
@@ -44,22 +44,22 @@ PBNewProjectPanelTest >> testProjectIsFilledAfterAccept [
 ]
 
 { #category : #tests }
-PBNewProjectPanelTest >> testProjectIsNotInstalledBeforeAccept [
+PBNewProjectPresenterTest >> testProjectIsNotInstalledBeforeAccept [
 
-	editionPanel nameInputField text: name.
-	editionPanel versionInputField text: version.
-	editionPanel descriptionText text: description.
+	editionPanel name: name.
+	editionPanel version: version.
+	editionPanel description: description.
 	
 	self deny: (testRegistry isProjectInstalled: project)
 
 ]
 
 { #category : #tests }
-PBNewProjectPanelTest >> testProjectIsRegisteredAfterAccept [
+PBNewProjectPresenterTest >> testProjectIsRegisteredAfterAccept [
 
-	editionPanel nameInputField text: name.
-	editionPanel versionInputField text: version.
-	editionPanel descriptionText text: description.
+	editionPanel name: name.
+	editionPanel version: version.
+	editionPanel description: description.
 	
 	panel accept.
 	

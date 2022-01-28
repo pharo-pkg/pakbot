@@ -3,7 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'tempFolder',
-		'counterIceRepository'
+		'counterIceRepository',
+		'presenter'
 	],
 	#category : #'CargoPackageManager-UI-Tests'
 }
@@ -12,6 +13,7 @@ Class {
 PBOpenNewRepositoryDialogActionTest >> tearDown [ 
 	tempFolder ifNotNil: [ tempFolder ensureDeleteAll ].
 	counterIceRepository ifNotNil: [ counterIceRepository forget ].
+	presenter ifNotNil: [ presenter delete ].
 ]
 
 { #category : #tests }
@@ -20,17 +22,17 @@ PBOpenNewRepositoryDialogActionTest >> testCanCreateNewProject [
 
 	project := PBProjectVersion named: ''.
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
-	presenter selectionChanged: (FTSelectionChanged from: #(1) to: #(2)). "select new repository panel"
+	presenter selectOptionAt: 2. "select new repository panel"
 	self 
-		assert: presenter selectedType class
+		assert: presenter selectedOption class
 		equals: IceTipNewRepositoryPanel.
 		
-	newRepositoryPresenter := presenter selectedType.
+	newRepositoryPresenter := presenter selectedOption.
 	newRepositoryPresenter projectNameInputText text: 'foo'.
 	newRepositoryPresenter projectLocation location ensureDeleteAll.
 	
 	self deny: project repository isValidRepository.
-	presenter accept.
+	presenter doAccept.
 	presenter delete.
 	self assert: project repository isValidRepository.
 	self 
@@ -44,7 +46,7 @@ PBOpenNewRepositoryDialogActionTest >> testCanCreateNewProject [
 
 { #category : #tests }
 PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
-	| presenter importRepositoryPresenter project iceRepository projectName |
+	| importRepositoryPresenter project iceRepository projectName |
 
 	projectName := 'pakbot-testCanImportProject'.
 	tempFolder := FileLocator temp / projectName.
@@ -58,15 +60,15 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	project := PBProjectVersion named: projectName.
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
 	self 
-		assert: presenter selectedType class
+		assert: presenter selectedOption class
 		equals: PBImportIcebergRepositoryPanel.
 		
-	importRepositoryPresenter := presenter selectedType.
-	iceRepository := importRepositoryPresenter repositoryList listItems detect: [ :repo | repo name = projectName ].
-	importRepositoryPresenter repositoryList setSelectedItem: iceRepository.
+	importRepositoryPresenter := presenter selectedOption.
+	iceRepository := importRepositoryPresenter repositoryList items detect: [ :repo | repo name = projectName ].
+	importRepositoryPresenter repositoryList selectItem: iceRepository.
 	
 	self deny: project repository isValidRepository.
-	presenter accept.
+	presenter doAccept.
 	presenter delete.
 	self assert: project repository isValidRepository.
 	self 

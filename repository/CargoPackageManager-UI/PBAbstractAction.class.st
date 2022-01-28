@@ -1,6 +1,12 @@
+"
+I execute an action by taking care of capturing errors and provide them to the default error visitor 
+"
 Class {
 	#name : #PBAbstractAction,
 	#superclass : #Object,
+	#instVars : [
+		'project'
+	],
 	#category : #'CargoPackageManager-UI-Actions'
 }
 
@@ -15,4 +21,9 @@ PBAbstractAction >> execute [
 	[ ^ self doExecute ]
 		on: PBError
 		do: [ :ex | ex acceptVisitor: PBErrorVisitor default ]
+]
+
+{ #category : #acccessing }
+PBAbstractAction >> project: aProject [
+	project := aProject
 ]
