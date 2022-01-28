@@ -10,10 +10,10 @@ PBCreateProjectDialog class >> example [
 	self new openDialogWithSpec
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 PBCreateProjectDialog >> initialize [
 	panels := {
-		PBNewProjectPanel new.
+		PBNewProjectPresenter new.
 		PBImportProjectFromGitPanel new.
 		PBImportProjectFromPackageRepositoryPanel new }.
 	super initialize.
