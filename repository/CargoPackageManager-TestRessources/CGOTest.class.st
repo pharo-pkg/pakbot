@@ -1,11 +1,11 @@
 Class {
 	#name : #CGOTest,
-	#superclass : #BabyMock2TestCase,
+	#superclass : #TestCase,
 	#instVars : [
 		'systemPackages',
 		'packageProviderStrategyBackup'
 	],
-	#category : 'CargoPackageManager-TestRessources-Resources'
+	#category : #'CargoPackageManager-TestRessources-Resources'
 }
 
 { #category : #testing }
