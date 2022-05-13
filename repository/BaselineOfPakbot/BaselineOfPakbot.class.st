@@ -29,7 +29,7 @@ BaselineOfPakbot >> baseline: spec [
 		for: #common
 		do: [ 
 			"self icetray: spec."
-			self babyMock: spec.
+			"self babyMock: spec."
 			self voyage: spec.
 			"self zincHttpComponents: spec."
 			"self aiGrapsAlgos: spec."
@@ -41,56 +41,42 @@ BaselineOfPakbot >> baseline: spec [
 				package: #CargoPackageManager
 					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" "'AIGraphAlgorithm'") ];
 
-				package: #'PakbotPackageManager-Repository'
-					with: [ spec requires: #(CargoPackageManager) ];
-				package: #'PakbotPackageManager-Repository-Tests'
-					with: [ spec requires: #('PakbotPackageManager-Repository' 'CargoPackageManager-Tests') ];
-				package: #'PakbotPackageManager-Repository-IntegrationTests'
-					with: [ spec requires: #('PakbotPackageManager-Repository' 'CargoPackageManager-Tests') ];
-					
-				package: #'CargoPackageManager-Repository'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-TestRessources' "'ZincHTTPComponents'") ];
-				package: #'CargoPackageManager-RepositoryBackend'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'Voyage') ];
-					
+				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
 				package: #'CargoPackageManager-TestRessources'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec' 'BabyMock2') ];
+					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec') ];
 				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
-				package: #'CargoPackageManager-Tests-FooResource';
-				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
-				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser') ];
-				package: #'CargoPackageManager-Calypso-Environment'
-					with: [ spec requires: #(CargoPackageManager) ];
-				package: #'CargoPackageManager-Calypso-Browser'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-UI' 'CargoPackageManager-Calypso-Environment') ];
+				package: #'CargoPackageManager-Tests-FooResource'.
+							
+			self pakbotUI: spec.		
+			self pakbotPackageRepository: spec.
+				
+			spec
 				package: 'CargoPackageManager-Utils';
 				package: #'CargoPackageManager-Utils-Tests' with: [ spec requires: #('CargoPackageManager-Tests-FooResource') ];
 				package: #'CargoPackageManager-Utils-FailingTests' with: [ spec requires: #('CargoPackageManager-Utils-Tests') ].	
 
 			spec
-				group: 'client'
-					with: #(CargoPackageManager 'CargoPackageManager-Calypso-Browser');
-				group: 'server'
-					with:
-					#(#'CargoPackageManager-RepositoryBackend' 'CargoPackageManager-Repository');
-				group: 'tests-client' with: 
-					#('client' 
-					'CargoPackageManager-Tests' 
+				group: 'client' with: #(CargoPackageManager);
+				group: 'tests-client' with:
+					#('client'
+					'CargoPackageManager-Tests'
+					'CargoPackageManager-FailingTests'
+					'CargoPackageManager-IntegrationTests'
+					); 
+				group: 'tests-client-ui' with: 
+					#('tests-client-ui'
 					'utils' 
 					'CargoPackageManager-Utils-Tests' 
-					'CargoPackageManager-FailingTests' 
 					'CargoPackageManager-Utils-FailingTests'
-					'CargoPackageManager-IntegrationTests'
-					'CargoPackageManager-UI-Tests' 
-					'PakbotPackageManager-Repository-Tests'
+					'CargoPackageManager-UI-Tests');
+				group: 'tests-server' with: 
+					#('PakbotPackageManager-Repository-Tests'
 					'PakbotPackageManager-Repository-IntegrationTests');
-				group: 'tests-server' with: #('server' 'tests-client');
-				group: 'tests' with: #('tests-client' 'tests-server');
+				group: 'tests' with: #('tests-client-ui' 'tests-server');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
-				group: 'development' with: #(client server tests utils);
 				group: 'default' with: 'tests-client' ]
 ]
 
@@ -112,6 +98,54 @@ BaselineOfPakbot >> iceberg: spec [
 { #category : #baseline }
 BaselineOfPakbot >> icetray: spec [
 	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
+]
+
+{ #category : #'as yet unclassified' }
+BaselineOfPakbot >> pakbotPackageRepository: spec [
+
+	spec
+		package: #'PakbotPackageManager-Repository' with: [ 
+			spec requires: #( CargoPackageManager ) ];
+		package: #'PakbotPackageManager-Repository-Tests' with: [ 
+			spec requires:
+					#( 'PakbotPackageManager-Repository'
+					   'CargoPackageManager-Tests' ) ];
+		package: #'PakbotPackageManager-Repository-IntegrationTests' with: [ 
+			spec requires:
+					#( 'PakbotPackageManager-Repository'
+					   'CargoPackageManager-Tests' ) ].
+				
+	" Old implementation using aMongoDB as backend"
+	"spec			
+		package: #'CargoPackageManager-Repository' with: [ 
+			spec requires:
+					#( CargoPackageManager 
+						'CargoPackageManager-RepositoryBackend'
+					   'CargoPackageManager-TestRessources' ) ""'ZincHTTPComponents'"" ];
+		package: #'CargoPackageManager-RepositoryBackend' with: [ 
+			spec requires:
+					#( CargoPackageManager 
+						'CargoPackageManager-TestRessources'
+					   'Voyage' ) ]"
+]
+
+{ #category : #'as yet unclassified' }
+BaselineOfPakbot >> pakbotUI: spec [
+
+	spec
+		package: #'CargoPackageManager-UI' with: [ 
+			spec requires: #( CargoPackageManager ) ];
+		
+		package: #'CargoPackageManager-UI-Tests' with: [ 
+			spec requires:
+					#( 'CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser' ) ];
+				
+		package: #'CargoPackageManager-Calypso-Environment'	with: [ 
+				spec requires: #( CargoPackageManager ) ];
+			
+		package: #'CargoPackageManager-Calypso-Browser' with: [ 
+			spec requires: #( CargoPackageManager 'CargoPackageManager-UI'
+					   'CargoPackageManager-Calypso-Environment' ) ]
 ]
 
 { #category : #baseline }
