@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #baseline }
+BaselineOfPakbot >> aiGrapsAlgos: spec [
+	spec
+    	baseline: 'AIGraphAlgorithm'
+    	with: [ spec 
+					repository: 'github://pharo-ai/graph-algorithms:v1.0.0/src' ]
+]
+
+{ #category : #baseline }
 BaselineOfPakbot >> babyMock: spec [
 	spec
 		project: 'BabyMock2'
@@ -20,18 +28,18 @@ BaselineOfPakbot >> baseline: spec [
 	spec
 		for: #common
 		do: [ 
-			self icetray: spec.
+			"self icetray: spec."
 			self babyMock: spec.
-			self mooseAlgos: spec.
 			self voyage: spec.
 			"self zincHttpComponents: spec."
+			"self aiGrapsAlgos: spec."
 			self iceberg: spec.
 			self parametrizedTests: spec.
 			
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'MooseAlgos') ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" "'AIGraphAlgorithm'") ];
 
 				package: #'PakbotPackageManager-Repository'
 					with: [ spec requires: #(CargoPackageManager) ];
@@ -52,7 +60,7 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource';
-				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager Icetray) ];
+				package: #'CargoPackageManager-UI' with: [ spec requires: #(CargoPackageManager "Icetray") ];
 				package: #'CargoPackageManager-UI-Tests' with: [ spec requires: #('CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser') ];
 				package: #'CargoPackageManager-Calypso-Environment'
 					with: [ spec requires: #(CargoPackageManager) ];
@@ -104,15 +112,6 @@ BaselineOfPakbot >> iceberg: spec [
 { #category : #baseline }
 BaselineOfPakbot >> icetray: spec [
 	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
-]
-
-{ #category : #baseline }
-BaselineOfPakbot >> mooseAlgos: spec [
-	spec
-    	baseline: 'MooseAlgos'
-    	with: [ spec 
-					repository: 'github://moosetechnology/MooseAlgos:master/src';
-					loads: #('Moose-Algos-Graph') ]
 ]
 
 { #category : #baseline }
