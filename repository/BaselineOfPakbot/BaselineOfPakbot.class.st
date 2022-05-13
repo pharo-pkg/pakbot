@@ -33,13 +33,13 @@ BaselineOfPakbot >> baseline: spec [
 			self voyage: spec.
 			"self zincHttpComponents: spec."
 			"self aiGrapsAlgos: spec."
-			"self iceberg: spec."
+			self iceberg: spec.
 			self parametrizedTests: spec.
 			
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' "'Iceberg'" "'ZincHTTPComponents'" "'AIGraphAlgorithm'") ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" "'AIGraphAlgorithm'") ];
 
 				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
@@ -82,16 +82,11 @@ BaselineOfPakbot >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfPakbot >> iceberg: spec [
-	| repository |
-	"re := '[:space:]*repository\:[:space:]*(.+)' asRegex.
-	re matchesIn:
-		((BaselineOfIDE>>#loadIceberg) sourceCode lines 
-		detect: [ :line | line includesSubstring: 'repository:' ])."
 	
 	spec
 		baseline: 'Iceberg'
 		with: [ spec
-				repository: 'github://pharo-vcs/iceberg:v1.8.3';
+				repository: (self class environment at: #BaselineOfPharo) icebergRepository;
 				loads: #('Iceberg-Memory') ]
 ]
 
