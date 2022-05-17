@@ -21,6 +21,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         smalltalk: [ Pharo64-11 ]
+        smalltalk_config: [ .client.ston ]
         
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
@@ -37,5 +38,5 @@ jobs:
           smalltalk-version: ${{ matrix.smalltalk }}
           
       - name: Load Image and Run Tests
-        run: smalltalkci -s ${{ matrix.smalltalk }}
+        run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.smalltalk_config }}
         timeout-minutes: 15
