@@ -7,7 +7,7 @@ Class {
 { #category : #baseline }
 BaselineOfPakbot >> aiGrapsAlgos: spec [
 	spec
-    	baseline: 'AIGraphAlgorithm'
+    	baseline: 'AIGraphAlgorithms'
     	with: [ spec 
 					repository: 'github://pharo-ai/graph-algorithms:v1.1.0/src' ]
 ]
@@ -39,7 +39,7 @@ BaselineOfPakbot >> baseline: spec [
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithm') ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
 
 				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
