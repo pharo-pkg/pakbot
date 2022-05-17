@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'parts'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #serialization }
@@ -36,7 +36,7 @@ CGOPackageAssembly >> asSerializablePackageVersion [
 { #category : #accessing }
 CGOPackageAssembly >> assemblies [
 	^ parts
-		collect: [ :each | registry packageNamed: each packageName ifAbsent: [ nil ] ]
+		collect: [ :each | self registry packageNamed: each packageName ifAbsent: [ nil ] ]
 		thenSelect: [ :each | each notNil and: [ each isAssembly ] ]
 ]
 
@@ -81,7 +81,7 @@ CGOPackageAssembly >> packageNames [
 	| foundPackage |
 	^ parts
 		select: [ :each | 
-			foundPackage := registry packageNamed: each packageName ifAbsent: [ nil ].
+			foundPackage := self registry packageNamed: each packageName ifAbsent: [ nil ].
 			foundPackage notNil and: [ foundPackage isUnit ] ]
 ]
 
@@ -108,7 +108,7 @@ CGOPackageAssembly >> printOn: aStream [
 
 { #category : #accessing }
 CGOPackageAssembly >> projectRepository [
-	^ projectRepository
+	^ self project repository
 ]
 
 { #category : #ston }
