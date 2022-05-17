@@ -32,7 +32,7 @@ BaselineOfPakbot >> baseline: spec [
 			"self babyMock: spec."
 			self voyage: spec.
 			"self zincHttpComponents: spec."
-			"self aiGrapsAlgos: spec."
+			self aiGrapsAlgos: spec.
 			self iceberg: spec.
 			self parametrizedTests: spec.
 			
