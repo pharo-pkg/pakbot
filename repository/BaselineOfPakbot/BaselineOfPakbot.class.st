@@ -9,7 +9,7 @@ BaselineOfPakbot >> aiGrapsAlgos: spec [
 	spec
     	baseline: 'AIGraphAlgorithm'
     	with: [ spec 
-					repository: 'github://pharo-ai/graph-algorithms:v1.0.0/src' ]
+					repository: 'github://pharo-ai/graph-algorithms:v1.1.0/src' ]
 ]
 
 { #category : #baseline }
@@ -95,7 +95,7 @@ BaselineOfPakbot >> icetray: spec [
 	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #baseline }
 BaselineOfPakbot >> pakbotPackageRepository: spec [
 
 	spec
@@ -124,7 +124,7 @@ BaselineOfPakbot >> pakbotPackageRepository: spec [
 					   'Voyage' ) ]"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #baseline }
 BaselineOfPakbot >> pakbotUI: spec [
 
 	spec

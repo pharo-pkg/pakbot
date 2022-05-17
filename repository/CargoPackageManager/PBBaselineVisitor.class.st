@@ -234,7 +234,7 @@ PBBaselineVisitor >> requires: aNameOrAListOfNames [
 PBBaselineVisitor >> sortedGroups [
 	"sort groups so that their parts are already defined in project"
 	| sorter groupNames nodes |
-	sorter := MalTopologicalSorting new.
+	sorter := AITopologicalSorting new.
 	groupNames := groups collect: #key.
 	nodes := Set withAll: groupNames. "We ignore package as they are already added to the project".
 	sorter nodes: nodes.

@@ -37,8 +37,8 @@ CGOLoadInstructionsBuilder >> loadOrder [
 	
 	resolution hasConflicts ifTrue: [ self signalConflicts ].
 	
-	sortedElements := MalTopologicalSorting new
-		privateNodes: self reducedGraph; 
+	sortedElements := AITopologicalSorting new
+		rawNodes: self reducedGraph; 
 		run.
 	^ sortedElements 
 		collect: [ :each | each model asOrderedCollection ]
@@ -48,7 +48,7 @@ CGOLoadInstructionsBuilder >> loadOrder [
 { #category : #'loading order' }
 CGOLoadInstructionsBuilder >> reducedGraph [
 
-	^ MalGraphReducer new
+	^ AIGraphReducer new
 		addNodesFrom: resolution
 		childrenBlock: [ :resolvedDependency | 
 			(resolvedDependency resolvedDependencies sorted: [ :a :b | a name < b name ])
