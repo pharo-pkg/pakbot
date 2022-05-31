@@ -38,10 +38,10 @@ CGOLoadInstructionsBuilder >> loadOrder [
 	resolution hasConflicts ifTrue: [ self signalConflicts ].
 	
 	sortedElements := AITopologicalSorting new
-		rawNodes: self reducedGraph; 
+		addNodesFromDifferentGraph: self reducedGraph; 
 		run.
 	^ sortedElements 
-		collect: [ :each | each model asOrderedCollection ]
+		collect: [ :each | each asOrderedCollection ]
 		as: Array
 ]
 
