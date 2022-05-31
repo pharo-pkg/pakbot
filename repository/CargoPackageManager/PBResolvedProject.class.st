@@ -178,7 +178,7 @@ PBResolvedProject >> load [
 { #category : #loading }
 PBResolvedProject >> loadInstructions [
 	
-	^ CGOLoadInstructionsBuilder new
+	^ PBLoadInstructionsBuilder new
 		resolution: self;
 		loadInstructions
 ]

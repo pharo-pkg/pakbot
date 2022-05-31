@@ -56,7 +56,7 @@ ManifestCargoPackageManager class >> ruleMissingSubclassResponsibilityRuleV1Fals
 
 { #category : #'code-critics' }
 ManifestCargoPackageManager class >> ruleMissingYourselfRuleV1FalsePositive [
-^ #(#(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #versionStringsOf: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGOLoadInstructionsBuilder #graph #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #packagesProviding:version:forEnvironment: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #latestVersionOfPackage:suitableForEnvironment: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #packages #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #fetch:version: #false)) #'2015-01-20T13:01:10.912183+01:00') )
+^ #(#(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #versionStringsOf: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#PBLoadInstructionsBuilder #graph #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #packagesProviding:version:forEnvironment: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #latestVersionOfPackage:suitableForEnvironment: #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #packages #false)) #'2015-01-20T13:01:10.912183+01:00') #(#(#RGMethodDefinition #(#CGORemoteRepositoryProxy #fetch:version: #false)) #'2015-01-20T13:01:10.912183+01:00') )
 ]
 
 { #category : #'code-critics' }

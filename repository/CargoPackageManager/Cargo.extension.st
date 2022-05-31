@@ -30,7 +30,7 @@ Cargo >> loadInstructions [
 	resolution := PBSolver new
 		repositories: repositories;
 		solveProject: self rootDependency.
-	^ CGOLoadInstructionsBuilder new
+	^ PBLoadInstructionsBuilder new
 		resolution: resolution;
 		loadInstructions
 ]

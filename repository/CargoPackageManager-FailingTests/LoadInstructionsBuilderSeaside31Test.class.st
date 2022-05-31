@@ -5,7 +5,7 @@ Class {
 		'resolution',
 		'sorter'
 	],
-	#category : 'CargoPackageManager-FailingTests-Functional'
+	#category : #'CargoPackageManager-FailingTests-Functional'
 }
 
 { #category : #utility }
@@ -34,7 +34,7 @@ LoadInstructionsBuilderSeaside31Test >> setUp [
 	resolution := PBSolver new 
 					repositories: { repository };
 					solveDependency: seaside31Dependency.
-	sorter := CGOLoadInstructionsBuilder new
+	sorter := PBLoadInstructionsBuilder new
 					resolution: resolution;
 					yourself
 ]

@@ -32,7 +32,7 @@ PBLoadInstructionsBuilderTest >> expectedSortResult [
 { #category : #running }
 PBLoadInstructionsBuilderTest >> setUp [
 	super setUp.
-	loadInstructionsBuilder := CGOLoadInstructionsBuilder new
+	loadInstructionsBuilder := PBLoadInstructionsBuilder new
 					resolution: FooDependencyResolutionResource current dependencyResolution;
 					yourself
 ]

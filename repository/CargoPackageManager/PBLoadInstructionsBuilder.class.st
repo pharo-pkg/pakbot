@@ -2,7 +2,7 @@
 Sort dependencies from leafs to the root.
 "
 Class {
-	#name : #CGOLoadInstructionsBuilder,
+	#name : #PBLoadInstructionsBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'graph',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'loading order' }
-CGOLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
+PBLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
 	| resolvedProjects |
 
 	resolvedProjects := (resolvedDependencies reject: #isInstalled) asArray.
@@ -22,7 +22,7 @@ CGOLoadInstructionsBuilder >> addLoadGroupFor: resolvedDependencies [
 ]
 
 { #category : #'loading order' }
-CGOLoadInstructionsBuilder >> loadInstructions [
+PBLoadInstructionsBuilder >> loadInstructions [
 	loadInstructions := PBLoadInstructions new.
 	self loadOrder do: 
 		[ :resolvedDependencyOrCollection | 
@@ -32,7 +32,7 @@ CGOLoadInstructionsBuilder >> loadInstructions [
 ]
 
 { #category : #'loading order' }
-CGOLoadInstructionsBuilder >> loadOrder [
+PBLoadInstructionsBuilder >> loadOrder [
 	| sortedElements |
 	
 	resolution hasConflicts ifTrue: [ self signalConflicts ].
@@ -46,7 +46,7 @@ CGOLoadInstructionsBuilder >> loadOrder [
 ]
 
 { #category : #'loading order' }
-CGOLoadInstructionsBuilder >> reducedGraph [
+PBLoadInstructionsBuilder >> reducedGraph [
 
 	^ AIGraphReducer new
 		addNodesFrom: resolution
@@ -58,12 +58,12 @@ CGOLoadInstructionsBuilder >> reducedGraph [
 ]
 
 { #category : #protocol }
-CGOLoadInstructionsBuilder >> resolution: aDependencyResolution [
+PBLoadInstructionsBuilder >> resolution: aDependencyResolution [
 	resolution := aDependencyResolution
 ]
 
 { #category : #errors }
-CGOLoadInstructionsBuilder >> signalConflicts [
+PBLoadInstructionsBuilder >> signalConflicts [
 	
 	PBProjectHasConflictsError signalOnResolution: resolution.
 	"If the error is resumed, re check the conflicts"
