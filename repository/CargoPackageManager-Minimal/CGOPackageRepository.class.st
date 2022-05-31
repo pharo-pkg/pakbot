@@ -29,7 +29,7 @@ CGOPackageRepository >> checkPreviousRegistrationOf: aPackageVersion [
 		version: aPackageVersion version.
 	aPackageVersion isDevelopmentVersion
 		ifFalse:
-			[ CGOPackageVersionAlreadyExistsError
+			[ PBPackageVersionAlreadyExistsError
 				signal: aPackageVersion asString , ' already defined' ] ]
 		on:
 			PBPackageNotFoundError , CGOPackageVersionNotFoundError

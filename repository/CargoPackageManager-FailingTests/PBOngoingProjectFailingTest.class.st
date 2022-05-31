@@ -13,7 +13,7 @@ PBOngoingProjectFailingTest >> testAddingDependencyPerformAnnouncement [
 
 	[ 	announced := false.
 		subscription := SystemAnnouncer uniqueInstance
-			when: CGODependenciesChanged
+			when: PBDependenciesChanged
 			do: [ :ann | 
 				ann project = ongoingProject
 					ifTrue: [ announced := true ] ].

@@ -117,7 +117,7 @@ CGORemoteRepositoryProxy >> savePackageVersion: aPackageVersion [
 	on: ZnHttpUnsuccessful 
 	do: [ :error |
 		znClient isBadRequest 
-			ifTrue: [ CGOPackageVersionAlreadyExistsError signal: 'Package ' , aPackageVersion asString, ' already exists!' ]
+			ifTrue: [ PBPackageVersionAlreadyExistsError signal: 'Package ' , aPackageVersion asString, ' already exists!' ]
 			ifFalse: [ Error signal: error messageText ] ]
 ]
 

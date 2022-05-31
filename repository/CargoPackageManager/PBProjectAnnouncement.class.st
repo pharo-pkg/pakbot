@@ -2,22 +2,22 @@
 I represent all the announcements in Cargo Projects
 "
 Class {
-	#name : #CGOProjectAnnouncement,
+	#name : #PBProjectAnnouncement,
 	#superclass : #SystemAnnouncement,
 	#instVars : [
 		'project'
 	],
-	#category : 'CargoPackageManager-Announcements'
+	#category : #'CargoPackageManager-Announcements'
 }
 
 { #category : #'as yet unclassified' }
-CGOProjectAnnouncement class >> announceOnProject: aProject [
+PBProjectAnnouncement class >> announceOnProject: aProject [
 	
 	(self onProject: aProject) announce
 ]
 
 { #category : #'as yet unclassified' }
-CGOProjectAnnouncement class >> onProject: aProject [
+PBProjectAnnouncement class >> onProject: aProject [
 
 	^ self new
 		project: aProject;
@@ -25,17 +25,17 @@ CGOProjectAnnouncement class >> onProject: aProject [
 ]
 
 { #category : #announcing }
-CGOProjectAnnouncement >> announce [
+PBProjectAnnouncement >> announce [
 
 	SystemAnnouncer uniqueInstance announce: self
 ]
 
 { #category : #accessing }
-CGOProjectAnnouncement >> project [
+PBProjectAnnouncement >> project [
 	^ project
 ]
 
 { #category : #accessing }
-CGOProjectAnnouncement >> project: anObject [
+PBProjectAnnouncement >> project: anObject [
 	project := anObject
 ]

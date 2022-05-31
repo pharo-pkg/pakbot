@@ -3,6 +3,6 @@ I am an announcement that is announced when a project is loaded in the system (o
 "
 Class {
 	#name : #PBProjectLoaded,
-	#superclass : #CGOProjectAnnouncement,
+	#superclass : #PBProjectAnnouncement,
 	#category : #'CargoPackageManager-Announcements'
 }

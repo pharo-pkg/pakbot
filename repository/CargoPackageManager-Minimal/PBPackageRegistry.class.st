@@ -159,7 +159,7 @@ PBPackageRegistry >> newProjectNamed: aString [
 	| project |
 	project := PBProjectVersion named: aString.
 	self register: project.
-	CGOProjectCreated announceOnProject: project.
+	PBProjectCreated announceOnProject: project.
 	^ project
 ]
 
@@ -312,5 +312,5 @@ PBPackageRegistry >> unregisterProject: aProject [
 	
 	aProject packages do: [ :each | installedPackages remove: each ifAbsent: [  ] ].
 	
-	CGOProjectRemoved announceOnProject: aProject.
+	PBProjectRemoved announceOnProject: aProject.
 ]

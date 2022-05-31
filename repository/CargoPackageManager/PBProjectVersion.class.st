@@ -114,13 +114,13 @@ PBProjectVersion >> allDependencies [
 
 { #category : #dependencies }
 PBProjectVersion >> announceChangeInDependencies [
-	CGODependenciesChanged announceOnProject: self
+	PBDependenciesChanged announceOnProject: self
 ]
 
 { #category : #packages }
 PBProjectVersion >> announceChanged [
 
-	CGOProjectPartsChanged announceOnProject: self.
+	PBProjectPartsChanged announceOnProject: self.
 ]
 
 { #category : #converting }
