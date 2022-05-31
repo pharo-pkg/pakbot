@@ -239,8 +239,10 @@ PBBaselineVisitor >> sortedGroups [
 	nodes := Set withAll: groupNames. "We ignore package as they are already added to the project".
 	sorter nodes: nodes.
 	sorter edges: groups from: #key toAll: #value.
+	sorter run.
 	
-	^ sorter run collect: [ :node | groups detect: [ :group | group key = node model ] ]
+	^ (sorter topologicalSortedElements
+		 collect: [ :model | groups detect: [ :group | group key = model ] ]) reversed
 ]
 
 { #category : #accessing }
