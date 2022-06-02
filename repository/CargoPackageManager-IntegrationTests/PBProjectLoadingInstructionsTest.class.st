@@ -184,7 +184,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithCargoProjectDependency
 	resolution := projectOne resolve.
 
 	self assert: resolution loadInstructions size equals: 1.
-	self assert: (resolution loadInstructions includes: self expectedCargoResolvedProject)
+	self assert: (resolution loadInstructions includes: self expectedPakbotResolvedProject)
 ]
 
 { #category : #tests }
@@ -268,7 +268,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDepe
 	loadInstructions := resolution loadInstructions.
 
 	self assert: resolution loadInstructions size equals: 1.
-	self assert: (resolution loadInstructions includes: self expectedCargoResolvedProject)
+	self assert: (resolution loadInstructions includes: self expectedPakbotResolvedProject)
 ]
 
 { #category : #tests }

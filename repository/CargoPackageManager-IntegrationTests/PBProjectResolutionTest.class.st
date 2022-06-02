@@ -12,14 +12,14 @@ PBProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBot
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	pakbotProject := PBPakbotProjectDependency
-		named: 'Counter'
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+		named: 'PharoCounter'
+		repositoryUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
 	
 	project addDependency: pakbotProject.
 	resolution := project resolve.
 
 	self assert: (resolution includesResolvedTarget: project).
-	self assert: (resolution includesResolvedTarget: self expectedCargoResolvedProject).
+	self assert: (resolution includesResolvedTarget: self expectedPakbotResolvedProject).
 ]
 
 { #category : #'cargo-dependencies' }
@@ -53,15 +53,15 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesInc
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
 	projectTwo version: '0.1'.
 	pakbotProject := PBPakbotProjectDependency
-		named: 'Counter'
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+		named: 'PharoCounter'
+		repositoryUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
 	projectTwo addDependency: pakbotProject.
 	
 	resolution := projectOne resolve.
 
 	self assert: (resolution includesResolvedTarget: projectOne).
 	self assert: (resolution includesResolvedTarget: projectTwo).
-	self assert: (resolution includesResolvedTarget: self expectedCargoResolvedProject).
+	self assert: (resolution includesResolvedTarget: self expectedPakbotResolvedProject).
 ]
 
 { #category : #'baseline-dependencies' }
