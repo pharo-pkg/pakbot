@@ -12,8 +12,8 @@ PBProjectResolutionTest >> testProjectResolutionWithCargoDependenciesIncludesBot
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	pakbotProject := PBPakbotProjectDependency
-		named: 'PharoCounter'
-		repositoryUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
+		named: self pharoCounterProjectName
+		repositoryUrl: self pharoCounterGitUrl.
 	
 	project addDependency: pakbotProject.
 	resolution := project resolve.
@@ -53,8 +53,8 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectCargoDependenciesInc
 	projectTwo := testRegistry newProjectNamed: 'ProjectTwo'.
 	projectTwo version: '0.1'.
 	pakbotProject := PBPakbotProjectDependency
-		named: 'PharoCounter'
-		repositoryUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
+		named: self pharoCounterProjectName
+		repositoryUrl: self pharoCounterGitUrl.
 	projectTwo addDependency: pakbotProject.
 	
 	resolution := projectOne resolve.

@@ -15,12 +15,22 @@ PBAbstractTest class >> isAbstract [
 { #category : #tests }
 PBAbstractTest >> expectedPakbotResolvedProject [
 
-	^ (PBProjectVersion named: 'PharoCounter')
-		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:pharo-pkg/pharo-counter.git');
+	^ (PBProjectVersion named: self pharoCounterProjectName)
+		repository: (PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl);
 		version: (SemanticVersion fromString: '0-N/A')
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
+PBAbstractTest >> pharoCounterGitUrl [
+	^ 'https://github.com/pharo-pkg/pharo-counter.git'
+]
+
+{ #category : #accessing }
+PBAbstractTest >> pharoCounterProjectName [
+	^ 'PharoCounter'
+]
+
+{ #category : #utilities }
 PBAbstractTest >> removePackageIfExists: aPackageName [
 
 	(aPackageName asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem
@@ -50,7 +60,7 @@ PBAbstractTest >> tearDown [
 	(MCRepositoryGroup default repositories select: [ :each | each species = IceMetacelloRepositoryAdapter and: [ each repository name = 'PakbotTestExample' ] ]) do: #unregister
 ]
 
-{ #category : #running }
+{ #category : #unloading }
 PBAbstractTest >> unloadMetacelloBaseline [
 	
 	"We fetch the loaded configuration and remove it"
@@ -72,7 +82,7 @@ PBAbstractTest >> unloadMetacelloBaseline [
 
 ]
 
-{ #category : #running }
+{ #category : #unloading }
 PBAbstractTest >> unloadMetacelloConfiguration [
 	"We fetch the loaded configuration and remove it"
 
@@ -90,7 +100,7 @@ PBAbstractTest >> unloadMetacelloConfiguration [
 	('ConfigurationOfCargoTestExample' asPackageIfAbsent: nil) ifNotNil: #removeFromSystem
 ]
 
-{ #category : #running }
+{ #category : #unloading }
 PBAbstractTest >> unloadPakbotProject [
 	
 	#(#'Counter-Core' #'Counter-Tests' #'PakbotTestExample-PackageA' #'PakbotTestExample-PackageB' #'PakbotTestExample-PackageC' #'PakbotTestExample-PackageD') 
