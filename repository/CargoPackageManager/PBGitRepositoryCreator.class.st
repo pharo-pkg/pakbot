@@ -21,7 +21,7 @@ Class {
 { #category : #example }
 PBGitRepositoryCreator class >> example [
 	^ self new
-		url: 'git://git@github.com/pharo-pkg/pharo-counter.git';
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
 		version: 'master';
 		create.
 ]
