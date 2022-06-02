@@ -16,7 +16,7 @@ PBProjectLoadingTest >> testAResolvedProjectIsInstalledWhenAllPackagesToLoadAreI
 
 	| project repository resolvedProject |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -32,7 +32,7 @@ PBProjectLoadingTest >> testAResolvedProjectIsNotInstalledWhenAtLeastOnePackageT
 
 	| project repository packageCore resolvedProject |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -51,7 +51,7 @@ PBProjectLoadingTest >> testCanLoadAProjectAssembly [
 
 	| project repository packageCore packageTest assembly |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -75,7 +75,7 @@ PBProjectLoadingTest >> testCanLoadAProjectPackage [
 
 	| project packageCore repository |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -212,7 +212,7 @@ PBProjectLoadingTest >> testPackageLoadingWithConditionalPackageDoesNotLoadPacka
 
 	| assembly repository project packageCore conditionalPackage |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -237,7 +237,7 @@ PBProjectLoadingTest >> testPackageLoadingWithConditionalPackageLoadsPackageWhen
 
 	| assembly repository project packageCore conditionalPackage |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -261,7 +261,7 @@ PBProjectLoadingTest >> testPackageLoadingWithConditionalPackageLoadsPackageWhen
 PBProjectLoadingTest >> testProjectLoadingWithConditionalPackageDoesNotLoadPackageWhenConditionUnmet [
 	| repository project packageCore conditionalPackage |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -282,7 +282,7 @@ PBProjectLoadingTest >> testProjectLoadingWithConditionalPackageDoesNotLoadPacka
 PBProjectLoadingTest >> testProjectLoadingWithConditionalPackageLoadsPackageWhenConditionMet [
 	| repository project packageCore conditionalPackage |
 
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:demarey/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project 
 		registry: testRegistry;
@@ -543,8 +543,8 @@ PBProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespon
 	project := testRegistry newProjectNamed: 'Test'.
 	
 	pakbotProjectDependency := PBPakbotProjectDependency
-		named: #Counter 
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
+		named: self pharoCounterProjectName 
+		repositoryUrl: self pharoCounterGitUrl
 		version: 'master'.
 	
 	project addDependency: pakbotProjectDependency.

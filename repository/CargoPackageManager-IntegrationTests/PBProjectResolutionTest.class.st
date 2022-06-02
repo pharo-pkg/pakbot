@@ -172,8 +172,8 @@ PBProjectResolutionTest >> testResolutionOfCargoDependencyIsResolvedDependency [
 	
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	pakbotProject := PBPakbotProjectDependency
-		named: 'Counter'
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+		named: self pharoCounterProjectName 
+		repositoryUrl: self pharoCounterGitUrl.
 	projectOne addDependency: pakbotProject.
 	resolution := projectOne resolve.
 

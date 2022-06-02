@@ -22,7 +22,7 @@ PBIcePakbotProjectTest >> iceRepositoryLocation [
 { #category : #running }
 PBIcePakbotProjectTest >> setUp [
 	repository := IceRepositoryCreator new 
-			addRemote: 'https://github.com/demarey/pharo-counter.git';
+			addRemote: 'https://github.com/pharo-pkg/pharo-counter.git';
 			location: self iceRepositoryLocation;
 			subdirectory: '';
 			createRepository.

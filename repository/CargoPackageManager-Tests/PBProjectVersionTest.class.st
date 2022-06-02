@@ -72,7 +72,7 @@ PBProjectVersionTest >> testCanGetPackageUnits [
 PBProjectVersionTest >> testCanLoadProjectWithoutUnresolvedDependenciesWarning [
 
 	| project |
-	repository := PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:pharo-pkg/pharo-counter.git'.
+	repository := PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl.
 	project := repository project.
 	project packages: { project packageNamed: 'Counter-Tests' . project packageNamed: 'Counter-Core' }. "ensure tests are loaded before core for the purpose of the test"
 	project 

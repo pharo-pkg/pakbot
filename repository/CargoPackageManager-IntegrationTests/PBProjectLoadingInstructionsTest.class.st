@@ -53,8 +53,8 @@ PBProjectLoadingInstructionsTest >> testPackageLoadingWithBothProjectAndPackageD
 	
 	projectOne 
 		addDependency: (PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
+			named: self pharoCounterProjectName 
+			repositoryUrl: self pharoCounterGitUrl).
 	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
 		addDependencyOn: 'PackageB'.
 	projectOne newNotLoadedPackage: 'PackageB'.
@@ -137,8 +137,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithBothProjectAndPackageD
 	
 	projectOne 
 		addDependency: (PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git').
+			named: self pharoCounterProjectName 
+			repositoryUrl: self pharoCounterGitUrl).
 	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
 		addDependencyOn: 'PackageB'.
 	projectOne newNotLoadedPackage: 'PackageB'.
@@ -149,7 +149,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithBothProjectAndPackageD
 	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
 		(loadableUnit name = 'Test')
 			and: [ loadableUnit packagesToLoad asArray = #("We load all packages of the project")] ]).
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = self pharoCounterProjectName ]).
 
 ]
 
@@ -178,8 +178,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithCargoProjectDependency
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
 	dependency := PBPakbotProjectDependency
-		named: 'Counter'
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+		named: self pharoCounterProjectName 
+		repositoryUrl: self pharoCounterGitUrl.
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
 
@@ -203,8 +203,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDepe
 	| resolution projectOne loadInstructions packageA dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	dependency := PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+			named: self pharoCounterProjectName 
+			repositoryUrl: self pharoCounterGitUrl.
 	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' }.
 	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
 		addDependency: dependency;
@@ -222,8 +222,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDepe
 	| resolution projectOne loadInstructions packageA dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	dependency := PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+			named: self pharoCounterProjectName 
+			repositoryUrl: self pharoCounterGitUrl.
 	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: OSPlatform current family }.
 	packageA := (projectOne newNotLoadedPackage: 'PackageA') 
 		addDependency: dependency;
@@ -232,7 +232,7 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalPackageDepe
 
 	loadInstructions := resolution loadInstructions.
 	self assert: loadInstructions size equals: 2.
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter' ]).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = self pharoCounterProjectName ]).
 
 ]
 
@@ -241,8 +241,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDepe
 	| resolution projectOne loadInstructions dependency |
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	dependency := PBPakbotProjectDependency
-			named: 'Counter'
-			repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+			named: self pharoCounterProjectName 
+			repositoryUrl: self pharoCounterGitUrl.
 	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: 'NON_EXISTING_OS' }.
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
@@ -260,8 +260,8 @@ PBProjectLoadingInstructionsTest >> testProjectLoadingWithConditionalProjectDepe
 	projectOne := testRegistry newProjectNamed: 'Test'.
 	
 	dependency := PBPakbotProjectDependency
-		named: 'Counter'
-		repositoryUrl: 'git@github.com:demarey/pharo-counter.git'.
+		named: self pharoCounterProjectName 
+		repositoryUrl: self pharoCounterGitUrl.
 	dependency platformRequirements: { PBPlatformAttributeRequirement osFamily: OSPlatform current family }.
 	projectOne addDependency: dependency.
 	resolution := projectOne resolve.
