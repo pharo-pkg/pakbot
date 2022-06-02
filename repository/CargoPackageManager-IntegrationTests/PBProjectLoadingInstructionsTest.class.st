@@ -38,7 +38,7 @@ PBProjectLoadingInstructionsTest >> testAssemblyLoading [
 	
 	loadInstructions := resolution loadInstructions.
 	self assert: loadInstructions size equals: 2.
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'PharoCounter']).
 	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
 		(loadableUnit name = 'Test')
 			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).
@@ -88,7 +88,7 @@ PBProjectLoadingInstructionsTest >> testPackageLoadingWithPackageDependency [
 	
 	loadInstructions := resolution loadInstructions.
 	self assert: loadInstructions size equals: 2.
-	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'Counter']).
+	self assert: (loadInstructions anySatisfy: [ :loadableUnit | loadableUnit name = 'PharoCounter']).
 	self assert: (loadInstructions anySatisfy: [ :loadableUnit | 
 		(loadableUnit name = 'Test')
 			and: [ loadableUnit packagesToLoad includes: 'PackageA' ] ]).

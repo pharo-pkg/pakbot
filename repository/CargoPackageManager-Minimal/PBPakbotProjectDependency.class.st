@@ -16,7 +16,7 @@ Class {
 
 { #category : #example }
 PBPakbotProjectDependency class >> example [
-	^ self named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter.git'
+	^ self named: 'pharo-counter' repositoryUrl: 'https://github.com/pharo-pkg/pharo-counter.git'
 ]
 
 { #category : #'instance creation' }
