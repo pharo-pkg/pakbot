@@ -10,7 +10,7 @@ PBPakbotProjectDependencyTest >> testCanCreateDependency [
 	dependency := PBPakbotProjectDependency example.
 	self 
 		assert: dependency repositoryUrl
-		equals: 'git@github.com:demarey/pharo-counter.git'.
+		equals: 'https://github.com/pharo-pkg/pharo-counter.git'.
 
 ]
 
