@@ -14,7 +14,7 @@ Class {
 
 { #category : #initialization }
 PBBrowserMainPresenter >> connectPresenters [
-	projectsTree transmitTo: descriptionPanel.
+	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem project ].
 ]
 
 { #category : #layout }
@@ -31,10 +31,10 @@ PBBrowserMainPresenter >> defaultLayout [
 PBBrowserMainPresenter >> initializePresenters [
 	projectsTree := self newTreeTable
 		hideColumnHeaders;
-		roots: self registry registeredProjects;
-		children: [ :aTemplateGroup | #() ];
+		roots: self roots;
+		children: [ :aPBUIItem | aPBUIItem items ];
 		addColumn: ((SpImageTableColumn evaluated: [ :project | self iconNamed: project iconName]) width: 30);
-		addColumn: (SpStringTableColumn evaluated: #name);
+		addColumn: (SpStringTableColumn evaluated: #displayName);
 		"contextMenuFromCommandsGroup: [ self rootCommandsGroup / 'Context Menu' ];"
 		yourself.
 		
@@ -57,4 +57,11 @@ PBBrowserMainPresenter >> modelChanged [
 { #category : #accessing }
 PBBrowserMainPresenter >> registry [
 	^ self application registry
+]
+
+{ #category : #accessing }
+PBBrowserMainPresenter >> roots [
+
+	^ self registry registeredProjects
+		collect: [ :project | PBProjectUIItem forProject: project ]
 ]

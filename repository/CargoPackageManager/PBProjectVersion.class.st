@@ -299,14 +299,6 @@ PBProjectVersion >> hash [
 	^ self name hash
 ]
 
-{ #category : #'querying - ui' }
-PBProjectVersion >> iconName [
-	self flag: 'TODO: handle not loaded projects, projects in error (#error)'.
-	
-	^ #configLoaded
-
-]
-
 { #category : #'as yet unclassified' }
 PBProjectVersion >> ifNotMarried: aBlock [
 	repository isMarried
@@ -530,7 +522,7 @@ PBProjectVersion >> packageUnits [
 	^ packages
 ]
 
-{ #category : #updating }
+{ #category : #accessing }
 PBProjectVersion >> packages [
 
 	^ packages
