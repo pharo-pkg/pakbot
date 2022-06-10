@@ -299,6 +299,14 @@ PBProjectVersion >> hash [
 	^ self name hash
 ]
 
+{ #category : #'querying - ui' }
+PBProjectVersion >> iconName [
+	self flag: 'TODO: handle not loaded projects, projects in error (#error)'.
+	
+	^ #configLoaded
+
+]
+
 { #category : #'as yet unclassified' }
 PBProjectVersion >> ifNotMarried: aBlock [
 	repository isMarried
@@ -445,7 +453,7 @@ PBProjectVersion >> loadedPackages [
 { #category : #updating }
 PBProjectVersion >> marryWith: aPBGitRepository [
 	"Marry this project with the referenced iceberg repository.
-	It means iceberg project with be replaced by an PBIcebergProject referencing myself.
+	It means iceberg project with be replaced by a PBIcebergProject referencing myself.
 	It will allows to commit pakbot metadata through iceberg for a project not using pakbot before."
 	
 	self repository: aPBGitRepository.

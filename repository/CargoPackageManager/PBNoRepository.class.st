@@ -12,6 +12,21 @@ PBNoRepository class >> type [
 	^ #'NOTYPE'
 ]
 
+{ #category : #accessing }
+PBNoRepository >> description [
+	^ nil
+]
+
+{ #category : #accessing }
+PBNoRepository >> editionIconName [
+	^ #edit
+]
+
+{ #category : #accessing }
+PBNoRepository >> iconName [
+	^ #smallCancel
+]
+
 { #category : #testing }
 PBNoRepository >> isValidRepository [
 	
