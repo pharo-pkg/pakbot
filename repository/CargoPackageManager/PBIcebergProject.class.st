@@ -55,7 +55,7 @@ PBIcebergProject >> addProjectFileToChangeBuilder: anIceChangeImporter [
 { #category : #changes }
 PBIcebergProject >> addToChangeBuilder: anIceChangeImporter [ 
 	
-	"compute diff between cargo model and saved version?"
+	"compute diff between pakbot model and saved version?"
 	
 	self addProjectFileToChangeBuilder: anIceChangeImporter.
 	self addIcebergProjectFileToChangeBuilder: anIceChangeImporter.

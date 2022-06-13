@@ -30,6 +30,12 @@ PBProjectStatusPresenter >> defaultLayout [
 			add: actionButton expand: false
 ]
 
+{ #category : #private }
+PBProjectStatusPresenter >> delete [
+	super delete.
+	self unsubscribe
+]
+
 { #category : #initialization }
 PBProjectStatusPresenter >> handleAnnouncement: ann [
 

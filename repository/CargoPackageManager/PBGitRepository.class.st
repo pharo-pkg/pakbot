@@ -243,7 +243,7 @@ PBGitRepository >> isIceRepositoryValid [
 	^ iceRepository isNotNil	and: [ iceRepository isValid ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 PBGitRepository >> isMarried [
 	^ iceRepository project isPakbotProject
 ]

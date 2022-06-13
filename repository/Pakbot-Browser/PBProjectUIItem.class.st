@@ -18,6 +18,11 @@ PBProjectUIItem class >> forProject: aPBProjectVersion [
 ]
 
 { #category : #accessing }
+PBProjectUIItem >> assemblyItems [
+	^ project assemblies collect: [ :assembly | PBAssemblyUIItem forAssembly: assembly ]
+]
+
+{ #category : #accessing }
 PBProjectUIItem >> displayName [
 	^ project name
 ]
@@ -31,6 +36,14 @@ PBProjectUIItem >> iconName [
 
 { #category : #accessing }
 PBProjectUIItem >> items [
+	^ OrderedCollection new
+		addAll: self packageItems;
+		addAll: self assemblyItems;
+		yourself
+]
+
+{ #category : #accessing }
+PBProjectUIItem >> packageItems [
 	^ project packages collect: [ :package | PBPackageUIItem forPackage: package ]
 ]
 

@@ -19,6 +19,16 @@ PBCommitProjectCommand >> alertNotInABranch [
 		title: 'Commit project failed'
 ]
 
+{ #category : #converting }
+PBCommitProjectCommand >> asSpecCommand [
+	^ super asSpecCommand
+		iconName: #smallOk;
+		name: 'Commit project';
+		shortcutKey: $s meta;
+		beDisabledWhenCantBeRun;
+		yourself
+]
+
 { #category : #executing }
 PBCommitProjectCommand >> askUseMetadata [
 
@@ -38,7 +48,7 @@ PBCommitProjectCommand >> askUseMetadata [
 { #category : #executing }
 PBCommitProjectCommand >> execute [
 
-	project ifNotMarried: [ 
+	self project ifNotMarried: [ 
 		usePakbot ifNil: [ 
 			usePakbot := self askUseMetadata ifNil: [ ^ nil "cancel command" ] ].
 		usePakbot ifTrue: [ 
@@ -46,7 +56,7 @@ PBCommitProjectCommand >> execute [
 			usePakbot := nil ] ].
 
 	[ 
-	^ (IceTipCommitBrowser onRepository: project repository iceRepository)
+	^ (IceTipCommitBrowser onRepository: self project repository iceRepository)
 		  open;
 		  yourself ]
 		on: IceNotInBranch

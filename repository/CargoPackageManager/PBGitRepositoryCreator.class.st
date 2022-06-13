@@ -78,6 +78,7 @@ PBGitRepositoryCreator >> create [
 	creator := IceRepositoryCreator new 
 			subdirectory: subdirectory;
 			location: location;
+			ensureProjectFile;
 			yourself.
 	url ifNotNil: [ creator addRemote: url ].
 	^ PBGitRepository 

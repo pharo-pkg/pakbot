@@ -12,6 +12,25 @@ Class {
 	#category : #'Pakbot-Browser-Presenters'
 }
 
+{ #category : #building }
+PBBrowserMainPresenter class >> buildCommandsGroupWith: anImagesPresenter forRoot: rootCommandGroup [
+
+	rootCommandGroup
+		"register: (self buildToolbarGroupContext: anImagesPresenter);"
+		register: (self buildContextualMenuGroupContext: anImagesPresenter)
+]
+
+{ #category : #building }
+PBBrowserMainPresenter class >> buildContextualMenuGroupContext: aContext [
+
+	^ (CmCommandGroup named: 'Context Menu') asSpecGroup
+		beDisplayedAsGroup;
+		description: 'Pakbot projects contextual menu';
+		register: (PBCommitProjectCommand forSpecContext: aContext selectedProject);
+		yourself
+
+]
+
 { #category : #initialization }
 PBBrowserMainPresenter >> connectPresenters [
 	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem pakbotItem ].
@@ -35,7 +54,7 @@ PBBrowserMainPresenter >> initializePresenters [
 		children: [ :aPBUIItem | aPBUIItem items ];
 		addColumn: ((SpImageTableColumn evaluated: [ :project | self iconNamed: project iconName]) width: 30);
 		addColumn: (SpStringTableColumn evaluated: #displayName);
-		"contextMenuFromCommandsGroup: [ self rootCommandsGroup / 'Context Menu' ];"
+		contextMenuFromCommandsGroup: [ self rootCommandsGroup / 'Context Menu' ];
 		yourself.
 		
 	descriptionPanel := self instantiate: PBProjectPresenter on: nil"PBNoProject ?".
@@ -64,4 +83,9 @@ PBBrowserMainPresenter >> roots [
 
 	^ self registry registeredProjects
 		collect: [ :project | PBProjectUIItem forProject: project ]
+]
+
+{ #category : #accessing }
+PBBrowserMainPresenter >> selectedProject [ 
+	^ projectsTree selectedItem pakbotItem
 ]

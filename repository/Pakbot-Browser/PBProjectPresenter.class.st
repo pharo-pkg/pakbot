@@ -16,7 +16,7 @@ Class {
 { #category : #initialization }
 PBProjectPresenter >> connectPresenters [
 	self 
-		transmitTo: projectStatus;
+		transmitTo: projectStatus transform: [ :projectElement | projectElement project ];
 		transmitTo: overview;
 		transmitTo: dependencies.
 ]

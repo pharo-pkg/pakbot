@@ -30,6 +30,6 @@ PBAbstractUIItem >> pakbotItem [
 
 { #category : #accessing }
 PBAbstractUIItem >> project [
-
-	^ self subclassResponsibility 
+	
+	self subclassResponsibility 
 ]
