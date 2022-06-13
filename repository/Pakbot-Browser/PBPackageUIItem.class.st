@@ -36,3 +36,14 @@ PBPackageUIItem >> items [
 PBPackageUIItem >> package: aPBPackage [ 
 	package := aPBPackage
 ]
+
+{ #category : #accessing }
+PBPackageUIItem >> pakbotItem [
+	
+	^ package
+]
+
+{ #category : #accessing }
+PBPackageUIItem >> project [
+	^ package project
+]

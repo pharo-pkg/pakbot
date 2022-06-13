@@ -21,3 +21,15 @@ PBAbstractUIItem >> iconName [
 PBAbstractUIItem >> items [ 
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+PBAbstractUIItem >> pakbotItem [
+	
+	self subclassResponsibility 
+]
+
+{ #category : #accessing }
+PBAbstractUIItem >> project [
+
+	^ self subclassResponsibility 
+]

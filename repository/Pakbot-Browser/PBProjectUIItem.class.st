@@ -35,6 +35,12 @@ PBProjectUIItem >> items [
 ]
 
 { #category : #accessing }
+PBProjectUIItem >> pakbotItem [
+	
+	^ project
+]
+
+{ #category : #accessing }
 PBProjectUIItem >> project [
 	^ project
 ]

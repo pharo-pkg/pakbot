@@ -14,7 +14,7 @@ Class {
 
 { #category : #initialization }
 PBBrowserMainPresenter >> connectPresenters [
-	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem project ].
+	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem pakbotItem ].
 ]
 
 { #category : #layout }
@@ -46,7 +46,7 @@ PBBrowserMainPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'Pakbot Browser';
-		initialExtent: 800 @ 600.
+		initialExtent: 850 @ 600.
 ]
 
 { #category : #initialization }
