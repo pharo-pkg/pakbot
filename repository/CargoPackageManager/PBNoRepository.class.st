@@ -14,7 +14,8 @@ PBNoRepository class >> type [
 
 { #category : #accessing }
 PBNoRepository >> description [
-	^ nil
+	
+	^ 'No repository configured'
 ]
 
 { #category : #accessing }

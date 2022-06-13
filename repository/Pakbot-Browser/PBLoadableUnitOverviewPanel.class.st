@@ -100,5 +100,6 @@ PBLoadableUnitOverviewPanel >> modelChanged [
 	
 	nameInputField text: self loadableUnit name.
 	versionInputField text: self loadableUnit version asString.
-	descriptionText text: self loadableUnit description
+	descriptionText text: self loadableUnit description.
+	repositoryInputField model: self loadableUnit
 ]

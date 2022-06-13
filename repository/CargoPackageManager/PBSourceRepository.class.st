@@ -55,6 +55,17 @@ PBSourceRepository >> asSerializableRepository [
 		yourself 
 ]
 
+{ #category : #accessing }
+PBSourceRepository >> description [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+PBSourceRepository >> editionIconName [
+
+	^ #glamorousBrowse
+]
+
 { #category : #serialization }
 PBSourceRepository >> fromSton: stonReader [
 	super fromSton: stonReader.

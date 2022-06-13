@@ -29,14 +29,14 @@ PBRepositoryPresenter >> connectPresenters [
 			execute ].
 ]
 
-{ #category : #initialization }
-PBRepositoryPresenter >> initializeLayout [
+{ #category : #layout }
+PBRepositoryPresenter >> defaultLayout [
 
-	self layout: (SpBoxLayout newLeftToRight 
+	^ SpBoxLayout newLeftToRight 
 			add: #icon expand: false;
 			add: #label;
 			add: #button expand: false;
-			yourself)
+			yourself
 ]
 
 { #category : #initialization }
@@ -45,9 +45,14 @@ PBRepositoryPresenter >> initializePresenters [
 	icon := self newImage.
 	label := self newLabel.
 	button := self newButton.
-	
-	self initializeLayout.
+]
 
+{ #category : #initialization }
+PBRepositoryPresenter >> modelChanged [ 
+
+	icon image: (self iconNamed: self repository iconName).
+	label label: self repository description.
+	button iconName: self repository editionIconName.
 ]
 
 { #category : #accessing }
@@ -55,14 +60,10 @@ PBRepositoryPresenter >> project [
 	^ self model
 ]
 
-{ #category : #initialization }
-PBRepositoryPresenter >> refresh [
+{ #category : #accessing }
+PBRepositoryPresenter >> repository [
+	^ self project 
+		ifNil: [ PBNoRepository new ]
+		ifNotNil: [ self project repository ]
 
-	| form repository |
-	repository := self project repository.
-	form := self iconNamed: repository iconName.
-	
-	icon image: form.
-	label label: repository description.
-	button iconName: repository editionIconName.
 ]
