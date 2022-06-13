@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : #'CargoPackageManager-Commands'
+	#category : #'Pakbot-Browser-Commands'
 }
 
 { #category : #accessing }
