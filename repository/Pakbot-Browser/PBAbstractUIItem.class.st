@@ -17,6 +17,11 @@ PBAbstractUIItem >> iconName [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+PBAbstractUIItem >> isPackage [
+	^ false
+]
+
 { #category : #accessing }
 PBAbstractUIItem >> items [ 
 	^ self subclassResponsibility

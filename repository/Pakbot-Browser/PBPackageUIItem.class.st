@@ -27,6 +27,11 @@ PBPackageUIItem >> iconName [
 	^ #package
 ]
 
+{ #category : #testing }
+PBPackageUIItem >> isPackage [
+	^ true
+]
+
 { #category : #accessing }
 PBPackageUIItem >> items [
 	^ #()

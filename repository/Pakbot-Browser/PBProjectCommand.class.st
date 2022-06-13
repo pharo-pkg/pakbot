@@ -13,7 +13,7 @@ Class {
 { #category : #accessing }
 PBProjectCommand >> project [
 
-	^ project ifNil: [ self context ]
+	^ project ifNil: [ self context selectedProject ]
 ]
 
 { #category : #accessing }

@@ -26,7 +26,8 @@ PBBrowserMainPresenter class >> buildContextualMenuGroupContext: aContext [
 	^ (CmCommandGroup named: 'Context Menu') asSpecGroup
 		beDisplayedAsGroup;
 		description: 'Pakbot projects contextual menu';
-		register: (PBCommitProjectCommand forSpecContext: aContext selectedProject);
+		register: (PBCommitProjectCommand forSpecContext: aContext);
+		register: (PBBrowsePackageCommand forSpecContext: aContext)
 		yourself
 
 ]
@@ -83,6 +84,13 @@ PBBrowserMainPresenter >> roots [
 
 	^ self registry registeredProjects
 		collect: [ :project | PBProjectUIItem forProject: project ]
+]
+
+{ #category : #accessing }
+PBBrowserMainPresenter >> selectedPackage [
+	^ projectsTree selectedItem isPackage
+		ifTrue: [ projectsTree selectedItem pakbotItem ]
+		ifFalse: [ nil ]
 ]
 
 { #category : #accessing }
