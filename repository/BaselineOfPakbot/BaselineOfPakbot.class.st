@@ -39,13 +39,14 @@ BaselineOfPakbot >> baseline: spec [
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'PakbotPackageManager-Repository' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
 
 				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
 				package: #'CargoPackageManager-TestRessources'
 					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec') ];
-				package: #'CargoPackageManager-Tests' with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
+				package: #'CargoPackageManager-Tests'
+					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
 				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource'.
@@ -59,25 +60,24 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-Utils-FailingTests' with: [ spec requires: #('CargoPackageManager-Utils-Tests') ].	
 
 			spec
-				group: 'client' with: #(CargoPackageManager);
-				group: 'tests-client' with:
-					#('client'
+				group: 'core' with: #(CargoPackageManager 'PakbotPackageManager-Repository');
+				group: 'tests-core' with:
+					#('core'
 					'CargoPackageManager-Tests'
 					'CargoPackageManager-FailingTests'
 					'CargoPackageManager-IntegrationTests'
+					'PakbotPackageManager-Repository-Tests'
+					'PakbotPackageManager-Repository-IntegrationTests'
 					); 
-				group: 'tests-client-ui' with: 
-					#('tests-client-ui'
+				group: 'tests' with: 
+					#('tests-core'
+					'Pakbot-Browser-Tests'
 					'utils' 
 					'CargoPackageManager-Utils-Tests' 
 					'CargoPackageManager-Utils-FailingTests'
 					'CargoPackageManager-UI-Tests');
-				group: 'tests-server' with: 
-					#('PakbotPackageManager-Repository-Tests'
-					'PakbotPackageManager-Repository-IntegrationTests');
-				group: 'tests' with: #('tests-client-ui' 'tests-server');
-				group: 'utils' with: #('CargoPackageManager-Utils' 'client');
-				group: 'default' with: 'tests-client' ]
+				group: 'utils' with: #('CargoPackageManager-Utils' 'core');
+				group: 'default' with: 'tests-core' ]
 ]
 
 { #category : #baseline }
@@ -140,7 +140,12 @@ BaselineOfPakbot >> pakbotUI: spec [
 			
 		package: #'CargoPackageManager-Calypso-Browser' with: [ 
 			spec requires: #( CargoPackageManager 'CargoPackageManager-UI'
-					   'CargoPackageManager-Calypso-Environment' ) ]
+					   'CargoPackageManager-Calypso-Environment' ) ];
+				
+		package: #'Pakbot-Browser' with: [ 
+			spec requires: #( CargoPackageManager ) ];
+		package: #'Pakbot-Browser-Tests' with: [ 
+			spec requires: #( 'Pakbot-Browser' ) ]
 ]
 
 { #category : #baseline }
