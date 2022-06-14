@@ -39,7 +39,7 @@ BaselineOfPakbot >> baseline: spec [
 			spec
 				package: #'CargoPackageManager-Minimal';
 				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'PakbotPackageManager-Repository' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
+					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
 
 				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
