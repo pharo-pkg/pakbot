@@ -1,11 +1,11 @@
 SmalltalkCISpec {
-  #name : 'Pakbot (client)',
+  #name : 'Pakbot (core)',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Pakbot',
       #directory : 'repository',
       #platforms : [ #pharo ],
-      #load : ['tests-client'],
+      #load : ['tests-core'],
       #onConflict : #useLoaded
     }
   ],
