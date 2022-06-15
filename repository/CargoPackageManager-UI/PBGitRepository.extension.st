@@ -9,9 +9,3 @@ PBGitRepository >> description [
 		ifEmpty: [ 'No remote configured for this project' ]
 		ifNotEmpty: [ :remotes | remotes anyOne url ]
 ]
-
-{ #category : #'*CargoPackageManager-UI' }
-PBGitRepository >> iconName [
-	
-	^ #git
-]
