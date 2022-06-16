@@ -121,7 +121,7 @@ PBGitBasedPackageRepositoryTest >> testPublishedProjectIsTagged [
 	| packageRepository project repository |
 	packageRepository := self newLocalPBGitBasedPackageRepository.
 	project := PBProjectVersion example.
-	repository := (PBGitRepository newLocalRepositoryIn: tempFolder2) ensureCloned.
+	repository := PBGitRepository repository: packageRepository iceRepository.
 	repository iceRepository commitWithMessage: 'initial commit'.
 
 	project
