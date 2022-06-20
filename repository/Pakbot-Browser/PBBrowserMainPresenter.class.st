@@ -97,7 +97,7 @@ PBBrowserMainPresenter >> rootCommandsGroup [
 { #category : #accessing }
 PBBrowserMainPresenter >> roots [
 
-	^ self registry registeredProjects
+	^ (self registry registeredProjects sorted: [ :a :b | a name <= b name ])
 		collect: [ :project | PBProjectUIItem forProject: project presenter: self ]
 ]
 
