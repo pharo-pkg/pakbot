@@ -22,7 +22,8 @@ PBOpenNewRepositoryDialogAction class >> onProject: aProject [
 { #category : #execution }
 PBOpenNewRepositoryDialogAction >> doExecute [
 	
-	^ SpOptionListPresenter new
+	| presenter |
+	presenter := SpOptionListPresenter new
 		addOptions: {PBImportIcebergRepositoryPanel new} , IceTipRepositoryTypePanel allTypes;
 		acceptCallback: [ :selectedOption | | repository |
 			selectedOption validate.
@@ -30,9 +31,11 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 			project project repository: repository.
 			
 			repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: project project).
-			self doPostAction ];
-		openDialog;
-		yourself
+			self doPostAction ].
+	presenter openDialog 
+		title: 'Set up project repository';
+		extent: 700@300.
+	^ presenter
 ]
 
 { #category : #execution }
