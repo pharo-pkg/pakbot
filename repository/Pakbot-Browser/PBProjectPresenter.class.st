@@ -32,9 +32,9 @@ PBProjectPresenter >> defaultLayout [
 ]
 
 { #category : #initialization }
-PBProjectPresenter >> initializeWidgets [
+PBProjectPresenter >> initializePresenters [
 
-	overview := self instantiate: PBLoadableUnitOverviewPanel on: self projectVersion.
+	overview := self instantiate: PBLoadableUnitOverviewPresenter on: self projectVersion.
 	dependencies := self instantiate: PBPackageDependenciesView on: self projectVersion.
 	projectStatus := self instantiate: PBProjectStatusPresenter on: self projectVersion.
 ]

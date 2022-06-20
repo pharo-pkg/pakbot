@@ -7,17 +7,19 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'projectsTree',
-		'descriptionPanel'
+		'descriptionPanel',
+		'rootCommandsGroup',
+		'toolbar'
 	],
 	#category : #'Pakbot-Browser-Presenters'
 }
 
 { #category : #building }
-PBBrowserMainPresenter class >> buildCommandsGroupWith: anImagesPresenter forRoot: rootCommandGroup [
+PBBrowserMainPresenter class >> buildCommandsGroupWith: aPBBrowserMainPresenter forRoot: rootCommandGroup [
 
 	rootCommandGroup
-		"register: (self buildToolbarGroupContext: anImagesPresenter);"
-		register: (self buildContextualMenuGroupContext: anImagesPresenter)
+		register: (self buildToolbarGroupContext: aPBBrowserMainPresenter);
+		register: (self buildContextualMenuGroupContext: aPBBrowserMainPresenter)
 ]
 
 { #category : #building }
@@ -32,6 +34,23 @@ PBBrowserMainPresenter class >> buildContextualMenuGroupContext: aContext [
 
 ]
 
+{ #category : #building }
+PBBrowserMainPresenter class >> buildToolbarGroupContext: aContext [
+
+	^ (CmCommandGroup named: 'Toolbar') asSpecGroup
+		description: 'Pakbot Browser toolbar';
+		register: (PBAddProjectCommand forSpecContext: aContext);
+		yourself
+]
+
+{ #category : #initialization }
+PBBrowserMainPresenter >> buildToolbar [
+	
+	^ self newToolbar
+		fillWith: self toolbarGroup;
+		yourself
+]
+
 { #category : #initialization }
 PBBrowserMainPresenter >> connectPresenters [
 	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem pakbotItem ].
@@ -39,10 +58,13 @@ PBBrowserMainPresenter >> connectPresenters [
 
 { #category : #layout }
 PBBrowserMainPresenter >> defaultLayout [ 
-	^ SpPanedLayout newLeftToRight
-		add: projectsTree;
-		add: descriptionPanel;
-		positionOfSlider: 0.4;
+	^ SpBoxLayout newTopToBottom
+		add: toolbar expand: false;
+		add: (SpPanedLayout newLeftToRight
+			add: projectsTree;
+			add: descriptionPanel;
+			positionOfSlider: 0.4;
+			yourself);
 		yourself
 	
 ]
@@ -59,6 +81,8 @@ PBBrowserMainPresenter >> initializePresenters [
 		yourself.
 		
 	descriptionPanel := self instantiate: PBProjectPresenter on: nil"PBNoProject ?".
+	
+	toolbar := self buildToolbar.
 ]
 
 { #category : #initialization }
@@ -79,6 +103,11 @@ PBBrowserMainPresenter >> registry [
 	^ self application registry
 ]
 
+{ #category : #private }
+PBBrowserMainPresenter >> rootCommandsGroup [ 
+	^ rootCommandsGroup ifNil: [ rootCommandsGroup := super rootCommandsGroup ]
+]
+
 { #category : #accessing }
 PBBrowserMainPresenter >> roots [
 
@@ -96,4 +125,9 @@ PBBrowserMainPresenter >> selectedPackage [
 { #category : #accessing }
 PBBrowserMainPresenter >> selectedProject [ 
 	^ projectsTree selectedItem pakbotItem
+]
+
+{ #category : #private }
+PBBrowserMainPresenter >> toolbarGroup [
+	^ self rootCommandsGroup / 'Toolbar'
 ]

@@ -5,7 +5,7 @@ I also allow to edit these meta-data.
 I mainly interact with PBProjectElement[Unit/Assembly]
 "
 Class {
-	#name : #PBLoadableUnitOverviewPanel,
+	#name : #PBLoadableUnitOverviewPresenter,
 	#superclass : #SpPresenterWithModel,
 	#instVars : [
 		'nameInputField',
@@ -17,17 +17,17 @@ Class {
 }
 
 { #category : #examples }
-PBLoadableUnitOverviewPanel class >> example [
+PBLoadableUnitOverviewPresenter class >> example [
 	^ self openOn: (PBPackage example)
 ]
 
 { #category : #examples }
-PBLoadableUnitOverviewPanel class >> example2 [
+PBLoadableUnitOverviewPresenter class >> example2 [
 	^ self openWithMinimalLayoutOn: (PBPackage example)
 ]
 
 { #category : #layout }
-PBLoadableUnitOverviewPanel class >> minimalLayout [
+PBLoadableUnitOverviewPresenter class >> minimalLayout [
 
 	^ SpGridLayout build: [ :builder | 
 		builder
@@ -38,7 +38,7 @@ PBLoadableUnitOverviewPanel class >> minimalLayout [
 ]
 
 { #category : #'instance creation' }
-PBLoadableUnitOverviewPanel class >> on: aPBProjectElement [
+PBLoadableUnitOverviewPresenter class >> on: aPBProjectElement [
 
 	^ self
 		 newApplication: self currentApplication
@@ -46,18 +46,18 @@ PBLoadableUnitOverviewPanel class >> on: aPBProjectElement [
 ]
 
 { #category : #opening }
-PBLoadableUnitOverviewPanel class >> openOn: aPBProjectElement [
+PBLoadableUnitOverviewPresenter class >> openOn: aPBProjectElement [
 
 	(self on: aPBProjectElement) open
 ]
 
 { #category : #'instance creation' }
-PBLoadableUnitOverviewPanel class >> openWithMinimalLayoutOn: aPBProjectElement [
+PBLoadableUnitOverviewPresenter class >> openWithMinimalLayoutOn: aPBProjectElement [
 	(self on: aPBProjectElement) openWithLayout: self minimalLayout
 ]
 
 { #category : #layout }
-PBLoadableUnitOverviewPanel >> defaultLayout [
+PBLoadableUnitOverviewPresenter >> defaultLayout [
 
 	^ (SpGridLayout build: [ :builder | 
 			   builder
@@ -77,8 +77,18 @@ PBLoadableUnitOverviewPanel >> defaultLayout [
 		  yourself
 ]
 
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> description [
+	^ descriptionText text
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> description: aString [
+	descriptionText text: aString
+]
+
 { #category : #initialization }
-PBLoadableUnitOverviewPanel >> initializePresenters [
+PBLoadableUnitOverviewPresenter >> initializePresenters [
 	nameInputField := self newTextInput
 		text: 'MyProject';
 		yourself.
@@ -90,16 +100,46 @@ PBLoadableUnitOverviewPanel >> initializePresenters [
 ]
 
 { #category : #accessing }
-PBLoadableUnitOverviewPanel >> loadableUnit [
+PBLoadableUnitOverviewPresenter >> loadableUnit [
 	^ self model
 ]
 
 { #category : #initialization }
-PBLoadableUnitOverviewPanel >> modelChanged [ 
+PBLoadableUnitOverviewPresenter >> modelChanged [ 
 	self loadableUnit ifNil: [ ^ self ].
 	
 	nameInputField text: self loadableUnit name.
 	versionInputField text: self loadableUnit version asString.
 	descriptionText text: (self loadableUnit description ifNil: ['']).
 	repositoryInputField model: self loadableUnit
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> name [
+	^ nameInputField text
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> name: aString [
+	nameInputField text: aString
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> registry [
+	^ self application registry
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> repository [
+	^ repositoryInputField repository 
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> version [
+	^ versionInputField text asSemanticVersion
+]
+
+{ #category : #accessing }
+PBLoadableUnitOverviewPresenter >> version: aString [
+	versionInputField text: aString
 ]

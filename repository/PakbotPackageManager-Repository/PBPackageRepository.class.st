@@ -1,6 +1,10 @@
 "
 I am a package repository used to host the meta data of Packbot packages / projects.
 I use a file system as backend.
+
+In the repository folder, you will find one folder per (Pakbot) project.
+In a project folder, you will get a STON file named <project-name>-<version-number>.ston that contains all the project metadaa for the specified version.
+Pakbot will then use this metadatafile to find dependencies and know from where to load this project.
 "
 Class {
 	#name : #PBPackageRepository,

@@ -46,17 +46,18 @@ PBGitBasedPackageRepository >> iceRepository [
 
 { #category : #initialization }
 PBGitBasedPackageRepository >> initialize [
-	repository := PBGitRepositoryCreator new
-		url: self class defaultGitUrl;
-		location: root;
-		createAndClone.
-	root := self workingCopy fileSystem
+	self initializeRepositoryOnUrl: self class defaultGitUrl.
 ]
 
 { #category : #initialization }
 PBGitBasedPackageRepository >> initializeEmptyRepository [
+	self initializeRepositoryOnUrl: 'file://', root fullName.
+]
+
+{ #category : #private }
+PBGitBasedPackageRepository >> initializeRepositoryOnUrl: url [
 	repository := PBGitRepositoryCreator new
-		url: 'file://', root fullName;
+		url: url;
 		location: root;
 		createAndClone.
 	root := self workingCopy fileSystem.
