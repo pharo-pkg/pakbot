@@ -77,7 +77,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 
 	self
 		should: [ assembly createPackageNamed: 'NewPackage' ]
-		raise: CGOSystemPackageAlreadyDefined
+		raise: PBSystemPackageAlreadyDefined
 ]
 
 { #category : #tests }

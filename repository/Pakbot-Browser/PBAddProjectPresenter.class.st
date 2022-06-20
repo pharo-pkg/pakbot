@@ -19,9 +19,9 @@ PBAddProjectPresenter class >> example [
 PBAddProjectPresenter >> allOptions [
 
 	^ { PBNewProjectPresenter .
-		"PBImportProjectFromGitPanel .
-		PBImportProjectFromPackageRepositoryPanel" }
-		collect: [ :class | class new ]
+		PBImportProjectFromGitPresenter .
+		PBImportProjectFromPackageRepositoryPresenter }
+		collect: [ :class | class newApplication: self application ]
 ]
 
 { #category : #initialization }

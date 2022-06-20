@@ -25,5 +25,5 @@ PBBrowsePackageCommand >> execute [
 
 { #category : #executing }
 PBBrowsePackageCommand >> package [
-	^ self context selectedPackage
+	^ self context
 ]

@@ -18,6 +18,12 @@ PBPackageUIItem class >> forPackage: aPBPackage [
 ]
 
 { #category : #accessing }
+PBPackageUIItem >> commands [
+	^ { PBCommitProjectCommand forSpecContext: package .
+		PBBrowsePackageCommand forSpecContext: package }
+]
+
+{ #category : #accessing }
 PBPackageUIItem >> displayName [
 	^ package name
 ]

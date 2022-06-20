@@ -73,12 +73,7 @@ PBNewProjectPresenter >> projectPanel [
 ]
 
 { #category : #accessing }
-PBNewProjectPresenter >> projectPanel: anObject [
-	projectPanel := anObject
-]
-
-{ #category : #accessing }
 PBNewProjectPresenter >> registry [
 	
-	^ projectPanel registry
+	^ self application registry
 ]

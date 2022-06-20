@@ -28,7 +28,7 @@ PBPackageCreationTest >> testCreateAlreadyExistingPackageRaisesException [
 	
 	self
 		should: [project createPackageNamed: packageName]
-		raise: CGOSystemPackageAlreadyDefined
+		raise: PBSystemPackageAlreadyDefined
 ]
 
 { #category : #tests }
@@ -40,7 +40,7 @@ PBPackageCreationTest >> testCreateExistingPackageInSystemRaisesException [
 	
 	self
 		should: [project createPackageNamed: packageName]
-		raise: CGOSystemPackageAlreadyDefined
+		raise: PBSystemPackageAlreadyDefined
 ]
 
 { #category : #tests }

@@ -202,7 +202,7 @@ PBProjectVersion >> createPackageNamed: aString [
 	If that succeeds, we register that new package in this project."
 	[ self systemPackageOrganizer createPackageNamed: aString ]
 		on: RPackageConflictError
-		do: [ :error | CGOSystemPackageAlreadyDefined signal: aString ].
+		do: [ :error | PBSystemPackageAlreadyDefined signal: aString ].
 
 	^ self importPackageNamed: aString.
 ]

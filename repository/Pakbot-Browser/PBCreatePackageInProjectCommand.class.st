@@ -1,0 +1,38 @@
+"
+Command used to create a new (empty) Pakbot package unit
+"
+Class {
+	#name : #PBCreatePackageInProjectCommand,
+	#superclass : #PBProjectCommand,
+	#instVars : [
+		'usePakbot',
+		'unitName'
+	],
+	#category : #'Pakbot-Browser-Commands'
+}
+
+{ #category : #accessing }
+PBCreatePackageInProjectCommand >> application [
+	^ context application
+]
+
+{ #category : #converting }
+PBCreatePackageInProjectCommand >> asSpecCommand [
+	^ super asSpecCommand
+		iconName: #smallAdd;
+		name: 'New package';
+		beDisabledWhenCantBeRun;
+		yourself
+]
+
+{ #category : #executing }
+PBCreatePackageInProjectCommand >> execute [
+	unitName := self application newRequest
+		title: 'New package name';
+		text: self project name, '-';
+		openModal.
+		
+	unitName isEmptyOrNil ifTrue: [ CmCommandAborted signal ].
+	
+	self project createPackageNamed: unitName.
+]

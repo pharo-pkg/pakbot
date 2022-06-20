@@ -11,15 +11,22 @@ Class {
 }
 
 { #category : #'instance creation' }
-PBProjectUIItem class >> forProject: aPBProjectVersion [
+PBProjectUIItem class >> forProject: aPBProjectVersion presenter: aSpPresenter [
 	^ self new
 		project: aPBProjectVersion;
+		presenter: aSpPresenter;
 		yourself
 ]
 
 { #category : #accessing }
 PBProjectUIItem >> assemblyItems [
 	^ project assemblies collect: [ :assembly | PBAssemblyUIItem forAssembly: assembly ]
+]
+
+{ #category : #building }
+PBProjectUIItem >> commands [
+	^ { PBCommitProjectCommand forSpecContext: self project .
+		PBCreatePackageInProjectCommand forSpecContext: presenter }
 ]
 
 { #category : #accessing }

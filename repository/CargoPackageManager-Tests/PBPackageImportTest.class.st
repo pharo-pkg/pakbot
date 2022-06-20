@@ -69,5 +69,5 @@ PBPackageImportTest >> testImportNonExistingPackageInSystemRaisesException [
 	
 	self
 		should: [project createPackageNamed: packageName]
-		raise: CGOSystemPackageAlreadyDefined
+		raise: PBSystemPackageAlreadyDefined
 ]

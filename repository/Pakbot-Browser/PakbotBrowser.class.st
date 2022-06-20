@@ -6,10 +6,17 @@ Class {
 	#superclass : #SpApplication,
 	#instVars : [
 		'projectName',
-		'registry'
+		'registry',
+		'packageRepository'
 	],
 	#category : #'Pakbot-Browser-Presenters'
 }
+
+{ #category : #accessing }
+PakbotBrowser >> packageRepository [
+	
+	^ packageRepository ifNil: [ PBPackageRepository newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo' ]
+]
 
 { #category : #accessing }
 PakbotBrowser >> registry [
