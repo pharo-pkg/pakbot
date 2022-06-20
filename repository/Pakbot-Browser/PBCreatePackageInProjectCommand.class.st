@@ -11,11 +11,6 @@ Class {
 	#category : #'Pakbot-Browser-Commands'
 }
 
-{ #category : #accessing }
-PBCreatePackageInProjectCommand >> application [
-	^ context application
-]
-
 { #category : #converting }
 PBCreatePackageInProjectCommand >> asSpecCommand [
 	^ super asSpecCommand

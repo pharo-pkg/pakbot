@@ -10,7 +10,7 @@ Class {
 { #category : #converting }
 PBBrowsePackageCommand >> asSpecCommand [
 	^ super asSpecCommand
-		iconName: #browse;
+		iconName: #glamorousBrowse;
 		name: 'Browse package';
 		shortcutKey: $b meta;
 		beDisabledWhenCantBeRun;
@@ -25,5 +25,5 @@ PBBrowsePackageCommand >> execute [
 
 { #category : #executing }
 PBBrowsePackageCommand >> package [
-	^ self context
+	^ self context selectedPackage
 ]

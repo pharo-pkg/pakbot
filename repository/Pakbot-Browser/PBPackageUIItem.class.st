@@ -11,16 +11,17 @@ Class {
 }
 
 { #category : #'instance creation' }
-PBPackageUIItem class >> forPackage: aPBPackage [
+PBPackageUIItem class >> forPackage: aPBPackage presenter: aSpPresenter [
 	^ self new
 		package: aPBPackage;
+		presenter: aSpPresenter;
 		yourself
 ]
 
 { #category : #accessing }
 PBPackageUIItem >> commands [
-	^ { PBCommitProjectCommand forSpecContext: package .
-		PBBrowsePackageCommand forSpecContext: package }
+	^ { PBBrowsePackageCommand forSpecContext: presenter .
+		 PBCommitProjectCommand forSpecContext: presenter }
 ]
 
 { #category : #accessing }

@@ -51,5 +51,5 @@ PBAssemblyUIItem >> project [
 
 { #category : #accessing }
 PBAssemblyUIItem >> uiItemFor: assemblyPart [
-	^ assemblyPart uiItemIn: assemblyPart
+	^ assemblyPart uiItemIn: assemblyPart presenter: presenter
 ]

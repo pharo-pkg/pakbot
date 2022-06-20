@@ -25,8 +25,13 @@ PBProjectUIItem >> assemblyItems [
 
 { #category : #building }
 PBProjectUIItem >> commands [
-	^ { PBCommitProjectCommand forSpecContext: self project .
-		PBCreatePackageInProjectCommand forSpecContext: presenter }
+	^ { PBBrowsePackageCommand .
+		PBCreatePackageInProjectCommand .
+		PBImportPackageInProjectCommand .
+		PBCreateAssemblyCommand .
+		PBCommitProjectCommand .
+		PBRemoveProjectCommand .
+	} collect: [ :cmd | cmd forSpecContext: presenter ]
 ]
 
 { #category : #accessing }
@@ -51,7 +56,7 @@ PBProjectUIItem >> items [
 
 { #category : #accessing }
 PBProjectUIItem >> packageItems [
-	^ project packages collect: [ :package | PBPackageUIItem forPackage: package ]
+	^ project packages collect: [ :package | PBPackageUIItem forPackage: package presenter: presenter ]
 ]
 
 { #category : #accessing }
