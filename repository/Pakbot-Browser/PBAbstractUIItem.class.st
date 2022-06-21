@@ -43,6 +43,11 @@ PBAbstractUIItem >> displayName [
 ]
 
 { #category : #accessing }
+PBAbstractUIItem >> icon [
+	^ self iconNamed: self iconName
+]
+
+{ #category : #accessing }
 PBAbstractUIItem >> iconName [ 
 	^ self subclassResponsibility
 ]

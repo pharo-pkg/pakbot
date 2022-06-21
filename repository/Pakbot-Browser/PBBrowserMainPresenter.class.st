@@ -62,7 +62,7 @@ PBBrowserMainPresenter >> initializePresenters [
 		hideColumnHeaders;
 		roots: self roots;
 		children: [ :aPBUIItem | aPBUIItem items ];
-		addColumn: ((SpImageTableColumn evaluated: [ :project | self iconNamed: project iconName]) width: 30);
+		addColumn: ((SpImageTableColumn evaluated: [ :aPBUIItem | aPBUIItem icon]) width: 30);
 		addColumn: (SpStringTableColumn evaluated: #displayName);
 		contextMenu: [ projectsTree selectedItem contextMenu ];
 		yourself.
@@ -111,7 +111,7 @@ PBBrowserMainPresenter >> selectedPackage [
 
 { #category : #accessing }
 PBBrowserMainPresenter >> selectedProject [ 
-	^ projectsTree selectedItem pakbotItem
+	^ projectsTree selectedItem ifNotNil: [ :uiItem | uiItem pakbotItem ]
 ]
 
 { #category : #private }

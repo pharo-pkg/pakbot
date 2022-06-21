@@ -30,8 +30,26 @@ PBPackageUIItem >> displayName [
 ]
 
 { #category : #accessing }
+PBPackageUIItem >> icon [
+	| icon |
+	
+	icon := super icon.
+	^ self isInstalled
+		ifTrue: [ icon ]
+		ifFalse: [ (icon asAlphaImageMorph
+						alpha: 0.6;
+						yourself) ]
+]
+
+{ #category : #accessing }
 PBPackageUIItem >> iconName [
 	^ #package
+]
+
+{ #category : #testing }
+PBPackageUIItem >> isInstalled [
+	
+	^ package isInstalled
 ]
 
 { #category : #testing }
