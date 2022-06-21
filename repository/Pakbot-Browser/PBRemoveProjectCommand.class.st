@@ -11,7 +11,7 @@ Class {
 PBRemoveProjectCommand >> asSpecCommand [
 	^ super asSpecCommand
 		iconName: #remove;
-		name: 'Remove Project';
+		name: 'Remove project';
 		beDisabledWhenCantBeRun;
 		yourself
 ]

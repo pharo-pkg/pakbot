@@ -45,8 +45,15 @@ PBCommitProjectCommand >> askUseMetadata [
 		
 ]
 
+{ #category : #testing }
+PBCommitProjectCommand >> canBeExecuted [
+
+	^ self project notNil
+]
+
 { #category : #executing }
 PBCommitProjectCommand >> execute [
+	self canBeExecuted ifFalse: [ ^ self ].
 
 	self project ifNotMarried: [ 
 		usePakbot ifNil: [ 

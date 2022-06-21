@@ -26,6 +26,7 @@ PBBrowserMainPresenter class >> buildToolbarGroupContext: aContext [
 	^ (CmCommandGroup named: 'Toolbar') asSpecGroup
 		description: 'Pakbot Browser toolbar';
 		register: (PBAddProjectCommand forSpecContext: aContext);
+		register: (PBCommitProjectCommand forSpecContext: aContext);
 		yourself
 ]
 
