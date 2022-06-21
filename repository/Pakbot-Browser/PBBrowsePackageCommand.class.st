@@ -17,6 +17,11 @@ PBBrowsePackageCommand >> asSpecCommand [
 		yourself
 ]
 
+{ #category : #testing }
+PBBrowsePackageCommand >> canBeExecuted [ 
+	^ self package isInstalled
+]
+
 { #category : #executing }
 PBBrowsePackageCommand >> execute [
 	
