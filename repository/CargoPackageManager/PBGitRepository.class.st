@@ -353,6 +353,12 @@ PBGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
 				self savePackageUnit: unit withMessage: commitMessage ]
 ]
 
+{ #category : #updating }
+PBGitRepository >> setIcebergProject: anIceAbstractProject [
+	
+	self iceRepository workingCopy basicSetProject: anIceAbstractProject
+]
+
 { #category : #querying }
 PBGitRepository >> sourcePackageVersionClass [
 	^ CGOGitHostedPackageVersion

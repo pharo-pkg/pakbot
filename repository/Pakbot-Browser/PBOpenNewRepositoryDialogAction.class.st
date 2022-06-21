@@ -30,7 +30,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 			repository := PBGitRepository repository: selectedOption newRepository.
 			project project repository: repository.
 			
-			repository iceRepository workingCopy basicSetProject: (PBIcebergProject onRepository: repository iceRepository project: project project).
+			repository setIcebergProject: (PBIcebergProject onRepository: repository iceRepository project: project project).
 			self doPostAction ].
 	presenter openDialog 
 		title: 'Set up project repository';
