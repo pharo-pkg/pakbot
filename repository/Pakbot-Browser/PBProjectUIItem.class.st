@@ -20,16 +20,19 @@ PBProjectUIItem class >> forProject: aPBProjectVersion presenter: aSpPresenter [
 
 { #category : #accessing }
 PBProjectUIItem >> assemblyItems [
-	^ project assemblies collect: [ :assembly | PBAssemblyUIItem forAssembly: assembly ]
+	^ (project assemblies 
+		collect: [ :assembly | PBAssemblyUIItem forAssembly: assembly presenter: presenter ])
+			sorted: [ :a :b | a displayName < b displayName ]
 ]
 
-{ #category : #building }
+{ #category : #accessing }
 PBProjectUIItem >> commands [
-	^ { PBBrowsePackageCommand .
+	^ { 
 		PBCreatePackageInProjectCommand .
 		PBImportPackageInProjectCommand .
 		PBCreateAssemblyCommand .
 		PBCommitProjectCommand .
+		PBPublishProjectCommand .
 		PBRemoveProjectCommand .
 	} collect: [ :cmd | cmd forSpecContext: presenter ]
 ]
@@ -46,6 +49,11 @@ PBProjectUIItem >> iconName [
 	^ #configLoaded
 ]
 
+{ #category : #testing }
+PBProjectUIItem >> isProject [ 
+	^ true
+]
+
 { #category : #accessing }
 PBProjectUIItem >> items [
 	^ OrderedCollection new
@@ -56,7 +64,9 @@ PBProjectUIItem >> items [
 
 { #category : #accessing }
 PBProjectUIItem >> packageItems [
-	^ project packages collect: [ :package | PBPackageUIItem forPackage: package presenter: presenter ]
+	^ (project packages 
+		collect: [ :package | PBPackageUIItem forPackage: package presenter: presenter ])
+			sort: [ :a :b | a displayName < b displayName ]
 ]
 
 { #category : #accessing }

@@ -12,16 +12,28 @@ Class {
 
 { #category : #'instance creation' }
 PBPackageUIItem class >> forPackage: aPBPackage presenter: aSpPresenter [
+
 	^ self new
 		package: aPBPackage;
 		presenter: aSpPresenter;
 		yourself
 ]
 
+{ #category : #testing }
+PBPackageUIItem >> canBeRemovedFromAssembly [
+	
+	^ false
+]
+
 { #category : #accessing }
 PBPackageUIItem >> commands [
-	^ { PBBrowsePackageCommand forSpecContext: presenter .
-		 PBCommitProjectCommand forSpecContext: presenter }
+	^ { 
+		PBBrowsePackageCommand .
+		PBLoadPackageCommand .
+		PBCommitProjectCommand .
+		PBRemovePackageFromProjectCommand .
+		PBRemovePackageFromSystemCommand .
+	} collect: [ :cmd | cmd forSpecContext: presenter ]
 ]
 
 { #category : #accessing }

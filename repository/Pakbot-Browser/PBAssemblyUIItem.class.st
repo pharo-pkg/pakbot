@@ -11,15 +11,24 @@ Class {
 }
 
 { #category : #'instance creation' }
-PBAssemblyUIItem class >> forAssembly: aPBAssembly [
+PBAssemblyUIItem class >> forAssembly: aPBAssembly presenter: aSpPresenter [
 	^ self new
 		assembly: aPBAssembly;
+		presenter: aSpPresenter;
 		yourself
 ]
 
 { #category : #initialization }
 PBAssemblyUIItem >> assembly: aPBAssembly [ 
 	assembly := aPBAssembly
+]
+
+{ #category : #accessing }
+PBAssemblyUIItem >> commands [
+	^ { 
+		PBAddPackageToAssemblyCommand .
+		PBDeleteAssemblyCommand .
+	} collect: [ :cmd | cmd forSpecContext: presenter ]
 ]
 
 { #category : #accessing }
@@ -30,6 +39,12 @@ PBAssemblyUIItem >> displayName [
 { #category : #accessing }
 PBAssemblyUIItem >> iconName [ 
 	^ #image
+]
+
+{ #category : #testing }
+PBAssemblyUIItem >> isAssembly [
+
+	^ true
 ]
 
 { #category : #accessing }
@@ -51,5 +66,5 @@ PBAssemblyUIItem >> project [
 
 { #category : #accessing }
 PBAssemblyUIItem >> uiItemFor: assemblyPart [
-	^ assemblyPart uiItemIn: assemblyPart presenter: presenter
+	^ assemblyPart uiItemIn: assembly presenter: presenter
 ]

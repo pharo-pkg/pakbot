@@ -27,6 +27,7 @@ PBBrowserMainPresenter class >> buildToolbarGroupContext: aContext [
 		description: 'Pakbot Browser toolbar';
 		register: (PBAddProjectCommand forSpecContext: aContext);
 		register: (PBCommitProjectCommand forSpecContext: aContext);
+		register: (PBPublishProjectCommand forSpecContext: aContext);
 		yourself
 ]
 
@@ -103,15 +104,35 @@ PBBrowserMainPresenter >> roots [
 ]
 
 { #category : #accessing }
+PBBrowserMainPresenter >> selectedAssembly [
+
+	^ self selectedPakbotItemIfTrue: [ self selectedItem isAssembly ]
+]
+
+{ #category : #accessing }
+PBBrowserMainPresenter >> selectedItem [
+
+	^ projectsTree selectedItem
+]
+
+{ #category : #accessing }
 PBBrowserMainPresenter >> selectedPackage [
-	^ projectsTree selectedItem isPackage
-		ifTrue: [ projectsTree selectedItem pakbotItem ]
+	
+	^ self selectedPakbotItemIfTrue: [ self selectedItem isPackage ]
+]
+
+{ #category : #private }
+PBBrowserMainPresenter >> selectedPakbotItemIfTrue: aBlock [
+
+	^ aBlock value
+		ifTrue: [ self selectedItem pakbotItem ]
 		ifFalse: [ nil ]
 ]
 
 { #category : #accessing }
 PBBrowserMainPresenter >> selectedProject [ 
-	^ projectsTree selectedItem ifNotNil: [ :uiItem | uiItem pakbotItem ]
+
+	^ self selectedPakbotItemIfTrue: [ self selectedItem isProject ]
 ]
 
 { #category : #private }

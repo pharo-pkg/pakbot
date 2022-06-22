@@ -46,7 +46,7 @@ PBAssembly >> addPackage: aPackage [
 { #category : #adding }
 PBAssembly >> addPackages: aCollection [
 	
-	aCollection do: [ :each | self doAddPackage: aCollection ].
+	aCollection do: [ :each | self doAddPackage: each ].
 	self project announceChanged.
 ]
 

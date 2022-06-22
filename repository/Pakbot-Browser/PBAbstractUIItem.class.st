@@ -12,6 +12,17 @@ Class {
 	#category : #'Pakbot-Browser-Items'
 }
 
+{ #category : #building }
+PBAbstractUIItem >> addExtraGroupTo: contextMenu [
+
+	contextMenu addItem: [ :item | 
+			item 
+				name: 'Extra'; 
+				subMenu: (SpMenuPresenter new 
+					addItem: [ :subMenuItem | subMenuItem name: 'Inspect'; action: [ self inspect ] ];
+					yourself) ]
+]
+
 { #category : #accessing }
 PBAbstractUIItem >> commands [
 	^ self subclassResponsibility
@@ -20,13 +31,16 @@ PBAbstractUIItem >> commands [
 { #category : #building }
 PBAbstractUIItem >> contextMenu [
 	
-	| commandGroup |
+	| commandGroup menu |
 	commandGroup := self contextMenuCommandGroup.
 	self commands do: [ :each | commandGroup register: each ].
 
-	^ SpMenuPresenterBuilder new 
+	menu := SpMenuPresenterBuilder new 
 		visitCommandGroup: commandGroup;
-		menuPresenter
+		menuPresenter.
+	self addExtraGroupTo: menu.
+	
+	^ menu
 ]
 
 { #category : #private }
@@ -53,7 +67,17 @@ PBAbstractUIItem >> iconName [
 ]
 
 { #category : #testing }
+PBAbstractUIItem >> isAssembly [
+	^ false
+]
+
+{ #category : #testing }
 PBAbstractUIItem >> isPackage [
+	^ false
+]
+
+{ #category : #testing }
+PBAbstractUIItem >> isProject [
 	^ false
 ]
 

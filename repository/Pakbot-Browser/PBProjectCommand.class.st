@@ -18,7 +18,7 @@ PBProjectCommand >> application [
 { #category : #accessing }
 PBProjectCommand >> project [
 
-	^ project ifNil: [ self context selectedProject ]
+	^ project ifNil: [ self context selectedItem project ]
 ]
 
 { #category : #accessing }
