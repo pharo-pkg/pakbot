@@ -77,6 +77,12 @@ PBResolvedProject >> beInstalledInImage [
 	isInstalledInImage := true.
 ]
 
+{ #category : #icons }
+PBResolvedProject >> conflictStatusIconName [
+	"We do not display a conflict icon for a resolved project (done on dependencies)"
+	^ nil
+]
+
 { #category : #conflicts }
 PBResolvedProject >> conflictingDependencies [
 	
@@ -118,8 +124,9 @@ PBResolvedProject >> hash [
 ]
 
 { #category : #accessing }
-PBResolvedProject >> icons [
-	^ { self iconNamed: #glamorousBookmark }
+PBResolvedProject >> iconName [
+
+	^ #glamorousBookmark
 ]
 
 { #category : #lookup }

@@ -13,6 +13,18 @@ Class {
 	#category : #'CargoPackageManager-Solver'
 }
 
+{ #category : #accessing }
+PBResolvedDependency class >> conflictIconName [
+
+	^ #error
+]
+
+{ #category : #accessing }
+PBResolvedDependency class >> noConflictIconName [
+
+	^ #forward 
+]
+
 { #category : #'instance-creation' }
 PBResolvedDependency class >> onDependency: aDependency resolution: aResolution [
 	
@@ -42,6 +54,14 @@ PBResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
 	| conflicts |
 	conflicts := self conflictingInstalledProjects: aCGOPackageRegistry.
 	dependencyState := dependencyState withConflicts: conflicts.
+]
+
+{ #category : #icons }
+PBResolvedDependency >> conflictStatusIconName [
+
+	^ self hasConflicts
+		  ifTrue: [ self class conflictIconName ]
+		  ifFalse: [ self class noConflictIconName ]
 ]
 
 { #category : #conflicts }
@@ -74,11 +94,10 @@ PBResolvedDependency >> hasConflicts [
 	^ dependencyState isConflictingDependency or: [ self resolution hasConflicts ]
 ]
 
-{ #category : #accessing }
-PBResolvedDependency >> icons [
-	^ {
-		self iconNamed: (self hasConflicts ifTrue: [ #error ] ifFalse: [ #forward ]).
-		self iconNamed: dependency iconName }
+{ #category : #icons }
+PBResolvedDependency >> iconName [
+
+	^ dependency iconName
 ]
 
 { #category : #accessing }
@@ -111,12 +130,6 @@ PBResolvedDependency >> name [
 PBResolvedDependency >> nameWithVersion [
 	
 	^ dependency name , ' ', dependency version
-]
-
-{ #category : #'*CargoPackageManager' }
-PBResolvedDependency >> nodesInResolutionTree [
-	
-	^ dependencyState nodesInResolutionTree
 ]
 
 { #category : #accessing }

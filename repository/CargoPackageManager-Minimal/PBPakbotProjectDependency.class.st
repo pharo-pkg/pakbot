@@ -27,11 +27,6 @@ PBPakbotProjectDependency class >> fromSton: stonReader [
 	^ self named: repository name repositoryUrl: repository	repositoryUrl
 ]
 
-{ #category : #accessing }
-PBPakbotProjectDependency class >> iconName [
-	^ #remote
-]
-
 { #category : #'instance creation' }
 PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString [
 	
@@ -85,12 +80,14 @@ PBPakbotProjectDependency >> fetch [
 
 { #category : #fetching }
 PBPakbotProjectDependency >> fetchFromScm [
+	repository ifNil: [ PBMissingSourceRepositoryError signal ].
+
 	^ (repository fetchVersion: self version)
 		registry: project registry;
 		yourself
 ]
 
-{ #category : #intialization }
+{ #category : #initialization }
 PBPakbotProjectDependency >> initializeWithRepository: aCGOGitRepository [ 
 	repository := aCGOGitRepository
 ]

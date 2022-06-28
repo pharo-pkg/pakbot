@@ -1,3 +1,7 @@
+"
+I represent a dependency that had conflicts and that has been manually resolved by the user, i.e. the conflict is now solved.
+
+"
 Class {
 	#name : #PBResolvedConflictDependencyState,
 	#superclass : #PBAbstractDependencyState,
@@ -25,7 +29,7 @@ PBResolvedConflictDependencyState >> resolution: aCGOResolvedProject [
 ]
 
 { #category : #resolution }
-PBResolvedConflictDependencyState >> resolutionFor: aCGOResolvedDependency [ 
+PBResolvedConflictDependencyState >> resolutionFor: aPBResolvedDependency [ 
 	
 	^ resolution
 ]

@@ -10,6 +10,14 @@ Class {
 	#category : #'Pakbot-Browser-Actions'
 }
 
+{ #category : #'instance creation' }
+PBAbstractAction class >> forProject: aProject [
+
+	^ self new
+		project: aProject;
+		yourself
+]
+
 { #category : #execution }
 PBAbstractAction >> doExecute [
 	^ self subclassResponsibility 

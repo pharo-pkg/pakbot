@@ -1,3 +1,6 @@
+"
+I represent a dependency conflicting with another project installation or dependency
+"
 Class {
 	#name : #PBConflictingDependencyState,
 	#superclass : #PBAbstractDependencyState,
@@ -38,9 +41,9 @@ PBConflictingDependencyState >> isConflictingDependency [
 ]
 
 { #category : #resolution }
-PBConflictingDependencyState >> resolutionFor: aCGOResolvedDependency [ 
+PBConflictingDependencyState >> resolutionFor: aPBResolvedDependency [ 
 	
-	^ aCGOResolvedDependency originalResolution
+	^ aPBResolvedDependency originalResolution
 ]
 
 { #category : #resolving }

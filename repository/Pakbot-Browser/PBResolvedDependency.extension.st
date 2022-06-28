@@ -1,6 +1,6 @@
 Extension { #name : #PBResolvedDependency }
 
-{ #category : #'*CargoPackageManager' }
+{ #category : #'*Pakbot-Browser' }
 PBResolvedDependency >> nodesInResolutionTree [
 	
 	^ dependencyState nodesInResolutionTree

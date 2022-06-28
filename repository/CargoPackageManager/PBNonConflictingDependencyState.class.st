@@ -1,3 +1,6 @@
+"
+I represent a dependency that has no conflict with anything
+"
 Class {
 	#name : #PBNonConflictingDependencyState,
 	#superclass : #PBAbstractDependencyState,
@@ -23,9 +26,9 @@ PBNonConflictingDependencyState >> isConflictingDependency [
 ]
 
 { #category : #resolution }
-PBNonConflictingDependencyState >> resolutionFor: aCGOResolvedDependency [ 
+PBNonConflictingDependencyState >> resolutionFor: aPBResolvedDependency [ 
 	
-	^ aCGOResolvedDependency originalResolution
+	^ aPBResolvedDependency originalResolution
 ]
 
 { #category : #updating }

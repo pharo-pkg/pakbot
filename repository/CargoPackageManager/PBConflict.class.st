@@ -40,6 +40,12 @@ PBConflict >> dependencies [
 	^ dependencies
 ]
 
+{ #category : #finding }
+PBConflict >> findResolution: aSemanticVersion [
+
+	^ self possibleResolutions detect: [ :each | each version = aSemanticVersion ]
+]
+
 { #category : #testing }
 PBConflict >> isResolved [
 	
@@ -48,7 +54,16 @@ PBConflict >> isResolved [
 
 { #category : #accessing }
 PBConflict >> possibleResolutions [
-	^ (dependencies collect: [ :e | e originalResolution ]) asOrderedCollection.
+
+	^ (dependencies collect: [ :dependency | 
+		   dependency originalResolution ]) asOrderedCollection
+]
+
+{ #category : #accessing }
+PBConflict >> possibleVersions [
+
+	^ self possibleResolutions 
+		collect: [ :each | each version ]
 ]
 
 { #category : #accessing }
@@ -77,6 +92,14 @@ PBConflict >> resolveWithSelected [
 		ifNotNil: [ dependencies do: [ :each | each resolveWith: selectedResolution ] ]
 ]
 
+{ #category : #resolving }
+PBConflict >> selectResolutionFromVersion: aSemanticVersion [
+
+	self selectedResolution: 
+		(self possibleResolutions detect: [ :each | each version = aSemanticVersion ]).
+	self resolveWithSelected.
+]
+
 { #category : #accessing }
 PBConflict >> selectedResolution [
 
@@ -84,6 +107,6 @@ PBConflict >> selectedResolution [
 ]
 
 { #category : #resolving }
-PBConflict >> selectedResolution: aCGOResolvedProject [ 
-	selectedResolution := aCGOResolvedProject
+PBConflict >> selectedResolution: aPBResolvedProject [ 
+	selectedResolution := aPBResolvedProject
 ]

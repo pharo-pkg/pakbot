@@ -52,3 +52,15 @@ PBPakbotProjectDependencyTest >> testCanSerializeDependency [
 	#version : ''''
 }'
 ]
+
+{ #category : #tests }
+PBPakbotProjectDependencyTest >> testFetchRaiseErrorWhenNoRepositoryDefined [
+
+	| dependency |
+	dependency := PBPakbotProjectDependency named: 'foo' version: 'v1.0'.
+	
+	self
+		should: [ dependency fetch ]
+		raise: PBMissingSourceRepositoryError
+
+]

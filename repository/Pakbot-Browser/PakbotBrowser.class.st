@@ -12,6 +12,15 @@ Class {
 	#category : #'Pakbot-Browser-Presenters'
 }
 
+{ #category : #initialization }
+PakbotBrowser >> initialize [ 
+
+	super initialize.
+	self
+		useBackend: #Morphic 
+		with: PakbotBrowserConfiguration new.
+]
+
 { #category : #accessing }
 PakbotBrowser >> packageRepository [
 	

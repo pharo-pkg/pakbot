@@ -26,6 +26,21 @@ PBProjectVersion class >> example [
 		yourself
 ]
 
+{ #category : #example }
+PBProjectVersion class >> exampleWithDependency [
+	^ self example
+		"addDependency: (PBPakbotProjectDependency
+			named: 'ProjectTwo'
+			version: '=0.1');"
+		addDependency: (PBMetacelloConfigurationProjectDependency
+			name: 'CargoTestExample'
+			repositoryUrl: 'http://smalltalkhub.com/mc/Pharo/CargoTestRepository/main'
+			version: '1.0');
+		registry: PBPackageRegistry new;
+		yourself
+	
+]
+
 { #category : #'instance creation' }
 PBProjectVersion class >> for: aProjectName [
 	
