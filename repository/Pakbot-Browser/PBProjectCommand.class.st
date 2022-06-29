@@ -15,10 +15,17 @@ PBProjectCommand >> application [
 	^ context application
 ]
 
+{ #category : #testing }
+PBProjectCommand >> canBeExecuted [
+
+	^ self project notNil
+]
+
 { #category : #accessing }
 PBProjectCommand >> project [
 
-	^ project ifNil: [ self context selectedItem project ]
+	^ project ifNil: [ 
+		  self context selectedItem ifNotNil: [ :item | item project ] ]
 ]
 
 { #category : #accessing }

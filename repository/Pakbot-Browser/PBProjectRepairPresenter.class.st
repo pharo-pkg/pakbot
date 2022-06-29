@@ -88,6 +88,7 @@ PBProjectRepairPresenter >> initializePresenters [
 				yourself);
 			yourself);
 		items: self availableRepairOptions;
+		selectFirst;
 		whenSelectionChangedDo: [ :selection | self selectionChanged ];
 		whenActivatedDo: [ :selection | selection ifNotNil: [ self accept ] ];
 		yourself.

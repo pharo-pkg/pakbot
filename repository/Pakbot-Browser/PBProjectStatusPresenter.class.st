@@ -20,6 +20,17 @@ PBProjectStatusPresenter class >> example [
 	^ (self on: PBProjectVersion example) open
 ]
 
+{ #category : #initialization }
+PBProjectStatusPresenter >> connectPresenters [
+	
+	SystemAnnouncer uniqueInstance weak
+		when: PBProjectAnnouncement
+		send: #handleAnnouncement:
+		to: self.
+		
+	actionButton action: [ (PBRepairProjectCommand forSpecContext: self mainPresenter) execute ]
+]
+
 { #category : #layout }
 PBProjectStatusPresenter >> defaultLayout [
 	<spec>
@@ -45,18 +56,7 @@ PBProjectStatusPresenter >> handleAnnouncement: ann [
 ]
 
 { #category : #initialization }
-PBProjectStatusPresenter >> initializePresenter [
-	
-	SystemAnnouncer uniqueInstance weak
-		when: PBProjectAnnouncement
-		send: #handleAnnouncement:
-		to: self.
-		
-	actionButton action: [ (PBOpenRepairDialogAction onProject: self project) execute ]
-]
-
-{ #category : #initialization }
-PBProjectStatusPresenter >> initializeWidgets [
+PBProjectStatusPresenter >> initializePresenters [
 	
 	statusLabel := self newLabel.
 	actionButton := self newButton label: 'Repair'.
@@ -70,6 +70,12 @@ PBProjectStatusPresenter >> initializeWidgets [
 
 	
 
+]
+
+{ #category : #accessing }
+PBProjectStatusPresenter >> mainPresenter [
+	"Main presenter -> Project presenter -> Status presenter"
+	^ self owner owner
 ]
 
 { #category : #accessing }
