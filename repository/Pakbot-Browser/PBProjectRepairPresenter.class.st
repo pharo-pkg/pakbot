@@ -4,11 +4,9 @@ You can select an option and then proceed with the selected action.
 "
 Class {
 	#name : #PBProjectRepairPresenter,
-	#superclass : #SpPresenterWithModel,
+	#superclass : #PBProjectOptionPresenter,
 	#instVars : [
-		'reasonPanel',
-		'optionList',
-		'detailPanel'
+		'reasonPanel'
 	],
 	#category : #'Pakbot-Browser-Presenters'
 }
@@ -21,29 +19,10 @@ PBProjectRepairPresenter class >> example [
 		openDialog
 ]
 
-{ #category : #action }
-PBProjectRepairPresenter >> accept [
-
-	self closeWindow.
-	self selectedOption execute.
-]
-
 { #category : #accessing }
 PBProjectRepairPresenter >> availableRepairOptions [
 	
 	^ PBRepairProjectAction allAvailableFor: self project
-]
-
-{ #category : #action }
-PBProjectRepairPresenter >> cancel [
-
-	self closeWindow
-]
-
-{ #category : #action }
-PBProjectRepairPresenter >> closeWindow [
-
-	self window close
 ]
 
 { #category : #layout }
@@ -56,49 +35,15 @@ PBProjectRepairPresenter >> defaultLayout [
 ]
 
 { #category : #initialization }
-PBProjectRepairPresenter >> initializeDialogWindow: aWindow [
-
-	super initializeDialogWindow: aWindow.
-
-	aWindow 
-		  okAction: [ self accept ];
-		  cancelAction: [ self cancel ]; 
-		  bindKeyCombination: Character escape asShortcut toAction: [ self cancel ].
-]
-
-{ #category : #initialization }
 PBProjectRepairPresenter >> initializePresenters [ 
+	super initializePresenters.
+	
 	reasonPanel := self newText
 		beNotEditable;
 		addStyle: 'readonly';
 		beWrapWord;
 		text: self project problemLongDescription;
 		yourself.
-		
-	optionList := self newTable
-		disable;
-		hideColumnHeaders;
-		addColumn: (SpCompositeTableColumn new
-			addColumn: (SpImageTableColumn new
-				width: 20;
-				evaluated: [ :option | self iconNamed: option iconName ];
-				yourself);
-			addColumn: (SpStringTableColumn new
-				evaluated: [ :option | option name ];
-				yourself);
-			yourself);
-		items: self availableRepairOptions;
-		selectFirst;
-		whenSelectionChangedDo: [ :selection | self selectionChanged ];
-		whenActivatedDo: [ :selection | selection ifNotNil: [ self accept ] ];
-		yourself.
-		
-	detailPanel := self newText
-		beNotEditable;
-		beWrapWord;
-		addStyle: 'readonly';
-		yourself.
-
 ]
 
 { #category : #initialization }
@@ -108,41 +53,5 @@ PBProjectRepairPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'Repair Cargo Project';
 		initialExtent:  700@500
-
-]
-
-{ #category : #accessing }
-PBProjectRepairPresenter >> project [
-	
-	^ self model
-]
-
-{ #category : #refreshing }
-PBProjectRepairPresenter >> refreshDetailPanel [
-
-	self selectedOption ifNotNil: [ :option |
-		detailPanel
-			text: option description;
-			yourself ]
-]
-
-{ #category : #refreshing }
-PBProjectRepairPresenter >> refreshDialogButtons [
-
-	self window ifNotNil: [ :aWindow |
-		aWindow buttons first enabled: (self selectedOption isNotNil) ]
-]
-
-{ #category : #accessing }
-PBProjectRepairPresenter >> selectedOption [
-	
-	^ optionList selectedItem
-]
-
-{ #category : #refreshing }
-PBProjectRepairPresenter >> selectionChanged [
-
-	self refreshDetailPanel.
-	self refreshDialogButtons.	
 
 ]

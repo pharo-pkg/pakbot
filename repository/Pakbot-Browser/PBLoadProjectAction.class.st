@@ -1,38 +1,41 @@
 "
-See `PBLoadProjectAction>>#description`
+Subclass me to provide a new way of loading a project.
+My subclasses are dynamically collected by `PBLoadProjectPresenter`.
 "
 Class {
 	#name : #PBLoadProjectAction,
-	#superclass : #PBRepairProjectAction,
+	#superclass : #PBAbstractAction,
 	#category : #'Pakbot-Browser-Actions'
 }
 
 { #category : #accessing }
+PBLoadProjectAction class >> allAvailableFor: aProject [
+
+	^ self allSubclasses 
+		select: [ :aClass | aClass isAvailableFor: aProject ] 
+		thenCollect: [ :aClass | aClass forProject: aProject ]
+]
+
+{ #category : #testing }
 PBLoadProjectAction class >> isAvailableFor: aProject [
 
-	^ aProject isUpToDate not
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 PBLoadProjectAction >> description [
-	^ 'Loads the missing dependencies of the project. 
-If there is a conflict it should be fixed before being able to load the dependencies.'
-]
 
-{ #category : #execution }
-PBLoadProjectAction >> doExecute [
-
-	^ (PBLoadPreviewPresenter on: project resolve) openDialog
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 PBLoadProjectAction >> iconName [
 
-	^ #smallLoadProject
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 PBLoadProjectAction >> name [
 
-	^ 'Load Dependencies of the Project'
+	^ self subclassResponsibility 
 ]
