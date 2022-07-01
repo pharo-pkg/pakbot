@@ -11,9 +11,9 @@ Class {
 { #category : #accessing }
 PBLoadProjectAction class >> allAvailableFor: aProject [
 
-	^ self allSubclasses 
+	^ (self allSubclasses 
 		select: [ :aClass | aClass isAvailableFor: aProject ] 
-		thenCollect: [ :aClass | aClass forProject: aProject ]
+		thenCollect: [ :aClass | aClass forProject: aProject ]) flattened
 ]
 
 { #category : #testing }
