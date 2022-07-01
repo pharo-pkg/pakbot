@@ -29,6 +29,17 @@ PBLoadAssemblyAction class >> isAvailableFor: aProject [
 	^ aProject assemblies isEmpty not
 ]
 
+{ #category : #'instance creation' }
+PBLoadAssemblyAction class >> on: aProject [
+
+	^ aProject assemblies 
+		collect: [ :each |
+			(super on: aProject)
+				assembly: each;
+				yourself	]
+
+]
+
 { #category : #accessing }
 PBLoadAssemblyAction >> assembly: anAssembly [ 
 

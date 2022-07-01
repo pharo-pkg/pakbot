@@ -41,7 +41,10 @@ PBBrowserMainPresenter >> buildToolbar [
 
 { #category : #initialization }
 PBBrowserMainPresenter >> connectPresenters [
-	projectsTree transmitTo: descriptionPanel transform: [ :uiItem | uiItem pakbotItem ].
+
+	projectsTree
+		transmitTo: descriptionPanel
+		transform: [ :uiItem | uiItem ifNotNil: [ :item | item pakbotItem ] ]
 ]
 
 { #category : #layout }
@@ -55,6 +58,13 @@ PBBrowserMainPresenter >> defaultLayout [
 			yourself);
 		yourself
 	
+]
+
+{ #category : #private }
+PBBrowserMainPresenter >> delete [
+	
+	super delete.
+	self unsubscribe.
 ]
 
 { #category : #initialization }
@@ -71,6 +81,7 @@ PBBrowserMainPresenter >> initializePresenters [
 	descriptionPanel := self instantiate: PBProjectPresenter on: nil"PBNoProject ?".
 	
 	toolbar := self buildToolbar.
+	self listenToPakbotAnnouncements.
 ]
 
 { #category : #initialization }
@@ -81,9 +92,24 @@ PBBrowserMainPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 850 @ 600.
 ]
 
+{ #category : #'event-listening' }
+PBBrowserMainPresenter >> listenToPakbotAnnouncements [
+	
+	SystemAnnouncer uniqueInstance weak
+		when: PBProjectCreated , PBProjectRemoved
+			send: #refresh
+			to: self.
+
+]
+
 { #category : #initialization }
 PBBrowserMainPresenter >> modelChanged [
 	
+]
+
+{ #category : #refreshing }
+PBBrowserMainPresenter >> refresh [
+	projectsTree updateRootsKeepingSelection: self roots
 ]
 
 { #category : #accessing }
@@ -138,4 +164,10 @@ PBBrowserMainPresenter >> selectedProject [
 { #category : #private }
 PBBrowserMainPresenter >> toolbarGroup [
 	^ self rootCommandsGroup / 'Toolbar'
+]
+
+{ #category : #'event-listening' }
+PBBrowserMainPresenter >> unsubscribe [
+	
+	SystemAnnouncer uniqueInstance unsubscribe: self.
 ]

@@ -15,10 +15,12 @@ Class {
 
 { #category : #initialization }
 PBProjectPresenter >> connectPresenters [
-	self 
-		transmitTo: projectStatus transform: [ :projectElement | projectElement project ];
+
+	self
+		transmitTo: projectStatus transform: [ :projectElement | 
+			projectElement ifNotNil: [ :element | element project ] ];
 		transmitTo: overview;
-		transmitTo: dependencies.
+		transmitTo: dependencies
 ]
 
 { #category : #layout }

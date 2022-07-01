@@ -41,7 +41,7 @@ PBPackageRegistry class >> reset [
 	Default ifNotNil: [ Default unregisterFromSystem. Default := nil ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #helper }
 PBPackageRegistry class >> useDefaultRegistry: aPBPackageRegistry during: aBlock [
 	| default |
 	default := self default.
