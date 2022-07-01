@@ -2,7 +2,7 @@
 I am an option panel that lets the user select an already installed iceberg repository.
 "
 Class {
-	#name : #PBImportIcebergRepositoryPanel,
+	#name : #PBImportIcebergRepositoryPresenter,
 	#superclass : #SpOptionPresenter,
 	#instVars : [
 		'repositoryList'
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #accepting }
-PBImportIcebergRepositoryPanel >> accept [
+PBImportIcebergRepositoryPresenter >> accept [
 	
 	^ repositoryList selectedItem
 ]
 
 { #category : #initialization }
-PBImportIcebergRepositoryPanel >> connectPresenters [
+PBImportIcebergRepositoryPresenter >> connectPresenters [
 
 	repositoryList items:
 		(IceLibgitRepository registry sorted: [ :a :b | 
@@ -25,7 +25,7 @@ PBImportIcebergRepositoryPanel >> connectPresenters [
 ]
 
 { #category : #layout }
-PBImportIcebergRepositoryPanel >> defaultLayout [
+PBImportIcebergRepositoryPresenter >> defaultLayout [
 
 	^ SpBoxLayout newTopToBottom 
 		add: repositoryList;
@@ -33,39 +33,39 @@ PBImportIcebergRepositoryPanel >> defaultLayout [
 ]
 
 { #category : #initialization }
-PBImportIcebergRepositoryPanel >> initializePresenters [
+PBImportIcebergRepositoryPresenter >> initializePresenters [
 	
 	repositoryList := self newList.
 	repositoryList display: [ :each | each name ]
 ]
 
 { #category : #accessing }
-PBImportIcebergRepositoryPanel >> newRepository [ 
+PBImportIcebergRepositoryPresenter >> newRepository [ 
 	"polymorphic with other iceberg creation panels"
 	^ repositoryList selectedItem
 ]
 
 { #category : #specs }
-PBImportIcebergRepositoryPanel >> optionIcon [
+PBImportIcebergRepositoryPresenter >> optionIcon [
 	^ self iconNamed: #komitterSmalltalkhubRemote
 ]
 
 { #category : #specs }
-PBImportIcebergRepositoryPanel >> optionTitle [ 
+PBImportIcebergRepositoryPresenter >> optionTitle [ 
 	^ 'Existing Iceberg Repository'
 ]
 
 { #category : #accessing }
-PBImportIcebergRepositoryPanel >> repositoryList [
+PBImportIcebergRepositoryPresenter >> repositoryList [
 	^ repositoryList
 ]
 
 { #category : #accessing }
-PBImportIcebergRepositoryPanel >> repositoryList: anObject [
+PBImportIcebergRepositoryPresenter >> repositoryList: anObject [
 	repositoryList := anObject
 ]
 
 { #category : #accepting }
-PBImportIcebergRepositoryPanel >> validate [ 	
+PBImportIcebergRepositoryPresenter >> validate [ 	
 	"We import an existing repository => no validation"
 ]

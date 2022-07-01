@@ -61,7 +61,7 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	presenter := (PBOpenNewRepositoryDialogAction onProject: project) execute.
 	self 
 		assert: presenter selectedOption class
-		equals: PBImportIcebergRepositoryPanel.
+		equals: PBImportIcebergRepositoryPresenter.
 		
 	importRepositoryPresenter := presenter selectedOption.
 	iceRepository := importRepositoryPresenter repositoryList items detect: [ :repo | repo name = projectName ].
