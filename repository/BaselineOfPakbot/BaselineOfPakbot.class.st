@@ -77,7 +77,8 @@ BaselineOfPakbot >> baseline: spec [
 					'CargoPackageManager-Utils-FailingTests'
 					'CargoPackageManager-UI-Tests');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'core');
-				group: 'default' with: 'tests-core' ]
+				group: 'browser' with: #('Pakbot-Browser-Tests' 'Pakbot-Browser-Tests');
+				group: 'default' with: #('tests-core' 'browser') ]
 ]
 
 { #category : #baseline }
