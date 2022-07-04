@@ -263,7 +263,7 @@ PBPackageRegistry >> registerProject: aPBProjectVersion [
 		and: [ registeredProject repository = aPBProjectVersion repository ])
 			ifFalse: [ self signalAlreadyRegistered: aPBProjectVersion ].
 				
-	registeredProject installedPackages ifEmpty: [ ^ registeredProject ].
+	registeredProject isInstalled ifFalse: [ ^ registeredProject ].
 	(registeredProject hasPackagesLoaded: aPBProjectVersion loadedPackages)
 		ifFalse: [ registeredProject addAllLoadedPackages: aPBProjectVersion loadedPackages.
 					^ registeredProject ].

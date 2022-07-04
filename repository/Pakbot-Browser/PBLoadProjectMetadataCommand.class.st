@@ -10,7 +10,7 @@ Class {
 { #category : #testing }
 PBLoadProjectMetadataCommand class >> isAvailableFor: aProject [
 
-	^ aProject isLoaded not
+	^ aProject isRegistered not
 ]
 
 { #category : #accessing }

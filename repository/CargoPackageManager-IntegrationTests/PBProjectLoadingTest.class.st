@@ -113,7 +113,7 @@ PBProjectLoadingTest >> testLoadingProjectWithDependenciesToSameProjectButDiffer
 	project addDependency: baselineProjectPkgB.
 	project load.
 	
-	self assert: project isLoaded.
+	self assert: project isRegistered.
 	self assert: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageA').
 	self assert: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageB').
 	self deny: (project systemPackageOrganizer includesPackageNamed: #'PakbotTestExample-PackageC').
@@ -571,7 +571,7 @@ PBProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKe
 	projectTwo version: '0.1'.
 	projectOne load.
 	
-	self assert: projectOne isLoaded.
-	self assert: projectTwo isLoaded.
+	self assert: projectOne isRegistered.
+	self assert: projectTwo isRegistered.
 	self assert: projectOne isUpToDate.
 ]

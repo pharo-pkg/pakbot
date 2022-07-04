@@ -411,19 +411,19 @@ PBProjectVersion >> isFixedVersion [
 { #category : #testing }
 PBProjectVersion >> isInstalled [
 	
-	^ self isLoaded
-]
-
-{ #category : #testing }
-PBProjectVersion >> isLoaded [
-	
-	^ registry notNil
-		and: [ registry isProjectRegistered: self ]
+	^ self isRegistered
 ]
 
 { #category : #testing }
 PBProjectVersion >> isProject [
 	^ true
+]
+
+{ #category : #testing }
+PBProjectVersion >> isRegistered [
+	
+	^ registry notNil
+		and: [ registry isProjectRegistered: self ]
 ]
 
 { #category : #solving }
