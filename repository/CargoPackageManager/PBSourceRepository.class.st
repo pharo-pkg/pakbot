@@ -43,6 +43,16 @@ PBSourceRepository class >> type [
 	^ self subclassResponsibility
 ]
 
+{ #category : #comparing }
+PBSourceRepository >> = anObject [
+
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ repositoryUrl = anObject repositoryUrl
+]
+
 { #category : #updating }
 PBSourceRepository >> addPackageNamed: aPackageName [
 	self subclassResponsibility
@@ -71,6 +81,14 @@ PBSourceRepository >> fromSton: stonReader [
 	super fromSton: stonReader.
 	self isGitRepositoryUrl
 		ifFalse: [ repositoryUrl := repositoryUrl asUrl ]
+]
+
+{ #category : #comparing }
+PBSourceRepository >> hash [
+
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ repositoryUrl hash
 ]
 
 { #category : #serialization }
