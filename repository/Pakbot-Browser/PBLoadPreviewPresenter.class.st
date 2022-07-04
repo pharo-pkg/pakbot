@@ -19,6 +19,12 @@ PBLoadPreviewPresenter class >> example [
 	(self on: PBResolutionPresenter conflictingResolutionExample) openDialog
 ]
 
+{ #category : #visiting }
+PBLoadPreviewPresenter >> accept [
+	conflictsPanel accept.
+	self resolution load
+]
+
 { #category : #layout }
 PBLoadPreviewPresenter >> defaultLayout [
 

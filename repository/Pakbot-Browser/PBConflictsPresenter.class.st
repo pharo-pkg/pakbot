@@ -17,6 +17,12 @@ PBConflictsPresenter class >> example [
 	(self on: PBResolutionPresenter conflictingResolutionExample) open
 ]
 
+{ #category : #visiting }
+PBConflictsPresenter >> accept [
+
+	self conflicts do: [:aConflict | aConflict resolveWithSelected].
+]
+
 { #category : #accessing }
 PBConflictsPresenter >> conflicts [
 	^ self resolution conflicts
