@@ -11,6 +11,17 @@ Class {
 	#category : #'Pakbot-Browser-Commands'
 }
 
+{ #category : #'instance creation' }
+PBLoadAssemblyCommand class >> forProject: aProject [
+
+	^ aProject assemblies 
+		collect: [ :each |
+			self new
+				project: aProject;
+				assembly: each;
+				yourself ]
+]
+
 { #category : #testing }
 PBLoadAssemblyCommand class >> isAvailableFor: aProject [
 
