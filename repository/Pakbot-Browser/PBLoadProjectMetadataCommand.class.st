@@ -10,9 +10,7 @@ Class {
 { #category : #testing }
 PBLoadProjectMetadataCommand class >> isAvailableFor: aProject [
 
-	^ aProject registry 
-		ifNil: [ true ]
-		ifNotNil: [ :registry | (registry isProjectRegistered: aProject) not ]
+	^ aProject isLoaded not
 ]
 
 { #category : #accessing }
