@@ -101,11 +101,11 @@ PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
 ]
 
 { #category : #tests }
-PBPackageRegistryTest >> testProjectfAlreadyRegisteredAndFullyLoadedRaisesAlreadyRegistered [
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredAndFullyLoadedDoesNotRaiseAlreadyRegistered [
 	registry registerProject: PBMetacelloBaselineProject example.
 	
 	self 
-		should: [ registry registerProject: PBMetacelloBaselineProject example ]
+		shouldnt: [ registry registerProject: PBMetacelloBaselineProject example ]
 		raise: PBPackageAlreadyRegistered.
 	
 	self 

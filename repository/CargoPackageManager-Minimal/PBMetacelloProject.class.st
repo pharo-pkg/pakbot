@@ -85,6 +85,12 @@ PBMetacelloProject >> basicLoad [
 	self subclassResponsibility 
 ]
 
+{ #category : #testing }
+PBMetacelloProject >> beInstalledWithPackages: packagesNames [
+	
+	self addAllLoadedPackages: packagesNames
+]
+
 { #category : #accessing }
 PBMetacelloProject >> dependencies [
 	^ #()

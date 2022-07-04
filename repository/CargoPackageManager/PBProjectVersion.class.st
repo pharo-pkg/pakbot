@@ -204,6 +204,15 @@ PBProjectVersion >> basicLoad: aListOfPackageName [
 	PBProjectLoaded announceOnProject: self. 
 ]
 
+{ #category : #testing }
+PBProjectVersion >> beInstalledWithPackages: packagesNames [
+	
+	" 	A Pakbot project does not keep a list of loaded packages.
+	  	We ask the system which packages are installed.
+		Nothing to be done in this method (only useful for a Metacello project )
+	"
+]
+
 { #category : #accessing }
 PBProjectVersion >> children [
 	^ self packageUnits , self assemblies, self virtualPackages
@@ -412,6 +421,7 @@ PBProjectVersion >> isFixedVersion [
 PBProjectVersion >> isInstalled [
 	
 	^ self isRegistered
+		and: [ self packages anySatisfy: [ :package | package isInstalled ] ]
 ]
 
 { #category : #testing }

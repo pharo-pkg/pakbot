@@ -161,7 +161,7 @@ PBResolvedProject >> isInstalled [
 	| packagesToCheck |
 	packagesToCheck := packagesToLoad ifEmpty: [ resolvedProjectVersion packages collect: #name ].
 	
-	^ resolvedProjectVersion isInstalled and: [ (resolvedProjectVersion installedPackages collect: #name) includesAll: packagesToCheck ]
+	^ resolvedProjectVersion isRegistered and: [ resolvedProjectVersion hasPackagesLoaded: packagesToCheck ]
 ]
 
 { #category : #testing }
