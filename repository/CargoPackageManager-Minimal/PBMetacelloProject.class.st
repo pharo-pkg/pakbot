@@ -272,6 +272,12 @@ PBMetacelloProject >> repository [
 ]
 
 { #category : #accessing }
+PBMetacelloProject >> resolvedVersion [
+
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
 PBMetacelloProject >> version [
 	^ version
 ]
