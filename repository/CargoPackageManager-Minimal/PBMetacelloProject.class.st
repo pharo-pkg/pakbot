@@ -1,6 +1,7 @@
 "
-I represent a Metacello Project and act as a Cargo project.
-Dependencies of this project will be loaded by Metacello as a black box for Cargo.
+I represent a Metacello Project and act as a Pakbot project.
+Dependencies of this project will be loaded by Metacello as a black box for Pakbot.
+As so, if I'm registered in the package registry, I'm considered to be loaded / installed.
 I can specify one or many packages / groups to load. In this case, I remember the loads instructions in `loadedPackages` i.v.
 Package dependencies are not described and so, a package/group can be seen as a package unit with no dependencies.
 
@@ -134,6 +135,12 @@ PBMetacelloProject >> initializeWithRepository: repositoryString name: projectNa
 	loadedPackages := Set new.
 	packageNames := Set new.
 
+]
+
+{ #category : #accessing }
+PBMetacelloProject >> installedPackages [
+
+	^ loadedPackages
 ]
 
 { #category : #'compatibility - PBProjectVersion' }

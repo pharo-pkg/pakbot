@@ -12,7 +12,7 @@ PBLoadProjectMetadataAction class >> isAvailableFor: aProject [
 
 	^ aProject registry 
 		ifNil: [ true ]
-		ifNotNil: [ :registry | (registry isProjectInstalled: aProject) not ]
+		ifNotNil: [ :registry | (registry isProjectRegistered: aProject) not ]
 ]
 
 { #category : #accessing }

@@ -418,7 +418,7 @@ PBProjectVersion >> isInstalled [
 PBProjectVersion >> isLoaded [
 	
 	^ registry notNil
-		and: [ registry isProjectInstalled: self ]
+		and: [ registry isProjectRegistered: self ]
 ]
 
 { #category : #testing }

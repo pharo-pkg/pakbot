@@ -114,6 +114,37 @@ PBPackageRegistryTest >> testProjectfAlreadyRegisteredAndFullyLoadedRaisesAlread
 ]
 
 { #category : #tests }
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredButNotLoadedDoesNotRaiseAlreadyRegisteredWhenLoading [
+	| project |
+	project := PBProjectVersion example.
+	registry registerProject: project.
+	
+	self 
+		shouldnt: [ registry registerProject: PBProjectVersion example ]
+		raise: PBPackageAlreadyRegistered.
+	
+	self 
+		assert: registry registeredProjects size 
+		equals: 1.
+]
+
+{ #category : #tests }
+PBPackageRegistryTest >> testProjectfAlreadyRegisteredButNotLoadedMetacelloProjectDoesNotRaiseAlreadyRegisteredWhenLoading [
+	| project |
+	project := PBMetacelloBaselineProject example.
+	project loadedPackages: #(). 
+	registry registerProject: project.
+	
+	self 
+		shouldnt: [ registry registerProject: PBMetacelloBaselineProject example ]
+		raise: PBPackageAlreadyRegistered.
+	
+	self 
+		assert: registry registeredProjects size 
+		equals: 1.
+]
+
+{ #category : #tests }
 PBPackageRegistryTest >> testProjectfAlreadyRegisteredButPartiallyLoadedDoesNotRaiseAlreadyRegisteredIfHavingNewPackageToLoad [
 	| project |
 	project := PBMetacelloBaselineProject example.

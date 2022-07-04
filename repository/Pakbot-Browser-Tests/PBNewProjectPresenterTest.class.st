@@ -50,7 +50,7 @@ PBNewProjectPresenterTest >> testProjectIsNotInstalledBeforeAccept [
 	editionPanel version: version.
 	editionPanel description: description.
 	
-	self deny: (testRegistry isProjectInstalled: project)
+	self deny: (testRegistry isProjectRegistered: project)
 
 ]
 
@@ -63,5 +63,5 @@ PBNewProjectPresenterTest >> testProjectIsRegisteredAfterAccept [
 	
 	panel accept.
 	
-	self assert: (testRegistry isProjectInstalled: project)
+	self assert: (testRegistry isProjectRegistered: project)
 ]
