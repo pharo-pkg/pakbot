@@ -44,7 +44,9 @@ PBImportProjectFromGitPresenter >> doAccept [
 		registry: self application registry;
 		repository: repository.
 	
-	(PBLoadProjectPresenter on: project) openDialog.
+	(PBLoadProjectPresenter on: project) 
+		application: self application;
+		openDialog.
 	^ project
 ]
 

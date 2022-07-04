@@ -28,6 +28,7 @@ PBProjectUIItem >> assemblyItems [
 { #category : #accessing }
 PBProjectUIItem >> commands [
 	^ { 
+		PBLoadFullProjectCommand .
 		PBRepairProjectCommand .
 		PBCreatePackageInProjectCommand .
 		PBImportPackageInProjectCommand .

@@ -3,12 +3,12 @@ Meta-action that represent the loading of a particular project assembly.
 I'm dynamically collected by `PBLoadProjectPresenter`.
 "
 Class {
-	#name : #PBLoadAssemblyAction,
-	#superclass : #PBLoadProjectAction,
+	#name : #PBLoadAssemblyCommand,
+	#superclass : #PBLoadProjectCommand,
 	#instVars : [
 		'assembly'
 	],
-	#category : #'Pakbot-Browser-Actions'
+	#category : #'Pakbot-Browser-Commands'
 }
 
 { #category : #'instance creation' }
@@ -24,9 +24,9 @@ PBLoadAssemblyAction class >> forProject: aProject [
 ]
 
 { #category : #testing }
-PBLoadAssemblyAction class >> isAvailableFor: aProject [
+PBLoadAssemblyCommand class >> isAvailableFor: aProject [
 
-	^ aProject assemblies isEmpty not
+	^ aProject assemblies isNotEmpty
 ]
 
 { #category : #'instance creation' }
@@ -41,32 +41,32 @@ PBLoadAssemblyAction class >> on: aProject [
 ]
 
 { #category : #accessing }
-PBLoadAssemblyAction >> assembly: anAssembly [ 
+PBLoadAssemblyCommand >> assembly: anAssembly [ 
 
 	assembly := anAssembly
 ]
 
 { #category : #accessing }
-PBLoadAssemblyAction >> description [
+PBLoadAssemblyCommand >> description [
 
 	^ 'Loads the packages of this assembly and their dependencies.
 Packages not belonging to this asembly will not be loaded.'
 ]
 
-{ #category : #execution }
-PBLoadAssemblyAction >> doExecute [
+{ #category : #executing }
+PBLoadAssemblyCommand >> doExecute [
 
 	assembly load
 ]
 
 { #category : #accessing }
-PBLoadAssemblyAction >> iconName [
+PBLoadAssemblyCommand >> iconName [
 
 	^ #group
 ]
 
 { #category : #accessing }
-PBLoadAssemblyAction >> name [
+PBLoadAssemblyCommand >> name [
 
 	^ 'Load {1} assembly' format: { assembly name }
 ]

@@ -19,7 +19,7 @@ PBLoadProjectPresenter class >> example [
 { #category : #accessing }
 PBLoadProjectPresenter >> availableRepairOptions [
 	
-	^ PBLoadProjectAction allAvailableFor: self project
+	^ PBLoadProjectCommand allAvailableFor: self project
 ]
 
 { #category : #layout }
