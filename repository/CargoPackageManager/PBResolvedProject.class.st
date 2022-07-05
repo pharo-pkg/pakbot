@@ -167,7 +167,7 @@ PBResolvedProject >> isInstalled [
 { #category : #testing }
 PBResolvedProject >> isInstalledInImage [
 	"tells if this project is already installed into the image (no need to load it).
-	It is used for Metacello projects not loaded through Cargo but installed and registered in Metacello registry"
+	It is used for Metacello projects not loaded through Pakbot but installed and registered in Metacello registry"
 	^ isInstalledInImage 
 ]
 

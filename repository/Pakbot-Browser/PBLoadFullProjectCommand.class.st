@@ -22,7 +22,7 @@ PBLoadFullProjectCommand >> description [
 { #category : #executing }
 PBLoadFullProjectCommand >> doExecute [
 	
-	project load
+	self project load
 ]
 
 { #category : #accessing }
