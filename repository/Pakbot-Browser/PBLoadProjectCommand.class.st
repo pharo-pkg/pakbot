@@ -16,6 +16,14 @@ PBLoadProjectCommand class >> allAvailableFor: aProject [
 		thenCollect: [ :aClass | aClass forProject: aProject ]) flattened
 ]
 
+{ #category : #'instance creation' }
+PBLoadProjectCommand class >> forProject: aProject [
+
+	^ self new
+		  project: aProject;
+		  yourself
+]
+
 { #category : #testing }
 PBLoadProjectCommand class >> isAvailableFor: aProject [
 

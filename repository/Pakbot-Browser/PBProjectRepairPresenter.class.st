@@ -20,7 +20,7 @@ PBProjectRepairPresenter class >> example [
 ]
 
 { #category : #accessing }
-PBProjectRepairPresenter >> availableRepairOptions [
+PBProjectRepairPresenter >> availableOptions [
 	
 	^ PBRepairProjectAction allAvailableFor: self project
 ]

@@ -44,6 +44,7 @@ PBPackageRepository >> fileForPackageNamed: aPackageName version: aVersionString
 
 { #category : #accessing }
 PBPackageRepository >> packages [
+
 	^ root directoryNames reject: [ :each | each beginsWith: '.' ]
 ]
 
@@ -68,4 +69,14 @@ PBPackageRepository >> saveProject: aPBProjectVersion [
 		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
 	file parent ensureCreateDirectory.
 	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].
+]
+
+{ #category : #accessing }
+PBPackageRepository >> versionsFor: aPackageName [
+	| prefixSize |
+	
+	prefixSize := aPackageName size + 1.
+
+	^ (root / aPackageName) files
+		collect: [ :file | file basenameWithoutExtension allButFirst: prefixSize ]
 ]

@@ -22,7 +22,7 @@ PBProjectOptionPresenter >> accept [
 ]
 
 { #category : #accessing }
-PBProjectOptionPresenter >> availableRepairOptions [
+PBProjectOptionPresenter >> availableOptions [
 
 	self subclassResponsibility
 ]
@@ -65,7 +65,7 @@ PBProjectOptionPresenter >> initializePresenters [
 				evaluated: [ :option | option name ];
 				yourself);
 			yourself);
-		items: self availableRepairOptions;
+		items: self availableOptions;
 		whenSelectionChangedDo: [ :selection | self selectionChanged ];
 		whenActivatedDo: [ :selection | selection ifNotNil: [ self accept ] ];
 		yourself.

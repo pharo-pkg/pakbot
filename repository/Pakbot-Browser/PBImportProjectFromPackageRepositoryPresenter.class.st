@@ -7,10 +7,19 @@ Class {
 	#superclass : #SpOptionPresenter,
 	#instVars : [
 		'repositoryUrlInputText',
-		'packageList'
+		'packageList',
+		'versionList'
 	],
 	#category : #'Pakbot-Browser-Presenters-NewProject'
 }
+
+{ #category : #initialization }
+PBImportProjectFromPackageRepositoryPresenter >> connectPresenters [
+
+	packageList
+		transmitTo: versionList
+		transform: [ :projectName | self packageRepository versionsFor: projectName ]
+]
 
 { #category : #layout }
 PBImportProjectFromPackageRepositoryPresenter >> defaultLayout [
@@ -19,8 +28,17 @@ PBImportProjectFromPackageRepositoryPresenter >> defaultLayout [
 		spacing: 5; 
 		add: 'Package Repository Url:' expand: false;
 		add: repositoryUrlInputText expand: false;
-		add: 'Packages:' expand: false;
-		add: packageList;
+		add: (SpBoxLayout newLeftToRight
+			spacing: 10;
+			add: (SpBoxLayout newTopToBottom 
+				add: 'Projects:' expand: false;
+				add: packageList;
+				yourself);
+			add: (SpBoxLayout newTopToBottom 
+				add: 'Versions:' expand: false;
+				add: versionList;
+				yourself);
+			yourself);
 		yourself
 ]
 
@@ -29,23 +47,24 @@ PBImportProjectFromPackageRepositoryPresenter >> doAccept [
 
 	| project |
 	
-	self flag: 'TODO'.
-		
 	project := self fetchSelectedProject ifNil: [ ^ self ].
 	
 	project registry: self application registry.
-	"(PBLoadProjectDialog onProject: project) openDialog."
+	(PBLoadProjectPresenter on: project) 
+		application: self application;
+		openDialog.
 	^ project
 ]
 
 { #category : #actions }
 PBImportProjectFromPackageRepositoryPresenter >> fetchSelectedProject [
 
-	| project |
 	packageList selectedItem ifNil: [ ^ nil ].
-	project := packageList selectedItem.
-	
-	self packageRepository fetch: project name version: project version.
+	versionList selectedItem ifNil: [ ^ nil ].
+
+	^ self packageRepository
+		  fetch: packageList selectedItem
+		  version: versionList selectedItem
 ]
 
 { #category : #initialization }
@@ -58,6 +77,8 @@ PBImportProjectFromPackageRepositoryPresenter >> initializePresenters [
 	packageList := self newList 
 		items: self packageRepository packages;
 		yourself.
+		
+	versionList := self newList.
 ]
 
 { #category : #'option list presenter' }
