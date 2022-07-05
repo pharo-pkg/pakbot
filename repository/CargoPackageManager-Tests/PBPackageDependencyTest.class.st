@@ -1,16 +1,16 @@
 Class {
-	#name : #CGOPackageDependencyTest,
+	#name : #PBPackageDependencyTest,
 	#superclass : #CGOTest,
 	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #accessing }
-CGOPackageDependencyTest class >> resources [
+PBPackageDependencyTest class >> resources [
 	^ #()
 ]
 
 { #category : #'tests-accessing' }
-CGOPackageDependencyTest >> testCanCreateDependencyFromNonScopedPackage [
+PBPackageDependencyTest >> testCanCreateDependencyFromNonScopedPackage [
 	| dependency |
 	dependency := PBPackageDependency on: #Package.
 	
@@ -21,7 +21,7 @@ CGOPackageDependencyTest >> testCanCreateDependencyFromNonScopedPackage [
 ]
 
 { #category : #'tests-accessing' }
-CGOPackageDependencyTest >> testCanCreateDependencyFromScopedPackage [
+PBPackageDependencyTest >> testCanCreateDependencyFromScopedPackage [
 	| dependency |
 	dependency := PBPackageDependency on: #Project::Package.
 	
@@ -34,7 +34,7 @@ CGOPackageDependencyTest >> testCanCreateDependencyFromScopedPackage [
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromCollectionOfContstraintsShouldCreateSeveralConstraints [
+PBPackageDependencyTest >> testCreateDependencyFromCollectionOfContstraintsShouldCreateSeveralConstraints [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1.1' '=1.1.2' '=1.1.3').
@@ -42,7 +42,7 @@ CGOPackageDependencyTest >> testCreateDependencyFromCollectionOfContstraintsShou
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactFeatureDependencyNumberShouldHaveFixedVersionConstraint [
+PBPackageDependencyTest >> testCreateDependencyFromExactFeatureDependencyNumberShouldHaveFixedVersionConstraint [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1').
@@ -51,13 +51,13 @@ CGOPackageDependencyTest >> testCreateDependencyFromExactFeatureDependencyNumber
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactFeatureDependencyNumberShouldSucceed [
+PBPackageDependencyTest >> testCreateDependencyFromExactFeatureDependencyNumberShouldSucceed [
 
 	PBPackageDependency newFrom: #A -> #('=1.1')
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactMajorDependencyNumberShouldHaveFixedVersionConstraint [
+PBPackageDependencyTest >> testCreateDependencyFromExactMajorDependencyNumberShouldHaveFixedVersionConstraint [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1').
@@ -66,13 +66,13 @@ CGOPackageDependencyTest >> testCreateDependencyFromExactMajorDependencyNumberSh
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactMajorDependencyNumberShouldSucceed [
+PBPackageDependencyTest >> testCreateDependencyFromExactMajorDependencyNumberShouldSucceed [
 
 	PBPackageDependency newFrom: #A -> #('=1')
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberShouldHaveFixedVersionConstraint [
+PBPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberShouldHaveFixedVersionConstraint [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1.1').
@@ -81,13 +81,13 @@ CGOPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberSh
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberShouldSucceed [
+PBPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberShouldSucceed [
 
 	PBPackageDependency newFrom: #A -> #('=1.1.1')
 ]
 
 { #category : #'tests-accessing' }
-CGOPackageDependencyTest >> testCreateDependencyFromScopedPackage [
+PBPackageDependencyTest >> testCreateDependencyFromScopedPackage [
 	| dependency |
 	dependency := PBPackageDependency on: #Project::Package.
 	
@@ -100,7 +100,7 @@ CGOPackageDependencyTest >> testCreateDependencyFromScopedPackage [
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyWithNoConstraintsShouldCreateNoConstraints [
+PBPackageDependencyTest >> testCreateDependencyWithNoConstraintsShouldCreateNoConstraints [
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #().
 	
@@ -108,7 +108,7 @@ CGOPackageDependencyTest >> testCreateDependencyWithNoConstraintsShouldCreateNoC
 ]
 
 { #category : #'tests-creation' }
-CGOPackageDependencyTest >> testCreateDependencyWithoutEqualGeneratesAConstraint [
+PBPackageDependencyTest >> testCreateDependencyWithoutEqualGeneratesAConstraint [
 	| dep |
 
 	dep := PBPackageDependency newFrom: #A -> #('1.1.1').
@@ -119,7 +119,7 @@ CGOPackageDependencyTest >> testCreateDependencyWithoutEqualGeneratesAConstraint
 ]
 
 { #category : #'tests-serialization' }
-CGOPackageDependencyTest >> testDependencyLiteralReprensentationWithNoConstraintsShouldBeDependencyAssociationWithEmptyConstraintCollection [
+PBPackageDependencyTest >> testDependencyLiteralReprensentationWithNoConstraintsShouldBeDependencyAssociationWithEmptyConstraintCollection [
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #().
 
@@ -127,7 +127,7 @@ CGOPackageDependencyTest >> testDependencyLiteralReprensentationWithNoConstraint
 ]
 
 { #category : #'tests-serialization' }
-CGOPackageDependencyTest >> testDependencyLiteralRepresentationShouldBeDependencyAssociation [
+PBPackageDependencyTest >> testDependencyLiteralRepresentationShouldBeDependencyAssociation [
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.0.0').
 
@@ -135,7 +135,7 @@ CGOPackageDependencyTest >> testDependencyLiteralRepresentationShouldBeDependenc
 ]
 
 { #category : #'tests-version comparison' }
-CGOPackageDependencyTest >> testFeatureDependencyNumberShouldSemanticVersionEquivalent [
+PBPackageDependencyTest >> testFeatureDependencyNumberShouldSemanticVersionEquivalent [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1').
@@ -144,7 +144,7 @@ CGOPackageDependencyTest >> testFeatureDependencyNumberShouldSemanticVersionEqui
 ]
 
 { #category : #'tests-version comparison' }
-CGOPackageDependencyTest >> testMajorDependencyNumberShouldSemanticVersionEquivalent [
+PBPackageDependencyTest >> testMajorDependencyNumberShouldSemanticVersionEquivalent [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1').
@@ -153,7 +153,7 @@ CGOPackageDependencyTest >> testMajorDependencyNumberShouldSemanticVersionEquiva
 ]
 
 { #category : #'tests-version comparison' }
-CGOPackageDependencyTest >> testPatchDependencyNumberShouldSemanticVersionEquivalent [
+PBPackageDependencyTest >> testPatchDependencyNumberShouldSemanticVersionEquivalent [
 
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1.1').
