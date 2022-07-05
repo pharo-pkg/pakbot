@@ -192,6 +192,13 @@ PBMetacelloProject >> isMetacelloProject [
 	^ true
 ]
 
+{ #category : #testing }
+PBMetacelloProject >> isRegistered [
+	
+	^ registry notNil
+		and: [ registry isProjectRegistered: self ]
+]
+
 { #category : #'compatibility - package repository' }
 PBMetacelloProject >> isVirtual [
 	^ false
