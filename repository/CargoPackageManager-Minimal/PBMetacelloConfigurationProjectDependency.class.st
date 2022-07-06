@@ -39,20 +39,21 @@ PBMetacelloConfigurationProjectDependency class >> stonName [
 ]
 
 { #category : #'querying - installed' }
-PBMetacelloConfigurationProjectDependency >> isInstalledInMetacello [	
+PBMetacelloConfigurationProjectDependency >> isInstalledInMetacello [
+
 	| conf |
-	conf := self metacelloProjectRegistry configurationRegistry 
-		at: (#ConfigurationOf , name) 
-		ifAbsent: [ ^ false ].	
-	
-	^ version isSymbol ifTrue: [  
-		self isInstalledSymbolicVersion: conf.
-	] ifFalse: [  
-		conf version = version 
-			and: [ conf loadedInImage 
-			and: [ conf configurationProjectSpec loads isEmpty ] ]
-	]
-	
+	"If a configuration is already installed from a baseline, we consider it as a conflict
+	even if, in some cases, it could refer to the same version."
+	conf := self metacelloProjectRegistry configurationRegistry
+		        at: #ConfigurationOf , name
+		        ifAbsent: [ ^ false ].
+
+	^ version isSymbol
+		  ifTrue: [ self isInstalledSymbolicVersion: conf ]
+		  ifFalse: [ 
+			  conf version = version 
+				and: [ conf loadedInImage 
+					and: [ conf configurationProjectSpec loads isEmpty ] ] ]
 ]
 
 { #category : #testing }

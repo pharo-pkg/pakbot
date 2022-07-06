@@ -53,9 +53,12 @@ PBMetacelloBaselineProjectDependency >> icebergUrl [
 PBMetacelloBaselineProjectDependency >> isInstalledInMetacello [
 	| baseline |
 	
+	"If a baseline is already installed from a configuration, we consider it as a conflict
+	even if, in some cases, it could refer to the same version."
 	baseline := self metacelloProjectRegistry baselineRegistry 
 		at: #BaselineOf , name 
 		ifAbsent: [ ^ false ].
+		
 	^ (self isSameVersionAs: baseline currentVersionString)
 		and: [ baseline loadedInImage 
 			and: [ baseline baselineProjectSpec loads isEmptyOrNil ] ]
