@@ -49,10 +49,10 @@ PBResolvedDependency >> checkConflictsWithDependencies: aDependencyCollection [
 ]
 
 { #category : #conflicts }
-PBResolvedDependency >> checkConflictsWithRegistry: aCGOPackageRegistry [
+PBResolvedDependency >> checkConflictsWithRegistry: aPBPackageRegistry [
 
 	| conflicts |
-	conflicts := self conflictingInstalledProjects: aCGOPackageRegistry.
+	conflicts := self conflictingInstalledProjects: aPBPackageRegistry.
 	dependencyState := dependencyState withConflicts: conflicts.
 ]
 
@@ -71,9 +71,9 @@ PBResolvedDependency >> conflictingDependencies [
 ]
 
 { #category : #'conflict testing' }
-PBResolvedDependency >> conflictingInstalledProjects: aCGOPackageRegistry [
+PBResolvedDependency >> conflictingInstalledProjects: aPBPackageRegistry [
 	| conflicts |
-	conflicts := (aCGOPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), 
+	conflicts := (aPBPackageRegistry registeredProjects select: [ :each | each isConflictingWith: self ]), 
 						dependency additionalConflictingInstalledProjects.
 	^ conflicts collect: [ :each | PBInstalledDependency onResolved: (PBResolvedProject onProject: each)]
 ]
