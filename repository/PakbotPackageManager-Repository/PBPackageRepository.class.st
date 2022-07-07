@@ -12,13 +12,22 @@ Class {
 	#instVars : [
 		'root'
 	],
+	#classVars : [
+		'Default'
+	],
 	#category : #'PakbotPackageManager-Repository'
 }
 
 { #category : #accessing }
 PBPackageRepository class >> default [
 
-	^ self newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo'
+	^ Default ifNil: [ self newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo' ]
+]
+
+{ #category : #accessing }
+PBPackageRepository class >> default: aPBPackageRepository [
+
+	Default := aPBPackageRepository.
 ]
 
 { #category : #'instance creation' }
