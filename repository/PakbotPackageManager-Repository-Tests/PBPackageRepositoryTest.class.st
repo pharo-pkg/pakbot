@@ -1,8 +1,29 @@
 Class {
 	#name : #PBPackageRepositoryTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'repository'
+	],
 	#category : #'PakbotPackageManager-Repository-Tests'
 }
+
+{ #category : #helper }
+PBPackageRepositoryTest >> publishProjects: aListOfProjects [
+
+	| registry |
+	registry := PBPackageRegistry new.
+
+	aListOfProjects do: [ :association | 
+		association value do: [ :version | repository registerFakePackage: association key version: version ] ]
+]
+
+{ #category : #running }
+PBPackageRepositoryTest >> setUp [
+	super setUp.
+	
+	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+
+]
 
 { #category : #tests }
 PBPackageRepositoryTest >> tempIceRepository [
@@ -18,7 +39,7 @@ PBPackageRepositoryTest >> tempIceRepository [
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCanCreateALocalRepository [
-	| repository |
+
 	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
 	
 	self 
@@ -28,8 +49,8 @@ PBPackageRepositoryTest >> testCanCreateALocalRepository [
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCanFetchAProject [
-	| repository project published |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project published |
+
 	project := PBProjectVersion example.
 	project 
 		version: '1.0' asSemanticVersion;
@@ -48,9 +69,55 @@ PBPackageRepositoryTest >> testCanFetchAProject [
 ]
 
 { #category : #tests }
+PBPackageRepositoryTest >> testCanListPackageVersions [
+
+	| versions |
+	versions := #('1.0' '2.0' '2.1' '2.2' '3.0' '3.0.1' '3.1' '4.0').
+	
+	self publishProjects: 
+		{ #project1 -> #('1.0' '1.0.1') .
+		#project2 -> #('2.0') .
+		#project3 -> versions }.
+		
+	self
+		assertCollection: (repository versionsOf: #project3)
+		hasSameElements: versions
+]
+
+{ #category : #tests }
+PBPackageRepositoryTest >> testCanListPackages [
+
+	self publishProjects: 
+		{ #project1 -> #('1.0' '1.0.1') .
+		#project2 -> #('2.0') .
+		#project3 -> #('1.0' '2.0' '2.1' '2.2' '3.0' '3.0.1' '3.1' '4.0') }.
+		
+	self
+		assertCollection: repository packages
+		hasSameElements: #(project1 project2 project3)
+		
+]
+
+{ #category : #tests }
+PBPackageRepositoryTest >> testCanListUnknownPackageThrowsPackageNotFoundError [
+
+	| versions |
+	versions := #('1.0' '2.0' '2.1' '2.2' '3.0' '3.0.1' '3.1' '4.0').
+	
+	self publishProjects: 
+		{ #project1 -> #('1.0' '1.0.1') .
+		#project2 -> #('2.0') .
+		#project3 -> versions }.
+		
+	self
+		should: [ repository versionsOf: #unknownProject ]
+		raise: PBPackageNotFoundError
+]
+
+{ #category : #tests }
 PBPackageRepositoryTest >> testCanPublishAProject [ 
-	| repository project published |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project published |
+
 	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
@@ -81,8 +148,8 @@ PBPackageRepositoryTest >> testCanPublishAProject [
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCannotPublishAProjectHavingNonFixedVersion [
-	| repository project |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project |
+
 	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
@@ -105,8 +172,8 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenHavingDependencyOnNonFix
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished [
-	| repository project |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project |
+
 	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
@@ -125,8 +192,8 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWhenVersionAlreadyPublished 
 
 { #category : #tests }
 PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [ 
-	| repository project |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project |
+
 	project := PBProjectVersion example.
 	project 
 		registry: PBPackageRegistry new;
@@ -142,8 +209,8 @@ PBPackageRepositoryTest >> testCannotPublishAProjectWithNoRepository [
 
 { #category : #tests }
 PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublication [
-	| repository project |
-	repository := PBPackageRepository newLocalRepositoryIn: FileSystem memory root.
+	| project |
+
 	project := PBProjectVersion example.
 	project 
 		registry: PBPackageRegistry new;
@@ -161,17 +228,18 @@ PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublica
 
 { #category : #tests }
 PBPackageRepositoryTest >> testPublishedProjectHasASourceRepository [
-	| repository project fetchedProject |
-	repository := PBPackageRepository
-		newLocalRepositoryIn: FileSystem memory root.
+	| project fetchedProject |
+
 	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
 		repository: self tempIceRepository;
 		version: '1.1';
 		publishOn: repository.
+		
 	fetchedProject := repository
 		fetch: project name
 		version: project version.
+		
 	self assert: fetchedProject repository isValidRepository
 ]

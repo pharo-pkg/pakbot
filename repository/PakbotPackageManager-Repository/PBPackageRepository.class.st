@@ -15,6 +15,12 @@ Class {
 	#category : #'PakbotPackageManager-Repository'
 }
 
+{ #category : #accessing }
+PBPackageRepository class >> default [
+
+	^ self newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo'
+]
+
 { #category : #'instance creation' }
 PBPackageRepository class >> newLocalRepositoryIn: aFileReference [ 
 	^ self new 
@@ -68,4 +74,15 @@ PBPackageRepository >> saveProject: aPBProjectVersion [
 		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
 	file parent ensureCreateDirectory.
 	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].
+]
+
+{ #category : #accessing }
+PBPackageRepository >> versionsOf: aPackageName [
+	| prefixSize |
+	prefixSize := aPackageName size + 1.
+
+	^ [ (root / aPackageName) files
+		collect: [ :fileName | fileName basenameWithoutExtension allButFirst: prefixSize ] ]
+		on: DirectoryDoesNotExist 
+		do: [ PBPackageNotFoundError signal: aPackageName ]
 ]
