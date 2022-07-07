@@ -48,6 +48,12 @@ PBMetacelloBaselineProject >> basicLoad: aListOfPackageName [
 		load: aListOfPackageName asArray.
 ]
 
+{ #category : #accessing }
+PBMetacelloBaselineProject >> fullVersionString [
+	
+	^ self version, ' (Baseline from ' , self repository , ')'
+]
+
 { #category : #initialization }
 PBMetacelloBaselineProject >> initialize [
 	super initialize.

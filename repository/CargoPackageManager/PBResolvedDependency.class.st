@@ -88,6 +88,12 @@ PBResolvedDependency >> dependency: aDependency [
 	dependency := aDependency
 ]
 
+{ #category : #accessing }
+PBResolvedDependency >> fullVersionString [
+	
+	^ self originalResolution fullVersionString
+]
+
 { #category : #testing }
 PBResolvedDependency >> hasConflicts [
 	

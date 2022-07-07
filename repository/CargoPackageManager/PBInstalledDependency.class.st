@@ -24,6 +24,12 @@ PBInstalledDependency >> dependency [
 	^ resolved resolvedProjectVersion 
 ]
 
+{ #category : #accessing }
+PBInstalledDependency >> fullVersionString [
+
+		^ self originalResolution fullVersionString , ', Installed'
+]
+
 { #category : #testing }
 PBInstalledDependency >> isInstalledDependency [
 
