@@ -44,6 +44,12 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 	^ #MetacelloBaselineProject
 ]
 
+{ #category : #accessing }
+PBMetacelloBaselineProjectDependency >> fullVersionString [
+
+	^ self version, ' (Baseline from ' , self icebergUrl , ')'
+]
+
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> icebergUrl [
 	^ url asGitUrl scpUrl

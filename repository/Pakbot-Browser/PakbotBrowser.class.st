@@ -24,7 +24,7 @@ PakbotBrowser >> initialize [
 { #category : #accessing }
 PakbotBrowser >> packageRepository [
 	
-	^ packageRepository ifNil: [ PBPackageRepository newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo' ]
+	^ packageRepository ifNil: [ PBPackageRepository default ]
 ]
 
 { #category : #accessing }

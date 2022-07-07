@@ -111,6 +111,12 @@ PBResolvedProject >> fitsPlatformRequirements [
 	^ resolvedProjectVersion fitsPlatformRequirements
 ]
 
+{ #category : #accessing }
+PBResolvedProject >> fullVersionString [
+	
+	^ resolvedProjectVersion fullVersionString
+]
+
 { #category : #testing }
 PBResolvedProject >> hasConflicts [
 	

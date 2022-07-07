@@ -93,10 +93,10 @@ PBConflict >> resolveWithSelected [
 ]
 
 { #category : #resolving }
-PBConflict >> selectResolutionFromVersion: aSemanticVersion [
+PBConflict >> selectResolution: aResolvedProject [
+	aResolvedProject ifNil: [ ^ self ].
 
-	self selectedResolution: 
-		(self possibleResolutions detect: [ :each | each version = aSemanticVersion ]).
+	self selectedResolution: aResolvedProject.
 	self resolveWithSelected.
 ]
 

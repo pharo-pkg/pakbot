@@ -49,9 +49,10 @@ PBConflictsPresenter >> initializePresenters [
 		addColumn:
 			((SpDropListTableColumn 
 				title: 'Version to use' 
-				evaluated: [ :conflict | conflict possibleVersions ])
-			selectedItemChangedAction: [ :conflict :version | 
-				conflict selectResolutionFromVersion: version.
+				evaluated: [ :conflict | conflict dependencies asOrderedCollection ])
+			display: [ :resolvedOrInstalledDependency | resolvedOrInstalledDependency fullVersionString];
+			selectedItemChangedAction: [ :conflict :resolvedOrInstalledDependency |
+				conflict selectResolution: resolvedOrInstalledDependency resolution.
 				self updateOkButtonAndResolution ];
 			yourself);
 		items: self conflicts;
