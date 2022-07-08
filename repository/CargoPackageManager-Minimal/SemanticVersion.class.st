@@ -35,20 +35,20 @@ SemanticVersion class >> fromString: aString [
 	matcher := self parsingRegex.
 	(matcher matches: aString) ifFalse: [ ^ InvalidSemanticVersion fromString: aString ].
 	
-	major := matcher subexpression: 2.
-	minor := (matcher subexpression: 4) ifNil: [ '0' ].
-	patch := (matcher subexpression: 6) ifNil: [ '0' ].
+	major := (matcher subexpression: 2) asInteger.
+	minor := (matcher subexpression: 4) ifNotNil: [ :string | string asInteger ].
+	patch := (matcher subexpression: 6) ifNotNil: [ :string | string asInteger ].
 	suffix := (matcher subexpression: 8).
 	
 	^ self new
-		initializeWithMajor: major asInteger minor: minor asInteger patch: patch asInteger suffix: suffix;
+		initializeWithMajor: major minor: minor patch: patch suffix: suffix;
 		yourself.
 	
 ]
 
 { #category : #accessing }
 SemanticVersion class >> parsingRegex [
-	^ '(\d+)(\.(\d+)(\.(\d+))?)?(-(.+))?' asRegex
+	^ 'v?(\d+)(\.(\d+)(\.(\d+))?)?(-(.+))?' asRegex
 ]
 
 { #category : #private }

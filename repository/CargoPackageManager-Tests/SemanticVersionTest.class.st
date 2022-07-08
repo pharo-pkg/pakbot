@@ -40,8 +40,8 @@ SemanticVersionTest >> testExtractSuffixSuffixedVersionStringShouldReturnSuffix 
 { #category : #'tests-parsing' }
 SemanticVersionTest >> testPrintString [
 
-	self assertVersion: '2' printStringEquals: '2.0.0'.
-	self assertVersion: '1.2' printStringEquals: '1.2.0'.
+	self assertVersion: '2' printStringEquals: '2'.
+	self assertVersion: '1.2' printStringEquals: '1.2'.
 	self assertVersion: '1.1.3' printStringEquals: '1.1.3'.
 	self assertVersion: '1.1.3-RC1' printStringEquals: '1.1.3-RC1'
 ]
@@ -55,7 +55,8 @@ SemanticVersionTest >> testRegEx [
 	self assert: (SemanticVersion parsingRegex matches: '1.0.1').
 	self assert: (SemanticVersion parsingRegex matches: '1-ASD').
 	self assert: (SemanticVersion parsingRegex matches: '1.1-aa').
-	self assert: (SemanticVersion parsingRegex matches: '1.0.1-aaa')
+	self assert: (SemanticVersion parsingRegex matches: '1.0.1-aaa').
+	self assert: (SemanticVersion parsingRegex matches: 'v1.0')
 ]
 
 { #category : #'tests-comparison' }
@@ -97,13 +98,13 @@ SemanticVersionTest >> testVersionStringInvalidShouldFail [
 { #category : #'tests-parsing' }
 SemanticVersionTest >> testVersionStringWithMajorNumberShouldOnlyHaveMajorVersionNumber [
 
-	self assertVersionFromString: '2' major: 2 minor: 0 patch: 0 suffix: nil
+	self assertVersionFromString: '2' major: 2 minor: nil patch: nil suffix: nil
 ]
 
 { #category : #'tests-parsing' }
 SemanticVersionTest >> testVersionStringWithMinorNumberShouldOnlyHaveMajorAndMinorVersionNumber [
 
-	self assertVersionFromString: '1.2' major: 1 minor: 2 patch: 0 suffix: nil
+	self assertVersionFromString: '1.2' major: 1 minor: 2 patch: nil suffix: nil
 ]
 
 { #category : #'tests-parsing' }
@@ -121,13 +122,13 @@ SemanticVersionTest >> testVersionStringWithPatchNumberShouldOnlyHaveMajorAndMin
 { #category : #'tests-parsing' }
 SemanticVersionTest >> testVersionStringWithSuffixButNoMinorNorPatchNumberShouldHaveSuffix [
 
-	self assertVersionFromString: '1-RC1' major: 1 minor: 0 patch: 0 suffix: 'RC1'
+	self assertVersionFromString: '1-RC1' major: 1 minor: nil patch: nil suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
 SemanticVersionTest >> testVersionStringWithSuffixButNoPatchNumberShouldHaveSuffix [
 
-	self assertVersionFromString: '1.1-RC1' major: 1 minor: 1 patch: 0 suffix: 'RC1'
+	self assertVersionFromString: '1.1-RC1' major: 1 minor: 1 patch: nil suffix: 'RC1'
 ]
 
 { #category : #'tests-parsing' }
@@ -137,29 +138,19 @@ SemanticVersionTest >> testVersionStringWithSuffixShouldHaveSuffix [
 ]
 
 { #category : #'tests-comparison' }
-SemanticVersionTest >> testVersionWithNoMinorNumberShouldHaveMinorNumberEqualsToZero [
-	| v1 v2 |
-	
-	v1 := SemanticVersion fromString: '1'.
-	v2 := SemanticVersion fromString: '1.0'.
+SemanticVersionTest >> testVersionWithNoMinorNumberShouldNotBeEqualToVersionWithMinorNumberEqualsToZero [
 
-	self assert: self v1 equals: self v10.
+	self deny: self v1 equals: self v10.
 ]
 
 { #category : #'tests-comparison' }
-SemanticVersionTest >> testVersionWithNoMinorNumberShouldHavePatchNumberEqualsToZero [
-
-	self assert: self v1 equals: self v100.
-]
-
-{ #category : #'tests-comparison' }
-SemanticVersionTest >> testVersionWithNoPatchNumberShouldHavePatchNumberEqualsToZero [
+SemanticVersionTest >> testVersionWithNoPatchNumberShouldNotBeEqualToVersionWithPatchNumberEqualsToZero [
 	| v1 v2 |
 	
 	v1 := SemanticVersion fromString: '1.1'.
 	v2 := SemanticVersion fromString: '1.1.0'.
 
-	self assert: self v11 equals: self v110.
+	self deny: self v11 equals: self v110.
 ]
 
 { #category : #'tests-development versions' }

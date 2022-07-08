@@ -170,6 +170,15 @@ PBGitRepository >> hasBaseline [
 ]
 
 { #category : #testing }
+PBGitRepository >> hasTag: aSemanticVersion [
+
+	| versionString |
+	versionString := aSemanticVersion asString.
+	^ (self iceRepository hasTagNamed: versionString)
+		or: [ self iceRepository hasTagNamed: 'v', versionString ]
+]
+
+{ #category : #testing }
 PBGitRepository >> hasTagNamed: aString [ 
 	^ self iceRepository hasTagNamed: aString
 ]
@@ -293,7 +302,7 @@ PBGitRepository >> pakbotProjectFromMetacelloBaseline [
 	baselinePackage := self baselines first load.
 	baseline := self class environment at: baselinePackage name asSymbol.
 	project := PBBaselineVisitor projectFor: baseline.
-	project version: (SemanticVersion fromString: self headCommit id).
+	project version: (SemanticVersion fromString: self version).
 	^ project
 ]
 
