@@ -71,6 +71,7 @@ PBImportProjectFromPackageRepositoryPresenter >> fetchSelectedProject [
 PBImportProjectFromPackageRepositoryPresenter >> initializePresenters [ 
 	
 	repositoryUrlInputText := self newTextInput 
+		text: self packageRepository url;
 		placeholder: 'e.g., https://github.com/pharo-pkg/project-repository';
 		yourself.
 	

@@ -71,6 +71,12 @@ PBGitBasedPackageRepository >> saveProject: aPBProjectVersion [
 ]
 
 { #category : #accessing }
+PBGitBasedPackageRepository >> url [
+	
+	^ repository repositoryUrl
+]
+
+{ #category : #accessing }
 PBGitBasedPackageRepository >> workingCopy [
 	^ self iceRepository workingCopy
 ]

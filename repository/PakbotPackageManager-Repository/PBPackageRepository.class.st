@@ -87,6 +87,12 @@ PBPackageRepository >> saveProject: aPBProjectVersion [
 ]
 
 { #category : #accessing }
+PBPackageRepository >> url [
+	
+	^ root fullName
+]
+
+{ #category : #accessing }
 PBPackageRepository >> versionsOf: aPackageName [
 	| prefixSize |
 	prefixSize := aPackageName size + 1.
