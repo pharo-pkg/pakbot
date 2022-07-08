@@ -20,5 +20,5 @@ PBPublishProjectCommand >> asSpecCommand [
 { #category : #executing }
 PBPublishProjectCommand >> execute [
 
-	project publish
+	self project publish
 ]

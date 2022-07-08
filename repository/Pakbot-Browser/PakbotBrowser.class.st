@@ -33,6 +33,12 @@ PakbotBrowser >> registry [
 ]
 
 { #category : #accessing }
+PakbotBrowser >> registry: aPBRegistry [
+	
+	registry := aPBRegistry
+]
+
+{ #category : #accessing }
 PakbotBrowser >> start [ 
 	(self newPresenter: PBBrowserMainPresenter) open
 ]

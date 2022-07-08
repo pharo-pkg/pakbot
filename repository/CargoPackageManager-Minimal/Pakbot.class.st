@@ -10,8 +10,13 @@ Class {
 	#classVars : [
 		'PlatformAttributes'
 	],
-	#category : #'CargoPackageManager-Model'
+	#category : #'CargoPackageManager-Minimal'
 }
+
+{ #category : #accessing }
+Pakbot class >> defaultPackageRepository [
+	^ PBPackageRepository default
+]
 
 { #category : #private }
 Pakbot class >> platformAttributes [

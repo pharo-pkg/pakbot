@@ -602,7 +602,7 @@ PBProjectVersion >> project [
 { #category : #publishing }
 PBProjectVersion >> publish [
 	
-	self publishOn: Cargo defaultPackageRepository
+	self publishOn: Pakbot defaultPackageRepository
 ]
 
 { #category : #publishing }

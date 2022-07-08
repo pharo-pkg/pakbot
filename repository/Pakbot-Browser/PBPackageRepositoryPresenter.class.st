@@ -37,6 +37,7 @@ PBPackageRepositoryPresenter >> initializePresenters [
 		
 	
 	versionList := self newFilteringList.
+	versionList listPresenter whenActivatedDo: [ self openProjectBrowserOnSelection ]
 ]
 
 { #category : #initialization }
@@ -45,6 +46,21 @@ PBPackageRepositoryPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'Pakbot repository browser';
 		initialExtent: 500@300
+]
+
+{ #category : #action }
+PBPackageRepositoryPresenter >> openProjectBrowserOnSelection [
+
+	| project version projectVersion registry |
+	project := projectList selectedItem.
+	version := versionList selectedItem.
+	projectVersion := self repository fetch: project version: version.
+	registry := PBPackageRegistry new.
+	registry registerProject: projectVersion.
+	
+	PakbotBrowser new
+		registry: registry;
+		start.
 ]
 
 { #category : #accessing }
