@@ -64,7 +64,7 @@ PBIcebergProject >> addToChangeBuilder: anIceChangeImporter [
 { #category : #writing }
 PBIcebergProject >> contentsString [
 
-	^ (CGOPackageVersionWriterV1 toStringPretty: pakbotProject asVcsSerializedCargoProject) withInternetLineEndings utf8Encoded
+	^ (PBPackageVersionWriterV1 toStringPretty: pakbotProject asVcsSerializedCargoProject) withInternetLineEndings utf8Encoded
 ]
 
 { #category : #initialization }

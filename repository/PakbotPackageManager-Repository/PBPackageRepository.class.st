@@ -81,7 +81,7 @@ PBPackageRepository >> saveProject: aPBProjectVersion [
 			^ self ].
 	
 	fileContent := String streamContents: [ :stream | 
-		stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
+		stream nextPutAll: (PBPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
 	file parent ensureCreateDirectory.
 	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].
 ]

@@ -288,7 +288,7 @@ PBGitRepository >> mcVersionFor: aPBPackage [
 
 { #category : #private }
 PBGitRepository >> metadataStringFor: aPackageUnit [
-	^ (CGOPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
+	^ (PBPackageVersionWriterV1 toStringPretty: aPackageUnit asPackageVersion asSerializablePackageVersion) withInternetLineEndings
 
 ]
 

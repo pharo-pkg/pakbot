@@ -30,7 +30,7 @@ PBIcebergProjectReader >> readProjectFromCommitish: aCommitish [
 				on: (ZnCharacterReadStream on: stream encoding: 'utf8').
 			version := stonReader next at: #version.
 			properties := stonReader next ].
-	pakbotProject := CGOPackageVersionWriterV1
+	pakbotProject := PBPackageVersionWriterV1
 		deserializeVcsProject: properties
 		version: version.
 	^ (PBIcebergProject onCommitish: aCommitish project: pakbotProject)

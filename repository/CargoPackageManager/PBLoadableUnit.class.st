@@ -48,7 +48,7 @@ PBLoadableUnit class >> fromStonString: aStonString [
 	version := reader next at: #version.
 	project:= reader next.
 
-	^ CGOPackageVersionWriterV1 deserializeProject: project version: version.
+	^ PBPackageVersionWriterV1 deserializeProject: project version: version.
 	
 
 ]
@@ -60,7 +60,7 @@ PBLoadableUnit class >> fromVcsStonString: aStonString [
 	version := reader next at: #version.
 	project:= reader next.
 
-	^ CGOPackageVersionWriterV1 deserializeVcsProject: project version: version.
+	^ PBPackageVersionWriterV1 deserializeVcsProject: project version: version.
 	
 
 ]

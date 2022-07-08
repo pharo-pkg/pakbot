@@ -9,7 +9,7 @@ Class {
 		'packageName',
 		'versionNumber'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #defaults }
@@ -47,6 +47,6 @@ CGOPackageVersionCache >> saveDescription: aPackageVersion [
 	| fileRef |
 	aPackageVersion ifNil: [ ^ self ].
 	fileRef := self packageDescriptionCache / aPackageVersion asString asLowercase.
-	fileRef writeStreamDo: [ :stream | stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: aPackageVersion) ]
+	fileRef writeStreamDo: [ :stream | stream nextPutAll: (PBPackageVersionWriterV1 toStringPretty: aPackageVersion) ]
 	"Maybe we can have better performances by getting directly the STON string before the conversion in objects"
 ]

@@ -40,7 +40,7 @@ CGORemoteRepositoryProxy >> initialize [
 		accept: ZnMimeType applicationSton;
 		enforceHttpSuccess: true;
 		contentReader: [ :entity | entity ifNotNil: [ STON fromString: entity contents ] ];
-		contentWriter: [ :object | ZnEntity with: (CGOPackageVersionWriterV1 toStringPretty: object) type: ZnMimeType applicationSton ];
+		contentWriter: [ :object | ZnEntity with: (PBPackageVersionWriterV1 toStringPretty: object) type: ZnMimeType applicationSton ];
 		yourself
 ]
 
@@ -111,7 +111,7 @@ CGORemoteRepositoryProxy >> savePackageVersion: aPackageVersion [
 		addPathSegment: 'packages';
 		addPathSegment: aPackageVersion packageName asString;
 		addPathSegment: aPackageVersion version asString;
-		entity: ( (ZnEntity text: (CGOPackageVersionWriterV1 toStringPretty: aPackageVersion))
+		entity: ( (ZnEntity text: (PBPackageVersionWriterV1 toStringPretty: aPackageVersion))
 						contentType: ZnMimeType applicationSton );
 		post ]
 	on: ZnHttpUnsuccessful 

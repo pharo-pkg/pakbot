@@ -5,7 +5,7 @@ Class {
 		'pkgVersionReference',
 		'pkgVersionString'
 	],
-	#category : 'CargoPackageManager-FailingTests-Model'
+	#category : #'CargoPackageManager-FailingTests-Model'
 }
 
 { #category : #tests }
@@ -18,7 +18,7 @@ CGOPackageVersionReferenceTest >> assertIsExpectedPackageVersion: packageVersion
 
 { #category : #input }
 CGOPackageVersionReferenceTest >> packageVersionDescription [
-	^ CGOPackageVersionWriterV1 toStringPretty: self resolvedProjectVersion
+	^ PBPackageVersionWriterV1 toStringPretty: self resolvedProjectVersion
 ]
 
 { #category : #input }

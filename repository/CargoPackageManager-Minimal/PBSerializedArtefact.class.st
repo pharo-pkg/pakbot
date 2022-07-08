@@ -36,7 +36,7 @@ PBSerializedArtefact >> addPropertyNamed: aString ifNotEmptyOrNil: aCollection [
 
 { #category : #serialization }
 PBSerializedArtefact >> asString [
-	^ CGOPackageVersionWriterV1 toStringPretty: dict
+	^ PBPackageVersionWriterV1 toStringPretty: dict
 ]
 
 { #category : #serialization }

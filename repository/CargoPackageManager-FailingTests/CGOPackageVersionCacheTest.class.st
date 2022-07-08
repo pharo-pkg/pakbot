@@ -4,7 +4,7 @@ A PMPackageDescriptionCacheTest is a test class for testing the behavior of PMPa
 Class {
 	#name : #CGOPackageVersionCacheTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-FailingTests-Model'
+	#category : #'CargoPackageManager-FailingTests-Model'
 }
 
 { #category : #'tests-decoding' }
@@ -38,7 +38,7 @@ CGOPackageVersionCacheTest >> testFetchDescription [
 	| pkgVersionString pkgVersion stonDescription fileRef |
 	
 	pkgVersionString := 'Seaside-Core@3.1.0'.
-	stonDescription := CGOPackageVersionWriterV1 toStringPretty: (self packageVersions detect: [:each | each asString = pkgVersionString ]).
+	stonDescription := PBPackageVersionWriterV1 toStringPretty: (self packageVersions detect: [:each | each asString = pkgVersionString ]).
 	fileRef := CGOPackageVersionCache packageDescriptionCache asFileReference / pkgVersionString asLowercase.
 	fileRef ensureDelete.
 	fileRef writeStreamDo: [ :stream | stream nextPutAll: stonDescription ].

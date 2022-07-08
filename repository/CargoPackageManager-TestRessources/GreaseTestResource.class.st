@@ -10,7 +10,7 @@ Class {
 		'versionReferences',
 		'cargoRepository'
 	],
-	#category : 'CargoPackageManager-TestRessources-Resources'
+	#category : #'CargoPackageManager-TestRessources-Resources'
 }
 
 { #category : #'data - cargo package versions' }
@@ -512,5 +512,5 @@ GreaseTestResource >> writePackageVersions: aListOfPackageVersions to: aFolder [
 		do: [ :pkgVersion |
 			(aFolder / pkgVersion packageName asLowercase) ensureCreateDirectory.
 			aFolder / pkgVersion packageName asLowercase / pkgVersion name asLowercase
-				writeStreamDo: [ :stream | stream nextPutAll: (CGOPackageVersionWriterV1 toStringPretty: pkgVersion) ] ].
+				writeStreamDo: [ :stream | stream nextPutAll: (PBPackageVersionWriterV1 toStringPretty: pkgVersion) ] ].
 ]

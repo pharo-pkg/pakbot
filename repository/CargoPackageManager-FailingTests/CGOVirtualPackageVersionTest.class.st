@@ -26,7 +26,7 @@ CGOVirtualPackageVersionTest >> testAsPackageVersionReference [
 { #category : #tests }
 CGOVirtualPackageVersionTest >> testCanDeserialize [
 	| stonString virtualPkgVersion |
-	stonString := CGOPackageVersionWriterV1
+	stonString := PBPackageVersionWriterV1
 		toStringPretty: self mailVirtualPackage.
 	
 	virtualPkgVersion := STON fromString: stonString.
@@ -42,7 +42,7 @@ CGOVirtualPackageVersionTest >> testCanDeserialize [
 { #category : #tests }
 CGOVirtualPackageVersionTest >> testCanSerializeInSTON [
 	| stonString |
-	stonString := CGOPackageVersionWriterV1 toStringPretty: self mailVirtualPackage.
+	stonString := PBPackageVersionWriterV1 toStringPretty: self mailVirtualPackage.
 	
 	self
 		assert: stonString

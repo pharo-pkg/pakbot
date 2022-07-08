@@ -26,7 +26,7 @@ SemanticVersionTest >> assertVersionFromString: aString major: major minor: mino
 
 { #category : #helpers }
 SemanticVersionTest >> stonSerializationFor: aString [
-	^ CGOPackageVersionWriterV1 toStringPretty: (SemanticVersion fromString: aString)
+	^ PBPackageVersionWriterV1 toStringPretty: (SemanticVersion fromString: aString)
 ]
 
 { #category : #'tests-parsing' }
