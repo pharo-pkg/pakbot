@@ -49,14 +49,20 @@ PBBrowserMainPresenter >> connectPresenters [
 ]
 
 { #category : #layout }
-PBBrowserMainPresenter >> defaultLayout [ 
-	^ SpBoxLayout newTopToBottom
-		add: toolbar expand: false;
-		add: (SpPanedLayout newLeftToRight
+PBBrowserMainPresenter >> coreLayout [ 
+	^ SpPanedLayout newLeftToRight
 			add: projectsTree;
 			add: descriptionPanel;
 			positionOfSlider: 0.4;
-			yourself);
+			yourself
+	
+]
+
+{ #category : #layout }
+PBBrowserMainPresenter >> defaultLayout [ 
+	^ SpBoxLayout newTopToBottom
+		add: toolbar expand: false;
+		add: self coreLayout;
 		yourself
 	
 ]
@@ -66,6 +72,15 @@ PBBrowserMainPresenter >> delete [
 	
 	super delete.
 	self unsubscribe.
+]
+
+{ #category : #configuring }
+PBBrowserMainPresenter >> disableActions [
+	"useful when used to present data that is not part of the system"
+	
+	self layout: self coreLayout.
+	projectsTree contextMenu: nil.
+	
 ]
 
 { #category : #initialization }

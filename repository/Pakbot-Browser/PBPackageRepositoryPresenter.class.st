@@ -60,7 +60,7 @@ PBPackageRepositoryPresenter >> openProjectBrowserOnSelection [
 	
 	PakbotBrowser new
 		registry: registry;
-		start.
+		startWithoutActions.
 ]
 
 { #category : #accessing }

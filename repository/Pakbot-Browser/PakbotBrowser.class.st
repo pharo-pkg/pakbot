@@ -22,6 +22,12 @@ PakbotBrowser >> initialize [
 ]
 
 { #category : #accessing }
+PakbotBrowser >> mainPresenter [ 
+	
+	^ self newPresenter: PBBrowserMainPresenter
+]
+
+{ #category : #accessing }
 PakbotBrowser >> packageRepository [
 	
 	^ packageRepository ifNil: [ PBPackageRepository default ]
@@ -38,7 +44,14 @@ PakbotBrowser >> registry: aPBRegistry [
 	registry := aPBRegistry
 ]
 
-{ #category : #accessing }
+{ #category : #actions }
 PakbotBrowser >> start [ 
-	(self newPresenter: PBBrowserMainPresenter) open
+	self mainPresenter open
+]
+
+{ #category : #actions }
+PakbotBrowser >> startWithoutActions [
+	self mainPresenter 
+		disableActions;
+		open
 ]
