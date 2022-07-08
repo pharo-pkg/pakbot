@@ -12,6 +12,15 @@ Class {
 }
 
 { #category : #initialization }
+PBPackageRepositoryPresenter >> buildContextMenu [
+		
+	^ SpMenuPresenter new 
+			addItem: [ :subMenuItem | subMenuItem name: 'Inspect project'; action: [ self inspect ] ];
+			addItem: [ :subMenuItem | subMenuItem name: 'Inspect metadata file'; action: [ self inspectSelectedProjectMetadataFile ] ];
+			yourself
+]
+
+{ #category : #initialization }
 PBPackageRepositoryPresenter >> connectPresenters [
 
 	projectList
@@ -37,7 +46,9 @@ PBPackageRepositoryPresenter >> initializePresenters [
 		
 	
 	versionList := self newFilteringList.
-	versionList listPresenter whenActivatedDo: [ self openProjectBrowserOnSelection ]
+	versionList listPresenter 
+		contextMenu: self buildContextMenu;
+		whenActivatedDo: [ self openProjectBrowserOnSelection ]
 ]
 
 { #category : #initialization }
@@ -46,6 +57,16 @@ PBPackageRepositoryPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'Pakbot repository browser';
 		initialExtent: 500@300
+]
+
+{ #category : #action }
+PBPackageRepositoryPresenter >> inspectSelectedProjectMetadataFile [
+
+	| project version |
+	project := projectList selectedItem.
+	version := versionList selectedItem.
+	
+	(self repository fileForPackageNamed: project version: version) inspect.
 ]
 
 { #category : #action }
