@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : #initialization }
-PBSerializedPackage >> initializeWithPackage: aCGOOngoingPackageUnit [
-	super initializeWithPackage: aCGOOngoingPackageUnit.
+PBSerializedPackage >> initializeWithPackage: aPBPackage [
+	super initializeWithPackage: aPBPackage.
 	"self 
 		addPropertyNamed: #dependencies 
 		ifNotEmptyOrNil: (self serializedDependenciesOf: aCGOOngoingPackageUnit dependencies)."

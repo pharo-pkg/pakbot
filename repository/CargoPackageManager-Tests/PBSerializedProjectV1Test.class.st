@@ -12,12 +12,50 @@ PBSerializedProjectV1Test >> serializedPropertiesOfDependencies: aListOfResolved
 ]
 
 { #category : #'expected values' }
+PBSerializedProjectV1Test >> stonStringForProjectWithAssemblies [
+	^ '{#version:''1.0''}
+{
+	#name : #MyProject,
+	#description : ''A simple project used for illustration.'',
+	#version : ''1.0'',
+	#units : [
+		{
+			#name : #Unit1,
+			#description : ''''
+		},
+		{
+			#name : #Unit2,
+			#description : ''''
+		},
+		{
+			#name : #UnitTest,
+			#description : ''A simple ongoing package unit.''
+		}
+	],
+	#assemblies : [
+		{
+			#name : #TestAssembly,
+			#description : ''A simple ongoing package assembly.'',
+			#parts : [
+				''Unit1'',
+				''Unit2''
+			]
+		}
+	],
+	#repositoryUrl : {
+		#type : #git,
+		#repositoryUrl : ''git://git@github.com/foo/bar.git''
+	}
+}' withInternetLineEndings
+]
+
+{ #category : #'expected values' }
 PBSerializedProjectV1Test >> stonStringForProjectWithDependencies [
 	^ '{#version:''1.0''}
 {
 	#name : #PharoLauncher,
 	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
-	#version : ''1.0.0'',
+	#version : ''1.0'',
 	#dependencies : [
 		{
 			#baseline : #OSSubprocess,
@@ -49,7 +87,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 {
 	#name : #PharoLauncher,
 	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
-	#version : ''1.0.0'',
+	#version : ''1.0'',
 	#units : [
 		{
 			#name : #PharoLauncher-80Compatibility,
@@ -102,7 +140,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
-	#version : ''1.0.0'',
+	#version : ''1.0'',
 	#units : [
 		{
 			#name : #UnitTest,
@@ -160,6 +198,28 @@ PBSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 		assertCollection: packageUnit platformRequirements 
 		hasSameElements: #()
 	
+]
+
+{ #category : #tests }
+PBSerializedProjectV1Test >> testCanSerializeProjectWithAssemblies [
+	| serializedProject project |
+	
+	project := PBProjectVersion example 
+		version: '1.0' asSemanticVersion;
+		registry: PBPackageRegistry new;
+		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
+		yourself.	
+	
+	project 
+		newNotLoadedPackage: #Unit1;
+		newNotLoadedPackage: #Unit2;
+		addAssembly: PBAssembly example.
+		
+	serializedProject := project asSerializedPackage.
+		
+	self
+		assert: serializedProject asString
+		equals: self stonStringForProjectWithAssemblies 
 ]
 
 { #category : #tests }
