@@ -38,7 +38,7 @@ PBMetacelloRepositorySpec class >> hostFromScheme: scheme [
 
 { #category : #accessing }
 PBMetacelloRepositorySpec class >> metacelloSupportedSchemes [
-	^ MCGitBasedNetworkRepository subclasses collect: #basicDescription
+	^ (MCGitBasedNetworkRepository subclasses collect: #basicDescription) copyWith: 'gitlocal'
 ]
 
 { #category : #private }
@@ -87,6 +87,12 @@ PBMetacelloRepositorySpec >> asMetacelloUrl [
 			with: 'project' -> self project
 			with: 'version' -> (self version ifNil: [ '' ] ifNotNil: [ ':', self version ])
 			with: 'repositoryPath' -> (self repositoryPath  ifNil: [ '' ] ifNotNil: [ '/', self repositoryPath ]) )
+]
+
+{ #category : #accessing }
+PBMetacelloRepositorySpec >> basicUrl [
+
+	^ url
 ]
 
 { #category : #accessing }

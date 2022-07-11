@@ -1,6 +1,6 @@
 Class {
 	#name : #PBMetacelloRepositorySpecTest,
-	#superclass : #TestCase,
+	#superclass : #FileTestCase,
 	#category : #'CargoPackageManager-Tests-SCM'
 }
 
@@ -193,6 +193,19 @@ PBMetacelloRepositorySpecTest >> testCanParseGitHubUrlWithVersionAndRepositoryPa
 	self
 		assert: spec repositoryPath 
 		equals: 'repository'.	
+]
+
+{ #category : #tests }
+PBMetacelloRepositorySpecTest >> testCanParseGitLocalUrl [
+	| directory spec |
+	directory := self newTempDirectory.
+	spec := PBMetacelloRepositorySpec url: 'gitlocal://', directory fullName.
+	
+	self
+		assert: spec scheme
+		equals: 'gitlocal'.
+
+	self assert: (spec basicUrl endsWith: directory fullName).
 ]
 
 { #category : #tests }
