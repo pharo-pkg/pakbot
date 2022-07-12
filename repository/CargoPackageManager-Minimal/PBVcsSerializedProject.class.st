@@ -46,7 +46,7 @@ PBVcsSerializedProject >> asOngoingProject [
 	project packages do: [:package | package project: project ].
 	assemblies do: [:assembly |
 		project addAssembly: assembly.
-		assembly packages: (assembly parts collect: [ :partName | project packageOrAssemblyNamed: partName ]) ].
+		assembly packages: (assembly packages collect: [ :partName | project packageOrAssemblyNamed: partName ]) ].
 	
 	^ project 
 ]
@@ -104,7 +104,9 @@ PBVcsSerializedProject >> ongoingPackageAssembliesFrom: aCollection [
 
 { #category : #deserialization }
 PBVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
-	^ aCollection collect: [ :each | (PBVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]	
+
+	^ aCollection collect: [ :each | 
+		  (PBVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]
 ]
 
 { #category : #deserialization }

@@ -91,7 +91,9 @@ PBProjectVersion >> = other [
 { #category : #assemblies }
 PBProjectVersion >> addAssembly: anAssembly [
 	(assemblies includes: anAssembly)
-		ifTrue: [ PBPackageAlreadyRegistered signal ].		
+		ifTrue: [ PBPackageAlreadyRegistered signal ].	
+			
+	anAssembly project: self.	
 	assemblies add: anAssembly.
 	self announceChanged.
 
