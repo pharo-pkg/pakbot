@@ -60,6 +60,20 @@ SemanticVersionTest >> testRegEx [
 ]
 
 { #category : #'tests-comparison' }
+SemanticVersionTest >> testV1ShouldBeEqualsToV10 [
+
+	self assert: self v1 equals: self v10.
+	self assert: self v10 equals: self v1.
+]
+
+{ #category : #'tests-comparison' }
+SemanticVersionTest >> testV1ShouldBeEqualsToV100 [
+
+	self assert: self v1 equals: self v100.
+	self assert: self v100 equals: self v1.
+]
+
+{ #category : #'tests-comparison' }
 SemanticVersionTest >> testVersionShouldBeGreaterThanVersionWithEqualMajorAndSmallerMinorNumber [
 
 	self assert: self v11 > self v10.

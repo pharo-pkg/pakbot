@@ -67,8 +67,8 @@ SemanticVersion >> = other [
 	self species = other species ifFalse: [ ^ false ].
 
 	(self major = other major) ifFalse: [ ^ false ].
-	(self minor = other minor) ifFalse: [ ^ false ].
-	(self patch = other patch) ifFalse: [ ^ false ].
+	(self areEquals: minor and: other minor) ifFalse: [ ^ false ].
+	(self areEquals: patch and: other patch) ifFalse: [ ^ false ].
 	(self suffix = other suffix) ifFalse: [ ^ false ].
 	^ true
 ]
@@ -86,6 +86,17 @@ SemanticVersion >> > other [
 		ifNotNil: [ other suffix
 					ifNil: [ false ]
 					ifNotNil: [ self suffix > other suffix ]  ]
+]
+
+{ #category : #private }
+SemanticVersion >> areEquals: a and: b [
+	"1.0 equals 1.0.0"
+
+	a = b ifTrue: [ ^ true ].
+	(a isNil and: [ b isZero ]) ifTrue: [ ^ true ].
+	(b isNil and: [ a isZero ]) ifTrue: [ ^ true ].
+	
+	^ false
 ]
 
 { #category : #converting }
