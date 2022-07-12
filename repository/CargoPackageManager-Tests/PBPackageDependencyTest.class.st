@@ -86,19 +86,6 @@ PBPackageDependencyTest >> testCreateDependencyFromExactPatchDependencyNumberSho
 	PBPackageDependency newFrom: #A -> #('=1.1.1')
 ]
 
-{ #category : #'tests-accessing' }
-PBPackageDependencyTest >> testCreateDependencyFromScopedPackage [
-	| dependency |
-	dependency := PBPackageDependency on: #Project::Package.
-	
-	self 
-		assert: dependency targetedPackage 
-		equals: 'Package'.
-	self 
-		assert: dependency scope
-		equals: 'Project'
-]
-
 { #category : #'tests-creation' }
 PBPackageDependencyTest >> testCreateDependencyWithNoConstraintsShouldCreateNoConstraints [
 	| dependency |
@@ -140,7 +127,7 @@ PBPackageDependencyTest >> testFeatureDependencyNumberShouldSemanticVersionEquiv
 	| dependency |
 	dependency := PBPackageDependency newFrom: #A -> #('=1.1').
 	
-	self assert: dependency constraints first version equals: '1.1.0' asSemanticVersion.
+	self assert: dependency constraints first version equals: '1.1' asSemanticVersion.
 ]
 
 { #category : #'tests-version comparison' }
