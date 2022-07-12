@@ -172,7 +172,7 @@ PBPackageDependency >> printOn: aStream [
 { #category : #accessing }
 PBPackageDependency >> project [
 	"project is not set on dependencies after deserialization from STON"
-	^ project ifNil: [ dependent project ]
+	^ project ifNil: [ dependent ifNotNil: [ :theDependent | theDependent project ] ]
 ]
 
 { #category : #solving }

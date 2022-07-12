@@ -58,7 +58,7 @@ PBPackageTest >> testCanSetProvisionsWhenPackageVersionNumberOmitted [
 	
 	self 
 		assert: unit provisions first
-		equals: 'A@2.0.0' asPackageVersionReference.
+		equals: 'A@2.0' asPackageVersionReference.
 	self 
 		assert: unit provisions second
 		equals: 'B@1.0.0' asPackageVersionReference.
@@ -110,6 +110,23 @@ PBPackageTest >> testPackageIsNotInstalledIfNoSystemPackageWithSameName [
 	package := project newNotLoadedPackage: #'BlaBla'.
 	
 	self deny: package isInstalled
+]
+
+{ #category : #tests }
+PBPackageTest >> testProjectIsUpdatedForDependenciesWhenProjectIsSet [
+
+	| unit |
+	unit := PBPackage example.
+	unit addDependency: (PBPackageDependency on: 'DependentPackage').	
+	self 
+		assert: unit dependencies first project
+		equals: unit project.
+
+
+	unit project: nil.
+	self 
+		assert: unit dependencies first project
+		equals: unit project.
 ]
 
 { #category : #'test data' }

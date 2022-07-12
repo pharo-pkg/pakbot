@@ -30,8 +30,9 @@ PBProjectElement >> project [
 ]
 
 { #category : #accessing }
-PBProjectElement >> project: aCGOOngoingProject [ 
-	project := aCGOOngoingProject
+PBProjectElement >> project: aPBProjectVersion [ 
+
+	project := aPBProjectVersion
 ]
 
 { #category : #accessing }

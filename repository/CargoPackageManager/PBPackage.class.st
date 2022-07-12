@@ -141,6 +141,13 @@ PBPackage >> platformRequirements: aListOfSymbols [
 ]
 
 { #category : #accessing }
+PBPackage >> project: aPBProjectVersion [ 
+
+	super project: aPBProjectVersion.
+	self dependencies do: [ :dep | dep project: aPBProjectVersion ].
+]
+
+{ #category : #accessing }
 PBPackage >> provisions [
 	^ provisions
 ]
