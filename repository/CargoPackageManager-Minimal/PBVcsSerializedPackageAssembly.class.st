@@ -20,8 +20,8 @@ PBVcsSerializedPackageAssembly >> asOngoingPackage [
 					
 	assembly := PBAssembly named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | assembly description: description ].
-	dict at: #parts ifPresent: [ :packages | 
-		assembly parts: packages asOrderedCollection ].
+	dict at: #packages ifPresent: [ :packages | 
+		assembly packages: packages asOrderedCollection ].
 	^ assembly
 
 ]
@@ -35,8 +35,8 @@ PBVcsSerializedPackageAssembly >> initializePartsWith: aPBAssembly [
 PBVcsSerializedPackageAssembly >> initializeWithPackage: aPBAssembly [
 	super initializeWithPackage: aPBAssembly.
 	self 
-		addPropertyNamed: #parts
-		ifNotEmptyOrNil: (aPBAssembly parts).
+		addPropertyNamed: #packages
+		ifNotEmptyOrNil: (aPBAssembly packages collect: #name).
 ]
 
 { #category : #accessing }

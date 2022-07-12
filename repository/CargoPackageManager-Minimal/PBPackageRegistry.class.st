@@ -29,10 +29,10 @@ PBPackageRegistry class >> default [
 ]
 
 { #category : #accessing }
-PBPackageRegistry class >> default: aCGOPackageRegistry [
+PBPackageRegistry class >> default: aPBPackageRegistry [
 	
 	self reset.
-	Default := aCGOPackageRegistry
+	Default := aPBPackageRegistry
 ]
 
 { #category : #accessing }

@@ -126,7 +126,7 @@ PBBaselineVisitorTest >> testAssembliesOnlyContainPackages [
 	visitor project assemblies do: 
 		[ :assembly |
 		 self
-			assert: (assembly parts allSatisfy: [ :part | part isUnit or: [ assembly isAssembly ] ])
+			assert: (assembly packages allSatisfy: [ :part | part isUnit or: [ assembly isAssembly ] ])
 			description: 'Assembly should only contains package units or assemblies' ].
 ]
 
@@ -341,7 +341,7 @@ PBBaselineVisitorTest >> testCanHandleForwardReferences [
 	
 	assembly := visitor project assemblies anyOne.
 	self
-		assertCollection: (assembly parts collect: #name)
+		assertCollection: (assembly packages collect: #name)
 		hasSameElements: #(#'PakbotTestExample-PackageA' #'PakbotTestExample-PackageB')
 ]
 
@@ -354,7 +354,7 @@ PBBaselineVisitorTest >> testCanHandleGroupForwardReferences [
 	
 	assembly := visitor project assemblyNamed: #groupWithFR1.
 	self
-		assertCollection: (assembly parts collect: #name)
+		assertCollection: (assembly packages collect: #name)
 		hasSameElements: #(groupWithFR2 'PakbotTestExample-PackageC').
 		
 	assembly := visitor project assemblyNamed: #groupWithFR2.

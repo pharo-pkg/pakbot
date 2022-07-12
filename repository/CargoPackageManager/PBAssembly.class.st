@@ -12,10 +12,18 @@ Class {
 
 { #category : #example }
 PBAssembly class >> example [
+	| project |
+	
+	project := PBProjectVersion named: #MyProject.
+	project packages: { 
+			(PBPackage named: #Unit1 project: project) .
+			(PBPackage named: #Unit2 project: project) }.
+
 	^ (self named: #TestAssembly)
 		description: 'A simple ongoing package assembly.';
-		parts: #('Unit1' 'Unit2');
-		project: (PBProjectVersion named: #MyProject);
+		project: project;
+		addPackage: (project packageNamed: #Unit1);
+		addPackage: (project packageNamed: #Unit2);
 		yourself
 ]
 
@@ -48,18 +56,6 @@ PBAssembly >> addPackages: aCollection [
 	
 	aCollection do: [ :each | self doAddPackage: each ].
 	self project announceChanged.
-]
-
-{ #category : #updating }
-PBAssembly >> addPart: aPackageNameOraPackageVersionReference [ 
-	| pkgVersionRef constraints |
-	pkgVersionRef := aPackageNameOraPackageVersionReference asPackageVersionReference.
-	constraints := pkgVersionRef versionNumber 
-		ifNil: [ #() ]
-		ifNotNil: [ Array with: '=' , pkgVersionRef versionString ].
-	packages add: ((PBPackageDependency newFrom: pkgVersionRef packageName  -> constraints)
-							project: project;
-							yourself)
 ]
 
 { #category : #accessing }
@@ -98,7 +94,7 @@ PBAssembly >> createPackageNamed: aString [
 { #category : #accessing }
 PBAssembly >> dependencies [
 	"for polymorphism with Package Unit"
-	^ (self parts collect: #asPackageDependency)
+	^ (self packages collect: #asPackageDependency)
 		do: [ :dependency | dependency dependent: self ];
 		yourself
 ]
@@ -189,13 +185,21 @@ PBAssembly >> packages [
 	^ packages
 ]
 
+{ #category : #updating }
+PBAssembly >> packages: aListOfPackagesOrAssemblies [
+
+	packages := aListOfPackagesOrAssemblies
+]
+
 { #category : #accessing }
 PBAssembly >> parts [
+	self deprecated: 'use #packages instead'.
 	^ packages
 ]
 
 { #category : #updating }
 PBAssembly >> parts: aListOfCGOPackageDependency [
+	self deprecated: 'use #packages instead'.
 	packages := aListOfCGOPackageDependency
 ]
 

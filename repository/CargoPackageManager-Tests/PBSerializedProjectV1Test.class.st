@@ -16,7 +16,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithAssemblies [
 	^ '{#version:''1.0''}
 {
 	#name : #MyProject,
-	#description : ''A simple project used for illustration.'',
+	#description : '''',
 	#version : ''1.0'',
 	#units : [
 		{
@@ -26,19 +26,15 @@ PBSerializedProjectV1Test >> stonStringForProjectWithAssemblies [
 		{
 			#name : #Unit2,
 			#description : ''''
-		},
-		{
-			#name : #UnitTest,
-			#description : ''A simple ongoing package unit.''
 		}
 	],
 	#assemblies : [
 		{
 			#name : #TestAssembly,
 			#description : ''A simple ongoing package assembly.'',
-			#parts : [
-				''Unit1'',
-				''Unit2''
+			#packages : [
+				#Unit1,
+				#Unit2
 			]
 		}
 	],
@@ -202,18 +198,16 @@ PBSerializedProjectV1Test >> testCanDeserializeSimpleProject [
 
 { #category : #tests }
 PBSerializedProjectV1Test >> testCanSerializeProjectWithAssemblies [
-	| serializedProject project |
+	| serializedProject assembly project |
 	
-	project := PBProjectVersion example 
+	assembly := PBAssembly example.
+	project := assembly project
 		version: '1.0' asSemanticVersion;
 		registry: PBPackageRegistry new;
 		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
 		yourself.	
 	
-	project 
-		newNotLoadedPackage: #Unit1;
-		newNotLoadedPackage: #Unit2;
-		addAssembly: PBAssembly example.
+	project addAssembly: assembly.
 		
 	serializedProject := project asSerializedPackage.
 		

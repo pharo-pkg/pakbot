@@ -41,7 +41,7 @@ PBVcsSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociati
 		equals: 1.
 	self 
 		assert: dependency constraints first asString
-		equals: '1.1.0'.
+		equals: '1.1'.
 ]
 
 { #category : #tests }

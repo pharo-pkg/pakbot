@@ -235,7 +235,7 @@ PBProjectVersion >> createPackageNamed: aString [
 PBProjectVersion >> defaultAssembly [
 
 	^ (PBAssembly named: #default inProject: self)
-		parts: packages copy;
+		addPackages: packages copy;
 		yourself
 ]
 
@@ -607,11 +607,14 @@ PBProjectVersion >> publish [
 
 { #category : #publishing }
 PBProjectVersion >> publishOn: aPackageRepository [
-	self hasRepository ifFalse: [ PBPublicationError signal: 'Cannot publish a Project with no repository defined!' ].
-	self version isInvalid ifTrue: [ PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
-	self ensureIsTagged.
-	aPackageRepository saveProject: self.
 
+	self hasRepository ifFalse: [ 
+		PBPublicationError signal: 'Cannot publish a Project with no repository defined!' ].
+	self version isInvalid ifTrue: [ 
+		PBPublicationError signal: 'Cannot publish a Project with no version defined!' ].
+	
+	self ensureIsTagged.
+	aPackageRepository saveProject: self
 ]
 
 { #category : #accessing }

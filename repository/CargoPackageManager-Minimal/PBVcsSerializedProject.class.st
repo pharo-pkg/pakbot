@@ -46,7 +46,7 @@ PBVcsSerializedProject >> asOngoingProject [
 	project packages do: [:package | package project: project ].
 	assemblies do: [:assembly |
 		project addAssembly: assembly.
-		assembly parts: (assembly parts collect: [ :partName | project packageOrAssemblyNamed: partName ]) ].
+		assembly packages: (assembly parts collect: [ :partName | project packageOrAssemblyNamed: partName ]) ].
 	
 	^ project 
 ]

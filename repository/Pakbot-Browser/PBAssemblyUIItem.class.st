@@ -49,7 +49,7 @@ PBAssemblyUIItem >> isAssembly [
 
 { #category : #accessing }
 PBAssemblyUIItem >> items [ 
-	^ assembly parts collect: [ :assemblyPart | self uiItemFor: assemblyPart ]
+	^ assembly packages collect: [ :assemblyPart | self uiItemFor: assemblyPart ]
 ]
 
 { #category : #accessing }
