@@ -18,7 +18,7 @@ PBImportProjectFromPackageRepositoryPresenter >> connectPresenters [
 
 	packageList
 		transmitTo: versionList
-		transform: [ :projectName | self packageRepository versionsFor: projectName ]
+		transform: [ :projectName | self packageRepository versionsOf: projectName ]
 ]
 
 { #category : #layout }
