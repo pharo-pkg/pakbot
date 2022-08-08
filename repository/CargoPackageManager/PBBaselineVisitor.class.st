@@ -13,7 +13,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'project',
-		'projectDependencyProperties',
 		'groups',
 		'currentAttributes',
 		'currentElement',
@@ -30,9 +29,23 @@ PBBaselineVisitor class >> attributesConjonctionCharacter [
 { #category : #accessing }
 PBBaselineVisitor class >> projectFor: aBaselineOf [
 	| visitor |
-	visitor := self new. 
-	visitor baseline: aBaselineOf new.
+	visitor := self visitBaseline: aBaselineOf.
+	visitor generateProject.
 	^ visitor project
+]
+
+{ #category : #private }
+PBBaselineVisitor class >> visitBaseline: aBaseline [
+
+	| visitor pragmas |
+	visitor := self new initializeOn: aBaseline. 
+	(aBaseline isLocalSelector: #baseline:)
+		ifTrue: [ aBaseline new baseline: visitor. ^ visitor ].
+	
+	"baseline can be any method if it defines tha baseline pragma"
+	pragmas := (Pragma allNamed: #baseline in: aBaseline).
+	pragmas ifNotEmpty: [ aBaseline new perform: pragmas first method selector withArguments: { visitor } ].
+	^ visitor
 ]
 
 { #category : #accessing }
@@ -49,28 +62,13 @@ PBBaselineVisitor >> attributesStringFor: aNameOrListOfNames [
 ]
 
 { #category : #visiting }
-PBBaselineVisitor >> baseline: aBaseline [
-	| projectName |
-	projectName := aBaseline class name allButFirst: 'BaselineOf' size.
-	project name: projectName.
-	aBaseline baseline: self.
-	self generateProject.
-]
-
-{ #category : #visiting }
 PBBaselineVisitor >> baseline: aName with: aBlockClosure [
-	| dependency repoSpec |
+	| dependency |
 
-	projectDependencyProperties := Dictionary with: 'version' -> 'master'.
-	aBlockClosure value.
-	repoSpec := PBMetacelloRepositorySpec url: (projectDependencyProperties at: 'repository').
-	dependency := PBMetacelloBaselineProjectDependency
-				name: aName
-				repositoryUrl: repoSpec asGitUrl scpUrl
-				version: (repoSpec version ifNil: [ projectDependencyProperties at: 'version' ]).
-	projectDependencyProperties 
-		at: 'loads'
-		ifPresent: [ :names | dependency loads: names ].
+	self initializeNewProjectDependencyNamed: aName with: aBlockClosure defaulVersion: 'master'.
+	currentElement beBaseline.
+
+	dependency := self metacelloBaselineDependencyFromProjectSpecNamed: aName.
 	project addExternalProjectRequirement: dependency.
 ]
 
@@ -173,9 +171,53 @@ PBBaselineVisitor >> initialize [
 	specs := Dictionary new.
 ]
 
+{ #category : #initialization }
+PBBaselineVisitor >> initializeNewProjectDependencyNamed: aName with: aBlockClosure defaulVersion: defaultVersion [
+
+	currentElement := PBMetacelloProjectSpec new 
+		name: aName;
+		version: defaultVersion;
+		yourself.
+	aBlockClosure value. "populate project spec"
+	self currentSpec add: currentElement 
+]
+
+{ #category : #initialization }
+PBBaselineVisitor >> initializeOn: aBaselineClass [
+	| projectName |
+	
+	projectName := aBaselineClass class allButFirst: 'BaselineOf' size.
+	project name: projectName.
+	^ self
+]
+
 { #category : #visiting }
 PBBaselineVisitor >> loads: parts [
-	projectDependencyProperties at: 'loads' put: parts.
+
+	currentElement loads: parts.
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> metacelloBaselineDependencyFromProjectSpecNamed: aName [
+
+	| repoSpec dependency |
+	repoSpec := PBMetacelloRepositorySpec url: (currentElement repository).
+	dependency := PBMetacelloBaselineProjectDependency
+				name: aName
+				repositoryUrl: repoSpec asGitUrl scpUrl
+				version: (repoSpec version ifNil: [ currentElement version ]).
+	currentElement loads
+		ifNotNil: [ :names | dependency loads: names ].
+	^ dependency
+]
+
+{ #category : #generating }
+PBBaselineVisitor >> metacelloConfigurationDependencyFromProjectSpecNamed: aName [
+
+	^ PBMetacelloConfigurationProjectDependency
+				name: aName
+				repositoryUrl: (currentElement repository)
+				version: (currentElement version).
 ]
 
 { #category : #visiting }
@@ -202,27 +244,34 @@ PBBaselineVisitor >> project [
 ]
 
 { #category : #visiting }
-PBBaselineVisitor >> project: aString copyFrom: aString2 with: aBlockClosure [ 
-	self flag: #TODO.
+PBBaselineVisitor >> project: projectName copyFrom: aName with: aBlockClosure [ 
 	"this should be done when resolving within a project is doable"
-	"ignore for now"
+	| spec dependency |
+	
+	spec := self specNamed: aName in: self currentAttributesString.
+	currentElement := spec deepCopy. "TODO: copy does not work as expected."
+	currentElement name: projectName.
+	self currentSpec add: currentElement.
+	aBlockClosure value. "populate project spec"
+
+	dependency := currentElement isBaseline 
+		ifTrue: [ self metacelloBaselineDependencyFromProjectSpecNamed: projectName ]
+		ifFalse: [ self metacelloConfigurationDependencyFromProjectSpecNamed: projectName ].
+	project addExternalProjectRequirement: dependency.
 ]
 
 { #category : #visiting }
 PBBaselineVisitor >> project: aName with: aBlockClosure [ 
-	projectDependencyProperties := Dictionary with: 'version' -> 'stable'.
-	aBlockClosure value.
-	project addExternalProjectRequirement: (PBMetacelloConfigurationProjectDependency
-				name: aName
-				repositoryUrl: (projectDependencyProperties at: 'repository')
-				version: (projectDependencyProperties at: 'version')).
+	self initializeNewProjectDependencyNamed: aName with: aBlockClosure defaulVersion: 'stable'.
+	currentElement beConfiguration.
+
+	project addExternalProjectRequirement: (self metacelloConfigurationDependencyFromProjectSpecNamed: aName).
 ]
 
 { #category : #visiting }
 PBBaselineVisitor >> repository: aRepositoryUrlString [
-	projectDependencyProperties 
-		at: 'repository'
-		put: aRepositoryUrlString 
+
+	currentElement repository: aRepositoryUrlString 
 ]
 
 { #category : #visiting }
@@ -246,19 +295,27 @@ PBBaselineVisitor >> sortedGroups [
 ]
 
 { #category : #accessing }
+PBBaselineVisitor >> specNamed: aName in: attributeString [
+
+	^ specs 
+		at: attributeString
+		ifPresent: [ :specList | specList detect: [ :spec | spec name = aName ] ]
+]
+
+{ #category : #accessing }
 PBBaselineVisitor >> specsByPackage [
 	| dict |
 	dict := Dictionary new.
 	specs keysAndValuesDo: [ :attributeString :specList |
 		specList do: [ :spec | 
-			spec attributes: attributeString.
-			(dict at: spec name ifAbsentPut: OrderedCollection new) add: spec ] ].
+			spec isPackageSpec ifTrue: [  
+				spec attributes: attributeString.
+				(dict at: spec name ifAbsentPut: OrderedCollection new) add: spec ] ] ].
 	^ dict
 ]
 
 { #category : #visiting }
 PBBaselineVisitor >> versionString: aString [
-	projectDependencyProperties 
-		at: 'version'
-		put: aString
+
+	currentElement version: aString
 ]

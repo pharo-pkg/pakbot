@@ -50,6 +50,12 @@ PBMetacelloPackageSpec >> initialize [
 	attributes := #().
 ]
 
+{ #category : #testing }
+PBMetacelloPackageSpec >> isPackageSpec [
+	
+	^ true
+]
+
 { #category : #converting }
 PBMetacelloPackageSpec >> mergeIn: aPBPackage [
 	self name 
@@ -75,5 +81,6 @@ PBMetacelloPackageSpec >> platformRequirements [
 	attribute := filteredAttributes first.
 	^ ((attribute includes: PBBaselineVisitor attributesConjonctionCharacter)
 		ifTrue: [ (PBBaselineVisitor attributesConjonctionCharacter split: attribute) ]
-		ifFalse: [ Array with: attribute ]) collect: [ :each | self attributeMappingFor: each ]
+		ifFalse: [ Array with: attribute ]) 
+			collect: [ :each | self attributeMappingFor: each ]
 ]

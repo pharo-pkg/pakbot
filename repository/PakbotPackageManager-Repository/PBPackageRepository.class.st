@@ -80,7 +80,7 @@ PBPackageRepository >> saveProject: aPBProjectVersion [
 		ifFalse: [ PBPublicationError signal: aPBProjectVersion name, ' ' , aPBProjectVersion version asString, ' is not a fixed version.'.
 			^ self ].
 	
-	fileContent := String streamContents: [ :stream | 
+	fileContent := String streamContents: [ :stream |
 		stream nextPutAll: (PBPackageVersionWriterV1 toStringPretty: aPBProjectVersion asSerializedPackage) ].
 	file parent ensureCreateDirectory.
 	file writeStreamDo: [ :stream | stream nextPutAll: fileContent].

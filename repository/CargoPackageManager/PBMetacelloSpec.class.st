@@ -39,6 +39,12 @@ PBMetacelloSpec >> initialize [
 	requirements := OrderedCollection new. 
 ]
 
+{ #category : #testing }
+PBMetacelloSpec >> isPackageSpec [
+	
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 PBMetacelloSpec >> name [
 	^ name

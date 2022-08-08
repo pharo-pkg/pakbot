@@ -82,6 +82,21 @@ PBBaselineVisitorTest >> baselineWithLoadDirective: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithProjectSpecCopy: spec [
+
+	spec
+		baseline: 'XMLWriter'
+      with: [ 
+			spec
+				loads: #('Core');
+				repository: 'github://pharo-contributions/XML-XMLWriter:2.9.x/src' ]. 
+				
+	spec 
+		project: 'XMLWriter Tests' copyFrom: 'XMLWriter' with: [ spec loads: #('Tests') ]; 	
+		project: 'XMLWriter Tools' copyFrom: 'XMLWriter' with: [ spec loads: #('Tools') ].
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> parametrizedTestsBaseline: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
@@ -128,6 +143,23 @@ PBBaselineVisitorTest >> testAssembliesOnlyContainPackages [
 		 self
 			assert: (assembly packages allSatisfy: [ :part | part isUnit or: [ assembly isAssembly ] ])
 			description: 'Assembly should only contains package units or assemblies' ].
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanCopyProjectSpec [
+
+	| project |
+	self simpleBaseline: visitor.
+	self baselineWithProjectSpecCopy: visitor.
+	visitor generateProject.
+	
+	project := visitor project.
+	
+	self assert: project externalProjects size equals: 3.
+	self assert: (project externalProjects allSatisfy: [ :extProject | extProject icebergUrl = 'git@github.com:pharo-contributions/XML-XMLWriter.git' ]).
+	self 
+		assertCollection: (project externalProjects collect: [ :each | each instVarNamed: 'packagesToLoad' ])
+		hasSameElements: { #('Tests') asSet . #('Core') asSet . #('Tools') asSet }.
 ]
 
 { #category : #tests }
@@ -184,7 +216,7 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloBaseline [
 ]
 
 { #category : #tests }
-PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWtihConfigurationWith [
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWithConfigurationWith [
 	| dependency |
 	
 	self simpleBaseline: visitor.
@@ -207,7 +239,7 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWt
 ]
 
 { #category : #tests }
-PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWtihProjectWith [
+PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWithProjectWith [
 	| dependency |
 	
 	self simpleBaseline: visitor.
