@@ -11,7 +11,7 @@ PBProjectLoadingTest >> performTest [
 		during: [ self perform: testSelector asSymbol ]
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testAResolvedProjectIsInstalledWhenAllPackagesToLoadAreInstalled [
 
 	| project repository resolvedProject |
@@ -27,7 +27,7 @@ PBProjectLoadingTest >> testAResolvedProjectIsInstalledWhenAllPackagesToLoadAreI
 	self assert: resolvedProject isInstalled.
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testAResolvedProjectIsNotInstalledWhenAtLeastOnePackageToLoadIsNotInstalled [
 
 	| project repository packageCore resolvedProject |
@@ -46,7 +46,7 @@ PBProjectLoadingTest >> testAResolvedProjectIsNotInstalledWhenAtLeastOnePackageT
 
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testCanLoadAProjectAssembly [
 
 	| project repository packageCore packageTest assembly |
@@ -70,7 +70,7 @@ PBProjectLoadingTest >> testCanLoadAProjectAssembly [
 	self assert: (Smalltalk globals hasClassNamed: 'CounterTest').
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testCanLoadAProjectPackage [
 
 	| project packageCore repository |
@@ -535,7 +535,7 @@ PBProjectLoadingTest >> testProjectLoadingWithMetacelloConfigurationDependencies
 	self assert: (Smalltalk globals at: 'ClassInPackageD' asSymbol) version equals: 2.
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespondingClassesInSystem [
 
 	| project pakbotProjectDependency |
@@ -557,7 +557,7 @@ PBProjectLoadingTest >> testProjectLoadingWithPakbotDependenciesV1LoadsCorrespon
 	self assert: (Smalltalk globals at: 'CounterTest' asSymbol) version equals: 1.
 ]
 
-{ #category : #'tests-cargo-dependencies' }
+{ #category : #'tests-pakbot-dependencies' }
 PBProjectLoadingTest >> testProjectLoadingWithPakbotOngoingProjectDependenciesKeepsThemLoaded [
 
 	| projectOne projectTwo |
