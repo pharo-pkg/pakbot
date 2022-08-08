@@ -186,7 +186,7 @@ PBBaselineVisitor >> initializeNewProjectDependencyNamed: aName with: aBlockClos
 PBBaselineVisitor >> initializeOn: aBaselineClass [
 	| projectName |
 	
-	projectName := aBaselineClass class allButFirst: 'BaselineOf' size.
+	projectName := aBaselineClass name allButFirst: 'BaselineOf' size.
 	project name: projectName.
 	^ self
 ]
