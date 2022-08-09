@@ -15,7 +15,7 @@ Class {
 PBPackageRepositoryPresenter >> buildContextMenu [
 		
 	^ SpMenuPresenter new 
-			addItem: [ :subMenuItem | subMenuItem name: 'Inspect project'; action: [ self inspect ] ];
+			addItem: [ :subMenuItem | subMenuItem name: 'Inspect project'; action: [ self inspectSelectedProject ] ];
 			addItem: [ :subMenuItem | subMenuItem name: 'Inspect metadata file'; action: [ self inspectSelectedProjectMetadataFile ] ];
 			yourself
 ]
@@ -60,13 +60,15 @@ PBPackageRepositoryPresenter >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #action }
+PBPackageRepositoryPresenter >> inspectSelectedProject [
+
+	(PBProjectVersion fromStonString: self selectedProjectMetadataFile contents) inspect.
+]
+
+{ #category : #action }
 PBPackageRepositoryPresenter >> inspectSelectedProjectMetadataFile [
 
-	| project version |
-	project := projectList selectedItem.
-	version := versionList selectedItem.
-	
-	(self repository fileForPackageNamed: project version: version) inspect.
+	self selectedProjectMetadataFile inspect.
 ]
 
 { #category : #action }
@@ -87,4 +89,14 @@ PBPackageRepositoryPresenter >> openProjectBrowserOnSelection [
 { #category : #accessing }
 PBPackageRepositoryPresenter >> repository [
 	^ self model
+]
+
+{ #category : #accessing }
+PBPackageRepositoryPresenter >> selectedProjectMetadataFile [
+
+	| project version |
+	project := projectList selectedItem.
+	version := versionList selectedItem.
+	
+	^ self repository fileForPackageNamed: project version: version
 ]
