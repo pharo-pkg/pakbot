@@ -59,6 +59,14 @@ PBAssembly >> addPackages: aCollection [
 ]
 
 { #category : #accessing }
+PBAssembly >> allPackageNames [
+
+	"returns the list of package unit names of the assembly recursively, flattening package assemblies"
+
+	^ self allPackages collect: [ :each | each name ]
+]
+
+{ #category : #accessing }
 PBAssembly >> allPackageUnits [
 	" returns the list of package units part of the assembly recursively, flattening package assemblies"
 	
@@ -178,7 +186,7 @@ PBAssembly >> isLoadable [
 PBAssembly >> load [
 	
 	self project resolve
-		addToLoadList: name;
+		addAllToLoadList: self allPackageNames;
 		load 
 ]
 

@@ -33,8 +33,8 @@ PBResolvedProject >> = anotherProject [
 ]
 
 { #category : #adding }
-PBResolvedProject >> addAllToLoadList: aListOfPackageName [
-	packagesToLoad addAll: aListOfPackageName
+PBResolvedProject >> addAllToLoadList: aPackageName [
+	packagesToLoad addAll: aPackageName
 ]
 
 { #category : #adding }
