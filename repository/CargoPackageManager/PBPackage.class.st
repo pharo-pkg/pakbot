@@ -37,6 +37,12 @@ PBPackage >> allDependencies [
 	^ dependencies
 ]
 
+{ #category : #accessing }
+PBPackage >> allPackages [
+	
+	^ { self }
+]
+
 { #category : #converting }
 PBPackage >> asPackageDependency [
 	^ (self name -> {('=', self version asString)}) asPackageDependency

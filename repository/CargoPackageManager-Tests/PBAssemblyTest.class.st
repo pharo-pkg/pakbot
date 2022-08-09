@@ -36,6 +36,37 @@ CGOPublishedPackageAssembly {
 ]
 
 { #category : #tests }
+PBAssemblyTest >> testAllPackagesListsPackagesRecursively [
+
+	| project package1 package2 package3 package4 package5 assembly1 assembly2 assembly3 |
+	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	
+	project := testRegistry newProjectNamed: 'TestProject'.
+	project repository: PBGitMemoryRepository new.
+	package1 := project createPackageNamed: 'Package1'.
+	package2 := project createPackageNamed: 'Package2'.
+	package3 := project createPackageNamed: 'Package3'.
+	package4 := project createPackageNamed: 'Package4'.
+	package5 := project createPackageNamed: 'Package5'.
+	assembly1 := project addAssemblyNamed: 'Assembly1'.
+	assembly1
+		addPackage: package2;
+		addPackage: package3.
+	assembly2 := project addAssemblyNamed: 'Assembly2'.
+	assembly2 
+		addPackage: package1;
+		addPackage: assembly1.
+	assembly3 := project addAssemblyNamed: 'Assembly3'.
+	assembly3
+		addPackage: package4;
+		addPackage: assembly2.
+	
+	self 
+		assertCollection: assembly3 allPackages
+		hasSameElements: { package1 . package2 . package3 . package4 }
+]
+
+{ #category : #tests }
 PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 	
 	| project package assembly |

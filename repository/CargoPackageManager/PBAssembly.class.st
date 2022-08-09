@@ -63,9 +63,18 @@ PBAssembly >> allPackageUnits [
 	" returns the list of package units part of the assembly recursively, flattening package assemblies"
 	
 	| units |
+	self deprecated: 'should be removed. Use #allPackages instead'.
 	units := (self assemblies flatCollect: #allPackageUnits as: Set).
 	units addAll: self packageUnits.
 	^ units
+]
+
+{ #category : #accessing }
+PBAssembly >> allPackages [
+
+	" returns the list of package units of the assembly recursively, flattening package assemblies"
+
+	^ self packages flatCollect: #allPackages as: Set
 ]
 
 { #category : #converting }
@@ -82,6 +91,9 @@ PBAssembly >> asVcsSerializedPackageAssembly [
 
 { #category : #accessing }
 PBAssembly >> assemblies [
+
+	self deprecated: 'should be removed'.
+	
 	^ self partsFromRegistry: [ :each | each notNil and: [ each isAssembly ] ]
 ]
 
@@ -151,7 +163,7 @@ PBAssembly >> isEmpty [
 { #category : #'querying - installed' }
 PBAssembly >> isInstalled [
 	
-	^ self parts allSatisfy: #isInstalled
+	^ self packages allSatisfy: #isInstalled
 ]
 
 { #category : #testing }
@@ -160,6 +172,14 @@ PBAssembly >> isLoadable [
 	 are already part of the resolution."
 	
 	^ false
+]
+
+{ #category : #loading }
+PBAssembly >> load [
+	
+	self project resolve
+		addToLoadList: name;
+		load 
 ]
 
 { #category : #'support-ui' }
@@ -176,6 +196,7 @@ PBAssembly >> packageNames [
 
 { #category : #accessing }
 PBAssembly >> packageUnits [
+	self deprecated: 'should be removed'.
 	^ self partsFromRegistry: [ :each | each notNil and: [ each isUnit ] ]
 ]
 
