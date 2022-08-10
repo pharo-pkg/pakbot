@@ -129,7 +129,7 @@ PBProjectLoadingTest >> testLoadingProjectWithMetacelloBaselineConflictsFailsWit
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		repositoryUrl: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'
 		version: '1.0'.
 
 	baselineProjectV2 := PBMetacelloBaselineProjectDependency
@@ -176,7 +176,7 @@ PBProjectLoadingTest >> testNotLoadingMetacelloBaselineDoesNotLoadCorrespondingC
 	
 	baselineProjectV1 := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		repositoryUrl: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'
 		version: '1.0'.
 	project addDependency: baselineProjectV1.
 	

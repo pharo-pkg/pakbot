@@ -68,7 +68,7 @@ PBMetacelloRepositorySpec class >> url: repositoryString [
 { #category : #converting }
 PBMetacelloRepositorySpec >> asGitUrl [
 
-	url:=  'git://{host}{port}/{owner}/{project}.git' format: 
+	url:=  'ssh://{host}{port}/{owner}/{project}.git' format: 
 		( Dictionary 
 			with: 'host' -> (self class hostFromScheme: self scheme)
 			with: 'port' -> '' "Metacello URLs do not support port specfication"

@@ -13,7 +13,7 @@ PBMetacelloBaselineProjectDependencyTest >> testCanCreateDependency [
 		equals: #PakbotTestExample.
 	self 
 		assert: dependency repositoryUrl asString
-		equals: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'.
+		equals: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'.
 	self 
 		assert: dependency version
 		equals: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
@@ -44,7 +44,7 @@ PBMetacelloBaselineProjectDependencyTest >> testCanSerializeDependency [
 		assert: projectDependencyString
 		equals: '{
 	#baseline : #PakbotTestExample,
-	#url : ''git://git@github.com/pharo-pkg/PakbotTestExample.git'',
+	#url : ''ssh://git@github.com/pharo-pkg/PakbotTestExample.git'',
 	#version : ''0866472ddded2a8fc36d3bae23f01aecfe947dc7''
 }'.
 ]

@@ -78,7 +78,7 @@ PBProjectResolutionTest >> testProjectResolutionWithIndirectMetacelloBaselineDep
 	projectTwo version: '0.1'.
 	baselineDependency := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		repositoryUrl: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'
 		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
 	projectTwo addDependency: baselineDependency.
 	
@@ -123,7 +123,7 @@ PBProjectResolutionTest >> testProjectResolutionWithMetacelloBaselineDependencie
 	
 	baselineDependency := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		repositoryUrl: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'
 		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
 	
 	project addDependency: baselineDependency.
@@ -188,7 +188,7 @@ PBProjectResolutionTest >> testResolutionOfMetacelloBaselineDependencyIsResolved
 	projectOne := testRegistry newProjectNamed: 'ProjectOne'.
 	baselineDependency := PBMetacelloBaselineProjectDependency
 		name: 'PakbotTestExample'
-		repositoryUrl: 'git://git@github.com/pharo-pkg/PakbotTestExample.git'
+		repositoryUrl: 'ssh://git@github.com/pharo-pkg/PakbotTestExample.git'
 		version: '0866472ddded2a8fc36d3bae23f01aecfe947dc7'.
 	projectOne addDependency: baselineDependency.
 	resolution := projectOne resolve.

@@ -10,7 +10,7 @@ Class {
 { #category : #tests }
 PBGitUrlTest >> testCanBeConvertedToMetacelloUrl [
 	self
-		assert: (PBGitUrl url: 'git://git@github.com/demarey/pharo-counter.git') asMetacelloUrl
+		assert: (PBGitUrl url: 'ssh://git@github.com/demarey/pharo-counter.git') asMetacelloUrl
 		equals: 'github://demarey/pharo-counter'
 ]
 
@@ -56,7 +56,7 @@ PBGitUrlTest >> testCanBeInitializedOnGitUrlWithoutScheme [
 
 	self 
 		assert: gitUrl scheme 
-		equals: 'git+ssh'.
+		equals: 'ssh'.
 		
 	self
 		assert: gitUrl host

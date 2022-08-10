@@ -21,7 +21,7 @@ PBPakbotProjectDependencyTest >> testCanDeserializeDependency [
 	#name : ''pharo-counter'',
 	#repository : {
 		#type : #git,
-		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
+		#repositoryUrl : ''ssh://git@github.com/demarey/pharo-counter-ui.git'',
 		#version : ''master''
 	},
 	#version : ''''

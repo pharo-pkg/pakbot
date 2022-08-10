@@ -5,7 +5,7 @@ It can be either an HTTP or a git URL.
 Some examples
 •	'git@github.com:demarey/pharo-counter.git'
 •	'https://github.com/demarey/pharo-counter.git'
-•	'git://git@github.com/demarey/pharo-counter.git'
+•	'ssh://git@github.com/demarey/pharo-counter.git'
 
 You can ask me to be converted to an http, an scp URL or a metacello repository URL (in this case, version and Smalltalk source repository path will not be initialized).
 
@@ -58,9 +58,9 @@ PBGitUrl >> asMetacelloUrl [
 PBGitUrl >> ensureScheme [
 	url scheme ifNotNil: [ ^ self ].
 	
-	[ url := ('git+ssh://' , originUrlString) asZnUrl ]
+	[ url := ('ssh://' , originUrlString) asZnUrl ]
 		on: ZnPortNotANumber
-		do: [ url := ('git+ssh://' , (originUrlString copy replaceAll: $: with: $/)) asZnUrl ]
+		do: [ url := ('ssh://' , (originUrlString copy replaceAll: $: with: $/)) asZnUrl ]
 ]
 
 { #category : #accessing }

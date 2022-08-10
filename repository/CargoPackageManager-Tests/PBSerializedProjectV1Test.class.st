@@ -40,7 +40,7 @@ PBSerializedProjectV1Test >> stonStringForProjectWithAssemblies [
 	],
 	#repositoryUrl : {
 		#type : #git,
-		#repositoryUrl : ''git://git@github.com/foo/bar.git''
+		#repositoryUrl : ''ssh://git@github.com/foo/bar.git''
 	}
 }' withInternetLineEndings
 ]
@@ -145,7 +145,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 	],
 	#repositoryUrl : {
 		#type : #git,
-		#repositoryUrl : ''git://git@github.com/foo/bar.git''
+		#repositoryUrl : ''ssh://git@github.com/foo/bar.git''
 	}
 }' withInternetLineEndings 
 ]

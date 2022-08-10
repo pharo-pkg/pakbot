@@ -70,7 +70,7 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromIcebergRepository [
 PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromSshUrl [
 
 	repository := PBGitRepositoryCreator new
-		url: 'git://git@github.com/demarey/pharo-counter.git';
+		url: 'ssh://git@github.com/demarey/pharo-counter.git';
 		version: 'master';
 		create.
 		
@@ -79,7 +79,7 @@ PBGitRepositoryCreatorTest >> testCanCreateRepositoryFromSshUrl [
 		equals: PBGitRepository.
 	self 
 		assert: repository iceRepositoryCreator remote url
-		equals: 'git://git@github.com/demarey/pharo-counter.git'
+		equals: 'ssh://git@github.com/demarey/pharo-counter.git'
 ]
 
 { #category : #tests }

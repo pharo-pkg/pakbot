@@ -54,7 +54,7 @@ PBVcsSerializedProjectV1Test >> counterUiStonString [
 			#name : ''pharo-counter'',
 			#repository : {
 				#type : #git,
-				#repositoryUrl : ''git://git@github.com/demarey/pharo-counter.git'',
+				#repositoryUrl : ''ssh://git@github.com/demarey/pharo-counter.git'',
 				#version : ''master''
 			},
 			#version : ''''
@@ -258,7 +258,7 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAPackageDependency
 		equals: PBPakbotProjectDependency.
 	self
 		assert: externalProject repositoryUrl 
-		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
+		equals: 'ssh://git@github.com/demarey/pharo-counter-ui.git'.
 	self 
 		assert: externalProject name
 		equals: #'pharo-counter'.

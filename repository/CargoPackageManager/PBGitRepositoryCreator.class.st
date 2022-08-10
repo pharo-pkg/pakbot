@@ -61,7 +61,7 @@ PBGitRepositoryCreator class >> repositoryFromUrl: urlOrString [
 { #category : #converting }
 PBGitRepositoryCreator class >> urlWithScheme: anUrlStringOrUrl [ 
 	^ (anUrlStringOrUrl asString beginsWith: 'git@')
-		ifTrue: [ ('git://' , (self normalizeUrl: anUrlStringOrUrl asString)) asZnUrl ]
+		ifTrue: [ ('ssh://' , (self normalizeUrl: anUrlStringOrUrl asString)) asZnUrl ]
 		ifFalse: [ anUrlStringOrUrl asZnUrl ]
 ]
 
