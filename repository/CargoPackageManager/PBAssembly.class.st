@@ -114,7 +114,7 @@ PBAssembly >> createPackageNamed: aString [
 { #category : #accessing }
 PBAssembly >> dependencies [
 	"for polymorphism with Package Unit"
-	^ (self packages collect: #asPackageDependency)
+	^ (self allPackages collect: #asPackageDependency as: Array)
 		do: [ :dependency | dependency dependent: self ];
 		yourself
 ]
