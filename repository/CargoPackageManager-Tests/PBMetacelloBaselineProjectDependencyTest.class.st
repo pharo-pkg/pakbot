@@ -9,6 +9,7 @@ PBMetacelloBaselineProjectDependencyTest >> testCanBeConvertedToPakbotDependency
 	| dependency converted |
 	dependency := PBMetacelloBaselineProjectDependency example.
 	dependency 
+		project: (PBProjectVersion named: 'Foo');
 		platformRequirements: #( 'pharo');
 		loads: #( 'core' ).
 	
@@ -29,7 +30,9 @@ PBMetacelloBaselineProjectDependencyTest >> testCanBeConvertedToPakbotDependency
 	self 
 		assert: converted packagesToLoad
 		equals: dependency packagesToLoad.
-
+	self 
+		assert: converted project
+		equals: dependency project.
 ]
 
 { #category : #tests }

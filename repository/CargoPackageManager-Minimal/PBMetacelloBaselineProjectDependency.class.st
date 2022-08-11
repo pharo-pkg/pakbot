@@ -51,6 +51,7 @@ PBMetacelloBaselineProjectDependency >> asPakbotProjectDependency [
 		named: self name
 		repositoryUrl: self repositoryUrl
 		version: self version)
+			project: self project;
 			loads: packagesToLoad copy;
 			platformRequirements: platformRequirements copy;
 			yourself
