@@ -223,6 +223,9 @@ PBPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 
 { #category : #registering }
 PBPackageRegistry >> register: aLoadableUnit [
+
+	self deprecated: 'should only register projects'.
+	
 	aLoadableUnit registry: self.
 	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
 	installedPackages add: aLoadableUnit.
@@ -298,6 +301,9 @@ PBPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [
 
 { #category : #registering }
 PBPackageRegistry >> unregister: aPackageVersion [
+
+	self deprecated: 'should only register projects'.
+
 	installedPackages remove: aPackageVersion ifAbsent: [ ^ self ].
 	installedPackages 
 		detect: [ :packageVersion | packageVersion project = aPackageVersion project ]
