@@ -190,7 +190,7 @@ PBProjectVersion >> authors [
 { #category : #'private-loading' }
 PBProjectVersion >> basicLoad [
 	registry registerProject: self.
-	self repository loadPackagesNamed: (self packageUnits 
+	self repository loadPackagesNamed: (self packages 
 		select: #isLoadable
 		thenCollect: #name).
 	PBProjectLoaded announceOnProject: self. 
@@ -546,6 +546,8 @@ PBProjectVersion >> packageOrAssemblyNamed: aString [
 
 { #category : #accessing }
 PBProjectVersion >> packageUnits [
+	self deprecated: 'should use #packages instead'.
+	
 	^ packages
 ]
 
