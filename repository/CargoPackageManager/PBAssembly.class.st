@@ -184,6 +184,7 @@ PBAssembly >> isLoadable [
 
 { #category : #loading }
 PBAssembly >> load [
+	"Only loads packages part of the assembly"
 	
 	self project resolve
 		addAllToLoadList: self allPackageNames;

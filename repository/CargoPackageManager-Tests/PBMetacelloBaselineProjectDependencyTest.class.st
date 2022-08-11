@@ -5,6 +5,34 @@ Class {
 }
 
 { #category : #tests }
+PBMetacelloBaselineProjectDependencyTest >> testCanBeConvertedToPakbotDependency [
+	| dependency converted |
+	dependency := PBMetacelloBaselineProjectDependency example.
+	dependency 
+		platformRequirements: #( 'pharo');
+		loads: #( 'core' ).
+	
+	converted := dependency asPakbotProjectDependency.
+	
+	self 
+		assert: converted name
+		equals: dependency name.
+	self 
+		assert: converted repositoryUrl
+		equals: dependency repositoryUrl.
+	self 
+		assert: converted version
+		equals: dependency version.
+	self 
+		assert: converted platformRequirements
+		equals: dependency platformRequirements.
+	self 
+		assert: converted packagesToLoad
+		equals: dependency packagesToLoad.
+
+]
+
+{ #category : #tests }
 PBMetacelloBaselineProjectDependencyTest >> testCanCreateDependency [
 	| dependency |
 	dependency := PBMetacelloBaselineProjectDependency example.

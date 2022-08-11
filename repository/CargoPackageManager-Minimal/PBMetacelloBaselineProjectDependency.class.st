@@ -44,6 +44,18 @@ PBMetacelloBaselineProjectDependency class >> stonName [
 	^ #MetacelloBaselineProject
 ]
 
+{ #category : #converting }
+PBMetacelloBaselineProjectDependency >> asPakbotProjectDependency [
+
+	^ (PBPakbotProjectDependency
+		named: self name
+		repositoryUrl: self repositoryUrl
+		version: self version)
+			loads: packagesToLoad copy;
+			platformRequirements: platformRequirements copy;
+			yourself
+]
+
 { #category : #accessing }
 PBMetacelloBaselineProjectDependency >> fullVersionString [
 
