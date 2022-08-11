@@ -48,15 +48,15 @@ PBAssemblyTest >> testAllPackagesListsPackagesRecursively [
 	package3 := project createPackageNamed: 'Package3'.
 	package4 := project createPackageNamed: 'Package4'.
 	package5 := project createPackageNamed: 'Package5'.
-	assembly1 := project addAssemblyNamed: 'Assembly1'.
+	assembly1 := project addAssemblyNamed: 'A1-P2+P3'.
 	assembly1
 		addPackage: package2;
 		addPackage: package3.
-	assembly2 := project addAssemblyNamed: 'Assembly2'.
+	assembly2 := project addAssemblyNamed: 'A2-P1+A1P2P3'.
 	assembly2 
 		addPackage: package1;
 		addPackage: assembly1.
-	assembly3 := project addAssemblyNamed: 'Assembly3'.
+	assembly3 := project addAssemblyNamed: 'A3-P4+A2-P1+A1P2P3'.
 	assembly3
 		addPackage: package4;
 		addPackage: assembly2.
