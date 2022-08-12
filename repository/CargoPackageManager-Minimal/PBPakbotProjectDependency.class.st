@@ -139,6 +139,18 @@ PBPakbotProjectDependency >> satisfyConstraints: aSemanticVersion [
 ]
 
 { #category : #ston }
+PBPakbotProjectDependency >> stonMap [
+	| dict |
+	
+	dict := OrderedDictionary 
+		with: #project -> name
+		with:	#url -> repository repositoryUrl
+		with: 	#version -> self version.
+	packagesToLoad ifNotEmpty: [  dict at: #packagesToLoad put: packagesToLoad asArray ].
+	^ dict
+]
+
+{ #category : #ston }
 PBPakbotProjectDependency >> stonOn: stonWriter [
 	stonWriter writeMap: (OrderedDictionary 
 		with: 	#name -> name

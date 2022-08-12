@@ -256,6 +256,31 @@ PBSerializedProjectV1Test >> testCanSerializeProjectWithPackages [
 ]
 
 { #category : #tests }
+PBSerializedProjectV1Test >> testCanSerializeProjectWithPakbotDependencies [
+	| serializedProject project projectDependency resolvedDependency serializedDepProperties |
+	
+	projectDependency := PBPakbotProjectDependency example
+				repository: (PBGitMemoryRepository url: 'ssh://git@github.com/org/project');
+				version: '2.0';
+				yourself.
+	project := PBProjectVersion example
+		registry: PBPackageRegistry new;
+		addExternalProjectRequirement: projectDependency;
+		version: '1.0' asSemanticVersion;
+		yourself.
+	[ serializedProject := project asSerializedPackage ]
+		on: PBProjectHasConflictsError
+		do: [ :e | e resume "ignore for now" ].
+	
+	resolvedDependency := (serializedProject propertyNamed: #dependencies) first.
+	serializedDepProperties := STON fromString: (STON toString: resolvedDependency).
+	
+	self assert: (serializedDepProperties at: #project) equals: projectDependency name.
+	self assert: (serializedDepProperties at: #version) equals: projectDependency version.
+	self assert: (serializedDepProperties at: #url) equals: projectDependency repositoryUrl.
+]
+
+{ #category : #tests }
 PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	

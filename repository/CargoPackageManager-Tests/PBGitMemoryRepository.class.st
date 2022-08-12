@@ -16,9 +16,26 @@ PBGitMemoryRepository class >> type [
 	^ #memory
 ]
 
+{ #category : #'instance creation' }
+PBGitMemoryRepository class >> url: aUrlString [
+
+	^ self new
+		url: aUrlString;
+		yourself
+]
+
 { #category : #updating }
 PBGitMemoryRepository >> addPackageNamed: aPackageName [
 	packages add: aPackageName
+]
+
+{ #category : #loading }
+PBGitMemoryRepository >> fetchVersion: aString [ 
+	
+	"I'm a fake version. I will not fetch anything, just returning a fake project"
+	^ (PBProjectVersion named: 'fake')
+			version: aString;
+			yourself
 ]
 
 { #category : #initialization }
@@ -31,4 +48,10 @@ PBGitMemoryRepository >> initialize [
 PBGitMemoryRepository >> loadPackageNamed: aString [ 
 	(packages includes: aString)
 		ifFalse: [ self error: 'package not found!' ]
+]
+
+{ #category : #updating }
+PBGitMemoryRepository >> url: aUrlString [
+
+	repositoryUrl := aUrlString
 ]

@@ -684,6 +684,11 @@ PBProjectVersion >> resolvedDependency [
 	^ self
 ]
 
+{ #category : #accessing }
+PBProjectVersion >> resolvedVersion [
+	^ version
+]
+
 { #category : #'system-interaction' }
 PBProjectVersion >> systemPackageOrganizer [
 	
