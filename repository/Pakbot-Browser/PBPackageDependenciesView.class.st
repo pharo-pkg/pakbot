@@ -37,8 +37,7 @@ PBPackageDependenciesView >> editAction [
 	| dependency |
 	dependency := self selectedPackage.
 	dependency newEditPanel
-		openDialogOnAccept: [ :modifiedDependency |
-			self refreshUI ]
+		openDialogOnAccept: [ :modifiedDependency | self updatePresenter ]
 		onCancel: [  ]
 ]
 
