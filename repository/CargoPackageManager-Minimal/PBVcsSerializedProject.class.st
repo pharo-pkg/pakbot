@@ -88,7 +88,7 @@ PBVcsSerializedProject >> initializeWithProject: aPBProjectVersion [
 		ifNotEmptyOrNil: (aPBProjectVersion dependencies).
 	self 
 		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion packageUnits andCollect: #asVcsSerializedPackageUnit).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion packages andCollect: #asVcsSerializedPackageUnit).
 	self
 		addPropertyNamed: #assemblies 
 		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asVcsSerializedPackageAssembly).

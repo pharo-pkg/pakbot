@@ -1,5 +1,5 @@
 "
-I represent a Cargo project ready to be serialized.
+I represent a Pakbot project ready to be serialized.
 I map some instance variables to an easily serialized form.
 "
 Class {
@@ -48,7 +48,7 @@ PBSerializedProject >> initializeWithProject: aPBProjectVersion [
 		ifNotEmptyOrNil: (aPBProject externalProjects)."
 	self 
 		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion packageUnits andCollect: #asSerializedPackage).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion packages andCollect: #asSerializedPackage).
 	self
 		addPropertyNamed: #assemblies 
 		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asSerializedPackage).
