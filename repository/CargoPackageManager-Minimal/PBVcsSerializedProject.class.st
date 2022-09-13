@@ -111,11 +111,10 @@ PBVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
 
 { #category : #deserialization }
 PBVcsSerializedProject >> pakbotProjectDependencyFrom: aDictionary [ 
-	| repository |
-	repository := self gitRepositoryFrom: (aDictionary at: #repository).
+
 	^ PBPakbotProjectDependency 
-		named: (aDictionary at: #name) 
-		repositoryUrl: repository repositoryUrl
+		named: (aDictionary at: #project) 
+		repositoryUrl: (aDictionary at: #url)
 		version: (aDictionary at: #version)
 		
 ]

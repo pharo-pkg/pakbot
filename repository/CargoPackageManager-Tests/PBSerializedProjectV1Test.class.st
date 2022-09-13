@@ -131,6 +131,28 @@ PBSerializedProjectV1Test >> stonStringForProjectWithPackages [
 ]
 
 { #category : #'expected values' }
+PBSerializedProjectV1Test >> stonStringForProjectWithPakbotDependency [
+	^ '{#version:''1.0''}
+{
+	#name : #PharoLauncher,
+	#description : ''Pharo Launcher is a cross-platform application that\r\r    lets you manage your Pharo images (launch, rename, copy and delete);\r    lets you download image templates (i.e., zip archives) from many different sources (e.g., Jenkins, files.pharo.org, and your local cache);\r    lets you create new images from any template,\r    automatically find and download the appropriate VM to launch your images.'',
+	#version : ''1.0'',
+	#dependencies : [
+		{
+			#project : #''pharo-counter'',
+			#url : ''ssh://git@github.com/org/project'',
+			#version : ''2.0''
+		}
+	],
+	#repositoryUrl : {
+		#type : #git,
+		#repositoryUrl : ''https://github.com/pharo-project/pharo-launcher.git'',
+		#version : ''dev''
+	}
+}' withInternetLineEndings
+]
+
+{ #category : #'expected values' }
 PBSerializedProjectV1Test >> stonStringForSimpleProject [
 	^ '{#version:''1.0''}
 {
@@ -169,6 +191,29 @@ PBSerializedProjectV1Test >> testCanDeserializeProjectWithDependencies [
 		
 
 	self assert: (project dependencies allSatisfy: [ :each | (each instVarNamed: 'project') notNil ]).
+]
+
+{ #category : #tests }
+PBSerializedProjectV1Test >> testCanDeserializeProjectWithPakbotDependencies [
+	| project dependency |
+	
+	project := PBProjectVersion fromStonString: self stonStringForProjectWithPakbotDependency.
+	
+	self
+		assert: project dependencies size
+		equals: 1.
+	dependency := project dependencies first.
+		
+	self
+		assert: dependency name
+		equals: #'pharo-counter'.
+	self
+		assert: dependency version
+		equals: '2.0'.
+	self
+		assert: dependency repositoryUrl
+		equals: 'ssh://git@github.com/org/project'.		
+	self assert: dependency project notNil.
 ]
 
 { #category : #tests }
