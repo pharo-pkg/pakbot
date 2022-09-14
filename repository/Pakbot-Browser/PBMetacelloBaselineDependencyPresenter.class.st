@@ -1,5 +1,5 @@
 "
-Presenter to edit Metacello Baseline project.
+Presenter to edit Metacello Baseline project dependency.
 "
 Class {
 	#name : #PBMetacelloBaselineDependencyPresenter,
@@ -19,7 +19,7 @@ PBMetacelloBaselineDependencyPresenter class >> example [
 	
 	| dependency |
 	dependency := PBMetacelloBaselineProjectDependency example.
-	(self on: PBMetacelloBaselineProjectDependency example) 
+	(self on: dependency) 
 		openDialogOnAccept: [ dependency inspect ] 
 		onCancel: [ ].
 ]

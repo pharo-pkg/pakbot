@@ -24,7 +24,7 @@ PBPackageDependenciesView class >> example [
 { #category : #actions }
 PBPackageDependenciesView >> addAction [
 	
-	PBNewDependencyDialog new 
+	PBNewDependencyPresenter new 
 		openDialogOnAccept: [ :dependency |
 			self packageVersion addDependency: dependency buildDependency.
 			self refreshUI ]

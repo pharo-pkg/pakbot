@@ -3,7 +3,10 @@ Abstract presenter used to edit pakbot project dependencies
 "
 Class {
 	#name : #PBAbstractDependencyPresenter,
-	#superclass : #SpPresenterWithModel,
+	#superclass : #SpOptionPresenter,
+	#instVars : [
+		'dependency'
+	],
 	#category : #'Pakbot-Browser-Presenters-Dependencies'
 }
 
@@ -15,7 +18,7 @@ PBAbstractDependencyPresenter class >> isAbstract [
 
 { #category : #accessing }
 PBAbstractDependencyPresenter >> dependency [
-	^ self model
+	^ dependency
 ]
 
 { #category : #initialization }
@@ -47,10 +50,28 @@ PBAbstractDependencyPresenter >> openDialogOnAccept: acceptBlock onCancel: cance
 	^ dialog
 ]
 
+{ #category : #'option list presenter' }
+PBAbstractDependencyPresenter >> optionIcon [
+
+	^ self icon
+]
+
+{ #category : #'option list presenter' }
+PBAbstractDependencyPresenter >> optionTitle [ 
+
+	^ self title
+]
+
 { #category : #initialization }
 PBAbstractDependencyPresenter >> setInitialValues [
 
 	self subclassResponsibility 
+]
+
+{ #category : #initialization }
+PBAbstractDependencyPresenter >> setModelBeforeInitialization: aPakbotDependency [
+
+	dependency := aPakbotDependency
 ]
 
 { #category : #building }

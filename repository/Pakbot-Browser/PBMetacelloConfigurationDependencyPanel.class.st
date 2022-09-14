@@ -1,16 +1,44 @@
+"
+Presenter to edit a Metacello Configuration dependency.
+"
 Class {
 	#name : #PBMetacelloConfigurationDependencyPanel,
 	#superclass : #PBAbstractDependencyPresenter,
+	#instVars : [
+		'name',
+		'repositoryUrl',
+		'version',
+		'group'
+	],
 	#category : #'Pakbot-Browser-Presenters-Dependencies'
 }
+
+{ #category : #examples }
+PBMetacelloConfigurationDependencyPanel class >> example [
+
+	(self on: PBMetacelloConfigurationProjectDependency example) open
+]
 
 { #category : #building }
 PBMetacelloConfigurationDependencyPanel >> buildDependency [
 
 	^ PBMetacelloConfigurationProjectDependency
-		name: (form valueNamed: #name)
-		repositoryUrl: (form valueNamed: #repositoryUrl)
-		version: (form valueNamed: #version)
+		name: name text
+		repositoryUrl: repositoryUrl text
+		version: version text
+]
+
+{ #category : #layout }
+PBMetacelloConfigurationDependencyPanel >> defaultLayout [ 
+
+	^ SpGridLayout build: [ :builder |
+		builder
+			beColumnNotHomogeneous;
+			column: 2 withConstraints: [ :c | c beExpand ];
+			add: 'Name'; add: name; nextRow;
+			add: 'Repository'; add: repositoryUrl; nextRow;
+			add: 'Version' ; add: version; nextRow;
+			add: 'Group' ; add: group ]
 ]
 
 { #category : #accessing }
@@ -20,36 +48,37 @@ PBMetacelloConfigurationDependencyPanel >> icon [
 ]
 
 { #category : #initialization }
-PBMetacelloConfigurationDependencyPanel >> initializeForm [
-	form := ITForm owner: self.
-	form
-		addTextField: #name
-			label: 'Name'
-			ghost: 'e.g., My Project'
-			with: [ :field | field beRequired ];
+PBMetacelloConfigurationDependencyPanel >> initializePresenters [
 
-		addTextField: #repositoryUrl label: 'Repository' ghost: 'e.g., github://project-owner/project';
+	name := (self instantiate: SpTextInputFieldWithValidationPresenter)
+			placeholder: 'e.g., My Project';
+			yourself.
+			"with: [ :field | field beRequired ];"
 
-		addTextField: #version
-			label: 'Version'
-			ghost: 'e.g., 1.0.1'
-			with: [ :field | field beRequired ];
+	repositoryUrl := (self instantiate: SpTextInputFieldWithValidationPresenter)
+			placeholder: 'e.g., github://project-owner/project';
+			yourself.
 
-		addTextField: #group
-			label: 'Group'
-			ghost: 'e.g., development';
+	version := (self instantiate: SpTextInputFieldWithValidationPresenter)
+			placeholder: 'e.g., 1.0.1';
+			yourself.
+		"	with: [ :field | field beRequired ];"
+
+	group := (self instantiate: SpTextInputFieldWithValidationPresenter)
+			placeholder: 'e.g., development';
+			yourself.
 			
-		validateOnChange;
-		whenChangedDo: [ self valueChanged ].
+	"	validateOnChange;
+		whenChangedDo: [ self valueChanged ]."
 		
 ]
 
 { #category : #initialization }
 PBMetacelloConfigurationDependencyPanel >> setInitialValues [
 
-	form valueNamed: #name set: self dependency name.
-	form valueNamed: #repositoryUrl set: self dependency repositoryUrl.
-	form valueNamed: #version set: self dependency version asString
+	name text: self dependency name.
+	repositoryUrl text: self dependency repositoryUrl.
+	version text: self dependency	version asString
 
 ]
 
@@ -63,7 +92,8 @@ PBMetacelloConfigurationDependencyPanel >> title [
 PBMetacelloConfigurationDependencyPanel >> updateDependency [
 
 	self dependency
-		setName: (form valueNamed: #name)
-		repositoryUrl: (form valueNamed: #repositoryUrl)
-		version: (form valueNamed: #version)
+		name: name text;
+		repositoryUrl: repositoryUrl text;
+		version: version text
+		
 ]
