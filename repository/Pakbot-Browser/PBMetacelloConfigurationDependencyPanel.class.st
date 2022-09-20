@@ -52,8 +52,8 @@ PBMetacelloConfigurationDependencyPanel >> initializePresenters [
 
 	name := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., My Project';
+			beRequired;
 			yourself.
-			"with: [ :field | field beRequired ];"
 
 	repositoryUrl := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., github://project-owner/project';
@@ -61,9 +61,9 @@ PBMetacelloConfigurationDependencyPanel >> initializePresenters [
 
 	version := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., 1.0.1';
+			beRequired;
 			yourself.
-		"	with: [ :field | field beRequired ];"
-
+			
 	group := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., development';
 			yourself.
@@ -91,6 +91,8 @@ PBMetacelloConfigurationDependencyPanel >> title [
 { #category : #building }
 PBMetacelloConfigurationDependencyPanel >> updateDependency [
 
+	self dependency ifNil: [ dependency := self buildDependency. ^ self ].
+	
 	self dependency
 		name: name text;
 		repositoryUrl: repositoryUrl text;

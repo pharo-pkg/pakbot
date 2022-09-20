@@ -26,7 +26,7 @@ PBPackageDependenciesView >> addAction [
 	
 	PBNewDependencyPresenter new 
 		openDialogOnAccept: [ :dependency |
-			self packageVersion addDependency: dependency buildDependency.
+			self packageVersion addDependency: dependency.
 			self refreshUI ]
 		onCancel: [ "Nothing" ]
 ]
@@ -41,9 +41,17 @@ PBPackageDependenciesView >> editAction [
 		onCancel: [  ]
 ]
 
+{ #category : #refreshing }
+PBPackageDependenciesView >> refreshUI [
+	
+	packageList refresh
+]
+
 { #category : #actions }
-PBPackageDependenciesView >> removeAction: aCGOPackageDependency [ 
-	self packageVersion removeDependency: aCGOPackageDependency
+PBPackageDependenciesView >> removeAction: aDependency [ 
+
+	self packageVersion removeDependency: aDependency.
+	self refreshUI.
 ]
 
 { #category : #'private - building' }

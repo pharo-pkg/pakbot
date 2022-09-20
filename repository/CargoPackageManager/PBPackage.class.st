@@ -164,9 +164,8 @@ PBPackage >> provisions: aListOfVirtualPackageVersionsReference [
 ]
 
 { #category : #dependencies }
-PBPackage >> removeDependency: aPackageDependency [
-	dependencies := dependencies 
-		reject: [ :dependency | dependency packageName = aPackageDependency packageName ]
+PBPackage >> removeDependency: aDependency [
+	dependencies remove: aDependency ifAbsent: [  ].
 ]
 
 { #category : #'system-package' }

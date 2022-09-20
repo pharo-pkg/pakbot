@@ -47,14 +47,16 @@ PBPakbotDependencyPresenter >> icon [
 PBPakbotDependencyPresenter >> initializePresenters [
 	projectName := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., My Project';
+			whenTextChangedDo: [ self updateOkButton ];
+			beRequired;
 			yourself.
-			"with: [ :field | field beRequired ];"
 
 	projectVersion := (self instantiate: SpTextInputFieldWithValidationPresenter)
 			placeholder: 'e.g., 1.0.1';
+			whenTextChangedDo: [ self updateOkButton ];
+			beRequired;
 			yourself.
-			"with: [ :field | field beRequired ];"
-
+			
 	projectRepository := (self instantiate: SpTextInputFieldWithValidationPresenter)
 		placeholder: 'e.g., github://project-owner/project';
 		yourself.
@@ -62,6 +64,18 @@ PBPakbotDependencyPresenter >> initializePresenters [
 		whenChangedDo: [ self valueChanged ]."
 	
 	super initializePresenters.
+]
+
+{ #category : #accessing }
+PBPakbotDependencyPresenter >> name: aName [
+	
+	projectName text: aName.
+]
+
+{ #category : #accessing }
+PBPakbotDependencyPresenter >> repositoryUrl: aString [ 
+	
+	projectRepository text: aString.
 ]
 
 { #category : #initialization }
@@ -81,8 +95,16 @@ PBPakbotDependencyPresenter >> title [
 { #category : #building }
 PBPakbotDependencyPresenter >> updateDependency [
 
+	self dependency ifNil: [ dependency := self buildDependency. ^ self ].
+	
 	self dependency
 		name: projectName text;
 		repositoryUrl: projectRepository text;
 		version: projectVersion text
+]
+
+{ #category : #accessing }
+PBPakbotDependencyPresenter >> version: aString [ 
+	
+	projectVersion text: aString.
 ]

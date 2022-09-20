@@ -18,6 +18,7 @@ PBAbstractDependencyPresenter class >> isAbstract [
 
 { #category : #accessing }
 PBAbstractDependencyPresenter >> dependency [
+	
 	^ dependency
 ]
 
@@ -30,24 +31,9 @@ PBAbstractDependencyPresenter >> initializePresenters [
 { #category : #validation }
 PBAbstractDependencyPresenter >> isValid [
 	
-	self flag: 'TODO: all fields are required! Ensure they are all filled before accept'.
-	^ true
-]
-
-{ #category : #opening }
-PBAbstractDependencyPresenter >> openDialogOnAccept: acceptBlock onCancel: cancelBlock [
-	| dialog |
-	
-	dialog := self openDialog
-		okAction: [ "check if valid"
-			self updateDependency.
-			acceptBlock cull: self ];
-		cancelAction: [ cancelBlock cull: self ];
-		yourself.
-
-	self whenChangedDo: [ dialog toolbar okButton enabled: self isValid ].
-
-	^ dialog
+	| report |
+	report := self validate.
+	^ report	hasErrors not
 ]
 
 { #category : #'option list presenter' }
@@ -74,13 +60,19 @@ PBAbstractDependencyPresenter >> setModelBeforeInitialization: aPakbotDependency
 	dependency := aPakbotDependency
 ]
 
-{ #category : #building }
+{ #category : #updating }
 PBAbstractDependencyPresenter >> updateDependency [
 
 	^ self subclassResponsibility 
 ]
 
-{ #category : #initialization }
+{ #category : #updating }
+PBAbstractDependencyPresenter >> updateOkButton [ 
+
+	self withWindowDo: [ :window | window okButton enabled: self isValid ] 
+]
+
+{ #category : #updating }
 PBAbstractDependencyPresenter >> updatePresenter [
 
 	self dependency ifNotNil: [ self setInitialValues ]

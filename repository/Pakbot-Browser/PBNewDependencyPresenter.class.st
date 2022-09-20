@@ -35,25 +35,28 @@ PBNewDependencyPresenter >> initialize [
 ]
 
 { #category : #initialization }
+PBNewDependencyPresenter >> initializeDialogWindow: aDialogWindowPresenter [
+
+	super initializeDialogWindow: aDialogWindowPresenter.		
+	aDialogWindowPresenter okButton enabled: false.
+
+]
+
+{ #category : #initialization }
 PBNewDependencyPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'Add a dependency';
-		initialExtent: 800@500
+		initialExtent: 800@500.
 ]
 
 { #category : #opening }
 PBNewDependencyPresenter >> openDialogOnAccept: acceptBlock onCancel: cancelBlock [
-	| dialog |
 	
-	dialog := self openDialog
-		okAction: [ "check if valid"
+	^ self openDialog
+		okAction: [
 			self selectedOption updateDependency.
-			acceptBlock cull: self ];
+			acceptBlock cull: self selectedOption dependency ];
 		cancelAction: [ cancelBlock cull: self ];
-		yourself.
-
-	self whenChangedDo: [ dialog toolbar okButton enabled: self selectedOption isValid ].
-
-	^ dialog
+		yourself
 ]

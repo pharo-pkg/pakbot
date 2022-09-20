@@ -32,8 +32,7 @@ PBPackageListEditor >> connectPresenters [
 		editButton enabled: enabled. ].
 	addButton action: [ self addAction ].
 	removeButton
-		action: [ self removeAction: self selectedPackage.
-			self refreshUI ].
+		action: [ self removeAction: self selectedPackage ].
 	editButton action: [ self editAction ]
 ]
 
@@ -96,13 +95,6 @@ PBPackageListEditor >> initializeTable [
 { #category : #initialization }
 PBPackageListEditor >> modelChanged [ 
 	packageList items: self roots
-]
-
-{ #category : #'private - displaying' }
-PBPackageListEditor >> morphIconFor: aPart [
-
-	^ (self iconForPackage: aPart) asMorph
-		 setBalloonText: aPart balloonText
 ]
 
 { #category : #'private - displaying' }

@@ -47,16 +47,18 @@ PBMetacelloBaselineDependencyPresenter >> icon [
 { #category : #initialization }
 PBMetacelloBaselineDependencyPresenter >> initializePresenters [ 
 
-	nameInput := self newTextInput
+	nameInput := (self instantiate: SpTextInputFieldWithValidationPresenter)
 		placeholder: 'e.g., My Project';
+		beRequired;
 		yourself.
 		
 	repositoryUrlInput := self newTextInput
 		placeholder: 'e.g., github://project-owner/project';
 		yourself.
 		
-	versionInput := self newTextInput
+	versionInput := (self instantiate: SpTextInputFieldWithValidationPresenter)
 		placeholder: 'e.g., 1.0.1';
+		beRequired;
 		yourself.
 		
 	srcDirectoryInput := self newTextInput
@@ -69,6 +71,12 @@ PBMetacelloBaselineDependencyPresenter >> initializePresenters [
 	
 	
 	
+]
+
+{ #category : #initialization }
+PBMetacelloBaselineDependencyPresenter >> newDependency [
+	
+	^ PBMetacelloBaselineProjectDependency new
 ]
 
 { #category : #initialization }
@@ -88,6 +96,8 @@ PBMetacelloBaselineDependencyPresenter >> title [
 
 { #category : #building }
 PBMetacelloBaselineDependencyPresenter >> updateDependency [
+	
+	self dependency ifNil: [ dependency := self buildDependency. ^ self ].
 	
 	self dependency
 		setName: nameInput text
