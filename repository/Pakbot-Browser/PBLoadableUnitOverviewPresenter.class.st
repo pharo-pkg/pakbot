@@ -90,10 +90,10 @@ PBLoadableUnitOverviewPresenter >> description: aString [
 { #category : #initialization }
 PBLoadableUnitOverviewPresenter >> initializePresenters [
 	nameInputField := self newTextInput
-		text: 'MyProject';
+		placeholder: 'MyProject';
 		yourself.
 	versionInputField := self newTextInput
-		text: '1.0.0';
+		placeholder: '1.0.0';
 		yourself.	
 	repositoryInputField := self instantiate: PBRepositoryPresenter on: self loadableUnit.
 	descriptionText := self newText.
