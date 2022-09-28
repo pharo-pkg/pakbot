@@ -27,7 +27,7 @@ PBCreatePackageInProjectCommand >> execute [
 		text: self project name, '-';
 		openModal.
 		
-	unitName isEmptyOrNil ifTrue: [ CmCommandAborted signal ].
+	unitName isEmptyOrNil ifTrue: [ ^ self ].
 	
 	self project createPackageNamed: unitName.
 ]
