@@ -20,5 +20,5 @@ PBRemovePackageFromProjectCommand >> asSpecCommand [
 { #category : #executing }
 PBRemovePackageFromProjectCommand >> execute [
 
-	self package project removePackage: self package
+	self package project removePackage: self package.
 ]

@@ -3,7 +3,7 @@ A command to create a new (empty) Pakbot project
 "
 Class {
 	#name : #PBAddProjectCommand,
-	#superclass : #CmCommand,
+	#superclass : #PBCommand,
 	#category : #'Pakbot-Browser-Commands'
 }
 

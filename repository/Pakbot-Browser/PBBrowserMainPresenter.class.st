@@ -83,6 +83,15 @@ PBBrowserMainPresenter >> disableActions [
 	
 ]
 
+{ #category : #refreshing }
+PBBrowserMainPresenter >> handleProjectChanged: announcement [
+
+	| path |
+	path := projectsTree selection selectedPath.
+	projectsTree selectPath: { path first }.
+	self refreshKeepingSelection.
+]
+
 { #category : #initialization }
 PBBrowserMainPresenter >> initializePresenters [
 	projectsTree := self newTreeTable
@@ -108,14 +117,13 @@ PBBrowserMainPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 850 @ 600.
 ]
 
-{ #category : #'event-listening' }
+{ #category : #registering }
 PBBrowserMainPresenter >> listenToPakbotAnnouncements [
 	
-	SystemAnnouncer uniqueInstance weak
-		when: PBProjectCreated , PBProjectRemoved
-			send: #refresh
-			to: self.
-
+	SystemAnnouncer uniqueInstance weak 
+		when: PBProjectChanged
+		send: #handleProjectChanged: 
+		to: self.
 ]
 
 { #category : #initialization }
@@ -125,6 +133,11 @@ PBBrowserMainPresenter >> modelChanged [
 
 { #category : #refreshing }
 PBBrowserMainPresenter >> refresh [
+	projectsTree refresh
+]
+
+{ #category : #refreshing }
+PBBrowserMainPresenter >> refreshKeepingSelection [
 	projectsTree updateRootsKeepingSelection: self roots
 ]
 
@@ -180,6 +193,12 @@ PBBrowserMainPresenter >> selectedProject [
 { #category : #private }
 PBBrowserMainPresenter >> toolbarGroup [
 	^ self rootCommandsGroup / 'Toolbar'
+]
+
+{ #category : #registering }
+PBBrowserMainPresenter >> unregisterToPakbotAnnouncements [
+
+	SystemAnnouncer uniqueInstance unsubscribe: self.
 ]
 
 { #category : #'event-listening' }

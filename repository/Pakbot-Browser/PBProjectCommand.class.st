@@ -3,17 +3,12 @@ Abstract class for all the commands that works on projects.
 "
 Class {
 	#name : #PBProjectCommand,
-	#superclass : #CmCommand,
+	#superclass : #PBCommand,
 	#instVars : [
 		'project'
 	],
 	#category : #'Pakbot-Browser-Commands'
 }
-
-{ #category : #accessing }
-PBProjectCommand >> application [
-	^ context application
-]
 
 { #category : #testing }
 PBProjectCommand >> canBeExecuted [

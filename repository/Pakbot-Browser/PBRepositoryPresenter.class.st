@@ -25,7 +25,7 @@ PBRepositoryPresenter >> connectPresenters [
 	
 	button action: [ 
 		(PBOpenNewRepositoryDialogAction onProject: self project)
-			postActionCallback: [ self refresh ];
+			postActionCallback: [ self modelChanged ];
 			execute ].
 ]
 

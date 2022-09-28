@@ -3,7 +3,7 @@ Abstract class for all the commands that works on assemblies.
 "
 Class {
 	#name : #PBAssemblyCommand,
-	#superclass : #CmCommand,
+	#superclass : #PBCommand,
 	#instVars : [
 		'assembly'
 	],

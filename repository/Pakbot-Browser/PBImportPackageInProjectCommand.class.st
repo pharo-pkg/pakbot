@@ -19,7 +19,8 @@ PBImportPackageInProjectCommand >> asSpecCommand [
 { #category : #execution }
 PBImportPackageInProjectCommand >> execute [
 
-	self project importPackagesNamed: (self packagesToImport collect: #name)
+	self project importPackagesNamed: (self packagesToImport collect: #name).
+	self refreshPresenterKeepingSelection.
 ]
 
 { #category : #interaction }

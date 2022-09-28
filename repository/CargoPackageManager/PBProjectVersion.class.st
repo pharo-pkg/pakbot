@@ -137,7 +137,7 @@ PBProjectVersion >> announceChangeInDependencies [
 { #category : #packages }
 PBProjectVersion >> announceChanged [
 
-	PBProjectPartsChanged announceOnProject: self.
+	PBProjectChanged announceOnProject: self.
 ]
 
 { #category : #converting }
@@ -336,7 +336,7 @@ PBProjectVersion >> importPackageNamed: aString [
 	| package |
 	package := self newNotLoadedPackage: aString.
 	repository addPackageNamed: aString. "Bind the package with the new repository."
-	^ registry register: package
+	^ package
 ]
 
 { #category : #packages }
