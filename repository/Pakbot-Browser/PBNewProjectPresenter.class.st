@@ -53,6 +53,7 @@ PBNewProjectPresenter >> doAccept [
 PBNewProjectPresenter >> initializePresenters [
 	
 	projectPanel := self instantiate: PBLoadableUnitOverviewPresenter on: (PBProjectVersion named: '').
+	projectPanel version: ''.
 ]
 
 { #category : #accessing }
