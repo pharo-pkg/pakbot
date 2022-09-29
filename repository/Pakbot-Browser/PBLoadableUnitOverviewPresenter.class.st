@@ -106,7 +106,7 @@ PBLoadableUnitOverviewPresenter >> loadableUnit [
 
 { #category : #initialization }
 PBLoadableUnitOverviewPresenter >> modelChanged [ 
-	self loadableUnit ifNil: [ ^ self ].
+	self loadableUnit ifNil: [ ^ self resetValues ].
 	
 	nameInputField text: self loadableUnit name.
 	versionInputField text: self loadableUnit version asString.
@@ -132,6 +132,15 @@ PBLoadableUnitOverviewPresenter >> registry [
 { #category : #accessing }
 PBLoadableUnitOverviewPresenter >> repository [
 	^ repositoryInputField repository 
+]
+
+{ #category : #resetting }
+PBLoadableUnitOverviewPresenter >> resetValues [
+
+	nameInputField text: ''.
+	versionInputField text: ''.
+	descriptionText text: ''.
+	repositoryInputField model: nil
 ]
 
 { #category : #accessing }

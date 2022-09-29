@@ -10,13 +10,13 @@ Class {
 	#category : #'CargoPackageManager-Announcements'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #announcing }
 PBProjectAnnouncement class >> announceOnProject: aProject [
 	
 	(self onProject: aProject) announce
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 PBProjectAnnouncement class >> onProject: aProject [
 
 	^ self new
@@ -27,7 +27,7 @@ PBProjectAnnouncement class >> onProject: aProject [
 { #category : #announcing }
 PBProjectAnnouncement >> announce [
 
-	SystemAnnouncer uniqueInstance announce: self
+	Pakbot announcer announce: self
 ]
 
 { #category : #accessing }

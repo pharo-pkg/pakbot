@@ -10,8 +10,17 @@ Class {
 	#classVars : [
 		'PlatformAttributes'
 	],
+	#classInstVars : [
+		'pakbotAnnouncer'
+	],
 	#category : #'CargoPackageManager-Minimal'
 }
+
+{ #category : #accessing }
+Pakbot class >> announcer [
+
+	^ pakbotAnnouncer ifNil: [ pakbotAnnouncer := Announcer new ]
+]
 
 { #category : #accessing }
 Pakbot class >> defaultPackageRepository [
@@ -26,4 +35,10 @@ Pakbot class >> platformAttributes [
 { #category : #private }
 Pakbot class >> platformAttributes: aListOfPlatformAttributes [
 	PlatformAttributes := aListOfPlatformAttributes
+]
+
+{ #category : #resetting }
+Pakbot class >> resetAnnouncer [
+	<script>
+	pakbotAnnouncer := nil.
 ]

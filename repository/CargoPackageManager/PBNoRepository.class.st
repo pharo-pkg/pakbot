@@ -12,6 +12,12 @@ PBNoRepository class >> type [
 	^ #'NOTYPE'
 ]
 
+{ #category : #updating }
+PBNoRepository >> addPackageNamed: aPackageName [
+
+	"no repository => do nothing"
+]
+
 { #category : #accessing }
 PBNoRepository >> description [
 	

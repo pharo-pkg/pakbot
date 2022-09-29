@@ -36,17 +36,13 @@ PBNewProjectPresenter >> defaultLayout [
 { #category : #accepting }
 PBNewProjectPresenter >> doAccept [
 
-	| project |
-
 	self flag: 'TO DO: validations (call super doAccept)'.
 	
-	project := (PBProjectVersion named: projectPanel name)
+	^ (self registry newProjectNamed: projectPanel name)
 		version: projectPanel version;
 		description: projectPanel description;
-		repository: projectPanel repository.
-	
-	self registry registerProject: project.
-	^ project
+		repository: projectPanel repository;
+		yourself
 ]
 
 { #category : #initialization }

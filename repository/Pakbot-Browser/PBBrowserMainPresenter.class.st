@@ -117,13 +117,13 @@ PBBrowserMainPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 850 @ 600.
 ]
 
-{ #category : #registering }
+{ #category : #'event-listening' }
 PBBrowserMainPresenter >> listenToPakbotAnnouncements [
 	
-	SystemAnnouncer uniqueInstance weak 
-		when: PBProjectChanged
-		send: #handleProjectChanged: 
-		to: self.
+	Pakbot announcer weak
+		when: PBProjectCreated , PBProjectRemoved, PBProjectChanged 
+			send: #refresh
+			to: self.
 ]
 
 { #category : #initialization }
@@ -133,7 +133,8 @@ PBBrowserMainPresenter >> modelChanged [
 
 { #category : #refreshing }
 PBBrowserMainPresenter >> refresh [
-	projectsTree refresh
+	"projectsTree roots: self roots"
+	self refreshKeepingSelection
 ]
 
 { #category : #refreshing }

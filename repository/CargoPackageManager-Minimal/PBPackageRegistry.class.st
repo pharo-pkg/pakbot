@@ -158,7 +158,7 @@ PBPackageRegistry >> newProjectNamed: aString [
 	
 	| project |
 	project := PBProjectVersion named: aString.
-	self register: project.
+	self registerProject: project.
 	PBProjectCreated announceOnProject: project.
 	^ project
 ]
