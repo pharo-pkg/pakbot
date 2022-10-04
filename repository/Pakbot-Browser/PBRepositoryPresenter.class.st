@@ -57,7 +57,7 @@ PBRepositoryPresenter >> modelChanged [
 
 { #category : #accessing }
 PBRepositoryPresenter >> project [
-	^ self model
+	^ self model ifNotNil: [ :model | model project ]
 ]
 
 { #category : #accessing }

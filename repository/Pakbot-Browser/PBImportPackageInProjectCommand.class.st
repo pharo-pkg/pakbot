@@ -7,6 +7,12 @@ Class {
 	#category : #'Pakbot-Browser-Commands'
 }
 
+{ #category : #'accessing - defaults' }
+PBImportPackageInProjectCommand class >> defaultDescription [
+
+	^ 'Import exising system packages into the project.'
+]
+
 { #category : #converting }
 PBImportPackageInProjectCommand >> asSpecCommand [
 	^ super asSpecCommand

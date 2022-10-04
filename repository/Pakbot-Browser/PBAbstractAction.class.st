@@ -32,6 +32,12 @@ PBAbstractAction >> execute [
 ]
 
 { #category : #acccessing }
+PBAbstractAction >> project [
+
+	^ project
+]
+
+{ #category : #acccessing }
 PBAbstractAction >> project: aProject [
 	project := aProject
 ]

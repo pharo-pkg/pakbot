@@ -20,6 +20,7 @@ PBAbstractUIItem >> addExtraGroupTo: contextMenu [
 				name: 'Extra'; 
 				subMenu: (SpMenuPresenter new 
 					addItem: [ :subMenuItem | subMenuItem name: 'Inspect'; action: [ self inspect ] ];
+					addItem: [ :subMenuItem | subMenuItem name: 'Inspect repository'; action: [ self project repository iceRepository inspect ] ];
 					yourself) ]
 ]
 

@@ -29,6 +29,7 @@ PBBrowserMainPresenter class >> buildToolbarGroupContext: aContext [
 		register: (PBCommitProjectCommand forSpecContext: aContext);
 		register: (PBPublishProjectCommand forSpecContext: aContext);
 		register: (PBLoadFullProjectCommand forSpecContext: aContext);
+		register: (PBOpenGitRepositoryCommand forSpecContext: aContext);
 		yourself
 ]
 
