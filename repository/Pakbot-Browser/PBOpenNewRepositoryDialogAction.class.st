@@ -28,9 +28,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 		acceptCallback: [ :selectedOption | | repository |
 			selectedOption validate.
 			repository := PBGitRepository repository: selectedOption newRepository.
-			project project repository: repository.
-			
-			repository setIcebergProject: (PBIcebergProject onRepository: repository iceRepository project: project project).
+			self project repository: repository.
 			self doPostAction ].
 	presenter openDialog 
 		title: 'Set up project repository';

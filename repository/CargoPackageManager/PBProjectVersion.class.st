@@ -669,6 +669,7 @@ PBProjectVersion >> repository [
 { #category : #updating }
 PBProjectVersion >> repository: aPBSourceRepository [ 
 	repository := aPBSourceRepository.
+	aPBSourceRepository ensureProject: self.
 ]
 
 { #category : #loading }

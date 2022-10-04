@@ -146,6 +146,15 @@ PBGitRepository >> ensureIcePackageNamed: aPackageName [
 		do: [ self iceRepository addPackageNamed: aPackageName ]
 ]
 
+{ #category : #private }
+PBGitRepository >> ensureProject: aPBProjectVersion [ 
+	
+	self setIcebergProject: 
+		(PBIcebergProject 
+			onRepository: self iceRepository 
+			project: aPBProjectVersion).
+]
+
 { #category : #fetching }
 PBGitRepository >> fetchHeadVersion [
 	

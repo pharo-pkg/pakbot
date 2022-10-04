@@ -85,6 +85,21 @@ PBProjectVersionTest >> testCanLoadProjectWithoutUnresolvedDependenciesWarning [
 ]
 
 { #category : #tests }
+PBProjectVersionTest >> testIcebergRepositoryHasReferenceToTheProjectReferencingIt [
+	
+	| project newRepository |
+	project := PBProjectVersion example.
+	newRepository := PBGitRepository example.
+	project repository: newRepository.
+	
+	self 
+		assert: newRepository iceRepository workingCopy project pakbotProject
+		equals: project.
+	
+	 
+]
+
+{ #category : #tests }
 PBProjectVersionTest >> testRemovingDependencyPerformAnnouncement [
 	| announced subscription dep |
 
