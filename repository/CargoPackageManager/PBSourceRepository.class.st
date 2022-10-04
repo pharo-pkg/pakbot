@@ -76,6 +76,12 @@ PBSourceRepository >> editionIconName [
 	^ #glamorousBrowse
 ]
 
+{ #category : #private }
+PBSourceRepository >> ensureProject: aPBProjectVersion [ 
+
+	"Do nothing by default"
+]
+
 { #category : #serialization }
 PBSourceRepository >> fromSton: stonReader [
 	super fromSton: stonReader.
