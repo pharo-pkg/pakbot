@@ -133,8 +133,7 @@ PBBrowserMainPresenter >> modelChanged [
 
 { #category : #refreshing }
 PBBrowserMainPresenter >> refresh [
-	"projectsTree roots: self roots"
-	self refreshKeepingSelection
+	projectsTree roots: self roots
 ]
 
 { #category : #refreshing }
