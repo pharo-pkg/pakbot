@@ -1,14 +1,14 @@
-# Tutorial: How to start a new project with Cargo?
+# Tutorial: How to start a new project with Pakbot?
 
-Before starting this tutorial, please ensure you already have [Cargo installed](https://github.com/demarey/cargo#install-cargo).
+Before starting this tutorial, please ensure you already have [Pakbot installed](https://github.com/pharo-pkg/pakbot#install-pakbot).
 
 ## Counter 
 For this tutorial, we will use a tiny project: Counter. It is basically the same example as the seaside counter. A counter has a value that can be incremented or decremented.
 
 We first implement a *#'Counter-Core'* package that will contain a Counter class. We will also create a *#'Counter-Tests'* package that will contain a *CounterTest* class.
 Here are the st files with the code already ready to use:
-- [Counter-Core.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Core.st)
-- [Counter-Tests.st](https://raw.githubusercontent.com/demarey/cargo/master/tutorial/Counter-Tests.st)
+- [Counter-Core.st](https://raw.githubusercontent.com/pharo-pkg/pakbot/master/tutorial/Counter-Core.st)
+- [Counter-Tests.st](https://raw.githubusercontent.com/pharo-pkg/pakbot/master/tutorial/Counter-Tests.st)
 
 At the end of this tutorial, *Counter* project will have 2 package units:
 - *Counter-Core*
@@ -16,9 +16,29 @@ At the end of this tutorial, *Counter* project will have 2 package units:
 
 We will also use the already existing *Counter-UI* project composed of 1 package unit: *Counter-UI-Spec*.
 
-## Cargo Project creation
-A Cargo project holds the meta-information on a software project: its source repository, name, desription, packages composing the project, etc.
-We will ask Cargo to create a new project by giving it a name: 'Counter'. We also specify the initial version, a description of the project and a repository definition (it is best to create your own repository).
+## Pakbot Project creation
+Pakbot comes with a browser allowing fast creation and visualisation of Pakbot projects.
+First, onpen a Pakbot browser with:
+```smalltalk
+PakbotBrowser new run.
+``` 
+![Pakbot browser](/tutorial/images/pakbot-browser.png)
+
+We will click on the `Add project` button.
+![Pakbot new project dialog](/tutorial/images/pakbot-new-project.png)
+Fill-in the following information:
+- name: Counter
+- version: 0.1-dev
+- repository:
+	- name: counter
+	- local directory: <use default value>
+	- source directory: src (default value)
+- description: 'A simple counter project. You can increment it, decrement it and get the value from the counter.'
+
+A Pakbot project holds the meta-information on a software project: its source repository, name, desription, packages composing the project, etc.
+Once created, the project is added to the **Pakbot registry** that holds the list of installed projects into the system.
+
+<!--We will ask Cargo to create a new project by giving it a name: 'Counter'. We also specify the initial version, a description of the project and a repository definition (it is best to create your own repository).
 ```smalltalk
 project := (CGOOngoingProject for: #'Counter')
 		version: '0.1-dev';
@@ -33,11 +53,16 @@ Once the project created, it has to be registered in the Cargo registry so that 
 ```smalltalk
 CGOPackageRegistry default 
 	register: project 
-```
-The **Cargo Package Registry** holds the list of installed packages into the system.
+``` -->
 
 ## Add a package unit
-Now we will add a package to the newly created project. It can be done easily by calling `#newPackageUnit:` on a project.
+Now we will add a package to the newly created project. 
+Select the project, rigth-click on it and select: **import package** menu item. Indeed, we already have defined the packages and their content (import of st files), so we on ly need to import them into the project.
+The default filter for packages is set to the project name but you can edit it and add any package in the project.
+
+![Pakbot import package dialog](/tutorial/images/pakbot-import-package.png)
+
+<!-- It can be done easily by calling `#newPackageUnit:` on a project.
 ```smalltalk
 (project newPackageUnit: #'Counter-Core')
 	description: 'Core package with the counter implementation.';
@@ -49,25 +74,41 @@ A package unit may have dependencies. You can add them by refering to a package 
 	description: 'Test package of the counter implementation.';
 	addDependencyOn: #'Counter-Core';
 	yourself.
-```
+``` -->
 
-## Save the project
-Now, it is time to save our new project to the Source Code Management system (e.g. git). A Cargo project offers a convenient function to store the whole project at once: `#saveToSCM:`. It will save the current state of packages part of the project and all the associated metadata.
+## Commit the project
+Now, it is time to commit our new project to the Git repository. Click on the `commit` button in the toolbar to open a preview of files that will be commited.
+<!-- A Pakbot project offers a convenient function to store the whole project at once: `#saveToSCM:`. It will save the current state of packages part of the project and all the associated metadata.
 ``` smalltalk
 project saveToSCM: 'Initial commit through Cargo.'
+``` -->
+![Pakbot commit project dialog](/tutorial/images/pakbot-commit.png)
+
+The code is commited to the git local directory (in the image folder pharo-local/iceberg/git-user/repository). You still **need to push the code to the origin.**
+You can do it by opening the repository view (button is in the toolbar).
+
+## Load the project in a new image from a Git repository
+You will now learn how to load your project from  a Git repository. Let us now download a fresh Pharo image with Pakbot already installed.
+Open the Pakbot browser:
+```smalltalk
+PakbotBrowser new run.
 ```
-*Note: for git backend, the code is commited to the local directory (check in the image folder pharo-local/iceberg/git-user/repository). You still need to push the code to the origin.*
+Then, click on `Add project` and select `Import from git`:
+Enter, your remote url, then specify the branch or tag you want.
+![Pakbot import project dialog](/tutorial/images/pakbot-import-from-git.png)
 
-## Load the project in a new image from SCM
-You will now learn how to load your project from your prefered Source Code Management system. Let us now download a fresh Pharo image with Cargo already installed.
+Pakbot is now loading the project.
+Finally, you get the project loaded.	
 
-To load a project from a SCM, Cargo offers the `#installProjectFromSourceRepository:` method. Just give the SourceRepository as parameter and Cargo will go through it to first load the project metadata, then to load project packages metadata, solve dependencies and install packages into the image. If no version is specified for the source repository, Cargo will use the HEAD version.
+![Pakbot commit project dialog](/tutorial/images/pakbot-project-loaded.png)
+
+<!-- To load a project from a Git repository, Pakbot offers the `#installProjectFromSourceRepository:` method. Just give the SourceRepository as parameter and Cargo will go through it to first load the project metadata, then to load project packages metadata, solve dependencies and install packages into the image. If no version is specified for the source repository, Cargo will use the HEAD version.
 ``` smalltalk
 Cargo new 
 	installProjectFromSourceRepository: (CGOGitRepository repositoryUrl: 'git@github.com:demarey/pharo-counter.git')
-```
+``` -->
 
-## Load both a project and its dependents from SCM
+<!-- ## Load both a project and its dependents from SCM
 Cargo allows you to load project packages directly from a Source Code Management system instead of using the package repository.
 This feature is especialy useful when you are developping a project. It may happen that, in development mode, you rely on external packages not yet published to the package repository. That's why Cargo propose the `#useSourceRepository:` message, taking a **CGOSourceRepository** as argument. All source repositories added will take precedence on the default repository and package metadata will be loaded from the SCM for all the project packages.
 
@@ -79,3 +120,4 @@ Cargo new
 	package: #'Counter-UI';
 	install
 ```
+-->
