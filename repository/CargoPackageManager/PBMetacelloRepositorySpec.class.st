@@ -38,7 +38,9 @@ PBMetacelloRepositorySpec class >> hostFromScheme: scheme [
 
 { #category : #accessing }
 PBMetacelloRepositorySpec class >> metacelloSupportedSchemes [
-	^ (MCGitBasedNetworkRepository subclasses collect: #basicDescription) copyWith: 'gitlocal'
+	^ (MCGitBasedNetworkRepository subclasses 
+			reject: #isAbstract
+			thenCollect: #basicDescription) copyWith: 'gitlocal'
 ]
 
 { #category : #private }
