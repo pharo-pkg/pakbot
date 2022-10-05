@@ -151,22 +151,6 @@ SemanticVersionTest >> testVersionStringWithSuffixShouldHaveSuffix [
 	self assertVersionFromString: '1.1.3-RC1' major: 1 minor: 1 patch: 3 suffix: 'RC1'
 ]
 
-{ #category : #'tests-comparison' }
-SemanticVersionTest >> testVersionWithNoMinorNumberShouldNotBeEqualToVersionWithMinorNumberEqualsToZero [
-
-	self deny: self v1 equals: self v10.
-]
-
-{ #category : #'tests-comparison' }
-SemanticVersionTest >> testVersionWithNoPatchNumberShouldNotBeEqualToVersionWithPatchNumberEqualsToZero [
-	| v1 v2 |
-	
-	v1 := SemanticVersion fromString: '1.1'.
-	v2 := SemanticVersion fromString: '1.1.0'.
-
-	self deny: self v11 equals: self v110.
-]
-
 { #category : #'tests-development versions' }
 SemanticVersionTest >> testVersionWithSuffixDevShouldBeADevelopmentVersion [
 	
