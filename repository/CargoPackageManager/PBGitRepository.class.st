@@ -149,6 +149,8 @@ PBGitRepository >> ensureIcePackageNamed: aPackageName [
 { #category : #private }
 PBGitRepository >> ensureProject: aPBProjectVersion [ 
 	
+	iceRepository ifNil: [ ^ self ]. "No iceberg repository yet. Do not force its creation if not needed."
+	
 	self setIcebergProject: 
 		(PBIcebergProject 
 			onRepository: self iceRepository 
