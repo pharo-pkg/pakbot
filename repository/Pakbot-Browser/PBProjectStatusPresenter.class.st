@@ -23,7 +23,7 @@ PBProjectStatusPresenter class >> example [
 { #category : #initialization }
 PBProjectStatusPresenter >> connectPresenters [
 	
-	SystemAnnouncer uniqueInstance weak
+	Pakbot announcer weak
 		when: PBProjectAnnouncement
 		send: #handleAnnouncement:
 		to: self.
@@ -86,5 +86,5 @@ PBProjectStatusPresenter >> project [
 { #category : #announcements }
 PBProjectStatusPresenter >> unsubscribe [
 	
-	SystemAnnouncer uniqueInstance unsubscribe: self
+	Pakbot announcer unsubscribe: self
 ]

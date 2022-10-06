@@ -12,7 +12,7 @@ PBOngoingProjectFailingTest >> testAddingDependencyPerformAnnouncement [
 	| announced subscription |
 
 	[ 	announced := false.
-		subscription := SystemAnnouncer uniqueInstance
+		subscription := Pakbot announcer
 			when: PBDependenciesChanged
 			do: [ :ann | 
 				ann project = ongoingProject
@@ -20,5 +20,5 @@ PBOngoingProjectFailingTest >> testAddingDependencyPerformAnnouncement [
 		ongoingProject
 			addDependency: (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').
 		self assert: announced 
-	] ensure: [ SystemAnnouncer uniqueInstance removeSubscription: subscription ]
+	] ensure: [ Pakbot announcer removeSubscription: subscription ]
 ]

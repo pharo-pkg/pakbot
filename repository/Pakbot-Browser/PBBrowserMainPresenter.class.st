@@ -196,14 +196,8 @@ PBBrowserMainPresenter >> toolbarGroup [
 	^ self rootCommandsGroup / 'Toolbar'
 ]
 
-{ #category : #registering }
-PBBrowserMainPresenter >> unregisterToPakbotAnnouncements [
-
-	SystemAnnouncer uniqueInstance unsubscribe: self.
-]
-
 { #category : #'event-listening' }
 PBBrowserMainPresenter >> unsubscribe [
 	
-	SystemAnnouncer uniqueInstance unsubscribe: self.
+	Pakbot announcer unsubscribe: self.
 ]
