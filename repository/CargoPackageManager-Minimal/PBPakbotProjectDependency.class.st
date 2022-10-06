@@ -16,15 +16,19 @@ Class {
 
 { #category : #example }
 PBPakbotProjectDependency class >> example [
-	^ self named: 'pharo-counter' repositoryUrl: 'https://github.com/pharo-pkg/pharo-counter.git'
+	^ self named: 'pharo-counter' repositoryUrl: 'https://github.com/pharo-pkg/pharo-counter.git' version: 'main'
 ]
 
 { #category : #'instance creation' }
 PBPakbotProjectDependency class >> fromSton: stonReader [
-	| repository |
+
+	| url version projectName |
+	stonReader parseMapDo: [ :instVarName :value |
+		instVarName = 'project' ifTrue: [ projectName := value ].
+		instVarName = 'url' ifTrue: [ url := value ].
+		instVarName = 'version' ifTrue: [ version := value ]. ].
 	
-	repository := super fromSton: stonReader.
-	^ self named: repository name repositoryUrl: repository	repositoryUrl
+	^ self named: projectName repositoryUrl: url version: version
 ]
 
 { #category : #'instance creation' }
@@ -47,6 +51,12 @@ PBPakbotProjectDependency class >> named: aName repositoryUrl: gitUrlString vers
 PBPakbotProjectDependency class >> named: aName version: aVersion [ 
 	
 	^ self named: aName repositoryUrl: nil version: aVersion
+]
+
+{ #category : #'ston-core' }
+PBPakbotProjectDependency class >> stonName [
+
+	^ #PakbotProject
 ]
 
 { #category : #accessing }
@@ -152,11 +162,8 @@ PBPakbotProjectDependency >> stonMap [
 
 { #category : #ston }
 PBPakbotProjectDependency >> stonOn: stonWriter [
-	stonWriter writeMap: (OrderedDictionary 
-		with: 	#name -> name
-		with:	#repository -> repository
-		with: 	#version -> self version) 
 
+	stonWriter writeMap: self stonMap
 ]
 
 { #category : #accessing }

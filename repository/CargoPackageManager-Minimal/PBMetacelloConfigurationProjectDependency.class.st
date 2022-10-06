@@ -78,8 +78,3 @@ PBMetacelloConfigurationProjectDependency >> stonMap [
 		with:	#url -> url asString
 		with: 	#version -> version
 ]
-
-{ #category : #ston }
-PBMetacelloConfigurationProjectDependency >> stonOn: stonWriter [
-	stonWriter writeMap: self stonMap
-]

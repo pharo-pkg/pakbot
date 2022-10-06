@@ -17,7 +17,7 @@ PBVcsSerializedProjectV1Test class >> resources [
 PBVcsSerializedProjectV1Test >> counterUiProject [
 	| project dependency |
 	
-	dependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
+	dependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'https://git@github.com/demarey/pharo-counter-ui.git'.
 	dependency repository version: 'master'.
 
 	project := (PBProjectVersion named: #'Counter-UI')
@@ -258,7 +258,7 @@ PBVcsSerializedProjectV1Test >> testCanSerializeAndDeserializeAPackageDependency
 		equals: PBPakbotProjectDependency.
 	self
 		assert: externalProject repositoryUrl 
-		equals: 'ssh://git@github.com/demarey/pharo-counter-ui.git'.
+		equals: 'https://git@github.com/demarey/pharo-counter-ui.git'.
 	self 
 		assert: externalProject name
 		equals: #'pharo-counter'.

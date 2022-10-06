@@ -9,6 +9,12 @@ PBPakbotProjectDependencyTest >> testCanCreateDependency [
 	| dependency |
 	dependency := PBPakbotProjectDependency example.
 	self 
+		assert: dependency name
+		equals: #'pharo-counter'.
+	self 
+		assert: dependency version
+		equals: 'main'.
+	self 
 		assert: dependency repositoryUrl
 		equals: 'https://github.com/pharo-pkg/pharo-counter.git'.
 
@@ -16,40 +22,30 @@ PBPakbotProjectDependencyTest >> testCanCreateDependency [
 
 { #category : #tests }
 PBPakbotProjectDependencyTest >> testCanDeserializeDependency [
-	| dependency dict |
-	dict := STON fromString: '{
-	#name : ''pharo-counter'',
-	#repository : {
-		#type : #git,
-		#repositoryUrl : ''ssh://git@github.com/demarey/pharo-counter-ui.git'',
-		#version : ''master''
-	},
-	#version : ''''
-}'.
-	dependency := PBVcsSerializedProject new pakbotProjectDependencyFrom: dict.
-	self 
-		assert: dependency repositoryUrl
-		equals: 'git://git@github.com/demarey/pharo-counter-ui.git'.
 
+	| dependency |
+	dependency := STON fromString: 'PakbotProject {
+	#project : ''pharo-counter'',
+	#url : ''https://github.com/pharo-pkg/pharo-counter.git'',
+	#version : ''main''
+}'.
+	
+	self
+		assert: dependency repositoryUrl
+		equals: 'https://github.com/pharo-pkg/pharo-counter.git'
 ]
 
 { #category : #tests }
 PBPakbotProjectDependencyTest >> testCanSerializeDependency [
-	| projectDependency projectDependencyString |
-	projectDependency := PBPakbotProjectDependency named: 'pharo-counter' repositoryUrl: 'git@github.com:demarey/pharo-counter-ui.git'.
-	projectDependency repository version: 'master'.
-	projectDependencyString := STON toStringPretty: projectDependency.
+
+	| projectDependencyString |
 	
-	self 
-		assert: projectDependencyString
-		equals: '{
-	#name : ''pharo-counter'',
-	#repository : {
-		#type : #git,
-		#repositoryUrl : ''git://git@github.com/demarey/pharo-counter-ui.git'',
-		#version : ''master''
-	},
-	#version : ''''
+	projectDependencyString := STON toStringPretty: PBPakbotProjectDependency example.
+
+	self assert: projectDependencyString equals: '{
+	#project : ''pharo-counter'',
+	#url : ''https://github.com/pharo-pkg/pharo-counter.git'',
+	#version : ''main''
 }'
 ]
 

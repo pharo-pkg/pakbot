@@ -167,8 +167,14 @@ PBMetacelloProjectDependency >> setName: projectName repositoryUrl: urlOrString 
 ]
 
 { #category : #ston }
+PBMetacelloProjectDependency >> stonMap [
+
+	self subclassResponsibility 
+]
+
+{ #category : #ston }
 PBMetacelloProjectDependency >> stonOn: stonWriter [
-	self subclassResponsibility
+	stonWriter writeMap: self stonMap
 ]
 
 { #category : #accessing }

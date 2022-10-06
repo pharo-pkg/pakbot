@@ -115,8 +115,3 @@ PBMetacelloBaselineProjectDependency >> stonMap [
 	packagesToLoad ifNotEmpty: [  dict at: #packagesToLoad put: packagesToLoad asArray ].
 	^ dict
 ]
-
-{ #category : #ston }
-PBMetacelloBaselineProjectDependency >> stonOn: stonWriter [
-	stonWriter writeMap: self stonMap
-]
