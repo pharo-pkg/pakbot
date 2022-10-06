@@ -28,10 +28,15 @@ PBPackageRegistryTest >> testCanDetectAMetacelloBaselineProjectIsAlreadyInstalle
 ]
 
 { #category : #tests }
-PBPackageRegistryTest >> testPackageRegisteredWhenPackageUnitIsAdded [
-	| project unit |
+PBPackageRegistryTest >> testPackageIsInstalledWhenPackageUnitIsAdded [
+	| project unit organizer |
 	project := PBProjectVersion example.
 	unit := project packageUnits anyOne.
+	
+	organizer := RPackageOrganizer new.
+	RPackage 
+		withOrganizer: organizer do: [ organizer registerPackageNamed: unit name ].
+	registry systemPackageOrganizer: organizer.
 	
 	registry register: unit.
 	
@@ -67,37 +72,6 @@ PBPackageRegistryTest >> testProjectRegisteredWhenPackageUnitIsAdded [
 	self 
 		assert: registry registeredProjects size
 		equals: 1.
-]
-
-{ #category : #tests }
-PBPackageRegistryTest >> testProjectStillRegisteredWhenPackageUnitIsUnregisteredAndSomeOfItsPackageStillInstalled [
-	| project unit |
-	project := PBProjectVersion example.
-	project 
-		registry: registry;
-		repository: PBGitMemoryRepository new.
-	unit := project packageUnits anyOne.
-	registry register: unit.
-	project importPackageNamed: #Unit2. "registers #Unit2"
-	
-	registry unregister: unit.
-	
-	self 
-		assert: registry registeredProjects size 
-		equals: 1
-]
-
-{ #category : #tests }
-PBPackageRegistryTest >> testProjectUnregisteredWhenPackageUnitIsUnregistered [
-	| project unit |
-	project := PBProjectVersion example.
-	unit := project packageUnits anyOne.
-	registry register: unit.
-	
-	registry unregister: unit.
-	
-	self 
-		assert: registry registeredProjects isEmpty.
 ]
 
 { #category : #tests }

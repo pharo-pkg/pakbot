@@ -325,7 +325,7 @@ PBProjectVersion >> hash [
 	^ self name hash
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PBProjectVersion >> ifNotMarried: aBlock [
 	repository isMarried
 		ifFalse: [ aBlock value ]
@@ -379,7 +379,7 @@ PBProjectVersion >> initializeWithProjectName: aProjectName [
 { #category : #accessing }
 PBProjectVersion >> installedPackages [
 	
-	^ self packages select: [ :each | each isInstalled ]
+	^ self packages select: [ :package | package isInstalled ]
 ]
 
 { #category : #accessing }
@@ -627,8 +627,8 @@ PBProjectVersion >> registry [
 ]
 
 { #category : #accessing }
-PBProjectVersion >> registry: aCGOPackageRegistry [ 
-	registry := aCGOPackageRegistry
+PBProjectVersion >> registry: aPBPackageRegistry [ 
+	registry := aPBPackageRegistry
 ]
 
 { #category : #assemblies }
@@ -653,12 +653,10 @@ PBProjectVersion >> removePackage: aPBPackage [
 ]
 
 { #category : #removing }
-PBProjectVersion >> removePart: aCGOPackageVersion [
-	registry unregister: aCGOPackageVersion.
-
+PBProjectVersion >> removePart: aPBProjectElement [
 	assemblies 
-		remove: aCGOPackageVersion
-		ifAbsent: [ 	packages remove: aCGOPackageVersion ]
+		remove: aPBProjectElement
+		ifAbsent: [ 	packages remove: aPBProjectElement ]
 ]
 
 { #category : #accessing }

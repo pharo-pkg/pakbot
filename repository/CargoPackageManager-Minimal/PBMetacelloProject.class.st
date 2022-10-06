@@ -143,6 +143,13 @@ PBMetacelloProject >> initializeWithRepository: repositoryString name: projectNa
 
 ]
 
+{ #category : #accessing }
+PBMetacelloProject >> installedPackages [
+	
+	"For now, we consider Metacello projects as black box."
+	^ #()
+]
+
 { #category : #'compatibility - PBProjectVersion' }
 PBMetacelloProject >> isAssembly [
 	" Let's say a CGOMetacelloProject is an assembly so that it will be ignored by PackageGroup mcVersions loading. "

@@ -10,7 +10,6 @@ Class {
 	#name : #PBPackageRegistry,
 	#superclass : #Object,
 	#instVars : [
-		'installedPackages',
 		'registeredProjects',
 		'systemPackageOrganizer',
 		'metacelloProjectRegistry',
@@ -48,14 +47,6 @@ PBPackageRegistry class >> useDefaultRegistry: aPBPackageRegistry during: aBlock
 	[ self default: aPBPackageRegistry.
 	aBlock value ]
 		ensure: [ self default: default ]
-]
-
-{ #category : #private }
-PBPackageRegistry >> checkPackageNameRegistrationOf: aPackageName [
-	
-	(self hasInstalledPackageNamed: aPackageName)
-		ifTrue: [ PBPackageAlreadyRegistered signal: aPackageName , ' is already present in the registry!' ]
-
 ]
 
 { #category : #private }
@@ -103,13 +94,13 @@ PBPackageRegistry >> hasInstalledPackageNamed: fullyQualifiedName [
 { #category : #initialization }
 PBPackageRegistry >> initialize [
 	super initialize.
-	installedPackages := Set new.
 	registeredProjects := Set new.
 ]
 
 { #category : #accessing }
 PBPackageRegistry >> installedPackages [
-	^ installedPackages
+
+	^ self registeredProjects flatCollect: [ :project | project installedPackages ] 
 ]
 
 { #category : #quering }
@@ -180,7 +171,7 @@ PBPackageRegistry >> packageNamed: aName [
 
 { #category : #accessing }
 PBPackageRegistry >> packageNamed: aName ifAbsent: absentBlock [
-	^ installedPackages 
+	^ self installedPackages 
 		detect: [ :package | package fullyQualifiedName = aName ]
 		ifNone: absentBlock
 ]
@@ -190,7 +181,7 @@ PBPackageRegistry >> packageRenamed: aRPackageRenamed [
 
 	| packages |
 	
-	packages := installedPackages select: [ :each | each name = aRPackageRenamed oldName ].
+	packages := self installedPackages select: [ :each | each name = aRPackageRenamed oldName ].
 	packages do: [ :each | each name: aRPackageRenamed newName. each project announceChanged ]
 
 ]
@@ -198,13 +189,9 @@ PBPackageRegistry >> packageRenamed: aRPackageRenamed [
 { #category : #'system-events' }
 PBPackageRegistry >> packageUnregistered: aRPackageUnregistered [ 
 
-	| packages |
-	
-	packages := installedPackages select: [ :each | each name = aRPackageUnregistered package name ].
-	installedPackages removeAll: packages.
-	
-	packages do: [ :each | each project announceChanged ]
-
+	self installedPackages 
+		select: [ :each | each name = aRPackageUnregistered package name ]
+		thenDo: [ :each | each project announceChanged ]
 ]
 
 { #category : #accessing }
@@ -224,14 +211,7 @@ PBPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 { #category : #registering }
 PBPackageRegistry >> register: aLoadableUnit [
 
-	self deprecated: 'should only register projects'.
-	
-	aLoadableUnit registry: self.
-	self checkPackageNameRegistrationOf: aLoadableUnit fullyQualifiedName.
-	installedPackages add: aLoadableUnit.
-	
-	(self isProjectRegistered: aLoadableUnit project)
-		ifFalse: [ self registerProject: aLoadableUnit project ].
+	self registerProject: aLoadableUnit project.
 	^ aLoadableUnit
 ]
 
@@ -299,19 +279,6 @@ PBPackageRegistry >> systemPackageOrganizer: aRPackageOrganizer [
 	systemPackageOrganizer := aRPackageOrganizer
 ]
 
-{ #category : #registering }
-PBPackageRegistry >> unregister: aPackageVersion [
-
-	self deprecated: 'should only register projects'.
-
-	installedPackages remove: aPackageVersion ifAbsent: [ ^ self ].
-	installedPackages 
-		detect: [ :packageVersion | packageVersion project = aPackageVersion project ]
-		ifNone: [ self unregisterProject: aPackageVersion project ].
-		
-
-]
-
 { #category : #'system-announcements' }
 PBPackageRegistry >> unregisterFromSystem [
 
@@ -322,9 +289,5 @@ PBPackageRegistry >> unregisterFromSystem [
 PBPackageRegistry >> unregisterProject: aProject [
 
 	registeredProjects remove: aProject.
-	installedPackages remove: aProject ifAbsent: ["Nothing To DO"].
-	
-	aProject packages do: [ :each | installedPackages remove: each ifAbsent: [  ] ].
-	
 	PBProjectRemoved announceOnProject: aProject.
 ]
