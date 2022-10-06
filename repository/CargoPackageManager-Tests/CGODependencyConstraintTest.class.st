@@ -1,7 +1,7 @@
 Class {
 	#name : #CGODependencyConstraintTest,
 	#superclass : #CGOTest,
-	#category : 'CargoPackageManager-Tests-Model'
+	#category : #'CargoPackageManager-Tests-Model'
 }
 
 { #category : #accessing }
@@ -18,7 +18,7 @@ CGODependencyConstraintTest >> testFromString [
 		equals: CGOFixedVersionConstraint.
 	self
 		assert: dependency asString
-		equals: '1.0.0'
+		equals: '1.0'
 ]
 
 { #category : #tests }
