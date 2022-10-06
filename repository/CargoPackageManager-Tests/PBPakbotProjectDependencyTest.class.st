@@ -13,7 +13,7 @@ PBPakbotProjectDependencyTest >> testCanCreateDependency [
 		equals: #'pharo-counter'.
 	self 
 		assert: dependency version
-		equals: 'main'.
+		equals: 'master'.
 	self 
 		assert: dependency repositoryUrl
 		equals: 'https://github.com/pharo-pkg/pharo-counter.git'.
@@ -45,7 +45,7 @@ PBPakbotProjectDependencyTest >> testCanSerializeDependency [
 	self assert: projectDependencyString equals: '{
 	#project : ''pharo-counter'',
 	#url : ''https://github.com/pharo-pkg/pharo-counter.git'',
-	#version : ''main''
+	#version : ''master''
 }'
 ]
 
