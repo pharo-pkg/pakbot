@@ -135,5 +135,5 @@ PBGitBasedPackageRepositoryTest >> testPublishedProjectIsTagged [
 		equals: 1.
 	self 
 		assert: project repository iceRepository tags first name
-		equals: '0.1.0'.
+		equals: '0.1'.
 ]
