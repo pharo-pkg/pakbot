@@ -1,6 +1,6 @@
 ![Image of Pakbot](/cargo-picture-small.png)
 
-# Pakbot package manager [![Build Status](https://github.com/demarey/SubProcess/actions/workflows/main.yml/badge.svg)](https://github.com/demarey/SubProcess/actions/workflows/main.yml)
+# Pakbot package manager [![Build Status](https://github.com/pharo-pkg/pakbot/actions/workflows/core.yml/badge.svg)](https://github.com/pharo-pkg/pakbot/actions/workflows/core.yml)
 Pakbot is a lightweitgh package manager for Smalltalk.
 
 ## What are the motivations behind Pakbot?
