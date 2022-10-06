@@ -181,7 +181,7 @@ PBPackageRegistry >> packageRenamed: aRPackageRenamed [
 
 	| packages |
 	
-	packages := self installedPackages select: [ :each | each name = aRPackageRenamed oldName ].
+	packages := self projectPackages select: [ :each | each name = aRPackageRenamed oldName ].
 	packages do: [ :each | each name: aRPackageRenamed newName. each project announceChanged ]
 
 ]
@@ -206,6 +206,13 @@ PBPackageRegistry >> projectNamed: aName ifAbsent: absentBlock [
 	^ registeredProjects 
 		detect: [ :project | project name = aName asSymbol ]
 		ifNone: absentBlock
+]
+
+{ #category : #accessing }
+PBPackageRegistry >> projectPackages [
+	"Get all project packages, even packages that are not installed"
+
+	^ self registeredProjects flatCollect: [ :project | project packages ] 
 ]
 
 { #category : #registering }
