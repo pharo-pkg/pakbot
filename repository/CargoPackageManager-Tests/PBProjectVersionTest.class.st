@@ -21,7 +21,7 @@ PBProjectVersionTest >> testAddingDependencyPerformAnnouncement [
 
 	[ 
 		announced := false.
-		subscription := SystemAnnouncer uniqueInstance
+		subscription := Pakbot announcer
 			when: PBDependenciesChanged
 			do: [ :ann | 
 				ann project = ongoingProject
@@ -29,7 +29,7 @@ PBProjectVersionTest >> testAddingDependencyPerformAnnouncement [
 		ongoingProject
 			addDependency: (PBPakbotProjectDependency named: 'AnotherProject' version: '=1.0.0').
 		self assert: announced 
-	] ensure: [ SystemAnnouncer uniqueInstance removeSubscription: subscription ]
+	] ensure: [ Pakbot announcer removeSubscription: subscription ]
 ]
 
 { #category : #tests }
@@ -108,12 +108,12 @@ PBProjectVersionTest >> testRemovingDependencyPerformAnnouncement [
 
 	[ 
 		announced := false.
-		subscription := SystemAnnouncer uniqueInstance
+		subscription := Pakbot announcer
 			when: PBDependenciesChanged
 			do: [ :ann | ann project = ongoingProject ifTrue: [ announced := true ] ].
 
 		ongoingProject removeDependency: dep.		
 
 		self assert: announced 
-	] ensure: [ SystemAnnouncer uniqueInstance removeSubscription: subscription ]
+	] ensure: [ Pakbot announcer removeSubscription: subscription ]
 ]
