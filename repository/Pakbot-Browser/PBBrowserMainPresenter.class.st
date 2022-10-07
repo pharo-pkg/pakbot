@@ -122,7 +122,7 @@ PBBrowserMainPresenter >> initializeWindow: aWindowPresenter [
 PBBrowserMainPresenter >> listenToPakbotAnnouncements [
 	
 	Pakbot announcer weak
-		when: PBProjectCreated , PBProjectRemoved, PBProjectChanged 
+		when: PBProjectCreated, PBProjectRemoved, PBProjectChanged, PBProjectLoaded  
 			send: #refresh
 			to: self.
 ]
