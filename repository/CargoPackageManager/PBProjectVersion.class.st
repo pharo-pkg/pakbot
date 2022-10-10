@@ -226,7 +226,9 @@ PBProjectVersion >> createPackageNamed: aString [
 	"We delegate to the system the creation of a package first.
 	This will fail if a package with that name already exists.
 	If that succeeds, we register that new package in this project."
-	[ self systemPackageOrganizer createPackageNamed: aString ]
+	[ RPackage
+			withOrganizer: self systemPackageOrganizer 
+			do: [ :organizer | organizer createPackageNamed: aString] ]
 		on: RPackageConflictError
 		do: [ :error | PBSystemPackageAlreadyDefined signal: aString ].
 
