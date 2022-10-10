@@ -151,8 +151,9 @@ PBGitRepository >> ensureProject: aPBProjectVersion [
 	
 	iceRepository ifNil: [ ^ self ]. "No iceberg repository yet. Do not force its creation if not needed."
 	
-	(aPBProjectVersion = self workingCopy project pakbotProject)
-		ifFalse: [ PBIcebergProjectMismatch signal ].
+	[ (aPBProjectVersion = self workingCopy project pakbotProject)
+		ifFalse: [ PBIcebergProjectMismatch signal ] ]
+	on: PBProjectMetadataNotFound do: [ "ignore. No pakbot metadata" ].
 	
 	self setIcebergProject: 
 		(PBIcebergProject 
