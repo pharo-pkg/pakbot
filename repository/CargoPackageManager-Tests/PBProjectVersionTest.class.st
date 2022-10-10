@@ -85,17 +85,16 @@ PBProjectVersionTest >> testCanLoadProjectWithoutUnresolvedDependenciesWarning [
 ]
 
 { #category : #tests }
-PBProjectVersionTest >> testIcebergRepositoryHasReferenceToTheProjectReferencingIt [
+PBProjectVersionTest >> testIcebergRepositoryHavingPakbotProjectReferencingADifferentPakbotProjectRaisesError [
 	
 	| project newRepository |
 	project := PBProjectVersion example.
 	newRepository := PBGitRepository example.
-	project repository: newRepository.
+	newRepository iceRepository. "force iceRepository creation to trigger the check"
 	
 	self 
-		assert: newRepository iceRepository workingCopy project pakbotProject
-		equals: project.
-	
+		should: [ project repository: newRepository ]
+		raise: PBIcebergProjectMismatch.
 	 
 ]
 
