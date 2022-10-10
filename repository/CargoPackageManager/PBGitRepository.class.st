@@ -77,12 +77,12 @@ PBGitRepository class >> url: anUrlOrString repositoryCreator: anIceRepositoryCr
 
 { #category : #updating }
 PBGitRepository >> addPackageNamed: aPackageName [
-	^ self iceRepository workingCopy addPackageNamed: aPackageName
+	^ self workingCopy addPackageNamed: aPackageName
 ]
 
 { #category : #baselines }
 PBGitRepository >> baselines [
-	^ (self iceRepository workingCopy packages
+	^ (self workingCopy packages
 		select: [ :each | each name beginsWith: 'BaselineOf' ])
 		sorted: [ :a :b | a name < b name ].
 ]
@@ -206,9 +206,8 @@ PBGitRepository >> iceRepository [
 
 { #category : #querying }
 PBGitRepository >> iceSavedPackageVersionFor: packageName [
-	| wc |
-	wc := self iceRepository workingCopy.
-	^ wc versionFor: (wc packageNamed: packageName)
+	
+	^ self workingCopy versionFor: (self workingCopy packageNamed: packageName)
 ]
 
 { #category : #initialization }
@@ -284,12 +283,12 @@ PBGitRepository >> isRepositoryAlreadyClonedInDefaultLocation [
 
 { #category : #loading }
 PBGitRepository >> loadPackageNamed: aPackageName [
-	self iceRepository workingCopy loadPackageNamed: aPackageName
+	self workingCopy loadPackageNamed: aPackageName
 ]
 
 { #category : #loading }
 PBGitRepository >> loadPackagesNamed: aListOfPackageName [
-	self iceRepository workingCopy loadPackagesNamed: aListOfPackageName
+	self workingCopy loadPackagesNamed: aListOfPackageName
 ]
 
 { #category : #querying }
@@ -331,7 +330,7 @@ PBGitRepository >> project [
 { #category : #configuring }
 PBGitRepository >> project: aPBIcebergProject [
 	"Used to set the Pakbot Project when creating a new project."
-	self iceRepository workingCopy basicSetProject: aPBIcebergProject.
+	self workingCopy basicSetProject: aPBIcebergProject.
 
 
 ]
@@ -376,7 +375,7 @@ PBGitRepository >> savePackageUnits: packageUnits withMessage: commitMessage [
 { #category : #updating }
 PBGitRepository >> setIcebergProject: anIceAbstractProject [
 	
-	self iceRepository workingCopy basicSetProject: anIceAbstractProject
+	self workingCopy basicSetProject: anIceAbstractProject
 ]
 
 { #category : #querying }
@@ -415,4 +414,10 @@ PBGitRepository >> versionLoaded: packageName [
 	self flag: 'TODO: check if I need to notify Iceberg that a package has been loaded. See IceWorkingCopy>>loadPackagesNamed: aCollection fromCommit: aCommit'
 	"iceRepository versionLoaded: 
 		(self iceSavedPackageVersionFor: packageName)"
+]
+
+{ #category : #private }
+PBGitRepository >> workingCopy [
+
+	^ self iceRepository workingCopy
 ]
