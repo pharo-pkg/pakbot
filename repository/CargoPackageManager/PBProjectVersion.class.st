@@ -52,10 +52,10 @@ PBProjectVersion class >> for: aProjectName [
 ]
 
 { #category : #'instance creation' }
-PBProjectVersion class >> fromRepository: aCGOSourceRepository [
+PBProjectVersion class >> fromRepository: aPBSourceRepository [
 	| ongoing |
-	ongoing := self fromVcsStonString: aCGOSourceRepository projectMetadataStonString.
-	ongoing repository: aCGOSourceRepository.
+	ongoing := self fromVcsStonString: aPBSourceRepository projectMetadataStonString.
+	ongoing repository: aPBSourceRepository.
 	^ ongoing
 ]
 
@@ -727,11 +727,4 @@ PBProjectVersion >> virtualPackages [
 { #category : #updating }
 PBProjectVersion >> virtualPackages: aListOfVirtualPackages [ 
 	virtualPackages := aListOfVirtualPackages
-]
-
-{ #category : #private }
-PBProjectVersion >> withRepositoryDo: aBlock [
-	repository 
-		ifNil: [ CGOGitRepositoryCreationPanel withNewRepositoryDo: aBlock ]
-		ifNotNil: [ aBlock value: repository ]
 ]
