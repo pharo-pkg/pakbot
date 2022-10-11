@@ -7,6 +7,9 @@ If you prefer a GUI, please use the project view from the system browser.
 Class {
 	#name : #Pakbot,
 	#superclass : #Object,
+	#instVars : [
+		'repository'
+	],
 	#classVars : [
 		'PlatformAttributes'
 	],
@@ -41,4 +44,24 @@ Pakbot class >> platformAttributes: aListOfPlatformAttributes [
 Pakbot class >> resetAnnouncer [
 	<script>
 	pakbotAnnouncer := nil.
+]
+
+{ #category : #'api - loading' }
+Pakbot >> load [
+	
+	(PBProjectVersion fromRepository: repository) 
+		registry: self registry;
+		load.
+]
+
+{ #category : #accessing }
+Pakbot >> registry [
+	
+	^ PBPackageRegistry default
+]
+
+{ #category : #'api - git' }
+Pakbot >> repository: aString [ 
+	
+	repository := PBSourceRepository fromStringUrl: aString subdirectory: ''.
 ]
