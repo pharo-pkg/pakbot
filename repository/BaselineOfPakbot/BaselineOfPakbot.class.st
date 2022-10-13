@@ -4,7 +4,7 @@ Class {
 	#category : #BaselineOfPakbot
 }
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> aiGrapsAlgos: spec [
 	spec
     	baseline: 'AIGraphAlgorithms'
@@ -12,7 +12,7 @@ BaselineOfPakbot >> aiGrapsAlgos: spec [
 					repository: 'github://pharo-ai/graph-algorithms:v1.1.0/src' ]
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> babyMock: spec [
 	spec
 		project: 'BabyMock2'
@@ -22,7 +22,7 @@ BaselineOfPakbot >> babyMock: spec [
 				repository: 'http://smalltalkhub.com/mc/zeroflag/BabyMock2/main/' ]
 ]
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfPakbot >> baseline: spec [
 	<baseline>
 	spec
@@ -65,7 +65,7 @@ BaselineOfPakbot >> baseline: spec [
 					#('core'
 					'Pakbot-Tests'
 					'CargoPackageManager-FailingTests'
-					'Pakbot-IntegrationTests'
+					"'Pakbot-IntegrationTests'"
 					'Pakbot-Catalog-Tests'); 
 				group: 'tests' with: 
 					#('tests-core'
@@ -79,7 +79,7 @@ BaselineOfPakbot >> baseline: spec [
 				group: 'default' with: #('tests-core' 'browser') ]
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> iceberg: spec [
 	
 	spec
@@ -89,7 +89,7 @@ BaselineOfPakbot >> iceberg: spec [
 				loads: #('Iceberg-Memory') ]
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> pakbotCatalog: spec [
 
 	spec
@@ -98,7 +98,7 @@ BaselineOfPakbot >> pakbotCatalog: spec [
 		package: #'Pakbot-Catalog-Tests' with: [ 
 			spec requires:
 					#( 'Pakbot-Catalog'
-					   'Pakbot-Core-Tests' ) ].
+					   'Pakbot-Tests' ) ].
 				
 	" Old implementation using aMongoDB as backend"
 	"spec			
@@ -114,22 +114,22 @@ BaselineOfPakbot >> pakbotCatalog: spec [
 					   'Voyage' ) ]"
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> pakbotUI: spec [
 
 	spec
 		package: #'Pakbot-Browser' with: [ 
-			spec requires: #( CargoPackageManager ) ];
+			spec requires: #( 'Pakbot-Core' ) ];
 		package: #'Pakbot-Browser-Tests' with: [ 
 			spec requires: #( 'Pakbot-Browser' ) ]
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> parametrizedTests: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfPakbot >> zincHttpComponents: spec [
 	spec
 		baseline: 'ZincHTTPComponents'
