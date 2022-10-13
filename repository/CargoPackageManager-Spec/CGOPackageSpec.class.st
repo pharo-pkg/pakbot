@@ -10,7 +10,7 @@ Class {
 		'package',
 		'dictionary'
 	],
-	#category : 'CargoPackageManager-Spec'
+	#category : #'CargoPackageManager-Spec'
 }
 
 { #category : #converting }
@@ -20,7 +20,7 @@ CGOPackageSpec >> asPackageVersion [
 			add: #package -> self packageName asSymbol;
 			add: #version -> self version;
 			add: #dependencies -> self dependencies;
-			add: #provisions -> (self provisions collect: [ :p | (CGOPackageVersionReference newOn: p) asString]);
+			add: #provisions -> (self provisions collect: [ :p | (PBPackageVersionReference newOn: p) asString]);
 			add: #description -> self description;
 			add: #sourcePackageVersion -> self sourcePackageVersionObject;
 			add: #platformRequirements -> self platformRequirements;

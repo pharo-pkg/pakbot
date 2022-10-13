@@ -16,5 +16,5 @@ Seaside31BasedTest >> setUp [
 	seaside31Dependency := PBPackageDependency
 									on: seaside31PackageVersion package name
 									for: nil
-									withConstraints: { CGOFixedVersionConstraint with: '3.1' }
+									withConstraints: { PBFixedVersionConstraint with: '3.1' }
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #PBMetacelloRepositorySpecTest,
 	#superclass : #FileTestCase,
-	#category : #'CargoPackageManager-Tests-SCM'
+	#category : #'Pakbot-Tests-Metacello-Support'
 }
 
 { #category : #test }

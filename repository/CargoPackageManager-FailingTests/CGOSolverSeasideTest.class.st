@@ -31,8 +31,8 @@ CGOSolverSeasideTest >> testCanSolvePackageWithManyCompatibleConstraints [
 	dependency := PBPackageDependency
 						on: testPackage
 						for: nil
-						withConstraints: { CGOFixedVersionConstraint with: version . 
-							CGOFixedVersionConstraint with: '3.1.0' asSemanticVersion }.
+						withConstraints: { PBFixedVersionConstraint with: version . 
+							PBFixedVersionConstraint with: '3.1.0' asSemanticVersion }.
 
 	resolution := solver solveDependency: dependency.
 	
@@ -49,8 +49,8 @@ CGOSolverSeasideTest >> testCanSolvePackageWithSpecifiedVersion [
 	dependency := PBPackageDependency 
 		on: testPackage 
 		for: nil
-		withConstraints: {(CGOFixedVersionConstraint with: version)}.
-	solver addConstraint: (CGOFixedVersionConstraint with: version) on: testPackage.
+		withConstraints: {(PBFixedVersionConstraint with: version)}.
+	solver addConstraint: (PBFixedVersionConstraint with: version) on: testPackage.
 	
 	resolution := solver solveDependency: dependency.
 	
@@ -85,7 +85,7 @@ CGOSolverSeasideTest >> testCanSolveVirtualPackageWithSpecifiedVersion [
 	dependency := PBPackageDependency
 						on: testPackage
 						for: nil
-						withConstraints: { CGOFixedVersionConstraint with: version }.
+						withConstraints: { PBFixedVersionConstraint with: version }.
 
 	resolution := solver solveDependency: dependency.
 	packageVersion := (resolution ongoingPackageResolutionFor: testPackage) resolvedProjectVersion.
@@ -142,7 +142,7 @@ CGOSolverSeasideTest >> testSolvePackageWithNonFixedConstraintDependencyRaisesUn
 	dependency := PBPackageDependency 
 		on: testPackage 
 		for: nil
-		withConstraints: { CGORangeVersionsConstraint between: '2.1' and: '2.4' }.
+		withConstraints: { PBRangeVersionsConstraint between: '2.1' and: '2.4' }.
 	
 	self 
 		should: [ solver solveDependency: dependency ]
@@ -155,7 +155,7 @@ CGOSolverSeasideTest >> testSolvingADependencyWithATransitiveDependencySolvesBot
 	dependencyToSolve := PBPackageDependency 
 								on: 'Seaside-Flow-Platform'
 								for: nil
-								withConstraints: { CGOFixedVersionConstraint with: '1' }.
+								withConstraints: { PBFixedVersionConstraint with: '1' }.
 	
 	resolution := solver solveDependency: dependencyToSolve.
 
@@ -190,7 +190,7 @@ CGOSolverSeasideTest >> testSolvingAVirtualPackageProvidedByNoPackageRaisesUnres
 	dependency := PBPackageDependency
 						on: #'Seaside-Canvas-Platform'
 						for: nil
-						withConstraints: { CGOFixedVersionConstraint with: '99.5' }.
+						withConstraints: { PBFixedVersionConstraint with: '99.5' }.
 
 	self 	
 		should: [ solver solveDependency: dependency  ]

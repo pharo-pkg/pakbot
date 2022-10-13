@@ -16,7 +16,7 @@ Class {
 		'project',
 		'timestamp'
 	],
-	#category : 'CargoPackageManager-Minimal-Model'
+	#category : #'CargoPackageManager-Minimal-Model'
 }
 
 { #category : #'instance creation' }
@@ -56,7 +56,7 @@ CGOPackageVersion >> asOngoingPackage [
 
 { #category : #converting }
 CGOPackageVersion >> asPackageVersionReference [
-	^ CGOPackageVersionReference 
+	^ PBPackageVersionReference 
 		packageName: self name 
 		version: self version asString
 ]

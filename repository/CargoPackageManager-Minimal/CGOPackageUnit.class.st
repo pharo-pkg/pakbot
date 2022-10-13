@@ -19,7 +19,7 @@ CGOPackageUnit class >> provisionsFromListOfProvisionStrings: aListOfProvisionSt
 	^ aListOfProvisionStrings
 		collect: [ :provision | | pkgVersionRef |
 			pkgVersionRef := provision asPackageVersionReference.
-			CGOPackageVersionReference 
+			PBPackageVersionReference 
 				packageName: pkgVersionRef packageName 
 				version:	(pkgVersionRef versionNumber 
 					ifNil: [ '1.0.0' asSemanticVersion ]

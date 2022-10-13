@@ -3,7 +3,7 @@ Class used to set up test data for Cargo projects, units and assemblies
 "
 Class {
 	#name : #PBModelTest,
-	#superclass : #PBAbstractTest,
+	#superclass : #PBTest,
 	#instVars : [
 		'ongoingProject',
 		'unitTestV1',
@@ -22,10 +22,10 @@ PBModelTest >> project [
 { #category : #running }
 PBModelTest >> setUp [
 	super setUp.
-	ongoingProject := testRegistry newProjectNamed: #'MyProject'.
+	ongoingProject := registry newProjectNamed: #'MyProject'.
 	ongoingProject description: 'A simple project used for illustration.'.
 	(ongoingProject newNotLoadedPackage: #UnitTest) description: 'A simple ongoing package unit.'.
-	testRegistry
+	registry
 		register: self unitTestV1;
 		register: self unitTestV2;
 		yourself.

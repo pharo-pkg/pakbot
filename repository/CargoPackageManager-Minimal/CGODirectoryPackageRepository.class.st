@@ -174,7 +174,7 @@ CGODirectoryPackageRepository >> versionStringsOf: aPackageName [
 	^ [ (self rootDirectory / aPackageName asLowercase) fileNames
 			collect: [ :fileName | 
 				"Preserve possible upper case letters in the package name"
-				aPackageName , CGOPackageVersionReference packageVersionSeparator asString , (fileName copyAfterLast: CGOPackageVersionReference packageVersionSeparator) ] ]
+				aPackageName , PBPackageVersionReference packageVersionSeparator asString , (fileName copyAfterLast: PBPackageVersionReference packageVersionSeparator) ] ]
 		on: DirectoryDoesNotExist 
 		do: [ #() ]
 ]

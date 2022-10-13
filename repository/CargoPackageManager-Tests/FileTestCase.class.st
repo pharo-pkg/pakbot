@@ -5,7 +5,7 @@ Class {
 		'directories',
 		'files'
 	],
-	#category : #'CargoPackageManager-Tests-SCM'
+	#category : #'Pakbot-Tests-Metacello-Support'
 }
 
 { #category : #initialization }

@@ -87,5 +87,5 @@ FooDependencyResolutionResource >> rootDependency [
 	^ PBPackageDependency 
 		on: self fooPackage packageName
 		for: nil
-		withConstraints: { CGOFixedVersionConstraint with: '1.0' }
+		withConstraints: { PBFixedVersionConstraint with: '1.0' }
 ]

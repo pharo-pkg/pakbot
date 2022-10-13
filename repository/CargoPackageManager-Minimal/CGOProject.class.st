@@ -53,7 +53,7 @@ CGOProject >> asCargoProject [
 { #category : #'compatibility - cargo solver' }
 CGOProject >> asPackageVersionReference [
 	"Needed so that Cargo solver can use a project as a standard package assembly"
-	^ CGOPackageVersionReference 
+	^ PBPackageVersionReference 
 		packageName: name 
 		version: self version asString
 ]

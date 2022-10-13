@@ -4,7 +4,7 @@ I store metadata for this package. These meta data are used by other tools such 
 Class {
 	#name : #ManifestCargoPackageManager,
 	#superclass : #PackageManifest,
-	#category : 'CargoPackageManager'
+	#category : #CargoPackageManager
 }
 
 { #category : #'meta-data' }
@@ -46,7 +46,7 @@ ManifestCargoPackageManager class >> ruleContainsRuleV1FalsePositive [
 
 { #category : #'code-critics' }
 ManifestCargoPackageManager class >> ruleEmptyExceptionHandlerRuleV1FalsePositive [
-^ #(#(#(#RGMethodDefinition #(#CGOPackageVersionReference #fetchFromRepositories #false)) #'2015-01-20T12:59:09.096635+01:00') )
+^ #(#(#(#RGMethodDefinition #(#PBPackageVersionReference #fetchFromRepositories #false)) #'2015-01-20T12:59:09.096635+01:00') )
 ]
 
 { #category : #'code-critics' }

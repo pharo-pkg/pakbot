@@ -73,7 +73,7 @@ CGOScmPackageMetadata >> packagesProviding: aName version: aSemanticVersion forE
 	"We ignore virtual package version as we load from SCM, eveything should be in sync."
 	"We also ignore platformAttributes as a virtual package has no platform attribute"
 	| virtualPkgVersion |
-	virtualPkgVersion := (CGOPackageVersionReference packageName: aName version: aSemanticVersion).
+	virtualPkgVersion := (PBPackageVersionReference packageName: aName version: aSemanticVersion).
 	^ self packageVersions 
 		select: [ :each | 
 			each isUnit

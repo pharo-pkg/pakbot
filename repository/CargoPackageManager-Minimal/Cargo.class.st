@@ -109,7 +109,7 @@ Cargo >> package: aPackageName [
 { #category : #configuring }
 Cargo >> package: aPackageName version: aSemanticVersionString [
 	packages addIfNotPresent: 
-		(CGOPackageVersionReference 
+		(PBPackageVersionReference 
 			packageName: aPackageName 
 			version: aSemanticVersionString)
 ]
@@ -129,7 +129,7 @@ Cargo >> rootDependency [
 		for: nil 
 		withConstraints: (pkgVersionRef versionString
 			ifEmpty: [ #() ]
-			ifNotEmpty: [ {(CGOFixedVersionConstraint with: pkgVersionRef versionString)} ] ) 
+			ifNotEmpty: [ {(PBFixedVersionConstraint with: pkgVersionRef versionString)} ] ) 
 ]
 
 { #category : #configuring }

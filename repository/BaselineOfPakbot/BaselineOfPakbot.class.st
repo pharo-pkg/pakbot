@@ -28,31 +28,31 @@ BaselineOfPakbot >> baseline: spec [
 	spec
 		for: #common
 		do: [ 
-			"self icetray: spec."
 			"self babyMock: spec."
-			self voyage: spec.
 			"self zincHttpComponents: spec."
 			self aiGrapsAlgos: spec.
 			self iceberg: spec.
 			self parametrizedTests: spec.
 			
 			spec
-				package: #'CargoPackageManager-Minimal';
-				package: #CargoPackageManager
-					with: [ spec requires: #('CargoPackageManager-Minimal' 'Iceberg' "'ZincHTTPComponents'" 'AIGraphAlgorithms') ];
+				package: #'Pakbot-Minimal';
+				package: #'Pakbot-Core'
+					with: [ spec requires: #('Pakbot-Minimal' 'Iceberg' "'ZincHTTPComponents'" "'AIGraphAlgorithms'") ];
 
 				"Tests and its ressources"
 				package: #'CargoPackageManager-Spec';
 				package: #'CargoPackageManager-TestRessources'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-Spec') ];
+					with: [ spec requires: #('Pakbot-Core' 'CargoPackageManager-Spec') ];
+				package: #'Pakbot-Tests'
+					with: [ spec requires: #('Pakbot-Core' 'ParametrizedTests') ];
 				package: #'CargoPackageManager-Tests'
-					with: [ spec requires: #(CargoPackageManager 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
-				package: #'CargoPackageManager-IntegrationTests' with: [ spec requires: #('CargoPackageManager' 'CargoPackageManager-Tests') ];
-				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('CargoPackageManager-Tests') ];
+					with: [ spec requires: #('Pakbot-Core' 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
+				package: #'Pakbot-IntegrationTests' with: [ spec requires: #('Pakbot-Core' 'Pakbot-Tests') ];
+				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('Pakbot-Tests') ];
 				package: #'CargoPackageManager-Tests-FooResource'.
 							
 			self pakbotUI: spec.		
-			self pakbotPackageRepository: spec.
+			self pakbotCatalog: spec.
 				
 			spec
 				package: 'CargoPackageManager-Utils';
@@ -60,15 +60,13 @@ BaselineOfPakbot >> baseline: spec [
 				package: #'CargoPackageManager-Utils-FailingTests' with: [ spec requires: #('CargoPackageManager-Utils-Tests') ].	
 
 			spec
-				group: 'core' with: #(CargoPackageManager 'PakbotPackageManager-Repository');
+				group: 'core' with: #('Pakbot-Core' 'Pakbot-Catalog');
 				group: 'tests-core' with:
 					#('core'
-					'CargoPackageManager-Tests'
+					'Pakbot-Tests'
 					'CargoPackageManager-FailingTests'
-					'CargoPackageManager-IntegrationTests'
-					'PakbotPackageManager-Repository-Tests'
-					'PakbotPackageManager-Repository-IntegrationTests'
-					); 
+					'Pakbot-IntegrationTests'
+					'Pakbot-Catalog-Tests'); 
 				group: 'tests' with: 
 					#('tests-core'
 					'Pakbot-Browser-Tests'
@@ -77,7 +75,7 @@ BaselineOfPakbot >> baseline: spec [
 					'CargoPackageManager-Utils-FailingTests'
 					'CargoPackageManager-UI-Tests');
 				group: 'utils' with: #('CargoPackageManager-Utils' 'core');
-				group: 'browser' with: #('Pakbot-Browser-Tests' 'Pakbot-Browser-Tests');
+				group: 'browser' with: #('Pakbot-Browser' 'Pakbot-Browser-Tests');
 				group: 'default' with: #('tests-core' 'browser') ]
 ]
 
@@ -92,24 +90,15 @@ BaselineOfPakbot >> iceberg: spec [
 ]
 
 { #category : #baseline }
-BaselineOfPakbot >> icetray: spec [
-	spec baseline: 'Icetray' with: [ spec repository: 'github://pharo-spec/icetray/src' ]
-]
-
-{ #category : #baseline }
-BaselineOfPakbot >> pakbotPackageRepository: spec [
+BaselineOfPakbot >> pakbotCatalog: spec [
 
 	spec
-		package: #'PakbotPackageManager-Repository' with: [ 
-			spec requires: #( CargoPackageManager ) ];
-		package: #'PakbotPackageManager-Repository-Tests' with: [ 
+		package: #'Pakbot-Catalog' with: [ 
+			spec requires: #( 'Pakbot-Core' ) ];
+		package: #'Pakbot-Catalog-Tests' with: [ 
 			spec requires:
-					#( 'PakbotPackageManager-Repository'
-					   'CargoPackageManager-Tests' ) ];
-		package: #'PakbotPackageManager-Repository-IntegrationTests' with: [ 
-			spec requires:
-					#( 'PakbotPackageManager-Repository'
-					   'CargoPackageManager-Tests' ) ].
+					#( 'Pakbot-Catalog'
+					   'Pakbot-Core-Tests' ) ].
 				
 	" Old implementation using aMongoDB as backend"
 	"spec			
@@ -129,20 +118,6 @@ BaselineOfPakbot >> pakbotPackageRepository: spec [
 BaselineOfPakbot >> pakbotUI: spec [
 
 	spec
-		package: #'CargoPackageManager-UI' with: [ 
-			spec requires: #( CargoPackageManager ) ];
-		
-		package: #'CargoPackageManager-UI-Tests' with: [ 
-			spec requires:
-					#( 'CargoPackageManager-UI' 'CargoPackageManager-Calypso-Browser' ) ];
-				
-		package: #'CargoPackageManager-Calypso-Environment'	with: [ 
-				spec requires: #( CargoPackageManager ) ];
-			
-		package: #'CargoPackageManager-Calypso-Browser' with: [ 
-			spec requires: #( CargoPackageManager 'CargoPackageManager-UI'
-					   'CargoPackageManager-Calypso-Environment' ) ];
-				
 		package: #'Pakbot-Browser' with: [ 
 			spec requires: #( CargoPackageManager ) ];
 		package: #'Pakbot-Browser-Tests' with: [ 
@@ -152,15 +127,6 @@ BaselineOfPakbot >> pakbotUI: spec [
 { #category : #baseline }
 BaselineOfPakbot >> parametrizedTests: spec [
 	spec baseline: 'ParametrizedTests' with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
-]
-
-{ #category : #baseline }
-BaselineOfPakbot >> voyage: spec [
-	spec
-		baseline: 'Voyage'
-		with: [ spec
-				repository: 'github://pharo-nosql/voyage:master/mc';
-				loads: #('memory' 'mongo tests') ]
 ]
 
 { #category : #baseline }

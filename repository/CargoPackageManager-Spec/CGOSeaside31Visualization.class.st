@@ -20,7 +20,7 @@ CGOSeaside31Visualization >> open [
 	seaside31Dependency := PBPackageDependency 
 									on: package package
 									for: nil
-									withConstraints: { CGOFixedVersionConstraint with: '3.1' }.
+									withConstraints: { PBFixedVersionConstraint with: '3.1' }.
 	resolution := PBSolver new solveDependency: seaside31Dependency.
 	
 	builder := ROMondrianViewBuilder new.
