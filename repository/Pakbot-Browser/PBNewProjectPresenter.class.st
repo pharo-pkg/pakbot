@@ -17,7 +17,6 @@ PBNewProjectPresenter class >> example [
 	panel := self new.
 	editionPanel := panel projectPanel.
 	
-	editionPanel registry: PBPackageRegistry new.
 	editionPanel name: 'aName'.
 	editionPanel version: '1.0.0'.
 	editionPanel description: 'A description'.

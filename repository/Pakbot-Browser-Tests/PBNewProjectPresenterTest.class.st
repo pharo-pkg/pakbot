@@ -1,27 +1,24 @@
 Class {
 	#name : #PBNewProjectPresenterTest,
-	#superclass : #PBAbstractTest,
+	#superclass : #PBTest,
 	#instVars : [
-		'project',
-		'panel',
 		'name',
 		'url',
 		'version',
 		'description',
-		'editionPanel'
+		'editionPanel',
+		'newProjectPresenter'
 	],
 	#category : #'Pakbot-Browser-Tests'
 }
 
-{ #category : #tests }
+{ #category : #running }
 PBNewProjectPresenterTest >> setUp [
 
 	super setUp.
 	
-	panel := PBNewProjectPresenter new.
-	editionPanel := panel projectPanel.
-	project := editionPanel loadableUnit.
-	editionPanel registry: testRegistry.
+	newProjectPresenter := PBNewProjectPresenter newApplication: self newApplicationWithRegistry.
+	editionPanel := newProjectPresenter projectPanel.
 	
 	name := 'aName'.
 	url := 'git@github.com:pharo-vcs/iceberg.git'.
@@ -32,11 +29,12 @@ PBNewProjectPresenterTest >> setUp [
 { #category : #tests }
 PBNewProjectPresenterTest >> testProjectIsFilledAfterAccept [
 
+	| project |
 	editionPanel name: name.
 	editionPanel version: version.
 	editionPanel description: description.
 	
-	panel accept.
+	project := newProjectPresenter doAccept.
 	
 	self assert: project name equals: name.
 	self assert: project version printString equals: version.
@@ -50,7 +48,7 @@ PBNewProjectPresenterTest >> testProjectIsNotInstalledBeforeAccept [
 	editionPanel version: version.
 	editionPanel description: description.
 	
-	self deny: (testRegistry isProjectRegistered: project)
+	self assert: registry registeredProjects isEmpty
 
 ]
 
@@ -61,7 +59,9 @@ PBNewProjectPresenterTest >> testProjectIsRegisteredAfterAccept [
 	editionPanel version: version.
 	editionPanel description: description.
 	
-	panel accept.
+	newProjectPresenter doAccept.
 	
-	self assert: (testRegistry isProjectRegistered: project)
+	self 
+		shouldnt: [ registry projectNamed: name ]
+		raise: PBPackageNotFoundError 
 ]

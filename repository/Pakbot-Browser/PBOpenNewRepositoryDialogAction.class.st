@@ -25,7 +25,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 	| presenter |
 	presenter := SpOptionListPresenter new
 		addOptions: {PBImportIcebergRepositoryPresenter new} , IceTipRepositoryTypePanel allTypes;
-		acceptCallback: [ :selectedOption | | repository |
+		whenAcceptedDo: [ :selectedOption | | repository |
 			selectedOption validate.
 			repository := PBGitRepository repository: selectedOption newRepository.
 			self project repository: repository.

@@ -10,6 +10,19 @@ Class {
 	#category : #'Pakbot-Tests-Model'
 }
 
+{ #category : #running }
+PBTest >> newApplicationWithRegistry [
+	
+	| app |
+	app := SpApplication newAnonymousSubclass 
+			addSlot: #registry;
+			compile: 'registry ^ registry';
+			compile: 'registry: aRegistry registry := aRegistry';
+			new.
+		app registry: registry.
+		^ app
+]
+
 { #category : #private }
 PBTest >> performTest [
 	PBPackageRegistry 
