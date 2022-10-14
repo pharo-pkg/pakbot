@@ -5,7 +5,7 @@ SmalltalkCISpec {
       #baseline : 'Pakbot',
       #directory : 'repository',
       #platforms : [ #pharo ],
-      #load : ['tests-core'],
+      #load : ['default'],
       #onConflict : #useLoaded
     }
   ],
