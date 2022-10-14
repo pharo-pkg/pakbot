@@ -16,7 +16,7 @@ Class {
 		'registry',
 		'project'
 	],
-	#category : #'CargoPackageManager-Tests-LauncherRessource'
+	#category : #'Pakbot-Tests-Integration-Tests'
 }
 
 { #category : #'instance creation' }

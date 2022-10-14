@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'testRegistry'
 	],
-	#category : #'CargoPackageManager-Tests'
+	#category : #'Pakbot-Tests-Integration-Tests'
 }
 
 { #category : #private }

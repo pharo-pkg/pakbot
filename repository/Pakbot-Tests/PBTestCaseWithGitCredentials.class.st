@@ -18,8 +18,6 @@ PBTestCaseWithGitCredentials >> setUp [
 	oldRemoteTypeSelector := Iceberg remoteTypeSelector.
 	iceCredentialsProviderBackup := IceCredentialsProvider providerType.
 
-	CGOGitHostedPackageVersionEnforcingProtocol useHttpsUrl.
-	
 	Iceberg remoteTypeSelector: #httpsUrl.
 	
 	"usable with pharo-counter project on GitHub"

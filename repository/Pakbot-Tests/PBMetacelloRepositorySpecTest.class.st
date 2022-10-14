@@ -4,7 +4,7 @@ Class {
 	#category : #'Pakbot-Tests-Metacello-Support'
 }
 
-{ #category : #tests }
+{ #category : #test }
 PBMetacelloRepositorySpecTest >> testAsMetacelloUrl [
 	self
 		assert: (PBMetacelloRepositorySpec url: 'github://marianopeck/FFICHeaderExtractor:master/repository') asMetacelloUrl 

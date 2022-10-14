@@ -1,11 +1,14 @@
 Class {
 	#name : #PBPackageTest,
 	#superclass : #PBModelTest,
-	#instVars : [
-		'oldPackageRegistry'
-	],
-	#category : #'CargoPackageManager-Tests-Model'
+	#category : #'Pakbot-Tests-Model'
 }
+
+{ #category : #running }
+PBPackageTest >> tearDown [ 
+	self unloadCounterPackages.
+	super tearDown.
+]
 
 { #category : #tests }
 PBPackageTest >> testCanAddDependencyToAProject [
@@ -82,7 +85,7 @@ PBPackageTest >> testComparisonWithSamePackageReturnsTrue [
 { #category : #tests }
 PBPackageTest >> testPackageIsInstalledIfSystemPackageWithSameNameExists [
 	| project package |
-	project := testRegistry newProjectNamed: 'PBPackageTest'.
+	project := registry newProjectNamed: 'PBPackageTest'.
 	package := project newNotLoadedPackage: #'Kernel'.
 	
 	self assert: package isInstalled
@@ -91,7 +94,7 @@ PBPackageTest >> testPackageIsInstalledIfSystemPackageWithSameNameExists [
 { #category : #tests }
 PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 	| project package |
-	project := testRegistry newProjectNamed: 'Pharo-Counter-Test'.
+	project := registry newProjectNamed: 'Pharo-Counter-Test'.
 	project repository: PBGitRepository example.
 	package := project newNotLoadedPackage: #'Counter-Core'.
 
@@ -106,7 +109,7 @@ PBPackageTest >> testPackageIsInstalledWhenPackageLoaded [
 { #category : #tests }
 PBPackageTest >> testPackageIsNotInstalledIfNoSystemPackageWithSameName [
 	| project package |
-	project := testRegistry newProjectNamed: 'PBPackageTest'.
+	project := registry newProjectNamed: 'PBPackageTest'.
 	package := project newNotLoadedPackage: #'BlaBla'.
 	
 	self deny: package isInstalled
@@ -127,10 +130,4 @@ PBPackageTest >> testProjectIsUpdatedForDependenciesWhenProjectIsSet [
 	self 
 		assert: unit dependencies first project
 		equals: unit project.
-]
-
-{ #category : #'test data' }
-PBPackageTest >> unitTestV2 [
-	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Test ]
-
 ]

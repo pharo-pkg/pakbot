@@ -9,14 +9,13 @@ Class {
 		'unitTestV1',
 		'unitTestV2'
 	],
-	#category : #'CargoPackageManager-Tests-Model'
+	#category : #'Pakbot-Tests-Model'
 }
 
-{ #category : #'test data' }
-PBModelTest >> project [
-	^ ongoingProject asCargoProject 
-		instVarNamed: 'version' put: '1' asSemanticVersion;
-		yourself
+{ #category : #cleaning }
+PBModelTest >> removePackageIfExists: aPackageName [
+
+	(aPackageName asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem
 ]
 
 { #category : #running }
@@ -40,4 +39,11 @@ PBModelTest >> unitTestV1 [
 { #category : #'test data' }
 PBModelTest >> unitTestV2 [
 	^ unitTestV2 ifNil: [ unitTestV2 := ongoingProject newNotLoadedPackage: #Package2]
+]
+
+{ #category : #cleaning }
+PBModelTest >> unloadCounterPackages [
+
+	#(#'Counter-Core' #'Counter-Tests') 
+		do: [ :each | self removePackageIfExists: each ].
 ]

@@ -4,8 +4,13 @@ Class {
 	#instVars : [
 		'repository'
 	],
-	#category : #'CargoPackageManager-Tests-Model'
+	#category : #'Pakbot-Tests-Model'
 }
+
+{ #category : #accessing }
+PBProjectVersionTest >> pharoCounterGitUrl [
+	^ 'https://github.com/pharo-pkg/pharo-counter.git'
+]
 
 { #category : #running }
 PBProjectVersionTest >> tearDown [ 
@@ -76,7 +81,7 @@ PBProjectVersionTest >> testCanLoadProjectWithoutUnresolvedDependenciesWarning [
 	project := repository project.
 	project packages: { project packageNamed: 'Counter-Tests' . project packageNamed: 'Counter-Core' }. "ensure tests are loaded before core for the purpose of the test"
 	project 
-		registry: testRegistry;
+		registry: registry;
 		repository: repository.
 
 	self

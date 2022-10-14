@@ -1,7 +1,7 @@
 Class {
 	#name : #PBAssemblyTest,
 	#superclass : #PBModelTest,
-	#category : #'CargoPackageManager-Tests-Model'
+	#category : #'Pakbot-Tests-Model'
 }
 
 { #category : #'test data' }
@@ -39,9 +39,9 @@ CGOPublishedPackageAssembly {
 PBAssemblyTest >> testAllPackagesListsPackagesRecursively [
 
 	| project package1 package2 package3 package4 package5 assembly1 assembly2 assembly3 |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package1 := project createPackageNamed: 'Package1'.
 	package2 := project createPackageNamed: 'Package2'.
@@ -70,9 +70,9 @@ PBAssemblyTest >> testAllPackagesListsPackagesRecursively [
 PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 	
 	| project package assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -85,7 +85,7 @@ PBAssemblyTest >> testAssemblyCanContainPackageExistingInItsProject [
 PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 	
 	| project assembly |
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
 	
@@ -98,9 +98,9 @@ PBAssemblyTest >> testCannotCreateDuplicatedAssembly [
 PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 	
 	| project assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	project createPackageNamed: 'NewPackage'.
 	
@@ -115,9 +115,9 @@ PBAssemblyTest >> testCreatePackageInAssemblyConflictsWithProjectPackages [
 PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
 	
 	| project package assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	assembly := project addAssemblyNamed: 'Ass1'.
 
@@ -130,7 +130,7 @@ PBAssemblyTest >> testCreatePackageInAssemblyCreatesItInProject [
 PBAssemblyTest >> testDuplicatedAssemblyIsNotAddedInProject [
 	
 	| project |
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	
 	project addAssemblyNamed: 'Ass1'.
 	
@@ -153,9 +153,9 @@ PBAssemblyTest >> testInitializeFromEmptyDictionary [
 PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 	
 	| project package assembly1 assembly2 |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly1 := project addAssemblyNamed: 'Ass1'.
@@ -172,7 +172,7 @@ PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 PBAssemblyTest >> testNewAssemblyIsListed [
 	
 	| project assembly |
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
 	
@@ -183,7 +183,7 @@ PBAssemblyTest >> testNewAssemblyIsListed [
 PBAssemblyTest >> testRemoveAssemblyUnlistsIt [
 	
 	| project assembly |
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	
 	assembly := project addAssemblyNamed: 'Ass1'.
 	assembly remove.
@@ -194,9 +194,9 @@ PBAssemblyTest >> testRemoveAssemblyUnlistsIt [
 PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
 	
 	| project package assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -210,9 +210,9 @@ PBAssemblyTest >> testRemovePackageFromAssemblyDoesNotTakeItOutFromProject [
 PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
 	
 	| project package assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -226,9 +226,9 @@ PBAssemblyTest >> testRemovePackageFromAssemblyTakesItOutFromAssembly [
 PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
 	
 	| project package assembly |
-	testRegistry systemPackageOrganizer: RPackageOrganizer new.
+	registry systemPackageOrganizer: RPackageOrganizer new.
 	
-	project := testRegistry newProjectNamed: 'TestProject'.
+	project := registry newProjectNamed: 'TestProject'.
 	project repository: PBGitMemoryRepository new.
 	package := project createPackageNamed: 'TestPackage'.
 	assembly := project addAssemblyNamed: 'Ass1'.
@@ -242,8 +242,8 @@ PBAssemblyTest >> testRemovePackageFromProjectRemovesItFromAssembly [
 PBAssemblyTest >> testTwoProjectsCanHaveTheSameAssembly [
 	
 	| project1 project2 assembly1 assembly2 |
-	project1 := testRegistry newProjectNamed: 'TestProject1'.
-	project2 := testRegistry newProjectNamed: 'TestProject2'.
+	project1 := registry newProjectNamed: 'TestProject1'.
+	project2 := registry newProjectNamed: 'TestProject2'.
 	
 	assembly1 := project1 addAssemblyNamed: 'Ass1'.
 	assembly2 := project2 addAssemblyNamed: 'Ass1'.
