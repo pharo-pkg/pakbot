@@ -8,7 +8,7 @@ Class {
 		'registry',
 		'expectedConflicts'
 	],
-	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
+	#category : #'Pakbot-IntegrationTests-Conflicts'
 }
 
 { #category : #private }

@@ -4,7 +4,7 @@ Test extension made on IceMetacelloRepository
 Class {
 	#name : #PBIceMetacelloRepositoryTest,
 	#superclass : #TestCase,
-	#category : #'CargoPackageManager-Tests'
+	#category : #'Pakbot-Tests-Metacello-Support'
 }
 
 { #category : #tests }

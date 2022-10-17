@@ -1,7 +1,7 @@
 Class {
 	#name : #PBPakbotProjectDependencyStatusTest,
 	#superclass : #PBDependencyStatusTest,
-	#category : #'CargoPackageManager-IntegrationTests-DependencyStatus'
+	#category : #'Pakbot-IntegrationTests-DependencyStatus'
 }
 
 { #category : #utils }

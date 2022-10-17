@@ -1,7 +1,7 @@
 Class {
 	#name : #PBProjectLoadingTest,
 	#superclass : #PBAbstractTest,
-	#category : #'CargoPackageManager-IntegrationTests'
+	#category : #'Pakbot-IntegrationTests'
 }
 
 { #category : #private }

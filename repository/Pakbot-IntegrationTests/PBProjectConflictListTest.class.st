@@ -10,7 +10,7 @@ Class {
 		'configurationProject2V1',
 		'configurationProject2V2'
 	],
-	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
+	#category : #'Pakbot-IntegrationTests-Conflicts'
 }
 
 { #category : #running }

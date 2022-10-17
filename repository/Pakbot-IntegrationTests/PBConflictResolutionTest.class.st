@@ -1,18 +1,18 @@
 Class {
-	#name : #CGOConflictResolutionTest,
+	#name : #PBConflictResolutionTest,
 	#superclass : #PBAbstractTest,
-	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
+	#category : #'Pakbot-IntegrationTests-Conflicts'
 }
 
 { #category : #private }
-CGOConflictResolutionTest >> performTest [
+PBConflictResolutionTest >> performTest [
 	PBPackageRegistry 
 		useDefaultRegistry: testRegistry
 		during: [ self perform: testSelector asSymbol ]
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAVersion [
+PBConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAVersion [
 
 	| projectOne dep2 dep1 conflict solution resolution |
 
@@ -49,7 +49,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUs
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAnotherVersion [
+PBConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUsingAnotherVersion [
 
 	| projectOne dep2 dep1 conflict solution resolution |
 
@@ -86,7 +86,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesCanBeResolvedUs
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasConflicts [
+PBConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasConflicts [
 
 	| projectOne |
 
@@ -106,7 +106,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasCon
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOneConflictForTheDependency [
+PBConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOneConflictForTheDependency [
 
 	| projectOne dep2 dep1 |
 
@@ -134,7 +134,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesExceptionHasOne
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException [
+PBConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException [
 
 	| projectOne |
 
@@ -152,7 +152,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependenciesThrowsException
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionHasBothVersions [
+PBConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionHasBothVersions [
 
 	| project configurationProjectV1 |
 
@@ -180,7 +180,7 @@ CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsin
 ]
 
 { #category : #tests }
-CGOConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionResolvedWithInstalledDoesNotInstallNothing [
+PBConflictResolutionTest >> testConflictingMetacelloDependencyWithInstalledUsingDifferentVersionResolvedWithInstalledDoesNotInstallNothing [
 
 	| project configurationProjectV1 resolution conflict solution |
 

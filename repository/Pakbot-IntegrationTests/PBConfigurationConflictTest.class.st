@@ -1,7 +1,7 @@
 Class {
 	#name : #PBConfigurationConflictTest,
 	#superclass : #PBParametrizedConflictTest,
-	#category : #'CargoPackageManager-IntegrationTests-Conflicts'
+	#category : #'Pakbot-IntegrationTests-Conflicts'
 }
 
 { #category : #'building suites' }

@@ -6,7 +6,7 @@ Class {
 		'dependencyToProject',
 		'dependencyToPackage'
 	],
-	#category : #'CargoPackageManager-IntegrationTests-DependencyStatus'
+	#category : #'Pakbot-IntegrationTests-DependencyStatus'
 }
 
 { #category : #testing }

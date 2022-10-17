@@ -1,7 +1,7 @@
 Class {
 	#name : #PBMetacelloConfigurationDependencyStatusTest,
 	#superclass : #PBDependencyStatusTest,
-	#category : #'CargoPackageManager-IntegrationTests-DependencyStatus'
+	#category : #'Pakbot-IntegrationTests-DependencyStatus'
 }
 
 { #category : #utils }
