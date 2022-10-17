@@ -1,11 +1,11 @@
 Extension { #name : #IceMetacelloRepositoryType }
 
-{ #category : #'*CargoPackageManager' }
+{ #category : #'*Pakbot-Core' }
 IceMetacelloRepositoryType >> basicMcRepository [
 	^ self mcRepositoryClass location: self location
 ]
 
-{ #category : #'*CargoPackageManager' }
+{ #category : #'*Pakbot-Core' }
 IceMetacelloRepositoryType class >> httpsUrlFor: aLocationString [
 	^ (self for: aLocationString) basicMcRepository httpsUrl 
 ]
