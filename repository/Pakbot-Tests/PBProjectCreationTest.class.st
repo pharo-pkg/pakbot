@@ -1,6 +1,8 @@
 Class {
 	#name : #PBProjectCreationTest,
 	#superclass : #PBTest,
+	#traits : 'TTemporaryFilesTrait',
+	#classTraits : 'TTemporaryFilesTrait classTrait',
 	#instVars : [
 		'project',
 		'workDir'
@@ -16,15 +18,7 @@ PBProjectCreationTest >> setUp [
 	project := registry newProjectNamed: #Counter.
 	project version: '0.1-dev'.
 	
-	workDir := FileLocator temp / (self class name , Date today yyyymmdd, '-', (Time now print24 replaceAll: $: with: $-))
-
-]
-
-{ #category : #running }
-PBProjectCreationTest >> tearDown [ 
-
-	workDir ensureDeleteAll.
-	super tearDown
+	workDir := self newTempDirectoryReference.
 ]
 
 { #category : #tests }
