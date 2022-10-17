@@ -1,8 +1,7 @@
 Class {
 	#name : #PBOpenNewRepositoryDialogActionTest,
-	#superclass : #TestCase,
+	#superclass : #FileTestCase,
 	#instVars : [
-		'tempFolder',
 		'counterIceRepository',
 		'presenter'
 	],
@@ -11,9 +10,9 @@ Class {
 
 { #category : #running }
 PBOpenNewRepositoryDialogActionTest >> tearDown [ 
-	tempFolder ifNotNil: [ tempFolder ensureDeleteAll ].
 	counterIceRepository ifNotNil: [ counterIceRepository forget ].
 	presenter ifNotNil: [ presenter delete ].
+	super tearDown.
 ]
 
 { #category : #tests }
@@ -49,9 +48,8 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	| importRepositoryPresenter project iceRepository projectName |
 
 	projectName := 'pakbot-testCanImportProject'.
-	tempFolder := FileLocator temp / projectName.
 	counterIceRepository := (IceRepositoryCreator new 
-		location: tempFolder;
+		location: self newTempDirectoryReference / projectName;
 		remote: (IceGitRemote url: 'https://github.com/pharo-pkg/pharo-counter.git');
 		createRepository)
 	register;
@@ -68,7 +66,9 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	importRepositoryPresenter repositoryList selectItem: iceRepository.
 	
 	self deny: project repository isValidRepository.
-	presenter doAccept.
+	[ presenter doAccept ]
+		on: PBIcebergProjectMismatch 
+		do: [ :error | error resume "force the marriage with the repository" ].
 	presenter delete.
 	self assert: project repository isValidRepository.
 	self 
@@ -78,6 +78,4 @@ PBOpenNewRepositoryDialogActionTest >> testCanImportProject [
 	self 
 		assert: project repository iceRepository
 		equals: iceRepository.
-
-	tempFolder ensureDeleteAll.
 ]

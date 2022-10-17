@@ -7,3 +7,8 @@ Class {
 	#superclass : #PBError,
 	#category : #'Pakbot-Minimal-Iceberg-Integration'
 }
+
+{ #category : #testing }
+PBIcebergProjectMismatch >> isResumable [
+	^ true
+]
