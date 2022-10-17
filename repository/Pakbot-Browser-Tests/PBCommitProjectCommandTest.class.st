@@ -1,9 +1,7 @@
 Class {
 	#name : #PBCommitProjectCommandTest,
-	#superclass : #TestCase,
+	#superclass : #FileTestCase,
 	#instVars : [
-		'location',
-		'projectName',
 		'repository',
 		'project',
 		'repositoryLocation',
@@ -15,7 +13,7 @@ Class {
 { #category : #running }
 PBCommitProjectCommandTest >> setUp [
 	super setUp.
-	repositoryLocation := FileLocator temp / ('pharo-' , self class name , '-', DateAndTime now asFileNameCompatibleString).
+	repositoryLocation := self newTempDirectoryReference.
 ]
 
 { #category : #tests }
@@ -55,10 +53,10 @@ PBCommitProjectCommandTest >> setUpNewRepository [
 
 { #category : #running }
 PBCommitProjectCommandTest >> tearDown [ 
-	super tearDown.
 	repository ifNotNil: [ :repo | repo iceRepository forget ].
 	presenterToDelete ifNotNil: [ presenterToDelete delete ].
-	repositoryLocation ensureDeleteAll.
+	super tearDown.
+
 ]
 
 { #category : #tests }
@@ -163,7 +161,7 @@ PBCommitProjectCommandTest >> testGivenNewProjectAndRepositoryWhenAddingNewPacka
 	| command commitBrowser visitor packageName packageAdditions |
 	
 	self setUpNewRepository.
-	packageName := 'CargoPackageManager-Minimal'.
+	packageName := 'Pakbot-Minimal'.
 	project importPackageNamed: packageName.
 	command := PBCommitProjectCommand new 
 		project: project;
