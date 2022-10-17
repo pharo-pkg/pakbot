@@ -26,10 +26,17 @@ FileTestCase >> newMemoryFileSystem [
 { #category : #creating }
 FileTestCase >> newTempDirectory [
 
+	^ self newTempDirectoryReference 
+		ensureCreateDirectory;
+		yourself
+]
+
+{ #category : #creating }
+FileTestCase >> newTempDirectoryReference [
+
 	| directory |
 	
 	directory := (FileLocator temp / (self class name,  '-' , UUIDGenerator next asString)) resolve.
-	directory ensureCreateDirectory.
 	directories add: directory.
 	^ directory
 ]

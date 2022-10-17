@@ -149,16 +149,11 @@ PBGitRepository >> ensureIcePackageNamed: aPackageName [
 { #category : #private }
 PBGitRepository >> ensureProject: aPBProjectVersion [ 
 	
-	iceRepository ifNil: [ ^ self ]. "No iceberg repository yet. Do not force its creation if not needed."
+	iceRepository ifNil: [ ^ self ]. "No iceberg repository yet."
 	
 	[ (aPBProjectVersion = self workingCopy project pakbotProject)
 		ifFalse: [ PBIcebergProjectMismatch signal ] ]
 	on: PBProjectMetadataNotFound do: [ "ignore. No pakbot metadata" ].
-	
-	self setIcebergProject: 
-		(PBIcebergProject 
-			onRepository: self iceRepository 
-			project: aPBProjectVersion).
 ]
 
 { #category : #fetching }
