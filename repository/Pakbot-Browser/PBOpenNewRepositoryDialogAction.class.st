@@ -28,7 +28,7 @@ PBOpenNewRepositoryDialogAction >> doExecute [
 		whenAcceptedDo: [ :selectedOption | | repository |
 			selectedOption validate.
 			repository := PBGitRepository repository: selectedOption newRepository.
-			self project repository: repository.
+			self project marryWith: repository.
 			self doPostAction ].
 	presenter openDialog 
 		title: 'Set up project repository';
