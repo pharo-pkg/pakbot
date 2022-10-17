@@ -1,16 +1,11 @@
 Class {
-	#name : #CGODependencyConstraintTest,
-	#superclass : #CGOTest,
-	#category : #'CargoPackageManager-Tests-Model'
+	#name : #PBDependencyConstraintTest,
+	#superclass : #TestCase,
+	#category : #'Pakbot-Tests-Dependencies'
 }
 
-{ #category : #accessing }
-CGODependencyConstraintTest class >> resources [
-	^ #()
-]
-
 { #category : #tests }
-CGODependencyConstraintTest >> testFromString [
+PBDependencyConstraintTest >> testFromString [
 	| dependency |
 	dependency := PBDependencyConstraint fromString: '=1.0'.
 	self 
@@ -22,13 +17,13 @@ CGODependencyConstraintTest >> testFromString [
 ]
 
 { #category : #tests }
-CGODependencyConstraintTest >> testFromStringWithBadVersion [
+PBDependencyConstraintTest >> testFromStringWithBadVersion [
 
 	self assert: (PBDependencyConstraint fromString: '=foo') version isInvalid
 ]
 
 { #category : #tests }
-CGODependencyConstraintTest >> testMergeAll [
+PBDependencyConstraintTest >> testMergeAll [
 	| c1 c2 result |
 	
 	c1 := PBFixedVersionConstraint with: '3.0' asSemanticVersion.

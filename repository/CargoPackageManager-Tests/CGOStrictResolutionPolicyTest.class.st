@@ -1,13 +1,8 @@
 Class {
 	#name : #CGOStrictResolutionPolicyTest,
-	#superclass : #CGOTest,
-	#category : #'CargoPackageManager-Tests-Model'
+	#superclass : #TestCase,
+	#category : #'CargoPackageManager-Tests'
 }
-
-{ #category : #accessing }
-CGOStrictResolutionPolicyTest class >> resources [
-	^ #()
-]
 
 { #category : #tests }
 CGOStrictResolutionPolicyTest >> testMergeStrictResolutionPolicy [
