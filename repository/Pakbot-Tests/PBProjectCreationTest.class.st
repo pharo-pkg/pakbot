@@ -56,7 +56,7 @@ PBProjectCreationTest >> testCanCommitAProject [
 	repository := PBGitRepositoryCreator new 
 		location: workDir;
 		createNewRepositoryNamed: 'tmp'.
-	project repository: repository.
+	project marryWith: repository.
 	
 	presenter := (IceTipCommitBrowser onRepository: project repository iceRepository).
 	changes := presenter diffPanel model tree children.
