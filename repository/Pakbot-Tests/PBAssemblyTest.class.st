@@ -143,13 +143,6 @@ PBAssemblyTest >> testDuplicatedAssemblyIsNotAddedInProject [
 ]
 
 { #category : #tests }
-PBAssemblyTest >> testInitializeFromEmptyDictionary [
-	self 
-		should: [ CGOPackageVersion newFrom: Dictionary new ]
-		raise: CGOPackageVersionInitializationError
-]
-
-{ #category : #tests }
 PBAssemblyTest >> testManyAssembliesCanContainSamePackage [
 	
 	| project package assembly1 assembly2 |
