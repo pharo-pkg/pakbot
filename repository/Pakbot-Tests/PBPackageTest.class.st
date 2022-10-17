@@ -54,10 +54,12 @@ PBPackageTest >> testCanGetProject [
 
 { #category : #tests }
 PBPackageTest >> testComparisonWithPackageAssemblyReturnsFalse [
+
 	| unit assembly |
 	unit := PBPackage named: #Test.
 	assembly := PBAssembly named: 'Test'.
-	self deny: unit = assembly
+	
+	self deny: unit equals: assembly
 ]
 
 { #category : #tests }
