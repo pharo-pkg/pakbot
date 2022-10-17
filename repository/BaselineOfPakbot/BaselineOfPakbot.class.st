@@ -65,7 +65,7 @@ BaselineOfPakbot >> baseline: spec [
 					#('core'
 					'Pakbot-Tests'
 					'CargoPackageManager-FailingTests'
-					"'Pakbot-IntegrationTests'"
+					'Pakbot-IntegrationTests'
 					'Pakbot-Catalog-Tests'); 
 				group: 'tests' with: 
 					#('tests-core'
