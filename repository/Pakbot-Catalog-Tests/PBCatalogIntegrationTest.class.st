@@ -31,7 +31,7 @@ PBCatalogIntegrationTest >> testCanLoadProjectFromProjectPublishedInPackageRepos
 PBCatalogIntegrationTest >> testCanLoadProjectFromScmAndPublishItToPackageRepository [
 	| repository project publishedProject |
 	repository := PBGitRepositoryCreator new
-		url: 'ssh://git@github.com/pharo-pkg/pharo-counter.git';
+		url: 'https://github.com/pharo-pkg/pharo-counter.git';
 		version: 'master';
 		create.		
 	project := PBProjectVersion fromRepository: repository.
