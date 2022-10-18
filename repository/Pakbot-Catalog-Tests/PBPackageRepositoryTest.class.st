@@ -153,6 +153,7 @@ PBPackageRepositoryTest >> testCannotPublishAProjectHavingNonFixedVersion [
 	project := PBProjectVersion example.
 	project
 		registry: PBPackageRegistry new;
+		version: PBNoVersion new;
 		repository: 	PBGitRepository example.
 	
 	self 
@@ -212,6 +213,7 @@ PBPackageRepositoryTest >> testProjectNotPublishedWhenAnErrorOccursDuringPublica
 	| project |
 
 	project := PBProjectVersion example.
+	project version: PBNoVersion new.
 	project 
 		registry: PBPackageRegistry new;
 		repository: 	PBGitRepository example.
