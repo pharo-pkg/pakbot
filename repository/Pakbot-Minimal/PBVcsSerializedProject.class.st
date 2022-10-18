@@ -33,11 +33,10 @@ PBVcsSerializedProject >> asOngoingProject [
 					
 	project := PBProjectVersion named: (dict at: #name).
 	dict at: #description ifPresent: [ :description | project description: description ].
-	dict 
+	project version: (dict 
 		at: #version
-		ifAbsent: [ PBError new 
-						signal: 'Cannot deserialize a Project with no version defined!' ].
-	project version: (dict at: #version) asSemanticVersion.
+		ifPresent: [ (dict at: #version) asSemanticVersion ]
+		ifAbsent: [ PBNoVersion new ]).
 
 	dict at: #units ifPresent: [ :units | 
 		project packages: (self ongoingPackageUnitsFrom: units) ].
