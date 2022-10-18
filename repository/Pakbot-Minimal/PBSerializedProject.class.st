@@ -33,28 +33,12 @@ PBSerializedProject >> asProject [
 { #category : #initialization }
 PBSerializedProject >> initializeWithProject: aPBProjectVersion [
 	| resolvedProject |
-	self initializeWithPackage: aPBProjectVersion.
-	dict at: #version put: aPBProjectVersion version asString.
+	super initializeWithProject: aPBProjectVersion.
+
 	resolvedProject := aPBProjectVersion resolve.
 	resolvedProject hasConflicts 
 		ifTrue: [ PBProjectHasConflictsError signalOnResolution: resolvedProject ].
-	self
-		addPropertyNamed: #dependencies 
-		ifNotEmptyOrNil: ((resolvedProject resolvedDependencies) 
-								sorted: [ :first :second | first name < second name ]).
-	"used for package dependencies
-	self
-		addPropertyNamed: #externalProjects 
-		ifNotEmptyOrNil: (aPBProject externalProjects)."
-	self 
-		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion packages andCollect: #asSerializedPackage).
-	self
-		addPropertyNamed: #assemblies 
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asSerializedPackage).
-	self 
-		addPropertyNamed: #virtualPackages 
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion virtualPackages andCollect: #asSerializedPackage).
+
 	dict
 		at: #repositoryUrl
 		put: aPBProjectVersion repository asSerializableRepository

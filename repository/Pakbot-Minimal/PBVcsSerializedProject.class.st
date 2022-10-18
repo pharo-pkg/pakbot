@@ -22,7 +22,7 @@ PBVcsSerializedProject >> asOngoingPackage [
 
 { #category : #converting }
 PBVcsSerializedProject >> asOngoingProject [
-	"Flush information from this VcsSerializedProject into the provided CGOProject.
+	"Flush information from this VcsSerializedProject into the provided PBProjectVersion.
 	All instance variables will be set with values from the SerializableProject"
 	| project assemblies |
 	
@@ -83,15 +83,20 @@ PBVcsSerializedProject >> gitRepositoryFrom: aDictionnary [
 { #category : #initialization }
 PBVcsSerializedProject >> initializeWithProject: aPBProjectVersion [
 	self initializeWithPackage: aPBProjectVersion.
+	dict at: #version put: aPBProjectVersion version asString.
 	self
 		addPropertyNamed: #dependencies 
 		ifNotEmptyOrNil: (aPBProjectVersion dependencies).
+	"used for package dependencies
+	self
+		addPropertyNamed: #externalProjects 
+		ifNotEmptyOrNil: (aPBProject externalProjects)."
 	self 
 		addPropertyNamed: #units
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion packages andCollect: #asVcsSerializedPackageUnit).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion packages andCollect: #asSerializedPackageUnit).
 	self
 		addPropertyNamed: #assemblies 
-		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asVcsSerializedPackageAssembly).
+		ifNotEmptyOrNil: (self sort: aPBProjectVersion assemblies andCollect: #asSerializedAssembly).
 	self 
 		addPropertyNamed: #virtualPackages 
 		ifNotEmptyOrNil: (self sort: aPBProjectVersion virtualPackages andCollect: #asVcsSerializablePackageVersion).
@@ -99,14 +104,14 @@ PBVcsSerializedProject >> initializeWithProject: aPBProjectVersion [
 
 { #category : #deserialization }
 PBVcsSerializedProject >> ongoingPackageAssembliesFrom: aCollection [ 
-	^ aCollection collect: [ :each | (PBVcsSerializedPackageAssembly fromDictionary: each) asOngoingPackage ]	
+	^ aCollection collect: [ :each | (PBSerializedAssembly fromDictionary: each) asOngoingPackage ]	
 ]
 
 { #category : #deserialization }
 PBVcsSerializedProject >> ongoingPackageUnitsFrom: aCollection [
 
 	^ aCollection collect: [ :each | 
-		  (PBVcsSerializedPackageUnit fromDictionary: each) asOngoingPackage ]
+		  (PBSerializedPackage fromDictionary: each) asOngoingPackage ]
 ]
 
 { #category : #deserialization }

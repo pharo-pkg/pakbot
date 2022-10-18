@@ -1,6 +1,6 @@
 Class {
 	#name : #PBSerializedPackageUnitV1Test,
-	#superclass : #PBVcsSerializedPackageUnitV1Test,
+	#superclass : #TestCase,
 	#category : #'Pakbot-Tests-Serialization'
 }
 
@@ -10,9 +10,8 @@ PBSerializedPackageUnitV1Test >> serializedClass [
 ]
 
 { #category : #tests }
-PBSerializedPackageUnitV1Test >> testSerializedDepedencyHasAFixedVersion [
+PBSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsASymbol [
 	| unit dict dependency |
-	self skip.
 	dict := Dictionary
 		with: #name -> #Bar
 		with: #dependencies -> #(#Project::Foo).
@@ -20,5 +19,39 @@ PBSerializedPackageUnitV1Test >> testSerializedDepedencyHasAFixedVersion [
 	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
 	
 	dependency := unit dependencies first.
-	self assert: dependency constraints size equals: 1.
+	self assert: dependency targetedPackage equals: #Foo.
+	self assert: dependency scope equals: #Project
+]
+
+{ #category : #tests }
+PBSerializedPackageUnitV1Test >> testCanDeserializeDepedencyThatIsAnAssociation [	
+	| unit dict dependency |
+	dict := Dictionary 
+		with: #name -> 'Foo'
+		with: #dependencies -> {#Project::Foo -> #('=1.1')}.
+
+	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
+	
+	dependency := unit dependencies first.
+	self 
+		assert: dependency targetedPackage 
+		equals: #Foo.
+	self 
+		assert: dependency constraints size
+		equals: 1.
+	self 
+		assert: dependency constraints first asString
+		equals: '1.1'.
+]
+
+{ #category : #tests }
+PBSerializedPackageUnitV1Test >> testGetEmptyCollectionWhenNoDependency [
+	| unit dict |
+	dict := Dictionary 
+		with: #name -> 'Foo'
+		with: #dependencies -> #().
+	
+	unit := (self serializedClass fromDictionary: dict) asOngoingPackage.
+	
+	self assert: unit dependencies isEmpty
 ]

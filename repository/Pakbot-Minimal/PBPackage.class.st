@@ -57,9 +57,9 @@ PBPackage >> asSerializedPackage [
 ]
 
 { #category : #converting }
-PBPackage >> asVcsSerializedPackageUnit [
+PBPackage >> asSerializedPackageUnit [
 	"VCS version of the unit metadata (i.e. minimum metadata)"
-	^ PBVcsSerializedPackageUnit from: self
+	^ PBSerializedPackage from: self
 ]
 
 { #category : #'private-loading' }

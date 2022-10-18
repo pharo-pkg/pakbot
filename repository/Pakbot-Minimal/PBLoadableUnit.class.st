@@ -77,11 +77,6 @@ PBLoadableUnit class >> named: aPackageName project: aCargoProject [
 		yourself 
 ]
 
-{ #category : #'as yet unclassified' }
-PBLoadableUnit class >> prepareClassQueriesFrom: aCollection in: aClyNavigationEnvironment [ 
-	^#()
-]
-
 { #category : #dependencies }
 PBLoadableUnit >> allDependencies [
 	
