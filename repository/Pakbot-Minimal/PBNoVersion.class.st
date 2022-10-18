@@ -12,6 +12,11 @@ PBNoVersion >> = anObject [
 	^ anObject class == self class
 ]
 
+{ #category : #converting }
+PBNoVersion >> asSemanticVersion [
+	^ self
+]
+
 { #category : #testing }
 PBNoVersion >> isInvalid [
 	^ true
