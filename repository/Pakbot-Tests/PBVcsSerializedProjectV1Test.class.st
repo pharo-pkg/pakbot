@@ -76,6 +76,7 @@ PBVcsSerializedProjectV1Test >> projectWithBaselineDependencyStonString [
 {
 	#name : #Foo,
 	#description : ''Foo project for test purposes. I have a baseline dependency'',
+	#version: ''1.0'',
 	#units : [
 		{
 			#name : #Foo-Bar,
@@ -98,6 +99,7 @@ PBVcsSerializedProjectV1Test >> projectWithConfigurationDependencyStonString [
 {
 	#name : #Foo,
 	#description : ''Foo project for test purposes. I have a configuration dependency'',
+	#version: ''1.0'',
 	#units : [
 		{
 			#name : #Foo-Bar,
@@ -133,6 +135,7 @@ PBVcsSerializedProjectV1Test >> stonStringForExampleProject [
 {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
+	#version : ''0.1'',
 	#units : [
 		{
 			#name : #UnitTest,

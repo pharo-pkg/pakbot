@@ -22,6 +22,7 @@ Class {
 PBProjectVersion class >> example [
 	^ (self named: #'MyProject')
 		description: 'A simple project used for illustration.';
+		version: '0.1' asSemanticVersion;
 		packages: { PBPackage example };
 		yourself
 ]

@@ -15,11 +15,6 @@ PBSerializedProject >> asProject [
 	| project |
 	
 	project := self asOngoingProject.
-	dict 
-		at: #version
-		ifAbsent: [ PBError new 
-						signal: 'Cannot deserialize a Project with no version defined!' ].
-	project version: (dict at: #version) asSemanticVersion.
 
 	dict 
 		at: #repositoryUrl
@@ -39,6 +34,11 @@ PBSerializedProject >> initializeWithProject: aPBProjectVersion [
 	resolvedProject hasConflicts 
 		ifTrue: [ PBProjectHasConflictsError signalOnResolution: resolvedProject ].
 
+	"We want solved dependencies for publication"
+	self
+		addPropertyNamed: #dependencies 
+		ifNotEmptyOrNil: ((resolvedProject resolvedDependencies) 
+								sorted: [ :first :second | first name < second name ]).
 	dict
 		at: #repositoryUrl
 		put: aPBProjectVersion repository asSerializableRepository
