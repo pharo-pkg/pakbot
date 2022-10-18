@@ -12,25 +12,14 @@ BaselineOfPakbot >> aiGrapsAlgos: spec [
 					repository: 'github://pharo-ai/graph-algorithms:v1.1.0/src' ]
 ]
 
-{ #category : #dependencies }
-BaselineOfPakbot >> babyMock: spec [
-	spec
-		project: 'BabyMock2'
-		with: [ spec
-				className: #ConfigurationOfBabyMock2;
-				versionString: #stable;
-				repository: 'http://smalltalkhub.com/mc/zeroflag/BabyMock2/main/' ]
-]
-
 { #category : #baselines }
 BaselineOfPakbot >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
 		do: [ 
-			"self babyMock: spec."
 			"self zincHttpComponents: spec."
-			self aiGrapsAlgos: spec.
+			"self aiGrapsAlgos: spec."
 			self iceberg: spec.
 			self parametrizedTests: spec.
 			
@@ -40,41 +29,23 @@ BaselineOfPakbot >> baseline: spec [
 					with: [ spec requires: #('Pakbot-Minimal' 'Iceberg' "'ZincHTTPComponents'" "'AIGraphAlgorithms'") ];
 
 				"Tests and its ressources"
-				package: #'CargoPackageManager-Spec';
-				package: #'CargoPackageManager-TestRessources'
-					with: [ spec requires: #('Pakbot-Core' 'CargoPackageManager-Spec') ];
 				package: #'Pakbot-Tests'
 					with: [ spec requires: #('Pakbot-Core' 'ParametrizedTests') ];
-				package: #'CargoPackageManager-Tests'
-					with: [ spec requires: #('Pakbot-Core' 'CargoPackageManager-TestRessources' 'ParametrizedTests') ];
-				package: #'Pakbot-IntegrationTests' with: [ spec requires: #('Pakbot-Core' 'Pakbot-Tests') ];
-				package: #'CargoPackageManager-FailingTests' with: [ spec requires: #('Pakbot-Tests') ];
-				package: #'CargoPackageManager-Tests-FooResource'.
+				package: #'Pakbot-IntegrationTests' with: [ spec requires: #('Pakbot-Core' 'Pakbot-Tests') ].
 							
 			self pakbotUI: spec.		
 			self pakbotCatalog: spec.
 				
 			spec
-				package: 'CargoPackageManager-Utils';
-				package: #'CargoPackageManager-Utils-Tests' with: [ spec requires: #('CargoPackageManager-Tests-FooResource') ];
-				package: #'CargoPackageManager-Utils-FailingTests' with: [ spec requires: #('CargoPackageManager-Utils-Tests') ].	
-
-			spec
 				group: 'core' with: #('Pakbot-Core' 'Pakbot-Catalog');
 				group: 'tests-core' with:
 					#('core'
 					'Pakbot-Tests'
-					'CargoPackageManager-FailingTests'
 					'Pakbot-IntegrationTests'
 					'Pakbot-Catalog-Tests'); 
 				group: 'tests' with: 
 					#('tests-core'
-					'Pakbot-Browser-Tests'
-					'utils' 
-					'CargoPackageManager-Utils-Tests' 
-					'CargoPackageManager-Utils-FailingTests'
-					'CargoPackageManager-UI-Tests');
-				group: 'utils' with: #('CargoPackageManager-Utils' 'core');
+					'Pakbot-Browser-Tests');
 				group: 'browser' with: #('Pakbot-Browser' 'Pakbot-Browser-Tests');
 				group: 'default' with: #('tests-core' 'browser') ]
 ]
