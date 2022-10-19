@@ -18,6 +18,15 @@ PBBaselineVisitorTest >> babyMockConfiguration: spec [
 ]
 
 { #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithCollectionLoadDirective: spec [
+	spec
+		baseline: 'Mustache'
+					with: [  spec
+						repository: 'github://noha/mustache:v1.0/repository';
+						loads: #('Core' 'Tests') ]
+]
+
+{ #category : #'test data' }
 PBBaselineVisitorTest >> baselineWithConditionalPackageDeclaration: spec [
 	<baseline>
 	spec
@@ -94,6 +103,15 @@ PBBaselineVisitorTest >> baselineWithProjectSpecCopy: spec [
 	spec 
 		project: 'XMLWriter Tests' copyFrom: 'XMLWriter' with: [ spec loads: #('Tests') ]; 	
 		project: 'XMLWriter Tools' copyFrom: 'XMLWriter' with: [ spec loads: #('Tools') ].
+]
+
+{ #category : #'test data' }
+PBBaselineVisitorTest >> baselineWithSingleLoadDirective: spec [
+	spec
+		baseline: 'Mustache'
+					with: [  spec
+						repository: 'github://noha/mustache:v1.0/repository';
+						loads: 'Core' ]
 ]
 
 { #category : #'test data' }
@@ -299,16 +317,29 @@ PBBaselineVisitorTest >> testCanGetGroups [
 ]
 
 { #category : #tests }
-PBBaselineVisitorTest >> testCanGetLoadDirectives [
+PBBaselineVisitorTest >> testCanGetLoadDirectivesWhenCollectionOfLoadNames [
 
 	| baselineDependency |
-	self baselineWithLoadDirective: visitor.
+	self baselineWithCollectionLoadDirective: visitor.
 	visitor generateProject.
 
 	baselineDependency := visitor project dependencies first.
 	self
 		assertCollection: baselineDependency packagesToLoad
 		hasSameElements: #('Core' 'Tests').
+]
+
+{ #category : #tests }
+PBBaselineVisitorTest >> testCanGetLoadDirectivesWhenSingleLoadName [
+
+	| baselineDependency |
+	self baselineWithSingleLoadDirective: visitor.
+	visitor generateProject.
+
+	baselineDependency := visitor project dependencies first.
+	self
+		assertCollection: baselineDependency packagesToLoad
+		hasSameElements: #('Core').
 ]
 
 { #category : #tests }

@@ -47,7 +47,9 @@ PBMetacelloProjectSpec >> loads [
 { #category : #accessing }
 PBMetacelloProjectSpec >> loads: anObject [
 
-	loads := anObject
+	loads := anObject isString
+		ifTrue: [ { anObject } "a single load name" ] 
+		ifFalse: [ anObject "a collection of load names" ]
 ]
 
 { #category : #accessing }
