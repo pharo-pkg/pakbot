@@ -142,11 +142,6 @@ PBProjectVersion >> announceChanged [
 ]
 
 { #category : #converting }
-PBProjectVersion >> asCargoProject [
-	^ CGOProject fromOngoing: self
-]
-
-{ #category : #converting }
 PBProjectVersion >> asOngoingPackage [
 	^ self
 ]
