@@ -53,7 +53,7 @@ PBCommitProjectCommand >> execute [
 		usePakbot ifNil: [ 
 			usePakbot := self askUseMetadata ifNil: [ ^ nil "cancel command" ] ].
 		usePakbot ifTrue: [ 
-			project marryWith: project repository.
+			self project marryWith: self project repository.
 			usePakbot := nil ] ].
 
 	[ 
