@@ -36,9 +36,9 @@ PBPackageDependenciesView >> editAction [
 	"only one fixed constraint managed for now"
 	| dependency |
 	dependency := self selectedPackage.
-	dependency newEditPanel
-		openDialogOnAccept: [ :modifiedDependency | self updatePresenter ]
-		onCancel: [  ]
+	dependency newEditPanel openDialog
+		okAction: [ "TODO: update dependency from presenter values". self updatePresenter ];
+		cancelAction: [  ]
 ]
 
 { #category : #refreshing }

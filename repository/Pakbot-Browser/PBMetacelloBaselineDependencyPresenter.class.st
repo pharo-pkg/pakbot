@@ -84,8 +84,8 @@ PBMetacelloBaselineDependencyPresenter >> setInitialValues [
 
 	nameInput text: self dependency name.
 	repositoryUrlInput text: self dependency repositoryUrl.
-	versionInput text: self dependency version asString
-
+	versionInput text: self dependency version asString.
+	groupInput text: self dependency packagesToLoad asArray asString.
 ]
 
 { #category : #accessing }
