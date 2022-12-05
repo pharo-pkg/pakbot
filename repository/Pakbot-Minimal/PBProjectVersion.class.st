@@ -86,7 +86,7 @@ PBProjectVersion class >> new [
 { #category : #comparing }
 PBProjectVersion >> = other [
 	self species == other species ifFalse: [ ^ false ].
-	^ self name = other name
+	^ self name = other name and: [ self version = other version ]
 ]
 
 { #category : #assemblies }
@@ -142,8 +142,22 @@ PBProjectVersion >> announceChanged [
 ]
 
 { #category : #converting }
+PBProjectVersion >> asFetchedPakbotProjectDependencyFor: aPBProject [
+	
+	^ PBFetchedPakbotProjectDependency 
+		for: aPBProject fetchedDependency: self
+]
+
+{ #category : #converting }
 PBProjectVersion >> asOngoingPackage [
 	^ self
+]
+
+{ #category : #converting }
+PBProjectVersion >> asProjectToInstallDependency [
+	
+	^ PBProjectToInstall
+		withProjects: { self }
 ]
 
 { #category : #converting }
