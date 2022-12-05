@@ -1,5 +1,5 @@
 "
-I represent a dependency to an external Cargo project.
+I represent a dependency to an external Pakbot project.
 
 	self example
 
@@ -16,7 +16,11 @@ Class {
 
 { #category : #example }
 PBPakbotProjectDependency class >> example [
-	^ self named: 'pharo-counter' repositoryUrl: 'https://github.com/pharo-pkg/pharo-counter.git' version: 'master'
+
+	^ self
+		  named: 'pharo-counter'
+		  repositoryUrl: 'https://github.com/pharo-pkg/pharo-counter.git'
+		  version: 'master'
 ]
 
 { #category : #'instance creation' }

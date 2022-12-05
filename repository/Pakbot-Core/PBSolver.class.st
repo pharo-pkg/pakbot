@@ -40,9 +40,9 @@ PBSolver >> registry: aRegistry [
 ]
 
 { #category : #solving }
-PBSolver >> solveDependenciesOf: aPBLodoableElement in: aPBResolvedProject [
+PBSolver >> solveDependenciesOf: aPBLoadableElement in: aPBResolvedProject [
 
-	aPBLodoableElement dependencies
+	aPBLoadableElement dependencies
 		select: [ :dep | dep satisfyPlatformRequirements: self platformAttributes ]
 		thenDo: [ :dep | dep resolveIn: aPBResolvedProject solver: self ].
 
