@@ -125,7 +125,7 @@ PBPackageRegistry >> isOutOfSync: anUnit [
 { #category : #testing }
 PBPackageRegistry >> isProjectRegistered: aPBProjectVersion [
 	
-	^ registeredProjects includes: aPBProjectVersion
+	^ registeredProjects anySatisfy: [ :project | project name = aPBProjectVersion name ]
 ]
 
 { #category : #'compatibility-repository' }

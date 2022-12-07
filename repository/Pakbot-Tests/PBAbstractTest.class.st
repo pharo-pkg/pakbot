@@ -16,8 +16,7 @@ PBAbstractTest class >> isAbstract [
 PBAbstractTest >> expectedPakbotResolvedProject [
 
 	^ (PBProjectVersion named: self pharoCounterProjectName)
-		repository: (PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl);
-		version: (SemanticVersion fromString: '0-N/A')
+		repository: (PBGitRepositoryCreator repositoryFromUrl: self pharoCounterGitUrl)
 ]
 
 { #category : #accessing }

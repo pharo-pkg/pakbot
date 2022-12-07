@@ -158,7 +158,7 @@ PBSerializedProjectV1Test >> stonStringForSimpleProject [
 {
 	#name : #MyProject,
 	#description : ''A simple project used for illustration.'',
-	#version : ''1.0'',
+	#version : ''0.1'',
 	#units : [
 		{
 			#name : #UnitTest,
@@ -330,7 +330,7 @@ PBSerializedProjectV1Test >> testCanSerializeSimpleProject [
 	| serializedProject |
 	
 	serializedProject := PBProjectVersion example 
-		version: '1.0' asSemanticVersion;
+		version: '0.1' asSemanticVersion;
 		registry: PBPackageRegistry new;
 		repository: (PBGitRepositoryCreator repositoryFromUrl: 'git@github.com:foo/bar.git');
 		asSerializedPackage.
