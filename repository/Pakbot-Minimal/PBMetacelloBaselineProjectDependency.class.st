@@ -4,6 +4,9 @@ I represent a dependency to a project managed by a Metacello BaselineOf.
 Class {
 	#name : #PBMetacelloBaselineProjectDependency,
 	#superclass : #PBMetacelloProjectDependency,
+	#instVars : [
+		'sourceDirectory'
+	],
 	#category : #'Pakbot-Minimal-Dependencies'
 }
 
@@ -103,6 +106,17 @@ PBMetacelloBaselineProjectDependency >> isSameVersionAs: aVersionString [
 { #category : #'querying - installed' }
 PBMetacelloBaselineProjectDependency >> satisfyConstraints: aVersionString [ 
 	^ self isSameVersionAs: aVersionString
+]
+
+{ #category : #accessing }
+PBMetacelloBaselineProjectDependency >> sourceDirectory [
+	^ sourceDirectory
+]
+
+{ #category : #accessing }
+PBMetacelloBaselineProjectDependency >> sourceDirectory: aRelativePathString [
+	"e.g. src"
+	sourceDirectory := aRelativePathString
 ]
 
 { #category : #ston }

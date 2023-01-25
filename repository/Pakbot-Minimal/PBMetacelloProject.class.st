@@ -12,6 +12,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'repository',
+		'sourceDirectory',
 		'name',
 		'version',
 		'packageNames',
@@ -28,10 +29,13 @@ PBMetacelloProject class >> fromProjectDependency: aPBMetacelloProjectDependency
 		repository: aPBMetacelloProjectDependency repositoryUrl
 		name: aPBMetacelloProjectDependency name
 		version: aPBMetacelloProjectDependency version.
-	
-	aPBMetacelloProjectDependency packagesToLoad 
+
+	aPBMetacelloProjectDependency sourceDirectory
+		ifNotNil: [ :path | project sourceDirectory: path ].
+
+	aPBMetacelloProjectDependency packagesToLoad
 		ifNotEmpty: [ :names | project loadedPackages: names ].
-	
+
 	^ project
 ]
 

@@ -280,6 +280,26 @@ PBBaselineVisitorTest >> testCanGetDependencyOnMetacelloConfigurationDescribedWi
 ]
 
 { #category : #tests }
+PBBaselineVisitorTest >> testCanGetDependencySourceDirectory [
+	| project |
+
+	self simpleBaseline: visitor.
+	self baselineWithGitUrlAndSrcFolderAndVersion: visitor.
+	visitor generateProject.
+
+	self
+		assert: visitor project metacelloProjects size
+		equals: 1.
+	project := visitor project metacelloProjects anyOne.
+	self
+		assert: project repository
+		equals: 'git@github.com:pillar-markup/pillar.git'.
+	self
+		assert: project sourceDirectory
+		equals: 'src'
+]
+
+{ #category : #tests }
 PBBaselineVisitorTest >> testCanGetDependencyUrlAndVersion [
 	| dependency |
 	

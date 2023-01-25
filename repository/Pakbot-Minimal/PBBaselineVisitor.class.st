@@ -206,6 +206,7 @@ PBBaselineVisitor >> metacelloBaselineDependencyFromProjectSpecNamed: aName [
 				name: aName
 				repositoryUrl: repoSpec asGitUrl scpUrl
 				version: (repoSpec version ifNil: [ currentElement version ]).
+	repoSpec repositoryPath ifNotNil: [ :path | dependency sourceDirectory: path ].
 	currentElement loads
 		ifNotNil: [ :names | dependency loads: names ].
 	^ dependency

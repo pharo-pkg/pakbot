@@ -68,6 +68,7 @@ PBMetacelloBaselineProject >> isConfiguration [
 PBMetacelloBaselineProject >> metacelloUrl [
 	^ repository asMetacelloRepositorySpec
 		version: self version;
+		repositoryPath: sourceDirectory;
 		asMetacelloUrl
 ]
 
@@ -79,4 +80,15 @@ PBMetacelloBaselineProject >> resolvedVersion [
 { #category : #testing }
 PBMetacelloBaselineProject >> satisfyConstraints: aVersionString [ 
 	^ self asDependency satisfyConstraints: aVersionString
+]
+
+{ #category : #accessing }
+PBMetacelloBaselineProject >> sourceDirectory [
+	^ sourceDirectory
+]
+
+{ #category : #accessing }
+PBMetacelloBaselineProject >> sourceDirectory: aRelativePathString [
+	"e.g. src"
+	sourceDirectory := aRelativePathString
 ]

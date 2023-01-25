@@ -177,6 +177,12 @@ PBMetacelloRepositorySpec >> repositoryPath [
 ]
 
 { #category : #accessing }
+PBMetacelloRepositorySpec >> repositoryPath: aRelativePathString [
+	"e.g. src"
+	repositoryPath := aRelativePathString
+]
+
+{ #category : #accessing }
 PBMetacelloRepositorySpec >> scheme [
 	^ scheme
 ]

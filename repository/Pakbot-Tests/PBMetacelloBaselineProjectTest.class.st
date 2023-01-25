@@ -47,15 +47,31 @@ PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlToMetacelloUrl
 ]
 
 { #category : #tests }
-PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlWithSubdirectoryToMetacelloUrl [
+PBMetacelloBaselineProjectTest >> testCanConvertMetacelloGitHubUrlWithSourceDirectoryToMetacelloUrl [
 	| project |
-	
-	project := PBMetacelloBaselineProject 
-		repository: 'github://pharo-pkg/PakbotTestExample' 
-		name: 'PakbotTestExample' 
+
+	project := PBMetacelloBaselineProject
+		repository: 'github://pharo-pkg/PakbotTestExample'
+		name: 'PakbotTestExample'
 		version: '1.0'.
-	
+	project sourceDirectory: 'src'.
+
 	self
 		assert: project metacelloUrl
-		equals: 'github://pharo-pkg/PakbotTestExample:1.0'
+		equals: 'github://pharo-pkg/PakbotTestExample:1.0/src'
+]
+
+{ #category : #tests }
+PBMetacelloBaselineProjectTest >> testCanConvertRepositoryWithSourceRepositoryToMetacelloUrl [
+	| project |
+
+	project := PBMetacelloBaselineProject
+		repository: 'git@github.com:sbragagnolo/taskit.git'
+		name: 'TaskIt'
+		version: 'v1.0.1'.
+	project sourceDirectory: 'src'.
+
+	self
+		assert: project metacelloUrl
+		equals: 'github://sbragagnolo/taskit:v1.0.1/src'
 ]

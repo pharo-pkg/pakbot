@@ -59,9 +59,9 @@ PBMetacelloProjectSpec >> repository [
 ]
 
 { #category : #accessing }
-PBMetacelloProjectSpec >> repository: anObject [
+PBMetacelloProjectSpec >> repository: urlString [
 
-	repository := anObject
+	repository := urlString
 ]
 
 { #category : #accessing }
