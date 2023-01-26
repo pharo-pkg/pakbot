@@ -166,6 +166,12 @@ PBMetacelloProjectDependency >> setName: projectName repositoryUrl: urlOrString 
 	
 ]
 
+{ #category : #accessing }
+PBMetacelloProjectDependency >> sourceDirectory [
+
+	^ nil
+]
+
 { #category : #ston }
 PBMetacelloProjectDependency >> stonMap [
 
