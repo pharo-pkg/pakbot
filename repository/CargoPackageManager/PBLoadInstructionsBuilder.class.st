@@ -41,7 +41,7 @@ PBLoadInstructionsBuilder >> loadOrder [
 		addNodesFromDifferentGraph: self reducedGraph; 
 		run.
 	^ sortedElements 
-		collect: [ :each | each asOrderedCollection ]
+		collect: [ :each | OrderedCollection with: each ]
 		as: Array
 ]
 
