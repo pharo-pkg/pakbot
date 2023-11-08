@@ -121,7 +121,7 @@ PBIcebergProject >> projectFileReference [
 
 { #category : #accessing }
 PBIcebergProject >> sourceDirectory [
-	^ sourceDirectory
+	^ nonPakbotProject sourceDirectory
 ]
 
 { #category : #accessing }
