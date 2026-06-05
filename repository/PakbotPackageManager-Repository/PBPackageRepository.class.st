@@ -21,7 +21,7 @@ Class {
 { #category : #accessing }
 PBPackageRepository class >> default [
 
-	^ Default ifNil: [ self newLocalRepositoryIn: FileLocator home / 'dev/rmod/test-pkg-repo' ]
+	^ Default ifNil: [ self newLocalRepositoryIn: FileLocator workingDirectory ]
 ]
 
 { #category : #accessing }
